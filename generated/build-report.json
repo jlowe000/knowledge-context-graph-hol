@@ -1,0 +1,18 @@
+{
+  "source_count": 9,
+  "passage_count": 20,
+  "review_example_count": 17,
+  "accepted_claim_count": 0,
+  "context_count": 3,
+  "triple_count": 547,
+  "graph_sha256": "37f7649785af70d1e1e49df7d8529bd453cd7655338ee00ca79de4456e668a2f",
+  "native_serverless_validation": "not_run",
+  "model_extraction": "see_work_run_log",
+  "full_source_text_location": "ignored work/passages.json",
+  "independent_of_original_collection": true,
+  "source_parser_warning_counts": {
+    "S06": 9,
+    "S07": 51,
+    "S09": 11
+  }
+}

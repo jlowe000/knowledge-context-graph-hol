@@ -1,0 +1,73 @@
+{
+  "reviewed_on": "2026-11-18",
+  "artifact_tests": {
+    "passed": 13,
+    "failed": 0
+  },
+  "oracle_linux_execution": {
+    "os": "Oracle Linux 8.10",
+    "bash": "4.4.20",
+    "python": "3.12.14",
+    "location": "isolated /tmp directory in existing oaiw-adb container",
+    "database_changes": false,
+    "global_python_packages_changed": false
+  },
+  "generated": {
+    "sources": 9,
+    "passages": 20,
+    "editorial_review_examples": 17,
+    "contexts": 3,
+    "triples": 547,
+    "accepted_extracted_claims": 0
+  },
+  "graph_sha256": "37f7649785af70d1e1e49df7d8529bd453cd7655338ee00ca79de4456e668a2f",
+  "serverless": {
+    "status": "java_runtime_and_rdf_entrypoints_verified",
+    "method": "Database Actions SQL Worksheet, authenticated by user",
+    "database_version": "26ai / 23.26.4.1.0",
+    "JAVAVM_registry_rows": 1,
+    "AI_packages": "VALID",
+    "native_graph_and_agent_execution": "not_run",
+    "pending": "Lab provisioning and functional RDF graph/model/agent tests",
+    "java_enablement": {
+      "authorised_by_user": true,
+      "method": "Database Actions SQL Worksheet",
+      "request": "DBMS_CLOUD_ADMIN.ENABLE_FEATURE JAVAVM",
+      "result": "PL/SQL procedure successfully completed",
+      "installation_verified": true,
+      "restart": "completed_by_user_then_verified"
+    },
+    "JAVAVM_status": "VALID",
+    "java_runtime": "11.0.33",
+    "rdf_entrypoints": {
+      "SEM_APIS": {
+        "target": "MDSYS.RDF_APIS",
+        "status": "VALID"
+      },
+      "SEM_MATCH": {
+        "target": "MDSYS.RDF_MATCH",
+        "status": "VALID"
+      }
+    }
+  },
+  "model_calls": "not_run",
+  "native_agent_runs": "not_run",
+  "optional_owl_inference": "not_run",
+  "limitations": [
+    "Local RDFLib artifact/query validation does not validate Oracle native RDF APIs",
+    "Three public PDF sources produce recovered parser warnings; selected extracted pages require inspection when layout is ambiguous",
+    "Full PDF text and raw model outputs remain ignored local work files"
+  ],
+  "worksheet_export": {
+    "generated": true,
+    "path": "ignored work/worksheet/10_load_dataset.sql",
+    "graph_hash_matches": true,
+    "database_driver_required": false
+  },
+  "local_container_correction": {
+    "SEM_APIS": "Public synonym to valid MDSYS.RDF_APIS",
+    "SEM_MATCH": "Public synonym to valid MDSYS.RDF_MATCH",
+    "JAVAVM": "No registry entry at recheck",
+    "note": "Earlier name-only absence inference was incomplete; no local Java or graph operation was performed."
+  }
+}

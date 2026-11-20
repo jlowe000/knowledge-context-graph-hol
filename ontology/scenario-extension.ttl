@@ -1,0 +1,11 @@
+@prefix kcv: <https://example.org/kcv/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Extension vocabulary. Runtime overlays do not rewrite the hashed base dataset.
+kcv:focusesOn a owl:ObjectProperty ; rdfs:domain kcv:ContextSnapshot ; rdfs:range kcv:Topic .
+kcv:usesConcept a owl:ObjectProperty ; rdfs:domain kcv:Topic ; rdfs:range kcv:Topic .
+kcv:dependsOn a owl:ObjectProperty ; rdfs:domain kcv:Topic ; rdfs:range kcv:Topic .
+kcv:complements a owl:ObjectProperty ; rdfs:domain kcv:Topic ; rdfs:range kcv:Topic .
+kcv:FocusedContext a owl:Class ; rdfs:comment "A context with an explicit topic link; not evidence of clarity, suitability, consensus or value." .
+[] a owl:Restriction ; owl:onProperty kcv:focusesOn ; owl:someValuesFrom kcv:Topic ; rdfs:subClassOf kcv:FocusedContext .

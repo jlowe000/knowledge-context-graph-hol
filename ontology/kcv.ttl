@@ -1,0 +1,56 @@
+@prefix kcv: <https://example.org/kcv/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+kcv: a owl:Ontology ; owl:versionInfo "0.1.0" ;
+  rdfs:comment "Lab-owned vocabulary. Source claims, editorial review examples and contextual assessments are separate." .
+kcv:ContentItem a owl:Class .
+kcv:ContentVersion a owl:Class .
+kcv:EvidencePassage a owl:Class .
+kcv:Claim a owl:Class .
+kcv:ReviewExample a owl:Class ; rdfs:comment "Curated paraphrase for inspection; not an extracted or accepted Claim." .
+kcv:Person a owl:Class .
+kcv:Organisation a owl:Class .
+kcv:Engagement a owl:Class .
+kcv:ContextSnapshot a owl:Class .
+kcv:Question a owl:Class .
+kcv:Objective a owl:Class .
+kcv:RelevanceAssessment a owl:Class .
+kcv:NextAction a owl:Class .
+kcv:Feedback a owl:Class .
+kcv:LearningOpportunity a owl:Class .
+kcv:SourceContribution a owl:Class .
+kcv:Topic a owl:Class ; rdfs:subClassOf skos:Concept .
+kcv:Domain a owl:Class ; rdfs:subClassOf skos:Concept .
+kcv:ContributionPurpose a owl:Class ; rdfs:subClassOf skos:Concept .
+
+kcv:hasVersion a owl:ObjectProperty ; rdfs:domain kcv:ContentItem ; rdfs:range kcv:ContentVersion .
+kcv:hasPassage a owl:ObjectProperty ; rdfs:domain kcv:ContentVersion ; rdfs:range kcv:EvidencePassage .
+kcv:supportedBy a owl:ObjectProperty ; rdfs:domain kcv:Claim ; rdfs:range kcv:EvidencePassage .
+kcv:reviewPage a owl:ObjectProperty ; rdfs:domain kcv:ReviewExample ; rdfs:comment "Links a review example to passage metadata for the cited page without claiming verbatim equivalence." .
+kcv:coversTopic a owl:ObjectProperty ; rdfs:range kcv:Topic .
+kcv:hasDomain a owl:ObjectProperty ; rdfs:range kcv:Domain .
+kcv:hasPurpose a owl:ObjectProperty ; rdfs:range kcv:ContributionPurpose .
+kcv:describedBy a owl:ObjectProperty .
+kcv:forEngagement a owl:ObjectProperty ; rdfs:range kcv:Engagement .
+kcv:focalPerson a owl:ObjectProperty ; rdfs:range kcv:Person .
+kcv:involvedOrganisation a owl:ObjectProperty ; rdfs:range kcv:Organisation .
+kcv:raisesQuestion a owl:ObjectProperty ; rdfs:range kcv:Question .
+kcv:hasObjective a owl:ObjectProperty ; rdfs:range kcv:Objective .
+kcv:forContext a owl:ObjectProperty ; rdfs:domain kcv:RelevanceAssessment ; rdfs:range kcv:ContextSnapshot .
+kcv:recommendsVersion a owl:ObjectProperty ; rdfs:domain kcv:RelevanceAssessment ; rdfs:range kcv:ContentVersion .
+kcv:proposesAction a owl:ObjectProperty ; rdfs:range kcv:NextAction .
+kcv:evaluates a owl:ObjectProperty ; rdfs:domain kcv:Feedback ; rdfs:range kcv:RelevanceAssessment .
+kcv:supersedesSnapshot a owl:ObjectProperty ; rdfs:domain kcv:ContextSnapshot ; rdfs:range kcv:ContextSnapshot .
+kcv:supersedesVersion a owl:ObjectProperty ; rdfs:domain kcv:ContentVersion ; rdfs:range kcv:ContentVersion .
+kcv:contributesTo a owl:ObjectProperty ; rdfs:domain kcv:SourceContribution ; rdfs:range kcv:ContentVersion .
+
+# Domains describe scope; Unclassified describes missing classification evidence.
+kcv:domain-General a kcv:Domain ; skos:prefLabel "General" ;
+  skos:definition "Cross-portfolio or event-wide overview with no single primary business domain; not a fallback for unknown material." .
+kcv:domain-Unclassified a kcv:Domain ; skos:prefLabel "Unclassified" ;
+  skos:definition "Insufficient evidence to establish business domain." .
+
+kcv:topic-Ontology a kcv:Topic ; skos:prefLabel "Ontology" ; skos:broader kcv:topic-Knowledge-graphs .
+kcv:topic-Knowledge-graphs a kcv:Topic ; skos:prefLabel "Knowledge graphs" .

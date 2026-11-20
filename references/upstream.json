@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/oracle-livelabs/spatial-graph",
+  "commit": "e88a08bd3f9df46031fd09bc62bc1cfe528be6a1",
+  "workshop_path": "adb-graph/f1-ontology-vector-rag",
+  "workshop_url": "https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4477",
+  "role": "implementation reference only; excluded from ingestion",
+  "public_presentation": "https://static.rainfocus.com/oracle/oaiw26/sess/1783457519407001Rcco/finalsessionfile/AIWorld26_DB_HOL6015_DocumentAnalysis_1792605689747001BDQX.pdf"
+}

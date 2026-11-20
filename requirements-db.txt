@@ -1,0 +1,3 @@
+# Optional Python-to-database automation; not needed for SQL Worksheet.
+-r requirements-core.txt
+oracledb==26.1.0

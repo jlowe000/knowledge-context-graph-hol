@@ -1,0 +1,40 @@
+-- Local component suite only: KCV_HOL_TEST with explicit service mocks.
+DECLARE
+ sid VARCHAR2(40);reply CLOB;before_trace CLOB;after_trace CLOB;t JSON_OBJECT_T;c JSON_OBJECT_T;
+ turn_a NUMBER;turn_b NUMBER;token VARCHAR2(40);rid VARCHAR2(40);n NUMBER;busy VARCHAR2(40);failed BOOLEAN;
+ PROCEDURE ok(b BOOLEAN,msg VARCHAR2) IS BEGIN IF b IS NULL OR NOT b THEN RAISE_APPLICATION_ERROR(-20990,msg);END IF;END;
+ PROCEDURE fixture(p_text VARCHAR2) IS BEGIN UPDATE kcv_test_ai_response SET body=p_text;COMMIT;END;
+ FUNCTION latest RETURN NUMBER IS v NUMBER;BEGIN SELECT MAX(turn_id) INTO v FROM kcv_chat_turns WHERE session_id=sid AND role='assistant';RETURN v;END;
+BEGIN
+ IF SYS_CONTEXT('USERENV','CURRENT_SCHEMA')<>'KCV_HOL_TEST' THEN RAISE_APPLICATION_ERROR(-20999,'Isolated mock schema required');END IF;
+ apex_session.create_session(p_app_id=>17001,p_page_id=>1,p_username=>'TRACE_TESTER');
+ fixture('{"facts":[]}');sid:=kcv_scenario.open_session('CTX01');reply:=kcv_scenario.ask(sid,'Which sources connect?');turn_a:=latest;
+ before_trace:=kcv_trace.response_trace(sid,turn_a);t:=JSON_OBJECT_T.parse(before_trace);
+ ok(t.get_string('status')='COMPLETED','Expected completed trace');ok(t.get_array('tool_calls').get_size=1,'Actual tool not captured');
+ c:=TREAT(t.get_array('citations').get(0) AS JSON_OBJECT_T);ok(c.get_boolean('matched'),'Citation did not match actual supplied evidence');rid:=t.get_string('revision_id');
+ t:=JSON_OBJECT_T.parse(kcv_scenario.stage_change(sid,'{"operation":"REMOVE_TOPIC","topic":"Graph capabilities"}'));token:=t.get_string('pending_change');reply:=kcv_scenario.apply_change(sid,token);
+ reply:=kcv_scenario.ask(sid,'What remains now?');turn_b:=latest;after_trace:=kcv_trace.response_trace(sid,turn_a);
+ ok(DBMS_LOB.COMPARE(before_trace,after_trace)=0,'Historical trace changed after refinement');
+ t:=JSON_OBJECT_T.parse(kcv_trace.response_trace(sid,turn_b));ok(t.get_string('revision_id')<>rid,'New response used old revision');
+ fixture('{"test_mode":"unknown_citation"}');reply:=kcv_scenario.ask(sid,'Check citation handling');t:=JSON_OBJECT_T.parse(kcv_trace.response_trace(sid,latest));
+ c:=TREAT(t.get_array('citations').get(1) AS JSON_OBJECT_T);ok(NOT c.get_boolean('matched'),'Unknown citation accepted');
+ fixture('{"test_mode":"nested_citations"}');reply:=kcv_scenario.ask(sid,'Nested citation metadata');t:=JSON_OBJECT_T.parse(kcv_trace.response_trace(sid,latest));ok(t.get_array('citations').get_size=1,'Nested explicit citation not recognized');c:=TREAT(t.get_array('citations').get(0) AS JSON_OBJECT_T);ok(c.get_boolean('matched'),'Nested citation did not match');
+ fixture('{"test_mode":"repeat_tool"}');reply:=kcv_scenario.ask(sid,'Repeated tool calls');t:=JSON_OBJECT_T.parse(kcv_trace.response_trace(sid,latest));ok(t.get_array('tool_calls').get_size=2,'Repeated calls lost');
+ fixture('{"test_mode":"no_tool"}');reply:=kcv_scenario.ask(sid,'No tool case');t:=JSON_OBJECT_T.parse(kcv_trace.response_trace(sid,latest));ok(t.get_string('status')='INCOMPLETE','No-call result claimed complete');ok(t.get_array('tool_calls').get_size=0,'Invented tool event');
+ fixture('{"test_mode":"model_failure"}');failed:=FALSE;
+ BEGIN reply:=kcv_scenario.ask(sid,'Failure case');EXCEPTION WHEN OTHERS THEN failed:=SQLCODE=-20980;END;ok(failed,'Model failure not propagated');
+ SELECT mutation_token INTO busy FROM kcv_chat_sessions WHERE session_id=sid;ok(busy IS NULL,'Failed run left active lease');
+ SELECT COUNT(*) INTO n FROM kcv_response_runs WHERE session_id=sid AND status='FAILED';ok(n=1,'Failure not recorded');
+ UPDATE kcv_chat_sessions SET mutation_token='E_TEST_BUSY' WHERE session_id=sid;COMMIT;failed:=FALSE;
+ BEGIN reply:=kcv_scenario.ask(sid,'Overlapping ask');EXCEPTION WHEN OTHERS THEN failed:=SQLCODE=-20173;END;ok(failed,'Overlapping ask accepted');
+ failed:=FALSE;BEGIN reply:=kcv_scenario.apply_change(sid,token);EXCEPTION WHEN OTHERS THEN failed:=SQLCODE=-20113;END;ok(failed,'Apply during ask accepted');
+ UPDATE kcv_chat_sessions SET mutation_token=NULL WHERE session_id=sid;COMMIT;
+ fixture('{"operation":"ADD_TOPIC","topic":"Embeddings"}');reply:=kcv_scenario.ask(sid,'Propose adding embeddings','propose_change');t:=JSON_OBJECT_T.parse(kcv_trace.response_trace(sid,latest));c:=TREAT(t.get_array('tool_calls').get(0) AS JSON_OBJECT_T);ok(c.get_string('tool')='PROPOSAL','Planner trace missing');
+ SELECT revision_id INTO rid FROM kcv_chat_sessions WHERE session_id=sid;
+ INSERT INTO kcv_chat_turns(session_id,revision_id,role,body) VALUES(sid,rid,'assistant','Legacy fixture') RETURNING turn_id INTO turn_b;
+ COMMIT;t:=JSON_OBJECT_T.parse(kcv_trace.response_trace(sid,turn_b));ok(t.get_string('availability')='LEGACY','Legacy trace fabricated');
+ apex_session.create_session(p_app_id=>17001,p_page_id=>1,p_username=>'TRACE_TESTER');failed:=FALSE;
+ BEGIN reply:=kcv_trace.response_trace(sid,turn_a);EXCEPTION WHEN OTHERS THEN failed:=SQLCODE=-20100;END;ok(failed,'Cross-login trace access accepted');
+ fixture('{"facts":[]}');DBMS_OUTPUT.PUT_LINE('PASS: paired actual capture, historical immutability, citations, repeats, incomplete/failure, lease guards, proposal/legacy and session isolation');
+END;
+/

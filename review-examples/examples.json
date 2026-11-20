@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "purpose": "Curated paraphrases used to inspect extraction; neither raw passages nor automated extraction results. These are not loaded as accepted claims by default.",
+  "examples": [
+    {
+      "id": "S02-EX1",
+      "source_id": "S02",
+      "pdf_page": 10,
+      "expected_statement": "The presentation illustrates an embedding model mapping objects into vectors.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S02-EX2",
+      "source_id": "S02",
+      "pdf_page": 11,
+      "expected_statement": "The presentation illustrates similarity using mathematical distance between vectors.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S03-EX1",
+      "source_id": "S03",
+      "pdf_page": 17,
+      "expected_statement": "The presentation describes discovery of concepts and relationships from data and marks the AI Discovery material as Coming Soon.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S03-EX2",
+      "source_id": "S03",
+      "pdf_page": 19,
+      "expected_statement": "The proposed workflow combines AI-generated ontology suggestions with expert review before deployment.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S04-EX1",
+      "source_id": "S04",
+      "pdf_page": 11,
+      "expected_statement": "The ARK presentation separates implemented concepts and graph-map layers from a next business-definition layer, as of its stated architecture date.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S04-EX2",
+      "source_id": "S04",
+      "pdf_page": 14,
+      "expected_statement": "A provisional challenges slide says the graph is rebuilt daily and insights gained through use do not accumulate in that map.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S05-EX1",
+      "source_id": "S05",
+      "pdf_page": 11,
+      "expected_statement": "The presentation describes business knowledge topics organised in a graph to route questions to required knowledge.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S05-EX2",
+      "source_id": "S05",
+      "pdf_page": 15,
+      "expected_statement": "Its knowledge-update workflow includes review, update, regression testing and publication.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S06-EX1",
+      "source_id": "S06",
+      "pdf_page": 13,
+      "expected_statement": "The presentation places Autonomous Database alongside AWS services in its multicloud overview.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S06-EX2",
+      "source_id": "S06",
+      "pdf_page": 41,
+      "expected_statement": "The presentation describes property graphs over existing data in its Oracle AI Database at Azure discussion.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S07-EX1",
+      "source_id": "S07",
+      "pdf_page": 36,
+      "expected_statement": "A JSON Relational Duality View example presents relational parts and inventory data through a JSON view and describes decoupling database changes from application changes.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S08-EX1",
+      "source_id": "S08",
+      "pdf_page": 3,
+      "expected_statement": "The agenda includes vector-search challenges, relational-data optimisation and performance demonstrations.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S08-EX2",
+      "source_id": "S08",
+      "pdf_page": 41,
+      "expected_statement": "A demonstration slide introduces a single-threaded baseline without an index and then with an IVF index.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S09-EX1",
+      "source_id": "S09",
+      "pdf_page": 26,
+      "expected_statement": "The presentation connects applying recent Release Updates with obtaining security fixes.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S09-EX2",
+      "source_id": "S09",
+      "pdf_page": 66,
+      "expected_statement": "A worked configuration shows AutoUpgrade creating a target database home for patching.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S10-EX1",
+      "source_id": "S10",
+      "pdf_page": 10,
+      "expected_statement": "The presentation connects clinical care, enterprise operations, payer collaboration and life sciences through a shared data and AI foundation.",
+      "kind": "editorial_paraphrase"
+    },
+    {
+      "id": "S10-EX2",
+      "source_id": "S10",
+      "pdf_page": 3,
+      "expected_statement": "The disclaimer says some illustrated features concern prospective US launches, may not be offered for sale and may vary by country or region.",
+      "kind": "editorial_paraphrase"
+    }
+  ]
+}

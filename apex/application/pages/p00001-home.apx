@@ -1,0 +1,59 @@
+page 1 (
+ name: Knowledge Context Explorer
+ alias: HOME
+ title: Knowledge Context Explorer
+ javaScript {
+  fileUrls: #APP_FILES#explorer.js?v=655b5a9be130
+ }
+ css {
+  fileUrls: #APP_FILES#explorer.css?v=6972a7686c05
+ }
+ appearance {
+  pageTemplate: @/standard
+  templateOptions: #DEFAULT#
+ }
+ security {
+  pageAccessProtection: argumentsMustHaveChecksum
+  formAutoComplete: false
+ }
+ region knowledge-explorer (
+  name: Knowledge Context Explorer
+  type: staticContent
+  layout {
+   sequence: 10
+   slot: body
+  }
+  source {
+   htmlCode:
+    ```html
+<main id="kcv-explorer" class="kcv-app">
+<header class="kcv-header"><div><p class="kcv-eyebrow">CONNECT THE DOTS</p><h1>Knowledge Context Explorer</h1><p>Explore connected evidence. Shape the next question.</p></div><span class="kcv-badge">Fictional learners · public sources</span></header>
+<div class="kcv-scenario-bar"><label for="kcv-context">Learner scenario<select id="kcv-context"><option value="CTX01">Alex · engineering information discovery</option><option value="CTX02">Sam · evidence and traceability</option><option value="CTX03">Casey · connected healthcare</option></select></label><button id="kcv-start" class="t-Button t-Button--hot" type="button">Start a new conversation</button></div>
+<div class="kcv-workspace"><nav class="kcv-nav" aria-label="Workspace views"><button type="button" data-view="conversation" aria-pressed="true">Conversation</button><button type="button" data-view="evidence" aria-pressed="false">Evidence</button><button type="button" data-view="context" aria-pressed="false">Context</button><button type="button" data-view="observations" aria-pressed="false">Observations</button></nav>
+<div class="kcv-workspace-body"><section class="kcv-understanding"><h2>Current understanding</h2><div id="kcv-context-summary">Choose a learner and start a conversation.</div><p id="kcv-change-summary" class="kcv-muted" aria-live="polite"></p></section>
+<section data-panel="conversation"><h2>A conversation that builds context</h2><div class="kcv-starters"><button type="button" data-prompt="What is known about my current context, and what should we clarify first?">Where do I start?</button><button type="button" data-prompt="Which sources help with this context, why do they connect, and what do they not establish?">Why these sources?</button><button type="button" data-prompt="What could help validate this understanding and inform the next question or next step?">What next?</button></div><div id="kcv-turns" role="log" aria-live="polite"></div><div class="kcv-composer"><label for="kcv-mode">Conversation intent</label><select id="kcv-mode"><option value="question">Explore and ask about content</option><option value="propose_change">Suggest a context refinement</option></select><label for="kcv-message">Your question or new thought</label><textarea id="kcv-message" rows="3" maxlength="8000" placeholder="What knowledge would help me find existing project information?"></textarea><button id="kcv-send" class="t-Button t-Button--hot" type="button">Explore this question</button></div></section>
+<section data-panel="evidence" hidden><h2>Current context evidence</h2><p>These paths come from the current graph query. For an earlier answer, open its own explanation.</p><div id="kcv-graph" class="kcv-graph" aria-label="Current context, topic and source connections"></div><div id="kcv-current-detail" class="kcv-detail" hidden></div><details><summary>Exact graph paths</summary><div id="kcv-paths"></div></details><h3>Public sources behind this conversation</h3><div id="kcv-sources" class="kcv-sources"></div></section>
+<section data-panel="context" hidden><h2>Refine the stored context</h2><p>Refine objectives and interests. The curated source knowledge remains unchanged.</p><label for="kcv-operation">What would you like to refine?</label><select id="kcv-operation"><option value="SET_OBJECTIVE">Clarify the objective</option><option value="ADD_TOPIC">Add an area to explore</option><option value="REMOVE_TOPIC">Remove an area of focus</option></select><label for="kcv-objective">Objective</label><textarea id="kcv-objective" maxlength="2000" rows="3" placeholder="Find existing project information across documents"></textarea><label for="kcv-topic">Topic</label><select id="kcv-topic"></select><button id="kcv-stage" type="button">Preview refinement</button><pre id="kcv-change-preview"></pre><button id="kcv-apply" class="t-Button t-Button--hot" type="button" hidden>Apply this refinement</button><details><summary>Context and graph identifiers</summary><pre id="kcv-identifiers"></pre></details></section>
+<section data-panel="observations" hidden><h2>Capture what you learned</h2><label for="kcv-method">How did you check your understanding?</label><select id="kcv-method"><option value="source_check">Check source evidence</option><option value="discussion">Discuss with others</option><option value="dot_vote">Dot vote / shared priorities</option><option value="practical_test">Practical test</option><option value="other">Another approach</option></select><label for="kcv-observation">What did you observe?</label><textarea id="kcv-observation" maxlength="8000" rows="3"></textarea><label for="kcv-next">Next question, idea or step</label><textarea id="kcv-next" maxlength="2000" rows="2"></textarea><button id="kcv-observe" class="t-Button t-Button--hot" type="button">Save observation</button><p class="kcv-muted">Votes record priorities or agreement; they do not establish that a source claim is true.</p></section>
+<p id="kcv-status" role="status" aria-live="polite">Choose a learner to start.</p></div></div>
+<dialog id="kcv-explanation" aria-labelledby="kcv-explanation-title"><header class="kcv-dialog-head"><div><h2 id="kcv-explanation-title">How this answer was built</h2><p id="kcv-trace-subtitle" class="kcv-muted"></p></div><button type="button" id="kcv-close-trace" aria-label="Close answer explanation">Close</button></header><div class="kcv-dialog-tabs" role="tablist" aria-label="Answer explanation sections"><button type="button" id="kcv-tab-overview" role="tab" aria-controls="kcv-trace-overview" aria-selected="false">Overview</button><button type="button" id="kcv-tab-sources" role="tab" aria-controls="kcv-trace-sources" aria-selected="true">Sources</button><button type="button" id="kcv-tab-lineage" role="tab" aria-controls="kcv-trace-lineage" aria-selected="false">Answer lineage</button><button type="button" id="kcv-tab-limits" role="tab" aria-controls="kcv-trace-limits" aria-selected="false">Limits</button></div><div class="kcv-dialog-body"><p id="kcv-trace-status" role="status" aria-live="polite"></p><section id="kcv-trace-overview" role="tabpanel" aria-labelledby="kcv-tab-overview" hidden></section><section id="kcv-trace-sources" role="tabpanel" aria-labelledby="kcv-tab-sources"></section><section id="kcv-trace-lineage" role="tabpanel" aria-labelledby="kcv-tab-lineage" hidden></section><section id="kcv-trace-limits" role="tabpanel" aria-labelledby="kcv-tab-limits" hidden></section></div><footer class="kcv-dialog-foot">Historical response evidence · read-only · no additional model call</footer></dialog>
+</main>
+
+    ```
+  }
+ )
+ process kcv-explorer (
+  name: KCV_EXPLORER
+  type: executeCode
+  source {
+   plsqlCode:
+    ```plsql
+    begin kcv_apex.dispatch; end;
+    ```
+  }
+  execution {
+   sequence: 10
+   point: ajaxCallback
+  }
+ )
+)

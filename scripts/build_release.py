@@ -162,6 +162,10 @@ def build(output):
             write(p, re.sub(r'(?<!!)\[([^\]]*)\]\(([^)]+)\)', fix, p.read_text(encoding='utf-8')))
         # No private runtime or PDF extraction files are copied into the result.
         shutil.rmtree(stage / 'work')
+        # Stable byte hashes across Windows/Linux clones; .gitattributes enforces LF.
+        for p in stage.rglob('*'):
+            if p.is_file() and p.suffix.lower() not in {'.png', '.jpg'}:
+                write(p, p.read_text(encoding='utf-8'))
         file_rows = [{'path': p.relative_to(stage).as_posix(),
                       'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}
                      for p in sorted(stage.rglob('*')) if p.is_file()]

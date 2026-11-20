@@ -1,0 +1,378 @@
+{
+  "format_version": 1,
+  "distribution": "release",
+  "python_required_for_learner": false,
+  "dataset_kind": "attributed_editorial_summary",
+  "summary_count": 17,
+  "source_count": 9,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "c7d2509ea74d6f150aa11c2172618d10bf1f26bb42fc6ae333fa9f15a9ca3965"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "244f88f49bfed103ab68917671c7a4ca855f5929cb68098a8e18088c614b5f5f"
+    },
+    {
+      "path": "apex/kcv-explorer.sql",
+      "sha256": "db6b889e6decb7d4b1baeeddf06193bc70d95566ad2f204ee25deca2de99d63d"
+    },
+    {
+      "path": "apex/README.md",
+      "sha256": "1eb5f1073d7cac9e474c4637aaf8c4302e3bd502526be27a4714c936daf7655b"
+    },
+    {
+      "path": "data/contexts.json",
+      "sha256": "a58bfcbb41b20133d7335945f9ebdfa8d890090dbebb16ed8693041a9f17f264"
+    },
+    {
+      "path": "data/public-sources.json",
+      "sha256": "96f922e893f11a63677ff3f4c6e6cbeed6ca316cc7337b4aea81df5399563066"
+    },
+    {
+      "path": "data/release-summaries.json",
+      "sha256": "7002506436a535729e55bee0e1beb148f2ad6fceec5004f51e820575d7f07617"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "cf6772552da29a737c8769545c59ff1c72b7c70a45372d7b0f3e8a60c401c348"
+    },
+    {
+      "path": "docs/authentication.md",
+      "sha256": "6136202e31cf9acb2af480bbfa87738680d91cc8130110c6af934399152fe4bb"
+    },
+    {
+      "path": "docs/cleanup.md",
+      "sha256": "7d12f83306f1737c14b349b6547a1f2b396f405b3d25fe9d3cd6a8a92257f543"
+    },
+    {
+      "path": "docs/fresh-serverless-deployment.md",
+      "sha256": "dec665748bdc6384eb24142a38972c524ec4d00e29f36f3b2a42f61155a0d763"
+    },
+    {
+      "path": "docs/livelabs-authoring-alignment.md",
+      "sha256": "24e57bdada734fe668961addd2726b47613c9f9da1cc7df6cb2c4aab90c7dff7"
+    },
+    {
+      "path": "docs/release-dataset.md",
+      "sha256": "74e42df4d7d9c7b47684be00855daa577e757700d20000c5ec2c24d1e626466b"
+    },
+    {
+      "path": "docs/scenario-validation.md",
+      "sha256": "5c6ed5069c0a321c2d19a2453b79adfc0cc235b7d93640924b1da4b02849beb3"
+    },
+    {
+      "path": "docs/screenshots.md",
+      "sha256": "9b76f8f0ba9c169d9d46f738f02dbd2a960f5c7a9e8d8d7f1c56a05324d10138"
+    },
+    {
+      "path": "docs/sql-catalogue.md",
+      "sha256": "f70e848b0e0cd815d32c8fe28847b1f6dbf51898cf49a8db7c3e1bd313ef6447"
+    },
+    {
+      "path": "docs/ui-walkthrough.md",
+      "sha256": "569db725ae66944f0602d15b06c501d5f7d0e949ddf09b39d9a92141991e9c1c"
+    },
+    {
+      "path": "docs/upstream-comparison.md",
+      "sha256": "522f20b78cc01160fd405ce3c43636d975439c20ef5cfa6d459b1d20a7bbf244"
+    },
+    {
+      "path": "generated/assessments.json",
+      "sha256": "76e4f112a8d05dada55e6a6477faf1561b1e33118bbf2e73e328cb319378505a"
+    },
+    {
+      "path": "generated/build-report.json",
+      "sha256": "f5996f11b519c52f6a904418990ff7592c7a2bc0e769338c8ce6bfc1c9e17b70"
+    },
+    {
+      "path": "generated/dataset-preview.md",
+      "sha256": "6c7839a0db9b8832ae3ae52b693fa11420aa9af1b1e4a7ba91f1aa118ff83ce6"
+    },
+    {
+      "path": "generated/knowledge.ttl",
+      "sha256": "becf74701ea978d3e8e6802ee6b33c570035e889af98799d14adeda87002ea49"
+    },
+    {
+      "path": "generated/model.svg",
+      "sha256": "595cb560582af6786e6b0123a12fa4d7f31e903f854c5ab139d50b32d62d3f0d"
+    },
+    {
+      "path": "integration-test/verify_scenario_native.sql",
+      "sha256": "a792d7dcf61643ecfab0bc45ea708c8a62957d309bb4210d8bd086d41a54cccb"
+    },
+    {
+      "path": "integration-test/verify_worksheet.sql",
+      "sha256": "5c561b6cf3fae122cd6b1f4f90e1648b156cc521322ee643fbf96466c5e87818"
+    },
+    {
+      "path": "labs/configure-database/configure-database.md",
+      "sha256": "4465e248d93b757965023b759aaa79c57bae57ccd57b8acf1c494988606df3ed"
+    },
+    {
+      "path": "labs/deploy-explorer/deploy-explorer.md",
+      "sha256": "42a73bd4d12d5122c4e0dd5f646d28de399e9242a919523dfa414d0da2eed8b5"
+    },
+    {
+      "path": "labs/explore-evidence/explore-evidence.md",
+      "sha256": "cd93c5926baab8f2c613e69c971e42fd156dedd055dc12d21124bf8471fee74b"
+    },
+    {
+      "path": "labs/explore-evidence/images/answer-lineage.jpg",
+      "sha256": "aa4dabec2c02308c9d886b9560e52997b47279107e7482445cfe392da9cb184f"
+    },
+    {
+      "path": "labs/explore-evidence/images/sources-graph.jpg",
+      "sha256": "12bb832ed8e13fba8a05dfa5e9c9cce5c1819043a9ff32880fda10f8bc9874dc"
+    },
+    {
+      "path": "labs/introduction/introduction.md",
+      "sha256": "17d4db9bb1e7750ccf77a38a033363ae4cd3484178e35d4c56278873370cf6f7"
+    },
+    {
+      "path": "labs/load-knowledge/load-knowledge.md",
+      "sha256": "46c2db94c5587715db0d65d427c25c54032a1bdafd6f5f769bdc5aed48145cdd"
+    },
+    {
+      "path": "labs/need-help/need-help.md",
+      "sha256": "31268f2cab181e3c18503b9e85676f267bd5cec91f97426d69ef338e4acfab21"
+    },
+    {
+      "path": "labs/prepare-environment/prepare-environment.md",
+      "sha256": "296fd355b64912e58a27d50855e13f0f312c0d4eea78628f323bece9e42e6677"
+    },
+    {
+      "path": "labs/provision-database/provision-database.md",
+      "sha256": "cc70867a5128fbeaf20a813610f5133e360f0376fe56dc1b7b0e46baa7aec4f8"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "0c108c95deab23308748ad89bc61255e38424a94c07ad949fdb009edef0255c7"
+    },
+    {
+      "path": "NOTICE.md",
+      "sha256": "d684f0cff0d092c75ccfc8dd6a652a93ef355589777e8ab6a6f6de0b10022e49"
+    },
+    {
+      "path": "ontology/kcv.ttl",
+      "sha256": "e4918219de46e0fc0df79b9471e576ec63ea14795f8592cc2d4c5e47884fc0df"
+    },
+    {
+      "path": "ontology/scenario-extension.ttl",
+      "sha256": "dcd557b44c2ad92c6fc248c1d0ddf5aadedb49f3190e428e47adae02873f6a48"
+    },
+    {
+      "path": "README.md",
+      "sha256": "1b7c0190ce355ff8996e08bad9dac3eefbe63c456bc680bdd2c93a679210547c"
+    },
+    {
+      "path": "references/upstream.json",
+      "sha256": "18cfad222d76bb05be02edf7b7309e03b1d9ad5f7f056c2fc4109d0e7a59a10f"
+    },
+    {
+      "path": "review-examples/examples.json",
+      "sha256": "d650f05b134fccef05b6e1bac7c8f14353793c03eaad4285ea778921cd433965"
+    },
+    {
+      "path": "sql/admin/00_java_status.sql",
+      "sha256": "88f5a2d7dec65aaf576388bf79efcad0c7ca1f91854fc3716ca8bbc149b9a90c"
+    },
+    {
+      "path": "sql/admin/00_readiness.sql",
+      "sha256": "02eeb4c1333c00d210e00658ae737468885a648337d6eb54841846c7a7b8c904"
+    },
+    {
+      "path": "sql/admin/01_create_user_worksheet.sql",
+      "sha256": "7066029553ae9d1b0784e9ae12101f58c620c3778a1974d254d9997b98dfcfe7"
+    },
+    {
+      "path": "sql/admin/01_enable_java.sql",
+      "sha256": "c8806893591598c653eab3d1dc0c5bb117dc6d8c9ab2f9801d876f4fc51ac5ec"
+    },
+    {
+      "path": "sql/admin/02_grants.sql",
+      "sha256": "7c840bdc10d3e9325d58e12e845fd29fd24e07ed61e0476a1c21236718340ae2"
+    },
+    {
+      "path": "sql/admin/03_resource_principal.sql",
+      "sha256": "03fecee6dd50095ec38f57df9bf3d6548d8cfb473bbfd1436e540887bda1c250"
+    },
+    {
+      "path": "sql/admin/04_enable_database_actions.sql",
+      "sha256": "5446515a8070e7e8921645afbc3c9cf70f8bd09c0465336f63affb9d3cda0c16"
+    },
+    {
+      "path": "sql/admin/06_cloud_apex_preflight.sql",
+      "sha256": "cb58861fbe1c4f762e05a54d7027363548a2ac7d433013caa3ced194dfe17cd4"
+    },
+    {
+      "path": "sql/admin/07_create_apex_workspace.sql",
+      "sha256": "c59a0f80618fc2b5135b958cb6cbce636e7b9e8db0da9e56240365636004b3a0"
+    },
+    {
+      "path": "sql/admin/08_create_apex_app_user.sql",
+      "sha256": "173c0fcae1afd2319e4fb5d6d6a2f3f7785062dd051e1d6cc192f24cff4a29e8"
+    },
+    {
+      "path": "sql/extensions/00_readiness.sql",
+      "sha256": "4bd1abe130e705c9a9bb4bfd3e0a0d237f74c89bc79278edebf231863e182115"
+    },
+    {
+      "path": "sql/extensions/01_scenario_objects.sql",
+      "sha256": "e384034bfdae8d1f3defe15aa1cb482c7b07c6d251f93a1ba3798a779c2cb8f3"
+    },
+    {
+      "path": "sql/extensions/02_scenario_api.sql",
+      "sha256": "5621a65a454e0fdad4aa1f90027b528c0af22f9b527d960836bdb0a0843be771"
+    },
+    {
+      "path": "sql/extensions/03_scenario_agents.sql",
+      "sha256": "242ac564fe15c03095ef798d8748caec460354c50713c284584623eacf446af3"
+    },
+    {
+      "path": "sql/extensions/04_domain_extraction.sql",
+      "sha256": "a40e938c79f8cebf2b9dbde1c69e009c24e9b97104758480694d0963b29bb4a1"
+    },
+    {
+      "path": "sql/extensions/05_apex_api.sql",
+      "sha256": "517887b64decf7ac83d4411656a8bd85b1abbf0d6ad1f51dc0a0b7299cec0d3f"
+    },
+    {
+      "path": "sql/extensions/06_response_provenance.sql",
+      "sha256": "796eed703c82272f1639e25fc53ed02054ad86f67ada053645d156731d7f296a"
+    },
+    {
+      "path": "sql/extensions/07_trace_tool_wrappers.sql",
+      "sha256": "47253c577c1d469e5af59685b7ed9623e78db8cc85191db3b3fc8dd59df6a0da"
+    },
+    {
+      "path": "sql/install/10_load_dataset.sql",
+      "sha256": "834505e58b07c444eb16d890191629cfc3ccf89daba21dcf7f731f91574b1183"
+    },
+    {
+      "path": "sql/install/20_install_apex.sql",
+      "sha256": "541738959819a4abbd5877e5d44095c09430322f6a914f56b2cd97e190f36a45"
+    },
+    {
+      "path": "sql/queries/00_create_conversation.sql",
+      "sha256": "2d0e4cb7c0687fac70fd4fecf32272e9a0d589e310d55a854e693465975dde7f"
+    },
+    {
+      "path": "sql/queries/00_inspect_ai_profile.sql",
+      "sha256": "50a85cd136319bb1ed94da8aeaa546283abaa7aac6e652099b74dae6aeec435c"
+    },
+    {
+      "path": "sql/queries/00_java_runtime.sql",
+      "sha256": "d81c4d42d7e570e8fa9c3784cea9e269739905917309ac696c8f39145d882cf3"
+    },
+    {
+      "path": "sql/queries/00_test_genai.sql",
+      "sha256": "65d9602ce2a328017604041b6a7565e367358322283e455b041d7280c39afe6e"
+    },
+    {
+      "path": "sql/queries/01_inspect.sql",
+      "sha256": "5c736fc56a57a0ea7d0ad7fecd81bde39ea6768e046fe7d6d21475f49efaebb3"
+    },
+    {
+      "path": "sql/queries/02_feedback.sql",
+      "sha256": "ff9761a7610fa578007c117127c56cbdffb2baa1828568fd4672f0587cb04118"
+    },
+    {
+      "path": "sql/queries/03_extract_candidates.sql",
+      "sha256": "57e5d9d155f95114d27b1ae3d2cdf9daf3f1ea49228a8b10a1c5775b35ba6496"
+    },
+    {
+      "path": "sql/queries/04_run_agents.sql",
+      "sha256": "936da0df1dd1f278b26ce1d9f400ea98fb13a1d757ff0dbcf65270833aae59f7"
+    },
+    {
+      "path": "sql/queries/05_record_feedback.sql",
+      "sha256": "41c065d7ebb6111a435553e9b32d329035ce3f2ce8c553c6983a63b39ca17dd7"
+    },
+    {
+      "path": "sql/queries/06_inference.sql",
+      "sha256": "828bd7d72dcb5bc0d280da1cee76212caa87938fc7f5dd300cd5fc57bd75db49"
+    },
+    {
+      "path": "sql/queries/07_agent_progress.sql",
+      "sha256": "85fce577de5d901134019f996a42bcfabf8123e561e02666c5c38b5c446c6a27"
+    },
+    {
+      "path": "sql/queries/08_agent_task_history.sql",
+      "sha256": "3611fbf6fdb439cbebdd14232cff9c73bea8ff0658b9fccf7227dc8e4e4449b6"
+    },
+    {
+      "path": "sql/queries/09_agent_tool_history.sql",
+      "sha256": "5294c1d098880456ef3a07dbe12cbfeb98eb02a851ca95e864c3fce836db5898"
+    },
+    {
+      "path": "sql/scenarios/01_start.sql",
+      "sha256": "9bf232b0e74a5be5c8cd5e0ab134c9fb56405820aefbd4b3b3cef973c9f3165f"
+    },
+    {
+      "path": "sql/scenarios/02_inspect.sql",
+      "sha256": "55163fa5aafee94e8532bca8914fcc3035ca7cdf242f2198820cb03a3cbc0d33"
+    },
+    {
+      "path": "sql/scenarios/03_ask.sql",
+      "sha256": "2a7e39c7061463c4cb614fa1331deb9e8df69840ad792f62fec25b3cea01d4f4"
+    },
+    {
+      "path": "sql/scenarios/04_preview_change.sql",
+      "sha256": "f573e37fe078e0fd8c7c4e328814ecf1d76205a417d1a4174567562939099397"
+    },
+    {
+      "path": "sql/scenarios/05_apply_change.sql",
+      "sha256": "9f5a9e22d1cccae53e4ece1ff6be6b4213517e34f3bdaa4a9e901fcefaaf87ab"
+    },
+    {
+      "path": "sql/scenarios/06_observe.sql",
+      "sha256": "4d3d1a8158308f1de585326cf9aa465940a66b8705f1d672abf29e6053541970"
+    },
+    {
+      "path": "sql/scenarios/07_extract_domain.sql",
+      "sha256": "6f613a7b1f32951f7b7e4fb5e64b6dcf2b4dbfa9dcc1b04fd14175e291ed7c70"
+    },
+    {
+      "path": "sql/scenarios/08_audit.sql",
+      "sha256": "30dc62ec1d20ba79b39bd3b82438cc7089fc188443c5e4b87973c319d276d941"
+    },
+    {
+      "path": "sql/scenarios/09_propose_change.sql",
+      "sha256": "a6a9d09cb02ef0abc599c22a0e84cc154787d14707f5255534ad677dc7778635"
+    },
+    {
+      "path": "sql/scenarios/10_owl_inference.sql",
+      "sha256": "93f5d409cf7d3b37e06eb7e850fbea2bb653416bc9c13b8a6e35c40fbe6c0325"
+    },
+    {
+      "path": "sql/schema/00_user_credential_worksheet.sql",
+      "sha256": "cc9a0e3d0ace6e8c3200768a6845aa33ca7b8304f523219b57dc7069ec53c8b4"
+    },
+    {
+      "path": "sql/schema/01_objects.sql",
+      "sha256": "4108cb9e4864f70eb093cf10b9cbd7630b1169cb42cc3bdbe5fc9edad2318885"
+    },
+    {
+      "path": "sql/schema/02_network.sql",
+      "sha256": "02113185a5d3b2ca3e8573170787f9983bed2a534d3ca523b05ba52fc75db00b"
+    },
+    {
+      "path": "sql/schema/03_tools.sql",
+      "sha256": "4a885b64603936ad2536688205788a37ad31d487b6ade7a5be079d71d2de9b7b"
+    },
+    {
+      "path": "sql/schema/04_agents.sql",
+      "sha256": "278368de11c827be8d1fbf8ba6b9b9ef5831e1cccd5f6b37cd2869ab68002b6f"
+    },
+    {
+      "path": "sql/schema/05_profile_worksheet.sql",
+      "sha256": "38b810fa9828e8f204c214834fe6f0c702d5217e18f5ada8ad39ed02b9363f19"
+    },
+    {
+      "path": "sql/schema/06_register_profile.sql",
+      "sha256": "826bdf62fb31222800aff4b627d7ace308f5641082db4d6c2dcde654810dba4e"
+    }
+  ]
+}

@@ -22,6 +22,8 @@ Two application screenshots from the validated lab are included in [Explore Evid
 | S14 | Explore evidence / Task 4 | Preview/apply control and current-versus-historical selection after removing a topic | What changed, and what stayed preserved? | Capture current app |
 | S15 | Explore evidence / Task 5 | Observation fields plus saved confirmation, using fictional sample text | How do I record learning and continue? | Capture current app |
 
+The included screenshots show the earlier extracted-passage dataset. This release loads editorial summaries with different citation IDs and wording. Use the images to locate controls; they do not demonstrate native acceptance of this changed dataset.
+
 ## Capture procedure
 
 1. Rehearse the beginner route on a new approved database. Capture each screen immediately after the corresponding task reaches its expected outcome.

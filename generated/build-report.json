@@ -1,18 +1,15 @@
 {
   "source_count": 9,
-  "passage_count": 20,
+  "passage_count": 17,
   "review_example_count": 17,
   "accepted_claim_count": 0,
   "context_count": 3,
-  "triple_count": 547,
-  "graph_sha256": "37f7649785af70d1e1e49df7d8529bd453cd7655338ee00ca79de4456e668a2f",
-  "native_serverless_validation": "not_run",
-  "model_extraction": "see_work_run_log",
-  "full_source_text_location": "ignored work/passages.json",
+  "triple_count": 526,
+  "graph_sha256": "becf74701ea978d3e8e6802ee6b33c570035e889af98799d14adeda87002ea49",
+  "native_serverless_validation": "release_summary_dataset_not_yet_run",
+  "model_extraction": "not_applicable",
+  "full_source_text_location": "Not bundled; summaries in data/release-summaries.json",
   "independent_of_original_collection": true,
-  "source_parser_warning_counts": {
-    "S06": 9,
-    "S07": 51,
-    "S09": 11
-  }
+  "content_kind": "attributed_editorial_summary",
+  "distribution": "release"
 }

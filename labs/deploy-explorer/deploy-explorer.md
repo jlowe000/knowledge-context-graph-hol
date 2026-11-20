@@ -16,7 +16,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-The native scenario check passed, you can sign in as ADMIN and KCV_LAB, and `work/worksheet/20_install_apex.sql` is available on your browser computer.
+The native scenario check passed, you can sign in as ADMIN and KCV_LAB, and `sql/install/20_install_apex.sql` is available on your browser computer.
 
 ## Task 1: Check APEX and create the workspace
 
@@ -80,21 +80,13 @@ END;
 
 1. Sign back into KCV_LAB Worksheet and check `SELECT USER FROM dual;`.
 
-2. Open the generated `work/worksheet/20_install_apex.sql`, replace the editor contents with the whole script and run **F5**. This can take time; do not submit it repeatedly while it is running. The script sets the workspace/schema and allocates a new app ID.
+2. Open the generated `sql/install/20_install_apex.sql`, replace the editor contents with the whole script and run **F5**. This can take time; do not submit it repeatedly while it is running. The script sets the workspace/schema and allocates a new app ID.
 
 3. Look for compatibility/import success and `KCV_APPLICATION_ID=` followed by a number. Record the number privately. Your number need not be 100; screenshots from the working demonstration are examples.
 
 **Expected outcome:** a new app named Knowledge Context Explorer is installed in KCV_KNOWLEDGE with parsing schema KCV_LAB and alias KCV-EXPLORER. If a duplicate alias is reported, inspect the existing app from your earlier attempt. Do not change the script to overwrite an unrelated application.
 
-If the generated file is missing, return to your Oracle Linux terminal at the project root and run:
-
-```bash
-<copy>
-.venv/bin/python scripts/build_apex_worksheet.py
-</copy>
-```
-
-The app SQL export is already supplied. SQLcl, a frontend build framework and local APEX are not required to install it. [App Builder import](../../apex/README.md) requires a separate developer account; KCV_USER is intentionally not one.
+Both SQL installation files are included in this branch. No Python, SQLcl or local APEX installation is required. If a file is missing, obtain the complete release download.
 
 ## Task 4: Open and sign in to the app
 
@@ -117,7 +109,7 @@ Continue to [Explore the evidence](../explore-evidence/explore-evidence.md).
 ## Learn More
 
 - [APEX installation reference](../../apex/README.md)
-- [Existing-installation upgrade route](../../docs/epics-upgrade.md)
+- Existing-installation upgrade route (technical reference on the dev branch: `docs/epics-upgrade.md`)
 
 ## Acknowledgements
 

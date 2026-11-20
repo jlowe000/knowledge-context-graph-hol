@@ -11,7 +11,7 @@ Estimated Workshop Time: allow a half-day for a first installation. This is a pl
 In this workshop, you will:
 
 - Prepare a new Autonomous AI Database Serverless instance.
-- Load public source metadata, passages and graph relationships.
+- Load public source metadata, attributed editorial summaries and graph relationships.
 - Deploy the Knowledge Context Explorer APEX application.
 - Inspect source connections and recorded answer lineage.
 - Refine context and record what should be explored next.
@@ -22,7 +22,7 @@ This workshop assumes you have:
 
 - An OCI account with permission to create a lab database, or an administrator who will perform that task.
 - An approved lab budget and access to OCI Generative AI chat inference.
-- An Oracle Linux terminal with Python 3.11+ and internet access, plus a browser.
+- A browser and plain-text editor; no Python, shell or local database software is required.
 - This standalone project downloaded/extracted from the location supplied by your facilitator.
 
 No ADB, SQL, RDF or APEX experience is required. OCI means Oracle Cloud Infrastructure. A compartment is a folder-like boundary for cloud resources and permissions. A schema is a database user's collection of tables and code. APEX is the browser application platform included with the database.
@@ -44,7 +44,7 @@ No ADB, SQL, RDF or APEX experience is required. OCI means Oracle Cloud Infrastr
 
 ## Task 2: Understand what is supplied
 
-1. Review the supplied content: nine public presentations, three fictional learners and a prebuilt APEX application export. You generate the selected PDF text locally and load it into your database.
+1. Review the supplied content: nine public presentation records, 17 attributed editorial summaries, three fictional learners and a prebuilt APEX application export. The supplied SQL loads the summaries; it does not download or redistribute the original PDF text.
 
 2. Notice the starting boundary: the graph is curated source/topic/evidence knowledge. Asking a question does not automatically discover new websites, retrain a model or edit source facts. This workshop refines the learner's context.
 

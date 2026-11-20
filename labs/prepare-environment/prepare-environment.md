@@ -1,101 +1,55 @@
-# Prepare Your Working Environment
+# Prepare the Release Files
 
 ## Introduction
 
-Prepare the files that will be copied into your new database. This lab runs in an Oracle Linux terminal and does not change any database.
+Get the supplied SQL and documentation onto the computer running your browser. This release is prebuilt: no Oracle Linux terminal, Python, wallet or local database software is required.
 
-Estimated Lab Time: 20–30 minutes, excluding software installation and download delays; planning estimate.
+Estimated Lab Time: 5–10 minutes; planning estimate.
 
 ### Objectives
 
 In this lab, you will:
 
-- Locate the project root and a supported Python interpreter.
-- Create an isolated Python environment.
-- Generate dataset and application-installation SQL files.
+- Confirm you downloaded the release branch.
+- Locate the dataset and application installation SQL.
+- Understand how to copy code into Worksheet.
 
 ### Prerequisites
 
-You have the project files, an Oracle Linux terminal, internet access to the public sources/Python packages, and permission to install or use Python 3.11+.
+A browser, a plain-text editor, the complete release download supplied by your facilitator or repository owner, and access to an approved OCI tenancy for the next lab.
 
-## Task 1: Open the correct folder
+## Task 1: Obtain the correct branch
 
-1. Open your Oracle Linux terminal. Change to the folder where you extracted this standalone project. Replace the path below with the actual folder; do not paste it into SQL Worksheet.
+1. On the repository page, select **release** in the branch selector before downloading/extracting the project. If your facilitator supplied a ZIP, confirm it is the SQL-first release.
 
-   ```bash
-   <copy>
-   cd /path/to/knowledge-context-graph-hol
-   pwd
-   ls README.md scripts sql apex
-   </copy>
-   ```
+2. Open README.md at the extracted project root. It should identify the release branch and state that no Python is needed. If it describes installing Python or building source artifacts, you have the dev branch.
 
-2. Check that README.md and the three directories are listed. Do not use the whole upstream spatial-graph repository for this installation.
+**Expected outcome:** you have the complete release files locally. You do not need Git installed to use an extracted release ZIP.
 
-**Expected outcome:** your terminal is at this project's root. Every terminal command in this route assumes that working directory.
+## Task 2: Locate the SQL installers
 
-**Reading this in GitHub?** `<copy>` and `</copy>` are LiveLabs copy markers. Copy only the commands between them. The LiveLabs renderer uses them for its copy button; they are not shell or SQL commands.
+1. Open the `sql/install/` directory. Confirm both supplied files exist:
 
-## Task 2: Check Python and create the environment
+   - [10_load_dataset.sql](../../sql/install/10_load_dataset.sql)
+   - [20_install_apex.sql](../../sql/install/20_install_apex.sql)
 
-1. Check the default interpreter:
+2. Open them in a plain-text editor to confirm you can read them. Do not execute them yet. Keep the files on the browser computer; a local file is not already uploaded to ADB.
 
-   ```bash
-   <copy>
-   python3.12 --version
-   </copy>
-   ```
+3. Read the [dataset explanation](../../docs/release-dataset.md). The loader contains 17 attributed editorial summaries of real public pages, not original PDF extracts. Original pages remain accessible through their links.
 
-2. If it is missing, ask your Oracle Linux administrator to install a supported Python 3.11+ with pip/venv. If Python 3.11 is already installed instead, select it before running the remaining commands:
+**Expected outcome:** both installation files are ready to copy later. No generation/download of presentation text is required. If files are missing, obtain a complete release archive; do not substitute another learner's private working files.
 
-   ```bash
-   <copy>
-   export KCV_PYTHON=python3.11
-   </copy>
-   ```
+## Task 3: Understand copyable examples
 
-3. Run the setup script:
+1. This workshop uses LiveLabs code blocks with `<copy>` and `</copy>` markers. In a plain repository view, copy only the content between those markers. The markers themselves are not SQL commands.
 
-   ```bash
-   <copy>
-   bash scripts/bootstrap.sh
-   </copy>
-   ```
+2. For long linked SQL files, open the local file in a plain-text editor and copy the complete contents. Later labs explain when to use Run Script versus Run Statement. Never save entered passwords or API signing keys into a file.
 
-**Expected outcome:** the terminal ends with `Environment ready. No database has been modified.` A `.venv` directory contains this project's Python packages. If it reports the wrong operating system or missing Python, fix that prerequisite before continuing. No SQL client, wallet or OCI CLI configuration is needed for this route.
-
-## Task 3: Generate the files
-
-1. Run:
-
-   ```bash
-   <copy>
-   bash scripts/build_artifacts.sh
-   .venv/bin/python scripts/build_apex_worksheet.py
-   </copy>
-   ```
-
-2. Check that the outputs exist:
-
-   ```bash
-   <copy>
-   ls generated/build-report.json
-   ls work/worksheet/10_load_dataset.sql
-   ls work/worksheet/20_install_apex.sql
-   </copy>
-   ```
-
-3. Make both SQL files accessible on the computer running your browser. If your terminal is on a remote Linux machine, download them through your approved file-transfer client; a Linux path is not an upload into ADB. Ask your facilitator for help with that transfer if needed.
-
-**Expected outcome:** `10_load_dataset.sql` contains your verified public passages and graph data. `20_install_apex.sql` installs the supplied app into the default KCV_KNOWLEDGE workspace/KCV_LAB schema later. Do not execute either yet. They contain no passwords and stay in ignored `work/` because the loader contains presentation text.
-
-If a source is unavailable or its edition hash differs, stop and report the source ID/error. Do not turn off hash checks or invent replacement content. A successful build is not a database test.
-
-Continue to [Create the database](../provision-database/provision-database.md).
+**Expected outcome:** you can find both supplied installers and copy commands without copying Markdown or page HTML. Continue to [Create the database](../provision-database/provision-database.md).
 
 ## Learn More
 
-- [Source identity and artifact details](../02_sources_and_passages.md)
+- [SQL catalogue](../../docs/sql-catalogue.md)
 - [Need help?](../need-help/need-help.md)
 
 ## Acknowledgements

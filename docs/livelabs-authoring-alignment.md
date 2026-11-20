@@ -22,7 +22,7 @@ The beginner route is now the canonical set of labs linked from [Start here](fre
 
 The public template also describes workshop manifests and the LiveLabs renderer's index page. Those belong to publication/runtime integration. They are **not** added here because this project was explicitly scoped to exclude WMS/reservation metadata. Plain relative links make the route usable in the repository. A LiveLabs renderer/publication package would be a separate, explicitly requested deliverable; no renderer or WMS QA pass is claimed.
 
-The short-SQL synchronizer supports LiveLabs copy tags for the nested beginner lab folders while leaving reference-document examples unchanged. Its check is a consistency check, not an official LiveLabs validator.
+Short inline SQL examples are prepared and checked on dev before packaging. Learners use the supplied release SQL; no synchronizer or Python is required. The build check is not an official LiveLabs validator.
 
 ## Remaining documentation acceptance
 

@@ -16,7 +16,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-The database is Available; you can use ADMIN SQL Worksheet; your Oracle Linux generated files are accessible; and an OCI administrator can provide model access if needed.
+The database is Available; you can use ADMIN SQL Worksheet; the release SQL files are accessible; and an OCI administrator can provide model access if needed.
 
 ## Task 1: Check database Java
 
@@ -208,7 +208,7 @@ Continue to [Load knowledge and install the scenario](../load-knowledge/load-kno
 ## Learn More
 
 - [Detailed authentication choices](../../docs/authentication.md)
-- [Database setup reference](../../docs/setup.md)
+- Database setup reference (technical reference on the dev branch: `docs/setup.md`)
 
 ## Acknowledgements
 

@@ -1,6 +1,6 @@
 # Generated dataset preview
 
-Generated from real public editions; contexts are fictional. No model or Serverless execution is implied.
+Editorial summaries attributed to real public editions; contexts are fictional. No model or Serverless execution is implied.
 
 | Source | Session | Public presentation | Review pages |
 | --- | --- | --- | --- |
@@ -20,6 +20,6 @@ Generated from real public editions; contexts are fictional. No model or Serverl
 - CTX02: S03, S04, S05 (topic baseline; proposed).
 - CTX03: S10 (topic baseline; proposed).
 
-20 real page-aware passages; 17 curated review examples; 0 accepted extracted claims.
+17 attributed editorial summaries; 17 curated review examples; 0 accepted extracted claims.
 
-Review examples are separate from Claim nodes. Actual passages are generated locally and not redistributed.
+Review examples are separate from Claim nodes. Summary IDs and hashes identify the editorial text. Follow the PDF links to inspect the original pages.

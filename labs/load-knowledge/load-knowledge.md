@@ -10,13 +10,13 @@ Estimated Lab Time: 20–30 minutes; planning estimate.
 
 In this lab, you will:
 
-- Load verified passages and native RDF relationships.
+- Load attributed editorial summaries and native RDF relationships.
 - Install scenario sessions, response snapshots and the agent team in dependency order.
 - Check native graph behaviour before opening the application.
 
 ### Prerequisites
 
-KCV_LAB owns the base tables/functions/network, Java is VALID, the KCV_GENAI greeting works, and the generated `10_load_dataset.sql` is accessible to your browser computer.
+KCV_LAB owns the base tables/functions/network, Java is VALID, the KCV_GENAI greeting works, and the supplied `10_load_dataset.sql` is accessible to your browser computer.
 
 ## Task 1: Load the public dataset
 
@@ -24,9 +24,9 @@ KCV_LAB owns the base tables/functions/network, Java is VALID, the KCV_GENAI gre
 
 1. Run `SELECT USER FROM dual;` and confirm KCV_LAB.
 
-2. Open the generated `work/worksheet/10_load_dataset.sql` in a plain-text editor, copy the whole file into Worksheet and choose **Run Script (F5)**. This is your generated file from the preparation lab, not a file already stored in the database.
+2. Open the generated `sql/install/10_load_dataset.sql` in a plain-text editor, copy the whole file into Worksheet and choose **Run Script (F5)**. This is the supplied release file checked in with this branch, not a file already stored in the database.
 
-3. Read Script Output. There should be no substitution prompt: source ampersands are encoded safely. If one appears, cancel it and regenerate the loader with the current project code. Do not guess a substitution value.
+3. Read Script Output. There should be no substitution prompt: source ampersands are encoded safely. If one appears, cancel it and obtain an unchanged copy of the release loader. Do not guess a substitution value.
 
 4. Run [01_inspect.sql](../../sql/queries/01_inspect.sql) and [verify_worksheet.sql](../../integration-test/verify_worksheet.sql), each using F5. If necessary, enable/display DBMS Output in Worksheet to see the PASS message.
 
@@ -74,8 +74,8 @@ Continue to [Deploy the application](../deploy-explorer/deploy-explorer.md).
 
 ## Learn More
 
-- [Scenario implementation and boundaries](../../docs/scenario-setup.md)
-- [Optional relationship extraction and OWL exercises](../07_original_workshop_scenarios.md)
+- Scenario implementation and boundaries (technical reference on the dev branch: `docs/scenario-setup.md`)
+- Optional relationship extraction and OWL exercises (technical reference on the dev branch: `labs/07_original_workshop_scenarios.md`)
 
 ## Acknowledgements
 

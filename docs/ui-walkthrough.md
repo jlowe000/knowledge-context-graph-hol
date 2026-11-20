@@ -6,6 +6,8 @@ The starting knowledge graph is already curated. This walkthrough changes the le
 
 **Experience:** start with a person → ask a question → inspect connected evidence → clarify the objective → narrow or broaden the focus → compare → capture learning → choose the next step.
 
+This release uses attributed editorial summaries rather than extracted slide text. Inspect the prefix and original PDF page link; source verification requires reading the original. Citation IDs/wording differ from the earlier screenshots.
+
 ## Before you start
 
 Open the application URL supplied by the facilitator and sign in with an APEX application account. In the deployed example, this is KCV_USER. Use the application's password, which is separate from database and OCI credentials. No SQL Worksheet or App Builder access is needed for this walkthrough.
@@ -55,7 +57,7 @@ With the objective now limited to finding existing information and Graph capabil
 
 Write your own observation. Describe what you checked, what you found and what remains uncertain. For example, if you checked a source's availability wording, record the page and qualification you found, then identify the current product information you would need next. If you used a dot vote, record the priorities expressed; agreement is not proof of factual accuracy.
 
-The current UI confirms that the observation was saved; it does not provide an observation-history panel. Revision-linked observations and audit history are available through the documented [Worksheet audit queries](../labs/07_original_workshop_scenarios.md).
+The current UI confirms that the observation was saved; it does not provide an observation-history panel. Revision-linked observations and audit history are available through the documented [Worksheet audit query](../sql/scenarios/08_audit.sql).
 
 ## How to interpret the comparison
 
@@ -86,4 +88,4 @@ The **Where do I start?**, **Why these sources?** and **What next?** buttons pop
 
 The original workshop's chatbot journey asks questions, checks a stored graph fact, performs a guarded change, asks again and restores the fact. This adaptation retains the inspect/change/compare learning pattern while refining a person's context over curated source knowledge. Source-graph maintenance, ingestion, ontology editing and optional inference are separate exercises.
 
-See the [adapted SQL scenarios](../labs/07_original_workshop_scenarios.md), [original workshop comparison](upstream-comparison.md) and [validation record](scenario-validation.md). The main Alex UI flow was exercised on the temporary ADB Serverless instance on 18 November 2026; optional branches are not all claimed as live browser tests.
+See the adapted SQL scenarios (technical reference on the dev branch: `labs/07_original_workshop_scenarios.md`), [original workshop comparison](upstream-comparison.md) and [validation record](scenario-validation.md). The main Alex UI flow was exercised on the temporary ADB Serverless instance on 18 November 2026; optional branches are not all claimed as live browser tests.

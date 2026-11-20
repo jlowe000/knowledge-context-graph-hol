@@ -71,7 +71,7 @@ You have an OCI account authorized to create a lab database or an administrator 
 
 ## Learn More
 
-- [Setup reference](../../docs/setup.md)
+- Setup reference (technical reference on the dev branch: `docs/setup.md`)
 - [Screenshot capture checklist](../../docs/screenshots.md)
 
 ## Acknowledgements

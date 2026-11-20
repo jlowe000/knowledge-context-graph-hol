@@ -35,13 +35,13 @@ Knowledge Context Explorer is installed, and you can sign into it as KCV_USER. T
 
 3. Wait for Ready or an error. Model requests can take a minute or more. Do not click repeatedly to check progress.
 
-**Expected outcome:** the answer discusses the connected sources and their limitations. With the supplied baseline, S02, S03 and S06 appear in the evidence set. Wording varies; a confident answer without supporting evidence is not the objective.
+**Expected outcome:** the answer discusses the connected sources and their limitations. The release uses summaries rather than the extracted text shown in the screenshots. With the supplied baseline, S02, S03 and S06 appear in the evidence set. Wording varies; a confident answer without supporting evidence is not the objective.
 
 ## Task 2: Inspect this answer's sources
 
 1. Under the assistant response, click **How was this answer built?** The Sources tab is selected by default.
 
-2. Select a topic, source or page node. Read the highlighted connection and the complete saved passages below. Follow a public PDF page link to check its context.
+2. Select a topic, source or page node. Read the highlighted connection and the complete saved editorial summaries below. Follow a public PDF page link to check its context.
 
 3. Distinguish **Cited in this answer** from evidence that was returned but not explicitly cited. A citation match establishes traceability to a supplied passage, not that every statement is correct.
 
@@ -94,7 +94,7 @@ For a longer journey, use the [detailed UI walkthrough](../../docs/ui-walkthroug
 ## Learn More
 
 - [Taxonomy, ontology and data contracts](../../docs/architecture.md)
-- [Additional scenarios and optional exercises](../07_original_workshop_scenarios.md)
+- Additional scenarios and optional exercises (technical reference on the dev branch: `labs/07_original_workshop_scenarios.md`)
 
 ## Acknowledgements
 

@@ -20,7 +20,7 @@ You have the name of the lab/task you were attempting and its exact displayed er
 
 ## Task 1: Locate the problem
 
-1. Check where you are: OCI Console, Oracle Linux terminal, SQL Worksheet or the finished app. Confirm the account name; ADMIN, KCV_LAB, KCV_USER and your OCI login have different purposes.
+1. Check where you are: OCI Console, SQL Worksheet or the finished app. Confirm the account name; ADMIN, KCV_LAB, KCV_USER and your OCI login have different purposes.
 
 2. Use the matching row below. Stop at the first failing task rather than running all remaining scripts.
 
@@ -32,12 +32,10 @@ You have the name of the lab/task you were attempting and its exact displayed er
    | Login rejected | Correct login screen and account/password; do not automatically reset another account |
    | No rows for JAVAVM | Java is not installed; follow the ADMIN enable/restart task |
    | JAVAVM LOADING | Installation is still running; wait and check again |
-   | Python or packages missing | Supported Oracle Linux interpreter/venv and access to package repositories |
-   | Public download/hash failure | Source ID, network access and exact edition; retain integrity checks |
    | Table/view does not exist | USER result, preceding creation step and compile errors; KCV_SETTINGS is created before profile registration |
    | Object already exists | An earlier attempt created it; inspect progress instead of dropping everything |
    | Model call returns JSON/API error | Exact supported model name/region, profile attributes, credential owner and effective OCI inference permission |
-   | Loader asks for substitutions | Cancel; regenerate the latest loader; do not replace source-text ampersands with guessed values |
+   | Loader asks for substitutions | Cancel; obtain an unchanged release loader; do not enter guessed substitution values |
    | App import fails | Workspace exists, KCV_LAB parsing schema, compatible APEX version and complete generated installer |
    | KCV_USER cannot access App Builder | Expected: it is an app end user. Use the Worksheet deployment route or an administrator-provided developer account |
    | Popup says earlier response unavailable | Expected for a pre-feature answer; ask a new question after trace capture is installed |
@@ -63,7 +61,7 @@ You have the name of the lab/task you were attempting and its exact displayed er
 
 3. If adding a screenshot, show the relevant control/result and account role. Keep passwords, entered secret bind values, private keys, authentication tokens, personal account details and private connection URLs out of the image. Do not post live session URLs in a public issue.
 
-**Expected outcome:** a facilitator or administrator can reproduce the failing step without receiving your secrets. See [authentication troubleshooting](../../docs/authentication.md#json-syntax-error-when-exercising-the-profile) and [upgrade/lease recovery](../../docs/epics-upgrade.md) where relevant.
+**Expected outcome:** a facilitator or administrator can reproduce the failing step without receiving your secrets. See [authentication troubleshooting](../../docs/authentication.md#json-syntax-error-when-exercising-the-profile) and upgrade/lease recovery (technical reference on the dev branch: `docs/epics-upgrade.md`) where relevant.
 
 ## Task 3: Resume from the last successful checkpoint
 

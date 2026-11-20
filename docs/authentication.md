@@ -64,7 +64,7 @@ Allow dynamic-group <domain>/KCV_ADB_GENAI to use generative-ai-chat in compartm
 
 Allow IAM changes to propagate before testing. These examples authorize inference rather than management of models or clusters; additional operations require corresponding permissions.
 
-3. As ADMIN, run [03_resource_principal.sql](../sql/admin/03_resource_principal.sql). Its copyable block is in the [setup guide](setup.md#oci-model-authentication).
+3. As ADMIN, run [03_resource_principal.sql](../sql/admin/03_resource_principal.sql). Its copyable block is in the setup guide (technical reference on the dev branch: `docs/setup.md`).
 4. In the profile script, change `l_credential` to `'OCI$RESOURCE_PRINCIPAL'`. Do not create `OCI_USER_CRED` for this path. See [Select AI provider authentication](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/use-select-ai-ai-providers.html).
 
 ## Common profile and connection check

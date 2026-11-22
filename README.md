@@ -93,3 +93,7 @@ Public availability does not transfer presentation copyright. This repo links to
 **Using the app:** follow the [UI walkthrough](docs/ui-walkthrough.md) to start with Alex, inspect evidence, refine the context and capture a useful next step. Each step explains the expected outcome.
 
 **Implemented features:** [two implementation epics](docs/implementation-epics.md) cover response explanations and Oracle-style layout/styling. See the [release and upgrade guide](docs/epics-upgrade.md).
+
+## Licence
+
+An independent project for education, learning and experimentation. Copyright (c) 2026 Jason Lowe. Original project contributions are licensed under [MIT](LICENSE.txt). Third-party material retains its respective licences, including Oracle LiveLabs material under UPL 1.0 and Font APEX assets under their upstream terms. See [NOTICE.md](NOTICE.md) for attribution and scope.

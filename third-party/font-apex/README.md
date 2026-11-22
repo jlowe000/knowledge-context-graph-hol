@@ -26,4 +26,4 @@ The APEX SQL export on both branches embeds those application-icon images. The r
 
 The Font APEX font files and the Oracle APEX/Universal Theme runtime libraries are not bundled in this repository; the target APEX service supplies them. The retained font notice documents the upstream library's licensing split and does not imply that font binaries are distributed here.
 
-These third-party assets retain their applicable upstream terms. The project's root UPL notice does not replace them. When redistributing the application export or installer separately, include the project NOTICE and this retained licence notice alongside it.
+These third-party assets retain their applicable upstream terms. The project's root MIT licence does not replace them. When redistributing the application export or installer separately, include the project NOTICE and this retained licence notice alongside it.

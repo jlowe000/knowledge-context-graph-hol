@@ -24,8 +24,15 @@ class ReleaseTests(unittest.TestCase):
         names = {f.relative_to(self.folder).as_posix() for f in self.folder.rglob('*') if f.is_file()}
         for required in ['sql/install/10_load_dataset.sql', 'sql/install/20_install_apex.sql',
                          'docs/release-dataset.md', 'README.md', 'LICENSE.txt', 'NOTICE.md',
-                         'third-party/font-apex/README.md', 'third-party/font-apex/LICENSE.txt']:
+                         'third-party/font-apex/README.md', 'third-party/font-apex/LICENSE.txt',
+                         'third-party/oracle-livelabs/README.md', 'third-party/oracle-livelabs/LICENSE.txt']:
             self.assertIn(required, names)
+        licence = (self.folder / 'LICENSE.txt').read_text(encoding='utf-8')
+        self.assertIn('MIT License', licence)
+        self.assertIn('Copyright (c) 2026 Jason Lowe', licence)
+        upstream = (self.folder / 'third-party/oracle-livelabs/LICENSE.txt').read_text(encoding='utf-8')
+        self.assertIn('Copyright (c) 2022 Oracle and/or its affiliates.', upstream)
+        self.assertIn('The Universal Permissive License (UPL), Version 1.0', upstream)
         self.assertFalse(any(n.split('/')[0] in {'work', 'scripts', 'kcv', 'tests',
                          'release-docs', 'config', '.venv'} for n in names))
         self.assertFalse(any(n.endswith(('.py', '.sh', '.env', '.pem', '.key')) for n in names))

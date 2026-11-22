@@ -1,10 +1,16 @@
 # Attribution and scope
 
+## Original project contributions
+
+Copyright (c) 2026 Jason Lowe. Original project code, accompanying documentation and original sample content are licensed under the [MIT licence](LICENSE.txt), except where another owner or licence is identified. This grant does not cover third-party source presentations, artwork, Oracle software or other third-party material.
+
+## Oracle LiveLabs adaptation
+
 This independent example adapts the workflow of Oracle LiveLabs' `adb-graph/f1-ontology-vector-rag` workshop at commit `e88a08bd3f9df46031fd09bc62bc1cfe528be6a1`.
 
 Upstream: https://github.com/oracle-livelabs/spatial-graph/tree/e88a08bd3f9df46031fd09bc62bc1cfe528be6a1/adb-graph/f1-ontology-vector-rag
 
-Copyright (c) 2022 Oracle and/or its affiliates. Applicable upstream UPL notice is retained in LICENSE.txt. This project is not an official Oracle LiveLabs release. It contains no WMS metadata and no other workshops.
+Copyright (c) 2022 Oracle and/or its affiliates. The applicable upstream UPL notice is retained in [third-party/oracle-livelabs/LICENSE.txt](third-party/oracle-livelabs/LICENSE.txt); see the [pinned source and adaptation scope](third-party/oracle-livelabs/README.md). This project is not an official Oracle LiveLabs release. It contains no WMS metadata and no other workshops.
 
 Public presentations remain the property of their respective rights holders. Their original PDFs and extracted text are downloaded/generated into ignored local work files, not redistributed as part of the source repo. Short review examples are original editorial paraphrases with source/page attribution. Fictional learner contexts and proposed assessments are explicitly labelled; no customer outcomes are claimed.
 ## APEX application scaffold
@@ -15,6 +21,6 @@ The standalone APEXlang app includes generic Oracle-generated Universal Theme an
 
 The application uses Font APEX iconography from the Oracle APEX team through Oracle APEX Universal Theme. Its five generated application-icon PNG sizes are included in the dev source and embedded in the APEX SQL export on both branches and the release Worksheet installer. This project does not claim authorship of that artwork.
 
-Font APEX identifies icons and code as MIT-licensed and fonts as SIL OFL 1.1. See the [asset attribution and pinned source](third-party/font-apex/README.md) and the [complete retained upstream licence notice](third-party/font-apex/LICENSE.txt). No Font APEX font binaries or APEX runtime libraries are bundled here; the target APEX service supplies them. These assets retain their applicable upstream terms; the root UPL does not replace those terms.
+Font APEX identifies icons and code as MIT-licensed and fonts as SIL OFL 1.1. See the [asset attribution and pinned source](third-party/font-apex/README.md) and the [complete retained upstream licence notice](third-party/font-apex/LICENSE.txt). No Font APEX font binaries or APEX runtime libraries are bundled here; the target APEX service supplies them. These assets retain their applicable upstream terms; the root MIT licence does not replace those terms.
 
-When distributing the application export or installer separately, include this NOTICE and the retained Font APEX attribution and licence files alongside it.
+When distributing the application export or installer separately, include the root MIT licence, this NOTICE and applicable third-party attribution and licence files alongside it, including Font APEX and Oracle LiveLabs material where included.

@@ -4,7 +4,9 @@ Local files: `work/` contains public source downloads, full extracted text, raw 
 
 The temporary ADB is a separately provisioned OCI resource. If it exists only for this exercise, review/export the evidence you need and terminate that exact instance through your normal OCI lifecycle process. Deletion/termination is not performed by any project script.
 
-If preserving a shared database, have its administrator inspect and remove only the KCV_LAB-owned agent team/tasks/tools, AI profile/credential as appropriate, RDF network/graphs and schema. Verify ownership and dependencies first. The project intentionally has no blanket DROP USER CASCADE or automatic RDF-network purge. Remove any lab-only IAM dynamic group/policy additions only after confirming that nothing else uses them.
+If preserving a shared database, have its administrator inspect and remove only the KCV_LAB-owned agent team/tasks/tools, AI profile/credential as appropriate, RDF network/graphs and schema. Verify ownership and dependencies first. The normal learner route has no automatic user deletion or RDF-network purge. Remove any lab-only IAM dynamic group/policy additions only after confirming that nothing else uses them.
+
+On dev, the separate [explicit reset workflow](dev-reset-and-retest.md) supports an owner-requested teardown of the dedicated disposable KCV_LAB project. Its guarded ADMIN stage does drop that named user with CASCADE after supported runtime/graph/APEX cleanup. It is not an installer side effect or a generic shared-schema cleanup tool. JAVAVM remains enabled.
 
 Oracle Java enablement is database-wide and Oracle documents that it cannot be disabled afterwards. Dropping lab objects does not reverse Java enablement. The optional local oaiw-adb instance and existing applications must remain intact.
 

@@ -2,24 +2,26 @@
 
 Reviewed 18 November 2026 against upstream commit `e88a08bd3f9df46031fd09bc62bc1cfe528be6a1`, limited to `adb-graph/f1-ontology-vector-rag`. All seven lab Markdown documents were read. This is a comparison with that pinned edition, not a claim that upstream main has not changed.
 
+Technology/status clarification, 23 November: both workshops use native Oracle RDF graphs, SPARQL through SEM_MATCH and optional native OWL2RL inference. This is not a PGQL/property-graph implementation. Our APEX application definition is APEXlang; its deployable artifact is an APEX-generated SQL export. See [language and engine boundaries](architecture.md#languages-and-graph-engine).
+
 ## What the original does and what changed
 
 | Original capability | This adaptation | Assessment |
 | --- | --- | --- |
 | Load PDFs as database BLOBs and extract/chunk with DBMS_VECTOR_CHAIN | Download verified public PDFs and extract selected pages locally with pypdf; load passages through generated Worksheet SQL | Intentional alternative, not equivalent database-native ingestion |
 | Ontology-constrained LLM extraction produces subject/predicate/object facts, then loads those facts as RDF | Optional source-concept extraction into separate proposed-relationship graphs, with constrained predicates and passage evidence | Added in the scenario extension; no per-claim approval gate; proposals are not silently mixed into active retrieval |
-| Inspect RDF in Graph Studio and run example SPARQL queries | Graph Studio walkthrough, native path-returning tools and APEX relationship view | Added; native extension acceptance remains pending |
+| Inspect RDF in Graph Studio and run example SPARQL queries | Graph Studio walkthrough, native path-returning tools and APEX relationship view | Native query/scenario and APEX browser checks passed; the Graph Studio walkthrough itself is not a recorded browser pass |
 | Supervisor routes to a read-only question agent or guarded change agent | Original KCV_TEAM retained; new KCV_EXPLORER_TEAM routes questions or context-change proposals | Scenario-specific roles; the planner cannot apply changes |
 | Add/delete facts through an allow-listed API with audit records and a confirmation code for deletes | Add/remove topic focus or set objective through revision-bound, expiring preview/apply tokens and audit | Context changes create new overlay graphs; immutable source knowledge is preserved |
-| Prepared APEX chatbot and agent-team map | Standalone APEXlang source and engine-generated SQL app export, with context, evidence paths, source links, refinements and observations | Local import/component validation completed; cloud workspace deployment pending |
-| Bonus OWL2RL restriction classifies an entity, with before/after queries | FocusedContext restriction and native before/after classification script | Added optional exercise; means a context has a topic link, not that it delivers value |
+| Prepared APEX chatbot and agent-team map | Standalone APEXlang source and engine-generated SQL app export, with context, evidence paths, source links, refinements and observations | Rebuilt and browser-validated on Serverless APEX 26.1.6, 23 November |
+| Bonus OWL2RL restriction classifies an entity, with before/after queries | FocusedContext restriction and native before/after classification script | Same engine/pattern; original uses owl:hasValue, adaptation uses owl:someValuesFrom plus subclass implication. Native before/after passed 22 November; this does not establish value |
 | Prepared sandbox credentials, grants, profile, RDF network and Java | Standalone provisioning and two OCI authentication paths | Added setup necessary outside the reservation sandbox |
 
 The original mentions human supervision in creating its supplied ontology. It does not require our per-candidate accept/reject CLI gate. That is an optional curation extension introduced here.
 
 Despite the workshop folder name, the reviewed main lab documents do not implement an embedding/vector similarity retrieval pipeline. Database text extraction uses DBMS_VECTOR_CHAIN; that is not itself embedding generation or vector search. Adding vector retrieval would be a new extension, not restoration of a missing original exercise.
 
-## What the current run establishes
+## What the initial run established
 
 The learner reported successful GenAI profile use, imported four candidate claims, and returned both a context clarification and a relevance assessment through RUN_TEAM. The relevance response cites passages and preserves qualifications. These are successful user-observed executions; they are not evidence that every native script or model case has passed independently captured integration tests.
 
@@ -32,7 +34,7 @@ The legacy KCV_EVIDENCE_PACKET function retains its original bounded baseline be
 3. Import the [APEX app](../apex/README.md) into a workspace mapped to KCV_LAB and run the same journeys through the UI.
 4. Run source extraction and OWL classification as separate optional learning objectives. Record validation observations without turning agreement into factual truth.
 
-The remaining intentional differences are local rather than database-native PDF extraction, a limited source-concept vocabulary, and context refinements rather than destructive edits to source assertions. The extension is implemented as reviewable artifacts and locally component-tested; it must not be described as fully native/cloud validated yet. See [the validation record](scenario-validation.md).
+The remaining intentional differences are local rather than database-native PDF extraction, a limited source-concept vocabulary, and context refinements rather than destructive edits to source assertions. The dev native graph/model/refinement flow, optional OWL exercise and APEX browser journey passed the clean-reset/rebuild checks on 21–23 November. Optional extraction/curation and older base-team reasoning were not rerun in that reset; release's editorial-summary dataset needs separate native acceptance. See [the validation record](scenario-validation.md).
 
 ## Original references
 

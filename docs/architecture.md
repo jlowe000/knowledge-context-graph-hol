@@ -1,5 +1,27 @@
 # Architecture and data contracts
 
+## Languages and graph engine
+
+The application definition under [apex/application](../apex/application/application.apx) is **APEXlang** (`.apx`). Its UI also includes HTML/CSS/JavaScript, and its database logic is Oracle SQL/PLSQL. The deployable [APEX SQL export](../apex/kcv-explorer.sql) is a second, engine-generated representation of the application; importing it does not require learners to author APEXlang. See [Oracle APEXlang](https://docs.oracle.com/en/database/oracle/apex/26.1/htmdb/creating-an-application-with-APEXlang.html).
+
+The active graph implementation is **native Oracle RDF with SPARQL**, queried from SQL through `TABLE(SEM_MATCH(...))`. This repository does not implement PGQL (Property Graph Query Language), SQL/PGQ `GRAPH_TABLE`, or a SQL property graph. Property graphs mentioned in public presentation content are subjects of that content, not the graph engine used by the lab.
+
+The [scenario evidence function](../sql/extensions/02_scenario_api.sql) selects a pinned base graph and a context-revision overlay with `SEM_MODELS(base, overlay)`. Its SPARQL matches this shape (`kcv:` denotes the project ontology namespace):
+
+```sparql
+SELECT ?item ?ver ?topic ?passage WHERE {
+  ?context kcv:focusesOn ?topic .
+  ?item kcv:coversTopic ?topic ; kcv:hasVersion ?ver .
+  ?ver kcv:hasPassage ?passage .
+}
+```
+
+This is a simplified pattern, not a complete runnable Worksheet statement. The actual code fixes the current context IRI, adds ordering/limits and embeds the SPARQL as a quoted SQL literal. `SEM_MATCH` returns variable bindings as SQL columns. PL/SQL then looks up each passage in KCV_PASSAGES and builds JSON containing evidence and actual graph paths. It bounds the packet to six distinct pages and two per source. The registered agent tool executes this application-defined query; the LLM does not generate arbitrary graph SQL in this flow. See [Oracle SEM_MATCH](https://docs.oracle.com/en/database/oracle/oracle-database/26/rdfrm/using-sem_match-table-function-query-rdf-data.html).
+
+OWL inference is a separate optional exercise, not part of normal answer retrieval. The pinned original lab uses an `owl:hasValue` restriction to classify ElectrifiedCar from a specific energy mode. Our [OWL exercise](../sql/scenarios/10_owl_inference.sql) uses `owl:someValuesFrom` plus `rdfs:subClassOf` to classify a context with a link to a Topic as FocusedContext. Both use `SEM_APIS.CREATE_INFERRED_GRAPH` with `SEM_RULEBASES('OWL2RL')` and before/after SPARQL queries. The inference mechanism is shared; the restriction and domain are adapted. The default evidence query passes no inference rulebase and does not automatically query that optional inferred graph.
+
+## Connected evidence model
+
 Two views meet at a contextual assessment: people/organisations/engagements and knowledge/content/evidence. Time changes both views. The ontology is [kcv.ttl](../ontology/kcv.ttl); [model.svg](../generated/model.svg) is a compact conceptual view.
 
 ## Evidence types

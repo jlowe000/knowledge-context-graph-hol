@@ -9,6 +9,8 @@ Choose one path. Both use the same `KCV_GENAI` profile and the same lab code. A 
 
 ## A. Existing OCI user credentials
 
+In Worksheet's bind dialog, match each value to its **field name**, not its position. `OCI_FINGERPRINT` is the short fingerprint shown for the registered public key, not the private-key body or a file path. `OCI_PRIVATE_KEY` takes the matching unencrypted key body without PEM BEGIN/END lines. Use Run Statement on the complete BEGIN–END block without the slash. If a bind is reported undeclared, reopen that complete block through Run Statement. A fingerprint-length error is an input-field check; inspect the field privately rather than sharing the entered values.
+
 Use this path if your OCI user already has inference permission in the intended compartment. Console/SSO access alone does not supply a database credential: this path requires an **OCI API signing key**, rather than your Console password, an OCI auth token or a Generative AI bearer API key. Oracle documents the [signing-key credential parameters](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-subprograms.html).
 
 1. In your OCI user's API Keys settings, identify an existing registered signing key or register a public key according to your organisation's process. You need the user OCID, tenancy OCID, matching fingerprint and corresponding private key. If you already use an OCI CLI configuration, its `user`, `tenancy` and `fingerprint` fields supply the first values; `key_file` points to the private key, not a value the database can read.

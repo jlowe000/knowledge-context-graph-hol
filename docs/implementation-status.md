@@ -14,7 +14,7 @@
 | Native graph load and bounded evidence functions | Compiled and native scenario acceptance passed on Serverless |
 | Three worker agents plus routing coordinator | Learner returned context and relevance responses through RUN_TEAM; broader native validation still pending |
 | Versioned native graph/context history and feedback | Native before/after topic refinement passed; observation component checks passed locally |
-| Optional OWL2RL inference | Implemented as an explicit native command; not run |
+| Optional OWL2RL inference | Native before/after exercise passed on Serverless, 22 November; class entailment only |
 | Standalone augmented HOL | Initial labs plus original-style Alex/Sam/Casey scenarios, source relationship extraction, Graph Studio and before/after OWL exercise |
 | Copyable short SQL | 37 inline examples across setup, authentication, deployment and labs; generated from retained scripts and checked during artifact builds |
 | OCI Generative AI authentication | User-key profile/model call reported successful by learner; resource-principal alternative documented, not exercised |
@@ -47,3 +47,8 @@ The project is organised into `dev` (complete source, original-PDF preparation, 
 The release uses the approved 17 attributed editorial summaries of nine public presentations, with separate summary IDs/hashes and original page links. It includes prebuilt dataset/APEX Worksheet installers, eight learner lab pages and native SQL verification, without Python/shell tooling, local mocks or original PDF extracts. Local tests verify package completeness, file hashes, provenance boundaries, source/page graph bindings and the documented S06-to-S08 refinement selection. Twenty-one Python checks pass on dev. New summary data and the updated agent instruction still require native Serverless/model/browser acceptance; this work did not redeploy the existing cloud app.
 
 Local branches/commits do not set GitHub's default branch or enforce remote protection. No remote or push is part of this change.
+
+
+## Clean dev reset and native retest — 21–23 November 2026
+
+The requested project teardown and clean checkpoint passed while retaining VALID JAVAVM. The dev original-passage dataset, schema, native graph, both teams and APEX app were rebuilt. Native base/scenario checks, a real model greeting, two real answer/provenance/refinement tests, historical immutability, observation save and optional OWL before/after inference passed. The app imported successfully on APEX 26.1.6; signed-in browser acceptance passed on 23 November: both explanation graphs, objective/topic preview and apply, real follow-up, preserved historical evidence after reload and observation save. See [reset workflow](dev-reset-and-retest.md) and [detailed validation](scenario-validation.md). This did not re-provision the database, re-enable Java, test the release summary dataset, publish a repository or push changes.

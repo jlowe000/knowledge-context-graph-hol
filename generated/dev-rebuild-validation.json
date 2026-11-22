@@ -1,0 +1,60 @@
+{
+  "run": "clean-dev-rebuild",
+  "started": "2026-11-21",
+  "completed": "2026-11-23",
+  "timezone": "Australia/Brisbane",
+  "branch": "dev",
+  "target": "temporary ADB Serverless",
+  "apex_version": "26.1.6",
+  "application_id": 100,
+  "dataset": {
+    "kind": "original_public_pdf_passages",
+    "sources": 9,
+    "passages": 20,
+    "fictional_contexts": 3,
+    "triples": 547,
+    "accepted_extracted_claims": 0
+  },
+  "checks": {
+    "project_teardown": "passed",
+    "project_free_checkpoint": "passed",
+    "javavm": "retained VALID; not disabled or re-enabled",
+    "native_base_retrieval": "passed",
+    "native_scenario_refinement_and_scope": "passed",
+    "real_model_greeting": "passed",
+    "worksheet_real_answers": 2,
+    "worksheet_historical_trace": "byte-for-byte unchanged after refinement",
+    "apex_import": "passed",
+    "browser_real_answers": 2,
+    "browser_tool_calls_per_answer": [
+      1,
+      1
+    ],
+    "browser_matched_citations_per_answer": [
+      6,
+      6
+    ],
+    "objective_preview_and_apply": "passed; source set unchanged",
+    "topic_removal": "passed; S06 removed and S08 selected",
+    "browser_full_reload": "passed; four turns and refined context restored",
+    "historical_popup_after_reload": "passed; original revision and S06 retained; no S08",
+    "current_evidence_after_reload": "passed; S08 present and no S06 source node",
+    "worksheet_observation_save": "passed",
+    "browser_observation_save": "passed",
+    "native_owl": {
+      "before": 0,
+      "after": 1,
+      "meaning": "class entailment only"
+    },
+    "python_tests_passed": 21,
+    "synchronised_short_sql_examples": 37
+  },
+  "limits": [
+    "Not a new OCI database provision or Java enablement test",
+    "Local preparation used Windows Python, not a repeated Oracle Linux bootstrap",
+    "Release editorial-summary dataset was not loaded or natively validated",
+    "Optional extraction/curation and older base-team reasoning were not rerun",
+    "No second-user live browser isolation or formal accessibility/zoom audit in this run"
+  ],
+  "private_evidence": "Ignored work files; no credentials, private endpoints or runtime session IDs in this summary"
+}

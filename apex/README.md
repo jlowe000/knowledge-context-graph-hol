@@ -75,7 +75,7 @@ The published SQL export must be regenerated after an asset change; changing the
 
 ## Local test status and deployment limit
 
-The app imported successfully into a separate local KCV_HOL_TEST workspace. Packages compiled and component tests passed using explicit native/model service mocks. An APEX-session callback test returned context, source metadata and graph paths. These results do not validate native RDF operations or model reasoning in that container. See [validation](../docs/scenario-validation.md) for the browser/deployment status. No cloud APEX deployment is claimed until the target workspace is known and the native scenarios run there.
+The app imported successfully into a separate local KCV_HOL_TEST workspace. Packages compiled and component tests passed using explicit native/model service mocks. An APEX-session callback test returned context, source metadata and graph paths. Those local results do not validate native RDF/model operations in that container. Separately, the app was rebuilt on temporary Serverless APEX 26.1.6 and passed the signed-in real-model/evidence/refinement/observation browser journey on 23 November. See [validation](../docs/scenario-validation.md) for the exact checks and remaining limits.
 
 ## Cleanup
 

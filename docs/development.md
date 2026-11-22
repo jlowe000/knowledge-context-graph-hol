@@ -28,3 +28,5 @@ The build uses the 17 existing attributed editorial paraphrases, not private fil
 Run `.venv/bin/python -m unittest discover -s tests -v`, `python scripts/sync_doc_snippets.py --check` and `python scripts/build_apex.py --check` before promotion. Inspect `work/release-package/README.md` and `release-manifest.json`. The release dataset requires its own native graph/model/browser acceptance; original-passage validation cannot be claimed for changed summaries.
 
 See [branch workflow](branch-workflow.md) for promotion. Optional direct-driver setup (`scripts/setup_serverless.sh`) does not replace the learner SQL walkthrough.
+
+For an explicitly requested reset of the dedicated disposable cloud lab, follow [dev reset and retest](dev-reset-and-retest.md). It verifies a project-free checkpoint and retains the one-way JAVAVM installation before rebuilding.

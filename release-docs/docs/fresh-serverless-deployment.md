@@ -1,4 +1,6 @@
-# Start here: deploy the SQL-first release
+# Set up the sample environment
+
+Use this route when an environment has not been supplied. If you already have an app URL/login, start with [app use](../labs/explore-evidence/explore-evidence.md). If the sample is deployed and you want to inspect its implementation, start with [developer learning](../labs/understand-collection/understand-collection.md).
 
 No previous ADB, SQL, graph or APEX experience is assumed. Use the files on this **release branch**; there are no Python or shell prerequisites.
 

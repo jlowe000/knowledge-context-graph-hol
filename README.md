@@ -6,7 +6,9 @@ This adapts only Oracle's [ontology-grounded document workshop](https://github.c
 
 ## Development branch
 
-This is the **dev branch**: full source, Python preparation/build utilities, tests and optional tooling. For the prebuilt SQL-first learner distribution, select **release**. Contributor instructions are in [development setup](docs/development.md); release packaging/control is explained in [branch workflow](docs/branch-workflow.md). The learner documentation is maintained separately under `release-docs/`.
+This is the **dev branch**, for people building their own adaptation of the knowledge collection or contributing implementation changes. Start with [Build your own version](docs/build-your-own.md), then [development environment setup](docs/development.md). It covers changing the sources, taxonomy/ontology, retrieval, tools, UI and validation—not just running build utilities.
+
+Select **release** to use the supplied app or follow its developer learning experience: understand the model, inspect SPARQL/tool evidence and exercise the existing SQL APIs. Its deployment guide is needed only when an environment has not been supplied. The branch distinction is the intended outcome, not whether you are a developer. Release experiences are maintained separately under `release-docs/`; see [branch workflow](docs/branch-workflow.md) for promotion.
 
 ## What is ready
 

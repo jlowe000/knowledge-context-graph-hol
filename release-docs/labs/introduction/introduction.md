@@ -2,63 +2,75 @@
 
 ## Introduction
 
-You will deploy an application that connects a person's question to curated public knowledge. You will inspect the evidence behind an answer, refine the person's context and see how the next conversation changes.
+Use a curated knowledge collection to explore a question, inspect its evidence and refine the next conversation. Choose an app-user experience or a developer experience that explains how the supplied collection works. Deployment is an additional route when an environment has not been provided.
 
-Estimated Workshop Time: allow a half-day for a first installation. This is a planning allowance, not a measured completion time; account access, provisioning and model availability can add waiting time.
+Estimated Lab Time: 10 minutes to choose a route. Allow 20–30 minutes for app use, 45–60 minutes for developer learning, or a half-day for a first deployment; these are planning estimates, with model/service waiting time additional.
 
 ### Objectives
 
-In this workshop, you will:
+In this introduction, you will:
 
-- Prepare a new Autonomous AI Database Serverless instance.
-- Load public source metadata, attributed editorial summaries and graph relationships.
-- Deploy the Knowledge Context Explorer APEX application.
-- Inspect source connections and recorded answer lineage.
-- Refine context and record what should be explored next.
+- Choose the experience that matches your learning objective.
+- Identify which account/access that experience needs.
+- Understand the public/fictional sample and evidence boundaries.
 
 ### Prerequisites
 
-This workshop assumes you have:
+| Route | Prerequisites |
+| --- | --- |
+| App user | Browser, working app URL and app login supplied by your facilitator |
+| Developer learning | Release files and a deployed sample with private KCV_LAB Worksheet access |
+| Deploy the sample | Approved OCI/ADB resources, administrator support and model inference permission; the setup labs explain each step |
 
-- An OCI account with permission to create a lab database, or an administrator who will perform that task.
-- An approved lab budget and access to OCI Generative AI chat inference.
-- A browser and plain-text editor; no Python, shell or local database software is required.
-- This standalone project downloaded/extracted from the location supplied by your facilitator.
+No Python or local build is required on release. No OCI Console or SQL knowledge is required for app use. Developer learning introduces the sample-specific SQL/graph concepts as you follow the implementation. ADB means Autonomous Database; APEX is the browser application platform included with it.
 
-No ADB, SQL, RDF or APEX experience is required. OCI means Oracle Cloud Infrastructure. A compartment is a folder-like boundary for cloud resources and permissions. A schema is a database user's collection of tables and code. APEX is the browser application platform included with the database.
+## Task 1: Choose a learning experience
 
-## Task 1: Understand the accounts
+1. Choose the question you want to answer:
 
-1. Keep the four identities below distinct. Your facilitator or OCI administrator can help with cloud permissions; do not substitute ADMIN for every login.
+   | Your question | Continue to |
+   | --- | --- |
+   | How can this collection help me decide what to explore next? | [Use the app](../explore-evidence/explore-evidence.md) |
+   | How do context, sources, the graph, agents and the UI work together? | [Understand the collection as a developer](../understand-collection/understand-collection.md) |
+   | How do I install the supplied sample? | [Prepare release files](../prepare-environment/prepare-environment.md), then follow the deployment route |
+   | How do I build my own collection or change this implementation? | Select dev and read `docs/build-your-own.md` |
 
-   | Identity | Where it is used | Purpose |
-   | --- | --- | --- |
-   | Your OCI user | OCI Console | Create/manage the database and authorize model access |
-   | ADMIN | Database Actions SQL Worksheet | Create the lab database user and APEX workspace/account |
-   | KCV_LAB | Database Actions SQL Worksheet | Own the knowledge tables, graph, profile and application code |
-   | KCV_USER | Knowledge Context Explorer login | Use the finished application |
+2. Read [Learning paths](../../docs/learning-paths.md). Release supports both app users and developers learning this example. Dev supports people building a new adaptation; the branch choice is about your intended outcome, not your technical seniority.
 
-2. Keep passwords and API signing keys in your approved private credential store. An APEX workspace name is not a username. The three database/app login passwords are separate from your OCI Console login.
+**Expected outcome:** you have a clear starting point without taking on unrelated setup work.
 
-**Expected outcome:** you know which identity to use when a later task says ADMIN, KCV_LAB or KCV_USER.
+## Task 2: Identify the required accounts
 
-## Task 2: Understand what is supplied
+1. Identify the account for your chosen route:
 
-1. Review the supplied content: nine public presentation records, 17 attributed editorial summaries, three fictional learners and a prebuilt APEX application export. The supplied SQL loads the summaries; it does not download or redistribute the original PDF text.
+   | Identity | Used for |
+   | --- | --- |
+   | KCV_USER or facilitator-supplied app login | The app-user experience |
+   | KCV_LAB | Developer SQL exercises and ownership of the sample data/code |
+   | ADMIN | Database/workspace setup when deploying the sample |
+   | Your OCI user | Cloud provisioning and model permissions when your role requires them |
 
-2. Notice the starting boundary: the graph is curated source/topic/evidence knowledge. Asking a question does not automatically discover new websites, retrain a model or edit source facts. This workshop refines the learner's context.
+2. Keep the credentials distinct and private. An app user does not need an ADMIN password. A developer inspecting a graph does not need to change cloud IAM when the sample is already configured.
 
-3. Continue to [Prepare your working environment](../prepare-environment/prepare-environment.md). If you are blocked at any point, use [Need help?](../need-help/need-help.md).
+**Expected outcome:** you know which login is relevant and who supplies it.
 
-**Expected outcome:** you can describe the final experience: question → connected evidence → context refinement → next question or action.
+## Task 3: Understand the sample
+
+1. Review the sample: nine public presentation records, 17 attributed editorial summaries, three fictional learner contexts and a prepared APEX app. The supplied SQL loads the collection. It does not redistribute the original PDFs.
+
+2. Notice the boundary: context changes affect which evidence is selected. They do not rewrite source facts, certify correctness or train the model. A matched citation points to supplied evidence; follow its original page link to check the source.
+
+3. Continue on your selected path. If blocked, use [Need help?](../need-help/need-help.md).
+
+**Expected outcome:** you can describe the experience as question → connected evidence → refinement → next question or action.
 
 ## Learn More
 
-- [Standalone project scope and attribution](../../NOTICE.md)
-- [Workshop route](../../docs/fresh-serverless-deployment.md)
+- [Choose your learning path](../../docs/learning-paths.md)
+- [Source attribution](../../NOTICE.md)
+- [Deployment route](../../docs/fresh-serverless-deployment.md)
 
 ## Acknowledgements
 
 - **Author** — Jason Lowe, standalone adaptation
-- **Upstream workshop** — Oracle LiveLabs authors credited in NOTICE.md
 - **Last Updated** — November 2026

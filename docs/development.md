@@ -1,6 +1,6 @@
-# Contributor setup — dev branch
+# Development environment — dev branch
 
-Use `dev` to change code, prepare public-source content, build the application and run tests. This document is not shipped on `release`. Learners use the separate release README and labs without installing Python.
+Use dev when building your own adaptation of the collection or contributing implementation changes. Start with [Build your own version](build-your-own.md) for the learning journey, then use this page for its environment and build commands. Release has separate experiences for end users and developers learning the supplied collection; neither requires this authoring setup. This page is not shipped on release.
 
 ## Requirements
 

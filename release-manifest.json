@@ -20,7 +20,7 @@
     },
     {
       "path": "apex/README.md",
-      "sha256": "1eb5f1073d7cac9e474c4637aaf8c4302e3bd502526be27a4714c936daf7655b"
+      "sha256": "1ac85b70486f70c590a719a3d6428348a44752aaff8ec783b23116ebd4818a20"
     },
     {
       "path": "data/contexts.json",
@@ -36,11 +36,11 @@
     },
     {
       "path": "docs/architecture.md",
-      "sha256": "cf6772552da29a737c8769545c59ff1c72b7c70a45372d7b0f3e8a60c401c348"
+      "sha256": "85e714dd74a87ef78c29103eab4ccb27bd84008a87abee00475575ca149a0fe4"
     },
     {
       "path": "docs/authentication.md",
-      "sha256": "6136202e31cf9acb2af480bbfa87738680d91cc8130110c6af934399152fe4bb"
+      "sha256": "1f8b45a97d499f2007330e3cf51949ef46cde5e0da88c2f7c9de8015e04518b2"
     },
     {
       "path": "docs/cleanup.md",
@@ -48,7 +48,11 @@
     },
     {
       "path": "docs/fresh-serverless-deployment.md",
-      "sha256": "dec665748bdc6384eb24142a38972c524ec4d00e29f36f3b2a42f61155a0d763"
+      "sha256": "a7c5e751259ce00b1d69a3f31b80a8cad5d99d0994859b1abbf7d060a8339cea"
+    },
+    {
+      "path": "docs/learning-paths.md",
+      "sha256": "8a63c600da22f3b5a6cee967944cfa31570baefdce61f56d0e9db6891f9d784c"
     },
     {
       "path": "docs/livelabs-authoring-alignment.md",
@@ -60,7 +64,7 @@
     },
     {
       "path": "docs/scenario-validation.md",
-      "sha256": "5c6ed5069c0a321c2d19a2453b79adfc0cc235b7d93640924b1da4b02849beb3"
+      "sha256": "af279f80901835201aa743d9c6976592b524c0e04df42659d1017e00cc12af5b"
     },
     {
       "path": "docs/screenshots.md",
@@ -68,7 +72,7 @@
     },
     {
       "path": "docs/sql-catalogue.md",
-      "sha256": "f70e848b0e0cd815d32c8fe28847b1f6dbf51898cf49a8db7c3e1bd313ef6447"
+      "sha256": "2f0e6c604ba1653ab54584d7cbca8c6177d5decd445e3b42297b40879ade367d"
     },
     {
       "path": "docs/ui-walkthrough.md",
@@ -116,7 +120,7 @@
     },
     {
       "path": "labs/explore-evidence/explore-evidence.md",
-      "sha256": "cd93c5926baab8f2c613e69c971e42fd156dedd055dc12d21124bf8471fee74b"
+      "sha256": "031ce4c7f2cbf25f9257846bb766b5b6148e643248e60bee3a085e638f3e7ec2"
     },
     {
       "path": "labs/explore-evidence/images/answer-lineage.jpg",
@@ -128,7 +132,7 @@
     },
     {
       "path": "labs/introduction/introduction.md",
-      "sha256": "17d4db9bb1e7750ccf77a38a033363ae4cd3484178e35d4c56278873370cf6f7"
+      "sha256": "e7acf70e22185e105679177444a9253d9b45ae16e46ee1d8653751851b214477"
     },
     {
       "path": "labs/load-knowledge/load-knowledge.md",
@@ -145,6 +149,10 @@
     {
       "path": "labs/provision-database/provision-database.md",
       "sha256": "cc70867a5128fbeaf20a813610f5133e360f0376fe56dc1b7b0e46baa7aec4f8"
+    },
+    {
+      "path": "labs/understand-collection/understand-collection.md",
+      "sha256": "9ddc6179023266b4bb4eb8126fea62b596d234a453de5c7f040c0e803c72b187"
     },
     {
       "path": "LICENSE.txt",
@@ -164,7 +172,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "1b7c0190ce355ff8996e08bad9dac3eefbe63c456bc680bdd2c93a679210547c"
+      "sha256": "e2e53839da79c984f11e26f5c9772dcb69c8618978c15deae8cab49d645fb965"
     },
     {
       "path": "references/upstream.json",

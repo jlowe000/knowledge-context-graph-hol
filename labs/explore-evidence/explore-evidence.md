@@ -17,7 +17,7 @@ In this lab, you will:
 
 ### Prerequisites
 
-Knowledge Context Explorer is installed, and you can sign into it as KCV_USER. The data and model checks in the preceding labs succeeded.
+Your facilitator has supplied a working Knowledge Context Explorer URL and an app login (KCV_USER in the supplied example). You need only a browser and that login. No OCI Console, SQL Worksheet or deployment work is required for this user experience. If you are setting up the environment yourself, follow the separate deployment guide first.
 
 ## Task 1: Start with Alex and ask a question
 
@@ -89,7 +89,9 @@ Knowledge Context Explorer is installed, and you can sign into it as KCV_USER. T
 
 **Expected outcome:** the status confirms the observation was saved against the current revision. This records feedback; it does not retrain the model, certify source claims or automatically apply a refinement. You have completed the main beginner path.
 
-For a longer journey, use the [detailed UI walkthrough](../../docs/ui-walkthrough.md). To retire the temporary environment, follow the [cleanup guidance](../../docs/cleanup.md) deliberately; this lab does not automatically delete resources.
+To understand how the collection works as a developer, continue to [Understand the collection](../understand-collection/understand-collection.md). To build a different implementation, use the dev branch.
+
+For a longer app journey, use the [detailed UI walkthrough](../../docs/ui-walkthrough.md). To retire the temporary environment, follow the [cleanup guidance](../../docs/cleanup.md) deliberately; this lab does not automatically delete resources.
 
 ## Learn More
 

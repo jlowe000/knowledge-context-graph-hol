@@ -1,5 +1,7 @@
 # SQL catalogue and execution order
 
+For a guided developer experience of the knowledge collection, use [Understand the collection](../labs/understand-collection/understand-collection.md). This catalogue supports both deployment and the API exercises; an app-only user does not need to run SQL.
+
 Use Database Actions SQL Worksheet. Do not run every SQL file alphabetically. Run complete slash-delimited files with F5; follow each lab's Run Statement instructions for private bind-input blocks.
 
 ## Required fresh installation

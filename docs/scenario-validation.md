@@ -2,7 +2,7 @@
 
 ## Existing application evidence
 
-The earlier original-passage version was deployed to the temporary ADB Serverless instance with APEX 26.1.6. Real model answers, native graph paths, context refinement, saved observations, per-response Sources/Answer lineage, historical persistence after reload and narrow-screen interaction were exercised. Detailed historical/component records remain on dev.
+The dev original-passage version was fully torn down (retaining JAVAVM), rebuilt on the temporary ADB Serverless instance and browser-tested through 23 November with APEX 26.1.6. Real model answers, native graph paths, context refinement, saved observations, per-response Sources/Answer lineage, historical persistence after reload and narrow-screen interaction were exercised. The native OWL before/after exercise also passed. These are supporting implementation results; they do not replace acceptance of the release summary dataset. Detailed records remain on dev.
 
 ## Summary release
 
@@ -17,3 +17,8 @@ This distribution changes the evidence payload to 17 attributed editorial summar
 5. Capture the remaining platform screenshots and have a first-time ADB learner complete the documented path. Review accessibility and a second user's isolation on the target separately.
 
 No new cloud database or model call is implied by packaging this release. The optional OWL/extraction exercises are not part of the main acceptance result.
+
+
+## Acceptance of the learning experiences
+
+The app-user route assumes a facilitator-provided URL/login and does not require deployment work. The developer-learning route follows the data/model, SPARQL evidence tool, supplied scenario API and APEX deployment artifacts. These new learning-path documents have packaging/link checks; they still need a first-time reader walkthrough against the release summary dataset. The build-your-own adaptation journey is documented separately on dev.

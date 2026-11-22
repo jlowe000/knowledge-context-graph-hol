@@ -1,5 +1,7 @@
 # Knowledge Context Explorer application
 
+Application icons use Font APEX from the Oracle APEX team. See [attribution](../third-party/font-apex/README.md) and the [retained licence](../third-party/font-apex/LICENSE.txt). Include these files and [NOTICE](../NOTICE.md) when distributing the SQL export or Worksheet installer separately.
+
 For the learning experience, start with [app use](../labs/explore-evidence/explore-evidence.md) or [understand the collection as a developer](../labs/understand-collection/understand-collection.md). Installation below is needed only when no suitable deployment is supplied.
 
 Use the supplied [Worksheet installer](../sql/install/20_install_apex.sql) as KCV_LAB after completing database and scenario setup. Follow the [deployment lab](../labs/deploy-explorer/deploy-explorer.md), including ADMIN workspace and app-user creation. The installer allocates a new application ID; it does not require App Builder or Python.

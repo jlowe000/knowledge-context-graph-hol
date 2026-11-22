@@ -20,7 +20,7 @@
     },
     {
       "path": "apex/README.md",
-      "sha256": "1ac85b70486f70c590a719a3d6428348a44752aaff8ec783b23116ebd4818a20"
+      "sha256": "66abb42d0d5338a871f6eed5a8b60924fe6a9d5140b7ab679eda97e6b37d3f97"
     },
     {
       "path": "data/contexts.json",
@@ -160,7 +160,7 @@
     },
     {
       "path": "NOTICE.md",
-      "sha256": "d684f0cff0d092c75ccfc8dd6a652a93ef355589777e8ab6a6f6de0b10022e49"
+      "sha256": "ce3eed0c1427eb365867b58370db028065ef8576d0a1481be192bbc996b8b282"
     },
     {
       "path": "ontology/kcv.ttl",
@@ -381,6 +381,14 @@
     {
       "path": "sql/schema/06_register_profile.sql",
       "sha256": "826bdf62fb31222800aff4b627d7ace308f5641082db4d6c2dcde654810dba4e"
+    },
+    {
+      "path": "third-party/font-apex/LICENSE.txt",
+      "sha256": "4b68767f618e57459a3029f9e88bb0d595232e00d2cd320c543514537017e69a"
+    },
+    {
+      "path": "third-party/font-apex/README.md",
+      "sha256": "31d7d08c2f2c5415cd74b211b9e0ef7860619398e875cd22bcf2442b22683a13"
     }
   ]
 }

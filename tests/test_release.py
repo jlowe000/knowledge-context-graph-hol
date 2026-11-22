@@ -23,7 +23,8 @@ class ReleaseTests(unittest.TestCase):
     def test_release_is_complete_without_developer_or_private_files(self):
         names = {f.relative_to(self.folder).as_posix() for f in self.folder.rglob('*') if f.is_file()}
         for required in ['sql/install/10_load_dataset.sql', 'sql/install/20_install_apex.sql',
-                         'docs/release-dataset.md', 'README.md', 'LICENSE.txt']:
+                         'docs/release-dataset.md', 'README.md', 'LICENSE.txt', 'NOTICE.md',
+                         'third-party/font-apex/README.md', 'third-party/font-apex/LICENSE.txt']:
             self.assertIn(required, names)
         self.assertFalse(any(n.split('/')[0] in {'work', 'scripts', 'kcv', 'tests',
                          'release-docs', 'config', '.venv'} for n in names))

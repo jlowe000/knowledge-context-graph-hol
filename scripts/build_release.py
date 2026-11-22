@@ -83,7 +83,7 @@ def build(output):
             if source.is_dir(): shutil.copytree(source, target)
             else: shutil.copy2(source, target)
         for relative in ['.gitattributes', '.gitignore', 'LICENSE.txt', 'NOTICE.md',
-                         'data', 'ontology', 'references', 'review-examples', 'sql']:
+                         'data', 'ontology', 'references', 'review-examples', 'sql', 'third-party']:
             copy(relative)
         # This is an explicit publication allowlist, never a copy of work/.
         for name in LABS: copy('labs/' + name)

@@ -1,5 +1,7 @@
 # Knowledge Context Explorer — APEX chatbot
 
+Application icons use Font APEX from the Oracle APEX team. See [attribution](../third-party/font-apex/README.md) and the [retained licence](../third-party/font-apex/LICENSE.txt). Include these files and [NOTICE](../NOTICE.md) when distributing the SQL export separately.
+
 **First deployment:** follow the [fresh Serverless walkthrough](../docs/fresh-serverless-deployment.md). **Existing explorer:** follow the [upgrade guide](../docs/epics-upgrade.md). The installation details below assume the base database objects, dataset and working model profile already exist.
 
 An authenticated APEX app for the extended knowledge/context scenarios. It uses the database's existing GenAI profile and the new KCV_EXPLORER_TEAM. There is no OpenAI/OCI key in browser code and no separate APEX Generative AI service configuration is required.

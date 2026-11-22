@@ -28,4 +28,8 @@ The [dataset](docs/release-dataset.md) contains editorial summaries of public pa
 
 The [validation record](docs/scenario-validation.md) distinguishes related dev application tests from the still-pending native acceptance of this summary dataset. A facilitator should confirm which sample is installed before a workshop.
 
-[UPL 1.0 licence](LICENSE.txt) · [attribution](NOTICE.md) · [cleanup](docs/cleanup.md). No WMS/reservation metadata or other upstream workshops are included.
+[MIT licence](LICENSE.txt) · [attribution](NOTICE.md) · [cleanup](docs/cleanup.md). No WMS/reservation metadata or other upstream workshops are included.
+
+## Licence
+
+An independent project for education, learning and experimentation. Copyright (c) 2026 Jason Lowe. Original project contributions are licensed under [MIT](LICENSE.txt). Third-party material retains its respective licences, including Oracle LiveLabs material under UPL 1.0 and Font APEX assets under their upstream terms. See [NOTICE.md](NOTICE.md) for attribution and scope.

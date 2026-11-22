@@ -156,11 +156,11 @@
     },
     {
       "path": "LICENSE.txt",
-      "sha256": "0c108c95deab23308748ad89bc61255e38424a94c07ad949fdb009edef0255c7"
+      "sha256": "e4cefa89c8f5d72b84f62cc81e5ff31e0e945bbc0df24b25349b685596671dd8"
     },
     {
       "path": "NOTICE.md",
-      "sha256": "ce3eed0c1427eb365867b58370db028065ef8576d0a1481be192bbc996b8b282"
+      "sha256": "c05b0c4dba934b2958cfe3c66c3c8187bcead589397fe348c27b4f7995db47fe"
     },
     {
       "path": "ontology/kcv.ttl",
@@ -172,7 +172,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "e2e53839da79c984f11e26f5c9772dcb69c8618978c15deae8cab49d645fb965"
+      "sha256": "253b363c8a3554b7f55084080363163bccc88ef402aebbd20486fb37ee33870c"
     },
     {
       "path": "references/upstream.json",
@@ -388,7 +388,15 @@
     },
     {
       "path": "third-party/font-apex/README.md",
-      "sha256": "31d7d08c2f2c5415cd74b211b9e0ef7860619398e875cd22bcf2442b22683a13"
+      "sha256": "bad1518d7c8d43b3be5f5bb02b5442d5bfddfd7cf15afdfe8ac5e4580021782b"
+    },
+    {
+      "path": "third-party/oracle-livelabs/LICENSE.txt",
+      "sha256": "0c108c95deab23308748ad89bc61255e38424a94c07ad949fdb009edef0255c7"
+    },
+    {
+      "path": "third-party/oracle-livelabs/README.md",
+      "sha256": "0b852b45f455d080220c41f85f35645270edc638c9f6db39b08c160361ff14cd"
     }
   ]
 }

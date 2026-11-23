@@ -19,7 +19,7 @@ Provisioning/restarting the database and OCI access policies are Console/adminis
 
 The shared loading lab defaults to the [public GitHub summary dataset](github-dataset-load.md). Its manifest and JSON parts must already be published at the chosen commit. Test the dev candidate using its full commit SHA and keep release unchanged until native acceptance passes. To test your own extracted authoring passages instead, use the local numbered SQL fallback described in that guide, in a separate fresh lab schema. Ordinary release learners use the promoted package and need no local build.
 
-The expanded public-content build also requires an APEX developer to [replace the supplied application JavaScript](content-ingestion-upgrade.md#required-application-file-update) after importing the app. Its engine SQL export has not yet been regenerated. The deployment lab identifies this step explicitly; KCV_USER remains an end-user login.
+The supplied engine-generated app export includes the expanded content's non-PDF links and locator labels. Import it through the deployment lab; no additional JavaScript upload or developer login is needed for that Worksheet installation route. KCV_USER remains an end-user login. The [upgrade guide](content-ingestion-upgrade.md#update-the-application) covers existing installations and the manual fallback for older exports.
 
 ## What is verified
 

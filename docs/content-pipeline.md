@@ -67,4 +67,4 @@ The local Worksheet loader remains available for authoring tests and environment
 
 ## 4. Deploy deliberately
 
-For a new database, follow [fresh Serverless deployment](fresh-serverless-deployment.md). For an existing lab, follow [content locator upgrade](content-ingestion-upgrade.md), including the updated APEX static JavaScript file. The engine-produced application export remains unchanged until it can be re-exported through APEX. Historical conversations retain their saved evidence; create a new conversation for the new active graph.
+For a new database, follow [fresh Serverless deployment](fresh-serverless-deployment.md). For an existing lab, follow [content locator upgrade](content-ingestion-upgrade.md). The current engine-produced application export includes the non-PDF evidence JavaScript and versioned assets; importing it does not require a separate static-file replacement. Historical conversations retain their saved evidence; create a new conversation for the new active graph.

@@ -2,7 +2,7 @@
 
 Implemented 19 November 2026. Target: the existing standalone Serverless schema and APEX app, with the initial scenario extension already installed. Preserve the working profile, credential, source data and registered KCV_EXPLORER_TEAM. No new OCI service or IAM policy is required.
 
-For the expanded research content, also follow the [non-PDF evidence migration and application-file update](content-ingestion-upgrade.md). This includes a nullable page locator and a required JavaScript replacement while the engine re-export is pending.
+For the expanded research content, also follow the [non-PDF evidence migration and application upgrade](content-ingestion-upgrade.md). This includes a nullable page locator and updated backend packages. The current engine-generated SQL export includes the non-PDF JavaScript; a separate file replacement is only a fallback for an older installed export.
 
 ## Upgrade order in KCV_LAB Worksheet
 

@@ -96,15 +96,7 @@ If the generated file is missing, return to your Oracle Linux terminal at the pr
 
 The app SQL export is already supplied. SQLcl, a frontend build framework and local APEX are not required to install it. [App Builder import](../../apex/README.md) requires a separate developer account; KCV_USER is intentionally not one.
 
-## Task 4: Apply the public-content display update
-
-**Where:** App Builder. **Account:** an APEX developer or workspace administrator in KCV_KNOWLEDGE; KCV_USER cannot administer the app.
-
-The engine-generated SQL export currently predates the expanded non-PDF evidence. Follow the [required application-file update](../../docs/content-ingestion-upgrade.md#required-application-file-update) to replace `explorer.js` and update its cache suffix after import. This uses the supplied file and does not require Python or SQLcl. If you do not have a workspace developer login, have the workspace administrator perform that step.
-
-**Expected outcome:** the application uses the current source links and locator labels. An engine re-export is pending; do not skip this step merely because the SQL import succeeded.
-
-## Task 5: Open and sign in to the app
+## Task 4: Open and sign in to the app
 
 **Where:** browser. **Account:** KCV_USER.
 
@@ -119,6 +111,8 @@ The engine-generated SQL export currently predates the expanded non-PDF evidence
 3. Sign in as KCV_USER with the password from Task 2. If the login fails, check that you are on the application login rather than Database Actions, and that the account was created in KCV_KNOWLEDGE.
 
 **Expected outcome:** the app displays the Learner scenario selector and Conversation, Evidence, Context and Observations views. Iris styling is part of the supplied Universal Theme app. A successful app import does not yet establish that model calls work from the application session.
+
+The current export includes non-PDF source links, locator labels and versioned JavaScript assets. No additional application-file upload is required. If you intentionally retained an older export instead of importing this version, use the [older-installation fallback](../../docs/content-ingestion-upgrade.md#manual-fallback-for-an-older-installed-export) before testing non-PDF evidence.
 
 Continue to [Explore the evidence](../explore-evidence/explore-evidence.md).
 

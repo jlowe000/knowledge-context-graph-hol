@@ -4,7 +4,7 @@ Application icons use Font APEX from the Oracle APEX team. See [attribution](../
 
 **First deployment:** follow the [fresh Serverless walkthrough](../docs/fresh-serverless-deployment.md). **Existing explorer:** follow the [upgrade guide](../docs/epics-upgrade.md). The installation details below assume the base database objects, dataset and working model profile already exist.
 
-**Expanded content:** the engine SQL export predates the non-PDF evidence display. Follow the [required application-file update](../docs/content-ingestion-upgrade.md#required-application-file-update) after import. The updated JavaScript and APEXlang assets are supplied; an engine re-export remains pending.
+**Expanded content:** the supplied engine-generated SQL export now includes the non-PDF evidence display and versioned application assets. Import it normally; a separate JavaScript upload is not required. For an existing installation, follow the [content upgrade guide](../docs/content-ingestion-upgrade.md#update-the-application). It also retains a manual file-update fallback for older exports.
 
 An authenticated APEX app for the extended knowledge/context scenarios. It uses the database's existing GenAI profile and the new KCV_EXPLORER_TEAM. There is no OpenAI/OCI key in browser code and no separate APEX Generative AI service configuration is required.
 
@@ -79,7 +79,7 @@ The published SQL export must be regenerated after an asset change; changing the
 
 ## Local test status and deployment limit
 
-The app imported successfully into a separate local KCV_HOL_TEST workspace. Packages compiled and component tests passed using explicit native/model service mocks. An APEX-session callback test returned context, source metadata and graph paths. Those local results do not validate native RDF/model operations in that container. Separately, the app was rebuilt on temporary Serverless APEX 26.1.6 and passed the signed-in real-model/evidence/refinement/observation browser journey on 23 November. See [validation](../docs/scenario-validation.md) for the exact checks and remaining limits.
+The app imported successfully into a separate local KCV_HOL_TEST workspace. Packages compiled and component tests passed using explicit native/model service mocks. An APEX-session callback test returned context, source metadata and graph paths. Those local results do not validate native RDF/model operations in that container. Separately, the app was rebuilt on temporary Serverless APEX 26.1.6 and passed the signed-in real-model/evidence/refinement/observation browser journey on 23 November. The expanded summary dataset subsequently passed [targeted real-model and browser acceptance](../references/expanded-ui-validation.json), including historical explanation persistence, new non-PDF research and corrected citation-object matching. See [validation](../docs/scenario-validation.md) for the exact checks and remaining limits.
 
 ## Cleanup
 

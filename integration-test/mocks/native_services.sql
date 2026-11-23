@@ -41,7 +41,7 @@ END;
 /
 CREATE OR REPLACE PACKAGE BODY dbms_cloud_ai_agent AS
  FUNCTION run_team(team_name VARCHAR2,user_prompt CLOB,params CLOB) RETURN CLOB IS
-   packet CLOB;fixture_mode VARCHAR2(30);answer JSON_OBJECT_T:=JSON_OBJECT_T();c JSON_ARRAY_T:=JSON_ARRAY_T();pid VARCHAR2(200);
+   packet CLOB;fixture_mode VARCHAR2(30);answer JSON_OBJECT_T:=JSON_OBJECT_T();c JSON_ARRAY_T:=JSON_ARRAY_T();pid VARCHAR2(200);item JSON_OBJECT_T;
  BEGIN
    SELECT JSON_VALUE(body,'$.test_mode') INTO fixture_mode FROM kcv_test_ai_response FETCH FIRST 1 ROW ONLY;
    IF fixture_mode='model_failure' THEN RAISE_APPLICATION_ERROR(-20980,'Fixture model failure');END IF;
@@ -53,7 +53,41 @@ CREATE OR REPLACE PACKAGE BODY dbms_cloud_ai_agent AS
    IF fixture_mode='repeat_tool' THEN EXECUTE IMMEDIATE 'BEGIN :r:=kcv_scenario_evidence(:q); END;' USING OUT packet,IN user_prompt;END IF;
    pid:=JSON_VALUE(packet,'$.evidence[0].id');IF pid IS NOT NULL THEN c.append(pid);END IF;
    IF fixture_mode='unknown_citation' THEN c.append('invented-passage');END IF;
-   answer.put('assessment','LOCAL MOCK: actual tool wrapper exercised; no OCI model inference.');IF fixture_mode='nested_citations' THEN DECLARE nested JSON_OBJECT_T:=JSON_OBJECT_T();BEGIN nested.put('citations',c);answer.put('assessment',nested);END;ELSE answer.put('citations',c);END IF;IF fixture_mode='nested_citations' THEN RETURN TO_CLOB(CHR(10)||'```json'||CHR(10))||answer.to_clob()||TO_CLOB(CHR(10)||'```'||CHR(10));END IF;RETURN answer.to_clob();
+   IF fixture_mode IN ('passage_id_citations','evidence_id_citations','aliased_citations','conflicting_citations') THEN
+    c:=JSON_ARRAY_T();item:=JSON_OBJECT_T();
+    IF fixture_mode='passage_id_citations' THEN item.put('passage_id',pid);item.put('exact_summary_text','LOCAL MOCK editorial summary.');
+    ELSIF fixture_mode='evidence_id_citations' THEN item.put('evidence_id',pid);
+    ELSIF fixture_mode='aliased_citations' THEN item.put('id',pid);item.put('passage_id',pid);item.put('evidence_id',pid);
+    ELSE
+     item.put('id',pid);item.put('passage_id','conflicting-passage');c.append(item);
+     item:=JSON_OBJECT_T();item.put('evidence_id',pid);item.put('id',42);c.append(item);
+     item:=JSON_OBJECT_T();item.put('passage_id',pid);item.put_null('evidence_id');
+    END IF;
+    c.append(item);
+   END IF;
+   IF fixture_mode IN ('object_citations','mixed_citations','malformed_citations') THEN
+    IF fixture_mode='object_citations' THEN c:=JSON_ARRAY_T();END IF;
+    item:=JSON_OBJECT_T();item.put('id',pid);item.put('editorial_summary_passage','LOCAL MOCK summary, not a source quotation.');c.append(item);
+    IF fixture_mode='mixed_citations' THEN
+     item:=JSON_OBJECT_T();item.put('id','invented-object-passage');c.append(item);
+    ELSIF fixture_mode='malformed_citations' THEN
+     c.append(JSON_OBJECT_T.parse('{"id":42}'));c.append(JSON_OBJECT_T.parse('{"id":null}'));
+     c.append(JSON_OBJECT_T.parse('{"id":{"id":"nested-id-must-not-count"}}'));
+     c.append(JSON_OBJECT_T.parse('{"label":"missing id"}'));c.append(JSON_OBJECT_T.parse('{"id":""}'));
+     c.append(JSON_ARRAY_T.parse('["nested-array-must-not-count"]'));c.append(7);
+    END IF;
+    -- These are deliberately outside citations arrays and must be ignored.
+    answer.put('id','top-level-id-must-not-count');
+    answer.put('graph_paths',JSON_ARRAY_T.parse('[{"id":"path-id-must-not-count"}]'));
+    answer.put('metadata',JSON_OBJECT_T.parse('{"id":"metadata-id-must-not-count"}'));
+   END IF;
+   answer.put('assessment','LOCAL MOCK: actual tool wrapper exercised; no OCI model inference.');
+   IF fixture_mode='nested_citations' THEN
+    DECLARE nested JSON_OBJECT_T:=JSON_OBJECT_T();BEGIN nested.put('citations',c);answer.put('assessment',nested);END;
+   ELSIF fixture_mode='non_array_citations' THEN answer.put('citations',JSON_OBJECT_T.parse('{"id":"invalid-container-id"}'));
+   ELSE answer.put('citations',c);END IF;
+   IF fixture_mode='nested_citations' THEN RETURN TO_CLOB(CHR(10)||'```json'||CHR(10))||answer.to_clob()||TO_CLOB(CHR(10)||'```'||CHR(10));END IF;
+   RETURN answer.to_clob();
  END;
  PROCEDURE create_tool(tool_name VARCHAR2,description VARCHAR2,attributes CLOB) IS j JSON_OBJECT_T;BEGIN j:=JSON_OBJECT_T.parse(attributes);END;
  PROCEDURE create_task(task_name VARCHAR2,attributes CLOB) IS j JSON_OBJECT_T;BEGIN j:=JSON_OBJECT_T.parse(attributes);END;

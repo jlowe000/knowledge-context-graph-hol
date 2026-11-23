@@ -67,23 +67,41 @@ CREATE OR REPLACE PACKAGE BODY kcv_trace AS
   TYPE seen_t IS TABLE OF PLS_INTEGER INDEX BY VARCHAR2(4000);supplied seen_t;seen seen_t;
   answer CLOB;clean CLOB;cid VARCHAR2(4000);rev VARCHAR2(40);last_pos NUMBER;parse_state VARCHAR2(32):='UNAVAILABLE';
   PROCEDURE visit(p_node JSON_ELEMENT_T,p_depth PLS_INTEGER DEFAULT 0) IS
-   o JSON_OBJECT_T;a JSON_ARRAY_T;ks JSON_KEY_LIST;v JSON_ELEMENT_T;id_text VARCHAR2(4000);entry JSON_OBJECT_T;
+   o JSON_OBJECT_T;a JSON_ARRAY_T;ks JSON_KEY_LIST;v JSON_ELEMENT_T;id_text VARCHAR2(4000);entry JSON_OBJECT_T;citation_obj JSON_OBJECT_T;
+   id_keys JSON_KEY_LIST:=JSON_KEY_LIST('id','passage_id','evidence_id');candidate VARCHAR2(4000);invalid_id BOOLEAN;
   BEGIN
    IF p_depth>32 THEN parse_state:='PARTIAL';RETURN;END IF;
    IF p_node.is_object THEN
     o:=TREAT(p_node AS JSON_OBJECT_T);ks:=o.get_keys;
     FOR k IN 1..ks.COUNT LOOP
      v:=o.get(ks(k));
-     IF LOWER(ks(k))='citations' AND v.is_array THEN
-      a:=TREAT(v AS JSON_ARRAY_T);IF parse_state<>'PARTIAL' THEN parse_state:='PARSED';END IF;
-      FOR x IN 0..a.get_size-1 LOOP
-       IF a.get(x).is_string THEN
-        id_text:=a.get_string(x);
-        IF NOT seen.EXISTS(id_text) THEN
-         entry:=JSON_OBJECT_T();entry.put('id',id_text);entry.put('matched',supplied.EXISTS(id_text));cites.append(entry);seen(id_text):=1;
+     IF LOWER(ks(k))='citations' THEN
+      IF v.is_array THEN
+       a:=TREAT(v AS JSON_ARRAY_T);IF parse_state<>'PARTIAL' THEN parse_state:='PARSED';END IF;
+       FOR x IN 0..a.get_size-1 LOOP
+        id_text:=NULL;v:=a.get(x);
+        -- Accept IDs only within an explicit citations array. Do not harvest
+        -- arbitrary object IDs, graph paths, prose or nested citation metadata.
+        IF v.is_string THEN id_text:=a.get_string(x);
+        ELSIF v.is_object THEN
+         citation_obj:=TREAT(v AS JSON_OBJECT_T);invalid_id:=FALSE;
+         FOR key_i IN 1..id_keys.COUNT LOOP
+          IF citation_obj.has(id_keys(key_i)) THEN
+           IF citation_obj.get(id_keys(key_i)).is_string THEN
+            candidate:=citation_obj.get_string(id_keys(key_i));
+            IF candidate IS NULL OR (id_text IS NOT NULL AND candidate<>id_text) THEN invalid_id:=TRUE;
+            ELSE id_text:=candidate;END IF;
+           ELSE invalid_id:=TRUE;END IF;
+          END IF;
+         END LOOP;
+         IF invalid_id THEN id_text:=NULL;END IF;
         END IF;
-       ELSE parse_state:='PARTIAL';END IF;
-      END LOOP;
+        IF id_text IS NULL THEN parse_state:='PARTIAL';
+        ELSIF NOT seen.EXISTS(id_text) THEN
+          entry:=JSON_OBJECT_T();entry.put('id',id_text);entry.put('matched',supplied.EXISTS(id_text));cites.append(entry);seen(id_text):=1;
+        END IF;
+       END LOOP;
+      ELSE parse_state:='PARTIAL';END IF;
      ELSE visit(v,p_depth+1);END IF;
     END LOOP;
    ELSIF p_node.is_array THEN
@@ -123,7 +141,7 @@ CREATE OR REPLACE PACKAGE BODY kcv_trace AS
    j:=JSON_OBJECT_T.parse(clean);
    visit(j);
   EXCEPTION WHEN OTHERS THEN parse_state:='UNAVAILABLE';END;
-  result.put('tool_calls',calls);result.put('citations',cites);result.put('citation_parse_status',parse_state);result.put('citation_parser_version','2-explicit-fields');
+  result.put('tool_calls',calls);result.put('citations',cites);result.put('citation_parse_status',parse_state);result.put('citation_parser_version','4-explicit-citation-ids');
   result.put('notice','Recorded application inputs and tool returns, not private reasoning. Citation matches establish traceability, not claim correctness. Prior conversation may influence the answer; this is not a provider prompt archive.');
   RETURN result.to_clob();
  END;

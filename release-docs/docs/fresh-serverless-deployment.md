@@ -19,7 +19,7 @@ Cloud provisioning/restart and IAM are administrator/OCI Console tasks. Database
 
 The [dataset load](github-dataset-load.md) reads public JSON files directly from a full GitHub commit SHA and validates the supplied manifest hash. The files must be published before the call can work. This download requires no GitHub token, OCI resource principal or storage bucket; model inference authentication is separate.
 
-After importing the application, an APEX workspace developer must [replace its supplied JavaScript file](content-ingestion-upgrade.md#required-application-file-update) for non-PDF links and locator labels. The engine SQL export has not yet been regenerated; the deployment lab includes the required file update. It requires no Python or SQLcl. KCV_USER remains an app-only account.
+The supplied engine-generated application export includes non-PDF links and locator labels. The normal Worksheet installation needs no additional JavaScript upload, Python, SQLcl or App Builder login. KCV_USER remains an app-only account. See the [upgrade guide](content-ingestion-upgrade.md#update-the-application) only when updating an existing installation or retaining an older export.
 
 Use a new dedicated lab schema/database for this summary-based distribution. The [dataset guide](release-dataset.md) explains attribution and changed citation IDs. The [SQL catalogue](sql-catalogue.md) separates required installation from optional exercises. The older KCV_TEAM, candidate approval, inference and developer mocks are not required.
 

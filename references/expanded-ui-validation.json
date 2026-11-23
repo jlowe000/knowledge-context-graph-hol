@@ -1,0 +1,150 @@
+{
+  "format_version": 1,
+  "validation_date": "2026-11-23",
+  "scope": "Real GenAI responses and signed-in APEX evidence flows for the expanded public summary dataset on the existing temporary ADB Serverless instance",
+  "status": "passed",
+  "tested_branch": "dev",
+  "artifact_identity_note": "Artifact hashes identify the candidate files used in this acceptance. A later commit recording these same artifacts does not imply an additional execution.",
+  "artifact_hash_basis": "SHA-256 of UTF-8 file bytes with CRLF normalized to LF, matching Git's published text normalization. This changes line endings only, not executable content. The application export embeds the same normalized JavaScript and CSS source assets.",
+  "artifact_sha256": {
+    "apex/kcv-explorer.sql": "103f6e94feb474f796f5f733c7d007dc376cfc6daeb9179375ff5235d190fb3b",
+    "apex/explorer.js": "35d2597bca5e2af63fda8c66cbf978c243f109bc7589e7b0c393c464dba98621",
+    "apex/explorer.css": "6972a7686c05a2434c945e7d6d10fcfb31fcc00b99530609747fe3fd12e2246e",
+    "sql/extensions/06_response_provenance.sql": "c02a4deb34cef2de925bf12d8eaed8b203b3bf171c4d9c0c49722c582b9b2cd8",
+    "data/load/manifest.json": "dae8efdcd9e99874c8dfc3d9a3ccaf4a861f76b3b5442f71f075a6d9b64ef8ad"
+  },
+  "dataset": {
+    "load_validation": "references/github-dataset-validation.json",
+    "sources": 834,
+    "passages": 762,
+    "contexts": 3,
+    "triples": 30144,
+    "evidence_kind": "attributed_editorial_summary"
+  },
+  "execution_interfaces": ["Database Actions SQL Worksheet", "Authenticated APEX application in browser"],
+  "real_model_calls": {"native_worksheet": 1, "apex_browser": 3, "total": 4},
+  "application_update": {
+    "status": "passed",
+    "method": "Reimported the regenerated engine-generated export into the existing verified lab application",
+    "observed_import_seconds": 2.536,
+    "non_pdf_locator_assets_packaged": true,
+    "backup_note": "The complete previous app export was retained in a private database table. A DBMS_OUTPUT-only backup was not relied on because that display was truncated.",
+    "credentials_or_dataset_reset": false
+  },
+  "native_casey_response": {
+    "status": "passed",
+    "real_model_call": true,
+    "observed_duration_seconds": 52.630,
+    "cited_source_ids": ["S10", "R0546", "R0691"],
+    "checks": [
+      "Preserved the distinction between reported operational changes and projected savings",
+      "Did not infer Australian availability from the supplied material",
+      "Used the expanded summary dataset"
+    ]
+  },
+  "citation_parser_regression": {
+    "status": "passed",
+    "initial_observation": "The model returned citation objects; the previous parser marked the answer PARTIAL.",
+    "parser_version": "4-explicit-citation-ids",
+    "after_fix_parse_status": "PARSED",
+    "matched_citations": 4,
+    "total_explicit_citations": 4,
+    "captured_evidence_tool_status": "SUCCEEDED",
+    "method": "Re-read the same saved native and browser Casey answers after replacing the provenance package, including a full browser reload. No replacement model inference was needed to repair citation matching.",
+    "additional_browser_observation": "The later Casey response used citation objects containing passage_id and exact_summary_text. The final bounded parser accepts explicit id, passage_id or evidence_id fields and preserves malformed or ambiguous entries as partial rather than inventing matches.",
+    "browser_saved_answer_parse_status": "PARSED",
+    "browser_saved_answer_matched_citations": 4,
+    "browser_saved_answer_total_explicit_citations": 4,
+    "browser_saved_answer_captured_tool_calls": 1,
+    "browser_saved_answer_tool_status": "SUCCEEDED",
+    "compile_errors_after_fix": 0
+  },
+  "apex_alex": {
+    "status": "passed",
+    "fresh_authenticated_conversation": true,
+    "initial_response": {
+      "status": "passed",
+      "real_model_call": true,
+      "returned_source_ids": ["S02", "S03", "S06"],
+      "matched_citations": 6,
+      "total_explicit_citations": 6,
+      "captured_evidence_tool_calls": 1
+    },
+    "sources_and_answer_lineage_node_details": "passed",
+    "objective_preview_and_apply": "passed; source set preserved",
+    "remove_graph_capabilities_preview_and_apply": "passed; S06 removed and S08 added",
+    "refined_model_response": {
+      "status": "passed",
+      "returned_source_ids": ["S02", "S03", "S08"],
+      "coming_soon_qualification_preserved": true,
+      "matched_citations": 6,
+      "total_explicit_citations": 6,
+      "captured_evidence_tool_calls": 1
+    },
+    "historical_evidence_after_reload": {
+      "status": "passed",
+      "restored_turns": 4,
+      "refined_context_restored": true,
+      "original_popup_historical_notice": true,
+      "original_popup_includes_s06_excludes_s08": true,
+      "refined_popup_includes_s08_excludes_s06": true
+    }
+  },
+  "apex_casey_non_pdf_evidence": {
+    "status": "passed",
+    "real_model_response": "passed",
+    "captured_passage_count": 6,
+    "captured_source_ids": ["S10", "R0046", "R0528", "R0546", "R0691"],
+    "cited_source_ids": ["S10", "R0546", "R0691"],
+    "regional_uncertainty_and_projected_benefit_qualifications": "passed",
+    "r0046_and_r0691_real_non_pdf_labels": "passed",
+    "editorial_summary_labels": "passed",
+    "long_locator_labels_wrap": "passed",
+    "public_link_follow": "passed; R0691 opened without a login and the inspected section retained expected-savings language",
+    "saved_popup_after_full_reload": {
+      "status": "passed",
+      "cited_passage_cards": 4,
+      "returned_not_cited_passage_cards": 2,
+      "editorial_summary_labels": 6,
+      "fabricated_null_pdf_page_labels": 0,
+      "partial_citation_notice": false
+    }
+  },
+  "observation_save": {
+    "status": "passed",
+    "method": "source_check",
+    "count": 1,
+    "recorded_against_current_revision": true
+  },
+  "final_database_checks": {
+    "status": "passed",
+    "completed_apex_responses": 3,
+    "captured_evidence_tool_calls_per_apex_response": 1,
+    "additional_model_calls_from_explanation_popups": 0,
+    "applied_refinements": {"SET_OBJECTIVE": 1, "REMOVE_TOPIC": 1, "ADD_TOPIC": 1},
+    "source_check_observations": 1,
+    "active_base_graph_unchanged": true,
+    "user_errors": 0
+  },
+  "browser_console_errors": 0,
+  "local_regressions": {
+    "release_packaging_tests_passed": 5,
+    "oracle_apex_component_suites_passed": 4,
+    "scope_note": "Local component suites exercise the corrected parser with explicit mocks; the saved native and browser responses above establish the real-model citation checks."
+  },
+  "duration_note": "Recorded timings describe individual observed operations, not performance guarantees.",
+  "not_tested_in_this_acceptance": [
+    "Interruption during a native dataset load",
+    "Fallback SQL dataset-part execution",
+    "New database provisioning or a complete first-time learner deployment",
+    "Execution from a promoted release commit",
+    "Live isolation using a second signed-in application user",
+    "Exhaustive model reliability across all 834 sources and question types",
+    "Formal accessibility audit"
+  ],
+  "publication_scope": {
+    "release_promoted_or_pushed": false,
+    "runtime_hosts_credentials_and_runtime_identifiers_included": false,
+    "public_source_ids_included": true
+  }
+}

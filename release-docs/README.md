@@ -28,7 +28,9 @@ The [dataset](docs/release-dataset.md) contains editorial summaries of public pa
 
 The dataset load uses a published release commit and the supplied manifest hash. The commit must contain `data/load/manifest.json` and all its JSON parts; generating a local release does not publish them. The [load guide](docs/github-dataset-load.md) explains choosing the commit, monitoring progress and the retained SQL fallback.
 
-The [validation record](docs/scenario-validation.md) distinguishes earlier dev application tests from the expanded summary dataset's native SQL acceptance on dev. The GitHub load, graph/scope checks and lock exclusion passed on 23 November 2026; model inference and browser acceptance for these summaries remain pending. Execution from a promoted release commit is separate. A facilitator should confirm which sample is installed before a workshop.
+The [validation record](docs/scenario-validation.md) distinguishes earlier application tests from the expanded summary dataset's native SQL acceptance on dev. The GitHub load, graph/scope and lock checks passed on 23 November 2026. Subsequent [real-model and signed-in APEX acceptance](references/expanded-ui-validation.json) passed refinement, historical explanations, new research and non-PDF links. This does not establish execution from a promoted release commit or a fresh learner deployment. A facilitator should confirm which sample is installed before a workshop.
+
+The supplied engine-generated APEX export includes the non-PDF evidence display and versioned assets; no separate JavaScript upload is needed after a normal import. The [Casey walkthrough](docs/ui-walkthrough.md#explore-the-expanded-research-with-casey) shows how to add a healthcare focus and inspect added research alongside the original presentation.
 
 [MIT licence](LICENSE.txt) · [attribution](NOTICE.md) · [cleanup](docs/cleanup.md). No WMS/reservation metadata or other upstream workshops are included.
 

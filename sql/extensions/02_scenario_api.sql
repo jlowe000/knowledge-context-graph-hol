@@ -89,9 +89,9 @@ CREATE OR REPLACE PACKAGE BODY kcv_scenario AS
  END;
  FUNCTION evidence_packet(p_request CLOB) RETURN CLOB IS
    sid VARCHAR2(40); r kcv_scenario_revisions%ROWTYPE; result JSON_OBJECT_T:=JSON_OBJECT_T();
-   paths JSON_ARRAY_T:=JSON_ARRAY_T(); evidence JSON_ARRAY_T:=JSON_ARRAY_T(); path JSON_OBJECT_T;
+   paths JSON_ARRAY_T:=JSON_ARRAY_T(); evidence JSON_ARRAY_T:=JSON_ARRAY_T(); path JSON_OBJECT_T; evidence_item JSON_OBJECT_T;
    cur SYS_REFCURSOR; item VARCHAR2(4000); ver VARCHAR2(4000); topic VARCHAR2(4000); pas VARCHAR2(4000);
-   sparql VARCHAR2(4000); stmt VARCHAR2(8000); pid VARCHAR2(200); meta CLOB; vid VARCHAR2(128); page_no NUMBER;
+   sparql VARCHAR2(4000); stmt VARCHAR2(8000); pid VARCHAR2(200); meta CLOB; vid VARCHAR2(128); page_no NUMBER; locator VARCHAR2(2000); segment_no NUMBER;
    TYPE seen_t IS TABLE OF PLS_INTEGER INDEX BY VARCHAR2(4000); seen seen_t; counts seen_t;
  BEGIN
    sid:=JSON_VALUE(p_request,'$.scenario_session' RETURNING VARCHAR2(40) ERROR ON ERROR);
@@ -103,19 +103,38 @@ CREATE OR REPLACE PACKAGE BODY kcv_scenario AS
    ELSE
    SELECT rv.* INTO r FROM kcv_scenario_revisions rv JOIN kcv_chat_sessions s ON s.revision_id=rv.revision_id WHERE s.session_id=sid;
    END IF;
-   sparql:='SELECT DISTINCT ?item ?ver ?topic ?passage WHERE { '||iri(r.revision_id)||' '||iri('focusesOn')||' ?topic . '||
-     '?item '||iri('coversTopic')||' ?topic ; '||iri('hasVersion')||' ?ver . ?ver '||iri('hasPassage')||' ?passage } ORDER BY ?item ?topic ?passage LIMIT 200';
-   stmt:='SELECT item,ver,topic,passage FROM TABLE(SEM_MATCH('||DBMS_ASSERT.ENQUOTE_LITERAL(sparql)||',SEM_MODELS('||
+   sparql:='SELECT DISTINCT ?item ?ver ?topic ?passage ?eligible WHERE { '||iri(r.revision_id)||' '||iri('focusesOn')||' ?topic . '||
+     '?item '||iri('coversTopic')||' ?topic ; '||iri('hasVersion')||' ?ver . ?ver '||iri('hasPassage')||' ?passage . '||
+     'OPTIONAL { ?passage '||iri('retrievalEligible')||' ?eligible } '||
+     'FILTER (?eligible = true || (!BOUND(?eligible) && REGEX(STR(?item),"/S[0-9]+$"))) }';
+   -- Eligibility belongs to this immutable graph snapshot, not shared passage
+   -- metadata that might have been loaded by an earlier graph. Only legacy S
+   -- curriculum sources may fall back when the RDF property is absent.
+   -- Bound after selecting distinct locators. A long document must not consume
+   -- the whole candidate limit before later documents can be considered.
+   stmt:='WITH matched AS (SELECT m.item,m.ver,m.topic,m.passage,p.pdf_page,JSON_VALUE(p.metadata_json,''$.segment_index'' RETURNING NUMBER) segment_no,'||
+     'COALESCE(JSON_VALUE(p.metadata_json,''$.locator_label'' RETURNING VARCHAR2(2000)),p.passage_id) loc FROM TABLE(SEM_MATCH('||DBMS_ASSERT.ENQUOTE_LITERAL(sparql)||',SEM_MODELS('||
      DBMS_ASSERT.ENQUOTE_LITERAL(r.base_graph)||','||DBMS_ASSERT.ENQUOTE_LITERAL(r.overlay_graph)||
-     '),NULL,NULL,NULL,NULL,NULL,NULL,NULL,'||DBMS_ASSERT.ENQUOTE_LITERAL($$PLSQL_UNIT_OWNER)||',''KCV_NET''))';
+     '),NULL,NULL,NULL,NULL,NULL,NULL,NULL,'||DBMS_ASSERT.ENQUOTE_LITERAL($$PLSQL_UNIT_OWNER)||',''KCV_NET'')) m '||
+     'JOIN kcv_passages p ON p.passage_id=REPLACE(REPLACE(REPLACE(m.passage,''<'',''''),''>'',''''),'''||c_ns||''','''') '||
+     'WHERE (m.eligible IS NOT NULL OR (REGEXP_LIKE(p.version_id,''^S[0-9]+-v'') AND p.chunk_index=1))), '||
+     'ranked AS (SELECT matched.*,DENSE_RANK() OVER(PARTITION BY ver ORDER BY COALESCE(segment_no,pdf_page) NULLS LAST,CASE WHEN COALESCE(segment_no,pdf_page) IS NULL THEN loc END) loc_rank FROM matched) '||
+     'SELECT item,ver,topic,passage FROM ranked WHERE loc_rank<=2 '||
+     'ORDER BY CASE WHEN REGEXP_LIKE(item,''/S[0-9]+>?$'') THEN 0 ELSE 1 END,item,topic,passage FETCH FIRST 200 ROWS ONLY';
    OPEN cur FOR stmt;
    LOOP
      FETCH cur INTO item,ver,topic,pas;EXIT WHEN cur%NOTFOUND;
      pid:=REPLACE(REPLACE(REPLACE(pas,'<',''),'>',''),c_ns,'');
      SELECT metadata_json,version_id,pdf_page INTO meta,vid,page_no FROM kcv_passages WHERE passage_id=pid;
+     segment_no:=JSON_VALUE(meta,'$.segment_index' RETURNING NUMBER);
+     locator:=CASE WHEN page_no IS NOT NULL THEN 'pdf:'||TO_CHAR(page_no,'TM9')
+       WHEN segment_no IS NOT NULL THEN 'segment:'||TO_CHAR(segment_no,'TM9')
+       ELSE COALESCE(JSON_VALUE(meta,'$.locator_label' RETURNING VARCHAR2(2000)),pid) END;
      IF NOT counts.EXISTS(vid) THEN counts(vid):=0; END IF;
-     IF NOT seen.EXISTS(vid||':'||page_no) AND counts(vid)<2 AND evidence.get_size<6 THEN
-       evidence.append(JSON_OBJECT_T.parse(meta));seen(vid||':'||page_no):=1;seen(pid):=1;counts(vid):=counts(vid)+1;
+     IF NOT seen.EXISTS(vid||':'||locator) AND counts(vid)<2 AND evidence.get_size<6 THEN
+       evidence_item:=JSON_OBJECT_T.parse(meta);
+       evidence_item.put('retrieval_eligible',TRUE);evidence_item.put('retrieval_eligibility_basis','pinned_graph_snapshot_or_legacy_curriculum');
+       evidence.append(evidence_item);seen(vid||':'||locator):=1;seen(pid):=1;counts(vid):=counts(vid)+1;
      END IF;
      IF seen.EXISTS(pid) AND paths.get_size<40 THEN
        path:=JSON_OBJECT_T();path.put('context_revision',r.revision_id);path.put('context_predicate','focusesOn');
@@ -130,7 +149,7 @@ CREATE OR REPLACE PACKAGE BODY kcv_scenario AS
    result.put('base_graph',r.base_graph);result.put('overlay_graph',r.overlay_graph);
    result.put('graph_paths',paths);result.put('evidence',evidence);
    result.put('retrieval_method','native joins: context focusesOn topic, content coversTopic topic, content hasVersion hasPassage');
-   result.put('limitations','Explicit topic intersection; deterministic order; at most six pages. Not semantic vector search or measured value. Consensus is not proof of a source claim.');
+   result.put('limitations','Explicit topic intersection; curriculum sources first, then catalogue IDs; inspected eligible passages only, at most two locators per source and six passages total. Raw chunks outside the selected editorial basis remain in the graph but cannot supply answers. Not exhaustive reading, semantic vector search or measured value. Consensus is not proof of a source claim.');
    RETURN result.to_clob();
  EXCEPTION WHEN OTHERS THEN IF cur%ISOPEN THEN CLOSE cur; END IF; RAISE;
  END;
@@ -229,8 +248,8 @@ CREATE OR REPLACE PACKAGE BODY kcv_scenario AS
    SELECT JSON_ARRAYAGG(turn_id ORDER BY turn_id RETURNING CLOB) INTO hist FROM kcv_chat_turns WHERE session_id=p_session;
    SELECT setting_value INTO prof FROM kcv_settings WHERE setting_key='AI_PROFILE';
    INSERT INTO kcv_chat_turns(session_id,revision_id,role,body) VALUES(p_session,s.revision_id,'user',p_message) RETURNING turn_id INTO ut;
-   INSERT INTO kcv_response_runs(execution_id,session_id,revision_id,conversation_id,user_turn_id,request_mode,question,context_json,sources_json,history_json,profile_name,status)
-    VALUES(eid,p_session,s.revision_id,s.conversation_id,ut,p_mode,p_message,ctx,NVL(sources,TO_CLOB('[]')),NVL(hist,TO_CLOB('[]')),prof,'RUNNING');
+   INSERT INTO kcv_response_runs(execution_id,session_id,revision_id,conversation_id,user_turn_id,request_mode,question,context_json,sources_json,history_json,profile_name,status,retrieval_policy)
+    VALUES(eid,p_session,s.revision_id,s.conversation_id,ut,p_mode,p_message,ctx,NVL(sources,TO_CLOB('[]')),NVL(hist,TO_CLOB('[]')),prof,'RUNNING','topic-join-v3;curriculum-first;graph-eligible-basis;6-passages;2-locators-per-source;40-paths');
    COMMIT;claimed:=TRUE;
    request.put('scenario_session',p_session);request.put('execution_id',eid);request.put('task',p_mode);
    request.put('question',DBMS_LOB.SUBSTR(p_message,8000,1));params.put('conversation_id',s.conversation_id);

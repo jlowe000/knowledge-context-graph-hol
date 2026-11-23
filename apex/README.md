@@ -4,6 +4,8 @@ Application icons use Font APEX from the Oracle APEX team. See [attribution](../
 
 **First deployment:** follow the [fresh Serverless walkthrough](../docs/fresh-serverless-deployment.md). **Existing explorer:** follow the [upgrade guide](../docs/epics-upgrade.md). The installation details below assume the base database objects, dataset and working model profile already exist.
 
+**Expanded content:** the engine SQL export predates the non-PDF evidence display. Follow the [required application-file update](../docs/content-ingestion-upgrade.md#required-application-file-update) after import. The updated JavaScript and APEXlang assets are supplied; an engine re-export remains pending.
+
 An authenticated APEX app for the extended knowledge/context scenarios. It uses the database's existing GenAI profile and the new KCV_EXPLORER_TEAM. There is no OpenAI/OCI key in browser code and no separate APEX Generative AI service configuration is required.
 
 ## What the app does
@@ -15,7 +17,7 @@ An authenticated APEX app for the extended knowledge/context scenarios. It uses 
 - Compare the resulting graph paths and recommendations. Earlier revisions and turns remain available in the database.
 - Record a source check, discussion, dot vote, practical test or another observation, plus the next question/step.
 
-The UI displays model output as text, never as executable HTML. Public links are restricted to HTTPS static.rainfocus.com source pages. Scenario access is checked against APP_USER, APP_ID and APP_SESSION on the server. This is a public-sample lab, not a production multi-tenant knowledge portal.
+The UI displays model output as text, never as executable HTML. Public links are restricted to approved Oracle publications, event files, repository owners and the catalogue's approved YouTube pages. HTTP, credential-bearing links and internal-storage references are rejected. Evidence labels identify PDF pages or the actual non-PDF locator; a webpage is never labelled as a video transcript. Scenario access is checked against APP_USER, APP_ID and APP_SESSION on the server. This is a public-sample lab, not a production multi-tenant knowledge portal.
 
 ## Install through APEX App Builder
 

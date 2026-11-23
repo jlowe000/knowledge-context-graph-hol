@@ -14,7 +14,7 @@ Select **release** to use the supplied app or follow its developer learning expe
 
 **New to ADB? [Start with the fresh Serverless deployment walkthrough](docs/fresh-serverless-deployment.md).** It explains the accounts, screens, SQL execution controls and expected results in order, through to the evidence explorer. It follows LiveLabs HOL content conventions without WMS publication metadata.
 
-- Nine real public presentation sources, exact edition hashes and selected PDF pages.
+- Nine reviewed public presentation sources, exact edition hashes and selected PDF pages.
 - Three fictional learner contexts, with optional/emerging objectives.
 - Executable download, page extraction, RDF/artifact generation and context-topic baseline.
 - Ontology, review examples, explicit candidate validation and human acceptance/rejection.
@@ -37,7 +37,9 @@ Read [generated/dataset-preview.md](generated/dataset-preview.md), [generated/as
 
 The initial graph has **zero accepted extracted claims**. Its content metadata, real passage locators, editorial review examples and proposed baseline assessments are intentionally distinct. Actual PDF text is in ignored `work/passages.json`, not in the published graph. Original PDFs remain in ignored `work/originals/`.
 
-Database work uses **Database Actions → SQL Worksheet**. The build also generates `work/worksheet/10_load_dataset.sql`, ready to open/run under the lab user. No client database driver or wallet is required for this route. `requirements-db.txt` and the Python DB commands are optional automation.
+Database work uses **Database Actions → SQL Worksheet**. The [direct GitHub dataset load](docs/github-dataset-load.md) fetches JSON data from a pinned public commit and validates it before activating the graph. Dev includes a publishable summary package under `data/load/` and its short caller in `sql/install/10_load_github.sql`. Publish and test that candidate using the full **dev commit SHA** before promoting it to release. Its evidence is attributed editorial summaries, separate from the extracted authoring passages in ignored `work/` files. No client database driver or wallet is required. `requirements-db.txt` and the Python DB commands are optional automation.
+
+The new GitHub load and expanded summary dataset still require native ADB Serverless and application acceptance. A successful local build or dev push does not establish that validation; follow the [dev testing and promotion sequence](docs/branch-workflow.md#maintainer-promotion).
 
 ## Understand the data
 
@@ -46,6 +48,7 @@ Database work uses **Database Actions → SQL Worksheet**. The build also genera
 | [data/public-sources.json](data/public-sources.json) | Public source metadata, hashes and selected pages; lab editorial topic/purpose tags |
 | [data/contexts.json](data/contexts.json) | Explicit fictional learner context, questions, topic preferences and snapshot versions |
 | [review-examples/examples.json](review-examples/examples.json) | 17 short original paraphrases for inspecting extraction quality; not raw source text or accepted claims |
+| [data/load/manifest.json](data/load/manifest.json) and its JSON parts | Publishable summary dataset for pinned-commit loading and native acceptance on dev; counts describe this package, separately from the raw authoring build |
 | `work/passages.json` | Actual normalised text from the verified PDF pages, generated locally |
 | `work/candidates.json` | Model-proposed claims with verified quote/locator structure; still awaiting review |
 | `work/accepted-claims.json` | Only claims with an explicit reviewer and rationale |
@@ -97,3 +100,7 @@ Public availability does not transfer presentation copyright. This repo links to
 ## Licence
 
 An independent project for education, learning and experimentation. Copyright (c) 2026 Jason Lowe. Original project contributions are licensed under [MIT](LICENSE.txt). Third-party material retains its respective licences, including Oracle LiveLabs material under UPL 1.0 and Font APEX assets under their upstream terms. See [NOTICE.md](NOTICE.md) for attribution and scope.
+
+## Public research catalogue
+
+The graph also includes public research references admitted through recorded access checks or the [manually approved public-source rules](references/public-source-policy.json). Sources matching those rules are labelled **manually marked as public**; their actual access-test results remain separate. Download and open the [searchable catalogue](generated/public-catalog.html), or follow the [catalogue learning steps](docs/public-research-catalog.md) to browse the same source/topic/version relationships through SQL and SPARQL. The [access-check record](references/public-access-checks.json) distinguishes successful verification from failed or unsupported checks. Readable research now contributes actual passages on dev and selected attributed summaries on release. Catalogue-only references remain discovery links; see the content-ingestion record for coverage gaps. Public classification does not transfer source copyright or licences.

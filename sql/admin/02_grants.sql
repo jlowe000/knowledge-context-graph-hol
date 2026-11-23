@@ -10,6 +10,8 @@ DECLARE
 BEGIN
   FOR item IN (SELECT 'SEM_APIS' name FROM dual UNION ALL
                SELECT 'DBMS_CLOUD' FROM dual UNION ALL
+               SELECT 'DBMS_CRYPTO' FROM dual UNION ALL
+               SELECT 'DBMS_LOCK' FROM dual UNION ALL
                SELECT 'DBMS_CLOUD_AI' FROM dual UNION ALL
                SELECT 'DBMS_CLOUD_AI_AGENT' FROM dual) LOOP
     BEGIN

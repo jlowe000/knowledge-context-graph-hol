@@ -8,8 +8,11 @@ BEGIN
  sid:=kcv_scenario.open_session('CTX03');req.put('scenario_session',sid);packet:=JSON_OBJECT_T.parse(kcv_scenario.evidence_packet(req.to_clob()));
  ev:=packet.get_array('evidence');IF packet.get_array('graph_paths').get_size=0 THEN RAISE_APPLICATION_ERROR(-20151,'No native graph paths returned');END IF;
  FOR i IN 0..ev.get_size-1 LOOP row_json:=TREAT(ev.get(i) AS JSON_OBJECT_T);
-   IF row_json.get_string('source_id')<>'S10' THEN RAISE_APPLICATION_ERROR(-20152,'Unexpected healthcare source');END IF;
-   IF row_json.get_number('pdf_page')=3 THEN p3:=TRUE;END IF;IF row_json.get_number('pdf_page')=10 THEN p10:=TRUE;END IF;
+   -- Additional catalogue sources may fill the remaining slots. The original
+   -- healthcare overview and qualification must still accompany this scenario.
+   IF row_json.get_string('source_id')='S10' THEN
+     IF row_json.get_number('pdf_page')=3 THEN p3:=TRUE;END IF;IF row_json.get_number('pdf_page')=10 THEN p10:=TRUE;END IF;
+   END IF;
  END LOOP;
  IF NOT p3 OR NOT p10 THEN RAISE_APPLICATION_ERROR(-20153,'Missing overview or disclaimer');END IF;
  sid:=kcv_scenario.open_session('CTX01');req.put('scenario_session',sid);packet:=JSON_OBJECT_T.parse(kcv_scenario.state(sid));oldbase:=packet.get_string('base_graph');

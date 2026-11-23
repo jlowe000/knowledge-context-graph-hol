@@ -127,15 +127,18 @@ Run in order:
 | `sql/schema/01_objects.sql` | Lab tables, source/context identity and revision tracking |
 | `sql/schema/02_network.sql` | KCV_NET owned by the lab user |
 | `sql/schema/03_tools.sql` | Deterministic read-only packet functions |
+| `sql/schema/06_dataset_import.sql` | Public GitHub dataset importer and persistent load log |
 | `sql/schema/00_user_credential_worksheet.sql` | User-key path only: create OCI_USER_CRED using private bind values; see authentication guide |
 | `sql/schema/05_profile_worksheet.sql` | Set model/region/compartment and chosen credential, then create KCV_GENAI |
 | `sql/schema/06_register_profile.sql` | After table/profile creation, register KCV_GENAI for lab extraction and agents |
 | `sql/queries/00_test_genai.sql` | Optional billable greeting call to verify authentication and model access |
-| `work/worksheet/10_load_dataset.sql` | Load metadata/passages and a native RDF snapshot |
+| Short `KCV_DATASET.LOAD_GITHUB` call | Load the public summaries and RDF from a pinned dev candidate or promoted release commit; see [GitHub dataset guide](github-dataset-load.md) |
 | `sql/queries/01_inspect.sql` | Inspect data and actual graph-derived evidence |
 | `integration-test/verify_worksheet.sql` | Assert context and native evidence behaviour without a model call |
 
 Initial schema/network setup is not a blanket rerunnable migration. Inspect USER_OBJECTS/USER_ERRORS after failures. Existing profiles/objects are not silently replaced. The load script checks identity/hashes and activates a graph only after success; identical graph hashes reuse ready snapshots. Prior graphs and contexts remain historical records.
+
+For a local authoring dataset instead of the public summaries, use `work/worksheet/dataset-parts/README.md` and its numbered SQL, or `work/worksheet/10_load_dataset.sql` in a suitable client. Keep extracted content local and choose one dataset/load method for a fresh schema. The GitHub path requires the importer package and current ADMIN grants, but no GitHub credentials. Test the dev candidate before promoting the package to release.
 
 Profile creation and the greeting test can also be done before creating lab tables. `05_profile_worksheet.sql` has no KCV table dependency; return to `06_register_profile.sql` after `01_objects.sql` before extraction or agents. Do not rerun schema creation over tables that already exist.
 

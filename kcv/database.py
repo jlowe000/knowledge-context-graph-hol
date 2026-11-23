@@ -9,7 +9,7 @@ import uuid
 
 from rdflib import Graph, Literal, URIRef
 
-from .pipeline import ROOT, digest, read, sources, validate_candidates, write
+from .pipeline import ROOT, digest, read, sources, catalog, load_passages, validate_candidates, write
 
 
 def connect(admin=False):
@@ -88,7 +88,7 @@ def preflight():
 def load(root=ROOT):
     g = Graph().parse(root / 'generated/knowledge.ttl', format='turtle')
     graph_hash = digest((root / 'generated/knowledge.ttl').read_bytes())
-    passages = read(root / 'work/passages.json')
+    passages = load_passages(root)
     contexts = read(root / 'data/contexts.json')['contexts']
     with connect() as conn:
         with conn.cursor() as cur:
@@ -101,7 +101,7 @@ def load(root=ROOT):
             else:
                 graph_name = 'KCV_G_' + uuid.uuid4().hex[:16].upper()
                 needs_graph = True
-            for s in sources(root):
+            for s in sources(root)+catalog(root):
                 payload = json.dumps(s)
                 cur.execute('select sha256 from kcv_sources where version_id=:v', v=s['version']['id'])
                 old = cur.fetchone()
@@ -118,7 +118,7 @@ def load(root=ROOT):
                     raise ValueError('Passage ID reused with a different text hash')
                 cur.execute('''merge into kcv_passages t using (select :i passage_id from dual) s on (t.passage_id=s.passage_id)
                   when not matched then insert (passage_id,version_id,pdf_page,chunk_index,text_sha256,passage_text,metadata_json)
-                  values (:i,:v,:p,:c,:h,:t,:m)''',i=p['id'],v=p['version_id'],p=p['pdf_page'],c=p['chunk_index'],h=p['text_sha256'],t=p['text'],m=json.dumps(p))
+                  values (:i,:v,:p,:c,:h,:t,:m)''',i=p['id'],v=p['version_id'],p=p.get('pdf_page'),c=p['chunk_index'],h=p['text_sha256'],t=p['text'],m=json.dumps(p))
             for c in contexts:
                 key = c['id'] + '-v' + str(c['snapshot_version'])
                 body = json.dumps(c)
@@ -143,7 +143,7 @@ def load(root=ROOT):
                 end;''',n=graph_name)
                 cur.execute("update kcv_graph_runs set state='READY' where graph_name=:n",n=graph_name)
                 cur.executemany('insert into kcv_graph_sources(graph_name,version_id,metadata_json) values(:1,:2,:3)',
-                                [(graph_name,s['version']['id'],json.dumps(s)) for s in sources(root)])
+                                [(graph_name,s['version']['id'],json.dumps(s)) for s in sources(root)+catalog(root)])
                 cur.executemany('insert into kcv_graph_contexts(graph_name,snapshot_id) values(:1,:2)',
                                 [(graph_name,c['id']+'-v'+str(c['snapshot_version'])) for c in contexts])
             cur.execute("merge into kcv_settings t using (select 'ACTIVE_GRAPH' setting_key from dual) s on(t.setting_key=s.setting_key) when matched then update set t.setting_value=:n when not matched then insert(setting_key,setting_value) values('ACTIVE_GRAPH',:n)",n=graph_name)

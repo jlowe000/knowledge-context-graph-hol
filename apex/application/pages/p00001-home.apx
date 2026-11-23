@@ -3,7 +3,7 @@ page 1 (
  alias: HOME
  title: Knowledge Context Explorer
  javaScript {
-  fileUrls: #APP_FILES#explorer.js?v=655b5a9be130
+  fileUrls: #APP_FILES#explorer.js?v=35d2597bca5e
  }
  css {
   fileUrls: #APP_FILES#explorer.css?v=6972a7686c05

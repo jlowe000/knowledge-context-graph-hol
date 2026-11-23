@@ -41,7 +41,7 @@ class ScenarioGraphTests(unittest.TestCase):
 
     def test_every_returned_relationship_is_grounded_in_loaded_content(self):
         context=p.read(p.ROOT/'data/contexts.json')['contexts'][0]
-        sources={s['id']:s for s in p.sources()};passages={r['id']:r for r in p.read(p.ROOT/'work/passages.json')}
+        sources={s['id']:s for s in p.sources()+p.catalog()};passages={r['id']:r for r in p.load_passages()}
         for row in self.bindings(context):
             source=sources[str(row.item).rsplit('/',1)[-1]]
             passage=passages[str(row.passage).rsplit('/',1)[-1]]

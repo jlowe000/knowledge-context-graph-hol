@@ -15,16 +15,18 @@ Read [Choose your learning path](docs/learning-paths.md) if you are unsure. **Re
 
 Ask a question for a fictional learner, inspect connected sources and answer lineage, clarify an objective or topic, compare the next answer and record what you learned. Developers can also inspect the source/version/evidence model, follow the native SPARQL query and exercise the supplied SQL APIs.
 
-Using a hosted app requires no OCI Console, SQL or Python access. Deploying this sample uses the supplied SQL through Database Actions; no Python, client wallet or local build is needed. The [architecture](docs/architecture.md) explains SPARQL and the role of APEXlang in preparing the deployable app.
+Using a hosted app requires no OCI Console, SQL or Python access. Deploying this sample uses SQL through Database Actions and a [short call that loads the dataset directly from GitHub](docs/github-dataset-load.md); no Python, client wallet or local build is needed. The [architecture](docs/architecture.md) explains SPARQL and the role of APEXlang in preparing the deployable app.
 
 ## Included sample
 
-- Nine public-source records, 17 attributed editorial summaries and three fictional learner contexts.
+- The original nine reviewed sources, the expanded public research catalogue, attributed editorial summaries and three fictional learner contexts. Exact coverage is recorded in generated/build-report.json.
 - Ontology, graph/model/agent SQL, scenario APIs and native verification.
-- [Dataset installer](sql/install/10_load_dataset.sql), [APEX Worksheet installer](sql/install/20_install_apex.sql) and [standard APEX export](apex/kcv-explorer.sql).
+- [GitHub dataset loader](sql/install/10_load_github.sql), [APEX Worksheet installer](sql/install/20_install_apex.sql) and [standard APEX export](apex/kcv-explorer.sql).
 - Separate user, developer-learning and deployment guides.
 
 The [dataset](docs/release-dataset.md) contains editorial summaries of public pages, not verbatim PDF extracts. Summary IDs/hashes identify that text; follow the original page links to check the source.
+
+The dataset load uses a published release commit and the supplied manifest hash. The commit must contain `data/load/manifest.json` and all its JSON parts; generating a local release does not publish them. The [load guide](docs/github-dataset-load.md) explains choosing the commit, monitoring progress and the retained SQL fallback.
 
 The [validation record](docs/scenario-validation.md) distinguishes related dev application tests from the still-pending native acceptance of this summary dataset. A facilitator should confirm which sample is installed before a workshop.
 
@@ -33,3 +35,7 @@ The [validation record](docs/scenario-validation.md) distinguishes related dev a
 ## Licence
 
 An independent project for education, learning and experimentation. Copyright (c) 2026 Jason Lowe. Original project contributions are licensed under [MIT](LICENSE.txt). Third-party material retains its respective licences, including Oracle LiveLabs material under UPL 1.0 and Font APEX assets under their upstream terms. See [NOTICE.md](NOTICE.md) for attribution and scope.
+
+## Public research catalogue
+
+The graph also includes public research references admitted through recorded access checks or the [manually approved public-source rules](references/public-source-policy.json). Sources matching those rules are labelled **manually marked as public**; their actual access-test results remain separate. Download and open the [searchable catalogue](generated/public-catalog.html), or follow the [catalogue learning steps](docs/public-research-catalog.md) to browse the same source/topic/version relationships through SQL and SPARQL. The [access-check record](references/public-access-checks.json) distinguishes successful verification from failed or unsupported checks. Readable research now contributes actual passages on dev and selected attributed summaries on release. Catalogue-only references remain discovery links; see the content-ingestion record for coverage gaps. Public classification does not transfer source copyright or licences.

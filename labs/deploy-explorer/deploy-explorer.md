@@ -96,7 +96,15 @@ If the generated file is missing, return to your Oracle Linux terminal at the pr
 
 The app SQL export is already supplied. SQLcl, a frontend build framework and local APEX are not required to install it. [App Builder import](../../apex/README.md) requires a separate developer account; KCV_USER is intentionally not one.
 
-## Task 4: Open and sign in to the app
+## Task 4: Apply the public-content display update
+
+**Where:** App Builder. **Account:** an APEX developer or workspace administrator in KCV_KNOWLEDGE; KCV_USER cannot administer the app.
+
+The engine-generated SQL export currently predates the expanded non-PDF evidence. Follow the [required application-file update](../../docs/content-ingestion-upgrade.md#required-application-file-update) to replace `explorer.js` and update its cache suffix after import. This uses the supplied file and does not require Python or SQLcl. If you do not have a workspace developer login, have the workspace administrator perform that step.
+
+**Expected outcome:** the application uses the current source links and locator labels. An engine re-export is pending; do not skip this step merely because the SQL import succeeded.
+
+## Task 5: Open and sign in to the app
 
 **Where:** browser. **Account:** KCV_USER.
 

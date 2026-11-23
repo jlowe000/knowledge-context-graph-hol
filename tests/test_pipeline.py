@@ -95,7 +95,11 @@ class ArtifactTests(unittest.TestCase):
         self.assertIn('SEM_APIS.BULK_LOAD_RDF_GRAPH',text)
         self.assertIn('Increment changed context snapshot version',text)
         self.assertIn(report['graph_sha256'],text)
-        self.assertEqual(len(list(sql_statements(p.ROOT/result['script']))),2)
+        units=list(sql_statements(p.ROOT/result['script']))
+        self.assertEqual(len(units),result['batches']+3)
+        self.assertLess(max(len(unit.encode('utf-8')) for unit in units),95000)
+        self.assertIn('Previous dataset batch failed',text)
+        self.assertIn('Dataset is incomplete; active graph unchanged',text)
         self.assertNotIn('ADMIN_PASSWORD',text)
         self.assertNotIn('&',text,'Worksheet loader must not prompt for substitutions')
     def test_real_page_coverage_and_content_hashes(self):

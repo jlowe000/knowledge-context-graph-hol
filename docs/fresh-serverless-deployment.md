@@ -5,10 +5,10 @@ This is the beginner route to the complete Knowledge Context Explorer applicatio
 | Order | Lab | Result |
 | --- | --- | --- |
 | Start | [Introduction](../labs/introduction/introduction.md) | Understand the experience, accounts and resources |
-| 1 | [Prepare your working environment](../labs/prepare-environment/prepare-environment.md) | Local files and generated dataset SQL are ready |
+| 1 | [Prepare your working environment](../labs/prepare-environment/prepare-environment.md) | Local authoring files and application installer are ready |
 | 2 | [Create the database](../labs/provision-database/provision-database.md) | A new Serverless database and ADMIN Worksheet are available |
 | 3 | [Configure database and model access](../labs/configure-database/configure-database.md) | Java, lab user, grants, schema and a working model profile |
-| 4 | [Load knowledge and install the scenario](../labs/load-knowledge/load-knowledge.md) | Public evidence, native graph and new scenario team work |
+| 4 | [Load knowledge and install the scenario](../labs/load-knowledge/load-knowledge.md) | The pinned GitHub summary dataset, native graph and scenario team are installed |
 | 5 | [Deploy the application](../labs/deploy-explorer/deploy-explorer.md) | APEX workspace, application and app-user login |
 | 6 | [Explore the evidence](../labs/explore-evidence/explore-evidence.md) | Inspect an answer, refine context and compare saved evidence |
 | Help | [Need help?](../labs/need-help/need-help.md) | Diagnose the failing step without restarting everything |
@@ -16,6 +16,10 @@ This is the beginner route to the complete Knowledge Context Explorer applicatio
 **Use this route for a new instance.** The [upgrade guide](epics-upgrade.md) is for an existing installation. The older numbered lab files remain deeper technical/optional exercises. You do not need the older KCV_TEAM, claim approval, an Oracle client wallet, a direct database driver, a separate graph service, or a LiveLabs sandbox reservation for this route.
 
 Provisioning/restarting the database and OCI access policies are Console/administrator activities. All database setup uses browser-based Database Actions SQL Worksheet. An Oracle Linux terminal generates the public-source artifacts and the APEX installer. Credentials are entered privately in the browser; they are never part of the repository.
+
+The shared loading lab defaults to the [public GitHub summary dataset](github-dataset-load.md). Its manifest and JSON parts must already be published at the chosen commit. Test the dev candidate using its full commit SHA and keep release unchanged until native acceptance passes. To test your own extracted authoring passages instead, use the local numbered SQL fallback described in that guide, in a separate fresh lab schema. Ordinary release learners use the promoted package and need no local build.
+
+The expanded public-content build also requires an APEX developer to [replace the supplied application JavaScript](content-ingestion-upgrade.md#required-application-file-update) after importing the app. Its engine SQL export has not yet been regenerated. The deployment lab identifies this step explicitly; KCV_USER remains an end-user login.
 
 ## What is verified
 

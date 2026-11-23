@@ -54,3 +54,21 @@ kcv:domain-Unclassified a kcv:Domain ; skos:prefLabel "Unclassified" ;
 
 kcv:topic-Ontology a kcv:Topic ; skos:prefLabel "Ontology" ; skos:broader kcv:topic-Knowledge-graphs .
 kcv:topic-Knowledge-graphs a kcv:Topic ; skos:prefLabel "Knowledge graphs" .
+
+kcv:evidenceCoverage a owl:DatatypeProperty ;
+  rdfs:label "Evidence coverage" ;
+  rdfs:comment "Distinguishes catalogue_only discovery metadata, reviewed_pdf_pages, extracted_source_passages and attributed_editorial_summary. Public access alone does not establish answer evidence; extraction does not establish factual correctness." .
+kcv:accessStatus a owl:DatatypeProperty ; rdfs:label "Recorded public-access status" .
+kcv:verifiedOn a owl:DatatypeProperty ; rdfs:label "Public-access verification date" .
+kcv:hashBasis a owl:DatatypeProperty ; rdfs:label "Hash basis: source response or catalogue metadata" .
+kcv:accessVerified a owl:DatatypeProperty ; rdfs:label "Anonymous content access verified" .
+kcv:publicClassification a owl:DatatypeProperty ; rdfs:label "Public classification decision" .
+kcv:verificationError a owl:DatatypeProperty ; rdfs:label "Outstanding access-test result" .
+kcv:locatorKind a owl:DatatypeProperty ; rdfs:label "Source locator type" .
+kcv:locatorLabel a owl:DatatypeProperty ; rdfs:label "Human-readable source locator" .
+kcv:sourceHash a owl:DatatypeProperty ; rdfs:label "SHA-256 of source response underlying a passage" .
+kcv:contentKind a owl:DatatypeProperty ; rdfs:label "Extracted source text or attributed editorial summary" .
+kcv:extractor a owl:DatatypeProperty ; rdfs:label "Method used to prepare a passage" .
+kcv:basisPassageId a owl:DatatypeProperty ; rdfs:label "Identifier of local source passage supporting an editorial summary" .
+kcv:basisTextHash a owl:DatatypeProperty ; rdfs:label "SHA-256 of local source text supporting an editorial summary" .
+kcv:retrievalEligible a owl:DatatypeProperty ; rdfs:label "Passage selected for answer retrieval in this graph snapshot" .

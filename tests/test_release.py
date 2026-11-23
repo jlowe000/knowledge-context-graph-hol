@@ -42,14 +42,20 @@ class ReleaseTests(unittest.TestCase):
     def test_summaries_have_own_hashes_labels_and_public_page_attribution(self):
         passages = p.read(self.folder / 'data/release-summaries.json')['passages']
         originals = p.read(p.ROOT / 'work/passages.json')
-        self.assertEqual(len(passages), 17)
+        expected = 17 + len(p.read(p.ROOT / 'data/public-content-summaries.json')['summaries'])
+        self.assertEqual(len(passages), expected)
         self.assertFalse({x['id'] for x in passages} & {x['id'] for x in originals})
         for item in passages:
             self.assertIn('-summary-', item['id'])
             self.assertTrue(item['text'].startswith('Editorial summary, not a quotation: '))
             self.assertEqual(item['text_sha256'], p.digest(item['text']))
-            self.assertTrue(item['locator_url'].startswith('https://static.rainfocus.com/'))
-            self.assertTrue(item['locator_url'].endswith('#page=' + str(item['pdf_page'])))
+            from kcv.public_access import validate_url
+            validate_url(item['locator_url'])
+            if item['pdf_page'] is not None:
+                self.assertTrue(item['locator_url'].endswith('#page=' + str(item['pdf_page'])))
+            else:
+                self.assertTrue(item['locator_kind'])
+                self.assertTrue(item['locator_label'])
             self.assertEqual(item['content_kind'], 'attributed_editorial_summary')
         loader = (self.folder / 'sql/install/10_load_dataset.sql').read_text(encoding='utf-8')
         self.assertNotIn('&', loader)
@@ -68,23 +74,52 @@ class ReleaseTests(unittest.TestCase):
             self.assertEqual(item['sha256'], hashlib.sha256((self.folder / item['path']).read_bytes()).hexdigest())
         with self.assertRaises(ValueError): build(self.folder)
 
+    def test_github_dataset_is_valid_public_and_pinned_by_the_sql_caller(self):
+        from kcv.github_dataset import validate, validate_package
+        folder = self.folder / 'data/load'
+        manifest = validate(folder)
+        files = {item['path']: (folder / item['path']).read_bytes() for item in manifest['files']}
+        rows = validate_package(manifest, files)
+        self.assertEqual(manifest['graph_sha256'], p.digest((self.folder / 'generated/knowledge.ttl').read_bytes()))
+        self.assertEqual(manifest['counts']['sources'], len(p.content_sources(p.ROOT)))
+        summaries = p.read(self.folder / 'data/release-summaries.json')['passages']
+        self.assertEqual({item['id']: item['text'] for item in rows['passages']},
+                         {item['id']: item['text'] for item in summaries})
+        raw_passages = []
+        for filename in ('passages.json', 'catalog-passages.json'):
+            path = p.ROOT / 'work' / filename
+            if path.exists():
+                raw_passages.extend(p.read(path))
+        self.assertFalse({item['id'] for item in rows['passages']} & {item['id'] for item in raw_passages})
+        self.assertFalse({item['text'] for item in rows['passages']} & {item['text'] for item in raw_passages})
+        self.assertTrue(all(item['content_kind'] == 'attributed_editorial_summary' for item in rows['passages']))
+        caller = (self.folder / 'sql/install/10_load_github.sql').read_text(encoding='utf-8')
+        self.assertIn('KCV_DATASET.LOAD_GITHUB(', caller)
+        self.assertIn("p_ref => 'PASTE_FULL_40_CHARACTER_COMMIT_SHA'", caller)
+        manifest_hash = p.digest((folder / 'manifest.json').read_bytes())
+        self.assertRegex(caller, r"p_expected_manifest_sha256\s*=>\s*'" + manifest_hash + "'")
+        importer = self.folder / 'sql/schema/06_dataset_import.sql'
+        self.assertEqual(importer.read_bytes(), (p.ROOT / 'sql/schema/06_dataset_import.sql').read_bytes())
+
     def evidence(self, labels):
         graph = Graph().parse(self.folder / 'generated/knowledge.ttl', format='turtle')
         rev = p.K['release-check']
         for label in labels: graph.add((rev, p.K.focusesOn, p.K['topic-' + p.slug(label)]))
-        return list(graph.query('''SELECT DISTINCT ?item ?ver ?topic ?passage WHERE {
+        rows = list(graph.query('''SELECT DISTINCT ?item ?ver ?topic ?passage WHERE {
           <https://example.org/kcv/release-check> <https://example.org/kcv/focusesOn> ?topic .
           ?item <https://example.org/kcv/coversTopic> ?topic ; <https://example.org/kcv/hasVersion> ?ver .
           ?ver <https://example.org/kcv/hasPassage> ?passage }
           ORDER BY ?item ?topic ?passage'''))
+        return sorted(rows, key=lambda r: (0 if str(r.item).rsplit('/', 1)[-1].startswith('S') else 1,
+                                          str(r.item), str(r.topic), str(r.passage)))
 
     def test_summary_graph_preserves_scope_pages_and_context_refinement(self):
         contexts = p.read(self.folder / 'data/contexts.json')['contexts']
         passages = {x['id']: x for x in p.read(self.folder / 'data/release-summaries.json')['passages']}
         healthcare = self.evidence(contexts[2]['topic_preferences'])
         evidence = [passages[str(r.passage).rsplit('/', 1)[-1]] for r in healthcare]
-        self.assertEqual({r['source_id'] for r in evidence}, {'S10'})
-        self.assertEqual({r['pdf_page'] for r in evidence}, {3, 10})
+        self.assertTrue(any(r['source_id'] == 'S10' for r in evidence))
+        self.assertEqual({r['pdf_page'] for r in evidence if r['source_id'] == 'S10'}, {3, 10})
         labels = contexts[0]['topic_preferences']
         before = {str(r.item) for r in self.evidence(labels)}
         after = {str(r.item) for r in self.evidence([x for x in labels if x != 'Graph capabilities'])}

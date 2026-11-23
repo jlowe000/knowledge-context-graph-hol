@@ -14,12 +14,20 @@ Generated from real public editions; contexts are fictional. No model or Serverl
 | S09 | LRN6040 | [Database Patching in the Age of AI and Security Threats](https://static.rainfocus.com/oracle/oaiw26/sess/1784668165532001CoOq/finalsessionfile/Patch%20Without%20the%20Outage%20Window%20LRN6040_1792337784305001ZMOX.pdf) | 26, 66 |
 | S10 | LRN2160 | [A Seamless Healthcare Journey Powered by One Oracle](https://static.rainfocus.com/oracle/oaiw26/sess/1784663145404001FcAP/finalsessionfile/A%20Seamless%20HealthCare%20Journey%20AI%20World%20LRN2160%20-%20A%20Seamless%20Healthcare%20Journey%2C%20Powered%20by%20One%20Oracle_October%202026_1792769047422001Nrt9.pdf) | 3, 10 |
 
+## Public research catalogue
+
+825 additional public catalogue records; 834 total content items including the curated sources.
+
+768 catalogue sources have 17079 attributable passages; 57 remain `evidenceCoverage=catalogue_only`. Only sources with passages can supply answer evidence. Manual public classifications and actual access results remain separate; metadata-only hashes do not identify downloaded content. Extraction and editorial summaries do not create accepted claims.
+
+The complete title, public URL, edition hash and verification metadata are in [public-catalog.json](../data/public-catalog.json).
+
 ## Context comparisons
 
 - CTX01: S02, S08, S03 (topic baseline; proposed).
 - CTX02: S03, S04, S05 (topic baseline; proposed).
 - CTX03: S10 (topic baseline; proposed).
 
-20 real page-aware passages; 17 curated review examples; 0 accepted extracted claims.
+17099 attributable passages with source locators; 17 curated review examples; 0 accepted extracted claims.
 
 Review examples are separate from Claim nodes. Actual passages are generated locally and not redistributed.

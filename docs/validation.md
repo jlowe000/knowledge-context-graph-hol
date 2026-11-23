@@ -1,5 +1,7 @@
 # Validation and remaining acceptance
 
+**Current dataset:** the 23 November research expansion supersedes the original dataset counts below. See [build-report.json](../generated/build-report.json), [content ingestion](content-pipeline.md) and the current [scenario validation record](scenario-validation.md). The following 18 November observations are historical; they do not establish native acceptance of the expanded dataset.
+
 As of 18 November 2026, the executable artifact pipeline has been run on the authoring host and in Oracle Linux 8.10 / Bash 4.4 / Python 3.12.14 inside an isolated temporary directory in the existing oaiw-adb container. Python dependencies for that run were installed only in its temporary target directory. No database schema, existing app or global Python installation was changed.
 
 The public-source cache was verified against exact hashes, selected pages were extracted, artifacts regenerated and **13 tests passed** under Oracle Linux. The generated graph hash matched the authoring-host build and the SQL Worksheet export. Tests exercise source/version identity, real page coverage, citation/quote rejection, explicit review transitions, context-sensitive selection, separate review/Claim types, native-script delimiters, private-source URL exclusion, reproducible RDF generation and SQL literal handling for untrusted source text.

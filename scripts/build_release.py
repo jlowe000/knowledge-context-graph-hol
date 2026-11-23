@@ -3,6 +3,7 @@
 Maintainer utility on dev only. This never modifies a Git branch or database.
 """
 import argparse
+from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
@@ -10,11 +11,14 @@ import re
 import shutil
 import sys
 import tempfile
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from kcv import pipeline
 from kcv.worksheet import export
+from kcv.github_dataset import generate as generate_github_dataset
+from kcv.github_dataset import loader_script
 from scripts.build_apex_worksheet import build as build_apex_installer
 
 LABS = ['introduction', 'prepare-environment', 'provision-database',
@@ -50,6 +54,8 @@ def summary_passages(root):
             'content_kind': 'attributed_editorial_summary',
             'locator_url': source['url'] + f'#page={page}',
             'qualification': 'Author-written summary linked to a public page; not verbatim source text or an accepted extracted claim.'})
+    from kcv.editorial import catalogue_summary_passages
+    result.extend(catalogue_summary_passages(root))
     if len({p['id'] for p in result}) != len(result):
         raise ValueError('Duplicate summary IDs')
     return result
@@ -74,6 +80,45 @@ def validate(folder):
 def build(output):
     output = Path(output).resolve()
     if output.exists(): raise ValueError('Use a new output folder; existing output is never deleted')
+    if (ROOT / 'data/public-content-summaries.json').exists():
+        from kcv.editorial import validate_summary_basis
+        validate_summary_basis(ROOT)
+    # Every source needs an actual access result or an explicit public classification.
+    from kcv.public_access import validate_url, public_rule, retained_publisher
+    policy = pipeline.read(ROOT / 'references/public-source-policy.json')
+    prefixes = policy['url_prefixes']
+    checks = {r['source_id']: r for r in pipeline.read(ROOT / 'references/public-access-checks.json')['checks']}
+    for source in pipeline.sources(ROOT) + pipeline.catalog(ROOT):
+        checked = checks.get(source['id'], {})
+        validate_url(source['url'])
+        try:
+            verified_at = datetime.fromisoformat(checked.get('checked_at',''))
+        except (ValueError, TypeError):
+            verified_at = None
+        def location(url):
+            validate_url(url)
+            u = urlsplit(url)
+            return (u.scheme, u.hostname.lower(), u.path, u.query)
+        matched_rule = public_rule(source['url'],prefixes,source['title'],policy.get('title_rules',[]))
+        if not matched_rule and not retained_publisher(source['url'],policy):
+            raise ValueError('Industry or third-party reference still requires review: ' + source['id'])
+        manual = checked.get('status') == 'manually_marked_public' and matched_rule and checked.get('public_rule') == matched_rule
+        verified = checked.get('access_verified') is True and checked.get('http_status') == 200
+        if (checked.get('status') not in {'verified_public','manually_marked_public'}
+                or (checked.get('status') == 'manually_marked_public' and not manual)
+                or (not verified and not manual)
+                or checked.get('authentication_used') is not False or checked.get('cookies_used') is not False
+                or verified_at is None or verified_at.tzinfo is None
+                or location(checked.get('url','')) != location(source['url'])
+                or checked.get('sha256') != source['version']['sha256']):
+            raise ValueError('Missing or mismatched anonymous verification: ' + source['id'])
+        if not verified:
+            metadata = {k:source[k] for k in ['title','url','topics','business_domains','session_ids']}
+            metadata_hash = hashlib.sha256(json.dumps(metadata,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+            if (not source['id'].startswith('R') or source['version'].get('hash_basis') != 'catalogue_metadata'
+                    or checked.get('hash_basis') != 'catalogue_metadata' or not checked.get('reason')
+                    or metadata_hash != source['version']['sha256']):
+                raise ValueError('Unverified manual source must remain explicit catalogue metadata: ' + source['id'])
     with tempfile.TemporaryDirectory(prefix='kcv-release-') as temporary:
         stage = Path(temporary)
         def copy(relative):
@@ -88,9 +133,11 @@ def build(output):
         # This is an explicit publication allowlist, never a copy of work/.
         for name in LABS: copy('labs/' + name)
         for name in DOCS: copy('docs/' + name)
-        for name in ['verify_worksheet.sql', 'verify_scenario_native.sql']:
+        for name in ['verify_worksheet.sql', 'verify_scenario_native.sql', 'verify_github_dataset.sql',
+                     'verify_source_packet_scope.sql']:
             copy('integration-test/' + name)
         copy('apex/kcv-explorer.sql')
+        copy('apex/explorer.js')
         for name in ['model.svg']:
             copy('generated/' + name)
         # Release documentation is maintained separately from contributor docs.
@@ -103,12 +150,16 @@ def build(output):
         pipeline.write(stage / 'work/passages.json', passages)
         report = pipeline.build(stage)
         export(stage)
+        generate_github_dataset(stage, stage / 'data/load')
         installer = stage / 'sql/install'
         installer.mkdir(parents=True, exist_ok=True)
+        manifest_hash = hashlib.sha256((stage / 'data/load/manifest.json').read_bytes()).hexdigest()
+        write(installer / '10_load_github.sql', loader_script(manifest_hash))
         loader = (stage / 'work/worksheet/10_load_dataset.sql').read_text(encoding='utf-8')
         loader = loader.replace('-- Contains public-source passage text: keep this generated script local; do not commit it.',
             '-- Contains attributed editorial summaries, not extracted PDF text or source quotations.')
         write(installer / '10_load_dataset.sql', loader)
+        shutil.copytree(stage / 'work/worksheet/dataset-parts', installer / 'dataset-parts')
         build_apex_installer(output=installer / '20_install_apex.sql')
         pipeline.write(stage / 'data/release-summaries.json', {
             'content_kind': 'attributed_editorial_summary',
@@ -128,6 +179,8 @@ def build(output):
         for p in (stage / 'labs').rglob('*.md'):
             text = p.read_text(encoding='utf-8')
             text = text.replace('work/worksheet/10_load_dataset.sql', 'sql/install/10_load_dataset.sql')
+            text = text.replace('work/worksheet/dataset-parts/', 'sql/install/dataset-parts/')
+            text = text.replace('These are your generated files from the preparation lab.', 'These numbered files are supplied with the release; no local generation is needed.')
             text = text.replace('work/worksheet/20_install_apex.sql', 'sql/install/20_install_apex.sql')
             text = text.replace('your Oracle Linux generated files are accessible', 'the release SQL files are accessible')
             text = text.replace('generated `10_load_dataset.sql`', 'supplied `10_load_dataset.sql`')
@@ -172,7 +225,8 @@ def build(output):
         pipeline.write(stage / 'release-manifest.json', {'format_version': 1,
             'distribution': 'release', 'python_required_for_learner': False,
             'dataset_kind': 'attributed_editorial_summary', 'summary_count': len(passages),
-            'source_count': report['source_count'], 'files': file_rows})
+            'source_count': report['source_count'], 'catalogue_count': report['catalog_count'],
+            'total_content_count': report['total_content_count'], 'files': file_rows})
         validate(stage)
         shutil.copytree(stage, output)
     return output

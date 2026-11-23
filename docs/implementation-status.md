@@ -1,5 +1,7 @@
 # Implementation status
 
+The 23 November public-content pipeline and release summaries extend the earlier milestones below. Current artifact counts are in [build-report.json](../generated/build-report.json); [content-pipeline.md](content-pipeline.md) explains extraction, provenance and release packaging. Native compilation and deployment of this expanded dataset, and a new engine-generated APEX export, remain separate acceptance steps.
+
 18 November 2026. The folder is an independent local Git repository on branch main. No remote has been configured and no publication has occurred.
 
 | Plan area | State |

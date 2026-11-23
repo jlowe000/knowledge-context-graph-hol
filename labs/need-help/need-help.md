@@ -34,6 +34,9 @@ You have the name of the lab/task you were attempting and its exact displayed er
    | JAVAVM LOADING | Installation is still running; wait and check again |
    | Python or packages missing | Supported Oracle Linux interpreter/venv and access to package repositories |
    | Public download/hash failure | Source ID, network access and exact edition; retain integrity checks |
+   | GitHub dataset file not found | Full published commit SHA, correct owner/repository and `data/load/manifest.json` at that commit; a local build is not yet on GitHub |
+   | GitHub load seems inactive or failed | Query KCV_DATASET_RUNS as KCV_LAB using the [load guide](../../docs/github-dataset-load.md#check-progress-and-handle-errors); do not start a second load |
+   | GitHub manifest/part hash mismatch | Use the caller and data from the same published commit; retain the expected hashes |
    | Table/view does not exist | USER result, preceding creation step and compile errors; KCV_SETTINGS is created before profile registration |
    | Object already exists | An earlier attempt created it; inspect progress instead of dropping everything |
    | Model call returns JSON/API error | Exact supported model name/region, profile attributes, credential owner and effective OCI inference permission |

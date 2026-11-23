@@ -6,7 +6,7 @@ The dev original-passage version was fully torn down (retaining JAVAVM), rebuilt
 
 ## Summary release
 
-This distribution changes the evidence payload to 17 attributed editorial summaries with distinct IDs/hashes. It includes a prebuilt dataset loader and Worksheet APEX installer. Build checks verify the publication allowlist, relative documentation links, generated SQL, graph/source/context integrity, native-query selection against RDFLib and manifest hashes. These are local checks, not a native Oracle database or inference pass.
+This distribution uses attributed editorial summaries with distinct IDs/hashes, including selected passages from the expanded research. It includes a prebuilt dataset loader and Worksheet APEX installer. Build checks verify the publication allowlist, relative documentation links, generated SQL, graph/source/context integrity, native-query selection against RDFLib and manifest hashes. These are local checks, not a native Oracle database or inference pass.
 
 ## Required native acceptance before a validated release tag
 
@@ -22,3 +22,20 @@ No new cloud database or model call is implied by packaging this release. The op
 ## Acceptance of the learning experiences
 
 The app-user route assumes a facilitator-provided URL/login and does not require deployment work. The developer-learning route follows the data/model, SPARQL evidence tool, supplied scenario API and APEX deployment artifacts. These new learning-path documents have packaging/link checks; they still need a first-time reader walkthrough against the release summary dataset. The build-your-own adaptation journey is documented separately on dev.
+
+## Public catalogue expansion — 23 November 2026
+
+Anonymous source checks and the explicit [public-source classification rules](../references/public-source-policy.json) govern the distributable corpus. The graph includes references admitted by verification or manual public classification. Readable added research supplies locally extracted passages on dev and selected attributed editorial summaries on release; items without supplied text remain discovery nodes. S05 and S07 are retained following explicit user review of their public event editions and template footers. Detailed source conflicts remain outside the public repository. The [catalogue guide](public-research-catalog.md) explains the evidence boundary and includes SQL/SPARQL queries.
+
+Local tests cover catalogue node/URL/version integrity, absence of fabricated passages, original Alex source priority and retention of Casey's S10 qualifications alongside additional matches, prepared SQL, public-reference scans and release manifest hashes. The chatbot API limits its topic selector and source list to versions with passages. Native ADB execution and browser acceptance of this expanded dataset/API update remain pending; earlier native results describe the earlier sample only.
+
+The expanded Worksheet loader uses bounded PL/SQL batches, progress messages and guarded graph activation. Local generation/parsing checks do not establish native compilation or completion in Database Actions; include that check in acceptance. The engine-produced app export requires the documented explorer.js static-file update for non-PDF locators.
+
+Manual public classification does not turn a failed access test into a success. Catalogue-only references with unverified access retain their error, decision rule and a clearly labelled metadata hash; they do not supply chatbot evidence. Conflict decisions and the separate `to_be_reviewed` array stay outside the Git repositories.
+
+
+## Content pipeline acceptance — 23 November 2026
+
+All 825 added references were attempted. Dev contains 17,099 passages in total; release contains 762 attributed summaries across 754 sources. The other 80 release references remain catalogue only. The full 49-test suite passed, followed by three new Worksheet-part tests and a repeat of release validation: 52 distinct local tests passed. The six release SQL parts are each below 2 MB and reproduce the complete loader's SQL units exactly. Source hashes, actual locators, graph-scoped retrieval eligibility and publication separation are checked locally.
+
+See the [validation record](../references/content-pipeline-validation.json) and [ingestion coverage](../references/content-ingestion-checks.json). Native execution of the new batches and queries, live model/browser acceptance and an engine re-export remain pending. No deployment occurred during this content build. Follow the documented static-file replacement after importing the existing APEX export.

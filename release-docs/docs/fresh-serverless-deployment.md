@@ -7,15 +7,19 @@ No previous ADB, SQL, graph or APEX experience is assumed. Use the files on this
 | Order | Lab | Result |
 | --- | --- | --- |
 | Start | [Introduction](../labs/introduction/introduction.md) | Understand the experience, accounts and resources |
-| 1 | [Prepare the release files](../labs/prepare-environment/prepare-environment.md) | The supplied SQL files are available on your browser computer |
+| 1 | [Prepare the release files](../labs/prepare-environment/prepare-environment.md) | Supplied SQL and the published GitHub dataset commit are identified |
 | 2 | [Create the database](../labs/provision-database/provision-database.md) | A new Serverless database and ADMIN Worksheet |
 | 3 | [Configure database and model access](../labs/configure-database/configure-database.md) | Java, lab owner, grants, schema and working model profile |
-| 4 | [Load knowledge and scenario](../labs/load-knowledge/load-knowledge.md) | Attributed summaries, graph and explorer agents |
+| 4 | [Load knowledge and scenario](../labs/load-knowledge/load-knowledge.md) | A short GitHub load imports summaries and graph; explorer agents are installed |
 | 5 | [Deploy the application](../labs/deploy-explorer/deploy-explorer.md) | Workspace, app login and installed application |
 | 6 | [Explore the evidence](../labs/explore-evidence/explore-evidence.md) | Ask, inspect sources/lineage, refine and record learning |
 | Help | [Need help?](../labs/need-help/need-help.md) | Diagnose the failing step |
 
 Cloud provisioning/restart and IAM are administrator/OCI Console tasks. Database work runs through Database Actions SQL Worksheet. Enter passwords/signing keys privately into the browser bind dialogs; do not put them into files.
+
+The [dataset load](github-dataset-load.md) reads public JSON files directly from a full GitHub commit SHA and validates the supplied manifest hash. The files must be published before the call can work. This download requires no GitHub token, OCI resource principal or storage bucket; model inference authentication is separate.
+
+After importing the application, an APEX workspace developer must [replace its supplied JavaScript file](content-ingestion-upgrade.md#required-application-file-update) for non-PDF links and locator labels. The engine SQL export has not yet been regenerated; the deployment lab includes the required file update. It requires no Python or SQLcl. KCV_USER remains an app-only account.
 
 Use a new dedicated lab schema/database for this summary-based distribution. The [dataset guide](release-dataset.md) explains attribution and changed citation IDs. The [SQL catalogue](sql-catalogue.md) separates required installation from optional exercises. The older KCV_TEAM, candidate approval, inference and developer mocks are not required.
 

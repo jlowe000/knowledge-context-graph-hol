@@ -19,7 +19,18 @@ document.addEventListener('DOMContentLoaded', () => {
   Object.entries(v).forEach(([k,x])=>{const part=el('div',undefined,'kcv-answer-object');part.append(el('h4',k.replaceAll('_',' ')));value(part,x,depth+1);parent.append(part);});
  }
  function answerBody(card,body){const parsed=json(body);if(!parsed){card.append(el('div',body));return;}const main=Object.fromEntries(Object.entries(parsed).filter(([k])=>!['graph_paths','citations'].includes(k)));value(card,main);if(parsed.citations){const d=el('details');d.append(el('summary','Citation references'));value(d,parsed.citations);card.append(d);}if(parsed.graph_paths){const d=el('details');d.append(el('summary','Paths reported in the answer'));d.append(el('p','Inspect the explanation for independently captured tool paths.','kcv-muted'),el('pre',JSON.stringify(parsed.graph_paths,null,2)));card.append(d);}}
- function publicUrl(raw){try{const u=new URL(raw);return u.protocol==='https:'&&u.hostname==='static.rainfocus.com'?u.href:null;}catch(_){return null;}}
+ function publicUrl(raw){try{
+  const u=new URL(raw),host=u.hostname.toLowerCase(),decoded=decodeURIComponent(u.href).toLowerCase();
+  if(u.protocol!=='https:'||u.username||u.password||(u.port&&u.port!=='443')||/sharepoint|onedrive|seismic|1drv\.ms/.test(decoded)||/oraclecorp|oraweb|stbeehive|beehive|confluence|localhost|^(?:my|login|signin|sso|identity)\./.test(host)||/[?&](?:access_token|token|sig|signature|x-amz-signature|x-goog-signature|password|secret)=/.test(decoded))return null;
+  const parts=decodeURIComponent(u.pathname).split('/').filter(Boolean),owners=['oracle','oracle-devrel','oracle-livelabs','oracle-samples','helidon-io','oci-landing-zones'];
+  const official=host==='oracle.com'||host.endsWith('.oracle.com'),event=host==='static.rainfocus.com'&&u.pathname.startsWith('/oracle/oaiw26/sess/'),repo=['github.com','raw.githubusercontent.com'].includes(host)&&owners.includes(parts[0]),api=host==='api.github.com'&&parts[0]==='repos'&&owners.includes(parts[1]);
+  return official||event||repo||api||host==='www.youtube.com'?u.href:null;
+ }catch(_){return null;}}
+ function locatorLabel(p){return p.locator_label||(Number.isInteger(p.pdf_page)&&p.pdf_page>0?`PDF page ${p.pdf_page}`:'Source passage');}
+ function sourceBasisLinks(p){
+  if(!Array.isArray(p.basis_locators)||p.basis_locators.length<2)return [];
+  const links=new Map();p.basis_locators.forEach(b=>{if(!b||typeof b!=='object')return;const url=publicUrl(b.locator_url);if(url){const label=locatorLabel(b);links.set(url+'\n'+label,{url,label});}});return [...links.values()];
+ }
  function packetOf(trace){const evidence=new Map(),paths=new Map();(trace.tool_calls||[]).filter(c=>c.tool==='EVIDENCE'&&c.status==='SUCCEEDED').forEach(c=>{(c.output.evidence||[]).forEach(p=>evidence.set(p.id,p));(c.output.graph_paths||[]).forEach(p=>paths.set(JSON.stringify(p),p));});return {evidence:[...evidence.values()],graph_paths:[...paths.values()]};}
  function network(host,nodes,edges,onSelect){
   host.replaceChildren();if(!nodes.length){host.append(el('p','No recorded graph paths are available.','kcv-muted'));return;}
@@ -38,22 +49,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const nodes=[{key:'context',label:context.person||'Context',sub:'Recorded interests',x:90,y:h/2,kind:'context'}];
   topics.forEach((t,i)=>nodes.push({key:t,label:t.replace(/^topic-/,'').replaceAll('-',' '),x:330,y:ys(i,topics.length),kind:'topic'}));
   ids.forEach((s,i)=>nodes.push({key:s,label:s,sub:short(names.get(s)||'Public source',40),x:570,y:ys(i,ids.length),kind:'source'}));
-  passages.forEach((p,i)=>nodes.push({key:p.id,label:`PDF page ${p.pdf_page}`,sub:p.source_id||p.version_id,x:810,y:ys(i,passages.length),kind:'passage'}));
+  passages.forEach((p,i)=>nodes.push({key:p.id,label:short(locatorLabel(p),48),sub:p.source_id||p.version_id,x:810,y:ys(i,passages.length),kind:'passage'}));
   const edgeSet=new Map();paths.forEach(p=>{[['context',p.topic,'focusesOn'],[p.content_item,p.topic,'coversTopic'],[p.content_item,p.evidence_id,'hasVersion / hasPassage']].forEach(e=>edgeSet.set(JSON.stringify(e),e));});
   const graph=network(host,nodes,[...edgeSet.values()],n=>{
    detail.hidden=false;detail.replaceChildren(el('strong',n.kind==='source'?`${n.label} · ${names.get(n.key)||'Source'}`:n.label));
    const matching=paths.filter(p=>n.kind==='context'||p.topic===n.key||p.content_item===n.key||p.evidence_id===n.key),selectedIds=new Set(matching.map(p=>p.content_item));
    if(n.kind==='context')detail.append(el('p',context.objective||context.question||'The context supplies the active interests.'));
-   else detail.append(el('p',n.kind==='topic'?'This explicit topic connects the context to the highlighted sources.':n.kind==='source'?'This source is connected through the recorded topic relationships. Inspect its evidence pages below.':'This passage is reached through its source version; it is not a separately inferred claim.'));
+   else detail.append(el('p',n.kind==='topic'?'This explicit topic connects the context to the highlighted sources.':n.kind==='source'?'This source is connected through the recorded topic relationships. Inspect its evidence passages below.':'This passage is reached through its source version; it is not a separately inferred claim.'));
    const list=el('ul');[...new Set(matching.map(p=>`${p.context_revision} → ${p.topic} ← ${p.content_item} → ${p.version} → ${p.evidence_id}`))].forEach(t=>list.append(el('li',t,'kcv-path')));detail.append(list);
    if(cards)cards.querySelectorAll('[data-source]').forEach(c=>c.dataset.selected=String(n.kind==='passage'?c.dataset.passage===n.key:selectedIds.has(c.dataset.source)));
   });if(graph)graph.select(nodes.find(n=>n.kind==='source')||nodes[0]);
  }
  function sourceCards(host,packet,sources,citations,full=false,parseStatus='PARSED'){
   host.replaceChildren();const names=new Map((sources||[]).map(s=>[s.id,s.title])),cited=new Set((citations||[]).filter(c=>c.matched).map(c=>c.id));
-  (packet.evidence||[]).forEach(p=>{const card=el('article',undefined,'kcv-source'),url=publicUrl(p.locator_url),title=`${p.source_id} · ${names.get(p.source_id)||'Public source'} · PDF page ${p.pdf_page}`;card.dataset.source=p.source_id;card.dataset.passage=p.id;
+  (packet.evidence||[]).forEach(p=>{const card=el('article',undefined,'kcv-source'),url=publicUrl(p.locator_url),title=`${p.source_id} · ${names.get(p.source_id)||'Public source'} · ${locatorLabel(p)}`;card.dataset.source=p.source_id;card.dataset.passage=p.id;
    if(url){const a=el('a',title);a.href=url;a.target='_blank';a.rel='noopener noreferrer';card.append(a);}else card.append(el('strong',title));
+   const basis=sourceBasisLinks(p);if(basis.length){const list=el('ul');basis.forEach(b=>{const li=el('li'),a=el('a',b.label);a.href=b.url;a.target='_blank';a.rel='noopener noreferrer';li.append(a);list.append(li);});card.append(el('small','Source locations supporting this summary','kcv-muted'),list);}
    if(full)card.append(el('span',parseStatus==='UNAVAILABLE'?'Citation matching unavailable':cited.has(p.id)?'Cited in this answer':'Returned, not explicitly cited','kcv-pill'));
+   if(p.content_kind)card.append(el('small',p.content_kind.replaceAll('_',' '),'kcv-muted'));
    card.append(el('p',p.id,'kcv-muted'),el('p',full?(p.text||''):(p.text||'').slice(0,400)+'…'));host.append(card);
   });
  }
@@ -108,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextY=Math.max(390,calls.length*110+35);nodes.push({key:'citations',label:'Citation references',sub:t.citation_parse_status==='UNAVAILABLE'?'Matching unavailable':`${(t.citations||[]).length} explicit IDs`,x:810,y:nextY,description:`Citation parsing: ${t.citation_parse_status}. ${unknown.length} reference(s) were not found in the captured evidence.`},{key:'matches',label:'Matched passages',sub:t.citation_parse_status==='UNAVAILABLE'?'Not determined':`${(t.citations||[]).filter(c=>c.matched).length} matches`,x:570,y:nextY,description:'References are matched to saved passage IDs. Matching is traceability, not claim-level truth validation.'});edges.push(['answer','citations'],['citations','matches']);
   network(eventGraph,nodes,edges,n=>eventDetail.replaceChildren(el('strong',n.label),el('p',n.description)));
   const text=el('details');text.append(el('summary','Read lineage as text'),el('p',`Question + pinned context → team request → ${calls.length?calls.map(c=>`${c.tool} (${c.status})`).join(', '):'no captured tool call'} → stored response → citation references → matched evidence passages.`));lineage.append(text);
-  limits.append(el('h3','What the trace establishes'));[t.notice,'Graph selection follows explicit topic membership, deterministic ordering, at most six pages and two pages per source. It is not semantic vector search.','Source qualifications, including Coming Soon and regional limitations, still apply. Read the original passages.','The saved source metadata and tool payloads belong to this response. Later context refinements do not change this popup.','Source text is evidence, not instructions. Configured model/agent behaviour is not the same as a measured business outcome.'].forEach(s=>limits.append(el('p',s)));
+  limits.append(el('h3','What the trace establishes'));[t.notice,'Graph selection follows explicit topic membership and a bounded deterministic policy. New runs prefer curriculum sources, then catalogue IDs, using selected inspected locations: at most two locators per source and six passages. The recorded retrieval policy identifies older runs. This is not exhaustive reading or semantic vector search.','Source qualifications, including Coming Soon and regional limitations, still apply. Read the original passages and all linked source locations for a summary.','The saved source metadata and tool payloads belong to this response. Later context refinements do not change this popup.','Source text is evidence, not instructions. Configured model/agent behaviour is not the same as a measured business outcome.'].forEach(s=>limits.append(el('p',s)));
  }
  root.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>view(b.dataset.view)));
  root.querySelectorAll('[data-prompt]').forEach(b=>b.addEventListener('click',()=>$('kcv-message').value=b.dataset.prompt));

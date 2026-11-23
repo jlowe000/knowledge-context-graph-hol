@@ -89,6 +89,8 @@ You have the project files, an Oracle Linux terminal, internet access to the pub
 
 **Expected outcome:** `10_load_dataset.sql` contains your verified public passages and graph data. `20_install_apex.sql` installs the supplied app into the default KCV_KNOWLEDGE workspace/KCV_LAB schema later. Do not execute either yet. They contain no passwords and stay in ignored `work/` because the loader contains presentation text.
 
+The shared loading lab defaults to the [public GitHub summary dataset](../../docs/github-dataset-load.md). Publish its candidate on dev and use the full dev commit SHA for native acceptance before promotion to release. Your generated dataset SQL is the local authoring alternative for testing extracted passages; it is not the content published for ordinary release learners. Choose the intended dataset before loading a fresh lab schema. The GitHub route requires a published commit containing `data/load/manifest.json` and its matching short caller.
+
 If a source is unavailable or its edition hash differs, stop and report the source ID/error. Do not turn off hash checks or invent replacement content. A successful build is not a database test.
 
 Continue to [Create the database](../provision-database/provision-database.md).

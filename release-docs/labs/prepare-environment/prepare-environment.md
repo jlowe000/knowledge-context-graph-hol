@@ -11,7 +11,7 @@ Estimated Lab Time: 5–10 minutes; planning estimate.
 In this lab, you will:
 
 - Confirm you downloaded the release branch.
-- Locate the dataset and application installation SQL.
+- Locate the short GitHub dataset call and application installation SQL.
 - Understand how to copy code into Worksheet.
 
 ### Prerequisites
@@ -28,16 +28,18 @@ A browser, a plain-text editor, the complete release download supplied by your f
 
 ## Task 2: Locate the SQL installers
 
-1. Open the `sql/install/` directory. Confirm both supplied files exist:
+1. Open the `sql/install/` directory. Confirm these supplied files exist:
 
-   - [10_load_dataset.sql](../../sql/install/10_load_dataset.sql)
+   - [10_load_github.sql](../../sql/install/10_load_github.sql)
    - [20_install_apex.sql](../../sql/install/20_install_apex.sql)
 
 2. Open them in a plain-text editor to confirm you can read them. Do not execute them yet. Keep the files on the browser computer; a local file is not already uploaded to ADB.
 
-3. Read the [dataset explanation](../../docs/release-dataset.md). The loader contains 17 attributed editorial summaries of real public pages, not original PDF extracts. Original pages remain accessible through their links.
+3. Read the [dataset explanation](../../docs/release-dataset.md). The short dataset call downloads the public research catalogue, attributed editorial summaries, contexts and graph data directly from GitHub. Original research pages remain accessible through their source links; they are not downloaded during installation.
 
-**Expected outcome:** both installation files are ready to copy later. No generation/download of presentation text is required. If files are missing, obtain a complete release archive; do not substitute another learner's private working files.
+4. Follow [Choose a published version](../../docs/github-dataset-load.md#choose-a-published-version) to identify the full release commit SHA containing `data/load/manifest.json` and the matching caller. The manifest hash is supplied in the caller; you will replace only its commit placeholder. If the package exists only locally and is not yet on GitHub, it must be published before the database can fetch it.
+
+**Expected outcome:** the short dataset call and application installer are ready for later tasks, and you can identify the published dataset commit. No local build or download of presentation text is required. If files are missing, obtain a complete release archive; do not substitute another learner's private working files. The larger `10_load_dataset.sql` and numbered SQL parts remain a fallback described in the GitHub load guide.
 
 ## Task 3: Understand copyable examples
 

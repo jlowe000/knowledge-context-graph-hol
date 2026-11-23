@@ -56,7 +56,7 @@ No Python or local build is required on release. No OCI Console or SQL knowledge
 
 ## Task 3: Understand the sample
 
-1. Review the sample: nine public presentation records, 17 attributed editorial summaries, three fictional learner contexts and a prepared APEX app. The supplied SQL loads the collection. It does not redistribute the original PDFs.
+1. Review the sample: nine reviewed public presentation records, the expanded public research catalogue and attributed editorial summaries of selected content, three fictional learner contexts and a prepared APEX app. The supplied SQL loads the collection. It does not redistribute the original PDFs.
 
 2. Notice the boundary: context changes affect which evidence is selected. They do not rewrite source facts, certify correctness or train the model. A matched citation points to supplied evidence; follow its original page link to check the source.
 

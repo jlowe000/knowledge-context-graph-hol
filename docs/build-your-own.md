@@ -46,8 +46,8 @@ Have someone follow your user journey, developer-learning journey and deployment
 
 ## 7. Publish an experience, not the development workspace
 
-Maintain the learner experience in `release-docs/`. It should support end users and developers learning your collection, with deployment offered when needed. Adjust the release data strategy and packaging assumptions for your own content and rights. Generate the distribution, review its manifest and secrets scan, then promote reviewed files using [branch workflow](branch-workflow.md).
+Maintain the learner experience in `release-docs/`. It should support end users and developers learning your collection, with deployment offered when needed. Adjust the release data strategy and packaging assumptions for your own content and rights. Generate the summary-only GitHub package on dev, review it, then publish dev for pinned-commit native testing. Keep release unchanged until that acceptance passes; promote the reviewed learner distribution using [branch workflow](branch-workflow.md).
 
-The provided release uses 17 author-written summaries. The dev original-passage pipeline and the release summary dataset are separate modes; validate whichever you distribute. Do not copy raw work directories or merge the complete dev tree into release.
+The provided release uses attributed editorial summaries of the original presentations and selected passages from the added research. The dev original-passage pipeline and the release summary dataset are separate modes; validate whichever you distribute. Do not copy raw work directories or merge the complete dev tree into release.
 
 **Outcome:** a usable learner-facing distribution, with dev still available to others who want to build on your implementation.

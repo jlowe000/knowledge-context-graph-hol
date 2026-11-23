@@ -106,7 +106,7 @@ CREATE OR REPLACE PACKAGE BODY kcv_scenario AS
    sparql:='SELECT DISTINCT ?item ?ver ?topic ?passage ?eligible WHERE { '||iri(r.revision_id)||' '||iri('focusesOn')||' ?topic . '||
      '?item '||iri('coversTopic')||' ?topic ; '||iri('hasVersion')||' ?ver . ?ver '||iri('hasPassage')||' ?passage . '||
      'OPTIONAL { ?passage '||iri('retrievalEligible')||' ?eligible } '||
-     'FILTER (?eligible = true || (!BOUND(?eligible) && REGEX(STR(?item),"/S[0-9]+$"))) }';
+     'FILTER (?eligible = true || (!BOUND(?eligible) '||CHR(38)||CHR(38)||' REGEX(STR(?item),"/S[0-9]+$"))) }';
    -- Eligibility belongs to this immutable graph snapshot, not shared passage
    -- metadata that might have been loaded by an earlier graph. Only legacy S
    -- curriculum sources may fall back when the RDF property is absent.

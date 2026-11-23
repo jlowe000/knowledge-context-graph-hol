@@ -63,7 +63,7 @@ Your facilitator has supplied a working Knowledge Context Explorer URL and an ap
 
 ## Task 4: Refine the focus and compare
 
-1. Open **Context**. Choose **Remove an area of focus**, select **Graph capabilities**, then click **Preview refinement**. Review the proposed operation; nothing has changed yet.
+1. Open **Context**. Choose **Remove an area of focus**, select **Graph capabilities**, then click **Preview refinement**. Review the proposed operation; nothing has changed yet. This changes Alex's learning focus and evidence selection, while leaving technical capabilities, availability and deployment constraints unchanged.
 
 2. Click **Apply this refinement**, then open **Evidence**. Read the change summary and source cards.
 
@@ -71,7 +71,7 @@ Your facilitator has supplied a working Knowledge Context Explorer URL and an ap
 
    ```text
    <copy>
-   With Graph capabilities removed from the stored context, which returned sources should Alex explore first and what remains unproven?
+   With Graph capabilities removed from Alex's learning focus, which returned sources should Alex explore first and what remains unproven?
    </copy>
    ```
 

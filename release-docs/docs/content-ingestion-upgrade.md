@@ -2,6 +2,41 @@
 
 The expanded dataset includes non-PDF evidence. PDF page numbers remain real page numbers; other passages carry a `locator_kind` and `locator_label`. The runtime uses selected inspected locations, returning up to two locators per source and six passages in total. Sources used in the original lessons take priority, followed by catalogue IDs. This is a bounded topic join, not exhaustive document reading or a semantic ranking. Summaries spanning multiple locations include separate links to each supporting location. Additional catalogue sources may fill unused slots, including in the healthcare scenario; the S10 overview and qualification must remain present.
 
+## Update learning-focus guidance in an existing app
+
+Use this small update when the app already works and you want topic removal to be interpreted as a change in learning focus. Fresh installations receive the guidance through the normal scenario setup.
+
+1. Let any running question finish. As **KCV_LAB** in Database Actions Worksheet, run the complete [02_scenario_api.sql](../sql/extensions/02_scenario_api.sql) with **F5**. This updates the evidence packet and the shared answer guidance.
+2. Run [09_refresh_context_guidance.sql](../sql/extensions/09_refresh_context_guidance.sql) with **F5**, or copy the block below. It updates the existing QA task instruction without recreating the team.
+
+<!-- include-sql: sql/extensions/09_refresh_context_guidance.sql -->
+
+```sql
+BEGIN
+  DBMS_CLOUD_AI_AGENT.SET_ATTRIBUTE(
+    object_name=>'KCV_SCENARIO_QA_TASK',object_type=>'task',
+    attribute_name=>'instruction',attribute_value=>kcv_scenario.qa_instruction);
+END;
+/
+```
+
+[Script: 09_refresh_context_guidance.sql](../sql/extensions/09_refresh_context_guidance.sql)
+
+<!-- /include-sql -->
+
+3. Run this compilation check with **F5** and expect no rows:
+
+   ```sql
+   SELECT name,line,text FROM user_errors
+   WHERE name LIKE 'KCV%' ORDER BY name,sequence;
+   ```
+
+4. In the app, **start a new conversation**, then repeat the [learning-focus refinement](ui-walkthrough.md#main-journey-alex-needs-to-find-project-information). Removing Graph capabilities should narrow the learning focus and evidence selection while leaving technical capabilities, availability and explicit constraints unchanged. A real technical constraint explicitly supplied by the learner must still be respected.
+
+**Expected outcome:** both scripts complete and new answers distinguish learning interests from technical constraints. Historical answers and their explanations remain unchanged. This update needs no dataset reload, APEX reimport or credential changes.
+
+The [validation record](../references/learning-focus-validation.json) covers native topic-removal invariants, the original ambiguous question, an explicit technical restriction and planner clarification tested on dev before this release update.
+
 ## Existing database
 
 As KCV_LAB in Database Actions Worksheet, run [08_content_locators.sql](../sql/extensions/08_content_locators.sql) with F5 before loading the new dataset. It permits a null PDF page for non-PDF evidence and retains existing records. Fresh installations already use the updated table definition and can skip this migration.

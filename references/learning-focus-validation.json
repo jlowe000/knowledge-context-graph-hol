@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "date": "2026-11-24",
+  "date_timezone": "Australia/Brisbane",
+  "change": "Topic addition/removal changes learning and retrieval focus, not technical capabilities or deployment constraints.",
+  "tested_branch": "dev",
+  "tested_dev_base_commit": "e50287407c3aafd541b638e54519cdc2759a6572",
+  "tested_candidate": "working-tree changes identified by artifact hashes before release regeneration",
+  "artifacts": [
+    {
+      "path": "sql/extensions/02_scenario_api.sql",
+      "sha256": "5a5839dc4e5330b10dd856b91a0b3ed37238853215ccc312c41bd86ba3914c06"
+    },
+    {
+      "path": "sql/extensions/03_scenario_agents.sql",
+      "sha256": "874478fd220f3241a99b4be320ffee81ff5b765374f7f3a06f31e7c373218625"
+    },
+    {
+      "path": "sql/extensions/09_refresh_context_guidance.sql",
+      "sha256": "fa56b2fcf0c40b7bb3efdfa236dc7b55c71d2be7bdb1b5b9c5cb4df97852c835"
+    },
+    {
+      "path": "integration-test/verify_scenario_native.sql",
+      "sha256": "02a5da2c30c3105a61dc6e3813980e722cdb57f98430a0a915daf069adc3bf7d"
+    }
+  ],
+  "local_checks": {
+    "unit_tests": 66,
+    "unit_tests_passed": 66,
+    "short_sql_snippets_checked": 38,
+    "apex_source_check": "passed"
+  },
+  "native_checks": {
+    "environment": "temporary ADB Serverless with APEX 26.1.6",
+    "api_compilation": "passed",
+    "existing_task_instruction_refresh": "passed",
+    "topic_removal_preserves_other_context_and_explicit_constraints": "passed",
+    "base_graph_preserved": "passed",
+    "evidence_contains_learning_focus_semantics": "passed",
+    "final_scenario_and_apex_packages": "VALID",
+    "compilation_errors": 0
+  },
+  "live_model_checks": [
+    {
+      "case": "Original ambiguous follow-up after removing Graph capabilities",
+      "result": "No inferred technical restriction; answer states removed topic alone is not a constraint and asks for clarification.",
+      "evidence_calls": 1,
+      "matched_citations": 6
+    },
+    {
+      "case": "Explicit learning-focus clarification plus separately supplied graph-service prohibition",
+      "result": "Answer distinguishes learning focus from the user-supplied restriction, respects the restriction and makes no compliance claim.",
+      "evidence_calls": 1,
+      "matched_citations": 6
+    },
+    {
+      "case": "Technical restriction alone sent to refinement planner",
+      "result": "CLARIFY returned; context unchanged."
+    }
+  ],
+  "live_model_calls": 3,
+  "browser_console_errors": 0,
+  "upgrade": [
+    "Run updated sql/extensions/02_scenario_api.sql as KCV_LAB",
+    "Run sql/extensions/09_refresh_context_guidance.sql",
+    "Start a new app conversation"
+  ],
+  "data_or_apex_export_changes": false,
+  "limitations": [
+    "Model outputs vary; these checks do not guarantee all future wording.",
+    "Checks used the current public summary dataset without reloading it.",
+    "Historical answers are preserved, not rewritten.",
+    "Raw runtime logs and temporary environment details remain outside the publication package."
+  ]
+}

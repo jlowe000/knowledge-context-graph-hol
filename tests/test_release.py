@@ -39,6 +39,25 @@ class ReleaseTests(unittest.TestCase):
         self.assertNotIn('docs/development.md', names)
         self.assertFalse((self.folder / 'integration-test/mocks').exists())
 
+    def test_release_learning_routes_include_expanded_casey_without_maintainer_steps(self):
+        readme = (self.folder / 'README.md').read_text(encoding='utf-8')
+        for route in ['labs/explore-evidence/explore-evidence.md',
+                      'labs/understand-collection/understand-collection.md',
+                      'docs/fresh-serverless-deployment.md']:
+            self.assertIn(route, readme)
+            self.assertTrue((self.folder / route).is_file())
+        anchor = 'docs/ui-walkthrough.md#explore-the-expanded-research-with-casey'
+        self.assertIn(anchor, readme)
+        walkthrough = (self.folder / 'docs/ui-walkthrough.md').read_text(encoding='utf-8')
+        self.assertIn('## Explore the expanded research with Casey', walkthrough)
+        self.assertIn('R0691', walkthrough)
+        load = (self.folder / 'labs/load-knowledge/load-knowledge.md').read_text(encoding='utf-8')
+        self.assertIn('select **release**', load)
+        self.assertNotIn('select **dev** for native acceptance', load)
+        self.assertNotIn('Keep release unchanged', load)
+        self.assertNotIn('local authoring loader', load)
+        self.assertIn('sql/install/10_load_github.sql', load)
+
     def test_summaries_have_own_hashes_labels_and_public_page_attribution(self):
         passages = p.read(self.folder / 'data/release-summaries.json')['passages']
         originals = p.read(p.ROOT / 'work/passages.json')

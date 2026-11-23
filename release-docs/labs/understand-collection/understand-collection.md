@@ -63,7 +63,7 @@ SELECT kcv_scenario.evidence_packet(JSON_OBJECT('scenario_session' VALUE :KCV_SE
 
 3. Read the returned context, base/overlay graph identities, graph_paths and evidence. Then read the SPARQL in [02_scenario_api.sql](../../sql/extensions/02_scenario_api.sql). It connects context → topic ← content → version → evidence. `SEM_MATCH` exposes those graph bindings as SQL rows; PL/SQL retrieves the matching text/metadata and returns bounded JSON.
 
-**Expected outcome:** you can explain why the initial S02/S03/S06 evidence is eligible and why the packet has at most six pages/two per source. These read operations make no model request. Weights stored in context do not drive this retrieval's ordering.
+**Expected outcome:** you can explain why the initial S02/S03/S06 evidence is eligible and why the packet has at most six passages/two locators per source. These read operations make no model request. Weights stored in context do not drive this retrieval's ordering.
 
 ## Task 3: Ask a question and inspect the tool boundary
 

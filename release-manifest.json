@@ -114,7 +114,7 @@
     },
     {
       "path": "docs/public-research-catalog.md",
-      "sha256": "125c55c96de098a8f0fc71bf7959a51282e14e0cd7864682df5e872d7163eb47"
+      "sha256": "d9547c7195a96ee6d5ff321f87f35b015d8f2ea197a82ce550fb69b07a1dca91"
     },
     {
       "path": "docs/release-dataset.md",
@@ -230,7 +230,7 @@
     },
     {
       "path": "NOTICE.md",
-      "sha256": "c05b0c4dba934b2958cfe3c66c3c8187bcead589397fe348c27b4f7995db47fe"
+      "sha256": "a785e1f8124d2f207c6e0b12f3edc1eee28dc00edbab65e6769bd7d5b232253b"
     },
     {
       "path": "ontology/kcv.ttl",
@@ -242,7 +242,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "7fd02079487b800a4f7d5f5f46cbbc59750e518395657cef943b872347ee9796"
+      "sha256": "1afb6c2a81309b5ec5b5bec72d36c96a6c2d14c23b67f48cf305527dc0d3b9a9"
     },
     {
       "path": "references/content-ingestion-checks.json",
@@ -527,6 +527,14 @@
     {
       "path": "sql/schema/06_register_profile.sql",
       "sha256": "826bdf62fb31222800aff4b627d7ace308f5641082db4d6c2dcde654810dba4e"
+    },
+    {
+      "path": "third-party/connormcd-misc-scripts/LICENSE.txt",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "third-party/connormcd-misc-scripts/README.md",
+      "sha256": "6701c2fb2727453a777b846c2193d24269ee8b3ed1c5365f3c69a199c43d745a"
     },
     {
       "path": "third-party/font-apex/LICENSE.txt",

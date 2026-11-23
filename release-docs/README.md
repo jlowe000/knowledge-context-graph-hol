@@ -28,7 +28,7 @@ The [dataset](docs/release-dataset.md) contains editorial summaries of public pa
 
 The dataset load uses a published release commit and the supplied manifest hash. The commit must contain `data/load/manifest.json` and all its JSON parts; generating a local release does not publish them. The [load guide](docs/github-dataset-load.md) explains choosing the commit, monitoring progress and the retained SQL fallback.
 
-The [validation record](docs/scenario-validation.md) distinguishes related dev application tests from the still-pending native acceptance of this summary dataset. A facilitator should confirm which sample is installed before a workshop.
+The [validation record](docs/scenario-validation.md) distinguishes earlier dev application tests from the expanded summary dataset's native SQL acceptance on dev. The GitHub load, graph/scope checks and lock exclusion passed on 23 November 2026; model inference and browser acceptance for these summaries remain pending. Execution from a promoted release commit is separate. A facilitator should confirm which sample is installed before a workshop.
 
 [MIT licence](LICENSE.txt) · [attribution](NOTICE.md) · [cleanup](docs/cleanup.md). No WMS/reservation metadata or other upstream workshops are included.
 

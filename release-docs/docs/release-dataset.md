@@ -27,7 +27,7 @@ For metadata-only observations, `version.hash_basis="catalogue_metadata"` identi
 
 Other unresolved conflicts remain in a private `to_be_reviewed` array outside both Git worktrees. The private conflict report also preserves the original conflicts and the `manually_marked_public` decisions. No conflict-detail file is included in the release. Manual public classification does not grant copyright or licensing rights over the original material. Existing conversations retain their historical graph snapshots; use a fresh lab deployment for first native acceptance of the expanded dataset.
 
-This expanded dataset has local graph, packaging, source-access and generated-SQL checks. Native execution of the expanded catalogue and release summaries on ADB Serverless remains pending.
+This expanded dataset has local graph, packaging, source-access and generated-SQL checks. Its GitHub package passed [native SQL acceptance on ADB Serverless](../references/github-dataset-validation.json) on 23 November 2026 at dev commit `6eb868ee732f0ca3a0d8a6f9e68f838590d77b47`: 834 sources, 762 summaries, three contexts and 30,144 triples. Native source isolation, graph paths, refinement, retry and two-session exclusion passed. This run did not test GenAI inference, the APEX UI, interrupted loading, fallback SQL batches or execution from a release commit.
 
 For non-PDF evidence cards, complete the [required APEX static-file update](content-ingestion-upgrade.md#required-application-file-update) after importing the supplied application. The source JavaScript is current; a new engine-produced export and live acceptance of this expanded release remain pending.
 

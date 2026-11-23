@@ -39,7 +39,7 @@ The initial graph has **zero accepted extracted claims**. Its content metadata, 
 
 Database work uses **Database Actions → SQL Worksheet**. The [direct GitHub dataset load](docs/github-dataset-load.md) fetches JSON data from a pinned public commit and validates it before activating the graph. Dev includes a publishable summary package under `data/load/` and its short caller in `sql/install/10_load_github.sql`. Publish and test that candidate using the full **dev commit SHA** before promoting it to release. Its evidence is attributed editorial summaries, separate from the extracted authoring passages in ignored `work/` files. No client database driver or wallet is required. `requirements-db.txt` and the Python DB commands are optional automation.
 
-The new GitHub load and expanded summary dataset still require native ADB Serverless and application acceptance. A successful local build or dev push does not establish that validation; follow the [dev testing and promotion sequence](docs/branch-workflow.md#maintainer-promotion).
+The GitHub load and expanded summary dataset passed [native ADB Serverless acceptance](references/github-dataset-validation.json) on 23 November 2026 at dev commit `6eb868ee732f0ca3a0d8a6f9e68f838590d77b47`: 834 sources, 762 passages, three contexts and 30,144 RDF triples. Import/retry, graph scope, source isolation and two-session locking passed. This run made no GenAI inference calls or APEX browser tests; those checks for the expanded summaries remain pending. Follow the [dev testing and promotion sequence](docs/branch-workflow.md#maintainer-promotion).
 
 ## Understand the data
 

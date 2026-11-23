@@ -94,7 +94,7 @@
     },
     {
       "path": "docs/content-ingestion-upgrade.md",
-      "sha256": "b66693f97ebb61ee65060a720d2a75a21e94bf14d3b664198cb7890eaccb85f4"
+      "sha256": "b7ce522fc4615df16068f4341ace9299af074f64b6cac3ce9fcde6d443530c40"
     },
     {
       "path": "docs/fresh-serverless-deployment.md",
@@ -134,7 +134,7 @@
     },
     {
       "path": "docs/ui-walkthrough.md",
-      "sha256": "ebd85d135c456c6fc1e73c55d6d71d323ffa02b51ae338d57ec6b7321888a316"
+      "sha256": "d898d298c5101ec69d1f4ecfafb9da45832aecc289332c89a9636323473ecb31"
     },
     {
       "path": "docs/upstream-comparison.md",
@@ -170,7 +170,7 @@
     },
     {
       "path": "integration-test/verify_scenario_native.sql",
-      "sha256": "040894646653126fa8fd924f83e96477cce5102e808a352cb0714026128d9c8b"
+      "sha256": "02a5da2c30c3105a61dc6e3813980e722cdb57f98430a0a915daf069adc3bf7d"
     },
     {
       "path": "integration-test/verify_source_packet_scope.sql",
@@ -190,7 +190,7 @@
     },
     {
       "path": "labs/explore-evidence/explore-evidence.md",
-      "sha256": "031ce4c7f2cbf25f9257846bb766b5b6148e643248e60bee3a085e638f3e7ec2"
+      "sha256": "f5abaf112f4ab40385147d472257baf8913b531280fc4436af45dac3aaeffdc1"
     },
     {
       "path": "labs/explore-evidence/images/answer-lineage.jpg",
@@ -261,6 +261,10 @@
       "sha256": "613e2994ca0f01f2586b5bf961307d0b82ea9d072e6824c9460e8483fa74e2d0"
     },
     {
+      "path": "references/learning-focus-validation.json",
+      "sha256": "941deda2a84224453289f792c9f1c550ad49ea84b47b9223fdd96fc34713fe99"
+    },
+    {
       "path": "references/public-access-checks.json",
       "sha256": "02bcb8fdc64092e5a55b390105222dc6783e71eaab290980dc504c1dc10b78cc"
     },
@@ -326,11 +330,11 @@
     },
     {
       "path": "sql/extensions/02_scenario_api.sql",
-      "sha256": "9945d331915bdf36b2130d46a7e459b5a59ce3e90a0ae4f348bc0d2acd9a0428"
+      "sha256": "5a5839dc4e5330b10dd856b91a0b3ed37238853215ccc312c41bd86ba3914c06"
     },
     {
       "path": "sql/extensions/03_scenario_agents.sql",
-      "sha256": "242ac564fe15c03095ef798d8748caec460354c50713c284584623eacf446af3"
+      "sha256": "874478fd220f3241a99b4be320ffee81ff5b765374f7f3a06f31e7c373218625"
     },
     {
       "path": "sql/extensions/04_domain_extraction.sql",
@@ -351,6 +355,10 @@
     {
       "path": "sql/extensions/08_content_locators.sql",
       "sha256": "c00a4d9910883320884d8947cd77aacac92331575f6e5309ce26f56e0bde2d86"
+    },
+    {
+      "path": "sql/extensions/09_refresh_context_guidance.sql",
+      "sha256": "fa56b2fcf0c40b7bb3efdfa236dc7b55c71d2be7bdb1b5b9c5cb4df97852c835"
     },
     {
       "path": "sql/install/10_load_dataset.sql",

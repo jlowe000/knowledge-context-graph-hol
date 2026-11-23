@@ -101,7 +101,7 @@ Public availability does not transfer presentation copyright. This repo links to
 
 ## Licence
 
-An independent project for education, learning and experimentation. Copyright (c) 2026 Jason Lowe. Original project contributions are licensed under [MIT](LICENSE.txt). Third-party material retains its respective licences, including Oracle LiveLabs material under UPL 1.0 and Font APEX assets under their upstream terms. See [NOTICE.md](NOTICE.md) for attribution and scope.
+An independent project for education, learning and experimentation. Copyright (c) 2026 Jason Lowe. Original project contributions are licensed under [MIT](LICENSE.txt). Third-party material retains its respective licences, including Oracle LiveLabs material under UPL 1.0, Font APEX assets under their upstream terms, and reused [public file-list metadata](third-party/connormcd-misc-scripts/README.md) under Apache 2.0. See [NOTICE.md](NOTICE.md) for attribution and scope.
 
 ## Public research catalogue
 

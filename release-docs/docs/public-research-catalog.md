@@ -4,6 +4,10 @@ The sample graph includes research references admitted through recorded access c
 
 The existing `S` sources retain their selected PDF pages. The added `R` sources now have actual extracted passages where readable public content was obtained. Dev keeps those bodies in ignored local files; release supplies AI-assisted editorial paraphrases of selected passages. Remaining references are explicitly **catalogue only**. Each build computes coverage from its supplied text. Web pages and repository files use section or line locators, with no invented PDF page number. See the [content ingestion record](../references/content-ingestion-checks.json) and [build report](../generated/build-report.json) for exact counts.
 
+## File-list attribution
+
+Some presentation references and catalogue metadata originate from Connor McDonald's `aiw_file_list26` in `connormcd/misc-scripts`. This project parses and normalises selected entries, reconciles duplicates and adds classifications and editorial summaries. Reused list material retains Apache 2.0 terms; original project contributions remain MIT. See the [file-list provenance and modifications](../third-party/connormcd-misc-scripts/README.md), [retained licence](../third-party/connormcd-misc-scripts/LICENSE.txt) and [project attribution](../NOTICE.md). The file-list licence does not apply automatically to linked presentations. Include these notices with separately distributed catalogue or dataset files.
+
 ## Task 1: Inspect the sources and access record
 
 1. Download the release files and open [public-catalog.html](../generated/public-catalog.html) in your browser. Search by title, topic or source ID; combine the topic, domain, format and evidence-coverage filters. The page runs locally, with no server or external libraries. GitHub's file view shows its HTML source; open the downloaded file to use its filters.

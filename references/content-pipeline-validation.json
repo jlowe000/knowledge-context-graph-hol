@@ -1,0 +1,20 @@
+{
+  "validated_on": "2026-11-23",
+  "environment": "Windows authoring host; Python local tests",
+  "public_reference_count": 834,
+  "additional_references_attempted": 825,
+  "additional_sources_with_extracted_text": 768,
+  "dev_passage_count": 17099,
+  "new_editorial_summary_count": 745,
+  "release_passage_count": 762,
+  "release_sources_with_evidence": 754,
+  "release_catalogue_only_sources": 80,
+  "distinct_local_tests_passed": 52,
+  "test_execution": "49-test full suite passed; three new Worksheet-part tests passed; four release tests rerun after part packaging.",
+  "release_sql_parts": 6,
+  "release_max_part_bytes": 2000000,
+  "raw_content_distributed": false,
+  "native_adb_execution": "not_run_for_expanded_dataset",
+  "apex_engine_reexport": "pending; updated explorer.js supplied with required replacement instructions",
+  "live_database_changed": false
+}

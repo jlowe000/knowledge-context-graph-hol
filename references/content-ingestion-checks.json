@@ -1,0 +1,5795 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-23T00:50:50.810792+00:00",
+  "source_count": 825,
+  "extracted_passage_count": 17079,
+  "release_summary_count": 745,
+  "statuses": {
+    "extracted": 768,
+    "no_substantive_text": 1,
+    "metadata_page_only": 5,
+    "video_transcript_not_available": 9,
+    "visual_or_media_content_not_transcribed": 13,
+    "archive_contents_not_extracted": 2,
+    "fetch_or_extract_failed": 26,
+    "pdf_without_extractable_text_no_ocr": 1
+  },
+  "limitations": "Dev extraction is not fact checking. Release uses selected editorial paraphrases. Failures and unsupported formats remain references without invented content. Full source bodies and private audit details are not distributed.",
+  "sources": [
+    {
+      "source_id": "R0006",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0007",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0008",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0009",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0010",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0011",
+      "status": "extracted",
+      "extracted_passage_count": 100,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0012",
+      "status": "no_substantive_text",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0013",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0014",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0015",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0016",
+      "status": "extracted",
+      "extracted_passage_count": 26,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0017",
+      "status": "extracted",
+      "extracted_passage_count": 130,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0018",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0019",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0020",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0021",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0022",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0035",
+      "status": "extracted",
+      "extracted_passage_count": 38,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0036",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0037",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0038",
+      "status": "extracted",
+      "extracted_passage_count": 48,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0039",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0040",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0041",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0042",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0043",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0044",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0045",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0046",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0047",
+      "status": "extracted",
+      "extracted_passage_count": 26,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0048",
+      "status": "extracted",
+      "extracted_passage_count": 22,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0049",
+      "status": "extracted",
+      "extracted_passage_count": 23,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0050",
+      "status": "extracted",
+      "extracted_passage_count": 26,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0051",
+      "status": "extracted",
+      "extracted_passage_count": 35,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0052",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0053",
+      "status": "extracted",
+      "extracted_passage_count": 33,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0054",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0055",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0056",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0057",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0058",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0059",
+      "status": "extracted",
+      "extracted_passage_count": 25,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0060",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0061",
+      "status": "extracted",
+      "extracted_passage_count": 29,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0062",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0063",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0064",
+      "status": "extracted",
+      "extracted_passage_count": 23,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0065",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0066",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0067",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0068",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0069",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0070",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0071",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0072",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0073",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0074",
+      "status": "extracted",
+      "extracted_passage_count": 22,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0075",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0076",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0077",
+      "status": "extracted",
+      "extracted_passage_count": 80,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0078",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0079",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0080",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0081",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0082",
+      "status": "extracted",
+      "extracted_passage_count": 22,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0083",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0084",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0085",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0086",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0087",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0088",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0089",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0090",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0091",
+      "status": "extracted",
+      "extracted_passage_count": 28,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0092",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0093",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0094",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0095",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0096",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0097",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0098",
+      "status": "extracted",
+      "extracted_passage_count": 22,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0099",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0100",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0101",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0102",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0103",
+      "status": "extracted",
+      "extracted_passage_count": 31,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0104",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0105",
+      "status": "extracted",
+      "extracted_passage_count": 28,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0106",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0107",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0108",
+      "status": "extracted",
+      "extracted_passage_count": 26,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0109",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0110",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0111",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0112",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0113",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0114",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0122",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0141",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0142",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0143",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0144",
+      "status": "extracted",
+      "extracted_passage_count": 39,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0145",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0146",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0147",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0148",
+      "status": "extracted",
+      "extracted_passage_count": 40,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0149",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0150",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0151",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0152",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0153",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0154",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0155",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0156",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0157",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0158",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0159",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0160",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0161",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0162",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0163",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0164",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0165",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0166",
+      "status": "extracted",
+      "extracted_passage_count": 26,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0167",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0168",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0169",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0170",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0171",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0172",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0173",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0174",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0175",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0176",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0177",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0178",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0179",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0180",
+      "status": "extracted",
+      "extracted_passage_count": 209,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0181",
+      "status": "extracted",
+      "extracted_passage_count": 37,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0182",
+      "status": "extracted",
+      "extracted_passage_count": 22,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0183",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0184",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0185",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0186",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0187",
+      "status": "extracted",
+      "extracted_passage_count": 84,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0188",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0189",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0190",
+      "status": "extracted",
+      "extracted_passage_count": 151,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0191",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0192",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0193",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0194",
+      "status": "extracted",
+      "extracted_passage_count": 22,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0195",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0196",
+      "status": "extracted",
+      "extracted_passage_count": 63,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0197",
+      "status": "extracted",
+      "extracted_passage_count": 76,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0198",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0199",
+      "status": "extracted",
+      "extracted_passage_count": 34,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0200",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0201",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0202",
+      "status": "extracted",
+      "extracted_passage_count": 63,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0203",
+      "status": "extracted",
+      "extracted_passage_count": 44,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0204",
+      "status": "extracted",
+      "extracted_passage_count": 32,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0205",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0206",
+      "status": "extracted",
+      "extracted_passage_count": 269,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0207",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0208",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0209",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0210",
+      "status": "extracted",
+      "extracted_passage_count": 29,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0211",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0212",
+      "status": "extracted",
+      "extracted_passage_count": 25,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0213",
+      "status": "extracted",
+      "extracted_passage_count": 34,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0214",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0215",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0216",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0217",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0218",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0219",
+      "status": "extracted",
+      "extracted_passage_count": 63,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0220",
+      "status": "extracted",
+      "extracted_passage_count": 126,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0222",
+      "status": "extracted",
+      "extracted_passage_count": 38,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0223",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0224",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0225",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0226",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0227",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0228",
+      "status": "extracted",
+      "extracted_passage_count": 42,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0229",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0230",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0231",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0232",
+      "status": "extracted",
+      "extracted_passage_count": 40,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0233",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0234",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0235",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0236",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0237",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0238",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0239",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0240",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0241",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0242",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0243",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0244",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0245",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0246",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0247",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0248",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0249",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0250",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0251",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0252",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0253",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0254",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0255",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0256",
+      "status": "extracted",
+      "extracted_passage_count": 26,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0257",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0258",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0272",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0273",
+      "status": "extracted",
+      "extracted_passage_count": 42,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0274",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0275",
+      "status": "extracted",
+      "extracted_passage_count": 43,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0276",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0277",
+      "status": "metadata_page_only",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0278",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0279",
+      "status": "metadata_page_only",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0280",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0281",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0282",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0283",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0284",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0285",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0286",
+      "status": "metadata_page_only",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0287",
+      "status": "metadata_page_only",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0288",
+      "status": "metadata_page_only",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0289",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0290",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0291",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0292",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0293",
+      "status": "extracted",
+      "extracted_passage_count": 72,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0294",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0295",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0296",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0297",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0298",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0301",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0311",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0320",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0321",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0322",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0323",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0324",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0325",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0326",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0327",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0328",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0329",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0330",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0331",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0332",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0333",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0334",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0335",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0336",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0337",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0338",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0339",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0340",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0341",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0342",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0343",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0344",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0345",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0346",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0347",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0348",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0349",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0350",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0351",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0352",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0353",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0354",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0355",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0356",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0357",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0358",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0359",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0360",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0361",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0362",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0363",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0364",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0365",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0371",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0372",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0373",
+      "status": "extracted",
+      "extracted_passage_count": 26,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0374",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0375",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0376",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0377",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0378",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0379",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0380",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0381",
+      "status": "extracted",
+      "extracted_passage_count": 25,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0382",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0383",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0384",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0385",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0386",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0387",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0388",
+      "status": "extracted",
+      "extracted_passage_count": 32,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0389",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0390",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0391",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0392",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0393",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0394",
+      "status": "extracted",
+      "extracted_passage_count": 23,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0395",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0396",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0397",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0398",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0399",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0400",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0401",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0402",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0403",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0404",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0405",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0406",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0407",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0408",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0409",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0410",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0411",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0412",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0413",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0414",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0415",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0416",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0417",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0418",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0419",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0420",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0421",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0431",
+      "status": "extracted",
+      "extracted_passage_count": 67,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0432",
+      "status": "extracted",
+      "extracted_passage_count": 251,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0433",
+      "status": "extracted",
+      "extracted_passage_count": 94,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0434",
+      "status": "extracted",
+      "extracted_passage_count": 120,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0435",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0436",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0437",
+      "status": "extracted",
+      "extracted_passage_count": 176,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0438",
+      "status": "extracted",
+      "extracted_passage_count": 617,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0439",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0440",
+      "status": "extracted",
+      "extracted_passage_count": 46,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0441",
+      "status": "extracted",
+      "extracted_passage_count": 31,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0442",
+      "status": "extracted",
+      "extracted_passage_count": 23,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0443",
+      "status": "extracted",
+      "extracted_passage_count": 32,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0444",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0445",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0446",
+      "status": "extracted",
+      "extracted_passage_count": 95,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0447",
+      "status": "extracted",
+      "extracted_passage_count": 97,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0448",
+      "status": "extracted",
+      "extracted_passage_count": 52,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0449",
+      "status": "extracted",
+      "extracted_passage_count": 50,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0450",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0452",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0453",
+      "status": "extracted",
+      "extracted_passage_count": 38,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0454",
+      "status": "extracted",
+      "extracted_passage_count": 32,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0455",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0456",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0457",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0458",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0459",
+      "status": "extracted",
+      "extracted_passage_count": 49,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0460",
+      "status": "extracted",
+      "extracted_passage_count": 64,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0461",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0462",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0463",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0464",
+      "status": "extracted",
+      "extracted_passage_count": 45,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0465",
+      "status": "extracted",
+      "extracted_passage_count": 36,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0466",
+      "status": "extracted",
+      "extracted_passage_count": 40,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0467",
+      "status": "extracted",
+      "extracted_passage_count": 29,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0468",
+      "status": "extracted",
+      "extracted_passage_count": 30,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0469",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0470",
+      "status": "extracted",
+      "extracted_passage_count": 60,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0471",
+      "status": "extracted",
+      "extracted_passage_count": 37,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0472",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0473",
+      "status": "extracted",
+      "extracted_passage_count": 25,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0474",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0475",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0476",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0477",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0478",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0479",
+      "status": "extracted",
+      "extracted_passage_count": 54,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0480",
+      "status": "extracted",
+      "extracted_passage_count": 22,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0481",
+      "status": "extracted",
+      "extracted_passage_count": 22,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0482",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0483",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0484",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0485",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0486",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0487",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0488",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0489",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0490",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0491",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0492",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0493",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0494",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0495",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0496",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0497",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0498",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0499",
+      "status": "extracted",
+      "extracted_passage_count": 31,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0500",
+      "status": "extracted",
+      "extracted_passage_count": 28,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0502",
+      "status": "extracted",
+      "extracted_passage_count": 50,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0503",
+      "status": "extracted",
+      "extracted_passage_count": 90,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0504",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0505",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0506",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0507",
+      "status": "extracted",
+      "extracted_passage_count": 63,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0508",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0509",
+      "status": "extracted",
+      "extracted_passage_count": 28,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0510",
+      "status": "extracted",
+      "extracted_passage_count": 37,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0511",
+      "status": "extracted",
+      "extracted_passage_count": 31,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0512",
+      "status": "extracted",
+      "extracted_passage_count": 31,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0513",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0514",
+      "status": "extracted",
+      "extracted_passage_count": 78,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0515",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0516",
+      "status": "extracted",
+      "extracted_passage_count": 79,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0517",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0518",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0519",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0520",
+      "status": "extracted",
+      "extracted_passage_count": 52,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0521",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0522",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0523",
+      "status": "extracted",
+      "extracted_passage_count": 31,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0526",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0527",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0528",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0531",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0532",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0535",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0536",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0537",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0538",
+      "status": "extracted",
+      "extracted_passage_count": 29,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0540",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0541",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0542",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0543",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0544",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0545",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0546",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0547",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0548",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0549",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0550",
+      "status": "extracted",
+      "extracted_passage_count": 28,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0551",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0552",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0553",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0554",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0555",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0558",
+      "status": "extracted",
+      "extracted_passage_count": 37,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0559",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0560",
+      "status": "extracted",
+      "extracted_passage_count": 25,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0561",
+      "status": "extracted",
+      "extracted_passage_count": 42,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0562",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0563",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0564",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0565",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0566",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0567",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0568",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0569",
+      "status": "extracted",
+      "extracted_passage_count": 28,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0571",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0572",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0574",
+      "status": "extracted",
+      "extracted_passage_count": 30,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0575",
+      "status": "extracted",
+      "extracted_passage_count": 52,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0576",
+      "status": "extracted",
+      "extracted_passage_count": 32,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0578",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0579",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0582",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0583",
+      "status": "extracted",
+      "extracted_passage_count": 39,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0584",
+      "status": "extracted",
+      "extracted_passage_count": 25,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0585",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0586",
+      "status": "extracted",
+      "extracted_passage_count": 45,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0587",
+      "status": "extracted",
+      "extracted_passage_count": 23,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0588",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0589",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0590",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0591",
+      "status": "extracted",
+      "extracted_passage_count": 45,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0592",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0593",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0594",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0595",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0596",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0597",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0598",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0599",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0600",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0601",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0602",
+      "status": "extracted",
+      "extracted_passage_count": 42,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0603",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0604",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0605",
+      "status": "extracted",
+      "extracted_passage_count": 95,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0606",
+      "status": "extracted",
+      "extracted_passage_count": 95,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0607",
+      "status": "extracted",
+      "extracted_passage_count": 97,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0608",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0609",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0610",
+      "status": "extracted",
+      "extracted_passage_count": 78,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0611",
+      "status": "extracted",
+      "extracted_passage_count": 78,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0612",
+      "status": "extracted",
+      "extracted_passage_count": 78,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0613",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0614",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0669",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0670",
+      "status": "extracted",
+      "extracted_passage_count": 46,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0672",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0673",
+      "status": "extracted",
+      "extracted_passage_count": 35,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0675",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0676",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0678",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0679",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0680",
+      "status": "extracted",
+      "extracted_passage_count": 28,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0681",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0682",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0683",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0684",
+      "status": "extracted",
+      "extracted_passage_count": 39,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0685",
+      "status": "extracted",
+      "extracted_passage_count": 58,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0686",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0687",
+      "status": "extracted",
+      "extracted_passage_count": 23,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0688",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0689",
+      "status": "extracted",
+      "extracted_passage_count": 120,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0690",
+      "status": "extracted",
+      "extracted_passage_count": 23,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0691",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0692",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0693",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0694",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0695",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0696",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0697",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0698",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0699",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0700",
+      "status": "extracted",
+      "extracted_passage_count": 25,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0701",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0702",
+      "status": "extracted",
+      "extracted_passage_count": 134,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0703",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0704",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0705",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0706",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0707",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0708",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0709",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0710",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0711",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0712",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0713",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0714",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0715",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0716",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0717",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0718",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0719",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0720",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0721",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0722",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0723",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0724",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0725",
+      "status": "extracted",
+      "extracted_passage_count": 35,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0727",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0728",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0729",
+      "status": "extracted",
+      "extracted_passage_count": 37,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0730",
+      "status": "extracted",
+      "extracted_passage_count": 79,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0731",
+      "status": "extracted",
+      "extracted_passage_count": 33,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0758",
+      "status": "video_transcript_not_available",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0760",
+      "status": "video_transcript_not_available",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0764",
+      "status": "video_transcript_not_available",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0765",
+      "status": "video_transcript_not_available",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0766",
+      "status": "video_transcript_not_available",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0767",
+      "status": "video_transcript_not_available",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0769",
+      "status": "video_transcript_not_available",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0773",
+      "status": "video_transcript_not_available",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0774",
+      "status": "video_transcript_not_available",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0778",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0779",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0780",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0781",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0782",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0783",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0784",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0785",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0786",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0787",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0788",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0789",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0790",
+      "status": "visual_or_media_content_not_transcribed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0791",
+      "status": "archive_contents_not_extracted",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0792",
+      "status": "archive_contents_not_extracted",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0793",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0794",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0795",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0796",
+      "status": "extracted",
+      "extracted_passage_count": 76,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0797",
+      "status": "extracted",
+      "extracted_passage_count": 44,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0798",
+      "status": "extracted",
+      "extracted_passage_count": 108,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0799",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0800",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0801",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0802",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0803",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0804",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0805",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0806",
+      "status": "extracted",
+      "extracted_passage_count": 110,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0807",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0808",
+      "status": "extracted",
+      "extracted_passage_count": 36,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0809",
+      "status": "extracted",
+      "extracted_passage_count": 50,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0810",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0811",
+      "status": "extracted",
+      "extracted_passage_count": 52,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0812",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0813",
+      "status": "extracted",
+      "extracted_passage_count": 30,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0814",
+      "status": "extracted",
+      "extracted_passage_count": 29,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0815",
+      "status": "extracted",
+      "extracted_passage_count": 42,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0816",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0817",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0818",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0819",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0820",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0821",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0822",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0823",
+      "status": "extracted",
+      "extracted_passage_count": 29,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0824",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0825",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0826",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0827",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0828",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0829",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0830",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0831",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0832",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0833",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0834",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0835",
+      "status": "extracted",
+      "extracted_passage_count": 46,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0836",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0837",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0838",
+      "status": "extracted",
+      "extracted_passage_count": 33,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0839",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0840",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0841",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0842",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0843",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0844",
+      "status": "extracted",
+      "extracted_passage_count": 31,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0845",
+      "status": "extracted",
+      "extracted_passage_count": 34,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0846",
+      "status": "extracted",
+      "extracted_passage_count": 39,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0847",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0848",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0849",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0850",
+      "status": "extracted",
+      "extracted_passage_count": 41,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0851",
+      "status": "extracted",
+      "extracted_passage_count": 25,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0852",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0853",
+      "status": "extracted",
+      "extracted_passage_count": 60,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0854",
+      "status": "extracted",
+      "extracted_passage_count": 22,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0855",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0856",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0857",
+      "status": "extracted",
+      "extracted_passage_count": 60,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0858",
+      "status": "extracted",
+      "extracted_passage_count": 28,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0859",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0860",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0861",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0862",
+      "status": "extracted",
+      "extracted_passage_count": 34,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0863",
+      "status": "extracted",
+      "extracted_passage_count": 31,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0864",
+      "status": "extracted",
+      "extracted_passage_count": 42,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0865",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0866",
+      "status": "extracted",
+      "extracted_passage_count": 36,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0867",
+      "status": "extracted",
+      "extracted_passage_count": 28,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0868",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0869",
+      "status": "extracted",
+      "extracted_passage_count": 30,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0870",
+      "status": "extracted",
+      "extracted_passage_count": 31,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0871",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0872",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0873",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0874",
+      "status": "extracted",
+      "extracted_passage_count": 32,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0875",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0876",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0877",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0878",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0879",
+      "status": "extracted",
+      "extracted_passage_count": 22,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0880",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0881",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0882",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0883",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0884",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0885",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0886",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0887",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0888",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0889",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0890",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0891",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0892",
+      "status": "extracted",
+      "extracted_passage_count": 48,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0893",
+      "status": "extracted",
+      "extracted_passage_count": 40,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0894",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0895",
+      "status": "extracted",
+      "extracted_passage_count": 55,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0896",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0897",
+      "status": "extracted",
+      "extracted_passage_count": 61,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0898",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0899",
+      "status": "extracted",
+      "extracted_passage_count": 40,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0900",
+      "status": "extracted",
+      "extracted_passage_count": 41,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0901",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0902",
+      "status": "extracted",
+      "extracted_passage_count": 53,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0903",
+      "status": "extracted",
+      "extracted_passage_count": 23,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0904",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0905",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0906",
+      "status": "pdf_without_extractable_text_no_ocr",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0907",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0908",
+      "status": "extracted",
+      "extracted_passage_count": 238,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0909",
+      "status": "extracted",
+      "extracted_passage_count": 44,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0910",
+      "status": "extracted",
+      "extracted_passage_count": 42,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0911",
+      "status": "extracted",
+      "extracted_passage_count": 44,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0912",
+      "status": "extracted",
+      "extracted_passage_count": 26,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0913",
+      "status": "extracted",
+      "extracted_passage_count": 26,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0914",
+      "status": "extracted",
+      "extracted_passage_count": 45,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0915",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0916",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0917",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0918",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0919",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0920",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0921",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0922",
+      "status": "extracted",
+      "extracted_passage_count": 58,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0923",
+      "status": "extracted",
+      "extracted_passage_count": 29,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0924",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0925",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0926",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0927",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0928",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0929",
+      "status": "extracted",
+      "extracted_passage_count": 8,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0930",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0931",
+      "status": "extracted",
+      "extracted_passage_count": 3,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0932",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0933",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0934",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0935",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0936",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0937",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0938",
+      "status": "extracted",
+      "extracted_passage_count": 18,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0939",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0940",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0941",
+      "status": "extracted",
+      "extracted_passage_count": 36,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0942",
+      "status": "extracted",
+      "extracted_passage_count": 46,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0943",
+      "status": "extracted",
+      "extracted_passage_count": 29,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0944",
+      "status": "extracted",
+      "extracted_passage_count": 6,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0945",
+      "status": "extracted",
+      "extracted_passage_count": 34,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0946",
+      "status": "extracted",
+      "extracted_passage_count": 5,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0947",
+      "status": "extracted",
+      "extracted_passage_count": 42,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0948",
+      "status": "extracted",
+      "extracted_passage_count": 25,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0949",
+      "status": "extracted",
+      "extracted_passage_count": 64,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0950",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0951",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0952",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0953",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0954",
+      "status": "extracted",
+      "extracted_passage_count": 4,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0955",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0956",
+      "status": "extracted",
+      "extracted_passage_count": 24,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0957",
+      "status": "extracted",
+      "extracted_passage_count": 59,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0958",
+      "status": "extracted",
+      "extracted_passage_count": 54,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0959",
+      "status": "extracted",
+      "extracted_passage_count": 51,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0960",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0961",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0962",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0963",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0964",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0965",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0966",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0967",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0968",
+      "status": "extracted",
+      "extracted_passage_count": 30,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0969",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0970",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0971",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0972",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0973",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0974",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0975",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0976",
+      "status": "extracted",
+      "extracted_passage_count": 9,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0977",
+      "status": "extracted",
+      "extracted_passage_count": 7,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0978",
+      "status": "extracted",
+      "extracted_passage_count": 1,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0979",
+      "status": "extracted",
+      "extracted_passage_count": 21,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0980",
+      "status": "extracted",
+      "extracted_passage_count": 48,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0981",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0982",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0983",
+      "status": "extracted",
+      "extracted_passage_count": 11,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0984",
+      "status": "extracted",
+      "extracted_passage_count": 2,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0985",
+      "status": "extracted",
+      "extracted_passage_count": 42,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0986",
+      "status": "extracted",
+      "extracted_passage_count": 44,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0987",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0988",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R0989",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0990",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0991",
+      "status": "extracted",
+      "extracted_passage_count": 13,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0992",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0993",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0994",
+      "status": "extracted",
+      "extracted_passage_count": 17,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0995",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0996",
+      "status": "extracted",
+      "extracted_passage_count": 27,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0997",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0998",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R0999",
+      "status": "extracted",
+      "extracted_passage_count": 16,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1000",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1001",
+      "status": "extracted",
+      "extracted_passage_count": 14,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1002",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1003",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1004",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1005",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1006",
+      "status": "extracted",
+      "extracted_passage_count": 33,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1007",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1008",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1009",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1010",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1011",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1012",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1013",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1014",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1015",
+      "status": "extracted",
+      "extracted_passage_count": 284,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1016",
+      "status": "extracted",
+      "extracted_passage_count": 247,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1017",
+      "status": "extracted",
+      "extracted_passage_count": 40,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1018",
+      "status": "extracted",
+      "extracted_passage_count": 20,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1019",
+      "status": "extracted",
+      "extracted_passage_count": 19,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1020",
+      "status": "extracted",
+      "extracted_passage_count": 15,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1021",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1022",
+      "status": "extracted",
+      "extracted_passage_count": 10,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1023",
+      "status": "extracted",
+      "extracted_passage_count": 12,
+      "release_summary_count": 1,
+      "release_coverage": "attributed_editorial_summary"
+    },
+    {
+      "source_id": "R1024",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    },
+    {
+      "source_id": "R1025",
+      "status": "fetch_or_extract_failed",
+      "extracted_passage_count": 0,
+      "release_summary_count": 0,
+      "release_coverage": "catalogue_only"
+    }
+  ]
+}

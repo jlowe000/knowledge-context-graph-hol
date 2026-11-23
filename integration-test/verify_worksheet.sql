@@ -18,9 +18,10 @@ BEGIN
   IF l_evidence.get_size=0 THEN RAISE_APPLICATION_ERROR(-20022,'No native evidence returned'); END IF;
   FOR i IN 0..l_evidence.get_size-1 LOOP
     l_row:=TREAT(l_evidence.get(i) AS JSON_OBJECT_T);
-    IF l_row.get_string('source_id')<>'S10' THEN RAISE_APPLICATION_ERROR(-20023,'Unexpected context evidence'); END IF;
-    IF l_row.get_number('pdf_page')=3 THEN l_page3:=TRUE; END IF;
-    IF l_row.get_number('pdf_page')=10 THEN l_page10:=TRUE; END IF;
+    IF l_row.get_string('source_id')='S10' THEN
+      IF l_row.get_number('pdf_page')=3 THEN l_page3:=TRUE; END IF;
+      IF l_row.get_number('pdf_page')=10 THEN l_page10:=TRUE; END IF;
+    END IF;
   END LOOP;
   IF NOT l_page3 OR NOT l_page10 THEN RAISE_APPLICATION_ERROR(-20024,'Missing overview or scope qualification'); END IF;
   DBMS_OUTPUT.PUT_LINE('PASS: active context and native RDF evidence include overview and disclaimer');

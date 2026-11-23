@@ -104,6 +104,8 @@ Both SQL installation files are included in this branch. No Python, SQLcl or loc
 
 **Expected outcome:** the app displays the Learner scenario selector and Conversation, Evidence, Context and Observations views. Iris styling is part of the supplied Universal Theme app. A successful app import does not yet establish that model calls work from the application session.
 
+The current export includes non-PDF source links, locator labels and versioned JavaScript assets. No additional application-file upload is required. If you intentionally retained an older export instead of importing this version, use the [older-installation fallback](../../docs/content-ingestion-upgrade.md#manual-fallback-for-an-older-installed-export) before testing non-PDF evidence.
+
 Continue to [Explore the evidence](../explore-evidence/explore-evidence.md).
 
 ## Learn More

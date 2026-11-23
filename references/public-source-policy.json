@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "decision": "manually marked as public",
+  "decided_by": "Jason Lowe",
+  "decided_on": "2026-11-23",
+  "scope": "Public classification is a user decision; actual anonymous access results are recorded separately. Catalogue references do not redistribute original content or become answer evidence.",
+  "url_prefixes": [
+    "https://api.github.com/repos/oracle",
+    "https://raw.githubusercontent.com/helidon-io",
+    "https://github.com/helidon-io",
+    "https://static.rainfocus.com/oracle/oaiw26/sess",
+    "https://www.oracle.com",
+    "https://livelabs.oracle.com",
+    "https://community.oracle.com",
+    "https://docs.oracle.com"
+  ],
+  "title_rules": [
+    {
+      "url_prefix": "https://www.youtube.com",
+      "title_contains": "Oracle AI World 2026",
+      "match_basis": "research catalogue title; case-insensitive normalized whitespace"
+    }
+  ],
+  "verified_publisher_domains": ["oracle.com"],
+  "verified_repository_owners": ["oracle", "oracle-devrel", "oracle-livelabs", "oracle-samples", "helidon-io", "oci-landing-zones"],
+  "review_scope": "Industry and third-party sources remain to be reviewed unless an explicit public-source rule matches. YouTube references outside the title rule remain to be reviewed."
+}

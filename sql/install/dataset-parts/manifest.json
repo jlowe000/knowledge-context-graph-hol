@@ -1,0 +1,68 @@
+{
+  "format_version": 1,
+  "source_sql": "../10_load_dataset.sql",
+  "source_sql_sha256": "322e1b145d945b807fa28d5e6833687a342970232f4ff8e8cfa1d0e00de424d5",
+  "sql_units_sha256": "772be7022ea249dc249591f3f6c8b3ab397abb17c6018e24c31e79655a578e20",
+  "max_part_bytes": 2000000,
+  "part_count": 6,
+  "unit_count": 365,
+  "execution_order": "Run every SQL file in the listed numeric order, starting at 001.sql.",
+  "recovery": "Stop on an error, resolve it, then rerun the complete sequence from 001.sql.",
+  "native_database_validation": "not_implied_by_packaging",
+  "files": [
+    {
+      "order": 1,
+      "path": "001.sql",
+      "bytes": 1983023,
+      "sha256": "34d0d18fad353ee24a0d6ecf73e544261cb6adeb5b51097250eff20a7082e166",
+      "first_unit": 1,
+      "last_unit": 23,
+      "unit_count": 23
+    },
+    {
+      "order": 2,
+      "path": "002.sql",
+      "bytes": 1998312,
+      "sha256": "9e0e78942b48973162c6cc58c0db2e1673a5ca3df461da06ed2f2e85c3dbad8a",
+      "first_unit": 24,
+      "last_unit": 50,
+      "unit_count": 27
+    },
+    {
+      "order": 3,
+      "path": "003.sql",
+      "bytes": 1992627,
+      "sha256": "950f1596f0845b2b9e5af892fdf43a552597934878729f39e13416b0ccb31a23",
+      "first_unit": 51,
+      "last_unit": 139,
+      "unit_count": 89
+    },
+    {
+      "order": 4,
+      "path": "004.sql",
+      "bytes": 1978190,
+      "sha256": "9adc4640325aa3152a2a8e8ef800e71c951bcb312aa59d248d1bfad96bb58ec2",
+      "first_unit": 140,
+      "last_unit": 226,
+      "unit_count": 87
+    },
+    {
+      "order": 5,
+      "path": "005.sql",
+      "bytes": 1978098,
+      "sha256": "2f13d86817488296e33937ceb44f9fcaade1771000dec923a3be23917f09a9c9",
+      "first_unit": 227,
+      "last_unit": 314,
+      "unit_count": 88
+    },
+    {
+      "order": 6,
+      "path": "006.sql",
+      "bytes": 1978239,
+      "sha256": "e41e1d6fe844d2639ed306acfe6ef7f71df77c3d6eaa230bb53424701b8d145b",
+      "first_unit": 315,
+      "last_unit": 365,
+      "unit_count": 51
+    }
+  ]
+}

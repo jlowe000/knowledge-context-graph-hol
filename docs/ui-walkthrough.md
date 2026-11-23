@@ -6,7 +6,7 @@ The starting knowledge graph is already curated. This walkthrough changes the le
 
 **Experience:** start with a person → ask a question → inspect connected evidence → clarify the objective → narrow or broaden the focus → compare → capture learning → choose the next step.
 
-This release uses attributed editorial summaries rather than extracted slide text. Inspect the prefix and original PDF page link; source verification requires reading the original. Citation IDs/wording differ from the earlier screenshots.
+This release uses attributed editorial summaries rather than extracted slide text. Inspect the prefix and original source link; source verification requires reading the original. Citation IDs/wording differ from the earlier screenshots.
 
 ## Before you start
 
@@ -61,7 +61,7 @@ The current UI confirms that the observation was saved; it does not provide an o
 
 ## How to interpret the comparison
 
-The evidence packet is limited to six pages, at most two per source, using explicit topic membership and deterministic ordering. Other eligible sources may therefore exist outside the displayed packet. S08 entering the packet after S06 leaves does not mean it was newly added to the knowledge collection. This flow does not use vector similarity or topic weights to rank sources.
+The evidence packet is limited to six passages, at most two locators per source, using explicit topic membership and deterministic ordering. Other eligible sources may therefore exist outside the displayed packet. S08 entering the packet after S06 leaves does not mean it was newly added to the knowledge collection. This flow does not use vector similarity or topic weights to rank sources.
 
 Refining the context supplies updated context to subsequent model responses. It does not train the model. Saving an observation records feedback for learning and later review; it does not automatically rewrite the context or curated knowledge.
 
@@ -76,6 +76,25 @@ Refining the context supplies updated context to subsequent model responses. It 
 
 The **Where do I start?**, **Why these sources?** and **What next?** buttons populate the question box. Click **Explore this question** to send the selected question.
 
+## Explore the expanded research with Casey
+
+Use this optional journey to compare an original presentation with added research and a public webpage. It uses the same preview/apply controls and does not alter the source collection.
+
+1. Select **Casey · connected healthcare** and click **Start a new conversation**. Check the current context before making a change.
+2. Open **Context**, choose **Add an area to explore**, select **Healthcare** and click **Preview refinement**. Read the proposed ADD_TOPIC operation, then click **Apply this refinement**.
+3. Open **Evidence**. In the expanded-data browser check, six passages were returned across **S10**, **R0046**, **R0528**, **R0546** (Community Health Systems presentation) and **R0691** (Community Health Systems customer webpage). The answer cited S10, R0546 and R0691. Distinguish evidence returned to the model from evidence explicitly cited in its answer. This bounded packet is not every matching healthcare source; it can differ with the installed dataset or later refinements.
+4. Return to **Conversation**, keep **Explore and ask about content**, and submit:
+
+   ```text
+   Using the returned summaries, how do clinical care and enterprise operations connect? Which benefits are reported or projected, and what does this material establish about availability in Australia? Cite the exact passages and identify what remains uncertain.
+   ```
+
+5. Open **How was this answer built?** and select the new source and passage nodes. Check **Sources**, then **Answer lineage**. R0691 is a webpage: its evidence should show a recorded section label and a public link, not a made-up PDF page. Its section is labelled **Solution and results: Standardized processes with cloud applications**. PDF evidence retains its actual page or supporting-page links.
+6. Compare the answer with the full saved summaries. R0546 and R0691 distinguish reported operational changes from expected savings. S10 preserves the country/region and prospective-US qualification. The supplied evidence does not establish Australian availability or prove that projected savings have been realised. The answer should preserve those limits and describe editorial summaries as summaries, not source quotations.
+7. Save an observation describing the source detail you checked and the next information you would seek. Use a new question or preview/apply another refinement to continue.
+
+**Expected outcome:** the graph connects Casey's added topic to newly supplied research, the explanation identifies the evidence actually returned for that answer, and public page links make the supporting context inspectable. A public URL, matching topic or citation does not certify a claim. The packet remains limited to six passages and two locators per source; its order is deterministic rather than semantic relevance ranking.
+
 ## When something looks unexpected
 
 - **The objective changed but the sources did not:** expected when topic membership is unchanged. Compare the focus of the next answer as well as the paths.
@@ -88,4 +107,4 @@ The **Where do I start?**, **Why these sources?** and **What next?** buttons pop
 
 The original workshop's chatbot journey asks questions, checks a stored graph fact, performs a guarded change, asks again and restores the fact. This adaptation retains the inspect/change/compare learning pattern while refining a person's context over curated source knowledge. Source-graph maintenance, ingestion, ontology editing and optional inference are separate exercises.
 
-See the adapted SQL scenarios (technical reference on the dev branch: `labs/07_original_workshop_scenarios.md`), [original workshop comparison](upstream-comparison.md) and [validation record](scenario-validation.md). The main Alex UI flow was exercised on the temporary ADB Serverless instance on 18 November 2026; optional branches are not all claimed as live browser tests.
+See the [SQL scenario catalogue](sql-catalogue.md), [original workshop comparison](upstream-comparison.md) and [validation record](scenario-validation.md). The expanded summary dataset's Alex refinement/history and Casey added-research journeys passed [real-model and signed-in browser acceptance](../references/expanded-ui-validation.json) on 23 November 2026. That existing-instance check does not establish a fresh learner deployment or execution from the eventual release commit; optional branches are not all claimed as live tests.

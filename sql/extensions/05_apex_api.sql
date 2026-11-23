@@ -41,9 +41,18 @@ CREATE OR REPLACE PACKAGE BODY kcv_apex AS
    request.put('scenario_session',sid);result.put('packet',JSON_OBJECT_T.parse(kcv_scenario.evidence_packet(request.to_clob())));
    FOR t IN (SELECT DISTINCT jt.label FROM kcv_graph_sources gs,
      JSON_TABLE(gs.metadata_json,'$.topics[*]' COLUMNS(label VARCHAR2(200) PATH '$')) jt
-     WHERE gs.graph_name=JSON_VALUE(status_json,'$.base_graph') ORDER BY jt.label) LOOP vocabulary.append(t.label);END LOOP;
+      WHERE gs.graph_name=JSON_VALUE(status_json,'$.base_graph')
+      AND (JSON_VALUE(gs.metadata_json,'$.retrieval_eligible_passage_count' RETURNING NUMBER)>0
+        OR (JSON_VALUE(gs.metadata_json,'$.retrieval_eligible_passage_count' RETURNING NUMBER) IS NULL
+          AND REGEXP_LIKE(gs.version_id,'^S[0-9]+-v')
+          AND EXISTS (SELECT 1 FROM kcv_passages ep WHERE ep.version_id=gs.version_id)))
+      ORDER BY jt.label) LOOP vocabulary.append(t.label);END LOOP;
    result.put('topics',vocabulary);
-   FOR src IN (SELECT metadata_json FROM kcv_graph_sources WHERE graph_name=JSON_VALUE(status_json,'$.base_graph') ORDER BY version_id) LOOP
+    FOR src IN (SELECT gs.metadata_json FROM kcv_graph_sources gs WHERE gs.graph_name=JSON_VALUE(status_json,'$.base_graph')
+      AND (JSON_VALUE(gs.metadata_json,'$.retrieval_eligible_passage_count' RETURNING NUMBER)>0
+        OR (JSON_VALUE(gs.metadata_json,'$.retrieval_eligible_passage_count' RETURNING NUMBER) IS NULL
+          AND REGEXP_LIKE(gs.version_id,'^S[0-9]+-v')
+          AND EXISTS (SELECT 1 FROM kcv_passages ep WHERE ep.version_id=gs.version_id))) ORDER BY gs.version_id) LOOP
      source_rows.append(JSON_OBJECT_T.parse(src.metadata_json));
    END LOOP;
    result.put('sources',source_rows);

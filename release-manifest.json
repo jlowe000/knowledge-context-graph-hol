@@ -3,8 +3,10 @@
   "distribution": "release",
   "python_required_for_learner": false,
   "dataset_kind": "attributed_editorial_summary",
-  "summary_count": 17,
+  "summary_count": 762,
   "source_count": 9,
+  "catalogue_count": 825,
+  "total_content_count": 834,
   "files": [
     {
       "path": ".gitattributes",
@@ -15,8 +17,12 @@
       "sha256": "244f88f49bfed103ab68917671c7a4ca855f5929cb68098a8e18088c614b5f5f"
     },
     {
+      "path": "apex/explorer.js",
+      "sha256": "35d2597bca5e2af63fda8c66cbf978c243f109bc7589e7b0c393c464dba98621"
+    },
+    {
       "path": "apex/kcv-explorer.sql",
-      "sha256": "db6b889e6decb7d4b1baeeddf06193bc70d95566ad2f204ee25deca2de99d63d"
+      "sha256": "103f6e94feb474f796f5f733c7d007dc376cfc6daeb9179375ff5235d190fb3b"
     },
     {
       "path": "apex/README.md",
@@ -27,12 +33,52 @@
       "sha256": "a58bfcbb41b20133d7335945f9ebdfa8d890090dbebb16ed8693041a9f17f264"
     },
     {
+      "path": "data/load/contexts-001.json",
+      "sha256": "aca1eae3ec18f23fa5563d09d84e123b8c86bdf9cb60be18cd24f8af1c1b6091"
+    },
+    {
+      "path": "data/load/manifest.json",
+      "sha256": "dae8efdcd9e99874c8dfc3d9a3ccaf4a861f76b3b5442f71f075a6d9b64ef8ad"
+    },
+    {
+      "path": "data/load/passages-001.json",
+      "sha256": "c89cee7116c94c76954d58e4932ecc7db36558a1fb20508e41dba6533d193fed"
+    },
+    {
+      "path": "data/load/sources-001.json",
+      "sha256": "eb291c5a72399efa34fef1f8e84776b5f75e229e99a41ce158ae0e76dd59db2d"
+    },
+    {
+      "path": "data/load/triples-001.json",
+      "sha256": "6d2cbdcac3f9d3e6ce8b37ff9c81092ff1b86b0f4baa72a43862a2299c948112"
+    },
+    {
+      "path": "data/load/triples-002.json",
+      "sha256": "05664b69e0b608587a921289667407505c2ac88cf32985a7eb400971fbff13b4"
+    },
+    {
+      "path": "data/load/triples-003.json",
+      "sha256": "95404ea6b3ba9e2dbc3e10b255f925ff135a3fdd08e9c8938d66d4ec014a2f6f"
+    },
+    {
+      "path": "data/load/triples-004.json",
+      "sha256": "6797fa06e3b5611dc82d53a9aba498496030b6761a83175d38da8d89b8b5e833"
+    },
+    {
+      "path": "data/public-catalog.json",
+      "sha256": "77f43a673cb7bd5b70c8e1423836773fc669e83c75c5a1096f9d8b17a65a93f9"
+    },
+    {
+      "path": "data/public-content-summaries.json",
+      "sha256": "1eecc48e5e738f776a3f7d2b8b1231df17dab2d6526c4d8918c276e501d21965"
+    },
+    {
       "path": "data/public-sources.json",
       "sha256": "96f922e893f11a63677ff3f4c6e6cbeed6ca316cc7337b4aea81df5399563066"
     },
     {
       "path": "data/release-summaries.json",
-      "sha256": "7002506436a535729e55bee0e1beb148f2ad6fceec5004f51e820575d7f07617"
+      "sha256": "a4af42734c4690fbd84861bacfb7490a92cc65e581643fa5ea055ad582dc16c3"
     },
     {
       "path": "docs/architecture.md",
@@ -47,8 +93,16 @@
       "sha256": "7d12f83306f1737c14b349b6547a1f2b396f405b3d25fe9d3cd6a8a92257f543"
     },
     {
+      "path": "docs/content-ingestion-upgrade.md",
+      "sha256": "b66693f97ebb61ee65060a720d2a75a21e94bf14d3b664198cb7890eaccb85f4"
+    },
+    {
       "path": "docs/fresh-serverless-deployment.md",
-      "sha256": "a7c5e751259ce00b1d69a3f31b80a8cad5d99d0994859b1abbf7d060a8339cea"
+      "sha256": "74e049598983d3ce22274131383b07194f83482e4f45a3227576e73eb8d7eff7"
+    },
+    {
+      "path": "docs/github-dataset-load.md",
+      "sha256": "4db52c5c918945775c98070224f4ed25e08d5a6fce6a21fcad03b48db929512f"
     },
     {
       "path": "docs/learning-paths.md",
@@ -59,12 +113,16 @@
       "sha256": "24e57bdada734fe668961addd2726b47613c9f9da1cc7df6cb2c4aab90c7dff7"
     },
     {
+      "path": "docs/public-research-catalog.md",
+      "sha256": "125c55c96de098a8f0fc71bf7959a51282e14e0cd7864682df5e872d7163eb47"
+    },
+    {
       "path": "docs/release-dataset.md",
-      "sha256": "74e42df4d7d9c7b47684be00855daa577e757700d20000c5ec2c24d1e626466b"
+      "sha256": "bf051ace826babf70d8b1730743ed663f9e1bd9f1b4e2762230a35db38138eb1"
     },
     {
       "path": "docs/scenario-validation.md",
-      "sha256": "af279f80901835201aa743d9c6976592b524c0e04df42659d1017e00cc12af5b"
+      "sha256": "9bb2d2f95dffd090011a4243e9f28ff401c7f60f6dfe10c35ecb0a96cf2e6ef8"
     },
     {
       "path": "docs/screenshots.md",
@@ -72,15 +130,15 @@
     },
     {
       "path": "docs/sql-catalogue.md",
-      "sha256": "2f0e6c604ba1653ab54584d7cbca8c6177d5decd445e3b42297b40879ade367d"
+      "sha256": "43ae7addeafd6f2dd269073f902e57e5b329f08417828d5d0d4e1bc5db105da0"
     },
     {
       "path": "docs/ui-walkthrough.md",
-      "sha256": "569db725ae66944f0602d15b06c501d5f7d0e949ddf09b39d9a92141991e9c1c"
+      "sha256": "ebd85d135c456c6fc1e73c55d6d71d323ffa02b51ae338d57ec6b7321888a316"
     },
     {
       "path": "docs/upstream-comparison.md",
-      "sha256": "522f20b78cc01160fd405ce3c43636d975439c20ef5cfa6d459b1d20a7bbf244"
+      "sha256": "31a16ea75bde8a2e721f99e7e73825c940be2cbf58f096544c54843e3c153de7"
     },
     {
       "path": "generated/assessments.json",
@@ -88,35 +146,47 @@
     },
     {
       "path": "generated/build-report.json",
-      "sha256": "f5996f11b519c52f6a904418990ff7592c7a2bc0e769338c8ce6bfc1c9e17b70"
+      "sha256": "224f5d4cf016124ef9215223c6bcaa06efadae0e32ad1f04981f81f52d559159"
     },
     {
       "path": "generated/dataset-preview.md",
-      "sha256": "6c7839a0db9b8832ae3ae52b693fa11420aa9af1b1e4a7ba91f1aa118ff83ce6"
+      "sha256": "efd45671764c3f5953e883d044bf34aa13cddf1bda2d6171de50aa0836e5886c"
     },
     {
       "path": "generated/knowledge.ttl",
-      "sha256": "becf74701ea978d3e8e6802ee6b33c570035e889af98799d14adeda87002ea49"
+      "sha256": "397da9d9f22e3188e89a7c6671d34e1edfef7528a6c106025a63e9a3a4f8b041"
     },
     {
       "path": "generated/model.svg",
       "sha256": "595cb560582af6786e6b0123a12fa4d7f31e903f854c5ab139d50b32d62d3f0d"
     },
     {
+      "path": "generated/public-catalog.html",
+      "sha256": "ebc5fefa03d01785a56dc8296eef0c782b74ecaa2ef26499fb8e5f93cf6c9e50"
+    },
+    {
+      "path": "integration-test/verify_github_dataset.sql",
+      "sha256": "62d7e11d143bba575a2237c8a118cfd440ea062be00d82b9a4cd8a16c27d7dc2"
+    },
+    {
       "path": "integration-test/verify_scenario_native.sql",
-      "sha256": "a792d7dcf61643ecfab0bc45ea708c8a62957d309bb4210d8bd086d41a54cccb"
+      "sha256": "040894646653126fa8fd924f83e96477cce5102e808a352cb0714026128d9c8b"
+    },
+    {
+      "path": "integration-test/verify_source_packet_scope.sql",
+      "sha256": "455582e7a59d9097e533ff9a892eb200b02b1c34cec2b355ab83a8feaa21e57d"
     },
     {
       "path": "integration-test/verify_worksheet.sql",
-      "sha256": "5c561b6cf3fae122cd6b1f4f90e1648b156cc521322ee643fbf96466c5e87818"
+      "sha256": "6396a673ade049f199cb50db0d61ca71824eb27ca53062eb0883ee7a6265e11d"
     },
     {
       "path": "labs/configure-database/configure-database.md",
-      "sha256": "4465e248d93b757965023b759aaa79c57bae57ccd57b8acf1c494988606df3ed"
+      "sha256": "096bbfd591e0e76d155259bfd0f41d139542187604abfd40a66f517a7949b400"
     },
     {
       "path": "labs/deploy-explorer/deploy-explorer.md",
-      "sha256": "42a73bd4d12d5122c4e0dd5f646d28de399e9242a919523dfa414d0da2eed8b5"
+      "sha256": "3770beba92f8f9dad605e3f81ab1d73f55cc2520bf58bac712ae0ec347a76af5"
     },
     {
       "path": "labs/explore-evidence/explore-evidence.md",
@@ -132,11 +202,11 @@
     },
     {
       "path": "labs/introduction/introduction.md",
-      "sha256": "e7acf70e22185e105679177444a9253d9b45ae16e46ee1d8653751851b214477"
+      "sha256": "8cf30fb26c57f788d8946195b052ee5e08ab5280321e497c4212fc8a9b0da097"
     },
     {
       "path": "labs/load-knowledge/load-knowledge.md",
-      "sha256": "46c2db94c5587715db0d65d427c25c54032a1bdafd6f5f769bdc5aed48145cdd"
+      "sha256": "3844f6268b9a61c5a7f79cfe1a1016e3aa2e48acb2c875b4936f49e5979b215d"
     },
     {
       "path": "labs/need-help/need-help.md",
@@ -144,7 +214,7 @@
     },
     {
       "path": "labs/prepare-environment/prepare-environment.md",
-      "sha256": "296fd355b64912e58a27d50855e13f0f312c0d4eea78628f323bece9e42e6677"
+      "sha256": "29479b9ae5e095f83e3acee431f35db624d308092f257166ef7c80fff522d072"
     },
     {
       "path": "labs/provision-database/provision-database.md",
@@ -152,7 +222,7 @@
     },
     {
       "path": "labs/understand-collection/understand-collection.md",
-      "sha256": "9ddc6179023266b4bb4eb8126fea62b596d234a453de5c7f040c0e803c72b187"
+      "sha256": "b80ea707e226f86e1fc7af524ae64c035982e59b28ae2dfe22786c662e3c93ec"
     },
     {
       "path": "LICENSE.txt",
@@ -164,7 +234,7 @@
     },
     {
       "path": "ontology/kcv.ttl",
-      "sha256": "e4918219de46e0fc0df79b9471e576ec63ea14795f8592cc2d4c5e47884fc0df"
+      "sha256": "609448b80cfd9f6f37bc66e5a16bff85651609b714446a53e0b6e37cd3e1d596"
     },
     {
       "path": "ontology/scenario-extension.ttl",
@@ -172,7 +242,31 @@
     },
     {
       "path": "README.md",
-      "sha256": "253b363c8a3554b7f55084080363163bccc88ef402aebbd20486fb37ee33870c"
+      "sha256": "7fd02079487b800a4f7d5f5f46cbbc59750e518395657cef943b872347ee9796"
+    },
+    {
+      "path": "references/content-ingestion-checks.json",
+      "sha256": "70ad57b0bcfcbe00efd5b38cc639f71da5c1b42429307437059659c59cf340dc"
+    },
+    {
+      "path": "references/content-pipeline-validation.json",
+      "sha256": "5f16e26385bbfee5e215f6e635763af076d0e11912e2e992b1d87aee25235415"
+    },
+    {
+      "path": "references/expanded-ui-validation.json",
+      "sha256": "01131680bb3f847e8486b57537ebdccacfa76a93a9456a7f0906a033813f7391"
+    },
+    {
+      "path": "references/github-dataset-validation.json",
+      "sha256": "613e2994ca0f01f2586b5bf961307d0b82ea9d072e6824c9460e8483fa74e2d0"
+    },
+    {
+      "path": "references/public-access-checks.json",
+      "sha256": "02bcb8fdc64092e5a55b390105222dc6783e71eaab290980dc504c1dc10b78cc"
+    },
+    {
+      "path": "references/public-source-policy.json",
+      "sha256": "5ecdc023aee129527ea437edcf4a4e27172caac554046587566ba593e5227f82"
     },
     {
       "path": "references/upstream.json",
@@ -200,7 +294,7 @@
     },
     {
       "path": "sql/admin/02_grants.sql",
-      "sha256": "7c840bdc10d3e9325d58e12e845fd29fd24e07ed61e0476a1c21236718340ae2"
+      "sha256": "67ca427b3258b2b565149605e43242b59c8468f2e151ab9aa9460360597f0fd5"
     },
     {
       "path": "sql/admin/03_resource_principal.sql",
@@ -232,7 +326,7 @@
     },
     {
       "path": "sql/extensions/02_scenario_api.sql",
-      "sha256": "5621a65a454e0fdad4aa1f90027b528c0af22f9b527d960836bdb0a0843be771"
+      "sha256": "9945d331915bdf36b2130d46a7e459b5a59ce3e90a0ae4f348bc0d2acd9a0428"
     },
     {
       "path": "sql/extensions/03_scenario_agents.sql",
@@ -244,23 +338,63 @@
     },
     {
       "path": "sql/extensions/05_apex_api.sql",
-      "sha256": "517887b64decf7ac83d4411656a8bd85b1abbf0d6ad1f51dc0a0b7299cec0d3f"
+      "sha256": "9a070712772529fa0ef0e8381b9c1ea50fd7471244e0c8be5d71ebd796878627"
     },
     {
       "path": "sql/extensions/06_response_provenance.sql",
-      "sha256": "796eed703c82272f1639e25fc53ed02054ad86f67ada053645d156731d7f296a"
+      "sha256": "c02a4deb34cef2de925bf12d8eaed8b203b3bf171c4d9c0c49722c582b9b2cd8"
     },
     {
       "path": "sql/extensions/07_trace_tool_wrappers.sql",
       "sha256": "47253c577c1d469e5af59685b7ed9623e78db8cc85191db3b3fc8dd59df6a0da"
     },
     {
+      "path": "sql/extensions/08_content_locators.sql",
+      "sha256": "c00a4d9910883320884d8947cd77aacac92331575f6e5309ce26f56e0bde2d86"
+    },
+    {
       "path": "sql/install/10_load_dataset.sql",
-      "sha256": "834505e58b07c444eb16d890191629cfc3ccf89daba21dcf7f731f91574b1183"
+      "sha256": "322e1b145d945b807fa28d5e6833687a342970232f4ff8e8cfa1d0e00de424d5"
+    },
+    {
+      "path": "sql/install/10_load_github.sql",
+      "sha256": "2113f69426492fc0b8b544d8a7644f6b27b971b6149d35277d4238ab6db0cac5"
     },
     {
       "path": "sql/install/20_install_apex.sql",
-      "sha256": "541738959819a4abbd5877e5d44095c09430322f6a914f56b2cd97e190f36a45"
+      "sha256": "526a0c2e3b16c540c3ac7b282cbbef99133e0765ade50fe68c187db372a2b245"
+    },
+    {
+      "path": "sql/install/dataset-parts/001.sql",
+      "sha256": "34d0d18fad353ee24a0d6ecf73e544261cb6adeb5b51097250eff20a7082e166"
+    },
+    {
+      "path": "sql/install/dataset-parts/002.sql",
+      "sha256": "9e0e78942b48973162c6cc58c0db2e1673a5ca3df461da06ed2f2e85c3dbad8a"
+    },
+    {
+      "path": "sql/install/dataset-parts/003.sql",
+      "sha256": "950f1596f0845b2b9e5af892fdf43a552597934878729f39e13416b0ccb31a23"
+    },
+    {
+      "path": "sql/install/dataset-parts/004.sql",
+      "sha256": "9adc4640325aa3152a2a8e8ef800e71c951bcb312aa59d248d1bfad96bb58ec2"
+    },
+    {
+      "path": "sql/install/dataset-parts/005.sql",
+      "sha256": "2f13d86817488296e33937ceb44f9fcaade1771000dec923a3be23917f09a9c9"
+    },
+    {
+      "path": "sql/install/dataset-parts/006.sql",
+      "sha256": "e41e1d6fe844d2639ed306acfe6ef7f71df77c3d6eaa230bb53424701b8d145b"
+    },
+    {
+      "path": "sql/install/dataset-parts/manifest.json",
+      "sha256": "746b006752bed328bc8aab5bc954da32d8187f1a5273159f9825943ab46056f2"
+    },
+    {
+      "path": "sql/install/dataset-parts/README.md",
+      "sha256": "2504eae5604175e6efdb82b597adb4f84324f8e682eecd0a9b9f375c171673ca"
     },
     {
       "path": "sql/queries/00_create_conversation.sql",
@@ -360,7 +494,7 @@
     },
     {
       "path": "sql/schema/01_objects.sql",
-      "sha256": "4108cb9e4864f70eb093cf10b9cbd7630b1169cb42cc3bdbe5fc9edad2318885"
+      "sha256": "fadbb283afc0ad6b6c051f9c2b235d1a0f82da406b7111400fd9fd21c5157bd2"
     },
     {
       "path": "sql/schema/02_network.sql",
@@ -368,7 +502,7 @@
     },
     {
       "path": "sql/schema/03_tools.sql",
-      "sha256": "4a885b64603936ad2536688205788a37ad31d487b6ade7a5be079d71d2de9b7b"
+      "sha256": "5d555da35074dc9854ecbff4506cb792d0ca01bca8b6ca3f6d3510374906e2c1"
     },
     {
       "path": "sql/schema/04_agents.sql",
@@ -377,6 +511,10 @@
     {
       "path": "sql/schema/05_profile_worksheet.sql",
       "sha256": "38b810fa9828e8f204c214834fe6f0c702d5217e18f5ada8ad39ed02b9363f19"
+    },
+    {
+      "path": "sql/schema/06_dataset_import.sql",
+      "sha256": "fd6d1a72214de5e49255f0eb5c13af2cefb40e95d9b7fc0fb5071521706701bb"
     },
     {
       "path": "sql/schema/06_register_profile.sql",

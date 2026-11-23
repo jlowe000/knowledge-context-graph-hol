@@ -124,6 +124,7 @@ END;
    | 1 | [01_objects.sql](../../sql/schema/01_objects.sql) | KCV tables created, including KCV_SETTINGS |
    | 2 | [02_network.sql](../../sql/schema/02_network.sql) | KCV_NET RDF network created in this schema |
    | 3 | [03_tools.sql](../../sql/schema/03_tools.sql) | Read-only source/context/evidence functions compiled |
+   | 4 | [06_dataset_import.sql](../../sql/schema/06_dataset_import.sql) | GitHub dataset importer and persistent load-progress log installed |
 
 4. Check compilation:
 
@@ -134,6 +135,8 @@ END;
    ```
 
 **Expected outcome:** no rows from USER_ERRORS. The tables/network now exist, but source data and the model profile are not loaded yet. An empty Navigator may need its Refresh button; the query result is more useful than whether the tree has refreshed.
+
+The dataset importer uses the `DBMS_CLOUD`, `DBMS_CRYPTO` and `DBMS_LOCK` execution grants supplied by ADMIN in Task 2. These support downloads, hash verification and one load at a time. Its public GitHub download needs no GitHub token, OCI signing key, resource principal or Object Storage bucket. The following OCI authentication task is for model inference, a separate connection.
 
 ## Task 4: Configure OCI model authentication
 

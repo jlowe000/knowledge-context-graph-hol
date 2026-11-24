@@ -1,0 +1,3 @@
+ l_expected:=TO_CLOB('');
+ l_expected:=l_expected||TO_CLOB('{"name":"KCV_GRAPH_CONTEXTS","temporary":"N","columns":[{"name":"GRAPH_NAME","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":128,"char_used":"B"},{"name":"SNAPSHOT_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":128,"char_used":"B"}],"constraints":[{"type":"R","columns":"GRAPH_NAME","reference_table":"KCV_GRAPH_RUNS","reference_columns":"GRAPH_NAME"},{"type":"R","columns":"SNAPSHOT_ID","reference_table":"KCV_CONTEXTS","reference_columns":"SNAPSHOT_ID"},{"type":"P","columns":"GRAPH_NAME,SNAPSHOT_ID"}]}');
+ check_table(l_expected);

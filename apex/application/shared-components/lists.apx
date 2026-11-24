@@ -63,7 +63,7 @@ list navigation-menu (
     name: Navigation Menu
 
     entry home (
-        label: Home
+        label: My Contexts
         icon {
             imageIconCssClasses: fa-home
         }
@@ -72,10 +72,21 @@ list navigation-menu (
         }
         link {
             target: {
-                page: 1
+                page: 10
             }
         }
     )
 
+entry samples (
+  label: Sample contexts
+  layout {
+    sequence: 20
+  }
+  link {
+    target: {
+      page: 14
+    }
+  }
+)
 )
 

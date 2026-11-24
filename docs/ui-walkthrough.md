@@ -1,5 +1,7 @@
 # UI walkthrough: from a broad interest to a useful next step
 
+**Supplied sample journey.** This walkthrough describes the original Alex/Sam/Casey experience, retained under **Explore the samples** in current dev. For personal saved contexts and the R4 evidence/expiry behaviour, use the [My Contexts manual review](my-contexts-manual-test.md). Historical v1 images and tool-call descriptions do not show the new application retrieval before model dispatch.
+
 Use Knowledge Context Explorer to explore a curated collection of public knowledge, understand why it connects to a person's situation, and refine what to explore next. Allow approximately 15–20 minutes, including time to read the evidence. Model responses may take a minute or longer.
 
 The starting knowledge graph is already curated. This walkthrough changes the learner's context, not the source documents or their assertions. Knowledge-graph maintenance is a separate activity outside this journey.

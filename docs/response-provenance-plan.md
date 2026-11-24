@@ -1,5 +1,7 @@
 # EPIC-01: “How was this answer built?”
 
+**Historical design and delivery plan.** The implementation-gap table below describes the starting v1 design, not outstanding work in current dev. Current application retrieval, provenance origins and model dispatch are documented in [architecture](architecture.md) and [the My Contexts API](my-contexts-api.md).
+
 Status: implemented and deployed, 19 November 2026. Native Serverless tool capture passed (COMPLETED, one actual tool call, parsed citations); local historical/security/component/UI checks passed. Cloud browser acceptance passed as KCV_USER. See [upgrade and operations](epics-upgrade.md).
 
 This entire feature is one epic in the [implementation plan](implementation-epics.md). Its phases are stories within EPIC-01. The related [styling and layout epic](ui-styling-plan.md) defines the app-wide visual treatment and navigation.
@@ -83,7 +85,7 @@ Use a short persisted lease rather than a row lock across the remote model call.
 | `sql/extensions/02_scenario_api.sql` | Add execution capture and authorized trace retrieval; refactor evidence selection to support a pinned revision; guard ASK/APPLY concurrency and finalize failures safely. |
 | `sql/extensions/03_scenario_agents.sql` | Add execution-ID propagation/validation in traced wrappers and instructions. Check which registration objects require updating on an already-installed team; provide an explicit upgrade path rather than assuming CREATE can overwrite them. |
 | `sql/extensions/05_apex_api.sql` | Return stable turn/revision IDs and trace availability; expose an allow-listed `trace` action requiring both owned scenario session and its assistant turn ID. Return only that response's saved trace. Avoid rebuilding the full current packet/transcript for a trace-only request. |
-| `apex/region.html`, `explorer.js`, `explorer.css` | Add per-answer buttons, on-demand loading, dialog, scoped graph/evidence highlighting, loading/error/legacy states and responsive styling. Reuse graph rendering through a supplied host element rather than hard-coded IDs. Render all source/model text safely. |
+| Original v1 HTML region (retained in the v1 tag), `explorer.js`, `explorer.css` | Add per-answer buttons, on-demand loading, dialog, scoped graph/evidence highlighting, loading/error/legacy states and responsive styling. Reuse graph rendering through a supplied host element rather than hard-coded IDs. Render all source/model text safely. |
 | APEX build/export | Rebuild APEXlang, validate/import in the isolated workspace and regenerate the engine-produced SQL export. The saved export must contain the feature, not only the editable JS. |
 | Documentation | Extend UI walkthrough with expected popup outcomes, explain historical versus current evidence, migration order and record-retention/cleanup procedure. Retain short runnable SQL inline where under ten lines. |
 

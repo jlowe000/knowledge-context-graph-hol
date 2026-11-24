@@ -1,0 +1,3 @@
+ l_expected:=TO_CLOB('');
+ l_expected:=l_expected||TO_CLOB('{"name":"KCV_GRAPH_SOURCES","temporary":"N","columns":[{"name":"GRAPH_NAME","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":128,"char_used":"B"},{"name":"VERSION_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":128,"char_used":"B"},{"name":"METADATA_JSON","type":"CLOB","nullable":"N","identity":"NO","default":null}],"constraints":[{"type":"R","columns":"GRAPH_NAME","reference_table":"KCV_GRAPH_RUNS","reference_columns":"GRAPH_NAME"},{"type":"R","columns":"VERSION_ID","reference_table":"KCV_SOURCES","reference_columns":"VERSION_ID"},{"type":"C","expression":"metadata_json IS JSON"},{"type":"P","columns":"GRAPH_NAME,VERSION_ID"}]}');
+ check_table(l_expected);

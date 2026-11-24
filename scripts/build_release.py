@@ -19,7 +19,7 @@ from kcv import pipeline
 from kcv.worksheet import export
 from kcv.github_dataset import generate as generate_github_dataset
 from kcv.github_dataset import loader_script
-from scripts.build_apex_worksheet import build as build_apex_installer
+from scripts.build_apex_worksheet import build as build_apex_installer, verify_upgrade_export
 
 LABS = ['introduction', 'prepare-environment', 'provision-database',
         'configure-database', 'load-knowledge', 'deploy-explorer',
@@ -80,6 +80,15 @@ def validate(folder):
 def build(output):
     output = Path(output).resolve()
     if output.exists(): raise ValueError('Use a new output folder; existing output is never deleted')
+    version_file = ROOT / 'VERSION'
+    if version_file.exists():
+        version = version_file.read_text(encoding='utf-8').strip()
+        if not re.fullmatch(r'(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)', version):
+            raise ValueError('VERSION must use major.minor.patch')
+        if int(version.split('.')[0]) >= 2:
+            # A new source tree plus an old engine export is not a v2 distribution.
+            # This checks import/export provenance, not all release acceptance gates.
+            verify_upgrade_export(ROOT)
     if (ROOT / 'data/public-content-summaries.json').exists():
         from kcv.editorial import validate_summary_basis
         validate_summary_basis(ROOT)

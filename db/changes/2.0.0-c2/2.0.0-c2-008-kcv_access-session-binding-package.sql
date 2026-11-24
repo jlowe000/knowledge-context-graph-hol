@@ -1,0 +1,6 @@
+CREATE OR REPLACE PACKAGE kcv_access AUTHID DEFINER AS
+ PROCEDURE capture_identity;
+ FUNCTION owner_scope RETURN VARCHAR2;
+ FUNCTION owner_subject RETURN VARCHAR2;
+ PROCEDURE assert_context(p_context VARCHAR2);
+END;

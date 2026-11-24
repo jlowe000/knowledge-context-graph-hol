@@ -1,0 +1,20 @@
+CREATE TABLE kcv_personal_contexts (
+ context_id VARCHAR2(32) PRIMARY KEY,
+ owner_scope VARCHAR2(128) NOT NULL,
+ owner_subject VARCHAR2(128) NOT NULL,
+ title VARCHAR2(200 CHAR) NOT NULL,
+ lifecycle VARCHAR2(16) DEFAULT 'DRAFT' NOT NULL,
+ prior_lifecycle VARCHAR2(16),
+ draft_json CLOB NOT NULL CHECK (draft_json IS JSON),
+ draft_version NUMBER DEFAULT 1 NOT NULL,
+ base_graph VARCHAR2(128),
+ latest_revision VARCHAR2(40) REFERENCES kcv_scenario_revisions(revision_id),
+ provenance_json CLOB CHECK (provenance_json IS JSON),
+ created_at TIMESTAMP WITH TIME ZONE DEFAULT SYSTIMESTAMP NOT NULL,
+ updated_at TIMESTAMP WITH TIME ZONE DEFAULT SYSTIMESTAMP NOT NULL,
+ CONSTRAINT kcv_personal_state_ck CHECK (lifecycle IN ('DRAFT','ACTIVE','ARCHIVED')),
+ CONSTRAINT kcv_personal_prior_ck CHECK (prior_lifecycle IN ('DRAFT','ACTIVE')),
+ CONSTRAINT kcv_personal_version_ck CHECK (draft_version >= 1 AND draft_version = TRUNC(draft_version)),
+ CONSTRAINT kcv_personal_id_ck CHECK (REGEXP_LIKE(context_id,'^C[A-F0-9]{31}$','c')),
+ CONSTRAINT kcv_personal_ready_ck CHECK (lifecycle <> 'ACTIVE' OR latest_revision IS NOT NULL)
+)

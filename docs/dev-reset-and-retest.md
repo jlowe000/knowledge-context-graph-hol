@@ -1,5 +1,7 @@
 # Reset the dedicated temporary lab and retest — dev only
 
+**Legacy v1 reset workflow.** These scripts target the original KCV_LAB/schema and its known runtime objects. They are not a reset or migration path for the v2 My Contexts candidate. Use [ordered migrations](database-migrations.md) to upgrade current dev while preserving contexts/history; any v2 teardown needs its own reviewed inventory and explicit authorization. Run the legacy workflow only from its matching v1 checkout.
+
 This is an explicit destructive development workflow, not a normal installation or upgrade. Use it only when the owner has requested deletion of this project's disposable database artifacts. It deletes conversations, observations and private deployment backups together with the schema. Inspect the inventory first; stop if this workspace/schema has been reused for unrelated work.
 
 The goal is a **project-free checkpoint**, followed by a new installation from dev. This does not factory-reset the managed service or remove unrelated schemas, service audit/history, Oracle-managed objects or other applications. JAVAVM remains enabled and VALID: Oracle Java enablement is one way. No Java removal, database termination, external API-key revocation or IAM policy change is part of these scripts.

@@ -1,0 +1,68 @@
+{
+  "recorded_date": "2026-11-24",
+  "product_version": "2.0.0",
+  "increment": "C3 personal journey",
+  "status": "initial_native_update_failed_unaccepted_suffix_retired",
+  "target": "isolated ADB Serverless schema",
+  "release_promoted": false,
+  "expected_schema_head": "2.0.0-c3-ready",
+  "expected_project_migrations": 66,
+  "expected_liquibase_changesets": 67,
+  "new_migrations": 18,
+  "previous_native_record": "native-validation.json",
+  "historical_project_steps_unchanged": 48,
+  "historical_generated_wrappers_unchanged_including_bootstrap": 49,
+  "tools": {
+    "sqlcl": "26.3.1.301.1413",
+    "java": "25.0.5.1",
+    "liquibase": "4.33.0",
+    "client": "Oracle Linux under WSL"
+  },
+  "local": {
+    "migration_tests_passed": 22,
+    "generated_artifact_check": "passed",
+    "frozen_c2_regression_fixture": "22 passed",
+    "diff_whitespace_check": "passed"
+  },
+  "native_read_only": {
+    "owner_session": "passed",
+    "liquibase_validate": "passed_no_validation_errors",
+    "pending_changesets": 18,
+    "complete_project_receipts": 48,
+    "incomplete_project_receipts": 0,
+    "sqlcl_exit_code": null,
+    "changelog_path": "relative db/changelog.xml after explicit SQLcl cd to checkout",
+    "completion": "The interrupted command's private log contains successful validate/status and final receipt counts, written after this manifest snapshot. The final process exit status was not returned before the pause. Repeat preflight before first update."
+  },
+  "native_execution": {
+    "c2_upgrade": "failed at 2.0.0-c3-015-kcv_scenario-package-body with ORA-24344 after fourteen C3 steps completed",
+    "fresh_liquibase": "pending",
+    "repeat_liquibase": "pending",
+    "physical_verification": "pending",
+    "legacy_request_index_probe": "pending",
+    "runtime_row_preservation": "pending",
+    "worksheet_sql_routes": "pending",
+    "worksheet_browser_transport": "pending",
+    "complete_project_receipts_at_failure": 62,
+    "failed_project_receipts_at_failure": 1,
+    "failed_step": "2.0.0-c3-015-kcv_scenario-package-body",
+    "cause": "Reserved PL/SQL identifier PRIOR in the new ask routine; corrected maintained source uses PRIOR_RUN."
+  },
+  "artifact_hashes": {
+    "VERSION": "c28fcca53637bc88e124af1725df13cb98c69dedefd62fb3cdbe1cdb6b760624",
+    "db/manifest.json": "be1cd596883941f183192d3556d85e2b827b424294e38909cdfb008396d4f1f1",
+    "db/changelog.xml": "6e7743d108b39a370737ab43bc6d7340f158229c949826b4b3f6ad0758a89b3d",
+    "db/baseline/changelog.xml": "053a6acde4f05e59167a55e63a3e32fbd5c33079cb5c9b7f14c4d618e6c60529",
+    "db/feature/changelog.xml": "23f8b9426d70052b8d652a4b3ba177fce2df2a0df7f60246f0c25b8caed9c58c",
+    "scripts/build_database_installers.py": "7ab1d969e23ea8033fd45367805047ea6bd5c5cf6fff2bd70dec79c88cf30046",
+    "sql/install/00_install_schema.sql": "4aae3e238018f2c6472fb3c0e1e89245ed19debca4e3d95a8c859a95cee342a2",
+    "sql/install/00_adopt_schema_baseline.sql": "5b6f594a0dab9cb9dd34b9e9f627c8ee2d8cefb825b23a808379a5ef5f2ede79",
+    "sql/install/01_upgrade_schema.sql": "6fcf5f08c3bb4ea6b8f9862fa72a597c641c3b5222967a23d0179bafbe4aa8c6",
+    "sql/install/02_verify_schema.sql": "22c1aa176a75da901dee9de170ed673c0aee0a8ff67730cfc19f91a25abc77c7",
+    "integration-test/verify_migration_legacy_requests.sql": "b16c96425713d05742ef309bf8a2a97e6a03811079cd8c49d99931bc1f09f91f"
+  },
+  "migration_contract_hash_definition": "SHA256 of compact sorted-key JSON array in manifest order containing id, payload_sha256, verification_sha256, supersedes.",
+  "scope": "This record preserves the initial C3 candidate hashes and preflight evidence. Its first native update failed after fourteen C3 steps; it is not accepted. The original failed receipt and the unexecuted suffix are retained in the explicit retirement audit. Replacement acceptance is recorded separately. No connection details, credentials or runtime records are included.",
+  "migration_contract_sha256": "0cb663d1cc0e2020db7fba4b84d67adc5531f29b4751a3e91afe80b4f4f6f9d1",
+  "replacement_record": "c3-r1-validation.json"
+}

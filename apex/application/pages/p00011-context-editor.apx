@@ -1,0 +1,566 @@
+page 11 (
+  name: Context editor
+  alias: CONTEXT-EDITOR
+  title: Context editor
+  appearance {
+    pageTemplate: @/standard
+    templateOptions: #DEFAULT#
+  }
+  navigation {
+    warnOnUnsavedChanges: true
+  }
+  security {
+    authentication: required
+    pageAccessProtection: argumentsMustHaveChecksum
+    formAutoComplete: false
+  }
+  region editor (
+    name: Describe your starting point
+    type: staticContent
+    layout {
+      sequence: 10
+      slot: body
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p>A name is enough to save a draft. Add what you know; leave uncertainty visible. Saving does not call a model or change the shared knowledge graph. After saving, review and explicitly apply your draft to use it in conversations. Topics select evidence; your objective and background guide interpretation.</p>
+      ```
+    }
+  )
+  pageItem P11_CONTEXT_ID (
+    type: hidden
+    layout {
+      sequence: 1
+      region: @editor
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P11_VERSION (
+    type: hidden
+    layout {
+      sequence: 2
+      region: @editor
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P11_TOKEN (
+    type: hidden
+    layout {
+      sequence: 3
+      region: @editor
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P11_TITLE (
+    type: textField
+    label {
+      label: Context name
+      alignment: left
+    }
+    layout {
+      sequence: 10
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/required-floating
+      width: 60
+    }
+    validation {
+      valueRequired: true
+      maxLength: 200
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_QUESTION (
+    type: textarea
+    label {
+      label: Starting question or interest
+      alignment: left
+    }
+    layout {
+      sequence: 20
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+      width: 60
+      height: 4
+    }
+    validation {
+      valueRequired: false
+      maxLength: 2000
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_CLARITY (
+    type: selectList
+    label {
+      label: How clear is the objective?
+      alignment: left
+    }
+    layout {
+      sequence: 30
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    validation {
+      valueRequired: false
+    }
+    lov {
+      type: staticValues
+      staticValues: STATIC:Not sure yet;unknown,Emerging;emerging,Defined;defined
+      displayNullValue: false
+      displayExtraValues: false
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_OBJECTIVE (
+    type: textarea
+    label {
+      label: Objective
+      alignment: left
+    }
+    layout {
+      sequence: 40
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+      width: 60
+      height: 4
+    }
+    validation {
+      valueRequired: false
+      maxLength: 2000
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_PERSON (
+    type: textField
+    label {
+      label: Who is this for?
+      alignment: left
+    }
+    layout {
+      sequence: 50
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+      width: 60
+    }
+    validation {
+      valueRequired: false
+      maxLength: 200
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_ROLE (
+    type: textField
+    label {
+      label: Role
+      alignment: left
+    }
+    layout {
+      sequence: 60
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+      width: 60
+    }
+    validation {
+      valueRequired: false
+      maxLength: 200
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_ORGANISATION (
+    type: textField
+    label {
+      label: Organisation
+      alignment: left
+    }
+    layout {
+      sequence: 70
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+      width: 60
+    }
+    validation {
+      valueRequired: false
+      maxLength: 200
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_SITUATION (
+    type: textarea
+    label {
+      label: Known situation
+      alignment: left
+    }
+    layout {
+      sequence: 80
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+      width: 60
+      height: 4
+    }
+    validation {
+      valueRequired: false
+      maxLength: 4000
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_UNKNOWNS (
+    type: textarea
+    label {
+      label: What is still unknown? One item per line
+      alignment: left
+    }
+    layout {
+      sequence: 90
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+      width: 60
+      height: 4
+    }
+    validation {
+      valueRequired: false
+      maxLength: 10019
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_CONSTRAINTS (
+    type: textarea
+    label {
+      label: Explicit constraints. One item per line
+      alignment: left
+    }
+    layout {
+      sequence: 100
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+      width: 60
+      height: 4
+    }
+    validation {
+      valueRequired: false
+      maxLength: 10019
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_PURPOSE (
+    type: textField
+    label {
+      label: Learning purpose
+      alignment: left
+    }
+    layout {
+      sequence: 105
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    validation {
+      valueRequired: false
+      maxLength: 200
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_HORIZON (
+    type: textField
+    label {
+      label: Time horizon
+      alignment: left
+    }
+    layout {
+      sequence: 106
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    validation {
+      valueRequired: false
+      maxLength: 200
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P11_TOPICS (
+    type: selectMany
+    label {
+      label: Topics to explore (up to 20)
+      alignment: left
+    }
+    layout {
+      sequence: 110
+      region: @editor
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    validation {
+      valueRequired: false
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+    lov {
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+SELECT j.label d,j.label r FROM JSON_TABLE(kcv_personal_context_api.topic_options(:P11_CONTEXT_ID),'$.topics[*]' COLUMNS(label VARCHAR2(800) PATH '$')) j ORDER BY j.label
+      ```
+    }
+    multipleValues {
+      type: jsonArray
+    }
+  )
+  button save (
+    buttonName: SAVE
+    label: Save draft
+    layout {
+      sequence: 10
+      region: @editor
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: true
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+  )
+  button cancel (
+    buttonName: CANCEL
+    label: Back to My Contexts
+    layout {
+      sequence: 20
+      region: @editor
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: redirectThisApp
+      target: {
+        page: 10
+        clearCache: 10
+      }
+    }
+  )
+  process load-owned-draft (
+    name: load owned draft
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+      DECLARE
+       l_doc JSON_OBJECT_T; l_draft JSON_OBJECT_T; l_topics JSON_ARRAY_T:=JSON_ARRAY_T(); l_prefs JSON_OBJECT_T; l_keys JSON_KEY_LIST;
+       FUNCTION lines(p_array JSON_ARRAY_T) RETURN VARCHAR2 IS l_text VARCHAR2(32767); BEGIN
+        IF p_array IS NOT NULL THEN FOR i IN 0..p_array.get_size-1 LOOP
+         IF i>0 THEN l_text:=l_text||CHR(10); END IF; l_text:=l_text||p_array.get_string(i);
+        END LOOP; END IF; RETURN l_text;
+       END;
+      BEGIN
+       IF :REQUEST IS NULL THEN
+        :P11_TOKEN:=RAWTOHEX(SYS_GUID());
+        IF :P11_CONTEXT_ID IS NOT NULL THEN
+         l_doc:=JSON_OBJECT_T.parse(kcv_personal_context_api.get_context(:P11_CONTEXT_ID));
+         IF l_doc.get_string('lifecycle')='ARCHIVED' THEN RAISE_APPLICATION_ERROR(-20181,'CONTEXT_ARCHIVED: Restore this context before editing.'); END IF;
+         l_draft:=l_doc.get_object('draft');
+         :P11_VERSION:=l_doc.get_number('draft_version'); :P11_TITLE:=l_doc.get_string('title');
+         :P11_QUESTION:=l_draft.get_string('question'); :P11_CLARITY:=l_draft.get_string('objective_clarity');
+         :P11_OBJECTIVE:=l_draft.get_string('objective'); :P11_PERSON:=l_draft.get_string('person');
+         :P11_ROLE:=l_draft.get_string('role'); :P11_ORGANISATION:=l_draft.get_string('organisation');
+         :P11_SITUATION:=l_draft.get_string('known_situation');
+         :P11_PURPOSE:=l_draft.get_string('learning_purpose'); :P11_HORIZON:=l_draft.get_string('time_horizon');
+         l_prefs:=l_draft.get_object('topic_preferences'); l_keys:=l_prefs.get_keys;
+         FOR i IN 1..l_keys.count LOOP l_topics.append(l_keys(i)); END LOOP; :P11_TOPICS:=l_topics.to_string();
+         :P11_UNKNOWNS:=lines(l_draft.get_array('unknowns')); :P11_CONSTRAINTS:=lines(l_draft.get_array('constraints'));
+        ELSE
+         :P11_VERSION:=0; :P11_CLARITY:='unknown'; :P11_TOPICS:='[]';
+        END IF;
+       END IF;
+      END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: beforeHeader
+    }
+  )
+  process save-owned-draft (
+    name: save owned draft
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+      DECLARE
+       l_body JSON_OBJECT_T:=JSON_OBJECT_T(); l_result JSON_OBJECT_T; l_previous JSON_OBJECT_T; l_prefs JSON_OBJECT_T:=JSON_OBJECT_T(); l_old_prefs JSON_OBJECT_T; l_topics JSON_ARRAY_T; l_label VARCHAR2(200);
+       FUNCTION lines(p_text VARCHAR2) RETURN JSON_ARRAY_T IS l_array JSON_ARRAY_T:=JSON_ARRAY_T(); l_lines apex_t_varchar2; BEGIN
+        l_lines:=apex_string.split(REPLACE(p_text,CHR(13),''),CHR(10));
+        FOR i IN 1..l_lines.count LOOP IF TRIM(l_lines(i)) IS NOT NULL THEN l_array.append(TRIM(l_lines(i))); END IF; END LOOP;
+        RETURN l_array;
+       END;
+      BEGIN
+       IF :P11_CONTEXT_ID IS NOT NULL THEN
+        l_previous:=JSON_OBJECT_T.parse(kcv_personal_context_api.get_context(:P11_CONTEXT_ID));
+        l_body:=l_previous.get_object('draft');
+       ELSE l_body.put('topic_preferences',JSON_OBJECT_T()); END IF;
+       l_body.put('question',:P11_QUESTION); l_body.put('objective_clarity',NVL(:P11_CLARITY,'unknown'));
+       l_body.put('objective',:P11_OBJECTIVE); l_body.put('person',:P11_PERSON); l_body.put('role',:P11_ROLE);
+       l_body.put('organisation',:P11_ORGANISATION); l_body.put('known_situation',:P11_SITUATION);
+       l_body.put('learning_purpose',:P11_PURPOSE); l_body.put('time_horizon',:P11_HORIZON);
+       l_old_prefs:=l_body.get_object('topic_preferences');
+       l_topics:=JSON_ARRAY_T.parse(NVL(:P11_TOPICS,'[]'));
+       FOR i IN 0..l_topics.get_size-1 LOOP
+        l_label:=l_topics.get_string(i);
+        IF l_old_prefs IS NOT NULL AND l_old_prefs.has(l_label) THEN l_prefs.put(l_label,l_old_prefs.get_number(l_label));
+        ELSE l_prefs.put(l_label,1); END IF;
+       END LOOP; l_body.put('topic_preferences',l_prefs);
+       l_body.put('unknowns',lines(:P11_UNKNOWNS)); l_body.put('constraints',lines(:P11_CONSTRAINTS));
+       l_result:=JSON_OBJECT_T.parse(kcv_personal_context_api.save_draft(:P11_CONTEXT_ID,:P11_TITLE,l_body.to_clob(),TO_NUMBER(:P11_VERSION),:P11_TOKEN));
+       apex_util.redirect_url(apex_page.get_url(p_page=>13,p_clear_cache=>'13',p_items=>'P13_CONTEXT_ID',p_values=>l_result.get_string('context_id')));
+       apex_application.stop_apex_engine;
+      END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: processing
+    }
+    serverSideCondition {
+      whenButtonPressed: @save
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+)

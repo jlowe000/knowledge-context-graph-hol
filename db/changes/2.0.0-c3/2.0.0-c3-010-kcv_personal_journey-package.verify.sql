@@ -1,0 +1,27 @@
+l_expected:=TO_CLOB('');
+ l_expected:=l_expected||TO_CLOB('PACKAGE kcv_personal_journey AUTHID DEFINER AS
+ FUNCTION preview(p_context VARCHAR2,p_version NUMBER,p_session VARCHAR2 DEFAULT NULL,p_collection VARCHAR2 DEFAULT NULL,p_body CLOB DEFAULT NULL) RETURN CLOB;
+ FUNCTION get_preview(p_context VARCHAR2,p_token VARCHAR2) RETURN CLOB;
+ FUNCTION apply_preview(p_context VARCHAR2,p_token VARCHAR2) RETURN CLOB;
+ FUNCTION start_conversation(p_context VARCHAR2,p_token VARCHAR2) RETURN VARCHAR2;
+ PROCEDURE open_conversation(p_session VARCHAR2);
+ PROCEDURE adopt_head(p_session VARCHAR2,p_expected VARCHAR2,p_request_token VARCHAR2 DEFAULT NULL,p_expected_head VARCHAR2 DEFAULT NULL);
+ FUNCTION conversations(p_context VARCHAR2,p_before VARCHAR2 DEFAULT NULL) ');
+ l_expected:=l_expected||TO_CLOB('RETURN CLOB;
+ FUNCTION history(p_session VARCHAR2,p_before NUMBER DEFAULT NULL) RETURN CLOB;
+ FUNCTION observations(p_session VARCHAR2,p_before NUMBER DEFAULT NULL) RETURN CLOB;
+ FUNCTION revisions(p_context VARCHAR2,p_before VARCHAR2 DEFAULT NULL) RETURN CLOB;
+ FUNCTION collections(p_context VARCHAR2) RETURN CLOB;
+ FUNCTION collection_topics(p_context VARCHAR2,p_collection VARCHAR2) RETURN CLOB;
+ FUNCTION operations(p_context VARCHAR2) RETURN CLOB;
+ PROCEDURE recover_operation(p_context VARCHAR2,p_token VARCHAR2);
+ PROCEDURE recover_response(p_session VARCHAR2,p_execution VARCHAR2);
+ PROCEDURE ensure_model(p_session VARCHAR2,p_reason VARCHAR2 DEFAULT ''MISSING_MODEL'');
+ FUNCTION continuation');
+ l_expected:=l_expected||TO_CLOB('(p_session VARCHAR2) RETURN CLOB;
+ FUNCTION lock_context(p_context VARCHAR2) RETURN PLS_INTEGER;
+ FUNCTION lock_conversation(p_session VARCHAR2,p_write BOOLEAN DEFAULT TRUE) RETURN PLS_INTEGER;
+ PROCEDURE unlock_context(p_lock PLS_INTEGER);
+END;
+');
+ check_program('KCV_PERSONAL_JOURNEY','PACKAGE',l_expected);

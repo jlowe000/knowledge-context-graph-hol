@@ -1,0 +1,5 @@
+CREATE TABLE kcv_domain_runs (
+ run_id VARCHAR2(40) PRIMARY KEY, source_id VARCHAR2(32) NOT NULL, graph_name VARCHAR2(128) NOT NULL,
+ response_json CLOB NOT NULL CHECK(response_json IS JSON), fact_count NUMBER NOT NULL,
+ created_at TIMESTAMP WITH TIME ZONE DEFAULT SYSTIMESTAMP NOT NULL
+)

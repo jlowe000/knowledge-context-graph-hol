@@ -1,5 +1,7 @@
 # Start here: deploy to a new ADB Serverless instance
 
+**Version scope:** this is the published v1 deployment route. Follow it from the `release` branch or a `v1.0.0` checkout so the instructions and SQL files match. To deploy the current dev candidate, use the [migration guide](database-migrations.md) and [v2 APEX deployment sequence](../apex/README.md#deploy-the-v2-dev-candidate). Do not run the raw schema/extension sequence below against a migration-managed v2 schema.
+
 This is the beginner route to the complete Knowledge Context Explorer application. No previous Autonomous Database (ADB), SQL, graph or APEX experience is assumed. Work through the labs below in order. Each task identifies the account, the screen or terminal, the action and the expected outcome.
 
 | Order | Lab | Result |

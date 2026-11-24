@@ -1,0 +1,967 @@
+{
+  "format_version": 1,
+  "target_product_version": "2.0.0",
+  "status": "unreleased-c3-candidate",
+  "baseline_product_version": "1.0.0",
+  "baseline_source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+  "native_validation": "pending-c3",
+  "migrations": [
+    {
+      "id": "1.0.0-001-kcv_settings",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/01_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-001-kcv_settings.sql",
+      "payload_sha256": "77c7c74b83c585f8884d23ff000f7b712dbdc5c8999941c9d95c154fe8820631",
+      "verification": "db/baseline/payloads/1.0.0-001-kcv_settings.verify.sql",
+      "verification_sha256": "d0bcc4db0f0dc7f474ac92c057911116f9450eb441445f657e6d5102cf9968e1",
+      "depends_on": []
+    },
+    {
+      "id": "1.0.0-002-kcv_sources",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/01_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-002-kcv_sources.sql",
+      "payload_sha256": "0940a20910dd5551f0b339244a7d1017f80e7e95192c00b3b7ed9a8c548069b5",
+      "verification": "db/baseline/payloads/1.0.0-002-kcv_sources.verify.sql",
+      "verification_sha256": "24a3906a9287e563bb1578e35cea91f0b40407af8a6220d2dbbd561e8ca80486",
+      "depends_on": [
+        "1.0.0-001-kcv_settings"
+      ]
+    },
+    {
+      "id": "1.0.0-003-kcv_passages",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/01_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-003-kcv_passages.sql",
+      "payload_sha256": "e0512b6b307ca7182f0877185ae2932a200a33b78f2d62e09b1da0464939db11",
+      "verification": "db/baseline/payloads/1.0.0-003-kcv_passages.verify.sql",
+      "verification_sha256": "bd18d70291e7178be78f003af54ef624a48c875b5fae2a98bb628cdfadcbaa60",
+      "depends_on": [
+        "1.0.0-002-kcv_sources"
+      ]
+    },
+    {
+      "id": "1.0.0-004-kcv_contexts",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/01_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-004-kcv_contexts.sql",
+      "payload_sha256": "752e4477e7bbf3fb920ce7835da0804f3f3b6274b2384a50229377880588009d",
+      "verification": "db/baseline/payloads/1.0.0-004-kcv_contexts.verify.sql",
+      "verification_sha256": "5eb66322817f9915cae88335eea54e679b479a71ed9eb10963c0fdfeb581c02e",
+      "depends_on": [
+        "1.0.0-003-kcv_passages"
+      ]
+    },
+    {
+      "id": "1.0.0-005-kcv_graph_runs",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/01_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-005-kcv_graph_runs.sql",
+      "payload_sha256": "7d33dc4e4f913b02e5e78091c1f23ad3dafb85fd0cd87b18c504f24265ad2c7c",
+      "verification": "db/baseline/payloads/1.0.0-005-kcv_graph_runs.verify.sql",
+      "verification_sha256": "69e8ab78dd7453775fd7da2e8f77ab9a9d737f696fc623411ceacfd026e219b8",
+      "depends_on": [
+        "1.0.0-004-kcv_contexts"
+      ]
+    },
+    {
+      "id": "1.0.0-006-kcv_rdf_stage",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/01_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-006-kcv_rdf_stage.sql",
+      "payload_sha256": "ed7cec52bf33761f36982caba7c021833160af32e4e27f17432ae27195b924bb",
+      "verification": "db/baseline/payloads/1.0.0-006-kcv_rdf_stage.verify.sql",
+      "verification_sha256": "75cd22b6d093e28ba724fa9da1e97e863bb10d3f3b6d0d94658a8aa092ed9a35",
+      "depends_on": [
+        "1.0.0-005-kcv_graph_runs"
+      ]
+    },
+    {
+      "id": "1.0.0-007-kcv_graph_sources",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/01_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-007-kcv_graph_sources.sql",
+      "payload_sha256": "9353905693e637678cd82168b31fe351f7745e586f56907f226360a5af06a4f1",
+      "verification": "db/baseline/payloads/1.0.0-007-kcv_graph_sources.verify.sql",
+      "verification_sha256": "470cde0c7563a24bac2567069e71517b513e19dd4a9a5848e0095dd227a9c862",
+      "depends_on": [
+        "1.0.0-006-kcv_rdf_stage"
+      ]
+    },
+    {
+      "id": "1.0.0-008-kcv_graph_contexts",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/01_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-008-kcv_graph_contexts.sql",
+      "payload_sha256": "cbbdaf028cfdb0f224df0cc808486f6e7d147ee3007ad9099a3e4c5d804ca33d",
+      "verification": "db/baseline/payloads/1.0.0-008-kcv_graph_contexts.verify.sql",
+      "verification_sha256": "a8a719a55d077e1fe0ac5a6f24bf81d3f1f797f4adbc6fec3ff6dd573447b78c",
+      "depends_on": [
+        "1.0.0-007-kcv_graph_sources"
+      ]
+    },
+    {
+      "id": "1.0.0-009-kcv_feedback",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/01_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-009-kcv_feedback.sql",
+      "payload_sha256": "0f3168d126338f6537432aacc2c17ad88621338592666cdd07bf11203d57345d",
+      "verification": "db/baseline/payloads/1.0.0-009-kcv_feedback.verify.sql",
+      "verification_sha256": "5157060b4509a0800d5f1a35e40152f586778b8ce27a2f8294136cbdd5017993",
+      "depends_on": [
+        "1.0.0-008-kcv_graph_contexts"
+      ]
+    },
+    {
+      "id": "1.0.0-010-kcv_dataset_runs",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/06_dataset_import.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-010-kcv_dataset_runs.sql",
+      "payload_sha256": "5e8d57d100a4432e006048654fe204145b69907e2826975ca5f1eccb9644e7af",
+      "verification": "db/baseline/payloads/1.0.0-010-kcv_dataset_runs.verify.sql",
+      "verification_sha256": "adc04e8fcf81021bd1fdbcdb4378d2a159779757af1e7a70ab5177a5bdcb5a50",
+      "depends_on": [
+        "1.0.0-009-kcv_feedback"
+      ]
+    },
+    {
+      "id": "1.0.0-011-kcv_dataset_stage",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/06_dataset_import.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-011-kcv_dataset_stage.sql",
+      "payload_sha256": "fd8f86ed5d218baada5cda189d90e42efb70183bcbef0eef55f91e76873bb2c4",
+      "verification": "db/baseline/payloads/1.0.0-011-kcv_dataset_stage.verify.sql",
+      "verification_sha256": "0b2481997bc7ca701cb57cf6f126d3315032df0b871c614cdbce9b002bab81fd",
+      "depends_on": [
+        "1.0.0-010-kcv_dataset_runs"
+      ]
+    },
+    {
+      "id": "1.0.0-012-kcv_scenario_revisions",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/01_scenario_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-012-kcv_scenario_revisions.sql",
+      "payload_sha256": "edcbcfc3bdf56acf918c0336b1292280e2a945cd198511b594b8f5ab20b3b4bd",
+      "verification": "db/baseline/payloads/1.0.0-012-kcv_scenario_revisions.verify.sql",
+      "verification_sha256": "a630f2f736f9d75d4e0b93d153dec58e34ce854073fde00afb5a7cd93a8f7645",
+      "depends_on": [
+        "1.0.0-011-kcv_dataset_stage"
+      ]
+    },
+    {
+      "id": "1.0.0-013-kcv_chat_sessions",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/01_scenario_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-013-kcv_chat_sessions.sql",
+      "payload_sha256": "ec6ff90329c0fb52a63d281d0b41c65d2b14550a98fe1bb10c57fbf9197e8761",
+      "verification": "db/baseline/payloads/1.0.0-013-kcv_chat_sessions.verify.sql",
+      "verification_sha256": "3d9316abcd967c5103f8f8aed2382012d079b4d4e950f7c1f1fb2427e1451045",
+      "depends_on": [
+        "1.0.0-012-kcv_scenario_revisions"
+      ]
+    },
+    {
+      "id": "1.0.0-014-kcv_scenario_changes",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/01_scenario_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-014-kcv_scenario_changes.sql",
+      "payload_sha256": "2858e3c1a8c1001aa4f78f04cb9661b1ec7ec5dad5de7f66703d9624922565e5",
+      "verification": "db/baseline/payloads/1.0.0-014-kcv_scenario_changes.verify.sql",
+      "verification_sha256": "835b620f214fa8c5d749e3745cab327b921d6aebf4b607e0140dcd144e17d5fb",
+      "depends_on": [
+        "1.0.0-013-kcv_chat_sessions"
+      ]
+    },
+    {
+      "id": "1.0.0-015-kcv_scenario_audit",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/01_scenario_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-015-kcv_scenario_audit.sql",
+      "payload_sha256": "e46e5a60e8c88a38f32fcd2bfcd84dc5f86b3be2139cf6eab041d234c92122e6",
+      "verification": "db/baseline/payloads/1.0.0-015-kcv_scenario_audit.verify.sql",
+      "verification_sha256": "b63d349a47107d7185886b22fc69cf1433981baffd56b9029a1ec025602c8729",
+      "depends_on": [
+        "1.0.0-014-kcv_scenario_changes"
+      ]
+    },
+    {
+      "id": "1.0.0-016-kcv_chat_turns",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/01_scenario_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-016-kcv_chat_turns.sql",
+      "payload_sha256": "dc5339a18a4562f66ae848cc900af3dd00d385e26715da5a186ab8b839a747b8",
+      "verification": "db/baseline/payloads/1.0.0-016-kcv_chat_turns.verify.sql",
+      "verification_sha256": "5947784ee669962ec040eb30bfa2f9d75f6d72ad440778517774b19677b6179e",
+      "depends_on": [
+        "1.0.0-015-kcv_scenario_audit"
+      ]
+    },
+    {
+      "id": "1.0.0-017-kcv_scenario_observations",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/01_scenario_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-017-kcv_scenario_observations.sql",
+      "payload_sha256": "2c89f8c8b04f4d6778083b303208dab0f02dfc5092546446e1d7c49925db3bd7",
+      "verification": "db/baseline/payloads/1.0.0-017-kcv_scenario_observations.verify.sql",
+      "verification_sha256": "a9888c759a33bf91ffd125ccaa90215d187e15e49435f98878102c5b5ebeeae3",
+      "depends_on": [
+        "1.0.0-016-kcv_chat_turns"
+      ]
+    },
+    {
+      "id": "1.0.0-018-kcv_response_runs",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/06_response_provenance.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-018-kcv_response_runs.sql",
+      "payload_sha256": "c1aad16315b6da25dd951fb3c14ee2c8e091b938f9cc2c5fbaebb62d565aa427",
+      "verification": "db/baseline/payloads/1.0.0-018-kcv_response_runs.verify.sql",
+      "verification_sha256": "0b0099d8b8006795b86f1bf6e815fab9c1f5209ef85b2309f8b506c20b102285",
+      "depends_on": [
+        "1.0.0-017-kcv_scenario_observations"
+      ]
+    },
+    {
+      "id": "1.0.0-019-kcv_response_tool_calls",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/06_response_provenance.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-019-kcv_response_tool_calls.sql",
+      "payload_sha256": "61fddb7cb88c244860b87ec3219fec9e94cae1f9c9895e163fd9d2999d30efcd",
+      "verification": "db/baseline/payloads/1.0.0-019-kcv_response_tool_calls.verify.sql",
+      "verification_sha256": "5e2d4ec64bd1407020174f0c40ec6d1515acbefa21437d2ceff574c79e5ef74b",
+      "depends_on": [
+        "1.0.0-018-kcv_response_runs"
+      ]
+    },
+    {
+      "id": "1.0.0-020-kcv_domain_runs",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/04_domain_extraction.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-020-kcv_domain_runs.sql",
+      "payload_sha256": "21c93509e68b540c7226c022cc2500c818d1e191b6d6bf1b558209b78c583009",
+      "verification": "db/baseline/payloads/1.0.0-020-kcv_domain_runs.verify.sql",
+      "verification_sha256": "0e21d72d3de5bbee5f63271f68468408f65ab6a1ddc74b4e40fe672d615af05f",
+      "depends_on": [
+        "1.0.0-019-kcv_response_tool_calls"
+      ]
+    },
+    {
+      "id": "1.0.0-021-schema-setting",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/01_objects.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-021-schema-setting.sql",
+      "payload_sha256": "b6ef4bb4a968d5dbafb409c542e1be605cb20c881fc5bd5ca8c77bcfec36145c",
+      "verification": "db/baseline/payloads/1.0.0-021-schema-setting.verify.sql",
+      "verification_sha256": "aba6ecf51ae2b43fe71aaeb907da89db41773a119e23dcb73c9121b2e586db2f",
+      "depends_on": [
+        "1.0.0-020-kcv_domain_runs"
+      ]
+    },
+    {
+      "id": "1.0.0-022-kcv_tool_run_ix",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/06_response_provenance.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-022-kcv_tool_run_ix.sql",
+      "payload_sha256": "4468946e20f1a35c9a2c44870e9958635a42dc9e9c604aac79a47034aeb6397d",
+      "verification": "db/baseline/payloads/1.0.0-022-kcv_tool_run_ix.verify.sql",
+      "verification_sha256": "06943331e91c4650509ac01aa0f6488bf0746341dc76e2012b56e233b6e7dc21",
+      "depends_on": [
+        "1.0.0-021-schema-setting"
+      ]
+    },
+    {
+      "id": "1.0.0-023-kcv_dataset-package",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/06_dataset_import.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-023-kcv_dataset-package.sql",
+      "payload_sha256": "e9efa7d9c5e6e08d89359278db5f93986c3720b121325504888710d3d06025ec",
+      "verification": "db/baseline/payloads/1.0.0-023-kcv_dataset-package.verify.sql",
+      "verification_sha256": "78ba2c3b9b6dc9432b67549c605cc5a16bbf823399eb82d9ecd5967d40957040",
+      "depends_on": [
+        "1.0.0-022-kcv_tool_run_ix"
+      ]
+    },
+    {
+      "id": "1.0.0-024-kcv_trace-package",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/06_response_provenance.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-024-kcv_trace-package.sql",
+      "payload_sha256": "234691905dc8727ca740aaf0c222aae4dc2006fedc345775336e42bf570860ce",
+      "verification": "db/baseline/payloads/1.0.0-024-kcv_trace-package.verify.sql",
+      "verification_sha256": "ad602105d399da4f40afb32022bf0b8ce110c049e1f5a6c2178b66401405cb43",
+      "depends_on": [
+        "1.0.0-023-kcv_dataset-package"
+      ]
+    },
+    {
+      "id": "1.0.0-025-kcv_scenario-package",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/02_scenario_api.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-025-kcv_scenario-package.sql",
+      "payload_sha256": "ed1ec6be0095010aa406fb3835ea849310fd950e7b3c5dd5d4701a42094dacfa",
+      "verification": "db/baseline/payloads/1.0.0-025-kcv_scenario-package.verify.sql",
+      "verification_sha256": "aba35a4e94d12b7102d55b8548a0bd5bf736a2b21484d5c377c8e7576acebdd0",
+      "depends_on": [
+        "1.0.0-024-kcv_trace-package"
+      ]
+    },
+    {
+      "id": "1.0.0-026-kcv_apex-package",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/05_apex_api.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-026-kcv_apex-package.sql",
+      "payload_sha256": "74b947a645228600cfb6f62c2c45d0172ace05f9477199f498de68148499d2d4",
+      "verification": "db/baseline/payloads/1.0.0-026-kcv_apex-package.verify.sql",
+      "verification_sha256": "543f8d2eeef00818996671c5e2b5b0298f5bab5467ebe3c636a5da641d816b83",
+      "depends_on": [
+        "1.0.0-025-kcv_scenario-package"
+      ]
+    },
+    {
+      "id": "1.0.0-027-kcv_context_packet-function",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/03_tools.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-027-kcv_context_packet-function.sql",
+      "payload_sha256": "584514c036d0895e8602cca0eabaaf0cefc8aba9d6ebf4ca766cc217a4ae9195",
+      "verification": "db/baseline/payloads/1.0.0-027-kcv_context_packet-function.verify.sql",
+      "verification_sha256": "b99cf878da7331f56ad815f2435796f574e58bb3e822dee18a486035edc98e50",
+      "depends_on": [
+        "1.0.0-026-kcv_apex-package"
+      ]
+    },
+    {
+      "id": "1.0.0-028-kcv_source_packet-function",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/03_tools.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-028-kcv_source_packet-function.sql",
+      "payload_sha256": "34b6dc41b2ffdb47313be30ac021fab0854da02e892759e9a4f43bfc0e4e4a7d",
+      "verification": "db/baseline/payloads/1.0.0-028-kcv_source_packet-function.verify.sql",
+      "verification_sha256": "4345298593803570a7b67a4912c0debad520d5d3c37a3d78a95091ff7c1b2194",
+      "depends_on": [
+        "1.0.0-027-kcv_context_packet-function"
+      ]
+    },
+    {
+      "id": "1.0.0-029-kcv_evidence_packet-function",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/03_tools.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-029-kcv_evidence_packet-function.sql",
+      "payload_sha256": "93463e5fcdc72ad2716d68c6053e6c5b7d66c269866a7570959be289493246c0",
+      "verification": "db/baseline/payloads/1.0.0-029-kcv_evidence_packet-function.verify.sql",
+      "verification_sha256": "457f19c2d7bb1aa007379985c949964806dd385ceae3341b55f1e78b26ff00bc",
+      "depends_on": [
+        "1.0.0-028-kcv_source_packet-function"
+      ]
+    },
+    {
+      "id": "1.0.0-030-kcv_dataset-package-body",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/schema/06_dataset_import.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-030-kcv_dataset-package-body.sql",
+      "payload_sha256": "8672e0e11990cb1b355cb29c2ef932aee43184adca9da59f4ed156a8562a6cef",
+      "verification": "db/baseline/payloads/1.0.0-030-kcv_dataset-package-body.verify.sql",
+      "verification_sha256": "1d297579c38435482ae38733b0c7403c042b981d365666e737c4ac88f97e5274",
+      "depends_on": [
+        "1.0.0-029-kcv_evidence_packet-function"
+      ]
+    },
+    {
+      "id": "1.0.0-031-kcv_trace-package-body",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/06_response_provenance.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-031-kcv_trace-package-body.sql",
+      "payload_sha256": "da0aa1a5d69381789ccb5d3b3e56f45c8f5253c70a1d09f2d8dbf50e66b518b5",
+      "verification": "db/baseline/payloads/1.0.0-031-kcv_trace-package-body.verify.sql",
+      "verification_sha256": "58ca0a55e9f963fc6fad6825dcab95e234c5b741ac8ead3c14b4f975d6f3938a",
+      "depends_on": [
+        "1.0.0-030-kcv_dataset-package-body"
+      ]
+    },
+    {
+      "id": "1.0.0-032-kcv_scenario-package-body",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/02_scenario_api.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-032-kcv_scenario-package-body.sql",
+      "payload_sha256": "0fce3a47f0c97df7f5e1c199f27e8f5d6fb518d03283faa772af213670f8ae7c",
+      "verification": "db/baseline/payloads/1.0.0-032-kcv_scenario-package-body.verify.sql",
+      "verification_sha256": "7b84aa1f7a59ffa1a4729946050965b2141035b105f808cb3c7513ff99943331",
+      "depends_on": [
+        "1.0.0-031-kcv_trace-package-body"
+      ]
+    },
+    {
+      "id": "1.0.0-033-kcv_extract_domain-function",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/04_domain_extraction.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-033-kcv_extract_domain-function.sql",
+      "payload_sha256": "cf384307534f5a6cdf1674250fd9837411a9d953e25c12dbb3d29d0ed20b76e1",
+      "verification": "db/baseline/payloads/1.0.0-033-kcv_extract_domain-function.verify.sql",
+      "verification_sha256": "3ae3f040646be0c865662a124c68908ec997292770af5e1f7b240add194692b4",
+      "depends_on": [
+        "1.0.0-032-kcv_scenario-package-body"
+      ]
+    },
+    {
+      "id": "1.0.0-034-kcv_scenario_evidence-function",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/07_trace_tool_wrappers.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-034-kcv_scenario_evidence-function.sql",
+      "payload_sha256": "7003656dbb77dce97ad664d116924832acb3ad747a15cdf61b4e649d5a286abc",
+      "verification": "db/baseline/payloads/1.0.0-034-kcv_scenario_evidence-function.verify.sql",
+      "verification_sha256": "c17b6a0543b267046bc415d1497a8ad7691cd00c4cf4fe616f4e0af0c6e0611f",
+      "depends_on": [
+        "1.0.0-033-kcv_extract_domain-function"
+      ]
+    },
+    {
+      "id": "1.0.0-035-kcv_scenario_propose-function",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/07_trace_tool_wrappers.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-035-kcv_scenario_propose-function.sql",
+      "payload_sha256": "af2f408210b36711e2e07c05234d36fe75bf73e7711b5087b69bf0742338afe1",
+      "verification": "db/baseline/payloads/1.0.0-035-kcv_scenario_propose-function.verify.sql",
+      "verification_sha256": "395313ef28aff08fcc0f5c341657792941b960e593526186b80a92b423a54061",
+      "depends_on": [
+        "1.0.0-034-kcv_scenario_evidence-function"
+      ]
+    },
+    {
+      "id": "1.0.0-036-kcv_apex-package-body",
+      "group": "baseline",
+      "version": "1.0.0",
+      "source_path": "sql/extensions/05_apex_api.sql",
+      "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+      "payload": "db/baseline/payloads/1.0.0-036-kcv_apex-package-body.sql",
+      "payload_sha256": "f6b7205c0214c3228fa27a8c0254bdd7c59b408e78ec7f5633c7647ac2c4ac01",
+      "verification": "db/baseline/payloads/1.0.0-036-kcv_apex-package-body.verify.sql",
+      "verification_sha256": "3e8bd2c7f4de33deecea92b27ada2218341ff0ffbbab417839a8f5d70e5606f3",
+      "depends_on": [
+        "1.0.0-035-kcv_scenario_propose-function"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-001-kcv_personal_contexts",
+      "group": "feature",
+      "version": "2.0.0",
+      "source_path": "sql/extensions/10_my_contexts_objects.sql",
+      "source_unit": 0,
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-001-kcv_personal_contexts.sql",
+      "payload_sha256": "56a71e7c6b82d5689de12e415699be198cd32d27b07f6fd6d5a62b20498aac4b",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-001-kcv_personal_contexts.verify.sql",
+      "verification_sha256": "c7b8dd6240774678b63a4ad09f4f2577ec01ae0a46fbec237c17cfef7f396c25",
+      "depends_on": [
+        "1.0.0-036-kcv_apex-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-002-kcv_personal_owner_ix",
+      "group": "feature",
+      "version": "2.0.0",
+      "source_path": "sql/extensions/10_my_contexts_objects.sql",
+      "source_unit": 1,
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-002-kcv_personal_owner_ix.sql",
+      "payload_sha256": "9df3da49011dc1a27132c50f7b32063b8062f74f7c5a13cc1245779fe33290ba",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-002-kcv_personal_owner_ix.verify.sql",
+      "verification_sha256": "29b95346184ec2f99052337bc661929b9f6aa56da526613dcb24e7dc8d0fe1d0",
+      "depends_on": [
+        "2.0.0-c2-001-kcv_personal_contexts"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-003-kcv_context_requests",
+      "group": "feature",
+      "version": "2.0.0",
+      "source_path": "sql/extensions/10_my_contexts_objects.sql",
+      "source_unit": 2,
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-003-kcv_context_requests.sql",
+      "payload_sha256": "f958989420b734a69241bf7536acbf5cc9396a199eeeae2da39e3756c18b0143",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-003-kcv_context_requests.verify.sql",
+      "verification_sha256": "d3d606800de18a3ccd2b2b9c29e0a036a3591fbe74d21becdc633b161664da03",
+      "depends_on": [
+        "2.0.0-c2-002-kcv_personal_owner_ix"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-004-kcv_access-package",
+      "group": "feature",
+      "version": "2.0.0",
+      "source_path": "sql/extensions/11_context_access.sql",
+      "source_unit": 0,
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-004-kcv_access-package.sql",
+      "payload_sha256": "cfd7d3d6002df4be592e6f021e969ba0d937caeaef57a39063f877ca85517b0e",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-004-kcv_access-package.verify.sql",
+      "verification_sha256": "75b3d75f6465c32e8b3d43d917c80db2784cf39e00b9c792313aaead1e3a9f23",
+      "depends_on": [
+        "2.0.0-c2-003-kcv_context_requests"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-005-kcv_access-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "source_path": "sql/extensions/11_context_access.sql",
+      "source_unit": 1,
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-005-kcv_access-package-body.sql",
+      "payload_sha256": "19be1d848f5d15b63a3480f911714f96b06a9382dd20d6356c1ffabadfe9e376",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-005-kcv_access-package-body.verify.sql",
+      "verification_sha256": "8a5806b4eb725093e6413958b1e3e84a2dcc764d3d9df678dbad89300dfece90",
+      "depends_on": [
+        "2.0.0-c2-004-kcv_access-package"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-006-kcv_personal_context_api-package",
+      "group": "feature",
+      "version": "2.0.0",
+      "source_path": "sql/extensions/12_my_contexts_api.sql",
+      "source_unit": 0,
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-006-kcv_personal_context_api-package.sql",
+      "payload_sha256": "d747fdab5c2bde0497a98aba4aef46cad2f39534e219d065bacabce168ae2c07",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-006-kcv_personal_context_api-package.verify.sql",
+      "verification_sha256": "5c68e7bb0556ee0f1ac47f43003fea07a5dcdd3461dc8ec60c3f1ac1df1f6cf4",
+      "depends_on": [
+        "2.0.0-c2-005-kcv_access-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-007-kcv_personal_context_api-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "source_path": "sql/extensions/12_my_contexts_api.sql",
+      "source_unit": 1,
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-007-kcv_personal_context_api-package-body.sql",
+      "payload_sha256": "97a282c2f09c24428e56451f6c522786ecf0d672deab479b85311bec4851857c",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-007-kcv_personal_context_api-package-body.verify.sql",
+      "verification_sha256": "f21b20d825c68e23f7d962dd26253091030a9c04a2a4392f8f491d3f095b9705",
+      "depends_on": [
+        "2.0.0-c2-006-kcv_personal_context_api-package"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-ready",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-ready.sql",
+      "payload_sha256": "b85110b107629d057c80fea4dccba2bcfd7ae2706cf9e35b7f9b4d532bd16ccb",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-ready.verify.sql",
+      "verification_sha256": "1213032ca7212ccef6105306bd63993c2dc57ace9745fb8dea1feead581cb39d",
+      "depends_on": [
+        "2.0.0-c2-007-kcv_personal_context_api-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-008-kcv_access-session-binding-package",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-008-kcv_access-session-binding-package.sql",
+      "payload_sha256": "8b91143483ce436c6305c975a0ab797b69711843c6b80c4823a3cede36427169",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-008-kcv_access-session-binding-package.verify.sql",
+      "verification_sha256": "d372adcc547f68d9bcc4388a3fa8044be18d73f6b0a3326be854b144558ba863",
+      "depends_on": [
+        "2.0.0-c2-ready"
+      ],
+      "source_path": "sql/extensions/11_context_access.sql",
+      "source_unit": 0,
+      "supersedes": [
+        "2.0.0-c2-004-kcv_access-package"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-009-kcv_access-session-binding-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-009-kcv_access-session-binding-package-body.sql",
+      "payload_sha256": "e1fdd8f2f6eeb00d8f6237587aadf05f3c3744089cd32c17f0c31e3add8eb24e",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-009-kcv_access-session-binding-package-body.verify.sql",
+      "verification_sha256": "182bea6f4db420fd3ea3e6f8bed8c9578cad8f1356243a912d333969858c11da",
+      "depends_on": [
+        "2.0.0-c2-008-kcv_access-session-binding-package"
+      ],
+      "source_path": "sql/extensions/11_context_access.sql",
+      "source_unit": 1,
+      "supersedes": [
+        "2.0.0-c2-005-kcv_access-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-010-recompile-context-api",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-010-recompile-context-api.sql",
+      "payload_sha256": "07c4ce2d4547a4952d601c2bbd68c88e536ab5fb63fc6c16d53fc8756844af07",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-010-recompile-context-api.verify.sql",
+      "verification_sha256": "3625116edffda600701f4a2f9a69320c4785182108b8fb9aa0cfa69b5c7db6ca",
+      "depends_on": [
+        "2.0.0-c2-009-kcv_access-session-binding-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c2-identity-ready",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c2/2.0.0-c2-identity-ready.sql",
+      "payload_sha256": "b85110b107629d057c80fea4dccba2bcfd7ae2706cf9e35b7f9b4d532bd16ccb",
+      "verification": "db/changes/2.0.0-c2/2.0.0-c2-identity-ready.verify.sql",
+      "verification_sha256": "d4b514bdb36207b51e199322cbcb0ca8b49586b6aee618ee636d6535e7c6beb3",
+      "depends_on": [
+        "2.0.0-c2-010-recompile-context-api"
+      ],
+      "supersedes": [
+        "2.0.0-c2-ready"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-001-kcv_chat_sessions-journey-columns",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-001-kcv_chat_sessions-journey-columns.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-001-kcv_chat_sessions-journey-columns.verify.sql",
+      "depends_on": [
+        "2.0.0-c2-identity-ready"
+      ],
+      "payload_sha256": "801426dd3e568e59852017992cbc5990a4e28c9d0d9816e42599feca011bb3ed",
+      "verification_sha256": "7c8e5f993e302b010ed03f8b85f14488cbd92a85ff91602df4a23a4ccbff5b3c",
+      "source_path": "sql/extensions/13_personal_journey_objects.sql",
+      "source_unit": 0,
+      "supersedes": [
+        "1.0.0-013-kcv_chat_sessions"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-002-kcv_chat_personal_ix",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-002-kcv_chat_personal_ix.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-002-kcv_chat_personal_ix.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-001-kcv_chat_sessions-journey-columns"
+      ],
+      "payload_sha256": "95b535516543e5c25d4295a423445cc19c96912ac47adc2ec5f1354acad53037",
+      "verification_sha256": "f68b5a390266b4ee11a0dc235133ee8afac94984e43e18ddf1fbaaaef56f59ef",
+      "source_path": "sql/extensions/13_personal_journey_objects.sql",
+      "source_unit": 1
+    },
+    {
+      "id": "2.0.0-c3-003-kcv_response_runs-journey-columns",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-003-kcv_response_runs-journey-columns.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-003-kcv_response_runs-journey-columns.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-002-kcv_chat_personal_ix"
+      ],
+      "payload_sha256": "fc67560a8dbe946042b5d16b8bac43b85e5bc9497306fa142c56b037fc09775b",
+      "verification_sha256": "297d0e21bd5fcbaa51a22348208e33ec0e7b9b7a3f8d1ee150e1a9b872209db7",
+      "source_path": "sql/extensions/13_personal_journey_objects.sql",
+      "source_unit": 2,
+      "supersedes": [
+        "1.0.0-018-kcv_response_runs"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-004-kcv_response_request_ix",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-004-kcv_response_request_ix.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-004-kcv_response_request_ix.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-003-kcv_response_runs-journey-columns"
+      ],
+      "payload_sha256": "27284e10996926d2c02ee1a8b0c71f7f6c5f57e893f279325a3611f088a701a5",
+      "verification_sha256": "0e6de142c6fad7d282a892b5a24441283f37b51a7c3392a2495c54e6301b8254",
+      "source_path": "sql/extensions/13_personal_journey_objects.sql",
+      "source_unit": 3
+    },
+    {
+      "id": "2.0.0-c3-005-kcv_context_attachments",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-005-kcv_context_attachments.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-005-kcv_context_attachments.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-004-kcv_response_request_ix"
+      ],
+      "payload_sha256": "094270dc4a8b0a8ff8c596d706776062b83127d7739750cae4ed449b040231a4",
+      "verification_sha256": "4ce7d6b2dd5e4054e11c0fa84579207d3bbe140640398006ce3bd4f49de86318",
+      "source_path": "sql/extensions/13_personal_journey_objects.sql",
+      "source_unit": 4
+    },
+    {
+      "id": "2.0.0-c3-006-kcv_personal_operations",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-006-kcv_personal_operations.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-006-kcv_personal_operations.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-005-kcv_context_attachments"
+      ],
+      "payload_sha256": "0a6b5b7e395742739edafc1ed437a6af031f89bf04f2d6187d9287faa19ec153",
+      "verification_sha256": "b009dae87fa70d4d8340226999b0442cb53789766f7c211859b35819e08b8154",
+      "source_path": "sql/extensions/13_personal_journey_objects.sql",
+      "source_unit": 5
+    },
+    {
+      "id": "2.0.0-c3-007-kcv_model_boundaries",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-007-kcv_model_boundaries.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-007-kcv_model_boundaries.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-006-kcv_personal_operations"
+      ],
+      "payload_sha256": "c7c339c897e778b8aac1135b9e16a7d282939812500a340c04ef45a03a54ba39",
+      "verification_sha256": "2520143b38b2a1914011eb03e206f2779ecf2e2b6df965bcf4f168d98fdf6ec0",
+      "source_path": "sql/extensions/13_personal_journey_objects.sql",
+      "source_unit": 6
+    },
+    {
+      "id": "2.0.0-c3-008-kcv_access-package",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-008-kcv_access-package.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-008-kcv_access-package.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-007-kcv_model_boundaries"
+      ],
+      "payload_sha256": "6c245d83dbab907122f3261c1a81c832223149bb7bdf688fd77f63ffe73b45e0",
+      "verification_sha256": "869ed3f1e35f97f9fddab89df759bc50fcaeeeac56594a301bde96508f155953",
+      "source_path": "sql/extensions/11_context_access.sql",
+      "source_unit": 0,
+      "supersedes": [
+        "2.0.0-c2-008-kcv_access-session-binding-package"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-009-kcv_personal_context_api-package",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-009-kcv_personal_context_api-package.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-009-kcv_personal_context_api-package.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-008-kcv_access-package"
+      ],
+      "payload_sha256": "f539f47a4aa9b37b29e8c8b88100d930254052fa1cae7b487204c13eddfd04e4",
+      "verification_sha256": "9b6af472c14fb2d9b34995340b8399209e7dabe1a13d217605b972f2f33f1170",
+      "source_path": "sql/extensions/12_my_contexts_api.sql",
+      "source_unit": 0,
+      "supersedes": [
+        "2.0.0-c2-006-kcv_personal_context_api-package"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-010-kcv_personal_journey-package",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-010-kcv_personal_journey-package.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-010-kcv_personal_journey-package.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-009-kcv_personal_context_api-package"
+      ],
+      "payload_sha256": "c424c718f70de6ccd467398cb4ac31561d4e5a9a2daa99c381ea56d0e607f00c",
+      "verification_sha256": "7a4e919c13451de87c88fe6aeb599a33b82d4c7f16c0a9386dc6128ac8148a71",
+      "source_path": "sql/extensions/14_personal_journey.sql",
+      "source_unit": 0
+    },
+    {
+      "id": "2.0.0-c3-011-kcv_scenario-package",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-011-kcv_scenario-package.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-011-kcv_scenario-package.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-010-kcv_personal_journey-package"
+      ],
+      "payload_sha256": "aafa3ae5228036f7051aa061756d8c7d43ecb44f0d8f6526274ce914748382ee",
+      "verification_sha256": "811c9e750c5457505a06e2252432198493c6ba2e55c54e159897dede784d9568",
+      "source_path": "sql/extensions/02_scenario_api.sql",
+      "source_unit": 0,
+      "supersedes": [
+        "1.0.0-025-kcv_scenario-package"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-012-kcv_access-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-012-kcv_access-package-body.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-012-kcv_access-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-011-kcv_scenario-package"
+      ],
+      "payload_sha256": "942f16d02a03e08d9fdbe16b73cdd3954d24c484d056b64329075592005aa515",
+      "verification_sha256": "65d131cfefc6da8201d0775b1464fbb92d2854304b37437f1290bf5a1e2c033c",
+      "source_path": "sql/extensions/11_context_access.sql",
+      "source_unit": 1,
+      "supersedes": [
+        "2.0.0-c2-009-kcv_access-session-binding-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-013-kcv_personal_context_api-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-013-kcv_personal_context_api-package-body.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-013-kcv_personal_context_api-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-012-kcv_access-package-body"
+      ],
+      "payload_sha256": "3883c5d0a76db32d47789a257d42b3ca721be4c6e966d4d565fd8bf3466c4d1d",
+      "verification_sha256": "66a3ef0b8cbbdf577c2826be67c6c3e9fe7faf8a7cd4181f761aadd6062115f3",
+      "source_path": "sql/extensions/12_my_contexts_api.sql",
+      "source_unit": 1,
+      "supersedes": [
+        "2.0.0-c2-007-kcv_personal_context_api-package-body",
+        "2.0.0-c2-010-recompile-context-api"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-014-kcv_personal_journey-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-014-kcv_personal_journey-package-body.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-014-kcv_personal_journey-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-013-kcv_personal_context_api-package-body"
+      ],
+      "payload_sha256": "56ca00d75134b26c09cf0cb1a9bfc022df7159c7e01f3827b216606cf103cfd5",
+      "verification_sha256": "53679ffcebebdf0594b5a62b2703cb02963fa314710851fdbf87535f3d754fba",
+      "source_path": "sql/extensions/14_personal_journey.sql",
+      "source_unit": 1
+    },
+    {
+      "id": "2.0.0-c3-015-kcv_scenario-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-015-kcv_scenario-package-body.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-015-kcv_scenario-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-014-kcv_personal_journey-package-body"
+      ],
+      "payload_sha256": "4c2b7bd6ae2e3d20fdabe64ddd785abdc6845d93a994d43737e3796d56c8e719",
+      "verification_sha256": "bf36e0da398a53ec0251c70aa21fb967c5c7bc779066e787b072ea8a9e141f7e",
+      "source_path": "sql/extensions/02_scenario_api.sql",
+      "source_unit": 1,
+      "supersedes": [
+        "1.0.0-032-kcv_scenario-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-016-kcv_trace-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-016-kcv_trace-package-body.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-016-kcv_trace-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-015-kcv_scenario-package-body"
+      ],
+      "payload_sha256": "1dc16cca79c9c3a4d4658c96d78d64a495e0583370f932eb3d0cf1187549d617",
+      "verification_sha256": "4bc7e31ff2992eb614dd7c10564a91829c75ff199c3aa3e9980d06633414885d",
+      "source_path": "sql/extensions/06_response_provenance.sql",
+      "source_unit": 2,
+      "supersedes": [
+        "1.0.0-031-kcv_trace-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-017-kcv_apex-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-017-kcv_apex-package-body.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-017-kcv_apex-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-016-kcv_trace-package-body"
+      ],
+      "payload_sha256": "94cd485e8c0e3082c9b79ad77a882a8638353ce1635108455627bb400ce5718e",
+      "verification_sha256": "5c697683d8937778e416fd862b1472b16fbe0a468a9a2f32c67c461a4706794f",
+      "source_path": "sql/extensions/05_apex_api.sql",
+      "source_unit": 1,
+      "supersedes": [
+        "1.0.0-036-kcv_apex-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-ready",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3/2.0.0-c3-ready.sql",
+      "verification": "db/changes/2.0.0-c3/2.0.0-c3-ready.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-017-kcv_apex-package-body"
+      ],
+      "payload_sha256": "5587a9df6d31a07ce4035afbfc60d5b1ddefac2761f6e5167e559349fbdc565a",
+      "verification_sha256": "7e344e4fd66417c7e0563818b1f6b0394c0d72c46b6c1d0e410a09861213b12f",
+      "supersedes": [
+        "2.0.0-c2-identity-ready"
+      ]
+    }
+  ]
+}

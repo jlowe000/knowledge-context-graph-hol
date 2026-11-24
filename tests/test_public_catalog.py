@@ -144,7 +144,10 @@ class PublicCatalogTests(unittest.TestCase):
 
     def test_release_includes_catalogue_graph_metadata_and_prepared_sql(self):
         with tempfile.TemporaryDirectory() as tmp:
-            folder=build(Path(tmp)/'release')
+            # Catalogue fixture only; native APEX import/export is a separate gate.
+            with patch('scripts.build_release.verify_upgrade_export', return_value={'fixture_only': True}), \
+                 patch('scripts.build_apex_worksheet.verify_upgrade_export', return_value={'fixture_only': True}):
+                folder=build(Path(tmp)/'release')
             self.assertTrue((folder/'data/public-catalog.json').exists())
             self.assertTrue((folder/'references/public-access-checks.json').exists())
             loader=(folder/'sql/install/10_load_dataset.sql').read_text(encoding='utf-8')

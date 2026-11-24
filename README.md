@@ -8,11 +8,13 @@ This adapts only Oracle's [ontology-grounded document workshop](https://github.c
 
 This is the **dev branch**, for people building their own adaptation of the knowledge collection or contributing implementation changes. Start with [Build your own version](docs/build-your-own.md), then [development environment setup](docs/development.md). It covers changing the sources, taxonomy/ontology, retrieval, tools, UI and validation—not just running build utilities.
 
+**v2.0.0 is in development.** The My Contexts R4 candidate retrieves and records scoped evidence before model dispatch. An authenticated browser test deleted only the synthetic provider conversation, then continued the same saved application conversation: one follow-up passed with six prior turns, six passages, six graph paths and three matched citations. The latest revision and every earlier turn/response/evidence/observation hash were preserved. Native initial/adopted answers and the fail-before-dispatch test passed. A separate strict native expiry test returned malformed model JSON despite successful retrieval, so the full model suite is not marked passed. The matching R4 engine export and receipt are prepared; new/upgrade Worksheet wrappers are generated but not deployed. Fresh deployment and Worksheet execution remain unverified. See the [R4 validation record](db/verification/c3-r4-validation.json), [journey record](references/my-contexts-c3-validation.json), [migration guide](docs/database-migrations.md) and [manual review](docs/my-contexts-manual-test.md). The learning loop and Explorer evaluation remain separate future epics. Published release remains **v1.0.0**; no v2 promotion has occurred.
+
 Select **release** to use the supplied app or follow its developer learning experience: understand the model, inspect SPARQL/tool evidence and exercise the existing SQL APIs. Its deployment guide is needed only when an environment has not been supplied. The branch distinction is the intended outcome, not whether you are a developer. Release experiences are maintained separately under `release-docs/`; see [branch workflow](docs/branch-workflow.md) for promotion.
 
 ## What is ready
 
-**New to ADB? [Start with the fresh Serverless deployment walkthrough](docs/fresh-serverless-deployment.md).** It explains the accounts, screens, SQL execution controls and expected results in order, through to the evidence explorer. It follows LiveLabs HOL content conventions without WMS publication metadata.
+**New to ADB? Use the `release` branch for the published SQL-first learning experience.** Its [fresh Serverless deployment walkthrough](https://github.com/jlowe000/knowledge-context-graph-hol/blob/release/docs/fresh-serverless-deployment.md) explains the accounts, screens, SQL execution controls and expected results in order. For the exact v1 baseline, check out `v1.0.0`. Current dev installation uses the migration route below; do not combine its files with the older raw-schema setup sequence.
 
 - Nine reviewed public presentation sources, exact edition hashes and selected PDF pages.
 - Three fictional learner contexts, with optional/emerging objectives.
@@ -37,7 +39,7 @@ Read [generated/dataset-preview.md](generated/dataset-preview.md), [generated/as
 
 The initial graph has **zero accepted extracted claims**. Its content metadata, real passage locators, editorial review examples and proposed baseline assessments are intentionally distinct. Actual PDF text is in ignored `work/passages.json`, not in the published graph. Original PDFs remain in ignored `work/originals/`.
 
-Database work uses **Database Actions → SQL Worksheet**. The [direct GitHub dataset load](docs/github-dataset-load.md) fetches JSON data from a pinned public commit and validates it before activating the graph. Dev includes a publishable summary package under `data/load/` and its short caller in `sql/install/10_load_github.sql`. Publish and test that candidate using the full **dev commit SHA** before promoting it to release. Its evidence is attributed editorial summaries, separate from the extracted authoring passages in ignored `work/` files. No client database driver or wallet is required. `requirements-db.txt` and the Python DB commands are optional automation.
+The published learner route uses **Database Actions → SQL Worksheet**; v2 schema development uses SQLcl/Liquibase through the migration guide above. The [direct GitHub dataset load](docs/github-dataset-load.md) fetches JSON data from a pinned public commit and validates it before activating the graph. Dev includes a publishable summary package under `data/load/` and its short caller in `sql/install/10_load_github.sql`. Publish and test that candidate using the full **dev commit SHA** before promoting it to release. Its evidence is attributed editorial summaries, separate from the extracted authoring passages in ignored `work/` files. The Worksheet route needs no client database driver or wallet; SQLcl has a separate private database connection. `requirements-db.txt` and the Python DB commands are optional automation.
 
 The GitHub load and expanded summary dataset passed [native ADB Serverless acceptance](references/github-dataset-validation.json) on 23 November 2026 at dev commit `6eb868ee732f0ca3a0d8a6f9e68f838590d77b47`: 834 sources, 762 passages, three contexts and 30,144 RDF triples. Import/retry, graph scope, source isolation and two-session locking passed. A subsequent [real-model and signed-in APEX check](references/expanded-ui-validation.json) passed Alex refinement, historical evidence, Casey's added research, non-PDF links and observations, with four real model calls. The tested app and citation-parser fixes are identified by artifact hashes. Release remains unchanged; follow the [testing and promotion sequence](docs/branch-workflow.md#maintainer-promotion).
 
@@ -59,7 +61,9 @@ The same LRN6034 session has two different presentations; they remain different 
 
 ## Continue on ADB Serverless
 
-**New installation:** follow the [beginner route](docs/fresh-serverless-deployment.md) from environment preparation through application deployment. **Existing installation:** use the [two-epic upgrade guide](docs/epics-upgrade.md). If the base graph and model profile are already working but the scenario extension is absent, use [scenario extension setup](docs/scenario-setup.md).
+**Current dev candidate:** follow the [database migration guide](docs/database-migrations.md) for a fresh isolated schema, an existing migration-managed dev installation, or verified v1 adoption. Complete its separate runtime prerequisites, then use the [native APEXlang deployment route](apex/README.md#deploy-the-v2-dev-candidate) and [manual candidate review](docs/my-contexts-manual-test.md). Do not run the legacy raw table/package installation sequence against a migration-managed schema.
+
+**Published v1 experience:** use a `release` or `v1.0.0` checkout and follow that checkout's beginner deployment, scenario setup or upgrade guide. The historical guides retained on dev are references; their linked current SQL files are not an alternative v2 migration path.
 
 The main path is sources → graph → context → relevant content → refinement. [Claim extraction and human review](labs/04_extract_and_review.md) is an optional curation extension; no claim approval is required for the main path. The older [setup reference](docs/setup.md) and [technical labs](labs/00_introduction.md) provide deeper exercises. Java enablement is a deliberate database-wide operation, never an automatic side effect of a build.
 
@@ -69,7 +73,7 @@ SQL examples shorter than 10 runnable lines are included inline where used, with
 
 ## Agents
 
-The explorer uses KCV_EXPLORER_TEAM: a question worker, a change planner and a coordinator. The older optional KCV_TEAM defines three workers plus a coordinator:
+Current v2 retrieves and records question evidence in application code, then sends the packet to the tool-free `KCV_GROUNDED_TEAM` answer task. Context-change proposals retain `KCV_EXPLORER_TEAM`. The lineage distinguishes application retrieval from agent tool calls and historical events with an unrecorded trigger. The older optional KCV_TEAM defines three workers plus a coordinator:
 
 - **Source analyst:** proposes claims from public passages.
 - **Context planner:** clarifies only the context supplied.

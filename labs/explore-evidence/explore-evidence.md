@@ -47,7 +47,7 @@ Knowledge Context Explorer is installed, and you can sign into it as KCV_USER. T
 
    ![Sources popup showing Alex connected through topics to sources and their PDF pages](images/sources-graph.jpg)
 
-**Expected outcome:** you can explain why a source was selected and locate its detail. This real screenshot is from the validated demonstration; your turn/revision IDs, selection and wording can differ. A graph connection alone does not establish suitability or observed value.
+**Expected outcome:** you can explain why a source was selected and locate its detail. This historical v1 screenshot shows the earlier demonstration; your turn/revision IDs, selection and wording can differ. Current dev's application retrieval before model dispatch is covered in the [My Contexts manual review](../../docs/my-contexts-manual-test.md). A graph connection alone does not establish suitability or observed value.
 
 ## Task 3: Inspect answer lineage
 
@@ -58,6 +58,8 @@ Knowledge Context Explorer is installed, and you can sign into it as KCV_USER. T
 3. Close the popup or press Escape to return to the answer. Opening the popup does not call the model or change the context.
 
    ![Answer lineage showing the question, context, pinned graphs, captured evidence tool, stored answer and six matched citation references](images/answer-lineage.jpg)
+
+This is a historical v1 lineage screenshot. Its agent-tool ordering is not the R4 dev execution order.
 
 **Expected outcome:** the response is linked to an execution, actual tool output and citation metadata. If structured citations cannot be read, matching is labelled unavailable rather than silently treated as zero. Answers created before trace capture show an earlier-response notice.
 

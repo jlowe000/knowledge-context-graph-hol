@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from rdflib import Graph, URIRef
 from kcv import pipeline as p
@@ -14,7 +15,11 @@ class ReleaseTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.temporary = tempfile.TemporaryDirectory()
-        cls.folder = build(Path(cls.temporary.name) / 'release')
+        # Fixture for dataset/distribution regression only. Real engine-export
+        # gating is exercised separately; this mock is never an acceptance receipt.
+        with patch('scripts.build_release.verify_upgrade_export', return_value={'fixture_only': True}), \
+             patch('scripts.build_apex_worksheet.verify_upgrade_export', return_value={'fixture_only': True}):
+            cls.folder = build(Path(cls.temporary.name) / 'release')
 
     @classmethod
     def tearDownClass(cls):
@@ -92,6 +97,15 @@ class ReleaseTests(unittest.TestCase):
         for item in manifest['files']:
             self.assertEqual(item['sha256'], hashlib.sha256((self.folder / item['path']).read_bytes()).hexdigest())
         with self.assertRaises(ValueError): build(self.folder)
+
+    def test_v2_distribution_refuses_missing_engine_export_before_packaging(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / 'VERSION').write_text('2.0.0\n', encoding='utf-8')
+            with patch('scripts.build_release.ROOT', root):
+                with self.assertRaisesRegex(ValueError, 'No validated v2 engine export'):
+                    build(root / 'candidate')
+            self.assertFalse((root / 'candidate').exists())
 
     def test_github_dataset_is_valid_public_and_pinned_by_the_sql_caller(self):
         from kcv.github_dataset import validate, validate_package

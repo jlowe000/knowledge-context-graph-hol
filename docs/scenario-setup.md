@@ -1,5 +1,7 @@
 # Install the original-style scenario extension
 
+**Version scope:** use this raw-script sequence only from a published v1 checkout (`release` or `v1.0.0`). The current dev package sources depend on additional My Contexts objects and must be installed through the [migration guide](database-migrations.md), followed by the [v2 APEX deployment sequence](../apex/README.md#deploy-the-v2-dev-candidate). Do not rerun this sequence against a migration-managed schema.
+
 **This starts after base installation.** For a new database or a first ADB deployment, follow the [beginner route](fresh-serverless-deployment.md); it installs this extension at the appropriate point. For an existing explorer installation, use [the upgrade guide](epics-upgrade.md).
 
 Target: ADB Serverless 26ai with the initial dataset loaded, Java/RDF available, KCV_GENAI working, and Database Actions enabled for KCV_LAB. The existing user/grants/profile setup is retained. The local test container is not the minimum full-HOL runtime.

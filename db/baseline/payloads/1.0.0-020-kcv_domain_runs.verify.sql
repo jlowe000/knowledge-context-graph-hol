@@ -1,0 +1,4 @@
+ l_expected:=TO_CLOB('');
+ l_expected:=l_expected||TO_CLOB('{"name":"KCV_DOMAIN_RUNS","temporary":"N","columns":[{"name":"RUN_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":40,"char_used":"B"},{"name":"SOURCE_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":32,"char_used":"B"},{"name":"GRAPH_NAME","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":128,"char_used":"B"},{"name":"RESPONSE_JSON","type":"CLOB","nullable":"N","identity":"NO","default":null},{"name":"FACT_COUNT","type":"NUMBER","nullable":"N","identity":"NO","default":null,"precision":null,"scale":null},{"name":"CREATED_AT","type":"TIMESTAMP(6) WITH TIME ZONE","nullable":"N","identity":"NO","default":"SYSTIMESTA');
+ l_expected:=l_expected||TO_CLOB('MP"}],"constraints":[{"type":"P","columns":"RUN_ID"},{"type":"C","expression":"response_json IS JSON"}]}');
+ check_table(l_expected);

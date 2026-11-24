@@ -1,0 +1,245 @@
+{
+  "recorded_date": "2026-11-24",
+  "product_version": "2.0.0",
+  "increment": "C3 My Contexts personal journey, R4 application evidence retrieval",
+  "status": "dev_candidate_browser_expiry_continuation_passed_with_separate_model_format_limitation",
+  "implementation_committed": false,
+  "release_promoted": false,
+  "target": "isolated temporary ADB Serverless schema and APEX application; original lab retained",
+  "schema_marker": "2.0.0-c3-r4-ready",
+  "tools": {
+    "sqlcl": "26.3.1.301.1413",
+    "liquibase": "4.33.0",
+    "java": "25.0.5.1",
+    "client_os": "Oracle Linux under WSL",
+    "apex": "26.1.6"
+  },
+  "database_upgrade": {
+    "active_complete_migrations": 80,
+    "liquibase_rows": 81,
+    "invalid_objects": 0,
+    "existing_personal_contexts_preserved": 4,
+    "original_app_and_profile": "present and unchanged by candidate deployment",
+    "javavm": "VALID",
+    "temporary_model_setup_helpers": 0,
+    "temporary_cross_schema_credential_grants": 0,
+    "existing_runtime_row_counts": "unchanged across migration and same-ID APEX import",
+    "sources": 834,
+    "passages": 762,
+    "retired_failure": "The original C3 scenario-body compilation failed on a reserved variable name. Its FAILED receipt and immutable artifacts are retained, with exact retirement guards; it is not falsely marked COMPLETE.",
+    "followup_fix": "R4 retrieves and durably records the pinned evidence packet in application code before dispatching a question to the grounded answer team. It records APPLICATION origin and the model dispatch boundary. Retrieval failure stops before inference, clears the lease and cannot replay under the same request token. Earlier immutable migrations and legacy historical trace shapes are retained.",
+    "migration_records": [
+      "../db/verification/c3-validation.json",
+      "../db/verification/c3-r1-validation.json",
+      "../db/verification/c3-r2-validation.json",
+      "../db/verification/c3-r3-validation.json",
+      "../db/verification/c3-r4-validation.json"
+    ]
+  },
+  "local_checks": {
+    "full_suite_before_r2_observation_fix": {
+      "passed": 106,
+      "seconds": 170.277
+    },
+    "r2_migration_suite": {
+      "passed": 29
+    },
+    "r2_apex_authoring_suite": {
+      "passed": 10
+    },
+    "r2_pipeline_suite": {
+      "passed": 13,
+      "seconds": 38.962
+    },
+    "apex_asset_check": "passed",
+    "r3": {
+      "migration_tests_passed": 29,
+      "apex_authoring_tests_passed": 10,
+      "generated_artifacts": "passed",
+      "javascript_syntax": "passed",
+      "prior_wrappers_preserved": 70
+    },
+    "r4": {
+      "migration_tests_passed": 29,
+      "apex_authoring_tests_passed": 10,
+      "javascript_tests_passed": 7,
+      "apex_assets": "passed",
+      "prior_wrappers_preserved": 74,
+      "review": "No critical security, concurrency or transaction blocker found in the application retrieval and failure/replay paths."
+    }
+  },
+  "native_personal_journey": {
+    "live_r2_suite": "passed",
+    "publication": "real RDF activation, idempotent apply/start and stale-preview rejection",
+    "revision_adoption": "pinned conversations, explicit reviewed-head compare-and-set and retained historical revisions",
+    "selection_and_interpretation": "objective-only changes preserve selected evidence; topic changes publish a new focus without silently moving conversations",
+    "collection_adoption": "collection-only changes increment the draft version and reject stale editors",
+    "history": "bounded pagination, cursor ownership and exact 8-turn/1500-per-turn/8000-total continuation limits",
+    "observations": "persisted and idempotent; no automatic context/source publication",
+    "model_metadata_recovery": "actual DROP_CONVERSATION followed by recreation and boundary recording; no provider inference in this test",
+    "uncertain_response_recovery": "explicit abandonment releases the finished worker lease without automatic replay",
+    "archive": "reopen remains readable; writes are rejected until restore",
+    "concurrency": "independent sessions verified advisory context lock across COMMIT, no competing save/archive writes, and resumed writes after release",
+    "cleanup": "exact synthetic rows, overlays, model conversations and disposable packages removed; public sources and passages unchanged"
+  },
+  "native_apex_authorization": {
+    "result": "passed using privileged APEX_SESSION test harness, not real browser sign-in",
+    "cross_account": "open, state, evidence, history, trace, observe and adoption rejected for another account",
+    "session_attachment": "missing identity pin rejected; same-owner new session requires explicit reopen; repeated attachment is idempotent",
+    "archive": "reopened archive is readable and write-protected",
+    "cleanup": "synthetic application sessions and fixtures removed; existing accounts unchanged"
+  },
+  "native_original_hol_regression": {
+    "result": "passed on live R2 without model inference",
+    "coverage": "Alex/Sam/Casey graph evidence, healthcare qualifications, staged topic/objective refinement, replay rejection and observations",
+    "topic_removal": "change in learning focus; explicit constraints and public source knowledge retained",
+    "preservation": "public source/passage counts, ACTIVE_GRAPH and sample-context hash unchanged; exact test sessions/revisions/overlays/model metadata cleaned"
+  },
+  "apex_engine": {
+    "target_metadata_validation": "passed; existing page 1 regionBody deprecation remains",
+    "same_id_native_apexlang_import": "R4 passed, including the final response-format warning; runtime rows preserved and the existing authenticated browser session survived the supported keep-sessions import option",
+    "installed_component_parse": {
+      "plsql_processes": 19,
+      "sql_reports": 6,
+      "sql_lovs": 4,
+      "result": "passed without executing page actions"
+    },
+    "native_close_dialog": "excluded from SQL parsing because it is a native CLOSE_WINDOW action",
+    "application_source_sha256": "c569cc01363edc4e24c2f504640be2917972a0c8a629193b79186acf1c21c5d4",
+    "availability": "candidate reopened after native verification",
+    "public_engine_export": "R4 native engine export accepted after the signed-in expiry test. Exact LF export, eight pages and seven source-matching assets passed privacy review; no supporting objects, workspace users, private URLs or runtime records were exported.",
+    "export_sql_sha256": "49e97be04498ccdd95c367d7117ae0cc0a6542792dd7532b77634ce0f5e43c84",
+    "export_receipt": "../apex/export-validation.json",
+    "worksheet_wrappers": "R4 new-install and same-ID upgrade wrappers regenerated and locally validated against the accepted engine export; neither wrapper was deployed for this candidate"
+  },
+  "genai_connection": {
+    "recorded_date": "2026-11-24",
+    "result": "passed after the user privately dropped and recreated the isolated schema credential",
+    "configuration": "local profile created and AI_PROFILE setting registered only after successful provider inference",
+    "owner_session": "second live greeting passed through the saved isolated owner/proxy connection; nonempty response contained 5 characters",
+    "cleanup": "temporary configuration procedure removed",
+    "scope": "provider connection and greeting only; subsequent agent acceptance is recorded separately below"
+  },
+  "live_model_acceptance": {
+    "recorded_date": "2026-11-24",
+    "result": "passed in the isolated schema through the native owner/proxy connection",
+    "registration": {
+      "previous_project_objects": 0,
+      "enabled_teams": 2,
+      "agents": 7,
+      "tasks_including_generated_supervisor_tasks": 7,
+      "tools": 5,
+      "method": "existing lab and Explorer registration blocks; no managed functions or packages replaced"
+    },
+    "personal_journey": {
+      "inference_calls": 3,
+      "coverage": "initial evidence answer, explicit topic-removal refinement and continuation after actual provider-conversation deletion",
+      "traces": "all three answers had completed saved traces, successful evidence tool returns, native graph paths and citations matched to returned passages",
+      "idempotence": "same request token returned the exact saved reply without creating another response run",
+      "revision_boundary": "publication retained the conversation's earlier revision until explicit adoption",
+      "historical_evidence": "the first answer's saved trace remained byte-identical after refinement and adoption",
+      "topic_removal": "the directly reviewed final answer treated removal as learning focus rather than technical prohibition, retained the explicit exploration-only constraint and identified editorial summaries",
+      "model_recovery": "a deliberately dropped test provider conversation was recreated on the next question, with four previous application turns supplied and a MISSING_MODEL boundary recorded",
+      "final_answer_trace": {
+        "matched_citations": 2,
+        "native_graph_paths": 6
+      },
+      "cleanup": "only the suite's synthetic context, runtime rows, overlays and model conversations removed; public source/passage counts unchanged and browser fixtures preserved"
+    },
+    "original_hol": {
+      "task": "Alex context clarification through the original lab team",
+      "result": "passed; supplied fictional identity, emerging objective, explicit constraints, topic preferences, unknowns and learning purpose retained without a fabricated adoption claim",
+      "cleanup": "disposable model conversation removed"
+    },
+    "limitations": [
+      "Native owner/proxy checks do not certify authenticated browser behaviour.",
+      "Later model calls cleared intermediate DBMS_OUTPUT. Initial and refinement assertions passed before the final acceptance marker; the final continued answer was directly inspected.",
+      "These synthetic examples do not establish that every future model response will have the same quality."
+    ]
+  },
+  "browser_acceptance": {
+    "recorded_date": "2026-11-24",
+    "result": "passed requested adoption and evidence-backed follow-up after the R3 routing repair",
+    "draft": "saved a name-only draft, retained it after validation, completed its fields and selected eligible collection topics",
+    "review": "before/after values distinguished topics from constraints; cancel retained draft-only state; explicit apply published a ready revision",
+    "conversation": "opened on the published revision and returned a live answer distinguishing editorial summaries, proposed relevance and source qualifications",
+    "sources_graph": "six actual returned passages across three sources, three cited passages, and selectable recorded topic/source/passage connections",
+    "answer_lineage": "completed execution, one successful evidence tool call and three matched citations; selecting the tool node displayed six returned passages",
+    "observation": "synthetic observation and next question saved against the conversation revision",
+    "fixes_found_and_deployed": [
+      "Removed obsolete draft-only availability copy from the library.",
+      "Expected incomplete-draft validation now has an in-dialog message and no Apply action until a valid preview exists.",
+      "Overview no longer automatically focuses the recovery input or warns about unsaved edits.",
+      "Successful review close now has an explicit parent event target and scoped overview refresh handler.",
+      "Known questions now select the QA worker directly rather than relying on supervisor delegation.",
+      "Incomplete responses remain visibly qualified in immediate and reopened history; raw text is preserved and no automatic retry occurs."
+    ],
+    "fix_deployment": "R3 native APEXlang reimport and all 29 component parses passed; application/runtime row counts preserved and the browser session survived.",
+    "limitation": "This browser acceptance covers one authenticated synthetic personal journey and its evidence popup. It is not a guarantee of future model output quality or complete coverage of every manual-review scenario. The separate native expiry-continuation case is recorded above as incomplete.",
+    "post_fix_navigation": "Incomplete draft shows a helpful in-dialog validation message and no Apply action; cancel retains draft. Overview opens without recovery autofocus or unsaved-edit warning. Successful apply closes the dialog and refreshes the overview.",
+    "refinement": "Removing Ontology changed only learning topics. The explicit no-production constraint remained unchanged. Publication did not silently move the saved conversation.",
+    "revision_adoption": "Reopened the saved conversation on its earlier revision; explicit adoption advanced it to the latest ready revision and retained the old answer.",
+    "followup": {
+      "question": "With my updated learning focus, what should I explore next, and which evidence supports that suggestion?",
+      "result": "COMPLETED through the QA-only evidence team in the same existing browser conversation",
+      "recorded_evidence_calls": 1,
+      "returned_passages": 6,
+      "native_graph_paths": 6,
+      "explicit_citations": 3,
+      "matched_citations": 3,
+      "unmatched_citations": 0,
+      "content": "Identified Semantic retrieval as the current focus, proposed a next step using S02 and R0208, qualified editorial summaries and retained the explicit production constraint."
+    },
+    "historical_preservation": "Original successful answer and earlier incomplete reply retained matching answer/context/sources/history/continuation hashes; original evidence input/output hashes unchanged. Earlier explanation retained Ontology and S03; new explanation showed the revised topic/source selection.",
+    "routing_failure_and_repair": "Initial browser follow-up returned directly from the supervisor without any worker/tool execution. R3 selects the question worker directly and requires the expected successful tool before classifying a run COMPLETE. Existing incomplete reply displays a warning with its original text available under View the saved model response."
+  },
+  "apex_login_readiness": {
+    "recorded_date": "2026-11-24",
+    "test_account": "present and unlocked",
+    "password": "not inspected or reset"
+  },
+  "pending": {
+    "browser": "R4 forced provider-expiry continuation, current evidence, sources/lineage popup and historical-row preservation passed. Broader manual review remains available in docs/my-contexts-manual-test.md.",
+    "fresh_c3_migration_routes": "not claimed by this candidate record; earlier C2 fresh-route results do not certify C3",
+    "export_and_installers": "R4 engine export, asset/privacy review and generated wrappers passed local checks. Fresh/upgrade Worksheet wrapper execution remains unverified.",
+    "model_reliability": "Evidence retrieval is now independent of optional model tool use. A separate R4 native expiry response contained malformed JSON; strict citation parsing correctly remained unavailable. The independent browser expiry answer parsed with three matched citations. Future model formatting and claim correctness are not guaranteed."
+  },
+  "scope": "EPIC-03 only. The learning-loop workflow and evaluation of the Explorer remain two separate future epics. No commit, push or release promotion. This record contains no credentials, private endpoints or personal runtime content.",
+  "r4_acceptance": {
+    "recorded_date": "2026-11-24",
+    "negative_retrieval_test": {
+      "result": "passed",
+      "coverage": "A synthetic missing graph produced one failed APPLICATION event, zero provider requests, no assistant turn or model dispatch timestamp, a cleared lease and ORA-20174. Reusing the same token after restoring the graph did not repeat retrieval or inference. Source content and profile setting were preserved; exact synthetic cleanup passed."
+    },
+    "native_model_suite": {
+      "result": "partial; strict full-suite pass is not claimed",
+      "initial_and_adopted_answers": "Passed with 4 and 3 matched citations, 6 graph paths each, application retrieval before dispatch and exact packet equality to provider input. Same-token replay and historical answer/trace preservation through adoption passed.",
+      "expiry_retrieval": "After actual provider conversation deletion, a new provider conversation received 6 passages, 6 paths and 4 previous turns (3266 characters), using the pinned revision. The provider task succeeded with zero tool calls as designed.",
+      "format_limitation": "The model returned literal unescaped newlines inside a quoted JSON assessment. Strict parsing correctly rejected it. Citation matches were not inferred. The final historical hash, profile, source digest and run-count assertions were not reached in this suite.",
+      "cleanup": "Only the native suite's synthetic fixtures and provider conversations were removed; the existing browser fixture was retained."
+    },
+    "browser_expiry": {
+      "result": "passed in the signed-in APEX app",
+      "method": "Removed only the exact synthetic conversation's provider state, preserving application messages and evidence; submitted one follow-up through the real app.",
+      "recovery": "A new provider conversation and one MISSING_MODEL boundary were recorded. The same saved conversation and latest adopted revision remained active, with 6 prior application turns supplied as bounded continuation.",
+      "answer": "Returned a parsed answer distinguishing the user-supplied learning context from public evidence, retained semantic retrieval as the current focus and proposed a clarifying next question.",
+      "application_retrievals": 1,
+      "returned_passages": 6,
+      "native_graph_paths": 6,
+      "matched_citations": 3,
+      "unmatched_citations": 0,
+      "explanation": "Sources remained selectable with cited and uncited passages distinguished. Answer lineage visibly placed application retrieval before the team request; selecting it showed six returned passages.",
+      "native_corroboration": "Retrieval finished before the stored model dispatch timestamp. Exactly two new turns, one response, one retrieval and one model boundary were added; every prior turn/run/tool/observation row retained its full-content hash. Source, passage and observation counts were unchanged."
+    },
+    "malformed_response_handling": "A dedicated answer-card warning preserves literal saved text and directs the reader to independently captured evidence. Strict citation parsing is not relaxed and no automatic model retry is introduced. Seven local JavaScript tests include the malformed-newline response and independent evidence availability."
+  },
+  "r3_live_model_acceptance": {
+    "result": "partial; not a full-suite pass",
+    "initial_and_revision_adoption": "passed with successful current-execution evidence retrieval and matched citations",
+    "replay_and_historical_evidence": "same-token replay and historical trace retention assertions passed",
+    "provider_expiry_continuation": "Provider conversation was recreated, but the QA worker returned without invoking its evidence tool. The application recorded INCOMPLETE; the full positive-answer assertion failed.",
+    "diagnosis": "Provider task completed with zero tool calls. No credential or database error was reported. A direct worker route removes optional supervisor delegation but cannot guarantee that a model will call a tool.",
+    "handling": "No automatic model retry. Incomplete text is retained for inspection, visibly qualified and collapsed in the UI.",
+    "cleanup": "Only native synthetic fixtures were removed. Browser fixtures and public data retained."
+  }
+}

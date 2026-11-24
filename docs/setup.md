@@ -1,5 +1,7 @@
 # Setup using Database Actions → SQL Worksheet
 
+**Legacy v1 technical reference.** Follow this raw SQL setup only from the matching published release or `v1.0.0` checkout. Current dev uses [database migrations](database-migrations.md) and [APEXlang authoring](apexlang-development.md); do not run raw v1 initialization over migration-managed objects.
+
 **New to ADB or deploying a fresh instance? Start with the [beginner walkthrough](fresh-serverless-deployment.md).** This page is the compact technical reference; it does not replace that ordered route.
 
 Database work is performed in SQL Worksheet. No laptop database driver, wallet, direct SQL*Net connection or database password in shell configuration is required for this route. The Python database CLI remains optional automation.

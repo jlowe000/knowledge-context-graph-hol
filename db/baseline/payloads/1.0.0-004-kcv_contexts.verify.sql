@@ -1,0 +1,3 @@
+ l_expected:=TO_CLOB('');
+ l_expected:=l_expected||TO_CLOB('{"name":"KCV_CONTEXTS","temporary":"N","columns":[{"name":"SNAPSHOT_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":128,"char_used":"B"},{"name":"CONTEXT_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":32,"char_used":"B"},{"name":"SNAPSHOT_VERSION","type":"NUMBER","nullable":"N","identity":"NO","default":null,"precision":null,"scale":null},{"name":"CONTEXT_JSON","type":"CLOB","nullable":"N","identity":"NO","default":null}],"constraints":[{"type":"P","columns":"SNAPSHOT_ID"},{"type":"C","expression":"context_json IS JSON"},{"type":"U","columns":"CONTEXT_ID,SNAPSHOT_VERSION"}]}');
+ check_table(l_expected);

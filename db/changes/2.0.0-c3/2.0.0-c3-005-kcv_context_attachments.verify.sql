@@ -1,0 +1,4 @@
+l_expected:=TO_CLOB('');
+ l_expected:=l_expected||TO_CLOB('{"name":"KCV_CONTEXT_ATTACHMENTS","temporary":"N","columns":[{"name":"SESSION_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":40,"char_used":"B"},{"name":"OWNER_SCOPE","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":128,"char_used":"B"},{"name":"OWNER_SUBJECT","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":128,"char_used":"B"},{"name":"APEX_SESSION_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":64,"char_used":"B"},{"name":"ATTACHED_AT","type":"TIMESTAMP(6) WITH TIME ZONE","nullable":"N","identity":"NO","default":"SYSTIMESTAMP"}],"constraints":[{"type":"R","columns":"SESSION_ID","refe');
+ l_expected:=l_expected||TO_CLOB('rence_table":"KCV_CHAT_SESSIONS","reference_columns":"SESSION_ID"},{"type":"P","columns":"SESSION_ID,OWNER_SCOPE,OWNER_SUBJECT,APEX_SESSION_ID"}]}');
+ check_table(l_expected);

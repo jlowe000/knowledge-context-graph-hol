@@ -1,0 +1,152 @@
+{
+  "recorded_date": "2026-11-24",
+  "product_version": "2.0.0",
+  "increment": "C2 persistent personal drafts",
+  "status": "native runtime and browser checks passed; full v2 remains incomplete",
+  "published_baseline": "83e3ecb64f417f6ef388df43ab9b102dddab2b71",
+  "dev_source_base": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+  "implementation_committed": false,
+  "release_promoted": false,
+  "target": "isolated ADB Serverless schema and separate APEX application; existing lab preserved",
+  "schema_marker": "2.0.0-c2-identity-ready",
+  "apex_version": "26.1.6",
+  "tools": {
+    "sqlcl": "26.2.1.209.2118",
+    "liquibase": "4.33.0",
+    "java": "21.0.12.1",
+    "tool_os": "Oracle Linux 8.10"
+  },
+  "dataset": {
+    "public_commit": "83e3ecb64f417f6ef388df43ab9b102dddab2b71",
+    "manifest_sha256": "dae8efdcd9e99874c8dfc3d9a3ccaf4a861f76b3b5442f71f075a6d9b64ef8ad",
+    "sources": 834,
+    "passages": 762,
+    "contexts": 3,
+    "rdf_triples": 30144,
+    "load_method": "KCV_DATASET.LOAD_GITHUB; pinned public JSON, no token"
+  },
+  "local_tests": {
+    "full_suite": {
+      "passed": 95,
+      "seconds": 177.731
+    },
+    "documentation_snippets": 38,
+    "documentation_changes_required": 0,
+    "legacy_shell_syntax": "passed",
+    "followup_migration_suite": {
+      "passed": 19,
+      "reason": "Additional successor-aware Liquibase adoption coverage after the 95-test full-suite run"
+    }
+  },
+  "native_runtime": {
+    "draft_crud": "PASS; post-identity-correction rerun",
+    "apex_account_scope": "PASS; server harness only, includes missing-pin fail-closed",
+    "identity_lifecycle": "PASS; rename, recreation, old-session replay/capture rejection",
+    "sample_copy": "PASS; Alex/Sam/Casey source unchanged and fictional assumptions cleared",
+    "cross_session_contention": "PASS; independent SQLcl session returned busy in0.00seconds; no writes; subsequent one-draft replay/cleanup",
+    "failed_fixture_cleanup": "PASS; exactly two failed-test drafts and two receipts removed",
+    "baseline_rdf_evidence": "passed: existing verify_worksheet.sql returned active context and native RDF evidence with overview and disclaimer"
+  },
+  "apex_engine": {
+    "direct_apexlang_import": "passed",
+    "same_app_id_upgrade": "passed; saved contexts retained",
+    "compiled_page_components": 13,
+    "source_sha256": "7d966e8d6b74e7711b0a656adbfff3f85b120a0825783bda635d475b0c9e7762",
+    "engine_export_sha256": "625225e43617c0b70e2efbee2eb0fbfac338d8300fbfe98c9f1feb9c9e68e8bf",
+    "export_location": "ignored development work directory; published SQL export remains v1",
+    "release_export_receipt_created": false
+  },
+  "browser": {
+    "real_login_post_authentication_callback": "passed",
+    "name_only_draft": "passed",
+    "save_and_reopen_after_same_id_upgrade": "passed",
+    "sign_out_sign_in_and_reopen": "passed",
+    "failed_validation_preserves_edits": "passed; 501-character line rejected, corrected text saved",
+    "literal_html_like_text": "escaped in saved overview",
+    "duplicate_archive_read_only_restore": "passed",
+    "sample_copy": "passed; opens editor with cleared fictional identity/background/constraints; question/purpose/topics retained as suggestions",
+    "pagination": "passed; 20 then 8 non-overlapping rows across 28 owned test contexts",
+    "search_from_later_page": "passed; cursor resets and owned matches appear",
+    "second_account_library": "empty; first account data not visible",
+    "copied_url_and_identity_item_tampering": "rejected by APEX session-state checksum protection; native harness separately proves owner checks",
+    "keyboard": "Tab moves from name to question; Enter saves through native button",
+    "narrow_viewport": "390px override; editor and overview document widths 375px with no horizontal overflow",
+    "temporary_pagination_fixtures": "25 exact synthetic drafts and associated receipts removed",
+    "screenshot": "safe unedited synthetic-context view retained outside Git; no endpoint, login or credentials"
+  },
+  "migration_validation_record": "../db/verification/native-validation.json",
+  "runtime_sources": [
+    {
+      "path": "sql/extensions/10_my_contexts_objects.sql",
+      "sha256": "e87014a2e45731b26fe606870ce81ef17f974f640217375ed36356553bf34f6d"
+    },
+    {
+      "path": "sql/extensions/11_context_access.sql",
+      "sha256": "2aa328006ef213795ebf10799e09581ad8ca1ce09d9924fa71c133fa56aeb87f"
+    },
+    {
+      "path": "sql/extensions/12_my_contexts_api.sql",
+      "sha256": "9d49b25e50df58c4993a5774b8248b8463d7ba4bd01caef345724092067c131a"
+    }
+  ],
+  "native_test_sources": [
+    {
+      "path": "integration-test/verify_my_contexts.sql",
+      "sha256": "df989ba28c80eab298276742b0db576c0d73284d7374cadd6d36dd0571f97e95"
+    },
+    {
+      "path": "integration-test/verify_my_contexts_apex.sql",
+      "sha256": "5f5b201bf45e17b9b54bbc6881e903094bb27deb4c26326fa6881b1c45ae6f3c"
+    },
+    {
+      "path": "integration-test/verify_my_contexts_contention_busy.sql",
+      "sha256": "f2950030096da487dcbf08ca2e50a47c748e12a52cd712c7f080dc285de11307"
+    },
+    {
+      "path": "integration-test/verify_my_contexts_contention_hold.sql",
+      "sha256": "c2b22a91c933031d605eee29aeb71741d8947f15f4c1a23785c6c0e2eba8fba1"
+    },
+    {
+      "path": "integration-test/verify_my_contexts_contention_replay.sql",
+      "sha256": "d847814b3429edfd83d6c683b73bd8a3ea7b1728cd22b0d63b804533cc824cd2"
+    },
+    {
+      "path": "integration-test/verify_my_contexts_identity_lifecycle.sql",
+      "sha256": "d7f8db1fdfe3bd40090363cbc763bc3bf29cf53a1644b56bc52fba037e63d3eb"
+    },
+    {
+      "path": "integration-test/verify_my_contexts_samples.sql",
+      "sha256": "adc072bc4fc6570cab1c938549bebca62c8478178be9789b1edcd93d7e9f2477"
+    }
+  ],
+  "remaining": [
+    "Personal graph activation and topic refinement",
+    "Saved personal conversations, evidence and continuation",
+    "Full v2 real-model acceptance and existing HOL regression against that completed version",
+    "Learner release packaging and independent complete application fresh/upgrade acceptance",
+    "Database Actions browser transport for the generated v2 schema bundles; their SQL has passed through SQLcl."
+  ],
+  "limits": [
+    "This is a development increment, not v2 release acceptance.",
+    "No personal model calls or graph activation were enabled.",
+    "Library ordering is live; concurrent edits can move rows between pages.",
+    "Private connections, credentials and raw logs remain outside tracked artifacts.",
+    "The native migration record separately reports the exact tested schema routes and remaining limits.",
+    "The isolated app was configured for draft acceptance; its sample GenAI credentials/agents were not provisioned. The original lab app remains available separately."
+  ],
+  "preservation_checks": {
+    "existing_lab_schema": "present",
+    "existing_lab_application": "present",
+    "javavm": "VALID",
+    "release_worktree": "unchanged"
+  },
+  "migration_summary": {
+    "complete_project_migrations": 48,
+    "liquibase_ledger_changesets": 49,
+    "fresh_and_upgrade": "passed",
+    "repeat_and_failure_recovery": "passed",
+    "two_session_runner_exclusion": "passed",
+    "worksheet_targeted_sql": "passed through SQLcl; Database Actions UI transport remains untested",
+    "record_sha256": "6ebc4f8864719002eb40d7fb312d9380497665f59ae20d521ea90f95c544f585"
+  }
+}

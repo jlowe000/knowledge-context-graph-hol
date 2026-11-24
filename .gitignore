@@ -5,9 +5,17 @@ __pycache__/
 .env.*
 config/*.env
 !config/example.env
+# Local tools, test runs, research extracts and private deployment artifacts.
 work/
+*.log
+.sqlcl/
+.dbtools/
 *.wallet
-wallet*/
+[Ww]allet*/
+*[Ww]allet*.zip
+tnsnames.ora
+sqlnet.ora
+ojdbc.properties
 *.pem
 *.key
 *.pfx

@@ -1,5 +1,7 @@
 # Deploy to the temporary Serverless database
 
+**Version scope:** this existing-target reference describes the published v1 application and its KCV_LAB setup. Use a matching `release` or `v1.0.0` checkout for those scripts. For current dev, preserve the original application and follow the [migration guide](database-migrations.md) and [v2 APEX deployment sequence](../apex/README.md#deploy-the-v2-dev-candidate) in the selected development schema.
+
 This is the existing-target deployment reference. For a new database, use the [beginner walkthrough](fresh-serverless-deployment.md), which includes provisioning, base objects and model setup before APEX.
 
 Deploy the supplied application to the existing temporary ADB Serverless instance, using its existing KCV_LAB schema, working KCV_GENAI profile and loaded public dataset. The local KCV_HOL_TEST workspace/mocks are not the deployment target and must not be copied into the cloud schema.

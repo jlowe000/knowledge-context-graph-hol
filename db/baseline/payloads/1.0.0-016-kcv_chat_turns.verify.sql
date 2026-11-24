@@ -1,0 +1,4 @@
+ l_expected:=TO_CLOB('');
+ l_expected:=l_expected||TO_CLOB('{"name":"KCV_CHAT_TURNS","temporary":"N","columns":[{"name":"TURN_ID","type":"NUMBER","nullable":"N","identity":"YES","default":null,"precision":null,"scale":null},{"name":"SESSION_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":40,"char_used":"B"},{"name":"REVISION_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":40,"char_used":"B"},{"name":"ROLE","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":16,"char_used":"B"},{"name":"BODY","type":"CLOB","nullable":"N","identity":"NO","default":null},{"name":"RECORDED_AT","type":"TIMESTAMP(6) WITH TIME ZONE","nullable":"N","identity":"NO","default":"SYSTIMESTAMP"}],"const');
+ l_expected:=l_expected||TO_CLOB('raints":[{"type":"P","columns":"TURN_ID"},{"type":"R","columns":"SESSION_ID","reference_table":"KCV_CHAT_SESSIONS","reference_columns":"SESSION_ID"}]}');
+ check_table(l_expected);

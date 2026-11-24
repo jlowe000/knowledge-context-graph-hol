@@ -1,0 +1,1213 @@
+page 13 (
+  name: Context overview
+  alias: CONTEXT-OVERVIEW
+  title: Context overview
+  appearance {
+    pageTemplate: @/standard
+    templateOptions: #DEFAULT#
+  }
+  javaScript {
+    executeWhenPageLoads:
+    ```javascript
+    apex.gPageContext$.on('apexafterclosedialog.kcvReview', function (event, data) {
+      if (data && String(data.dialogPageId) === '12' && data.P12_CONTEXT_ID === apex.item('P13_CONTEXT_ID').getValue()) {
+        window.location.reload();
+      }
+    });
+    ```
+  }
+  navigation {
+    cursorFocus: doNotFocusCursor
+    warnOnUnsavedChanges: false
+  }
+  security {
+    authentication: required
+    pageAccessProtection: argumentsMustHaveChecksum
+    formAutoComplete: false
+  }
+  region overview (
+    name: Your context
+    type: staticContent
+    layout {
+      sequence: 10
+      slot: body
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p>Save your draft, review its changes, then apply it as a ready revision. Start or reopen a conversation to explore the public collection. Conversations and earlier answer explanations retain their own context revisions. Archiving makes this work read-only until restored.</p>
+      ```
+    }
+  )
+  pageItem P13_CONTEXT_ID (
+    type: hidden
+    layout {
+      sequence: 1
+      region: @overview
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P13_VERSION (
+    type: hidden
+    layout {
+      sequence: 2
+      region: @overview
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P13_LIFECYCLE (
+    type: hidden
+    layout {
+      sequence: 3
+      region: @overview
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P13_TOKEN (
+    type: hidden
+    layout {
+      sequence: 4
+      region: @overview
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P13_HEAD (
+    type: hidden
+    layout {
+      sequence: 5
+      region: @overview
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P13_REVIEW_URL (
+    type: hidden
+    layout {
+      sequence: 6
+      region: @overview
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P13_CURSOR (
+    type: hidden
+    layout {
+      sequence: 7
+      region: @overview
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P13_NEXT (
+    type: hidden
+    layout {
+      sequence: 8
+      region: @overview
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  button review (
+    buttonName: REVIEW
+    label: Review and apply draft
+    layout {
+      sequence: 5
+      region: @overview
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: true
+    }
+    behavior {
+      action: redirectUrl
+      targetUrl: &P13_REVIEW_URL!RAW.
+      executeValidations: false
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P13_LIFECYCLE <> 'ARCHIVED'
+    }
+  )
+  button start-conversation (
+    buttonName: START_CONVERSATION
+    label: Start a new conversation
+    layout {
+      sequence: 6
+      region: @overview
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: true
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P13_LIFECYCLE='ACTIVE' AND :P13_HEAD IS NOT NULL
+    }
+  )
+  button older-conversations (
+    buttonName: OLDER_CONVERSATIONS
+    label: Older conversations
+    layout {
+      sequence: 60
+      region: @overview
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P13_NEXT IS NOT NULL
+    }
+  )
+  button newest-conversations (
+    buttonName: NEWEST_CONVERSATIONS
+    label: Newest conversations
+    layout {
+      sequence: 70
+      region: @overview
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P13_CURSOR IS NOT NULL
+    }
+  )
+  button edit (
+    buttonName: EDIT
+    label: Edit draft
+    layout {
+      sequence: 10
+      region: @overview
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P13_LIFECYCLE <> 'ARCHIVED'
+    }
+  )
+  button archive (
+    buttonName: ARCHIVE
+    label: Archive
+    layout {
+      sequence: 20
+      region: @overview
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P13_LIFECYCLE <> 'ARCHIVED'
+    }
+  )
+  button restore (
+    buttonName: RESTORE
+    label: Restore
+    layout {
+      sequence: 30
+      region: @overview
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    serverSideCondition {
+      type: item=value
+      item: P13_LIFECYCLE
+      value: ARCHIVED
+    }
+  )
+  button duplicate (
+    buttonName: DUPLICATE
+    label: Duplicate
+    layout {
+      sequence: 40
+      region: @overview
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+  )
+  button library (
+    buttonName: LIBRARY
+    label: My Contexts
+    layout {
+      sequence: 50
+      region: @overview
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: redirectThisApp
+      target: {
+        page: 10
+        clearCache: 10
+      }
+    }
+  )
+  process load-owned-context (
+    name: load owned context
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+      DECLARE l_doc JSON_OBJECT_T; l_rows JSON_ARRAY_T; l_row JSON_OBJECT_T; BEGIN
+       l_doc:=JSON_OBJECT_T.parse(kcv_personal_context_api.get_context(:P13_CONTEXT_ID));
+       :P13_PUBLICATION_STATUS:=CASE WHEN l_doc.get_string('latest_revision') IS NULL THEN 'Draft only. Review and apply it before starting a conversation.'
+        WHEN l_doc.get_boolean('has_unapplied_changes') THEN 'Saved draft has changes that are not yet applied. Existing conversations continue with their pinned revisions.'
+        ELSE 'The saved draft matches the latest ready revision. Each conversation keeps its own pinned revision.' END;
+       :P13_VERSION:=l_doc.get_number('draft_version'); :P13_LIFECYCLE:=l_doc.get_string('lifecycle');
+       :P13_HEAD:=l_doc.get_string('latest_revision');
+       :P13_REVIEW_URL:=apex_page.get_url(p_page=>12,p_clear_cache=>'12',p_items=>'P12_CONTEXT_ID,P12_VERSION',p_values=>:P13_CONTEXT_ID||','||:P13_VERSION,p_triggering_element=>'body');
+       l_rows:=JSON_ARRAY_T.parse(kcv_personal_journey.conversations(:P13_CONTEXT_ID,:P13_CURSOR)); :P13_NEXT:=NULL;
+       IF l_rows.get_size=20 THEN l_row:=TREAT(l_rows.get(19) AS JSON_OBJECT_T); :P13_NEXT:=l_row.get_string('session_id'); END IF;
+       l_rows:=JSON_ARRAY_T.parse(kcv_personal_journey.revisions(:P13_CONTEXT_ID,:P13_REV_CURSOR)); :P13_REV_NEXT:=NULL;
+       IF l_rows.get_size=50 THEN l_row:=TREAT(l_rows.get(49) AS JSON_OBJECT_T); :P13_REV_NEXT:=l_row.get_string('revision'); END IF;
+       IF :REQUEST IS NULL THEN :P13_TOKEN:=RAWTOHEX(SYS_GUID()); END IF;
+      END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: beforeHeader
+    }
+  )
+  region saved-details (
+    name: Saved draft understanding
+    type: classicReport
+    layout {
+      sequence: 20
+      slot: body
+    }
+    source {
+      location: localDatabase
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+      WITH saved AS (SELECT kcv_personal_context_api.get_context(:P13_CONTEXT_ID) doc FROM dual),
+      fields AS (
+       SELECT 1000 field_order,'Name' field,JSON_VALUE(doc,'$.title' RETURNING VARCHAR2(32767)) value FROM saved
+       UNION ALL SELECT 2000,'Status',INITCAP(JSON_VALUE(doc,'$.lifecycle')) FROM saved
+       UNION ALL SELECT 3000,'Question',JSON_VALUE(doc,'$.draft.question' RETURNING VARCHAR2(32767)) FROM saved
+       UNION ALL SELECT 4000,'Objective clarity',CASE JSON_VALUE(doc,'$.draft.objective_clarity')
+        WHEN 'unknown' THEN 'Not sure yet' WHEN 'emerging' THEN 'Emerging' WHEN 'defined' THEN 'Defined' END FROM saved
+       UNION ALL SELECT 5000,'Objective',JSON_VALUE(doc,'$.draft.objective' RETURNING VARCHAR2(32767)) FROM saved
+       UNION ALL SELECT 6000,'Person',JSON_VALUE(doc,'$.draft.person') FROM saved
+       UNION ALL SELECT 7000,'Role',JSON_VALUE(doc,'$.draft.role') FROM saved
+       UNION ALL SELECT 8000,'Organisation',JSON_VALUE(doc,'$.draft.organisation') FROM saved
+       UNION ALL SELECT 9000,'Learning purpose',JSON_VALUE(doc,'$.draft.learning_purpose') FROM saved
+       UNION ALL SELECT 10000,'Time horizon',JSON_VALUE(doc,'$.draft.time_horizon') FROM saved
+       UNION ALL SELECT 11000+j.display_order,'Selected topic (learning focus)',j.label FROM saved,
+        JSON_TABLE(doc,'$.selected_topics[*]' COLUMNS(display_order FOR ORDINALITY,label VARCHAR2(800) PATH '$.label')) j
+       UNION ALL SELECT 12000,'Known situation',JSON_VALUE(doc,'$.draft.known_situation' RETURNING VARCHAR2(32767)) FROM saved
+       UNION ALL SELECT 13000+j.display_order,'Unknown',j.value FROM saved,
+        JSON_TABLE(doc,'$.draft.unknowns[*]' COLUMNS(display_order FOR ORDINALITY,value VARCHAR2(2000) PATH '$')) j
+       UNION ALL SELECT 14000+j.display_order,'Explicit constraint',j.value FROM saved,
+        JSON_TABLE(doc,'$.draft.constraints[*]' COLUMNS(display_order FOR ORDINALITY,value VARCHAR2(2000) PATH '$')) j
+      )
+      SELECT field,value FROM fields ORDER BY field_order
+      ```
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    reportLayout {
+      numberOfRowsType: staticValue
+      numberOfRows: 100
+    }
+    componentAppearance {
+      template: @/standard
+    }
+    messages {
+      whenNoDataFound: No saved contexts match. Create a context to get started.
+    }
+    column FIELD (
+      reportColumnQueryId: 1
+      type: plainText
+      heading {
+        heading: Field
+        alignment: start
+      }
+      layout {
+        sequence: 10
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column VALUE (
+      reportColumnQueryId: 2
+      type: plainText
+      heading {
+        heading: Your understanding
+        alignment: start
+      }
+      layout {
+        sequence: 20
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+  )
+  process edit-context (
+    name: edit context
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+      DECLARE l_doc CLOB; BEGIN
+       l_doc:=kcv_personal_context_api.get_context(:P13_CONTEXT_ID);
+       apex_util.redirect_url(apex_page.get_url(p_page=>11,p_clear_cache=>'11',p_items=>'P11_CONTEXT_ID',p_values=>:P13_CONTEXT_ID));
+       apex_application.stop_apex_engine;
+      END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: processing
+    }
+    serverSideCondition {
+      whenButtonPressed: @edit
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+  process archive-context (
+    name: archive context
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+      DECLARE l_result JSON_OBJECT_T; BEGIN
+       l_result:=JSON_OBJECT_T.parse(kcv_personal_context_api.archive_context(:P13_CONTEXT_ID,TO_NUMBER(:P13_VERSION),:P13_TOKEN));
+       apex_util.redirect_url(apex_page.get_url(p_page=>13,p_clear_cache=>'13',p_items=>'P13_CONTEXT_ID',p_values=>l_result.get_string('context_id')));
+       apex_application.stop_apex_engine;
+      END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: processing
+    }
+    serverSideCondition {
+      whenButtonPressed: @archive
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+  process restore-context (
+    name: restore context
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+      DECLARE l_result JSON_OBJECT_T; BEGIN
+       l_result:=JSON_OBJECT_T.parse(kcv_personal_context_api.restore_context(:P13_CONTEXT_ID,TO_NUMBER(:P13_VERSION),:P13_TOKEN));
+       apex_util.redirect_url(apex_page.get_url(p_page=>13,p_clear_cache=>'13',p_items=>'P13_CONTEXT_ID',p_values=>l_result.get_string('context_id')));
+       apex_application.stop_apex_engine;
+      END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: processing
+    }
+    serverSideCondition {
+      whenButtonPressed: @restore
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+  process duplicate-context (
+    name: duplicate context
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+      DECLARE l_result JSON_OBJECT_T; l_source JSON_OBJECT_T; BEGIN
+       l_source:=JSON_OBJECT_T.parse(kcv_personal_context_api.get_context(:P13_CONTEXT_ID));
+       l_result:=JSON_OBJECT_T.parse(kcv_personal_context_api.duplicate_context(
+        :P13_CONTEXT_ID,SUBSTR(l_source.get_string('title'),1,193)||' (copy)',:P13_TOKEN));
+       apex_util.redirect_url(apex_page.get_url(p_page=>13,p_clear_cache=>'13',p_items=>'P13_CONTEXT_ID',p_values=>l_result.get_string('context_id')));
+       apex_application.stop_apex_engine;
+      END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: processing
+    }
+    serverSideCondition {
+      whenButtonPressed: @duplicate
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+  process move-conversation-cursor (
+    name: move conversation cursor
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+BEGIN
+ IF :REQUEST='OLDER_CONVERSATIONS' THEN :P13_CURSOR:=:P13_NEXT;
+ ELSIF :REQUEST='NEWEST_CONVERSATIONS' THEN :P13_CURSOR:=NULL;
+ ELSIF :REQUEST='OLDER_REVISIONS' THEN :P13_REV_CURSOR:=:P13_REV_NEXT;
+ ELSIF :REQUEST='NEWEST_REVISIONS' THEN :P13_REV_CURSOR:=NULL; END IF;
+END;
+      ```
+    }
+    execution {
+      sequence: 5
+      point: processing
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+  process start-owned-conversation (
+    name: start owned conversation
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+DECLARE sid VARCHAR2(40); BEGIN
+ sid:=kcv_personal_journey.start_conversation(:P13_CONTEXT_ID,:P13_TOKEN);
+ apex_util.redirect_url(apex_page.get_url(p_page=>1,p_clear_cache=>'1',p_items=>'P1_SESSION_ID',p_values=>sid));
+ apex_application.stop_apex_engine;
+END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: processing
+    }
+    serverSideCondition {
+      whenButtonPressed: @start-conversation
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+  region conversations (
+    name: Saved conversations
+    type: classicReport
+    layout {
+      sequence: 30
+      slot: body
+    }
+    source {
+      location: localDatabase
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+SELECT 'Open conversation' open_label,j.created_at,j.revision,
+ CASE WHEN j.revision=:P13_HEAD THEN 'Current ready revision' ELSE 'Earlier revision; explicit adoption available' END revision_status,
+ apex_page.get_url(p_page=>1,p_clear_cache=>'1',p_items=>'P1_SESSION_ID',p_values=>j.session_id) open_url
+FROM JSON_TABLE(kcv_personal_journey.conversations(:P13_CONTEXT_ID,:P13_CURSOR),'$[*]'
+ COLUMNS(ord FOR ORDINALITY,session_id VARCHAR2(40) PATH '$.session_id',revision VARCHAR2(40) PATH '$.revision',created_at VARCHAR2(80) PATH '$.created_at')) j ORDER BY j.ord
+      ```
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    reportLayout {
+      numberOfRowsType: staticValue
+      numberOfRows: 20
+    }
+    componentAppearance {
+      template: @/standard
+    }
+    messages {
+      whenNoDataFound: No records yet.
+    }
+    column OPEN_LABEL (
+      reportColumnQueryId: 1
+      type: link
+      heading {
+        heading: Conversation
+        alignment: start
+      }
+      layout {
+        sequence: 10
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+      link {
+        target: {
+          type: url
+          url: #OPEN_URL#
+        }
+        linkText: #OPEN_LABEL#
+      }
+    )
+    column CREATED_AT (
+      reportColumnQueryId: 2
+      type: plainText
+      heading {
+        heading: Started
+        alignment: start
+      }
+      layout {
+        sequence: 20
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column REVISION (
+      reportColumnQueryId: 3
+      type: plainText
+      heading {
+        heading: Pinned revision
+        alignment: start
+      }
+      layout {
+        sequence: 30
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column REVISION_STATUS (
+      reportColumnQueryId: 4
+      type: plainText
+      heading {
+        heading: Revision status
+        alignment: start
+      }
+      layout {
+        sequence: 40
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column OPEN_URL (
+      reportColumnQueryId: 5
+      type: hidden
+      layout {
+        sequence: 50
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+  )
+  region revisions (
+    name: Ready revision history
+    type: classicReport
+    layout {
+      sequence: 40
+      slot: body
+    }
+    source {
+      location: localDatabase
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+SELECT j.revision,j.parent,j.collection,j.created_at
+FROM JSON_TABLE(kcv_personal_journey.revisions(:P13_CONTEXT_ID,:P13_REV_CURSOR),'$[*]'
+ COLUMNS(ord FOR ORDINALITY,revision VARCHAR2(40) PATH '$.revision',parent VARCHAR2(40) PATH '$.parent',collection VARCHAR2(128) PATH '$.collection',created_at VARCHAR2(80) PATH '$.created_at')) j ORDER BY j.ord
+      ```
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    reportLayout {
+      numberOfRowsType: staticValue
+      numberOfRows: 50
+    }
+    componentAppearance {
+      template: @/standard
+    }
+    messages {
+      whenNoDataFound: No records yet.
+    }
+    column REVISION (
+      reportColumnQueryId: 1
+      type: plainText
+      heading {
+        heading: Revision
+        alignment: start
+      }
+      layout {
+        sequence: 10
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column PARENT (
+      reportColumnQueryId: 2
+      type: plainText
+      heading {
+        heading: Previous revision
+        alignment: start
+      }
+      layout {
+        sequence: 20
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column COLLECTION (
+      reportColumnQueryId: 3
+      type: plainText
+      heading {
+        heading: Pinned collection
+        alignment: start
+      }
+      layout {
+        sequence: 30
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column CREATED_AT (
+      reportColumnQueryId: 4
+      type: plainText
+      heading {
+        heading: Applied
+        alignment: start
+      }
+      layout {
+        sequence: 40
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+  )
+  region operations-help (
+    name: Unfinished operations
+    type: staticContent
+    layout {
+      sequence: 50
+      slot: body
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p>If a request was interrupted, review its status before trying again. An uncertain response may already have reached the provider. Abandoning it records your decision to continue; it does not cancel a provider request or claim that it failed. A running worker cannot be abandoned.</p>
+      ```
+    }
+  )
+  region operations (
+    name: Operations requiring attention
+    type: classicReport
+    layout {
+      sequence: 60
+      slot: body
+    }
+    source {
+      location: localDatabase
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+SELECT j.action,j.phase,j.error_code,
+ CASE WHEN j.session_id IS NOT NULL THEN 'Open conversation' END open_label,
+ CASE WHEN j.session_id IS NOT NULL THEN apex_page.get_url(p_page=>1,p_clear_cache=>'1',p_items=>'P1_SESSION_ID',p_values=>j.session_id) END open_url
+FROM JSON_TABLE(kcv_personal_journey.operations(:P13_CONTEXT_ID),'$[*]'
+ COLUMNS(ord FOR ORDINALITY,action VARCHAR2(32) PATH '$.action',phase VARCHAR2(20) PATH '$.phase',error_code NUMBER PATH '$.error_code',session_id VARCHAR2(40) PATH '$.session_id')) j ORDER BY j.ord
+      ```
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    reportLayout {
+      numberOfRowsType: staticValue
+      numberOfRows: 40
+    }
+    componentAppearance {
+      template: @/standard
+    }
+    messages {
+      whenNoDataFound: No records yet.
+    }
+    column ACTION (
+      reportColumnQueryId: 1
+      type: plainText
+      heading {
+        heading: Requested action
+        alignment: start
+      }
+      layout {
+        sequence: 10
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column PHASE (
+      reportColumnQueryId: 2
+      type: plainText
+      heading {
+        heading: Recorded status
+        alignment: start
+      }
+      layout {
+        sequence: 20
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column ERROR_CODE (
+      reportColumnQueryId: 3
+      type: plainText
+      heading {
+        heading: Diagnostic code
+        alignment: start
+      }
+      layout {
+        sequence: 30
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column OPEN_LABEL (
+      reportColumnQueryId: 4
+      type: link
+      heading {
+        heading: Conversation
+        alignment: start
+      }
+      layout {
+        sequence: 40
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+      link {
+        target: {
+          type: url
+          url: #OPEN_URL#
+        }
+        linkText: #OPEN_LABEL#
+      }
+    )
+    column OPEN_URL (
+      reportColumnQueryId: 5
+      type: hidden
+      layout {
+        sequence: 50
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+  )
+  pageItem P13_RECOVER (
+    type: selectList
+    label {
+      label: Operation to abandon after review
+      alignment: left
+    }
+    layout {
+      sequence: 10
+      region: @operations-help
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    validation {
+      valueRequired: false
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+    lov {
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+SELECT j.action||' - '||j.phase||' ('||SUBSTR(NVL(j.operation_id,j.execution_id),-8)||')' d,
+ CASE WHEN j.action='ANSWER' THEN 'A:'||j.execution_id ELSE 'J:'||j.operation_id END r
+FROM JSON_TABLE(kcv_personal_journey.operations(:P13_CONTEXT_ID),'$[*]'
+ COLUMNS(ord FOR ORDINALITY,operation_id VARCHAR2(40) PATH '$.operation_id',execution_id VARCHAR2(40) PATH '$.execution_id',action VARCHAR2(32) PATH '$.action',phase VARCHAR2(20) PATH '$.phase')) j ORDER BY j.ord
+      ```
+      displayNullValue: false
+      displayExtraValues: false
+    }
+  )
+  button abandon (
+    buttonName: ABANDON
+    label: Abandon interrupted operation
+    layout {
+      sequence: 10
+      region: @operations-help
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      requiresConfirmation: true
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    confirmation {
+      message: Abandon this interrupted operation? An uncertain model request may already have been processed. This does not cancel provider work. You must explicitly submit a new request afterwards.
+      style: warning
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P13_LIFECYCLE <> 'ARCHIVED'
+    }
+  )
+  process abandon-interrupted-operation (
+    name: abandon interrupted operation
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+DECLARE op_id VARCHAR2(40); sid VARCHAR2(40); action_name VARCHAR2(32); BEGIN
+ SELECT NVL(j.operation_id,j.execution_id),j.session_id,j.action INTO op_id,sid,action_name
+ FROM JSON_TABLE(kcv_personal_journey.operations(:P13_CONTEXT_ID),'$[*]'
+ COLUMNS(operation_id VARCHAR2(40) PATH '$.operation_id',execution_id VARCHAR2(40) PATH '$.execution_id',session_id VARCHAR2(40) PATH '$.session_id',action VARCHAR2(32) PATH '$.action')) j
+ WHERE CASE WHEN j.action='ANSWER' THEN 'A:'||j.execution_id ELSE 'J:'||j.operation_id END=:P13_RECOVER;
+ IF action_name='ANSWER' THEN
+  kcv_personal_journey.open_conversation(sid);kcv_personal_journey.recover_response(sid,op_id);
+ ELSE kcv_personal_journey.recover_operation(:P13_CONTEXT_ID,op_id);END IF;
+ apex_util.redirect_url(apex_page.get_url(p_page=>13,p_clear_cache=>'13',p_items=>'P13_CONTEXT_ID',p_values=>:P13_CONTEXT_ID));
+ apex_application.stop_apex_engine;
+EXCEPTION WHEN NO_DATA_FOUND THEN RAISE_APPLICATION_ERROR(-20244,'Choose an unfinished operation that is still available.');
+END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: processing
+    }
+    serverSideCondition {
+      whenButtonPressed: @abandon
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+  pageItem P13_REV_CURSOR (
+    type: hidden
+    layout {
+      sequence: 15
+      region: @overview
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P13_REV_NEXT (
+    type: hidden
+    layout {
+      sequence: 16
+      region: @overview
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  button older-revisions (
+    buttonName: OLDER_REVISIONS
+    label: Older revisions
+    layout {
+      sequence: 10
+      region: @revisions
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P13_REV_NEXT IS NOT NULL
+    }
+  )
+  button newest-revisions (
+    buttonName: NEWEST_REVISIONS
+    label: Newest revisions
+    layout {
+      sequence: 20
+      region: @revisions
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P13_REV_CURSOR IS NOT NULL
+    }
+  )
+  pageItem P13_PUBLICATION_STATUS (
+    type: displayOnly
+    label {
+      label: Draft and ready revision
+      alignment: left
+    }
+    layout {
+      sequence: 11
+      region: @overview
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+)

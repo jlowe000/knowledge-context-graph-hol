@@ -2,7 +2,7 @@
 
 Screenshots support a decision or confirm a result. They do not replace the numbered steps, copyable commands or expected outcomes. Use real product screens, meaningful alternative text and a caption beside the task they explain. Keep labels consistent with the Console/APEX version used for capture.
 
-Two application screenshots from the validated lab are included in [Explore Evidence](../labs/explore-evidence/explore-evidence.md). The remaining setup images below are a **capture plan**, not evidence that a new empty instance was provisioned for this documentation review. Do not add broken placeholder image links to learner pages.
+Two historical v1 application screenshots are included in [Explore Evidence](../labs/explore-evidence/explore-evidence.md). They illustrate the earlier tool-based evidence flow, not R4 application retrieval before model dispatch; use the [current manual review](my-contexts-manual-test.md) for that behaviour. The remaining setup images below are a **capture plan**, not evidence that a new empty instance was provisioned for this documentation review. Do not add broken placeholder image links to learner pages.
 
 | ID | Lab/task | Capture and useful callout | Learner question answered | State |
 | --- | --- | --- | --- | --- |

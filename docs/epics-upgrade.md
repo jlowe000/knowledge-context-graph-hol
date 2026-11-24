@@ -1,5 +1,7 @@
 # Upgrade: response explanations and traditional workspace
 
+**Version scope:** this is a historical v1 feature upgrade. Use the scripts from the `release` branch or `v1.0.0` checkout when following it. The current dev candidate uses the [migration guide](database-migrations.md) for all static schema/package changes and the [v2 APEX deployment sequence](../apex/README.md#deploy-the-v2-dev-candidate) for its UI. Do not apply the raw replacement scripts below to a migration-managed v2 schema.
+
 Implemented 19 November 2026. Target: the existing standalone Serverless schema and APEX app, with the initial scenario extension already installed. Preserve the working profile, credential, source data and registered KCV_EXPLORER_TEAM. No new OCI service or IAM policy is required.
 
 For the expanded research content, also follow the [non-PDF evidence migration and application upgrade](content-ingestion-upgrade.md). This includes a nullable page locator and updated backend packages. The current engine-generated SQL export includes the non-PDF JavaScript; a separate file replacement is only a fallback for an older installed export.
@@ -25,7 +27,7 @@ No rows means these objects compiled; a real tool/model/browser test is still re
 
 ## Import the UI
 
-Regenerate source with `python scripts/build_apex.py`; it writes the HTML region and application static-file assets. In an isolated compatible APEX workspace, validate/import the APEXlang app and export the engine-generated SQL. Use [the installation guide](../apex/README.md) for the import and schema mapping. For an upgrade, explicitly select this lab's existing application ID after verifying its alias/workspace/schema; never overwrite an unrelated app. The Worksheet builder defaults to a new app ID to prevent accidental replacement; the task-specific deployment script pins the verified ID privately.
+For this historical v1 upgrade, use the supplied application export and installation instructions from the same v1 checkout. Current dev maintains pages directly in APEXlang; `python scripts/build_apex.py` synchronizes application assets and does not regenerate the page definitions. Its separate [APEXlang guide](apexlang-development.md) covers validation, import and engine export. For either route, explicitly select this lab's existing application ID only after verifying its alias/workspace/schema; never overwrite an unrelated app. The Worksheet builder defaults to a new app ID to prevent accidental replacement; the task-specific deployment script pins the verified ID privately.
 
 The app uses Universal Theme 26.1 with **Iris**. The content inherits APEX theme variables with scoped fallback colors. A theme change applies to the native shell and supported theme values; custom graph behavior remains application code. CSS and JS are packaged as APEX application static files so the HTML region remains below APEXlang's string-size limit. Their page URLs include content hashes to invalidate stale browser copies after updates. New imports may expire the app login.
 

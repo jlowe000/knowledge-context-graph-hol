@@ -2,7 +2,7 @@
 
 Reviewed 19 November 2026 against Oracle's public [LiveLabs ultimate template](https://github.com/oracle-livelabs/developer/blob/main/livelabs-ultimate-template/intro/intro.md) and the pinned [upstream workshop](upstream-comparison.md). These are content-authoring conventions, not a claim that the project has passed Oracle publication review.
 
-The beginner route is now the canonical set of labs linked from [Start here](fresh-serverless-deployment.md). Existing engineering reference documents and older numbered exercises remain available without becoming prerequisites for new learners.
+This is the historical v1 authoring review. Its beginner route is linked from [Start here](fresh-serverless-deployment.md) and remains in the published release. Current dev uses [migrations](database-migrations.md), [APEXlang authoring](apexlang-development.md) and the [My Contexts manual review](my-contexts-manual-test.md). Existing engineering reference documents and older numbered exercises remain available without becoming an alternative v2 setup sequence.
 
 | Convention | Applied in this project |
 | --- | --- |

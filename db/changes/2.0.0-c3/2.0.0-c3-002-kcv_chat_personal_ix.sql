@@ -1,0 +1,1 @@
+CREATE INDEX kcv_chat_personal_ix ON kcv_chat_sessions(personal_context_id,created_at)

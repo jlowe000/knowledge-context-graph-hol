@@ -1,6 +1,16 @@
 # Implementation status
 
-The 23 November public-content pipeline and release summaries extend the earlier milestones below. Current artifact counts are in [build-report.json](../generated/build-report.json); [content-pipeline.md](content-pipeline.md) explains extraction, provenance and release packaging. Native compilation and deployment of this expanded dataset, and a new engine-generated APEX export, remain separate acceptance steps.
+## Current dev candidate — 24 November 2026
+
+The v2.0.0 R4 My Contexts candidate is deployed to an isolated test schema/application. Native upgrade and verification passed with 80 project migrations / 81 Liquibase changesets and no invalid objects. APEXlang import/export passed; the matching engine export and receipt are in `apex/`. Application retrieval now captures evidence before the grounded model request. The independent browser expiry/follow-up passed with six passages, six graph paths, three matched citations and unchanged historical evidence.
+
+Native initial/adopted answers and the negative retrieval test passed. The separate strict native expiry test returned malformed model JSON, so model-suite acceptance remains partial. Fresh deployment and execution of the generated Worksheet installers remain unverified. See the [candidate acceptance record](../references/my-contexts-c3-validation.json) and [R4 verification](../db/verification/c3-r4-validation.json) for the precise scope.
+
+Start current dev work with [development setup](development.md), [database migrations](database-migrations.md) and [APEXlang authoring](apexlang-development.md). Test the experience with the [My Contexts manual review](my-contexts-manual-test.md). The published release remains v1; the learning loop and Explorer evaluation remain separate future epics. Dataset counts are recorded in [build-report.json](../generated/build-report.json) and the distributed dataset manifest, which describe different preparation modes.
+
+## Historical milestones
+
+The dated sections below preserve the state observed at each earlier milestone. Their pending checks, commands and publication statements are not the current dev setup or acceptance status. Use the matching v1 tag/release for the legacy SQL-first instructions.
 
 18 November 2026. The folder is an independent local Git repository on branch main. No remote has been configured and no publication has occurred.
 

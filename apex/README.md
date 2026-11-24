@@ -2,11 +2,17 @@
 
 Application icons use Font APEX from the Oracle APEX team. See [attribution](../third-party/font-apex/README.md) and the [retained licence](../third-party/font-apex/LICENSE.txt). Include these files and [NOTICE](../NOTICE.md) when distributing the SQL export separately.
 
-**First deployment:** follow the [fresh Serverless walkthrough](../docs/fresh-serverless-deployment.md). **Existing explorer:** follow the [upgrade guide](../docs/epics-upgrade.md). The installation details below assume the base database objects, dataset and working model profile already exist.
+**Dev v2 status:** directly authored My Contexts pages are under `application/`. The R4 schema upgrade, native APEXlang validation/import and 29 component parses passed on APEX 26.1.6. An independent authenticated browser expiry test passed: the provider conversation was recreated, the same saved conversation retained its latest revision and six prior turns, and application retrieval supplied six passages/six paths with three matched citations before model dispatch. Historical hashes remained unchanged. Native initial/adopted answers passed, while a separate strict native expiry answer failed JSON/citation parsing despite successful retrieval; a full model-suite pass is not claimed. Fresh deployment and Worksheet execution remain unverified. The final R4 engine export and receipt match the reviewed source: eight pages and seven embedded assets. New/upgrade Worksheet wrappers are generated but not deployed. See the [R4 record](../db/verification/c3-r4-validation.json), [journey record](../references/my-contexts-c3-validation.json), [manual review](../docs/my-contexts-manual-test.md) and [APEXlang guide](../docs/apexlang-development.md). Historical v1 installation instructions below require a matching v1 checkout.
+
+The personal journey uses native pages 10 (library), 11 (full draft editor), 12 (review dialog), 13 (overview/history/operations) and 14 (samples). Page 1 retains the specialized graph, chat and answer-explanation workspace. Its personal route opens an owned saved conversation; the sample route remains separate. Context and conversation ownership is checked through the stable authenticated principal and server-side attachment API. A URL checksum is additional protection, not an ownership decision.
+
+From the overview, **Review and apply draft** opens a before/after dialog. A collection change offers its eligible topics and requires **Refresh preview for selected collection and topics** before Apply. The before/after table shows the candidate topics before they replace the draft and ready revision. Existing conversations stay pinned until **Use the latest ready revision** is selected. The operation-review controls can deliberately abandon interrupted work after server checks; they never automatically retry an uncertain model submission. The separately planned learning loop and Explorer evaluation are outside this epic.
+
+**Current dev deployment:** use the v2 migration and native APEXlang sequence below. **Published v1 deployment:** use the `release` branch or `v1.0.0` tag and follow the fresh Serverless or upgrade guide in that checkout. The older raw-schema instructions must not be combined with current dev files.
 
 **Expanded content:** the supplied engine-generated SQL export now includes the non-PDF evidence display and versioned application assets. Import it normally; a separate JavaScript upload is not required. For an existing installation, follow the [content upgrade guide](../docs/content-ingestion-upgrade.md#update-the-application). It also retains a manual file-update fallback for older exports.
 
-An authenticated APEX app for the extended knowledge/context scenarios. It uses the database's existing GenAI profile and the new KCV_EXPLORER_TEAM. There is no OpenAI/OCI key in browser code and no separate APEX Generative AI service configuration is required.
+An authenticated APEX app for the extended knowledge/context scenarios. Current v2 uses the database's existing GenAI profile, retrieves question evidence before calling `KCV_GROUNDED_TEAM`, and retains `KCV_EXPLORER_TEAM` for context-change proposals. Application retrieval and agent tool calls have distinct lineage labels. There is no OpenAI/OCI key in browser code and no separate APEX Generative AI service configuration is required.
 
 ## What the app does
 
@@ -19,7 +25,17 @@ An authenticated APEX app for the extended knowledge/context scenarios. It uses 
 
 The UI displays model output as text, never as executable HTML. Public links are restricted to approved Oracle publications, event files, repository owners and the catalogue's approved YouTube pages. HTTP, credential-bearing links and internal-storage references are rejected. Evidence labels identify PDF pages or the actual non-PDF locator; a webpage is never labelled as a video transcript. Scenario access is checked against APP_USER, APP_ID and APP_SESSION on the server. This is a public-sample lab, not a production multi-tenant knowledge portal.
 
-## Install through APEX App Builder
+## Deploy the v2 dev candidate
+
+1. Prepare an isolated Serverless schema and its private owner connection using the [connection guide](../docs/dev-connection-setup.md). Complete separately reviewed ADMIN bootstrap/grants and Java/RDF prerequisites; preserve any existing application and runtime data.
+2. Follow the appropriate [migration route](../docs/database-migrations.md): fresh schema, migration-managed dev upgrade, or verified v1 adoption. Run the complete schema verifier before importing the application. Do not substitute individual files from `sql/extensions/` for the ordered migrations.
+3. Verify the target's RDF network, loaded public collection, working model profile and registered scenario team. Migrations manage static objects; they do not create credentials, load a dataset or register agents. Retain existing runtime configuration. On a fresh target, complete those separate setup operations deliberately; do not rerun legacy raw table/package initialization to obtain them.
+4. Validate and import the authored `apex/application/` directory using the [APEXlang guide](../docs/apexlang-development.md). Select the verified workspace, parsing schema and application ID. The canonical `kcv-explorer.sql` and [validation receipt](export-validation.json) match the reviewed R4 source. Generated new/upgrade Worksheet wrappers remain undeployed and require their own native execution tests.
+5. Run the [manual candidate review](../docs/my-contexts-manual-test.md), including the personal and sample paths. Record failures and outstanding checks before accepting an engine-generated export. An import or schema checkpoint alone is not full application acceptance.
+
+## Install the published v1 app through APEX App Builder
+
+Use the files from the `release` branch or the exact `v1.0.0` checkout for this historical route. For current dev, use the v2 sequence above instead.
 
 For the user's temporary ADB Serverless instance, follow the [Serverless workspace and deployment sequence](../docs/serverless-apex-deployment.md). A local test workspace is not needed on that route.
 
@@ -57,22 +73,22 @@ For the complete UI instructions, copyable prompts and expected outcome at every
 | File | Purpose |
 | --- | --- |
 | `kcv-explorer.sql` | APEX-engine-generated application export; import through App Builder |
-| `region.html`, `explorer.css`, `explorer.js` | Editable UI source, with no build/runtime npm dependencies |
-| `application/` | Standalone APEXlang application source with Universal Theme and APEX Accounts login |
+| `explorer.css`, `explorer.js` | Maintained specialized conversation/graph assets, with no build/runtime npm dependencies |
+| `application/` | Authoritative, directly maintained APEXlang pages/shared components with Universal Theme and APEX Accounts login |
 | `../sql/extensions/05_apex_api.sql` | Server-side authenticated AJAX process adapter |
 
-To rebuild the APEXlang page after editing assets:
+To synchronize the application assets while preserving authored APEXlang pages:
 
 ```bash
 python scripts/build_apex.py
 ```
 
-For optional SQLcl authoring, connect to the intended database privately and run the following, replacing the workspace and choosing a free application ID. Importing updates the selected application if it already exists, so inspect the target first:
+For SQLcl authoring, complete the v2 schema prerequisites and connect to an isolated development target privately. The following command forms illustrate validation/import/export; use the [development guide](../docs/apexlang-development.md) and verify the selected workspace, schema and application before execution. Importing updates an existing selected application:
 
 ```text
 apex validate -input apex/application -workspace YOUR_WORKSPACE
-apex import -input apex/application -workspace YOUR_WORKSPACE -schema KCV_LAB -id YOUR_NEW_ID -alias KCV-EXPLORER -name "Knowledge Context Explorer"
-apex export -applicationid YOUR_NEW_ID -exptype SQL -dir work/apex-export
+apex import -input apex/application -workspace YOUR_WORKSPACE -schema YOUR_TEST_SCHEMA -id YOUR_NEW_ID -alias KCV-EXPLORER -name "Knowledge Context Explorer"
+apex export -applicationid YOUR_NEW_ID -exptype APPLICATION_SOURCE -skipExportDate -expSupportingObjects N -disable-exp-comments -dir work/apex-export
 ```
 
 The published SQL export must be regenerated after an asset change; changing the source files alone does not change the already exported app. The generated export is not a handwritten imitation of APEX internal import APIs.

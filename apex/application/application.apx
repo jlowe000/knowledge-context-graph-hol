@@ -1,12 +1,13 @@
 app KCV-EXPLORER (
     name: Knowledge Context Explorer
+    version: 2.0.0-dev
     logo {
         type: text
         text: &APP_TITLE.
     }
     navigation {
         homeUrl: {
-            page: 1
+            page: 10
         }
         loginUrl: {
             page: LOGIN
@@ -47,5 +48,12 @@ app KCV-EXPLORER (
         allowFeedback: true
         compatibilityMode: 24.2
     }
+    appItem KCV_AUTH_ACCOUNT_ID (
+        scope: app
+        security {
+            sessionStateProtection: restricted
+            escapeSpecialChars: true
+        }
+    )
 )
 

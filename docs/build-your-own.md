@@ -26,7 +26,7 @@ Follow [development setup](development.md). The original-source pipeline on dev 
 
 Read [architecture](architecture.md), `sql/schema/03_tools.sql`, `sql/extensions/02_scenario_api.sql` and `03_scenario_agents.sql`. The current retrieval is explicit topic intersection over a pinned base plus context overlay, with deterministic bounds. Context weights are not a learned ranking. Change the ontology, query/tool contracts and tests together if your desired semantics differ.
 
-Keep evidence IDs, actual tool-output capture, context ownership, guarded preview/apply and historical immutability. The optional OWL exercise demonstrates class entailment; using inference in normal retrieval would be an explicit design change.
+Keep evidence IDs, captured retrieval packets, context ownership, guarded preview/apply and historical immutability. Current R4 retrieves and records evidence in application code before calling the tool-free grounded answer team; an answer's explanation must preserve that origin and ordering. The optional OWL exercise demonstrates class entailment; using inference in normal retrieval would be an explicit design change.
 
 **Outcome:** a defensible answer-selection mechanism with testable limits, not merely different model prose.
 

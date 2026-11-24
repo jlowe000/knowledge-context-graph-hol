@@ -1,0 +1,1 @@
+INSERT INTO kcv_settings VALUES ('SCHEMA_VERSION','1')

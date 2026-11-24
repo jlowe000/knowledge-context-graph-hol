@@ -1,5 +1,7 @@
 # Scenario extension validation
 
+**Historical v1 validation record.** Dates and limitations below describe the recorded runs, including early component tests. Current v2 My Contexts coverage is recorded separately in [candidate acceptance](../references/my-contexts-c3-validation.json) and [R4 verification](../db/verification/c3-r4-validation.json). Reproduction commands below require the corresponding v1 checkout and isolated fixtures.
+
 18 November 2026. This record distinguishes real Oracle/APEX execution from mocked native/model services and user-reported earlier Serverless results.
 
 | Check | Result and limit |

@@ -1,0 +1,6 @@
+CREATE TABLE kcv_scenario_observations (
+ observation_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+ session_id VARCHAR2(40) NOT NULL REFERENCES kcv_chat_sessions, revision_id VARCHAR2(40) NOT NULL,
+ actor VARCHAR2(255) NOT NULL, method VARCHAR2(32) NOT NULL,
+ observation CLOB NOT NULL, next_step CLOB, recorded_at TIMESTAMP WITH TIME ZONE DEFAULT SYSTIMESTAMP NOT NULL
+)

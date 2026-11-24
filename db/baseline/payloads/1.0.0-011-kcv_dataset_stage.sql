@@ -1,0 +1,4 @@
+CREATE GLOBAL TEMPORARY TABLE kcv_dataset_stage (
+    file_name VARCHAR2(80) PRIMARY KEY, file_role VARCHAR2(16) NOT NULL,
+    row_count NUMBER NOT NULL, payload CLOB NOT NULL CHECK (payload IS JSON))
+    ON COMMIT PRESERVE ROWS

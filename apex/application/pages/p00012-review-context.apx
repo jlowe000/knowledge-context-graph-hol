@@ -1,0 +1,516 @@
+page 12 (
+  name: Review context changes
+  alias: REVIEW-CONTEXT
+  title: Review context changes
+  appearance {
+    pageMode: modalDialog
+    dialogTemplate: @/modal-dialog
+    templateOptions: #DEFAULT#
+  }
+  dialog {
+    chained: false
+    width: 1000
+  }
+  security {
+    authentication: required
+    pageAccessProtection: argumentsMustHaveChecksum
+    formAutoComplete: false
+  }
+  region validation-feedback (
+    name: Before you can review
+    type: staticContent
+    layout {
+      sequence: 5
+      slot: contentBody
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p role="status">&P12_VALIDATION_MESSAGE!HTML.</p><p>Your saved draft is unchanged. Cancel this review, then choose Edit draft to update it.</p>
+      ```
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P12_VALIDATION_MESSAGE IS NOT NULL
+    }
+  )
+  region review (
+    name: Review before applying
+    type: staticContent
+    layout {
+      sequence: 10
+      slot: contentBody
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p>When choosing a different collection, select its eligible topics and refresh the preview. This review can replace the saved draft topic choices only when you explicitly apply it.</p><p>Check the saved draft against the current ready revision. Applying publishes a private context revision. It does not edit the shared source knowledge. Existing conversations stay on their pinned revisions until you explicitly adopt a newer one.</p><p>Topics and the collection select evidence. Your question, objective, background and constraints frame its interpretation. Removing a topic changes learning focus; it does not create a technical constraint.</p>
+      ```
+    }
+  )
+  pageItem P12_CONTEXT_ID (
+    type: hidden
+    layout {
+      sequence: 1
+      region: @review
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P12_VERSION (
+    type: hidden
+    layout {
+      sequence: 2
+      region: @review
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P12_TOKEN (
+    type: hidden
+    layout {
+      sequence: 3
+      region: @review
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P12_COLLECTION (
+    type: selectList
+    label {
+      label: Collection for this preview
+      alignment: left
+    }
+    layout {
+      sequence: 10
+      region: @review
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    validation {
+      valueRequired: false
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+    lov {
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+SELECT CASE WHEN j.graph=JSON_VALUE(kcv_personal_context_api.get_context(:P12_CONTEXT_ID),'$.base_graph') THEN j.graph||' (currently pinned)' ELSE j.graph END d,j.graph r FROM JSON_TABLE(kcv_personal_journey.collections(:P12_CONTEXT_ID),'$.collections[*]' COLUMNS(graph VARCHAR2(128) PATH '$.graph')) j
+      ```
+      displayNullValue: false
+      displayExtraValues: false
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P12_TOKEN IS NOT NULL
+    }
+  )
+  pageItem P12_TOPICS (
+    type: selectMany
+    label {
+      label: Topics in the selected collection
+      alignment: left
+    }
+    layout {
+      sequence: 20
+      region: @review
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    validation {
+      valueRequired: false
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+    lov {
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+SELECT j.label d,j.label r FROM JSON_TABLE(kcv_personal_journey.collection_topics(:P12_CONTEXT_ID,:P12_COLLECTION),'$.topics[*]' COLUMNS(label VARCHAR2(800) PATH '$')) j ORDER BY j.label
+      ```
+    }
+    cascadingLov {
+      parentItems: P12_COLLECTION
+      itemsToSubmit: P12_CONTEXT_ID
+      parentRequired: true
+    }
+    multipleValues {
+      type: jsonArray
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P12_TOKEN IS NOT NULL
+    }
+  )
+  button preview (
+    buttonName: PREVIEW
+    label: Refresh preview for selected collection and topics
+    layout {
+      sequence: 10
+      region: @review
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P12_TOKEN IS NOT NULL
+    }
+  )
+  button apply (
+    buttonName: APPLY
+    label: Apply reviewed context
+    layout {
+      sequence: 20
+      region: @review
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: true
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P12_TOKEN IS NOT NULL
+    }
+  )
+  button cancel (
+    buttonName: CANCEL
+    label: Cancel
+    layout {
+      sequence: 30
+      region: @review
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: redirectUrl
+      targetUrl: javascript:apex.navigation.dialog.cancel(true);
+      executeValidations: false
+    }
+  )
+  process initialize-preview (
+    name: initialize preview
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+DECLARE j JSON_OBJECT_T; body JSON_OBJECT_T; prefs JSON_OBJECT_T; keys JSON_KEY_LIST; topics JSON_ARRAY_T:=JSON_ARRAY_T(); BEGIN
+ :P12_VALIDATION_MESSAGE:=NULL;
+ IF :P12_TOKEN IS NULL THEN
+  :P12_COLLECTION:=NULL; :P12_TOPICS:=NULL;
+  BEGIN
+   j:=JSON_OBJECT_T.parse(kcv_personal_journey.preview(:P12_CONTEXT_ID,TO_NUMBER(:P12_VERSION)));
+  EXCEPTION WHEN OTHERS THEN
+   IF SQLCODE=-20244 THEN
+    :P12_TOKEN:=NULL; :P12_COLLECTION:=NULL; :P12_TOPICS:=NULL;
+    :P12_VALIDATION_MESSAGE:=REGEXP_REPLACE(SQLERRM,'^ORA-20244: (VALIDATION_ERROR: )?','');
+    RETURN;
+   ELSE RAISE; END IF;
+  END;
+  :P12_TOKEN:=j.get_string('token'); :P12_COLLECTION:=j.get_string('new_collection');
+  body:=j.get_object('after');prefs:=body.get_object('topic_preferences');keys:=prefs.get_keys;
+  FOR i IN 1..keys.count LOOP topics.append(keys(i));END LOOP;:P12_TOPICS:=topics.to_string();
+ ELSE j:=JSON_OBJECT_T.parse(kcv_personal_journey.get_preview(:P12_CONTEXT_ID,:P12_TOKEN)); END IF;
+END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: beforeHeader
+    }
+  )
+  process refresh-preview (
+    name: refresh preview
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+DECLARE j JSON_OBJECT_T; body JSON_OBJECT_T; reviewed JSON_OBJECT_T; old_prefs JSON_OBJECT_T; prefs JSON_OBJECT_T:=JSON_OBJECT_T();topics JSON_ARRAY_T;label VARCHAR2(200);BEGIN
+ j:=JSON_OBJECT_T.parse(kcv_personal_journey.get_preview(:P12_CONTEXT_ID,:P12_TOKEN));
+ reviewed:=j.get_object('after');body:=JSON_OBJECT_T.parse(reviewed.to_clob());old_prefs:=body.get_object('topic_preferences');topics:=JSON_ARRAY_T.parse(NVL(:P12_TOPICS,'[]'));
+ FOR i IN 0..topics.get_size-1 LOOP
+  label:=topics.get_string(i);
+  IF old_prefs.has(label) THEN prefs.put(label,old_prefs.get_number(label));ELSE prefs.put(label,1);END IF;
+ END LOOP;body.put('topic_preferences',prefs);
+ j:=JSON_OBJECT_T.parse(kcv_personal_journey.preview(:P12_CONTEXT_ID,TO_NUMBER(:P12_VERSION),p_collection=>:P12_COLLECTION,p_body=>body.to_clob()));
+ :P12_TOKEN:=j.get_string('token');
+END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: processing
+    }
+    serverSideCondition {
+      whenButtonPressed: @preview
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+  region comparison (
+    name: Before and after
+    type: classicReport
+    layout {
+      sequence: 20
+      slot: contentBody
+    }
+    source {
+      location: localDatabase
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+WITH preview AS (SELECT kcv_personal_journey.get_preview(:P12_CONTEXT_ID,:P12_TOKEN) doc FROM dual), fields AS (
+SELECT 0 ord,'Collection' field,JSON_VALUE(doc,'$.old_collection' RETURNING VARCHAR2(32767)) before_value,JSON_VALUE(doc,'$.new_collection' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 1 ord,'Question' field,JSON_VALUE(doc,'$.before.question' RETURNING VARCHAR2(32767)) before_value,JSON_VALUE(doc,'$.after.question' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 2 ord,'Objective clarity' field,JSON_VALUE(doc,'$.before.objective_clarity' RETURNING VARCHAR2(32767)) before_value,JSON_VALUE(doc,'$.after.objective_clarity' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 3 ord,'Objective' field,JSON_VALUE(doc,'$.before.objective' RETURNING VARCHAR2(32767)) before_value,JSON_VALUE(doc,'$.after.objective' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 4 ord,'Person' field,JSON_VALUE(doc,'$.before.person' RETURNING VARCHAR2(32767)) before_value,JSON_VALUE(doc,'$.after.person' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 5 ord,'Role' field,JSON_VALUE(doc,'$.before.role' RETURNING VARCHAR2(32767)) before_value,JSON_VALUE(doc,'$.after.role' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 6 ord,'Organisation' field,JSON_VALUE(doc,'$.before.organisation' RETURNING VARCHAR2(32767)) before_value,JSON_VALUE(doc,'$.after.organisation' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 7 ord,'Known situation' field,JSON_VALUE(doc,'$.before.known_situation' RETURNING VARCHAR2(32767)) before_value,JSON_VALUE(doc,'$.after.known_situation' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 8 ord,'Learning purpose' field,JSON_VALUE(doc,'$.before.learning_purpose' RETURNING VARCHAR2(32767)) before_value,JSON_VALUE(doc,'$.after.learning_purpose' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 9 ord,'Time horizon' field,JSON_VALUE(doc,'$.before.time_horizon' RETURNING VARCHAR2(32767)) before_value,JSON_VALUE(doc,'$.after.time_horizon' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 10 ord,'Topics (learning focus)' field,JSON_QUERY(doc,'$.before.topic_preferences' RETURNING VARCHAR2(32767)) before_value,JSON_QUERY(doc,'$.after.topic_preferences' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 11 ord,'Unknowns' field,JSON_QUERY(doc,'$.before.unknowns' RETURNING VARCHAR2(32767)) before_value,JSON_QUERY(doc,'$.after.unknowns' RETURNING VARCHAR2(32767)) after_value FROM preview
+UNION ALL
+SELECT 12 ord,'Explicit constraints' field,JSON_QUERY(doc,'$.before.constraints' RETURNING VARCHAR2(32767)) before_value,JSON_QUERY(doc,'$.after.constraints' RETURNING VARCHAR2(32767)) after_value FROM preview
+) SELECT field,before_value,after_value,CASE WHEN NVL(before_value,CHR(1))=NVL(after_value,CHR(1)) THEN 'Unchanged' ELSE 'Changed' END change_status FROM fields ORDER BY ord
+      ```
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    reportLayout {
+      numberOfRowsType: staticValue
+      numberOfRows: 30
+    }
+    componentAppearance {
+      template: @/standard
+    }
+    messages {
+      whenNoDataFound: No records yet.
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :P12_TOKEN IS NOT NULL
+    }
+    column FIELD (
+      reportColumnQueryId: 1
+      type: plainText
+      heading {
+        heading: Field
+        alignment: start
+      }
+      layout {
+        sequence: 10
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column BEFORE_VALUE (
+      reportColumnQueryId: 2
+      type: plainText
+      heading {
+        heading: Current ready revision
+        alignment: start
+      }
+      layout {
+        sequence: 20
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column AFTER_VALUE (
+      reportColumnQueryId: 3
+      type: plainText
+      heading {
+        heading: Draft to apply
+        alignment: start
+      }
+      layout {
+        sequence: 30
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column CHANGE_STATUS (
+      reportColumnQueryId: 4
+      type: plainText
+      heading {
+        heading: Change
+        alignment: start
+      }
+      layout {
+        sequence: 40
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+  )
+  process apply-reviewed-context (
+    name: apply reviewed context
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+DECLARE j JSON_OBJECT_T; body JSON_OBJECT_T; reviewed JSON_OBJECT_T; old_prefs JSON_OBJECT_T; prefs JSON_OBJECT_T:=JSON_OBJECT_T();topics JSON_ARRAY_T;label VARCHAR2(200);result CLOB;before_body CLOB;candidate CLOB;matches NUMBER;BEGIN
+ j:=JSON_OBJECT_T.parse(kcv_personal_journey.get_preview(:P12_CONTEXT_ID,:P12_TOKEN));
+ reviewed:=j.get_object('after');body:=JSON_OBJECT_T.parse(reviewed.to_clob());old_prefs:=body.get_object('topic_preferences');topics:=JSON_ARRAY_T.parse(NVL(:P12_TOPICS,'[]'));
+ FOR i IN 0..topics.get_size-1 LOOP
+  label:=topics.get_string(i);
+  IF old_prefs.has(label) THEN prefs.put(label,old_prefs.get_number(label));ELSE prefs.put(label,1);END IF;
+ END LOOP;body.put('topic_preferences',prefs);
+ before_body:=reviewed.to_clob();candidate:=body.to_clob();
+ SELECT CASE WHEN JSON_EQUAL(before_body,candidate) THEN 1 ELSE 0 END INTO matches FROM dual;
+ IF NVL(j.get_string('new_collection'),CHR(1))<>NVL(:P12_COLLECTION,CHR(1)) OR matches<>1 THEN
+  RAISE_APPLICATION_ERROR(-20244,'Refresh the preview after changing collection or topics, then review before applying.');
+ END IF;
+ result:=kcv_personal_journey.apply_preview(:P12_CONTEXT_ID,:P12_TOKEN);
+END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: processing
+    }
+    serverSideCondition {
+      whenButtonPressed: @apply
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+  process close-applied-review (
+    name: Close applied review
+    type: closeDialog
+    settings {
+      itemsToReturn: P12_CONTEXT_ID
+    }
+    execution {
+      sequence: 20
+      point: processing
+    }
+    serverSideCondition {
+      whenButtonPressed: @apply
+    }
+  )
+  pageItem P12_VALIDATION_MESSAGE (
+    type: hidden
+    layout {
+      sequence: 4
+      region: @review
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+)

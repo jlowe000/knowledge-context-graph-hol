@@ -21,6 +21,44 @@ The branches share an initial history. `release` is a curated distribution tree,
 
 Do not merge `dev` wholesale into `release`: it restores developer files. Do not merge the release's file-removal commit wholesale into `dev`: it removes the tools. Port individual fixes on dev and regenerate the distribution. Branch names are case-sensitive.
 
-The release manifest hashes all payload files except itself. Compare those hashes when preparing a release; the manifest is not a signature or a substitute for native acceptance. Use version tags only after the desired acceptance checks pass.
+The release manifest hashes all payload files except itself. Compare those hashes when preparing a release; the manifest is not a signature or a substitute for native acceptance. New version tags follow the acceptance gates below; the initial baseline tag identifies the already-published state without asserting new testing.
+
+## Product versions and Git tags
+
+Use **major.minor.patch**, with public annotated tags named `vMAJOR.MINOR.PATCH`. The agreed baseline is **v1.0.0** and the planned My Contexts delivery is **v2.0.0**. This project's policy explicitly permits a major increment for significant functional uplift as well as backward incompatibility; version numbers are not a substitute for compatibility notes.
+
+| Increment | When to use it | Example |
+| --- | --- | --- |
+| Major | A backward-incompatible API, stored-data, behaviour or deployment contract; or a significant functional uplift that changes what users can do. Reset minor and patch to zero. | `v1.0.0` to `v2.0.0` for durable personal contexts and conversations. |
+| Minor | A backward-compatible feature or meaningful extension within the current experience. Reset patch to zero. | `v2.0.0` to `v2.1.0` for an additional compatible learning capability. |
+| Patch | Backward-compatible defect fixes, documentation corrections or maintenance with no new functional contract. | `v2.0.0` to `v2.0.1` for a corrected error message or installer defect. |
+
+Classify each release by its highest-impact change. Routine source corrections can be patch changes; meaningful additional content coverage can be minor. A change to retrieval/data semantics must be assessed for compatibility rather than classified from the number of source files changed. Source editions, dataset hashes, schema migration IDs and APEX platform versions remain separately versioned.
+
+My Contexts qualifies for `v2.0.0` because the user can maintain personal contexts and multiple durable conversations across sign-ins, beyond the supplied sample journeys. Native APEXlang authoring and Liquibase on dev accompany that uplift. The major number does not require us to break the existing HOL: retain its sample APIs/flows where feasible and provide tested, data-preserving upgrades. Document actual compatibility and unsupported downgrade paths separately.
+
+### Baseline and tag targets
+
+Public remote refs were checked on 24 November 2026. No tags were returned. At that check:
+
+| Record | Commit | Planned role |
+| --- | --- | --- |
+| Published `release` | `83e3ecb64f417f6ef388df43ab9b102dddab2b71` | Exact target for the retrospective `v1.0.0` baseline tag. |
+| Published `dev` | `cb4608c8b594d73e3908a63561cc963d386e52f8` | Corresponding development baseline; retain this source SHA in baseline provenance. |
+| Future accepted release | Not yet created | Target for `v2.0.0` after the My Contexts implementation and learner acceptance gates pass. |
+
+On 24 November 2026, annotated tag `v1.0.0` was created and pushed. Its tag object is `aa60df23294503f2f0bb38c69a76c5ec6707e1fd` and its peeled commit was verified as `83e3ecb64f417f6ef388df43ab9b102dddab2b71`. The release branch stayed on that commit. `v2.0.0` remains a future target. Recheck remote tags before creating new ones and reject an existing name pointing to a different commit. The baseline label describes the already-published implementation and its existing validation record; it does not assert that new tests have run.
+
+Git tags identify commits across the repository, not separate branch-local versions. `vX.Y.Z` identifies the curated **release** commit. Record the exact accepted **dev** source SHA in the release manifest/validation provenance instead of trying to apply the same tag to two different commits. Dev contributors can check out that source SHA to recover the matching tools and authoring sources.
+
+Use annotated, immutable tags. Never move or force-push a published version tag; publish the next appropriate version for a correction. Work in progress is identified by its full commit SHA and marked as an unreleased target version. If candidate tags become useful, use distinct prerelease names such as `v2.0.0-rc.1`; these do not claim final acceptance.
+
+### Implementation and publication sequence
+
+1. Record/tag the exact existing baseline when executing the tagging work. Creating or pushing tags is a separate Git operation; editing this policy does neither.
+2. Implement version metadata in the dev source/build: one maintained product version, release notes, manifest source SHA, migration compatibility range and app artifact hash. Keep build/acceptance status explicit so `2.0.0` in candidate metadata cannot imply a published release.
+3. Accept the dev implementation, generate the learner distribution and independently accept its fresh Worksheet installation and supported upgrade from `v1.0.0`. Confirm the same-ID APEX upgrade preserves owned contexts/history. Record the exact source/data/app hashes and supported compatibility.
+4. Produce the reviewed release commit and verify its tree matches the accepted candidate. Create the annotated `v2.0.0` tag against that exact commit with upgrade/release notes, then publish the branch/tag through the normal controlled Git workflow.
+5. Continue pinning the GitHub dataset loader to a full 40-character commit SHA plus the manifest hash. A convenient version tag does not replace the loader's existing integrity/reproducibility contract.
 
 The GitHub importer and expanded summary dataset passed the [recorded native SQL acceptance](../references/github-dataset-validation.json) on 23 November 2026 at dev commit `6eb868ee732f0ca3a0d8a6f9e68f838590d77b47`, including the four supplied verification scripts and two-session lock exclusion. A subsequent [GenAI and signed-in APEX acceptance](../references/expanded-ui-validation.json) passed with the regenerated app export and corrected citation parser, identified by artifact hashes. Interrupted loading, a fresh learner deployment and execution from a promoted release commit remain separate checks. These results do not automatically promote or push release.

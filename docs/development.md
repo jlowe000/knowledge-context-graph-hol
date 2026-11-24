@@ -2,19 +2,45 @@
 
 Use dev when building your own adaptation of the collection or contributing implementation changes. Start with [Build your own version](build-your-own.md) for the learning journey, then use this page for its environment and build commands. Release has separate experiences for end users and developers learning the supplied collection; neither requires this authoring setup. This page is not shipped on release.
 
+## v2.0.0 work in progress
+
+The published baseline is tagged `v1.0.0`. The R4 My Contexts candidate uses application retrieval before model dispatch and preserves saved context/history across provider expiry. The independent browser expiry/follow-up passed with recorded evidence, matched citations and unchanged historical hashes. Native initial/adopted answers and the negative retrieval test passed; the separate strict native expiry answer returned malformed JSON, so full model-suite acceptance remains partial. The matching R4 export/receipt and generated wrappers are prepared; fresh deployment and Worksheet execution remain unverified. The learning loop and evaluation of the Explorer remain separate future epics.
+
+Use the [implementation plan](my-contexts-implementation-plan.md), [context API contract](my-contexts-api.md), [migration workflow](database-migrations.md) and [APEXlang authoring guide](apexlang-development.md) for the new development route. The [private SQLcl connection guide](dev-connection-setup.md) prepares isolated native tests without sharing credentials. SQLcl/Liquibase manages new database development; native pages are maintained directly in `.apx` files. Existing Python utilities continue to prepare content and generate/check artifacts.
+
+The v2 release builder and app installer require a matching native engine import/export receipt and reject missing or stale source/export hashes. The matching R4 receipt is present; offline compiler and local unit-test results alone cannot supply it. This enables candidate packaging, not release promotion. Release stays on v1 while deployment and learner acceptance remain incomplete.
+
+After installing the development app through the [v2 deployment sequence](../apex/README.md#deploy-the-v2-dev-candidate), use the [personal journey walkthrough](my-contexts-draft-walkthrough.md) and [manual candidate review](my-contexts-manual-test.md) to exercise drafts, activation, saved conversations, refinement and evidence. Use migrations for the schema; the older raw-schema beginner and upgrade guides apply to a published v1 checkout.
+
+The [C3 validation record](../references/my-contexts-c3-validation.json) separates current native, model and browser evidence from outstanding checks. The earlier [C2 validation record](../references/my-contexts-c2-validation.json) remains the historical record for the draft library, including account recreation and draft reopening; it does not certify the later personal journey.
+
 ## Requirements
 
 - Oracle Linux/Bash and Python 3.11+ (default python3.12).
 - Git and internet access to the pinned public PDFs and Python package index.
 - For native testing: a separate approved ADB Serverless 26ai instance with Java/RDF, Select AI and compatible APEX; use the documented private credentials.
-- APEX/SQLcl tooling is needed only when regenerating an engine-generated application export. Do not hand-edit the generated SQL export.
+- For v2 schema/UI development: local Java and SQLcl/Liquibase with APEXlang tooling. The [Bash launcher](dev-connection-setup.md) reuses compatible installations or downloads missing Java/SQLcl; no container is required. Earlier native acceptance used SQLcl 26.2.1.209.2118 with Java 21.0.12.1 on Oracle Linux 8.10. Verify the actual tool versions and target APEX compatibility before import. Do not hand-edit the generated SQL export.
+
+## Script conventions
+
+All shell launchers use Bash: invoke them as `bash scripts/<name>.sh` from the repository root in Oracle Linux. The same convention applies on a laptop and an OCI host. The SQLcl launcher additionally supports Git Bash on Windows for a native local client, documented in [private connection setup](dev-connection-setup.md). This does not change the Oracle Linux requirement for the full authoring pipeline. There is no PowerShell launcher to maintain alongside it.
+
+| Script | Purpose |
+| --- | --- |
+| `scripts/check_environment.sh` | Check the Oracle Linux/Bash and Python prerequisites. |
+| `scripts/bootstrap.sh` | Prepare the Python build environment. |
+| `scripts/build_artifacts.sh` | Build and check the authoring data/artifacts. |
+| `scripts/open_dev_sqlcl.sh` | Prepare missing local Java/SQLcl and open SQLcl without logging in; use it for the dev Liquibase/APEXlang workflow. |
+| `scripts/setup_serverless.sh` | Legacy direct-driver helper; v2 schema creation is blocked in favour of migrations. |
+
+Python `.py` files remain build/data utilities called from this Bash environment. Database objects and operations remain SQL/PLSQL. The release learner route remains SQL Worksheet and requires none of these shell launchers.
 
 ## Set up and check the original-source pipeline
 
 1. Check out `dev`: `git switch dev`.
 2. Run `bash scripts/bootstrap.sh`.
 3. Run `bash scripts/build_artifacts.sh`. This verifies source hashes, extracts selected PDF text, builds RDF and runs checks.
-4. Run `.venv/bin/python scripts/build_apex_worksheet.py` if testing the original-passage Worksheet installation.
+4. Generate candidate app installers with `python scripts/build_apex_worksheet.py --mode new` or `--mode upgrade`, using the target options described in the [APEXlang guide](apexlang-development.md). A matching R4 receipt is required before generation; the resulting wrappers still need deployment testing. To reproduce the published v1 deployment, use the tagged baseline.
 5. Keep `work/`, `.venv/`, local configuration and credentials ignored. Original PDFs and extracted text never belong in a public commit.
 
 The `kcv/` package implements preparation and optional direct-database automation. `scripts/` contains developer/build utilities. `tests/` and `integration-test/` contain checks; mocks may be installed only in the isolated test schema. Learner database operations remain SQL/PLSQL.
@@ -27,7 +53,7 @@ The build uses attributed editorial summaries from the original presentations an
 
 Run `.venv/bin/python -m unittest discover -s tests -v`, `python scripts/sync_doc_snippets.py --check` and `python scripts/build_apex.py --check` before promotion. Inspect `work/release-package/README.md` and `release-manifest.json`. The release dataset requires its own native graph/model/browser acceptance; original-passage validation cannot be claimed for changed summaries.
 
-See [branch workflow](branch-workflow.md) for promotion. Optional direct-driver setup (`scripts/setup_serverless.sh`) does not replace the learner SQL walkthrough.
+See [branch workflow](branch-workflow.md) for promotion. Optional direct-driver setup (`scripts/setup_serverless.sh`) is retained for legacy diagnostics/bootstrap and rejects raw schema creation on v2. Use the migration guide for v2 schema changes; do not mix old raw initialization scripts with migration-managed objects.
 
 ## Publish and test the GitHub dataset on dev
 
@@ -41,9 +67,9 @@ On a Windows development host, use `.venv/Scripts/python.exe` for the same comma
 
 After local validation and publication review, commit and push **dev**. Copy that full 40-character dev commit SHA into the generated caller and run it through the [GitHub load guide](github-dataset-load.md) on the approved temporary ADB Serverless instance. The caller's manifest hash is already filled in. Keep release unchanged while proving this candidate.
 
-Native acceptance includes installing/compiling the importer, loading the pinned data, running `integration-test/verify_worksheet.sql`, `verify_scenario_native.sql`, `verify_source_packet_scope.sql` and `verify_github_dataset.sql`, then checking the relevant real model and signed-in application/evidence flows. Record outcomes against the tested commit and manifest hash; do not convert pending checks into passes based on local packaging tests. If a change is needed, publish a new dev commit and repeat the affected checks before promotion.
+For current dev acceptance, follow the [migration workflow](database-migrations.md), load the pinned data, and run `integration-test/verify_worksheet.sql`, `verify_sample_journey_regression.sql` and `verify_personal_journey.sql` in the isolated test schema. The latter two remove only their own synthetic fixtures. Do not use the legacy `verify_scenario_native.sql` against a schema whose conversations must be preserved. Dataset changes also need `verify_source_packet_scope.sql` and `verify_github_dataset.sql`; review each script's prerequisites before execution. Model/expiry checks and signed-in application/evidence flows are separate acceptance steps in the [manual review](my-contexts-manual-test.md). Record outcomes against the tested commit or artifact hashes and manifest hash; local packaging tests do not establish native acceptance. Repeat affected checks after changes before promotion.
 
-The GitHub path and expanded summaries passed [native SQL acceptance](../references/github-dataset-validation.json) on 23 November 2026 at dev commit `6eb868ee732f0ca3a0d8a6f9e68f838590d77b47`, including the four scripts above and two-session lock exclusion. A later [real-model and APEX browser acceptance](../references/expanded-ui-validation.json) passed using the updated app export and citation parser, identified by artifact hashes. Interrupted-load behaviour, a fresh learner deployment and execution from a promoted release commit remain untested. See [branch workflow](branch-workflow.md#maintainer-promotion).
+Historical v1 acceptance: the GitHub path and expanded summaries passed [native SQL acceptance](../references/github-dataset-validation.json) on 23 November 2026 at dev commit `6eb868ee732f0ca3a0d8a6f9e68f838590d77b47`, including that record's dataset/scenario tests and two-session lock exclusion. A later [real-model and APEX browser acceptance](../references/expanded-ui-validation.json) passed using the updated app export and citation parser, identified by artifact hashes. These records do not establish fresh v2 deployment or execution from a promoted v2 release. See the current candidate status above and [branch workflow](branch-workflow.md#maintainer-promotion).
 
 For an explicitly requested reset of the dedicated disposable cloud lab, follow [dev reset and retest](dev-reset-and-retest.md). It verifies a project-free checkpoint and retains the one-way JAVAVM installation before rebuilding.
 

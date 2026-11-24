@@ -1,0 +1,1594 @@
+{
+  "version": "1.0.0",
+  "source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
+  "tables": [
+    {
+      "name": "KCV_SETTINGS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "SETTING_KEY",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 64,
+          "char_used": "B"
+        },
+        {
+          "name": "SETTING_VALUE",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 4000,
+          "char_used": "B"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "SETTING_KEY"
+        }
+      ]
+    },
+    {
+      "name": "KCV_SOURCES",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "VERSION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "SOURCE_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "SHA256",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 64,
+          "char_used": "B"
+        },
+        {
+          "name": "METADATA_JSON",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "VERSION_ID"
+        },
+        {
+          "type": "C",
+          "expression": "metadata_json IS JSON"
+        }
+      ]
+    },
+    {
+      "name": "KCV_PASSAGES",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "PASSAGE_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 200,
+          "char_used": "B"
+        },
+        {
+          "name": "VERSION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "PDF_PAGE",
+          "type": "NUMBER",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "CHUNK_INDEX",
+          "type": "NUMBER",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "TEXT_SHA256",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 64,
+          "char_used": "B"
+        },
+        {
+          "name": "PASSAGE_TEXT",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "METADATA_JSON",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "PASSAGE_ID"
+        },
+        {
+          "type": "R",
+          "columns": "VERSION_ID",
+          "reference_table": "KCV_SOURCES",
+          "reference_columns": "VERSION_ID"
+        },
+        {
+          "type": "C",
+          "expression": "pdf_page>0 AND pdf_page=TRUNC(pdf_page)"
+        },
+        {
+          "type": "C",
+          "expression": "chunk_index>0"
+        },
+        {
+          "type": "C",
+          "expression": "metadata_json IS JSON"
+        }
+      ]
+    },
+    {
+      "name": "KCV_CONTEXTS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "SNAPSHOT_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "CONTEXT_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "SNAPSHOT_VERSION",
+          "type": "NUMBER",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "CONTEXT_JSON",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "SNAPSHOT_ID"
+        },
+        {
+          "type": "C",
+          "expression": "context_json IS JSON"
+        },
+        {
+          "type": "U",
+          "columns": "CONTEXT_ID,SNAPSHOT_VERSION"
+        }
+      ]
+    },
+    {
+      "name": "KCV_GRAPH_RUNS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "GRAPH_NAME",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "GRAPH_HASH",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 64,
+          "char_used": "B"
+        },
+        {
+          "name": "STATE",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 16,
+          "char_used": "B"
+        },
+        {
+          "name": "CREATED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "GRAPH_NAME"
+        },
+        {
+          "type": "C",
+          "expression": "state IN ('LOADING','READY')"
+        }
+      ]
+    },
+    {
+      "name": "KCV_RDF_STAGE",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "RDF$STC_SUB",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 4000,
+          "char_used": "B"
+        },
+        {
+          "name": "RDF$STC_PRED",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 4000,
+          "char_used": "B"
+        },
+        {
+          "name": "RDF$STC_OBJ",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 4000,
+          "char_used": "B"
+        }
+      ],
+      "constraints": []
+    },
+    {
+      "name": "KCV_GRAPH_SOURCES",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "GRAPH_NAME",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "VERSION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "METADATA_JSON",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        }
+      ],
+      "constraints": [
+        {
+          "type": "R",
+          "columns": "GRAPH_NAME",
+          "reference_table": "KCV_GRAPH_RUNS",
+          "reference_columns": "GRAPH_NAME"
+        },
+        {
+          "type": "R",
+          "columns": "VERSION_ID",
+          "reference_table": "KCV_SOURCES",
+          "reference_columns": "VERSION_ID"
+        },
+        {
+          "type": "C",
+          "expression": "metadata_json IS JSON"
+        },
+        {
+          "type": "P",
+          "columns": "GRAPH_NAME,VERSION_ID"
+        }
+      ]
+    },
+    {
+      "name": "KCV_GRAPH_CONTEXTS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "GRAPH_NAME",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "SNAPSHOT_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "R",
+          "columns": "GRAPH_NAME",
+          "reference_table": "KCV_GRAPH_RUNS",
+          "reference_columns": "GRAPH_NAME"
+        },
+        {
+          "type": "R",
+          "columns": "SNAPSHOT_ID",
+          "reference_table": "KCV_CONTEXTS",
+          "reference_columns": "SNAPSHOT_ID"
+        },
+        {
+          "type": "P",
+          "columns": "GRAPH_NAME,SNAPSHOT_ID"
+        }
+      ]
+    },
+    {
+      "name": "KCV_FEEDBACK",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "FEEDBACK_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 64,
+          "char_used": "B"
+        },
+        {
+          "name": "CONTEXT_SNAPSHOT_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "GRAPH_NAME",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "OBSERVER",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 200,
+          "char_used": "B"
+        },
+        {
+          "name": "OBSERVATION",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "RECORDED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "FEEDBACK_ID"
+        },
+        {
+          "type": "R",
+          "columns": "CONTEXT_SNAPSHOT_ID",
+          "reference_table": "KCV_CONTEXTS",
+          "reference_columns": "SNAPSHOT_ID"
+        },
+        {
+          "type": "R",
+          "columns": "GRAPH_NAME",
+          "reference_table": "KCV_GRAPH_RUNS",
+          "reference_columns": "GRAPH_NAME"
+        }
+      ]
+    },
+    {
+      "name": "KCV_DATASET_RUNS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "RUN_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "STATUS",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 16,
+          "char_used": "B"
+        },
+        {
+          "name": "PHASE",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "SOURCE_REF",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "MANIFEST_SHA256",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 64,
+          "char_used": "B"
+        },
+        {
+          "name": "DATASET_ID",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 64,
+          "char_used": "B"
+        },
+        {
+          "name": "GRAPH_NAME",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "STARTED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        },
+        {
+          "name": "UPDATED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        },
+        {
+          "name": "COMPLETED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "ERROR_CODE",
+          "type": "NUMBER",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "precision": null,
+          "scale": null
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "RUN_ID"
+        },
+        {
+          "type": "C",
+          "expression": "status IN ('RUNNING','SUCCEEDED','FAILED')"
+        }
+      ]
+    },
+    {
+      "name": "KCV_DATASET_STAGE",
+      "temporary": "Y",
+      "columns": [
+        {
+          "name": "FILE_NAME",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 80,
+          "char_used": "B"
+        },
+        {
+          "name": "FILE_ROLE",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 16,
+          "char_used": "B"
+        },
+        {
+          "name": "ROW_COUNT",
+          "type": "NUMBER",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "PAYLOAD",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "FILE_NAME"
+        },
+        {
+          "type": "C",
+          "expression": "payload IS JSON"
+        }
+      ]
+    },
+    {
+      "name": "KCV_SCENARIO_REVISIONS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "REVISION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "PARENT_REVISION",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "CONTEXT_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "BASE_GRAPH",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "OVERLAY_GRAPH",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "CONTEXT_JSON",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "CREATED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "REVISION_ID"
+        },
+        {
+          "type": "U",
+          "columns": "OVERLAY_GRAPH"
+        },
+        {
+          "type": "C",
+          "expression": "context_json IS JSON"
+        }
+      ]
+    },
+    {
+      "name": "KCV_CHAT_SESSIONS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "SESSION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "OWNER_NAME",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 255,
+          "char_used": "B"
+        },
+        {
+          "name": "APEX_APP_ID",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "APEX_SESSION_ID",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 64,
+          "char_used": "B"
+        },
+        {
+          "name": "CONVERSATION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "CONTEXT_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "REVISION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "MUTATION_TOKEN",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "CREATED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "SESSION_ID"
+        },
+        {
+          "type": "R",
+          "columns": "REVISION_ID",
+          "reference_table": "KCV_SCENARIO_REVISIONS",
+          "reference_columns": "REVISION_ID"
+        }
+      ]
+    },
+    {
+      "name": "KCV_SCENARIO_CHANGES",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "CHANGE_TOKEN",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "SESSION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "EXPECTED_REVISION",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "OPERATION",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "PLAN_JSON",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "STATE",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 16,
+          "char_used": "B"
+        },
+        {
+          "name": "REQUESTED_BY",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 255,
+          "char_used": "B"
+        },
+        {
+          "name": "CREATED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        },
+        {
+          "name": "APPLIED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "RESULTING_REVISION",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "CHANGE_TOKEN"
+        },
+        {
+          "type": "R",
+          "columns": "SESSION_ID",
+          "reference_table": "KCV_CHAT_SESSIONS",
+          "reference_columns": "SESSION_ID"
+        },
+        {
+          "type": "C",
+          "expression": "plan_json IS JSON"
+        }
+      ]
+    },
+    {
+      "name": "KCV_SCENARIO_AUDIT",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "AUDIT_ID",
+          "type": "NUMBER",
+          "nullable": "N",
+          "identity": "YES",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "SESSION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "ACTOR",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 255,
+          "char_used": "B"
+        },
+        {
+          "name": "OPERATION",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "OLD_REVISION",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "NEW_REVISION",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "DETAILS",
+          "type": "CLOB",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "RECORDED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "AUDIT_ID"
+        }
+      ]
+    },
+    {
+      "name": "KCV_CHAT_TURNS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "TURN_ID",
+          "type": "NUMBER",
+          "nullable": "N",
+          "identity": "YES",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "SESSION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "REVISION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "ROLE",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 16,
+          "char_used": "B"
+        },
+        {
+          "name": "BODY",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "RECORDED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "TURN_ID"
+        },
+        {
+          "type": "R",
+          "columns": "SESSION_ID",
+          "reference_table": "KCV_CHAT_SESSIONS",
+          "reference_columns": "SESSION_ID"
+        }
+      ]
+    },
+    {
+      "name": "KCV_SCENARIO_OBSERVATIONS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "OBSERVATION_ID",
+          "type": "NUMBER",
+          "nullable": "N",
+          "identity": "YES",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "SESSION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "REVISION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "ACTOR",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 255,
+          "char_used": "B"
+        },
+        {
+          "name": "METHOD",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "OBSERVATION",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "NEXT_STEP",
+          "type": "CLOB",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "RECORDED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "OBSERVATION_ID"
+        },
+        {
+          "type": "R",
+          "columns": "SESSION_ID",
+          "reference_table": "KCV_CHAT_SESSIONS",
+          "reference_columns": "SESSION_ID"
+        }
+      ]
+    },
+    {
+      "name": "KCV_RESPONSE_RUNS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "EXECUTION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "SESSION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "REVISION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "CONVERSATION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "USER_TURN_ID",
+          "type": "NUMBER",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "ASSISTANT_TURN_ID",
+          "type": "NUMBER",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "REQUEST_MODE",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "QUESTION",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "CONTEXT_JSON",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "SOURCES_JSON",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "HISTORY_JSON",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "PROFILE_NAME",
+          "type": "VARCHAR2",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "STATUS",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "ERROR_CODE",
+          "type": "NUMBER",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "STARTED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        },
+        {
+          "name": "FINISHED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "TRACE_VERSION",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "'1.0'",
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "RETRIEVAL_POLICY",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "'topic-join-v1;6-pages;2-per-source;40-paths'",
+          "length": 128,
+          "char_used": "B"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "EXECUTION_ID"
+        },
+        {
+          "type": "R",
+          "columns": "SESSION_ID",
+          "reference_table": "KCV_CHAT_SESSIONS",
+          "reference_columns": "SESSION_ID"
+        },
+        {
+          "type": "R",
+          "columns": "REVISION_ID",
+          "reference_table": "KCV_SCENARIO_REVISIONS",
+          "reference_columns": "REVISION_ID"
+        },
+        {
+          "type": "R",
+          "columns": "USER_TURN_ID",
+          "reference_table": "KCV_CHAT_TURNS",
+          "reference_columns": "TURN_ID"
+        },
+        {
+          "type": "U",
+          "columns": "ASSISTANT_TURN_ID"
+        },
+        {
+          "type": "R",
+          "columns": "ASSISTANT_TURN_ID",
+          "reference_table": "KCV_CHAT_TURNS",
+          "reference_columns": "TURN_ID"
+        },
+        {
+          "type": "C",
+          "expression": "context_json IS JSON"
+        },
+        {
+          "type": "C",
+          "expression": "sources_json IS JSON"
+        },
+        {
+          "type": "C",
+          "expression": "history_json IS JSON"
+        }
+      ]
+    },
+    {
+      "name": "KCV_RESPONSE_TOOL_CALLS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "CALL_ID",
+          "type": "NUMBER",
+          "nullable": "N",
+          "identity": "YES",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "EXECUTION_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "TOOL_NAME",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "INPUT_JSON",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "OUTPUT_JSON",
+          "type": "CLOB",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "STATUS",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 16,
+          "char_used": "B"
+        },
+        {
+          "name": "ERROR_CODE",
+          "type": "NUMBER",
+          "nullable": "Y",
+          "identity": "NO",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "STARTED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "FINISHED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "CALL_ID"
+        },
+        {
+          "type": "R",
+          "columns": "EXECUTION_ID",
+          "reference_table": "KCV_RESPONSE_RUNS",
+          "reference_columns": "EXECUTION_ID"
+        },
+        {
+          "type": "C",
+          "expression": "input_json IS JSON"
+        },
+        {
+          "type": "C",
+          "expression": "output_json IS JSON"
+        }
+      ]
+    },
+    {
+      "name": "KCV_DOMAIN_RUNS",
+      "temporary": "N",
+      "columns": [
+        {
+          "name": "RUN_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 40,
+          "char_used": "B"
+        },
+        {
+          "name": "SOURCE_ID",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 32,
+          "char_used": "B"
+        },
+        {
+          "name": "GRAPH_NAME",
+          "type": "VARCHAR2",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "length": 128,
+          "char_used": "B"
+        },
+        {
+          "name": "RESPONSE_JSON",
+          "type": "CLOB",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null
+        },
+        {
+          "name": "FACT_COUNT",
+          "type": "NUMBER",
+          "nullable": "N",
+          "identity": "NO",
+          "default": null,
+          "precision": null,
+          "scale": null
+        },
+        {
+          "name": "CREATED_AT",
+          "type": "TIMESTAMP(6) WITH TIME ZONE",
+          "nullable": "N",
+          "identity": "NO",
+          "default": "SYSTIMESTAMP"
+        }
+      ],
+      "constraints": [
+        {
+          "type": "P",
+          "columns": "RUN_ID"
+        },
+        {
+          "type": "C",
+          "expression": "response_json IS JSON"
+        }
+      ]
+    }
+  ],
+  "programs": [
+    {
+      "name": "KCV_CONTEXT_PACKET",
+      "type": "FUNCTION",
+      "source_path": "sql/schema/03_tools.sql"
+    },
+    {
+      "name": "KCV_SOURCE_PACKET",
+      "type": "FUNCTION",
+      "source_path": "sql/schema/03_tools.sql"
+    },
+    {
+      "name": "KCV_EVIDENCE_PACKET",
+      "type": "FUNCTION",
+      "source_path": "sql/schema/03_tools.sql"
+    },
+    {
+      "name": "KCV_DATASET",
+      "type": "PACKAGE",
+      "source_path": "sql/schema/06_dataset_import.sql"
+    },
+    {
+      "name": "KCV_DATASET",
+      "type": "PACKAGE BODY",
+      "source_path": "sql/schema/06_dataset_import.sql"
+    },
+    {
+      "name": "KCV_TRACE",
+      "type": "PACKAGE",
+      "source_path": "sql/extensions/06_response_provenance.sql"
+    },
+    {
+      "name": "KCV_TRACE",
+      "type": "PACKAGE BODY",
+      "source_path": "sql/extensions/06_response_provenance.sql"
+    },
+    {
+      "name": "KCV_SCENARIO",
+      "type": "PACKAGE",
+      "source_path": "sql/extensions/02_scenario_api.sql"
+    },
+    {
+      "name": "KCV_SCENARIO",
+      "type": "PACKAGE BODY",
+      "source_path": "sql/extensions/02_scenario_api.sql"
+    },
+    {
+      "name": "KCV_EXTRACT_DOMAIN",
+      "type": "FUNCTION",
+      "source_path": "sql/extensions/04_domain_extraction.sql"
+    },
+    {
+      "name": "KCV_SCENARIO_EVIDENCE",
+      "type": "FUNCTION",
+      "source_path": "sql/extensions/07_trace_tool_wrappers.sql"
+    },
+    {
+      "name": "KCV_SCENARIO_PROPOSE",
+      "type": "FUNCTION",
+      "source_path": "sql/extensions/07_trace_tool_wrappers.sql"
+    },
+    {
+      "name": "KCV_APEX",
+      "type": "PACKAGE",
+      "source_path": "sql/extensions/05_apex_api.sql"
+    },
+    {
+      "name": "KCV_APEX",
+      "type": "PACKAGE BODY",
+      "source_path": "sql/extensions/05_apex_api.sql"
+    }
+  ]
+}

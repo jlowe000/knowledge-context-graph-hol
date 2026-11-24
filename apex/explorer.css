@@ -7,3 +7,7 @@
 @media(max-width:580px){.kcv-graph svg{display:none}.kcv-node-grid{position:static;display:grid;grid-template-columns:1fr 1fr;gap:.6rem}.kcv-node-grid button{position:static!important;transform:none;width:auto!important}.kcv-dialog-head,.kcv-dialog-body,.kcv-dialog-foot{padding:1rem}.kcv-dialog-tabs{padding:0 1rem;gap:.8rem}}
 @media(max-width:580px){.kcv-app .kcv-workspace-body{padding:.85rem}.kcv-app .kcv-turn{padding:.75rem;margin-left:0}.kcv-app .kcv-answer-object{padding-left:0;border-left:0;margin:.6rem 0}.kcv-app .kcv-turn ul{padding-left:1rem}.kcv-app .kcv-turn h4{margin:.75rem 0 .3rem}.kcv-app .kcv-turn-meta{overflow-wrap:anywhere}}
 .kcv-app .kcv-dialog-head>div{min-width:0;overflow-wrap:anywhere}.kcv-app .kcv-dialog-head>button{flex-shrink:0}
+
+.kcv-personal-bar{padding:1rem 1.2rem;margin:0 0 1rem;border:1px solid var(--ut-component-border-color,#d8d2c8);border-radius:.5rem;background:var(--ut-component-background-color,#fff)}
+.kcv-personal-bar h2{margin:0 0 .4rem}.kcv-personal-bar a{display:inline-block;margin:.2rem 0}.kcv-personal-bar button{margin:.5rem 0}
+#kcv-older-turns,#kcv-older-observations{margin:.5rem 0 1rem}#kcv-observation-list:empty{display:none}

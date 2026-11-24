@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Optional direct-driver automation. Preferred HOL route: Database Actions SQL Worksheet.
+# Legacy v1 direct-driver automation. v2 schema changes use SQLcl/Liquibase.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PYTHON="${KCV_RUN_PYTHON:-.venv/bin/python}"
@@ -12,6 +12,10 @@ case "$mode" in
     "$PYTHON" -m kcv.cli apply-sql --admin --file sql/admin/02_grants.sql
     ;;
   schema)
+    if [[ -f VERSION && "$(cut -d. -f1 VERSION)" -ge 2 ]]; then
+      printf '%s\n' 'v2 schema setup uses db/changelog.xml through SQLcl/Liquibase. See docs/database-migrations.md; do not mix raw CREATE scripts with migration-managed objects.' >&2
+      exit 2
+    fi
     "$PYTHON" -m kcv.cli apply-sql --file sql/schema/01_objects.sql
     "$PYTHON" -m kcv.cli apply-sql --file sql/schema/02_network.sql
     "$PYTHON" -m kcv.cli apply-sql --file sql/schema/03_tools.sql

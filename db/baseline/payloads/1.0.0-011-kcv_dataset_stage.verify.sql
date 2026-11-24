@@ -1,0 +1,3 @@
+ l_expected:=TO_CLOB('');
+ l_expected:=l_expected||TO_CLOB('{"name":"KCV_DATASET_STAGE","temporary":"Y","columns":[{"name":"FILE_NAME","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":80,"char_used":"B"},{"name":"FILE_ROLE","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":16,"char_used":"B"},{"name":"ROW_COUNT","type":"NUMBER","nullable":"N","identity":"NO","default":null,"precision":null,"scale":null},{"name":"PAYLOAD","type":"CLOB","nullable":"N","identity":"NO","default":null}],"constraints":[{"type":"P","columns":"FILE_NAME"},{"type":"C","expression":"payload IS JSON"}]}');
+ check_table(l_expected);

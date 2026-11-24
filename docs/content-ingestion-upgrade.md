@@ -1,5 +1,7 @@
 # Use evidence from pages, PDFs and repositories
 
+**Legacy v1 upgrade reference.** The direct package replacement and task refresh below belong to the matching v1 release. Current dev schema/package changes go through [ordered migrations](database-migrations.md), followed by the documented current runtime registration. Dataset loading remains a separate step in the [GitHub load guide](github-dataset-load.md).
+
 The expanded dataset includes non-PDF evidence. PDF page numbers remain real page numbers; other passages carry a `locator_kind` and `locator_label`. The runtime uses selected inspected locations, returning up to two locators per source and six passages in total. Sources used in the original lessons take priority, followed by catalogue IDs. This is a bounded topic join, not exhaustive document reading or a semantic ranking. Summaries spanning multiple locations include separate links to each supporting location. Additional catalogue sources may fill unused slots, including in the healthcare scenario; the S10 overview and qualification must remain present.
 
 ## Update learning-focus guidance in an existing app

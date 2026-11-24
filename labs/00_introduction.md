@@ -1,6 +1,6 @@
 # From Drawing Connections to Testing Them
 
-**New to ADB? Use the [beginner deployment route](../docs/fresh-serverless-deployment.md).** The numbered files below are technical reference and optional exercises; they are not a second prerequisite sequence for the new route.
+**Choose the matching branch experience.** Current dev setup starts with [development](../docs/development.md), [migrations](../docs/database-migrations.md) and the [My Contexts manual review](../docs/my-contexts-manual-test.md). For the published v1 SQL-first HOL, use its release/tag checkout and [beginner deployment route](../docs/fresh-serverless-deployment.md). The numbered files below retain the original sample exercises and technical reference; their raw initialization commands are not an alternative v2 migration sequence.
 
 This lab asks: which knowledge may help this person, in this context, and why?
 

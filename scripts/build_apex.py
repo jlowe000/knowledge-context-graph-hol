@@ -1,81 +1,61 @@
-"""Assemble the self-contained SQLcl APEXlang source from project UI assets."""
+"""Synchronize application assets without rewriting directly authored APEXlang.
+
+Page definitions under apex/application/pages are authoritative. Cache-version
+references are explicit source edits: a stale reference is reported, never fixed
+by regenerating a page from an HTML snapshot.
+"""
 from pathlib import Path
 import argparse
 import hashlib
+import re
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[1]
+ASSETS = ('explorer.js', 'explorer.css')
 
 
-def build(check=False):
-    assets=ROOT/'apex'
-    html=(assets/'region.html').read_text(encoding='utf-8')
-    generated_assets=assets/'application/shared-components/static-files'
-    generated_assets.mkdir(parents=True,exist_ok=True)
-    for filename in ['explorer.js','explorer.css']:
-        target_asset=generated_assets/filename
-        content=(assets/filename).read_text(encoding='utf-8')
+def build(check=False, root=ROOT):
+    root = Path(root)
+    assets = root / 'apex'
+    application = assets / 'application'
+    destination = application / 'shared-components/static-files'
+    pages = list((application / 'pages').glob('*.apx'))
+    if not pages:
+        raise ValueError('No directly authored APEXlang pages found')
+    errors = []
+    version_file = root / 'VERSION'
+    app_file = application / 'application.apx'
+    if version_file.exists() and app_file.exists():
+        product_version = version_file.read_text(encoding='utf-8').strip()
+        declared = re.search(r'^\s+version:\s*([^\r\n]+)', app_file.read_text(encoding='utf-8'), re.MULTILINE)
+        app_version = declared.group(1).strip().strip('"') if declared else None
+        if app_version not in (product_version, product_version + '-dev'):
+            errors.append('APEX application version must match VERSION, optionally followed by -dev')
+    for filename in ASSETS:
+        content = (assets / filename).read_text(encoding='utf-8')
+        target = destination / filename
         if check:
-            if not target_asset.exists() or target_asset.read_text(encoding='utf-8')!=content:
-                raise ValueError('APEX static asset is stale: '+filename)
-        else:target_asset.write_text(content,encoding='utf-8',newline='\n')
-    page='''page 1 (
- name: Knowledge Context Explorer
- alias: HOME
- title: Knowledge Context Explorer
- javaScript {
-  fileUrls: #APP_FILES#explorer.js?v=__JS_VERSION__
- }
- css {
-  fileUrls: #APP_FILES#explorer.css?v=__CSS_VERSION__
- }
- appearance {
-  pageTemplate: @/standard
-  templateOptions: #DEFAULT#
- }
- security {
-  pageAccessProtection: argumentsMustHaveChecksum
-  formAutoComplete: false
- }
- region knowledge-explorer (
-  name: Knowledge Context Explorer
-  type: staticContent
-  layout {
-   sequence: 10
-   slot: body
-  }
-  source {
-   htmlCode:
-    ```html
-__HTML__
-    ```
-  }
- )
- process kcv-explorer (
-  name: KCV_EXPLORER
-  type: executeCode
-  source {
-   plsqlCode:
-    ```plsql
-    begin kcv_apex.dispatch; end;
-    ```
-  }
-  execution {
-   sequence: 10
-   point: ajaxCallback
-  }
- )
-)
-'''.replace('__HTML__',html).replace('__JS_VERSION__',hashlib.sha256((assets/'explorer.js').read_text(encoding='utf-8').encode()).hexdigest()[:12]).replace('__CSS_VERSION__',hashlib.sha256((assets/'explorer.css').read_text(encoding='utf-8').encode()).hexdigest()[:12])
-    target=assets/'application/pages/p00001-home.apx'
-    target.parent.mkdir(parents=True,exist_ok=True)
-    if check:
-        if not target.exists() or target.read_text(encoding='utf-8')!=page:
-            raise ValueError('APEX page source is stale; run python scripts/build_apex.py')
-    else:
-        target.write_text(page,encoding='utf-8',newline='\n')
-    return str(target.relative_to(ROOT))
+            if not target.exists() or target.read_text(encoding='utf-8') != content:
+                errors.append('APEX static asset is stale: ' + filename)
+        else:
+            destination.mkdir(parents=True, exist_ok=True)
+            target.write_text(content, encoding='utf-8', newline='\n')
+        expected = hashlib.sha256(content.encode()).hexdigest()[:12]
+        found = False
+        pattern = re.compile(r'#APP_FILES#' + re.escape(filename) + r'\?v=([A-Za-z0-9_.-]+)')
+        for page in pages:
+            for actual in pattern.findall(page.read_text(encoding='utf-8')):
+                found = True
+                if actual != expected:
+                    errors.append(f'{page.relative_to(root)}: set {filename} cache version to {expected}')
+        if not found:
+            errors.append(f'No versioned {filename} reference in authored pages')
+    if errors:
+        raise ValueError('\n'.join(errors))
+    return 'APEX assets synchronized; directly authored pages preserved'
 
 
-if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true');args=parser.parse_args()
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--check', action='store_true')
+    args = parser.parse_args()
     print(build(args.check))

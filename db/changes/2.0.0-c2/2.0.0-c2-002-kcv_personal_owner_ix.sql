@@ -1,0 +1,1 @@
+CREATE INDEX kcv_personal_owner_ix ON kcv_personal_contexts(owner_scope,owner_subject,lifecycle,updated_at)

@@ -1,0 +1,3 @@
+ l_expected:=TO_CLOB('');
+ l_expected:=l_expected||TO_CLOB('{"name":"KCV_SOURCES","temporary":"N","columns":[{"name":"VERSION_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":128,"char_used":"B"},{"name":"SOURCE_ID","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":32,"char_used":"B"},{"name":"SHA256","type":"VARCHAR2","nullable":"N","identity":"NO","default":null,"length":64,"char_used":"B"},{"name":"METADATA_JSON","type":"CLOB","nullable":"N","identity":"NO","default":null}],"constraints":[{"type":"P","columns":"VERSION_ID"},{"type":"C","expression":"metadata_json IS JSON"}]}');
+ check_table(l_expected);

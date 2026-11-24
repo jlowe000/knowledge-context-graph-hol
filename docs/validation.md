@@ -1,6 +1,6 @@
 # Validation and remaining acceptance
 
-**Current dataset:** the 23 November research expansion supersedes the original dataset counts below. See [build-report.json](../generated/build-report.json), [content ingestion](content-pipeline.md) and the current [scenario validation record](scenario-validation.md). The following 18 November observations are historical; they do not establish native acceptance of the expanded dataset.
+**Historical record:** the 18 November observations below preserve the initial acceptance state. Later source expansion and native tests superseded its counts and pending checks. For current dev, use [implementation status](implementation-status.md) and the [My Contexts acceptance record](../references/my-contexts-c3-validation.json); [build-report.json](../generated/build-report.json) records the current authoring dataset.
 
 As of 18 November 2026, the executable artifact pipeline has been run on the authoring host and in Oracle Linux 8.10 / Bash 4.4 / Python 3.12.14 inside an isolated temporary directory in the existing oaiw-adb container. Python dependencies for that run were installed only in its temporary target directory. No database schema, existing app or global Python installation was changed.
 

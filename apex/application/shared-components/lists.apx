@@ -78,7 +78,7 @@ list navigation-menu (
     )
 
 entry samples (
-  label: Sample contexts
+  label: Sample Contexts
   layout {
     sequence: 20
   }

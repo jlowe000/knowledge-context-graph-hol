@@ -1,7 +1,7 @@
 page 14 (
-  name: Sample contexts
+  name: Sample Contexts
   alias: SAMPLE-CONTEXTS
-  title: Sample contexts
+  title: Sample Contexts
   appearance {
     pageTemplate: @/standard
     templateOptions: #DEFAULT#
@@ -51,6 +51,10 @@ page 14 (
       staticValues: STATIC:Alex - engineering information discovery;CTX01,Sam - evidence and traceability;CTX02,Casey - connected healthcare;CTX03
       displayNullValue: false
       displayExtraValues: false
+    }
+    default {
+      type: static
+      staticValue: CTX01
     }
   )
   pageItem P14_TITLE (
@@ -122,6 +126,7 @@ page 14 (
         page: 1
         clearCache: 1
       }
+      warnOnUnsavedChanges: doNotCheck
     }
   )
   process initialize-token (

@@ -69,12 +69,12 @@ def build(workspace='KCV_KNOWLEDGE',schema='KCV_LAB',alias='KCV-EXPLORER',output
     schema_gate=''
     if mode=='upgrade' or int(version.split('.')[0])>=2:
         schema_gate=""" EXECUTE IMMEDIATE 'SELECT COUNT(*) FROM kcv_schema_migrations WHERE migration_id=:1 AND product_version=:2 AND phase=:3'
-  INTO l_count USING '2.0.0-c3-r4-ready','2.0.0','COMPLETE';
+  INTO l_count USING '2.0.0-c3-r7-ready','2.0.0','COMPLETE';
  IF l_count<>1 THEN RAISE_APPLICATION_ERROR(-20163,'Apply and verify the v2 personal journey schema migration before importing this app');END IF;
  SELECT COUNT(*) INTO l_count FROM user_objects
-  WHERE object_name IN ('KCV_ACCESS','KCV_PERSONAL_CONTEXT_API','KCV_PERSONAL_JOURNEY','KCV_SCENARIO','KCV_TRACE','KCV_APEX')
+  WHERE object_name IN ('KCV_ACCESS','KCV_PERSONAL_CONTEXT_API','KCV_PERSONAL_JOURNEY','KCV_SCENARIO','KCV_TRACE','KCV_APEX','KCV_CONTEXT_DELETE','KCV_CONTEXT_SEARCH')
     AND object_type IN ('PACKAGE','PACKAGE BODY') AND status='VALID';
- IF l_count<>12 THEN RAISE_APPLICATION_ERROR(-20164,'Required personal journey and conversation APIs must compile before app installation');END IF;
+ IF l_count<>16 THEN RAISE_APPLICATION_ERROR(-20164,'Required personal journey, conversation, deletion and search APIs must compile before app installation');END IF;
 """
     install_context=""" APEX_APPLICATION_INSTALL.GENERATE_APPLICATION_ID;
  APEX_APPLICATION_INSTALL.GENERATE_OFFSET;

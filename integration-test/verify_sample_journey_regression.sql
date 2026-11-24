@@ -36,7 +36,7 @@ DECLARE
   RETURN LOWER(RAWTOHEX(DBMS_CRYPTO.HASH(v,DBMS_CRYPTO.HASH_SH256)));
  END;
 BEGIN
- check_true(SYS_CONTEXT('USERENV','SESSION_USER') IN('KCV_V2_TEST','KCV_HOL_TEST'),'Use the isolated Serverless schema owner');
+ check_true(SYS_CONTEXT('USERENV','SESSION_USER') IN('KCV_V2_TEST','KCV_HOL_TEST','KCV_V2_FRESH'),'Use the isolated Serverless schema owner');
  SELECT setting_value INTO active_before FROM kcv_settings WHERE setting_key='ACTIVE_GRAPH';
  SELECT COUNT(*) INTO sources_before FROM kcv_sources;SELECT COUNT(*) INTO passages_before FROM kcv_passages;samples_before:=sample_hash;
  FOR i IN 1..ids.COUNT LOOP

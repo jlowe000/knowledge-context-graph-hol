@@ -55,7 +55,7 @@ DECLARE
   FOR i IN 1..sessions.COUNT LOOP apex_session.delete_session(p_session_id=>sessions(i));END LOOP;
  END;
 BEGIN
- check_true(SYS_CONTEXT('USERENV','SESSION_USER') IN('KCV_V2_TEST','KCV_HOL_TEST'),'Use the isolated schema owner');
+ check_true(SYS_CONTEXT('USERENV','SESSION_USER') IN('KCV_V2_TEST','KCV_HOL_TEST','KCV_V2_FRESH'),'Use the isolated schema owner');
  SELECT COUNT(*) INTO n FROM apex_applications WHERE application_id=app_id AND owner=SYS_CONTEXT('USERENV','SESSION_USER');
  check_true(n=1 AND app_id<>100,'Use the isolated test application');
  check_true(user_a IS NOT NULL AND user_b IS NOT NULL AND UPPER(user_a)<>UPPER(user_b),'Two existing distinct test accounts are required');

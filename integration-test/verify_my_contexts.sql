@@ -1,5 +1,6 @@
 -- Native C2 acceptance. Run as the owner of an isolated KCV_V2_TEST/KCV_HOL_TEST schema.
--- Uses synthetic runtime drafts only. Does not call a model or alter the public graph.
+-- Uses synthetic runtime drafts only. No chat/GenAI model calls or public graph changes;
+-- optional local embedding inference may run when drafts are saved or searched.
 DECLARE
  result CLOB;again CLOB;j JSON_OBJECT_T;items JSON_ARRAY_T;
  cid VARCHAR2(32);copy_id VARCHAR2(32);unicode_id VARCHAR2(32);unicode_title VARCHAR2(1000);unicode_text VARCHAR2(16000);foreign_id VARCHAR2(32):='C'||SUBSTR(RAWTOHEX(SYS_GUID()),1,31);
@@ -9,7 +10,7 @@ DECLARE
    IF p_ok IS NULL OR NOT p_ok THEN RAISE_APPLICATION_ERROR(-20990,p_message);END IF;
  END;
 BEGIN
- IF SYS_CONTEXT('USERENV','CURRENT_SCHEMA') NOT IN ('KCV_V2_TEST','KCV_HOL_TEST') THEN
+ IF SYS_CONTEXT('USERENV','CURRENT_SCHEMA') NOT IN ('KCV_V2_TEST','KCV_HOL_TEST','KCV_V2_FRESH') THEN
    RAISE_APPLICATION_ERROR(-20999,'Use the isolated My Contexts test schema');END IF;
  check_true(kcv_access.owner_scope='DB:'||SYS_CONTEXT('USERENV','CURRENT_SCHEMA'),'Worksheet scope mismatch');
  title_prefix:='C2 test '||token_prefix;
@@ -110,7 +111,7 @@ BEGIN
  check_true(n=0,'Failed request left a committed unfinished receipt');
  DELETE FROM kcv_context_requests WHERE request_token LIKE token_prefix||'%';
  DELETE FROM kcv_personal_contexts WHERE context_id IN (cid,copy_id,unicode_id,foreign_id);COMMIT;
- DBMS_OUTPUT.PUT_LINE('PASS: native C2 drafts, optimistic concurrency, idempotency, pagination, archive/restore, owner filtering and no graph/model side effects');
+ DBMS_OUTPUT.PUT_LINE('PASS: native C2 drafts, optimistic concurrency, idempotency, pagination, archive/restore, owner filtering and no graph or model-conversation side effects');
  DBMS_OUTPUT.PUT_LINE('PENDING: actual APEX login/relogin and two-account browser acceptance are separate checks');
 END;
 /

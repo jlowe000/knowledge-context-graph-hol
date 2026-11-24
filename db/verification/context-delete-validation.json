@@ -1,0 +1,116 @@
+{
+  "format_version": 1,
+  "date": "2026-11-25",
+  "product_version": "2.0.0",
+  "increment": "c3-r5",
+  "status": "native_schema_deletion_and_import_passed_browser_confirmation_pending",
+  "scope": "Owned-context deletion on the isolated development app; no release promotion.",
+  "schema": {
+    "checkpoint": "2.0.0-c3-r5-ready",
+    "appended_migrations": 8,
+    "complete_project_receipts": 88,
+    "liquibase_changesets_including_bootstrap": 89,
+    "native_upgrade_passed": true,
+    "physical_schema_and_source_verification_passed": true,
+    "invalid_project_objects": 0,
+    "project_compilation_errors": 0,
+    "independent_repeat": "passed_no_changes",
+    "repeat_changesets_run": 0,
+    "repeat_previously_executed_changesets": 89,
+    "repeat_physical_verification_passed": true,
+    "fresh_r5_install": "not_executed"
+  },
+  "local_checks": {
+    "migration_tests_passed": 29,
+    "apex_authoring_tests_passed": 10,
+    "generated_database_artifacts_current": true,
+    "prior_manifest_entries_unchanged": 80,
+    "prior_immutable_file_byte_hashes_unchanged": 321
+  },
+  "behavior_contract": {
+    "explicit_confirmation": "Review the owned context and saved-work counts, then deliberately confirm permanent deletion; Cancel does not start it.",
+    "stale_confirmation": "The context version, head and preview digest must still match.",
+    "pending_cleanup": "Normal content access is fenced while deletion is pending; Retry deletion resumes recorded cleanup.",
+    "removed_scope": "The selected context's application rows, personal overlays and associated Select AI conversations captured in its cleanup manifest.",
+    "preserved_scope": "The public knowledge collection, independent copied contexts and other users' contexts.",
+    "retained_receipts": "Minimal identifier/count/status receipts remain; completed deletion removes the context title and cleanup manifest.",
+    "retention_limit": "This feature does not promise erasure of service/provider/administrator audit records or backups."
+  },
+  "native_deletion_regression": {
+    "script": "integration-test/verify_context_delete.sql",
+    "status": "passed",
+    "verified": [
+      "Ownership and stale history checks",
+      "Lock and archived-context behavior",
+      "Resource-scope guard",
+      "Interrupted cleanup and explicit retry",
+      "Receipt replay privacy",
+      "Native resource cleanup",
+      "Independent copied context preserved",
+      "Separate-session context-lock contention rejected without changing inventory or creating a deletion journal",
+      "Separate-session conversation-lock contention rejected without changing inventory or creating a deletion journal"
+    ],
+    "draft_library_regression": "passed",
+    "inference_requested_by_deletion_test": false,
+    "synthetic_native_fixture_cleanup": "passed"
+  },
+  "apex": {
+    "authoring": "Native APEXlang",
+    "delete_review_page": 15,
+    "expected_page_count": 9,
+    "import": "passed",
+    "installed_page_count": 9,
+    "installed_asset_count": 7,
+    "component_parse": "passed",
+    "parsed_components": 33,
+    "skipped_native_components": 1,
+    "authenticated_browser": "review_and_cancel_passed_permanent_confirmation_pending",
+    "browser_verified": [
+      "Create and reopen a disposable synthetic draft",
+      "Delete review identifies its title and zero saved-work counts",
+      "Cancel preserves the context in My Contexts"
+    ],
+    "current_engine_export_and_receipt": "pending_browser_acceptance",
+    "staged_native_export": {
+      "audit": "passed",
+      "source_sha256": "3ee44b36a7acfe8c33232b7c850ba39e72c1f28fb33d36975fee4965bf97aa27",
+      "export_sha256": "f9636b9ff2961868812706395a4e589d88c422ce6c5d299edb507e976a6eb643",
+      "page_count": 9,
+      "asset_count": 7,
+      "export_blocks": 45,
+      "sensitive_findings": 0
+    }
+  },
+  "resolved_attempts": [
+    {
+      "stage": "Initial APEXlang import",
+      "error": "ORA-40441 on page 15",
+      "cause": "Compact one-line navigation target fields were accepted by metadata validation but rejected during engine import.",
+      "correction": "Use multiline native APEXlang page/clearCache fields.",
+      "verification": "Import succeeded with nine pages, seven assets and 33 component parses."
+    }
+  ],
+  "runtime_preservation": {
+    "existing_runtime_rows": "passed",
+    "existing_fresh_table_hash_assertions_unchanged": 25,
+    "comparison_exclusions": [
+      "The exact disposable browser draft and its request receipts created for this test",
+      "The eight intentionally appended R5 migration IDs"
+    ],
+    "other_installations": "passed",
+    "original_installation_count_and_hash_assertions_unchanged": 58,
+    "scope": "Captured project table/count/hash checks only, not a whole-database audit."
+  },
+  "limitations": [
+    "Schema readiness is not deletion behavior or browser acceptance.",
+    "A fresh R5 installation has not been executed.",
+    "Generated Worksheet installers have not been executed for this increment.",
+    "Earlier fresh-deployment and navigation records remain historical and do not certify deletion."
+  ],
+  "related_records": [
+    "db/verification/fresh-dev-validation.json",
+    "db/verification/sample-navigation-validation.json"
+  ],
+  "release_changed": false,
+  "committed_or_pushed": false
+}

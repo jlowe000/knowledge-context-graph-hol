@@ -1,10 +1,10 @@
 {
   "format_version": 1,
   "target_product_version": "2.0.0",
-  "status": "unreleased-c3-r4-candidate",
+  "status": "unreleased-c3-r7-candidate",
   "baseline_product_version": "1.0.0",
   "baseline_source_commit": "cb4608c8b594d73e3908a63561cc963d386e52f8",
-  "native_validation": "pending-c3-r4",
+  "native_validation": "pending-c3-r7",
   "migrations": [
     {
       "id": "1.0.0-001-kcv_settings",
@@ -1215,6 +1215,260 @@
       "supersedes": [
         "2.0.0-c3-r3-ready"
       ],
+      "retirement_guards": [
+        "2.0.0-c3-unaccepted-suffix"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-r5-001-kcv_context_deletions",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-001-kcv_context_deletions.sql",
+      "verification": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-001-kcv_context_deletions.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r4-ready"
+      ],
+      "payload_sha256": "eefdec0501cd4873711caded83156261695b85a04413aae358ad2148b44ee3d2",
+      "verification_sha256": "14b1b2ed36add1ec72ba2990a0246fd1c1f4ff91a174c6944e9df221aa68cdbf",
+      "source_path": "sql/extensions/18_context_delete_objects.sql",
+      "source_unit": 0
+    },
+    {
+      "id": "2.0.0-c3-r5-002-kcv_context_delete_resources",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-002-kcv_context_delete_resources.sql",
+      "verification": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-002-kcv_context_delete_resources.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r5-001-kcv_context_deletions"
+      ],
+      "payload_sha256": "8cf4f887e3989ac8ae7799a0643ae0e17bb841474d066ed56dee2b90e49f4f45",
+      "verification_sha256": "b79360fddb8aae2963cbbdf7342c34d33f5f278f0e07381308d588043ed0266e",
+      "source_path": "sql/extensions/18_context_delete_objects.sql",
+      "source_unit": 1
+    },
+    {
+      "id": "2.0.0-c3-r5-003-kcv_context_delete-package",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-003-kcv_context_delete-package.sql",
+      "verification": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-003-kcv_context_delete-package.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r5-002-kcv_context_delete_resources"
+      ],
+      "payload_sha256": "46656504e053366e58e1cc2e10fdc457ce1915cd1523847c6e74b560b607840f",
+      "verification_sha256": "3b8cba59764d64fa397d40921b133c640eda13732e1e1af713937ff0aaad38ec",
+      "source_path": "sql/extensions/19_context_delete.sql",
+      "source_unit": 0
+    },
+    {
+      "id": "2.0.0-c3-r5-004-kcv_access-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-004-kcv_access-package-body.sql",
+      "verification": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-004-kcv_access-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r5-003-kcv_context_delete-package"
+      ],
+      "payload_sha256": "1453584e080cfe1bcdf1c2bbaa4577f426c28f9eb8d69c7893b555acbd4ba610",
+      "verification_sha256": "1e451d05ad169a0a186dfe9e1426f4de94a9e983278ea1e5d59b31464ae1e754",
+      "source_path": "sql/extensions/11_context_access.sql",
+      "source_unit": 1,
+      "supersedes": [
+        "2.0.0-c3-012-kcv_access-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-r5-005-kcv_personal_context_api-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-005-kcv_personal_context_api-package-body.sql",
+      "verification": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-005-kcv_personal_context_api-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r5-004-kcv_access-package-body"
+      ],
+      "payload_sha256": "97acf0a52e39e9b126a4671c6f630edc1a9ac38e308d298cc9e86688b646246b",
+      "verification_sha256": "2335a4987f91f977afb4070995b722e8b16e8b793596fc978237c9bd14dda66f",
+      "source_path": "sql/extensions/12_my_contexts_api.sql",
+      "source_unit": 1,
+      "supersedes": [
+        "2.0.0-c3-013-kcv_personal_context_api-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-r5-006-kcv_personal_journey-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-006-kcv_personal_journey-package-body.sql",
+      "verification": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-006-kcv_personal_journey-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r5-005-kcv_personal_context_api-package-body"
+      ],
+      "payload_sha256": "9bb1c47bc53d8baebe7d54461d507cf27629f7a2d2966f00dbd02266ba8b7b63",
+      "verification_sha256": "1e341b6179ad0813400016322660a5211164329c07b7e35843a6c6f7b0a27adb",
+      "source_path": "sql/extensions/14_personal_journey.sql",
+      "source_unit": 1,
+      "supersedes": [
+        "2.0.0-c3-r3-002-kcv_personal_journey-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-r5-007-kcv_context_delete-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-007-kcv_context_delete-package-body.sql",
+      "verification": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-007-kcv_context_delete-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r5-006-kcv_personal_journey-package-body"
+      ],
+      "payload_sha256": "ed960803d437889076a04927261829de19de64d38d0d5e93b18ccdda59c77d2f",
+      "verification_sha256": "301dced36f693c9411931637d35bb205580d56e4b0df0f3b0f292942972a9a74",
+      "source_path": "sql/extensions/19_context_delete.sql",
+      "source_unit": 1
+    },
+    {
+      "id": "2.0.0-c3-r5-ready",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-ready.sql",
+      "verification": "db/changes/2.0.0-c3-r5/2.0.0-c3-r5-ready.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r5-007-kcv_context_delete-package-body"
+      ],
+      "payload_sha256": "5b4e06208783b2adeca8607afd0e1b55ea6f05fe19bedba441cf880d94d8b7f9",
+      "verification_sha256": "d2f8ff4a0a6cbbdedc3721cc31fdf4283ad1b63ea1b99629a96d7cff61d4d0d7",
+      "supersedes": [
+        "2.0.0-c3-r4-ready"
+      ],
+      "retirement_guards": [
+        "2.0.0-c3-unaccepted-suffix"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-r6-001-kcv_context_search_chunks",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-001-kcv_context_search_chunks.sql",
+      "verification": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-001-kcv_context_search_chunks.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r5-ready"
+      ],
+      "payload_sha256": "15a5d1cee060b1927d2261f26d92668df00f1a4bcd9b69e7e4bf70dd1bf015ab",
+      "verification_sha256": "eb6a5ce9e9a90ad23e3b962b05469aa194f489133217be38f3a617e39047c143",
+      "source_path": "sql/extensions/20_context_search_objects.sql",
+      "source_unit": 0
+    },
+    {
+      "id": "2.0.0-c3-r6-002-kcv_context_search-package",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-002-kcv_context_search-package.sql",
+      "verification": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-002-kcv_context_search-package.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r6-001-kcv_context_search_chunks"
+      ],
+      "payload_sha256": "0e4ebeecaaa01248fc24ea67912df83870a6f2cef7615fddcc3b8497e9bc9430",
+      "verification_sha256": "746988395d45c8db9372ace2b55e119ba8c0e7705d4efa16e81e2cdcf5631d0d",
+      "source_path": "sql/extensions/21_context_search.sql",
+      "source_unit": 0
+    },
+    {
+      "id": "2.0.0-c3-r6-003-kcv_context_search-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-003-kcv_context_search-package-body.sql",
+      "verification": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-003-kcv_context_search-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r6-002-kcv_context_search-package"
+      ],
+      "payload_sha256": "b3bc3a71ab935262abcfea02d443bab74158f10e0a584bd37c4e6542c3f455b3",
+      "verification_sha256": "760f34a3dc7c0e0f024181ff74de6a5a95b46c118d4d58875dd6c7aa8cb12e77",
+      "source_path": "sql/extensions/21_context_search.sql",
+      "source_unit": 1
+    },
+    {
+      "id": "2.0.0-c3-r6-004-kcv_personal_context_api-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-004-kcv_personal_context_api-package-body.sql",
+      "verification": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-004-kcv_personal_context_api-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r6-003-kcv_context_search-package-body"
+      ],
+      "payload_sha256": "83674b35f7099f7351a98b0aee99de8a3b95fed03cd6c3b4bb13c06baa198ac3",
+      "verification_sha256": "e0c47171d73014b1d292d3d4da1e62888c4a3485ac329c559b8c79aaaeb2dc5f",
+      "source_path": "sql/extensions/12_my_contexts_api.sql",
+      "source_unit": 1,
+      "supersedes": [
+        "2.0.0-c3-r5-005-kcv_personal_context_api-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-r6-005-kcv_personal_journey-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-005-kcv_personal_journey-package-body.sql",
+      "verification": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-005-kcv_personal_journey-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r6-004-kcv_personal_context_api-package-body"
+      ],
+      "payload_sha256": "9297282b8240e182e50f996ba9d17ccb5e9ffb5b186e95f7298c14739b60d8c1",
+      "verification_sha256": "6ec12a5e49ef9a282e49498f8b048840c548ebc7befd0504a71da007b0c7a0ce",
+      "source_path": "sql/extensions/14_personal_journey.sql",
+      "source_unit": 1,
+      "supersedes": [
+        "2.0.0-c3-r5-006-kcv_personal_journey-package-body"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-r6-ready",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-ready.sql",
+      "verification": "db/changes/2.0.0-c3-r6/2.0.0-c3-r6-ready.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r6-005-kcv_personal_journey-package-body"
+      ],
+      "payload_sha256": "177fdb2a55e660a50dfaec12a02a67504ae7f837d948114035ec0268b81ed636",
+      "verification_sha256": "ccd39acc20dcb77fa0e1117a617f809af676428b6886bc763ac82e2f3b1d2247",
+      "supersedes": [
+        "2.0.0-c3-r5-ready"
+      ],
+      "retirement_guards": [
+        "2.0.0-c3-unaccepted-suffix"
+      ]
+    },
+    {
+      "id": "2.0.0-c3-r7-001-kcv_context_search-package-body",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r7/2.0.0-c3-r7-001-kcv_context_search-package-body.sql",
+      "verification": "db/changes/2.0.0-c3-r7/2.0.0-c3-r7-001-kcv_context_search-package-body.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r6-ready"
+      ],
+      "supersedes": [
+        "2.0.0-c3-r6-003-kcv_context_search-package-body"
+      ],
+      "payload_sha256": "2ed439adc7c2670a2120ed54e538fcacdedf7fbb0fc1a72958e62219ecf4d30f",
+      "verification_sha256": "dc580ab26e6aa6eb27571514c8668320291a0715566472f0884b5481171e72eb",
+      "source_path": "sql/extensions/21_context_search.sql",
+      "source_unit": 1
+    },
+    {
+      "id": "2.0.0-c3-r7-ready",
+      "group": "feature",
+      "version": "2.0.0",
+      "payload": "db/changes/2.0.0-c3-r7/2.0.0-c3-r7-ready.sql",
+      "verification": "db/changes/2.0.0-c3-r7/2.0.0-c3-r7-ready.verify.sql",
+      "depends_on": [
+        "2.0.0-c3-r7-001-kcv_context_search-package-body"
+      ],
+      "supersedes": [
+        "2.0.0-c3-r6-ready"
+      ],
+      "payload_sha256": "177fdb2a55e660a50dfaec12a02a67504ae7f837d948114035ec0268b81ed636",
+      "verification_sha256": "b1ca5a5c23342eb93e39cb0bc311f7d16fd5bd89dc54e5ce8cb761e24d9689b4",
       "retirement_guards": [
         "2.0.0-c3-unaccepted-suffix"
       ]

@@ -40,7 +40,7 @@ DECLARE
   END IF;
  END;
 BEGIN
- check_true(SYS_CONTEXT('USERENV','SESSION_USER') IN('KCV_V2_TEST','KCV_HOL_TEST'),'Use the isolated schema owner');
+ check_true(SYS_CONTEXT('USERENV','SESSION_USER') IN('KCV_V2_TEST','KCV_HOL_TEST','KCV_V2_FRESH'),'Use the isolated schema owner');
  SELECT COUNT(*) INTO before_sources FROM kcv_sources;SELECT COUNT(*) INTO before_passages FROM kcv_passages;
  j:=JSON_OBJECT_T.parse(kcv_personal_context_api.topic_options);a:=j.get_array('topics');check_true(a.get_size>=2,'Need two eligible public topics');topic1:=a.get_string(0);topic2:=a.get_string(1);
  body.put('question','Which public information would help a synthetic learner decide what to explore?');body.put('objective_clarity','emerging');prefs.put(topic1,2);body.put('topic_preferences',prefs);

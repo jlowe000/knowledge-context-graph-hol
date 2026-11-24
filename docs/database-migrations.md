@@ -1,6 +1,6 @@
 # Database migrations on dev
 
-Status: v2.0.0 C3 r4 dev candidate, not an accepted release. R4 records application retrieval before model dispatch, retrieval origin and the dispatch boundary. Native migration/import and an independent browser expiry/follow-up passed. Native initial/adopted answers and fail-before-dispatch checks passed; the strict native expiry answer failed JSON/citation parsing despite successful retrieval. Fresh routes and Worksheet execution remain unverified. See the [R4 record](../db/verification/c3-r4-validation.json); local artifact tests alone do not establish native execution.
+Status: v2.0.0 C3 R7 dev candidate, not an accepted release. The [context-search record](../db/verification/context-search-validation.json) records the native upgrade to 96 COMPLETE project receipts / 97 Liquibase changesets, zero invalid objects and successful search regression tests. Scoped browser search/filter checks passed; the matching engine export is identified by its [receipt](../apex/export-validation.json). Fresh R7 installation remains unverified. The [deletion record](../db/verification/context-delete-validation.json) retains its R5 native results and pending permanent-delete browser confirmation; the [fresh deployment record](../db/verification/fresh-dev-validation.json) describes the preceding R4 installation. Generated Worksheet installer execution remains unverified; historical records and release remain unchanged.
 
 The [24 November native migration record](../db/verification/native-validation.json) records successful SQLcl/Liquibase execution on isolated Serverless schemas: all 48 project migrations, fresh and verified-v1 upgrade routes, repeat updates, exact schema/program checks, concurrent-runner exclusion and failure/recovery probes. Generated Worksheet SQL also passed fresh/adoption/upgrade/repeat and subsequent Liquibase-entry tests through SQLcl. The Database Actions browser upload/copy transport has not been tested for these v2 bundles. The initial timestamp-index verification correction and later append-only identity correction are recorded explicitly; this is not full-v2 or release acceptance.
 
@@ -17,7 +17,7 @@ Use SQLcl's Liquibase integration for developer schema changes. The [local Bash 
 | `db/manifest.json` | Explicit dependency order, immutable payload/verification hashes, baseline identity and target product version. |
 | `db/baseline/contract.json` | Public v1 table/column/constraint and program inventory anchored to the recorded dev commit. |
 | `db/baseline/payloads/` | Frozen v1 static schema/program source, not a dump of a live instance. |
-| `db/changes/` | Frozen baseline additions and C2/C3/r1/r2/r3/r4 payloads with exact postconditions. |
+| `db/changes/` | Frozen baseline additions and C2/C3/r1/r2/r3/r4/r5 payloads with exact postconditions. |
 | `db/retired/` | Hashed evidence for an unaccepted failed candidate, excluded from the active execution chain. |
 | `db/generated/` | Generated one-unit migration wrappers used by Liquibase. |
 | `db/changelog.xml` | Ordered baseline and feature changelogs. |
@@ -44,7 +44,9 @@ Use the repository's Python environment if dependencies are not on your path. Th
 
 ## Fresh isolated schema
 
-Complete the documented ADMIN user/grant bootstrap separately. Connect SQLcl to that dedicated schema and work from the repository root. The commands below were exercised with the SQLcl/Liquibase versions recorded above; validate them again when changing runner versions.
+Use the [complete fresh dev deployment route](fresh-dev-deployment.md) for parameterized ADMIN bootstrap, a separate owner connection, runtime configuration, dataset loading and a new APEX app. It identifies local bootstrap/documentation/APEX fixes added after the published R4 commit and records scoped fresh acceptance with the remaining route limitations. Connect SQLcl to the dedicated schema and work from the repository root. The commands below were exercised with the SQLcl/Liquibase versions recorded above; validate them again when changing runner versions.
+
+Before the Liquibase commands, use SQLcl `cd /path/to/knowledge-context-graph-hol` with your actual repository path. A previously executed script under `work/` can change relative-path resolution; do not assume a shell working directory or script header left Liquibase at the repository root.
 
 ```sql
 lb validate -changelog-file db/changelog.xml
@@ -53,7 +55,7 @@ lb update -changelog-file db/changelog.xml
 @sql/install/02_verify_schema.sql
 ```
 
-Expected result: 36 static v1 baseline steps, twelve C2 steps and thirty-two active C3/r1/r2/r3/r4 steps, with valid package objects and complete postconditions. The final marker is `2.0.0-c3-r4-ready`. A second `lb update` should report no pending changes; rerun the verification SQL to check the physical schema/program state. The marker denotes the installed schema contract, not browser/model or release acceptance.
+Expected result: 36 static v1 baseline steps, twelve C2 steps and forty-eight active C3/r1/r2/r3/r4/r5/r6/r7 steps: 96 project receipts and 97 Liquibase changesets including bootstrap. The final marker is `2.0.0-c3-r7-ready`, with valid package objects and complete postconditions. A second `lb update` should report no pending changes; rerun the verification SQL to check the physical schema/program state. The marker denotes the installed schema contract, not browser/model or release acceptance.
 
 No credentials or environment-specific source rows are part of the baseline. Its built-in `SCHEMA_VERSION = 1` setting is retained for compatibility; the full migration receipts identify later objects. Do not infer the complete schema version from that old setting alone.
 
@@ -64,13 +66,17 @@ Preserve the existing schema, application ID, public collection and personal run
 1. Put the target application into a maintenance window and wait for active requests to finish. Setting a database flag alone cannot stop an already running application request. Keep the original separate HOL application available.
 2. Record counts of existing contexts, conversations, turns and observations without exporting their contents. Record the current migration checkpoint and application identity.
 3. Run the same `lb validate`, `lb status`, `lb update` and verification commands shown above. Do not recreate users, repeat raw table initialization, re-adopt an already recorded baseline or reset migration checksums.
-4. Confirm 80 active COMPLETE project receipts, the `2.0.0-c3-r4-ready` marker, no invalid project objects and unchanged existing runtime row counts. Run `integration-test/verify_migration_legacy_requests.sql` in the isolated test schema; it uses and removes its own reserved probe table.
+4. Confirm 96 active COMPLETE project receipts, the `2.0.0-c3-r7-ready` marker, no invalid project objects and unchanged existing runtime row counts. Run `integration-test/verify_migration_legacy_requests.sql` in the isolated test schema; it uses and removes its own reserved probe table.
 5. Run `sql/extensions/16_refresh_grounded_answers.sql` for the existing configured app. Confirm its ready message; a deferred message means initial model/agent setup is still needed.
 6. Import the compatible native APEXlang application using the same application ID, complete the personal-journey and existing sample checks, then reopen the application. Verify a follow-up question records evidence for that answer and any incomplete response is visibly labelled. Keep any unresolved native/model/browser checks explicit in the candidate record.
 
 On the development installation that encountered the initial compile error, one additional original FAILED receipt remains as audit evidence. The new checkpoint does not convert it to COMPLETE.
 
 R4 adds `CALL_ORIGIN` with a `LEGACY` default to retained retrieval events and nullable `MODEL_STARTED_AT` to response runs. New events use `APPLICATION` or `AGENT`; old trace JSON omits the new origin and missing timestamp. The final checkpoint recompiles dependent package bodies and functions and checks their exact source. These changes do not rerun historical answers.
+
+R5 adds an empty deletion journal and resource manifest, the `KCV_CONTEXT_DELETE` package, and replacement access/context/journey bodies. Normal access is fenced once deletion starts; cleanup can resume after an interruption. The schema migration itself deletes no context, conversation or graph.
+
+R6 adds private derived search chunks, `KCV_CONTEXT_SEARCH`, and save/apply refresh hooks. Its native long-multibyte-query test exposed `ORA-12733`; R7 supersedes the search body with fixed-pattern normalization and literal token matching, and adds the final readiness checkpoint. Earlier applied payloads remain immutable. Apply the complete chain before importing the current app: the APEX installer checks R7 readiness and all sixteen required package specification/body objects. Model privileges, loading and backfill are separate runtime steps in [context search setup](context-search.md).
 
 The C3 table changes add nullable fields to existing chat and response records. The response request-token index uses a conditional expression so legacy responses with NULL tokens remain valid; only non-NULL per-conversation request tokens are unique. New attachments, operation journals and model-boundary tables start empty. Package specifications precede dependent bodies, and the final step recompiles the fixed project function inventory before verifying the complete source contract. These migrations do not backfill personal identities, publish contexts or create model conversations.
 
@@ -106,10 +112,10 @@ The final check is short enough to run directly:
 ```sql
 SELECT migration_id,product_version,phase
 FROM kcv_schema_migrations
-WHERE migration_id='2.0.0-c3-r4-ready';
+WHERE migration_id='2.0.0-c3-r7-ready';
 ```
 
-Expected: one `2.0.0` row with `COMPLETE`. This is a necessary schema checkpoint, not proof of browser, ownership, model or full-v2 acceptance. The complete verifier and the native My Contexts tests remain required. See the [R4 validation record](../db/verification/c3-r4-validation.json) for current coverage and the [R3 validation record](../db/verification/c3-r3-validation.json) for the preceding tested checkpoint.
+Expected: one `2.0.0` row with `COMPLETE`. This is a necessary schema checkpoint, not proof of browser, ownership, model or full-v2 acceptance. The complete verifier and native My Contexts/deletion/search tests remain required. The [search record](../db/verification/context-search-validation.json) describes R7's tested scope; the [fresh deployment](../db/verification/fresh-dev-validation.json), [R4](../db/verification/c3-r4-validation.json) and [R3](../db/verification/c3-r3-validation.json) records describe preceding checkpoints.
 
 ## Adding a migration
 

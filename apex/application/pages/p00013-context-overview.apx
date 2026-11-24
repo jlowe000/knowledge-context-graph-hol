@@ -39,7 +39,7 @@ page 13 (
     source {
       htmlCode:
       ```html
-      <p>Save your draft, review its changes, then apply it as a ready revision. Start or reopen a conversation to explore the public collection. Conversations and earlier answer explanations retain their own context revisions. Archiving makes this work read-only until restored.</p>
+      <p>Save your draft, review its changes, then apply it as a ready revision. Start or reopen a conversation to explore the public collection. Conversations and earlier answer explanations retain their own context revisions. Archiving keeps this work read-only. Choose Unarchive to return it to its previous Draft or Active state.</p>
       ```
     }
   )
@@ -181,11 +181,12 @@ page 13 (
   )
   button review (
     buttonName: REVIEW
-    label: Review and apply draft
+    label: Review and Apply
     layout {
       sequence: 5
       region: @overview
       slot: bottom
+      horizontalAlignment: right
     }
     appearance {
       buttonTemplate: @/text
@@ -207,8 +208,9 @@ page 13 (
     label: Start a new conversation
     layout {
       sequence: 6
-      region: @overview
+      region: @conversations
       slot: bottom
+      horizontalAlignment: left
     }
     appearance {
       buttonTemplate: @/text
@@ -231,7 +233,7 @@ page 13 (
     label: Older conversations
     layout {
       sequence: 60
-      region: @overview
+      region: @conversations
       slot: bottom
     }
     appearance {
@@ -255,7 +257,7 @@ page 13 (
     label: Newest conversations
     layout {
       sequence: 70
-      region: @overview
+      region: @conversations
       slot: bottom
     }
     appearance {
@@ -276,15 +278,16 @@ page 13 (
   )
   button edit (
     buttonName: EDIT
-    label: Edit draft
+    label: Edit Draft
     layout {
       sequence: 10
       region: @overview
       slot: bottom
+      horizontalAlignment: left
     }
     appearance {
       buttonTemplate: @/text
-      hot: false
+      hot: true
     }
     behavior {
       action: submitPage
@@ -305,6 +308,7 @@ page 13 (
       sequence: 20
       region: @overview
       slot: bottom
+      horizontalAlignment: left
     }
     appearance {
       buttonTemplate: @/text
@@ -324,11 +328,12 @@ page 13 (
   )
   button restore (
     buttonName: RESTORE
-    label: Restore
+    label: Unarchive
     layout {
       sequence: 30
       region: @overview
       slot: bottom
+      horizontalAlignment: left
     }
     appearance {
       buttonTemplate: @/text
@@ -353,6 +358,7 @@ page 13 (
       sequence: 40
       region: @overview
       slot: bottom
+      horizontalAlignment: left
     }
     appearance {
       buttonTemplate: @/text
@@ -372,6 +378,7 @@ page 13 (
       sequence: 50
       region: @overview
       slot: bottom
+      horizontalAlignment: right
     }
     appearance {
       buttonTemplate: @/text
@@ -383,6 +390,61 @@ page 13 (
         page: 10
         clearCache: 10
       }
+    }
+  )
+  region deletion-actions (
+    name: Context deletion
+    type: staticContent
+    layout {
+      sequence: 100
+      slot: body
+    }
+    appearance {
+      template: @/buttons-container
+      templateOptions: #DEFAULT#
+    }
+  )
+  button delete-context (
+    buttonName: DELETE_CONTEXT
+    label: Delete Context
+    layout {
+      sequence: 90
+      region: @deletion-actions
+      slot: previous
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: true
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+  )
+  process review-context-deletion (
+    name: Review context deletion
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+      BEGIN
+       kcv_access.assert_context(:P13_CONTEXT_ID);
+       apex_util.redirect_url(apex_page.get_url(p_page=>15,p_clear_cache=>'15',p_items=>'P15_CONTEXT_ID',p_values=>:P13_CONTEXT_ID));
+       apex_application.stop_apex_engine;
+      END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: processing
+    }
+    serverSideCondition {
+      whenButtonPressed: @delete-context
+    }
+    error {
+      displayLocation: inlineInNotification
     }
   )
   process load-owned-context (

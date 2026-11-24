@@ -38,11 +38,15 @@ CREATE OR REPLACE PACKAGE BODY kcv_personal_journey AS
   IF n=4 THEN RETURN -id;END IF;
   require(n=0,'OPERATION_IN_PROGRESS: Another operation is running',-20246);RETURN id;
  END;
- FUNCTION lock_context(p_context VARCHAR2) RETURN PLS_INTEGER IS r kcv_personal_contexts%ROWTYPE;BEGIN
-  r:=owned(p_context,TRUE);RETURN advisory_lock('KCV_PERSONAL:'||p_context);
+ FUNCTION lock_context(p_context VARCHAR2) RETURN PLS_INTEGER IS r kcv_personal_contexts%ROWTYPE;lk PLS_INTEGER;BEGIN
+  r:=owned(p_context,TRUE);lk:=advisory_lock('KCV_PERSONAL:'||p_context);
+  r:=owned(p_context,TRUE);RETURN lk;
+ EXCEPTION WHEN OTHERS THEN unlock_context(lk);RAISE;
  END;
- FUNCTION lock_conversation(p_session VARCHAR2,p_write BOOLEAN DEFAULT TRUE) RETURN PLS_INTEGER IS BEGIN
-  kcv_access.assert_session(p_session,p_write);RETURN advisory_lock('KCV_CONVERSATION:'||p_session);
+ FUNCTION lock_conversation(p_session VARCHAR2,p_write BOOLEAN DEFAULT TRUE) RETURN PLS_INTEGER IS lk PLS_INTEGER;BEGIN
+  kcv_access.assert_session(p_session,p_write);lk:=advisory_lock('KCV_CONVERSATION:'||p_session);
+  kcv_access.assert_session(p_session,p_write);RETURN lk;
+ EXCEPTION WHEN OTHERS THEN unlock_context(lk);RAISE;
  END;
  PROCEDURE unlock_context(p_lock PLS_INTEGER) IS n PLS_INTEGER;BEGIN IF p_lock>0 THEN n:=DBMS_LOCK.RELEASE(p_lock);END IF;END;
  PROCEDURE token_check(p_token VARCHAR2) IS BEGIN
@@ -131,6 +135,7 @@ CREATE OR REPLACE PACKAGE BODY kcv_personal_journey AS
   UPDATE kcv_personal_contexts SET latest_revision=rid,base_graph=op.target_graph,lifecycle='ACTIVE',draft_json=op.body_json,draft_version=draft_version+changed,updated_at=SYSTIMESTAMP
    WHERE context_id=p_context AND draft_version=op.expected_version AND NVL(latest_revision,'-')=NVL(op.expected_head,'-') AND lifecycle<>'ARCHIVED';
   require(SQL%ROWCOUNT=1,'STALE_VERSION: Draft changed during publication',-20242);
+  kcv_context_search.refresh_context(p_context);
   IF op.session_id IS NOT NULL THEN
    UPDATE kcv_chat_sessions SET revision_id=rid WHERE session_id=op.session_id AND revision_id=op.expected_revision AND mutation_token IS NULL;
    require(SQL%ROWCOUNT=1,'OPERATION_IN_PROGRESS: Conversation is busy',-20246);
@@ -148,15 +153,19 @@ CREATE OR REPLACE PACKAGE BODY kcv_personal_journey AS
   unlock_context(lk);unlock_context(slk);RAISE;
  END;
  PROCEDURE attach(p_session VARCHAR2,p_context VARCHAR2) IS s VARCHAR2(128):=kcv_access.owner_scope;u VARCHAR2(128):=kcv_access.owner_subject;
-  a VARCHAR2(64):=NVL(SYS_CONTEXT('APEX$SESSION','APP_SESSION'),'DB');n NUMBER;
+  a VARCHAR2(64):=NVL(SYS_CONTEXT('APEX$SESSION','APP_SESSION'),'DB');n NUMBER;lk PLS_INTEGER;
  BEGIN
   kcv_access.assert_context(p_context);kcv_access.assert_writable;
+  -- Reopening an archived conversation is allowed, but must serialize with
+  -- permanent deletion rather than creating a late attachment behind its fence.
+  lk:=advisory_lock('KCV_PERSONAL:'||p_context);kcv_access.assert_context(p_context);
   SELECT COUNT(*) INTO n FROM kcv_chat_sessions WHERE session_id=p_session AND personal_context_id=p_context;
   require(n=1,'CONTEXT_UNAVAILABLE: Conversation is not available',-20241);
   MERGE INTO kcv_context_attachments d USING(SELECT p_session sid FROM dual) x
    ON(d.session_id=x.sid AND d.owner_scope=s AND d.owner_subject=u AND d.apex_session_id=a)
    WHEN NOT MATCHED THEN INSERT(session_id,owner_scope,owner_subject,apex_session_id) VALUES(p_session,s,u,a);
-  COMMIT;
+  COMMIT;unlock_context(lk);
+ EXCEPTION WHEN OTHERS THEN ROLLBACK;unlock_context(lk);RAISE;
  END;
  PROCEDURE open_conversation(p_session VARCHAR2) IS cid VARCHAR2(32);BEGIN
   BEGIN SELECT personal_context_id INTO cid FROM kcv_chat_sessions WHERE session_id=p_session AND personal_context_id IS NOT NULL;

@@ -1,0 +1,256 @@
+{
+  "recorded_date": "2026-11-24",
+  "product_version": "2.0.0",
+  "increment": "R4 fresh isolated development deployment",
+  "status": "fresh_native_authenticated_browser_and_scoped_preservation_passed",
+  "target_scope": "new isolated schema and APEX workspace on the existing temporary ADB Serverless database",
+  "release_promoted": false,
+  "changes_committed_or_pushed": false,
+  "published_code_commit": "bcabe1ceb14a07c7338fcb58e96bdbf02429d886",
+  "published_database_runtime_and_dataset_unchanged": true,
+  "apex_source_has_local_followups": true,
+  "local_followups_not_in_published_commit": {
+    "bootstrap_scripts": [
+      "sql/admin/09_create_dev_schema.sql",
+      "sql/admin/10_create_dev_workspace.sql"
+    ],
+    "fresh_guide": "docs/fresh-dev-deployment.md",
+    "related_documentation": "fresh route links, v2 dataset/authentication prerequisites and explicit application remapping",
+    "apex_source_fixes": {
+      "files": [
+        "apex/application/pages/p00014-sample-contexts.apx",
+        "apex/application/shared-components/lists.apx"
+      ],
+      "label": "Sample Contexts",
+      "sample_navigation": "Only the page14 EXPLORE button sets warnOnUnsavedChanges to doNotCheck; page/form protections remain enabled.",
+      "cause": "The inherited unsaved-change warning opened a beforeunload dialog and cancelled navigation from the copy form.",
+      "deployment_scope": "fresh application only",
+      "engine_export_and_receipt": "passed_matching_native_engine_export_and_receipt",
+      "application_source_sha256": "4e5dbd8f9370ecdb9c036f4088eb018c00aad5e8d822a8609c41aa202c502299",
+      "engine_export_sql_sha256": "bf7920f02c93309e101a764e30c38a03f2ace29ca32ed030f2fd54fb037f4002",
+      "engine_export_bytes": 325959,
+      "static_assets_matched": 7,
+      "receipt": "apex/export-validation.json",
+      "worksheet_new_and_upgrade_wrappers": "regenerated_not_executed"
+    },
+    "native_test_allowlist_additions": {
+      "count": 15,
+      "scope": "add only the explicitly named fresh test owner while preserving existing isolation guards and fixture-scoped cleanup",
+      "test_pass_implied": false
+    }
+  },
+  "local_checks": {
+    "migration_tests_passed": 29,
+    "generated_migration_artifacts": "passed_hash_and_current_source_checks_for_80_active_migrations",
+    "apex_authoring_tests_passed_after_navigation_fix": 10
+  },
+  "native_schema": {
+    "admin_bootstrap": "passed",
+    "owner_authentication": "NO_AUTHENTICATION",
+    "admin_proxy_grant": "passed",
+    "owner_connection_identity": "passed",
+    "fresh_liquibase_install": "passed",
+    "complete_project_receipts": 80,
+    "liquibase_changesets_including_bootstrap": 81,
+    "schema_head": "2.0.0-c3-r4-ready",
+    "physical_schema_and_program_verification": "passed",
+    "invalid_project_objects": 0,
+    "independent_repeat": {
+      "status": "passed_no_pending_changes",
+      "project_receipt_hashes_unchanged": true,
+      "liquibase_receipt_hashes_unchanged": true
+    },
+    "rdf_network": "created_owner_private_KCV_NET",
+    "harness_correction": "The first invocation could not resolve the Liquibase changelog from the script directory and stopped before mutation. Explicit SQLcl cd to the repository root corrected the invocation; no migration payload was changed."
+  },
+  "public_dataset": {
+    "source_commit": "bcabe1ceb14a07c7338fcb58e96bdbf02429d886",
+    "manifest_path": "data/load/manifest.json",
+    "manifest_sha256": "dae8efdcd9e99874c8dfc3d9a3ccaf4a861f76b3b5442f71f075a6d9b64ef8ad",
+    "transport": "anonymous_DBMS_CLOUD_download_from_immutable_public_GitHub_commit",
+    "loader_status": "SUCCEEDED",
+    "native_counts": {
+      "sources": 834,
+      "passages": 762,
+      "contexts": 3,
+      "triples": 30144
+    },
+    "native_loader_verification": "passed",
+    "verify_worksheet": "passed_native_overview_and_scope_qualification_evidence"
+  },
+  "model_access": {
+    "authorized_cross_schema_credential_attempt": {
+      "status": "rejected_before_profile_creation",
+      "operation": "DBMS_CLOUD_AI.CREATE_PROFILE",
+      "error_code": "ORA-20010",
+      "error_category": "Invalid credential name",
+      "trigger": "schema_qualified_credential_name",
+      "profile_created": false,
+      "greeting_or_model_request_made": false,
+      "temporary_helper_removed": true,
+      "temporary_scoped_grant_revoked": true,
+      "original_credential_changed": false,
+      "interpretation": "The observed Select AI profile route rejected the qualified name. This is not a universal statement about cross-schema credential support."
+    },
+    "owner_local_credential": "created_privately",
+    "owner_profile_and_greeting": "passed",
+    "scenario_agent_registration": "passed",
+    "registered_agents": 3,
+    "live_model_acceptance": "passed_full_fresh_native_three_request_suite",
+    "strict_native_suite": {
+      "initial_question": "passed_3_matched_citations_6_graph_paths",
+      "adopted_revision_question": "passed_3_matched_citations_6_graph_paths",
+      "provider_expiry_continuation": "passed_3_matched_citations_6_graph_paths",
+      "model_requests": 3,
+      "provider_packet_matches_recorded_evidence": "passed_all_3_requests",
+      "prior_turns_preserved_after_expiry": 4,
+      "history_unchanged": true,
+      "profile_preserved": true,
+      "fixture_cleanup": "passed_own_synthetic_fixtures_only",
+      "limit": "These fresh-schema results do not rewrite the earlier R4 strict native failure record."
+    }
+  },
+  "native_core_regressions": {
+    "personal_journey": "passed",
+    "sample_journey": "passed",
+    "negative_retrieval_failure": "passed"
+  },
+  "apex": {
+    "new_workspace_creation_api_call": "returned_without_error",
+    "persisted_workspace_mapping": "passed_admin_and_owner_confirmed_only_fresh_owner_mapping",
+    "connected_apexlang_validation": "passed_with_deprecation_warning",
+    "validation_warning": {
+      "source": "apex/application/pages/p00001-home.apx",
+      "line": 66,
+      "attribute": "regionBody",
+      "category": "deprecated_attribute"
+    },
+    "owner_proxy_workspace_activation": {
+      "initial_set_workspace": "failed_WORKSPACE_NOT_ASSIGNED",
+      "initial_set_security_group_id": "failed_WORKSPACE_NOT_ASSIGNED",
+      "owner_and_proxy_identities_verified": true,
+      "mapping_verified": true,
+      "root_cause": "workspace_inactive_confirmed_through_public_APEX_LANG_MESSAGE",
+      "remediation": "APEX_INSTANCE_ADMIN.ENABLE_WORKSPACE_scoped_to_new_workspace",
+      "post_enable_owner_set_workspace": "passed_in_true_owner_proxy_session",
+      "interpretation": "Workspace inactivity caused the observed denial. Enabling the new workspace resolved owner workspace activation without changing NO AUTHENTICATION, the proxy grant or unrelated privileges."
+    },
+    "workspace_bootstrap_correction": {
+      "maintained_script": "sql/admin/10_create_dev_workspace.sql",
+      "sequence": "ADD_WORKSPACE_then_ENABLE_WORKSPACE_then_COMMIT",
+      "native_execution": "ADD_and_ENABLE_executed_separately_during_fresh_rehearsal",
+      "final_combined_script_second_fresh_schema_run": "not_performed"
+    },
+    "new_application_import": "passed_direct_admin_with_explicit_fresh_workspace_schema_id_and_alias",
+    "initial_owner_proxy_import": "failed_WORKSPACE_NOT_ASSIGNED_retained_as_observed_failure",
+    "application_creation_accepted": true,
+    "application_id": 102,
+    "application_alias": "KCV-FRESH-EXPLORER",
+    "parsing_schema_and_workspace": "verified_fresh_target",
+    "page_count": 8,
+    "static_asset_count": 7,
+    "installed_component_parse": {
+      "status": "passed_in_true_owner_session",
+      "parsed": 29,
+      "page_processes": 19,
+      "reports": 6,
+      "lists_of_values": 4,
+      "native_close_window_processes_skipped": 1,
+      "limit": "Parsing does not establish authenticated APEX session behavior, browser acceptance or model execution."
+    },
+    "owner_apex_session_native_harness": {
+      "status": "passed_after_workspace_enablement",
+      "identity_pin_and_two_account_isolation": "passed",
+      "cross_account_rejection": "passed",
+      "owned_context_relogin_across_new_apex_sessions": "passed",
+      "personal_conversation_ownership_and_attachments": "passed",
+      "trace_history_and_archive_checks": "passed",
+      "synthetic_account_cleanup": "passed_exact_two_fixture_accounts_removed_after_identity_and_no_owned_runtime_checks_human_app_account_preserved"
+    },
+    "private_application_account_setup": "passed_user_entered_password_privately",
+    "browser_login_page": "visible_after_workspace_enablement_resolved_initial_404",
+    "authenticated_browser_acceptance": "passed_personal_journey_sample_navigation_and_real_sample_answer",
+    "followup_apex_import": {
+      "status": "passed_native_apexlang_validation_and_import",
+      "scope": "Sample Contexts labels_and_EXPLORE_button_warning_override_only",
+      "browser_session_preserved": true,
+      "pages": 8,
+      "assets": 7,
+      "components_parsed": 29,
+      "page_unsaved_changes_warning": "enabled",
+      "explore_button_override": "I_doNotCheck",
+      "fresh_runtime_baseline_hashes_unchanged": 25
+    }
+  },
+  "authenticated_browser": {
+    "personal_context_create_preview_apply_start": "passed",
+    "initial_answer": {
+      "matched_citations": 4,
+      "passages": 6,
+      "graph_paths": 6
+    },
+    "observation_save": "passed",
+    "topic_only_removal_preview": "passed_constraints_unchanged",
+    "existing_conversation_revision": "stayed_pinned_until_explicit_adoption",
+    "followup_answer": {
+      "matched_citations": 3,
+      "passages": 6,
+      "graph_paths": 6,
+      "topic_removal_became_technology_prohibition": false
+    },
+    "historical_preservation": {
+      "unchanged_hash_groups": 4,
+      "groups": ["original_answer", "original_trace", "original_revision", "original_events"],
+      "original_explanation_reopen": "passed_original_topics_and_S03_with_historical_notice"
+    },
+    "sample_copy": "passed_Alex_identity_background_constraints_cleared_suggestions_retained",
+    "sample_contexts_label": "passed_exact_navigation_label_visible",
+    "sample_navigation_after_fix": "passed_edited_unsaved_copy_form_Explore_button_navigated_immediately_to_sample_workspace",
+    "sample_real_answer": {
+      "status": "passed_Casey",
+      "source_id": "S10",
+      "source_pages": [3, 10],
+      "matched_citations": 2,
+      "native_graph_paths": 4,
+      "application_retrievals": 1,
+      "qualifications": "prospective_US_and_regional_variation_preserved_no_guaranteed_availability"
+    },
+    "actual_ui_model_requests": 3,
+    "request_scope": "two_personal_questions_and_one_Casey_sample_question",
+    "provider_expiry_scope": "covered_by_separate_native_suite_not_this_browser_journey",
+    "post_import_library": "both_owned_synthetic_contexts_visible",
+    "post_import_personal_conversation_reopen": "passed_adopted_revision_and_both_saved_answers_retained",
+    "reimport_session": "preserved_no_fresh_sign_in_required",
+    "synthetic_browser_rows": "retained_for_user_review"
+  },
+  "preservation": {
+    "scope": "existing original and v2 test schemas, applications and runtime data; JAVAVM remains enabled",
+    "baseline_capture": "passed",
+    "baseline_assertions": 58,
+    "comparison_after_native_install_and_core_tests": "passed_all_58_assertions",
+    "final_comparison": "passed_all_58_original_installation_count_and_hash_assertions_after_browser_acceptance",
+    "fresh_application_reimport": "passed_all_25_captured_runtime_table_hashes_unchanged",
+    "full_preservation_pass_claimed": true,
+    "claim_scope": "the_58_captured_original_installation_assertions_and_25_fresh_runtime_hashes_not_a_whole_database_audit",
+    "final_fresh_checkpoint": {
+      "complete_project_receipts": 80,
+      "liquibase_changesets": 81,
+      "schema_head": "2.0.0-c3-r4-ready",
+      "invalid_project_objects": 0,
+      "javavm": "VALID",
+      "application_identity": "verified_fresh_app102"
+    }
+  },
+  "outstanding": [],
+  "acceptance_scope": "The fresh native installation, scoped native/model suites, three actual browser questions and recorded preservation assertions passed. The limits below remain outside this completed test scope.",
+  "limits": [
+    "Database runtime and dataset remain at the published commit; APEX includes local Sample Contexts label/navigation fixes, alongside bootstrap, documentation and test-allowlist followups. This is not an unchanged-checkout acceptance of the published commit.",
+    "No new database was provisioned and initial Java enablement was not repeated.",
+    "Fresh generated Worksheet installer execution and Database Actions transport are separate, untested routes.",
+    "The corrected workspace bootstrap's ADD and ENABLE calls were exercised separately; its final combined file has not been rerun on a second fresh schema.",
+    "The earlier R4 upgrade/browser record and its partial strict native model-suite result remain historical evidence, not new fresh-deployment passes.",
+    "Release promotion, commit and push have not been performed.",
+    "This public record contains no endpoints, host/service names, wallet locations, OCIDs, credentials, runtime row bodies, raw logs or private connection definitions."
+  ],
+  "historical_r4_record": "db/verification/c3-r4-validation.json"
+}

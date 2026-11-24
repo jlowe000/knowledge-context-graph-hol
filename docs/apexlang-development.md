@@ -4,7 +4,9 @@ The v2 application is authored directly under `apex/application/`. SQL/PLSQL sti
 
 ## Current candidate
 
-The R4 My Contexts source has passed connected validation/import on APEX 26.1.6 and 29 installed-component parse checks. The independent authenticated browser expiry/follow-up passed: application retrieval preceded model dispatch, the same saved conversation retained its selected revision and six prior turns, and three citations matched six returned passages with six graph paths. Earlier hashes remained unchanged. Seven JavaScript tests passed. Native initial/adopted answers and fail-before-dispatch behavior passed, but the separate strict native expiry answer returned malformed JSON; full model-suite acceptance remains partial. The matching R4 engine export and receipt are prepared, with new/upgrade wrappers generated but not deployed. Fresh deployment and Worksheet execution remain unverified. See the [R4 record](../db/verification/c3-r4-validation.json) and [journey record](../references/my-contexts-c3-validation.json).
+R7 adds local context search and saved-objective previews on page 10. Its [validation record](../db/verification/context-search-validation.json) reports native upgrade/repeat, search regressions, APEX import with nine pages/seven assets/33 parsed components, and scoped browser search/filter checks. The [R5 deletion record](../db/verification/context-delete-validation.json) retains successful native tests and browser review/Cancel; permanent-delete browser confirmation remains pending.
+
+The preceding [fresh R4 deployment](../db/verification/fresh-dev-validation.json) passed schema/data, native/model and personal/sample browser checks. The historical [R4 record](../db/verification/c3-r4-validation.json) and [journey record](../references/my-contexts-c3-validation.json) retain the earlier browser expiry pass and separate malformed-JSON native failure. These results describe their own source versions. Fresh R7 and generated Worksheet installer execution remain unverified; no release promotion is implied.
 
 | Page | Implementation |
 | --- | --- |
@@ -12,10 +14,11 @@ The R4 My Contexts source has passed connected validation/import on APEX 26.1.6 
 | 11 — Context editor | Native full-context form, including eligible topics, explicit clarity, purpose, horizon, background and constraints. A name alone can be saved. |
 | 12 — Review changes | Native modal comparing the draft with the ready revision. Collection/topic changes require a refreshed preview before explicit Apply. |
 | 13 — Context overview | Draft/ready status, edit, archive/restore, duplicate, activation, new/reopened conversations, revision paging and interrupted-operation review. |
-| 14 — Sample contexts | Deliberate copying into an owned draft, with fictional identity/background cleared by the API. |
+| 14 — Sample Contexts | Deliberate copying into an owned draft, with fictional identity/background cleared by the API. |
+| 15 — Delete context | Owner-checked counts and permanent-delete confirmation; unfinished cleanup is routed here for explicit retry. |
 | 1 — Conversation | Specialized conversation, evidence and answer explanations for either an owned personal conversation or an explicit fictional sample. |
 
-Saving drafts makes no model call or RDF graph. Applying a reviewed draft publishes a private immutable context revision; it does not modify public source knowledge. Existing conversations remain pinned until the user selects **Use the latest ready revision**. The current shared `KCV_USER` login is one identity; separate people require separate application accounts.
+Saving drafts may refresh embeddings with the local database model; it makes no chat/GenAI request or RDF graph. The library combines text and local semantic search over owned saved drafts, with an objective preview and explicit coverage notice. Its API result is computed once per request and reused by the report and pagination controls. Applying a reviewed draft publishes a private immutable context revision; it does not modify public source knowledge. Existing conversations remain pinned until the user selects **Use the latest ready revision**. A shared application login is one identity; separate people require separate application accounts.
 
 Use the [starting walkthrough](my-contexts-draft-walkthrough.md), [complete manual candidate review](my-contexts-manual-test.md) and [API contract](my-contexts-api.md). Learning-loop planning/assessment and evaluation of the Explorer are separate future epics. The existing observation capture and explicit refinement do not implement those future workflows.
 
@@ -46,13 +49,13 @@ Native form saves preserve the request token on a failed submission and the expe
 
 The Oracle APEX Accounts authentication scheme calls `KCV_ACCESS.CAPTURE_IDENTITY` after sign-in. It pins the native account ID in the restricted application item `KCV_AUTH_ACCOUNT_ID`; normal requests cannot set this item. Context reads and writes require the pinned account ID to match the current account. This prevents an old session from acquiring a recreated account's identity when a username is reused. Install the appended identity migration and application metadata together, then sign out and in again. Tests using `APEX_SESSION.CREATE_SESSION` must explicitly invoke the trusted capture callback for a new synthetic session; attaching an existing session must never refresh its pin.
 
-Library and overview paging is processed on submit, before APEX redirects back to the page. Conversation history and observations are fetched through authorized read-only AJAX calls without a model request. The reports disable header sorting and preserve the API's order, so a header cannot reorder only the current 20-row window and imply a different global order.
+Library and overview paging is processed on submit, before APEX redirects back to the page. Conversation history and observations are fetched through authorized read-only AJAX calls without a model request. The reports disable header sorting and preserve the API's order, so a header cannot reorder only the current page and imply a different global order.
 
 ## Engine export and Worksheet packaging
 
 Export the reviewed, deployed candidate through APEX/SQLcl to `apex/kcv-explorer.sql` and record its tested scope and unresolved limitations separately. Never hand-edit this generated SQL to imitate new pages. Retain the app's page numbers/aliases and use a supported engine export.
 
-The final R4 engine export and [export-validation.json](../apex/export-validation.json) match the reviewed application source: eight pages, 44 export blocks and seven matching embedded assets. New/upgrade Worksheet wrappers have been generated but not deployed; their native execution requires separate acceptance. This receipt validates artifact provenance; it does not certify fresh deployment, every model response or release readiness.
+The current nine-page engine export and [export-validation.json](../apex/export-validation.json) identify the tested R7 source and seven application assets. New/upgrade Worksheet wrappers are generated from that artifact but require separate execution acceptance. The receipt validates artifact provenance; it does not certify every deployment route, model response or release readiness.
 
 The wrapper supports two distinct modes:
 
@@ -61,7 +64,15 @@ python scripts/build_apex_worksheet.py --mode new
 python scripts/build_apex_worksheet.py --mode upgrade
 ```
 
-`new` allocates a new application ID. `upgrade` generates `work/worksheet/20_upgrade_apex.sql`, requires the existing app ID in a Worksheet bind prompt, and checks workspace, parsing schema, alias, the completed `2.0.0-c3-r4-ready` migration and all six compiled personal-journey/conversation package specifications and bodies before import. It preserves the application ID. APEX generates an offset to avoid internal metadata collisions; page numbers and aliases are retained, but internal numeric component IDs are not an ownership key.
+Those commands use the legacy KCV_KNOWLEDGE/KCV_LAB defaults. For a separate fresh development target, specify every target explicitly; verify the workspace mapping before executing the result:
+
+```bash
+python scripts/build_apex_worksheet.py --mode new --workspace KCV_V2_FRESH --schema KCV_V2_FRESH --alias KCV-FRESH-EXPLORER --output work/fresh/20_install_apex.sql
+```
+
+Follow [fresh dev deployment](fresh-dev-deployment.md) for the complete setup. Choose the wrapper or native APEXlang import for that installation; running both creates separate apps and does not establish a single tested deployment path.
+
+`new` allocates a new application ID. `upgrade` generates `work/worksheet/20_upgrade_apex.sql`, requires the existing app ID in a Worksheet bind prompt, and checks workspace, parsing schema, alias, the completed `2.0.0-c3-r7-ready` migration and all sixteen required package specification/body objects, including personal-journey, conversation, deletion and context search before import. It preserves the application ID. APEX generates an offset to avoid internal metadata collisions; page numbers and aliases are retained, but internal numeric component IDs are not an ownership key.
 
 For product version 2 or later, **both new and upgrade modes** require `apex/export-validation.json`, recorded only after the actual engine import/export acceptance, containing:
 

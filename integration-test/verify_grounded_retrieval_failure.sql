@@ -66,7 +66,7 @@ DECLARE
   FOR i IN 1..graphs.COUNT LOOP SEM_APIS.DROP_RDF_GRAPH(graphs(i),network_owner=>SYS_CONTEXT('USERENV','SESSION_USER'),network_name=>'KCV_NET');END LOOP;
  END;
 BEGIN
- require(SYS_CONTEXT('USERENV','SESSION_USER') IN('KCV_V2_TEST','KCV_HOL_TEST'),'Use an isolated test schema owner');
+ require(SYS_CONTEXT('USERENV','SESSION_USER') IN('KCV_V2_TEST','KCV_HOL_TEST','KCV_V2_FRESH'),'Use an isolated test schema owner');
  public_before:=public_digest;
  SELECT setting_value INTO profile_before FROM kcv_settings WHERE setting_key='AI_PROFILE';
  body.put('question','Which public concepts help a synthetic learner explore project information?');

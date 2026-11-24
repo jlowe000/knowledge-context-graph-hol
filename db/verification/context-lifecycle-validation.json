@@ -1,0 +1,49 @@
+{
+  "format_version": 1,
+  "date": "2026-11-25",
+  "product_version": "2.0.0",
+  "status": "native_import_and_scoped_archive_unarchive_browser_checks_passed",
+  "scope": "Clarify the account-owned My Contexts entry, add the Active status filter, and label the existing restore action Unarchive.",
+  "schema": {
+    "checkpoint": "2.0.0-c3-r5-ready",
+    "new_migrations": 0,
+    "backend_changed": false,
+    "existing_api": "KCV_PERSONAL_CONTEXT_API.restore_context"
+  },
+  "native_apex": {
+    "import_passed": true,
+    "pages": 9,
+    "assets": 7,
+    "parsed_components": 33,
+    "engine_export_receipt": "apex/export-validation.json",
+    "current_export_packaging": "passed"
+  },
+  "authenticated_browser": {
+    "status": "passed",
+    "verified": [
+      "A disposable Draft context was archived; Edit and Review actions were hidden.",
+      "The Archived filter included that context and excluded the existing Active context.",
+      "Unarchive returned the disposable context to Draft and restored Edit, Review and Archive actions.",
+      "The Active filter isolated the existing Active context.",
+      "Returning the filter to All showed the original contexts and the same disposable Draft."
+    ],
+    "mutation_scope": "Only the disposable Draft context was archived and unarchived; no existing user context was modified."
+  },
+  "source_review": {
+    "prior_lifecycle": "The existing restore API returns the prior Draft or Active lifecycle without deleting revisions, conversations, observations or evidence.",
+    "ownership": "Personal contexts are scoped to the authenticated native application account, workspace and application; a shared login is one identity.",
+    "samples": "Shared fictional samples become owned contexts only through Save as my draft; exploring a sample does not create a personal draft."
+  },
+  "limitations": [
+    "This browser run exercised Draft to Archived to Draft, not an Active archive/unarchive round trip.",
+    "No new two-account browser isolation test was performed; ownership behavior was reviewed in the existing code and has separate earlier native acceptance.",
+    "Permanent deletion cannot be undone by Unarchive. Its browser confirmation remains pending in the separate deletion record.",
+    "Generated Worksheet installers were not executed for this followup."
+  ],
+  "related_records": [
+    "db/verification/context-delete-validation.json",
+    "db/verification/fresh-dev-validation.json"
+  ],
+  "release_changed": false,
+  "committed_or_pushed": false
+}

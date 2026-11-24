@@ -1,7 +1,7 @@
 -- Session B. Execute only while session A reports HOLD_READY.
 DECLARE token VARCHAR2(80):=:KCV_TEST_REQUEST_TOKEN;cid VARCHAR2(32);result CLOB;n NUMBER;started NUMBER;
 BEGIN
- IF SYS_CONTEXT('USERENV','SESSION_USER') NOT IN('KCV_V2_TEST','KCV_HOL_TEST') OR NOT REGEXP_LIKE(token,'^v3_context_[A-Fa-f0-9]{32}$','c') THEN RAISE_APPLICATION_ERROR(-20999,'Use the isolated owner and the session A token');END IF;
+ IF SYS_CONTEXT('USERENV','SESSION_USER') NOT IN('KCV_V2_TEST','KCV_HOL_TEST','KCV_V2_FRESH') OR NOT REGEXP_LIKE(token,'^v3_context_[A-Fa-f0-9]{32}$','c') THEN RAISE_APPLICATION_ERROR(-20999,'Use the isolated owner and the session A token');END IF;
  SELECT context_id INTO cid FROM kcv_personal_contexts WHERE title=token AND owner_scope=kcv_access.owner_scope AND owner_subject=kcv_access.owner_subject;
  started:=DBMS_UTILITY.GET_TIME;
  BEGIN result:=kcv_personal_context_api.save_draft(cid,token,TO_CLOB('{}'),1,token||'_edit');RAISE_APPLICATION_ERROR(-20991,'Edit bypassed context publication lock');EXCEPTION WHEN OTHERS THEN IF SQLCODE<>-20246 THEN RAISE;END IF;END;

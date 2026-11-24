@@ -12,7 +12,7 @@ DECLARE
    IF p_ok IS NULL OR NOT p_ok THEN RAISE_APPLICATION_ERROR(-20990,p_message);END IF;
  END;
 BEGIN
- IF SYS_CONTEXT('USERENV','CURRENT_SCHEMA') NOT IN ('KCV_V2_TEST','KCV_HOL_TEST') THEN
+ IF SYS_CONTEXT('USERENV','CURRENT_SCHEMA') NOT IN ('KCV_V2_TEST','KCV_HOL_TEST','KCV_V2_FRESH') THEN
    RAISE_APPLICATION_ERROR(-20999,'Use the isolated My Contexts test schema');END IF;
  check_true(app_id IS NOT NULL AND user_a IS NOT NULL AND user_b IS NOT NULL AND UPPER(user_a)<>UPPER(user_b),
    'Two distinct existing test accounts and an isolated app ID are required');

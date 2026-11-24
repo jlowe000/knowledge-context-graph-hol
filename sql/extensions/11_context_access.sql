@@ -59,10 +59,17 @@ CREATE OR REPLACE PACKAGE BODY kcv_access AS
  END;
  FUNCTION owner_scope RETURN VARCHAR2 IS s VARCHAR2(128);u VARCHAR2(128);BEGIN identity(s,u);RETURN s;END;
  FUNCTION owner_subject RETURN VARCHAR2 IS s VARCHAR2(128);u VARCHAR2(128);BEGIN identity(s,u);RETURN u;END;
- PROCEDURE assert_context(p_context VARCHAR2) IS s VARCHAR2(128);u VARCHAR2(128);n NUMBER;BEGIN
+ PROCEDURE assert_context(p_context VARCHAR2) IS s VARCHAR2(128);u VARCHAR2(128);n NUMBER;deletion_state VARCHAR2(16);BEGIN
    identity(s,u);
    SELECT COUNT(*) INTO n FROM kcv_personal_contexts WHERE context_id=p_context AND owner_scope=s AND owner_subject=u;
    IF n<>1 THEN RAISE_APPLICATION_ERROR(-20241,'CONTEXT_UNAVAILABLE: Context is not available to this account');END IF;
+   SELECT MAX(status) INTO deletion_state FROM kcv_context_deletions
+    WHERE context_id=p_context AND owner_scope=s AND owner_subject=u;
+   IF deletion_state='PENDING' THEN
+    RAISE_APPLICATION_ERROR(-20248,'CONTEXT_DELETING: Open the deletion status to complete or retry this deletion');
+   ELSIF deletion_state IS NOT NULL THEN
+    RAISE_APPLICATION_ERROR(-20241,'CONTEXT_UNAVAILABLE: Context is not available to this account');
+   END IF;
  END;
  PROCEDURE assert_writable IS n NUMBER;BEGIN
    SELECT COUNT(*) INTO n FROM kcv_settings WHERE setting_key='APP_MAINTENANCE' AND UPPER(setting_value)='ON';

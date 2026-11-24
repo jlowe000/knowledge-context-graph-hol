@@ -1,12 +1,14 @@
 # My Contexts: create, use and revisit a learning context
 
-Status: R4 dev candidate, 24 November 2026. Native upgrade, APEXlang import/export and the independent browser expiry/follow-up passed, including preserved history and evidence retrieved before model dispatch. The separate strict native expiry test returned malformed model JSON, so model-suite acceptance remains partial. Fresh deployment and generated Worksheet installer execution remain unverified. See the [current acceptance record](../references/my-contexts-c3-validation.json) and [R4 verification](../db/verification/c3-r4-validation.json). The published release remains the v1 baseline.
+Status: R7 dev candidate, 25 November 2026. The [search record](../db/verification/context-search-validation.json) records native upgrade/repeat and search regressions plus scoped browser search/filter checks. The [lifecycle UI record](../db/verification/context-lifecycle-validation.json) covers native import and the scoped Draft archive/unarchive and status-filter browser checks. The [R5 deletion record](../db/verification/context-delete-validation.json) records native tests and browser review/Cancel; permanent-delete confirmation remains pending. The preceding [fresh deployment](../db/verification/fresh-dev-validation.json), historical [journey record](../references/my-contexts-c3-validation.json) and [R4 verification](../db/verification/c3-r4-validation.json) retain their earlier results and separate model-format failure. Generated Worksheet installer execution remains unverified. Published release remains the v1 baseline.
 
 The [implementation plan](my-contexts-implementation-plan.md) defines EPIC-03. Dev uses directly authored APEXlang and SQLcl/Liquibase-managed schema changes; release retains its SQL Worksheet route. The [manual candidate review](my-contexts-manual-test.md) gives the actions and expected results for testing the completed source journey.
 
 ## Purpose
 
 Use the public knowledge collection for your own engagement or learning question. Start without a settled objective, inspect connected evidence, record what you learn and return to the same work after signing in again. A context describes a situation; it is not a universal profile of everything a person knows. One account may own several contexts, each with several conversations.
+
+**My Contexts** opens your signed-in account's personal library in this application. **Sample Contexts** contains shared fictional templates: **Save as my draft** creates an owned copy, while **Explore the samples** stays in the separate sample experience. Sharing a login shares that identity and its personal library; use individual application accounts for separate work.
 
 The journey is **My Contexts → Create or copy → Save draft → Review and apply → Start or reopen a conversation → Inspect evidence → Record observations or refine → Return later**. A source check, discussion, vote or practical activity may inform a next step. This candidate does not prescribe an experiment.
 
@@ -15,9 +17,9 @@ The journey is **My Contexts → Create or copy → Save draft → Review and ap
 | Step | Screen and action | Expected outcome |
 | --- | --- | --- |
 | 1 | Open **My Contexts**, then **Create context**, **Use a sample** or an existing context. | The library contains this account's owned contexts in this application, with title, clarity, lifecycle and update information. Search and status filters operate on that owned list. |
-| 2 | Enter a context name and choose **Save draft**. | A name alone is enough. No RDF overlay, model conversation or answer is created. |
+| 2 | Enter a context name and choose **Save draft**. | A name alone is enough. Private search embeddings may be generated locally; no RDF overlay, chat-model conversation or answer is created. |
 | 3 | Use **Edit draft** to enter a starting question, purpose, objective clarity, optional background, unknowns, constraints and topics. Save. | The complete draft is retained separately from any ready revision. Topic removal means a change of learning focus, not a technical prohibition. |
-| 4 | From the overview choose **Review and apply draft**. Read the before/after comparison. | A valid preview needs a question and at least one eligible topic. Defined clarity also requires objective text. Cancel leaves ready work unchanged. |
+| 4 | From the overview choose **Review and Apply**. Read the before/after comparison. | A valid preview needs a question and at least one eligible topic. Defined clarity also requires objective text. Cancel leaves ready work unchanged. |
 | 5 | If changing collection or topics, select the collection's eligible topics and choose **Refresh preview for selected collection and topics**. Inspect the new comparison, then **Apply reviewed context**. | A private immutable context revision becomes ready. The reviewed draft/head must still match. Shared public source knowledge is unchanged. |
 | 6 | Choose **Start a new conversation**, or open a saved conversation. | A new conversation starts on the ready head. An existing conversation retains its pinned revision and attaches only after ownership validation. Opening it does not ask the model a question. |
 | 7 | Ask a question, then open **How was this answer built?** | The answer explanation shows its captured context, application-retrieved evidence, Sources graph, Answer lineage and citation matches. Viewing it makes no model call. |
@@ -25,7 +27,7 @@ The journey is **My Contexts → Create or copy → Save draft → Review and ap
 | 9 | Return to the full editor, save changes, review and apply. In the conversation choose **Use the latest ready revision** when wanted. | Applying advances the context head; all existing conversations remain pinned until explicit adoption. Earlier turns and explanations retain their original revision and evidence. |
 | 10 | Sign out, sign in again, reopen the context and saved conversation. | Saved work remains available to the same account in the same application. The app retains history independently of replaceable model state. |
 
-Conversation and observation history have **Load earlier** controls. The overview has **Older conversations** and **Older revisions**, with controls to return to the newest page. The library supports title search and Draft, Active and Archived filtering. These are bounded pages, not frozen snapshots; edits can change library ordering.
+Conversation and observation history have **Load earlier** controls. The overview has **Older conversations** and **Older revisions**, with controls to return to the newest page. **Search your contexts** combines title/saved-detail text matches with available local semantic matches, within **All**, **Draft**, **Active** or **Archived** filters. Results include the saved objective preview (up to 240 characters, with `...` when truncated), match reason and coverage notice. An empty query restores recency ordering. These are bounded current results, not frozen snapshots; edits can change library ordering. See [context search](context-search.md) for setup and the scoped R7 acceptance record.
 
 ## Draft, ready revision and conversation
 
@@ -63,7 +65,7 @@ Model conversations have seven-day retention. Before a personal answer the runti
 
 If a submitted model request fails, its result may be uncertain. The browser refreshes status without automatically resubmitting. Use **Context overview and saved conversations** to inspect unfinished operations. **Abandon interrupted operation** requires an explicit confirmation and server-side checks that no worker still holds the operation lock. It does not cancel provider processing, publish incomplete work or retry an answer. A later new request is deliberate.
 
-Archive makes a context read-only and refuses to proceed while answers or build/publication work remain unfinished. Archived conversations and evidence remain readable; Restore returns the previous Draft or Active lifecycle. Archive is not deletion.
+Archive makes a context read-only and refuses to proceed while answers or build/publication work remain unfinished. To resume it, choose **My Contexts → Status: Archived → Search**, open the context, then choose **Unarchive**. This returns the previous Draft or Active lifecycle and preserves revisions, conversations, observations and evidence. Select **All** when returning to the library if the Archived filter remains selected. Permanent deletion cannot be undone with Unarchive; the separate [deletion record](../db/verification/context-delete-validation.json) retains that feature's current acceptance status.
 
 Personal context, conversations, observations and operational records remain runtime data. They are excluded from the public sample dataset, generated dataset SQL and release manifests. Asking a question supplies context to the configured model service; keeping it out of GitHub does not mean no model service receives it.
 

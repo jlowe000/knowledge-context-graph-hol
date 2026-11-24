@@ -1,10 +1,12 @@
 # My Contexts API: v2.0.0 C3 candidate
 
-The C3/R4 source implements the personal journey alongside the existing sample route. R4 migration, grounded-task registration, native APEX import and the independent browser expiry/follow-up have passed. Native initial/adopted answers and the retrieval-failure test passed; a separate strict native expiry answer failed JSON/citation parsing despite successful retrieval. Full model-suite and fresh-route acceptance are not claimed; see the [R4 record](../db/verification/c3-r4-validation.json). Capabilities describe permitted actions, not a promise that every input is valid or every generated answer is correct.
+The C3/R7 source adds [local hybrid context search](context-search.md) and objective previews to the personal journey; its [native search and scoped browser checks passed](../db/verification/context-search-validation.json). The [deletion record](../db/verification/context-delete-validation.json) retains R5's successful native upgrade/repeat and runtime tests with permanent-delete browser confirmation still pending. Earlier [fresh deployment](../db/verification/fresh-dev-validation.json) and [R4](../db/verification/c3-r4-validation.json) records retain their own scope. Capabilities describe permitted actions, not a promise that every input is valid or every generated answer is correct.
 
 ## Storage and identity
 
 `KCV_PERSONAL_CONTEXTS` stores the owned draft and ready-head reference separately from the public dataset. `KCV_CONTEXT_REQUESTS` stores transactional draft/lifecycle receipts. `KCV_PERSONAL_OPERATIONS` journals graph publication, model boundaries and other personal actions; `KCV_CONTEXT_ATTACHMENTS` authorizes a durable conversation in the current authenticated session. Personal revisions, turns, observations, receipts and attachments are runtime records, never public dataset/export supporting data.
+
+`KCV_CONTEXT_SEARCH_CHUNKS` stores private, derived text segments, content hashes, model keys and optional 384-dimensional vectors. Its foreign key cascades deletion from the owning context. Search filters by the authenticated owner before ranking; stale content/model keys cannot contribute semantic results. Saves, copies, duplicates and publication refresh this material within their existing transaction. A schema owner can explicitly rebuild it outside APEX; it is never included in the public dataset.
 
 `KCV_ACCESS` derives APEX ownership from the workspace, application and native APEX account ID. The authentication scheme's post-login callback `KCV_ACCESS.CAPTURE_IDENTITY` pins that account ID in the protected, application-scoped `KCV_AUTH_ACCOUNT_ID` item. Every read/write requires the pin to match the current native account ID. Missing or mismatched pins fail closed; reads never populate the item. A stale session therefore cannot become a newly created account that reused the same username. Existing sessions must sign out/in after this authentication change.
 
@@ -18,7 +20,7 @@ The following `KCV_PERSONAL_CONTEXT_API` functions return CLOB JSON. Read functi
 
 | Function | Inputs | Output |
 | --- | --- | --- |
-| `list_contexts` | Optional status, literal title search, owner-checked cursor ID and limit 1–50 | `contexts` summaries and nullable `next_cursor`; newest updated rows first |
+| `list_contexts` | Optional status, query up to 200 characters, owner-checked cursor ID and limit 1–50 | Empty query: recent owned contexts. Populated query: title/saved-detail keyword and local semantic ranking, `contexts`, nullable `next_cursor`, `search_mode` and `search_notice`. |
 | `get_context` | Owned context ID | Summary, draft, ready context when present, `has_unapplied_changes`, selected topics, pinned base graph, provenance and actual capabilities |
 | `topic_options` | Optional owned context ID; omitted uses the current collection | Eligible topic labels and base graph, using relational metadata only |
 | `save_draft` | Context ID or null for create, title, body, expected draft version and request token | Saved context; version increments on update |
@@ -26,9 +28,21 @@ The following `KCV_PERSONAL_CONTEXT_API` functions return CLOB JSON. Read functi
 | `copy_sample` | Available sample ID, title and request token | New draft with question/purpose/topics as suggestions; identity, constraints and background omitted |
 | `archive_context`, `restore_context` | Owned ID, expected version and request token | Updated lifecycle; restore returns the prior Draft or Active state |
 
-Draft body allows `question`, `objective_clarity`, `objective`, `person`, `role`, `organisation`, `known_situation`, `learning_purpose`, `time_horizon`, `unknowns`, `constraints` and `topic_preferences`. Clarity is `unknown`, `emerging` or `defined`; constraints and unknowns are arrays of single-line text, at most 20 entries of 500 characters each. Embedded CR/LF is rejected so the native one-item-per-line editor preserves item boundaries. Topic preferences map exact eligible labels to weights 1–10; weights are not retrieval rankings. `selected_topics` is a presentation projection of the saved preferences, not an extra graph lookup. The total submitted body is limited to **16,000 UTF-8 bytes**, with smaller per-field character limits enforced by the API. The exact byte check converts a temporary CLOB/BLOB; it does not approximate the size by truncating a string. This bounds native editor buffers for multibyte input. A draft can be incomplete and does not invoke a model.
+Draft body allows `question`, `objective_clarity`, `objective`, `person`, `role`, `organisation`, `known_situation`, `learning_purpose`, `time_horizon`, `unknowns`, `constraints` and `topic_preferences`. Clarity is `unknown`, `emerging` or `defined`; constraints and unknowns are arrays of single-line text, at most 20 entries of 500 characters each. Embedded CR/LF is rejected so the native one-item-per-line editor preserves item boundaries. Topic preferences map exact eligible labels to weights 1–10; weights are not retrieval rankings. `selected_topics` is a presentation projection of the saved preferences, not an extra graph lookup. The total submitted body is limited to **16,000 UTF-8 bytes**, with smaller per-field character limits enforced by the API. The exact byte check converts a temporary CLOB/BLOB; it does not approximate the size by truncating a string. This bounds native editor buffers for multibyte input. Saving an incomplete draft is allowed. It may generate local search embeddings but makes no chat/GenAI request.
+
+List rows include `objective_preview`; whitespace is normalized and objectives longer than 240 characters use 237 characters plus `...`. A populated search also supplies `match_reason`. `search_mode` is `HYBRID`, `PARTIAL` or `KEYWORD`, with a user-visible notice explaining semantic coverage. A blank browse has no semantic query and uses update-time ordering. Search reads perform no DML or commit; the APEX page calls the list API once per request and reuses its protected request-only CLOB for the report and cursor controls.
+
+Ranked cursors describe current results, not a durable snapshot. An owned, available cursor that stops matching resets to the first page with a notice; a deleted, deleting or foreign cursor is rejected. See [search selection and maintenance](context-search.md) for ranking, literal token handling, model prerequisites and fallback behavior. Conversation text and historical answers are not part of this search document.
 
 An Active context's pending draft is stored separately from its ready revision. Saving an incomplete edit does not disable ready work or change a conversation. Applying a reviewed complete draft creates a new immutable revision and advances the context head. Public graph data and original answer records are untouched.
+
+## Permanent context deletion
+
+`KCV_CONTEXT_DELETE` checks the authenticated owner independently of the ordinary content gate. Its `status(context)` returns `NONE`, `PENDING` or `DELETED`; missing/unowned IDs remain unavailable. `preview(context)` returns the owned title, saved-work counts, expected version/head and an inventory digest. For a pending deletion it returns the saved cleanup receipt so the explicit retry can use the same request identity.
+
+Call `delete_context(context, expected_version, expected_head, preview_digest, request_token)` from a PL/SQL submit process only after confirmation. It returns CLOB JSON. The initial request locks and rechecks the context and its conversations, rejects running/uncertain work or a stale review, then commits a deletion fence and resource manifest before native cleanup. Native RDF/Select AI calls can commit independently; this is not one rollbackable transaction. A pending result means cleanup must be resumed explicitly, not that deletion completed. Completed retries return the minimal saved receipt without recreating content.
+
+The journal and resource manifest are `KCV_CONTEXT_DELETIONS` and `KCV_CONTEXT_DELETE_RESOURCES`. Pending contexts reject normal reads and writes and remain visible in the library only as deletion-status summaries. Completion removes the owned context's application rows and associated private resources, scrubs its title from the deletion receipt, and replaces earlier draft-operation response bodies with minimal `DELETED` markers. Public knowledge and independently copied contexts remain. Service/provider audit records and backups are outside this API's erasure claim. Archive remains the reversible alternative; see the [manual deletion checks](my-contexts-manual-test.md#delete-an-owned-context).
 
 ## Publication and durable conversations
 
@@ -93,6 +107,8 @@ List cursors are reauthorized on every call. A changing library can move rows be
 | `-20244` | `VALIDATION_ERROR` | Invalid input, shape, status, length or request token |
 | `-20245` | `REQUEST_TOKEN_REUSED` | Same token was supplied for different action/content |
 | `-20246` | `OPERATION_IN_PROGRESS` | Another worker holds the lock or an earlier operation needs review; do not blindly resubmit |
+| `-20248` | `CONTEXT_DELETING` / `DELETE_PENDING` | Cleanup has started; use its deletion-status/retry flow rather than ordinary content actions |
+| `-20249` | `DELETE_SCOPE_ERROR` | A private cleanup resource does not satisfy the ownership/reference checks; deletion must not remove an unrelated resource |
 | `-20247` | `INVALID_TOPIC` | Label is not an eligible topic in the pinned collection |
 
 Native page processes display safe validation errors. Do not expose owner IDs or private backtraces in user-facing messages. Personal-conversation routes reuse this authorization model while retaining the original sample-session rules.

@@ -2,6 +2,7 @@
 import hashlib
 import json
 from pathlib import Path
+import re
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -11,6 +12,35 @@ from scripts import build_apex_worksheet as worksheet
 
 
 class ApexAuthoringTests(unittest.TestCase):
+    def test_context_search_runs_once_and_report_uses_request_only_payload(self):
+        # Repeated report evaluation must not repeat an embedding request or
+        # reuse another request's private results from persistent session state.
+        page=(Path(__file__).resolve().parents[1]/'apex/application/pages/p00010-my-contexts.apx').read_text()
+        calls=re.findall(r'kcv_personal_context_api\.list_contexts\s*\(',page,re.I)
+        self.assertEqual(len(calls),1)
+        prepare=page.split('process prepare-library (',1)[1].split('\n  )',1)[0]
+        self.assertIn('point: beforeHeader',prepare)
+        self.assertIn("p_item=>'P10_RESULTS',p_value=>l_result",prepare)
+        self.assertIn("JSON_VALUE(l_result,'$.next_cursor')",prepare)
+        self.assertIn("JSON_VALUE(l_result,'$.search_notice'",prepare)
+        cache=page.split('pageItem P10_RESULTS (',1)[1].split('\n  )',1)[0]
+        self.assertIn('dataType: clob',cache)
+        self.assertIn('storage: request',cache)
+        self.assertIn('valueProtected: true',cache)
+        report=page.split('region contexts (',1)[1]
+        self.assertNotIn('list_contexts(',report)
+        self.assertIn("JSON_TABLE(apex_session_state.get_clob('P10_RESULTS')",report)
+
+    def test_context_search_explanations_are_bounded_and_html_escaped(self):
+        # Saved context/model-derived match text is untrusted display content.
+        page=(Path(__file__).resolve().parents[1]/'apex/application/pages/p00010-my-contexts.apx').read_text()
+        self.assertIn('SUBSTR(j.objective_preview,1,240)',page)
+        self.assertIn('&P10_SEARCH_NOTICE!HTML.',page)
+        for name in ('OBJECTIVE_PREVIEW','MATCH_REASON'):
+            column=page.split(f'column {name} (',1)[1].split('\n    )',1)[0]
+            self.assertIn('type: plainText',column)
+            self.assertIn('escapeSpecialChars: true',column)
+
     def fixture(self, root):
         folder=root/'apex/application/pages';folder.mkdir(parents=True)
         for name in ('explorer.js','explorer.css'):
@@ -109,7 +139,7 @@ class ApexAuthoringTests(unittest.TestCase):
             self.assertIn('SET_APPLICATION_ID(l_app_id)',sql)
             self.assertIn("workspace='KCV_KNOWLEDGE'",sql)
             self.assertIn("owner='KCV_LAB' AND UPPER(alias)='KCV-EXPLORER'",sql)
-            self.assertLess(sql.index('2.0.0-c3-r4-ready'),sql.index('null; -- fixture only'))
+            self.assertLess(sql.index('2.0.0-c3-r7-ready'),sql.index('null; -- fixture only'))
             self.assertNotIn('&',sql)
 
     def test_fresh_installer_still_allocates_new_id(self):
@@ -128,9 +158,9 @@ class ApexAuthoringTests(unittest.TestCase):
                 sql=worksheet.build().read_text()
             self.assertIn('GENERATE_APPLICATION_ID',sql)
             self.assertNotIn(':KCV_APPLICATION_ID',sql)
-            self.assertLess(sql.index('2.0.0-c3-r4-ready'),sql.index('GENERATE_APPLICATION_ID'))
-            self.assertIn("object_name IN ('KCV_ACCESS','KCV_PERSONAL_CONTEXT_API','KCV_PERSONAL_JOURNEY','KCV_SCENARIO','KCV_TRACE','KCV_APEX')",sql)
-            self.assertIn('IF l_count<>12',sql)
+            self.assertLess(sql.index('2.0.0-c3-r7-ready'),sql.index('GENERATE_APPLICATION_ID'))
+            self.assertIn("object_name IN ('KCV_ACCESS','KCV_PERSONAL_CONTEXT_API','KCV_PERSONAL_JOURNEY','KCV_SCENARIO','KCV_TRACE','KCV_APEX','KCV_CONTEXT_DELETE','KCV_CONTEXT_SEARCH')",sql)
+            self.assertIn('IF l_count<>16',sql)
 
 
 if __name__=='__main__':unittest.main()

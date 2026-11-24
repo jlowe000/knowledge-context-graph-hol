@@ -2,6 +2,8 @@
 
 Choose one path. Both use the same `KCV_GENAI` profile and the same lab code. A database grant permits package use; OCI IAM separately authorizes inference. The user-key path is the default in the example profile and optional automation configuration.
 
+**Current dev owner:** the account names and Worksheet prompts below describe the v1 KCV_LAB setup. For a new v2 schema, complete the [fresh dev bootstrap and private owner connection](fresh-dev-deployment.md) first. Its parameterized bootstrap supplies the package grants; do not run hard-coded KCV_LAB administration scripts against a different target. Migrations create KCV_SETTINGS. A NO AUTHENTICATION owner uses SQLcl proxy access, not a direct Worksheet password login; SQLcl does not automatically open Worksheet bind dialogs. Create the signing-key credential privately in the actual new owner. The fresh rehearsal rejected a schema-qualified credential name with ORA-20010 during profile creation, before any model call; the guide records that finding rather than treating cross-schema reuse as an established alternative.
+
 | Choice | OCI identity making model calls | Database credential | Dynamic group |
 | --- | --- | --- | --- |
 | User API signing key | Your OCI user | `OCI_USER_CRED`, owned by KCV_LAB | Not required |
@@ -73,7 +75,7 @@ Allow IAM changes to propagate before testing. These examples authorize inferenc
 
 Edit [05_profile_worksheet.sql](../sql/schema/05_profile_worksheet.sql) locally: set `l_region`, `l_compartment` to the inference compartment OCID, `l_model` to the exact model name/identifier supported by Select AI for the chosen region and access mode, and `l_credential` to the chosen name. Run as KCV_LAB using **Run Script (F5)**. The script creates `KCV_GENAI` independently of lab tables; it does not silently replace an existing profile. It builds attributes with `JSON_OBJECT_T` and serializes to CLOB before the package call. No secret values belong in the profile script.
 
-After `01_objects.sql` has created the lab tables and the profile has been created, register its name for extraction and agents. Run as KCV_LAB using **F5**:
+After the profile exists and the lab tables have been created, register its name for extraction and agents. On current v2, the tables come from migrations; on a matching v1 checkout, they come from `01_objects.sql`. Run the following in the actual lab-owner session, using **F5** in Worksheet or the linked script with SQLcl `@`:
 
 <!-- include-sql: sql/schema/06_register_profile.sql -->
 

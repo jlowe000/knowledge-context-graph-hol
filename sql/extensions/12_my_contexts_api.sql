@@ -37,6 +37,7 @@ CREATE OR REPLACE PACKAGE BODY kcv_personal_context_api AS
  FUNCTION context_row(p_context VARCHAR2) RETURN kcv_personal_contexts%ROWTYPE IS
    r kcv_personal_contexts%ROWTYPE;s VARCHAR2(128):=kcv_access.owner_scope;u VARCHAR2(128):=kcv_access.owner_subject;
  BEGIN
+   kcv_access.assert_context(p_context);
    SELECT * INTO r FROM kcv_personal_contexts WHERE context_id=p_context AND owner_scope=s AND owner_subject=u;
    RETURN r;
  EXCEPTION WHEN NO_DATA_FOUND THEN RAISE_APPLICATION_ERROR(-20241,'CONTEXT_UNAVAILABLE: Context is not available to this account');
@@ -44,6 +45,7 @@ CREATE OR REPLACE PACKAGE BODY kcv_personal_context_api AS
  FUNCTION locked_context_row(p_context VARCHAR2) RETURN kcv_personal_contexts%ROWTYPE IS
    r kcv_personal_contexts%ROWTYPE;s VARCHAR2(128):=kcv_access.owner_scope;u VARCHAR2(128):=kcv_access.owner_subject;
  BEGIN
+   kcv_access.assert_context(p_context);
    SELECT * INTO r FROM kcv_personal_contexts WHERE context_id=p_context AND owner_scope=s AND owner_subject=u FOR UPDATE NOWAIT;
    RETURN r;
  EXCEPTION
@@ -51,16 +53,24 @@ CREATE OR REPLACE PACKAGE BODY kcv_personal_context_api AS
    WHEN OTHERS THEN
      IF SQLCODE=-54 THEN RAISE_APPLICATION_ERROR(-20246,'OPERATION_IN_PROGRESS: Another edit is being saved');END IF;RAISE;
  END;
- FUNCTION lock_owned_context(p_context VARCHAR2) RETURN PLS_INTEGER IS lock_id PLS_INTEGER;n PLS_INTEGER;BEGIN
+ FUNCTION lock_owned_context(p_context VARCHAR2) RETURN PLS_INTEGER IS lock_id PLS_INTEGER;n PLS_INTEGER;ignored PLS_INTEGER;BEGIN
    kcv_access.assert_context(p_context);kcv_access.assert_writable;
    lock_id:=DBMS_UTILITY.GET_HASH_VALUE('KCV_PERSONAL:'||p_context,1,1073741823);
    n:=DBMS_LOCK.REQUEST(lock_id,DBMS_LOCK.X_MODE,0,FALSE);
-   require(n=0,'OPERATION_IN_PROGRESS: Another context operation is running',-20246);RETURN lock_id;
+   require(n=0,'OPERATION_IN_PROGRESS: Another context operation is running',-20246);
+   kcv_access.assert_context(p_context);RETURN lock_id;
+ EXCEPTION WHEN OTHERS THEN
+   IF n=0 THEN ignored:=DBMS_LOCK.RELEASE(lock_id);END IF;RAISE;
  END;
- FUNCTION summary(p_row kcv_personal_contexts%ROWTYPE) RETURN JSON_OBJECT_T IS j JSON_OBJECT_T:=JSON_OBJECT_T();BEGIN
+ FUNCTION summary(p_row kcv_personal_contexts%ROWTYPE) RETURN JSON_OBJECT_T IS j JSON_OBJECT_T:=JSON_OBJECT_T();deletion_state VARCHAR2(16);BEGIN
    j.put('context_id',p_row.context_id);j.put('title',p_row.title);j.put('lifecycle',p_row.lifecycle);
    j.put('draft_version',p_row.draft_version);j.put('latest_revision',p_row.latest_revision);
    j.put('updated_at',TO_CHAR(p_row.updated_at,'YYYY-MM-DD"T"HH24:MI:SS.FF6TZH:TZM'));
+   SELECT MAX(status) INTO deletion_state FROM kcv_context_deletions
+    WHERE context_id=p_row.context_id AND owner_scope=p_row.owner_scope AND owner_subject=p_row.owner_subject;
+   IF deletion_state IS NULL THEN j.put_null('deletion_status');ELSE j.put('deletion_status',deletion_state);END IF;
+   IF deletion_state IS NULL THEN j.put('objective_preview',kcv_context_search.objective_preview(p_row.draft_json));
+   ELSE j.put_null('objective_preview');END IF;
    RETURN j;
  END;
  FUNCTION get_context(p_context VARCHAR2) RETURN CLOB IS
@@ -98,8 +108,16 @@ CREATE OR REPLACE PACKAGE BODY kcv_personal_context_api AS
    require(p_limit BETWEEN 1 AND 50 AND p_limit=TRUNC(p_limit),'VALIDATION_ERROR: Page size must be 1 to 50');
    require(status_filter IS NULL OR status_filter IN ('DRAFT','ACTIVE','ARCHIVED'),'VALIDATION_ERROR: Unknown context status');
    require(p_search IS NULL OR LENGTH(p_search)<=200,'VALIDATION_ERROR: Search is limited to 200 characters');
+   IF search_filter IS NOT NULL THEN
+    RETURN kcv_context_search.search_contexts(status_filter,search_filter,p_before_id,p_limit);
+   END IF;
    limit_rows:=p_limit;fetch_rows:=limit_rows+1;
-   IF p_before_id IS NOT NULL THEN cursor_row:=context_row(p_before_id);END IF;
+   IF p_before_id IS NOT NULL THEN
+    -- Pagination requires only owned list metadata, including pending deletions.
+    BEGIN SELECT context_id,updated_at INTO cursor_row.context_id,cursor_row.updated_at
+     FROM kcv_personal_contexts WHERE context_id=p_before_id AND owner_scope=s AND owner_subject=u;
+    EXCEPTION WHEN NO_DATA_FOUND THEN RAISE_APPLICATION_ERROR(-20241,'CONTEXT_UNAVAILABLE: Context is not available to this account');END;
+   END IF;
    FOR r IN (SELECT * FROM kcv_personal_contexts WHERE owner_scope=s AND owner_subject=u
      AND (status_filter IS NULL OR lifecycle=status_filter)
      AND (search_filter IS NULL OR INSTR(LOWER(title),LOWER(search_filter))>0)
@@ -168,7 +186,7 @@ CREATE OR REPLACE PACKAGE BODY kcv_personal_context_api AS
  END;
  FUNCTION request_begin(p_action VARCHAR2,p_token VARCHAR2,p_payload JSON_OBJECT_T,p_result OUT CLOB,p_lock OUT PLS_INTEGER) RETURN BOOLEAN IS
    s VARCHAR2(128):=kcv_access.owner_scope;u VARCHAR2(128):=kcv_access.owner_subject;hash_value VARCHAR2(64);r kcv_context_requests%ROWTYPE;
-   lock_id PLS_INTEGER;lock_result PLS_INTEGER;
+   lock_id PLS_INTEGER;lock_result PLS_INTEGER;replay_lock PLS_INTEGER;result_context VARCHAR2(32);result_status VARCHAR2(16);
  BEGIN
    p_lock:=NULL;
    kcv_access.assert_writable;
@@ -186,9 +204,15 @@ CREATE OR REPLACE PACKAGE BODY kcv_personal_context_api AS
      SELECT * INTO r FROM kcv_context_requests WHERE owner_scope=s AND owner_subject=u AND request_token=p_token;
      require(r.action=p_action AND r.payload_sha256=hash_value,'REQUEST_TOKEN_REUSED: Start a new action with a new token',-20245);
      require(r.result_json IS NOT NULL,'OPERATION_IN_PROGRESS: The prior request has not completed',-20246);
-     p_result:=r.result_json;release_request(p_lock);RETURN TRUE;
+     SELECT JSON_VALUE(r.result_json,'$.context_id'),JSON_VALUE(r.result_json,'$.status') INTO result_context,result_status FROM dual;
+     require(NVL(result_status,'-')<>'DELETED' AND result_context IS NOT NULL,
+       'CONTEXT_UNAVAILABLE: The earlier request no longer returns an available context',-20241);
+     -- An old receipt can contain an entire draft. Serialize its replay with
+     -- deletion, then recheck the stable owner and deletion fence before return.
+     replay_lock:=lock_owned_context(result_context);
+     p_result:=r.result_json;release_request(replay_lock);release_request(p_lock);RETURN TRUE;
    END;
- EXCEPTION WHEN OTHERS THEN release_request(p_lock);RAISE;
+ EXCEPTION WHEN OTHERS THEN release_request(replay_lock);release_request(p_lock);RAISE;
  END;
  FUNCTION request_finish(p_token VARCHAR2,p_context VARCHAR2) RETURN CLOB IS
    s VARCHAR2(128):=kcv_access.owner_scope;u VARCHAR2(128):=kcv_access.owner_subject;result CLOB:=get_context(p_context);
@@ -205,6 +229,7 @@ CREATE OR REPLACE PACKAGE BODY kcv_personal_context_api AS
  BEGIN
    INSERT INTO kcv_personal_contexts(context_id,owner_scope,owner_subject,title,draft_json,base_graph,provenance_json)
      VALUES(cid,s,u,TRIM(p_title),p_body,p_graph,p_provenance);
+   kcv_context_search.refresh_context(cid);
    RETURN cid;
  END;
  FUNCTION save_draft(p_context VARCHAR2,p_title VARCHAR2,p_body CLOB,
@@ -224,18 +249,21 @@ CREATE OR REPLACE PACKAGE BODY kcv_personal_context_api AS
      UPDATE kcv_personal_contexts SET title=TRIM(p_title),draft_json=clean,draft_version=draft_version+1,updated_at=SYSTIMESTAMP
        WHERE context_id=p_context AND draft_version=p_expected_version AND lifecycle<>'ARCHIVED';
      require(SQL%ROWCOUNT=1,'STALE_VERSION: Reload your saved context before editing',-20242);
+     kcv_context_search.refresh_context(cid);
    END IF;
    result:=request_finish(p_request_token,cid);release_request(context_lock);RETURN result;
  EXCEPTION WHEN OTHERS THEN ROLLBACK TO kcv_context_write;release_request(context_lock);release_request(request_lock);RAISE;
  END;
  FUNCTION duplicate_context(p_context VARCHAR2,p_title VARCHAR2,p_request_token VARCHAR2) RETURN CLOB IS
-   request JSON_OBJECT_T:=JSON_OBJECT_T();provenance JSON_OBJECT_T:=JSON_OBJECT_T();result CLOB;r kcv_personal_contexts%ROWTYPE;cid VARCHAR2(32);request_lock PLS_INTEGER;
+   request JSON_OBJECT_T:=JSON_OBJECT_T();provenance JSON_OBJECT_T:=JSON_OBJECT_T();result CLOB;r kcv_personal_contexts%ROWTYPE;cid VARCHAR2(32);request_lock PLS_INTEGER;context_lock PLS_INTEGER;
  BEGIN
    SAVEPOINT kcv_context_write;title_check(p_title);request.put('context_id',p_context);request.put('title',p_title);
    IF request_begin('DUPLICATE',p_request_token,request,result,request_lock) THEN RETURN result;END IF;
+   context_lock:=lock_owned_context(p_context);
    r:=context_row(p_context);provenance.put('kind','owned_context_copy');provenance.put('context_id',r.context_id);provenance.put('draft_version',r.draft_version);
-   cid:=insert_draft(p_title,r.draft_json,r.base_graph,provenance.to_clob());RETURN request_finish(p_request_token,cid);
- EXCEPTION WHEN OTHERS THEN ROLLBACK TO kcv_context_write;release_request(request_lock);RAISE;
+   cid:=insert_draft(p_title,r.draft_json,r.base_graph,provenance.to_clob());result:=request_finish(p_request_token,cid);
+   release_request(context_lock);RETURN result;
+ EXCEPTION WHEN OTHERS THEN ROLLBACK TO kcv_context_write;release_request(context_lock);release_request(request_lock);RAISE;
  END;
  FUNCTION copy_sample(p_sample VARCHAR2,p_title VARCHAR2,p_request_token VARCHAR2) RETURN CLOB IS
    request JSON_OBJECT_T:=JSON_OBJECT_T();provenance JSON_OBJECT_T:=JSON_OBJECT_T();source JSON_OBJECT_T;draft JSON_OBJECT_T:=JSON_OBJECT_T();

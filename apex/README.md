@@ -1,20 +1,24 @@
-# Knowledge Context Explorer application
+# APEX application deployment
 
-Application icons use Font APEX from the Oracle APEX team. See [attribution](../third-party/font-apex/README.md) and the [retained licence](../third-party/font-apex/LICENSE.txt). Include these files and [NOTICE](../NOTICE.md) when distributing the SQL export or Worksheet installer separately.
+App users start with [My Contexts](../labs/my-contexts/my-contexts.md) or [Sample Contexts](../labs/explore-evidence/explore-evidence.md). Developer learners use [Understand the collection](../labs/understand-collection/understand-collection.md). A working hosted app requires no database login.
 
-For the learning experience, start with [app use](../labs/explore-evidence/explore-evidence.md) or [understand the collection as a developer](../labs/understand-collection/understand-collection.md). Installation below is needed only when no suitable deployment is supplied.
+## Choose the installation mode
 
-Use the supplied [Worksheet installer](../sql/install/20_install_apex.sql) as KCV_LAB after completing database and scenario setup. Follow the [deployment lab](../labs/deploy-explorer/deploy-explorer.md), including ADMIN workspace and app-user creation. The installer allocates a new application ID; it does not require App Builder or Python.
+Use [installation paths](../docs/installation-paths.md) before running SQL. A clean schema uses the new-app installer; an existing supported installation uses the ordered schema migration and **same-ID** app upgrade. Both routes have passed scoped candidate02 [acceptance](../db/verification/release-v2-paths-validation.json), including fresh-sign-in reopening. The tested import body is unchanged; its corrected execution instruction is Run Statement. The v2 distribution remains an unpromoted candidate.
 
-The [standard APEX export](kcv-explorer.sql) is also supplied for an APEX developer importing through App Builder. It was generated on APEX 26.1.5 and tested on Serverless 26.1.6; use a compatible APEX 26.1+ service. KCV_USER is an application end user, not an App Builder developer.
+| Mode | Prepared artifact | Identity behavior |
+| --- | --- | --- |
+| New application | [20_install_apex.sql](../sql/install/20_install_apex.sql) | Allocates a new app ID in the chosen workspace/schema |
+| Existing application | [20_upgrade_apex.sql](../sql/install/20_upgrade_apex.sql) | Requires its existing app ID and matching workspace/schema/alias |
 
-APEX HTML/CSS/JavaScript source and application-building tools are available on dev. The release SQL export already contains the runtime assets; no external frontend build/server is required. It uses the database KCV_GENAI profile and KCV_EXPLORER_TEAM. No separate APEX Generative AI service configuration or browser API key is needed.
+The bind names are `KCV_SCHEMA`, `KCV_WORKSPACE`, `KCV_APP_ALIAS`; upgrade also uses `KCV_APPLICATION_ID`. Blank nonsecret values select documented defaults. Do not select a different ID to bypass a mismatch. Account creation and passwords are separate ADMIN tasks; upgrades retain existing accounts.
 
-This release uses [attributed editorial summaries](../docs/release-dataset.md). See [validation status](../docs/scenario-validation.md) and the [UI walkthrough](../docs/ui-walkthrough.md).
+After R7 schema verification, open the supplied installer in the project owner's Database Actions Worksheet. Select its complete outer `DECLARE` through the final `END;`, excluding the final slash, and use **Run Statement (Ctrl+Enter)**. Supply the target binds and, for an upgrade, the existing application ID. These bind-bearing installers require Run Statement; F5 does not open their bind prompts. The schema gate checks the checkpoint and sixteen required package specification/body objects. The app contains nine pages and seven packaged assets. A compatible APEX 26.1+ service is required; current native tests used 26.1.6. The standard [engine export](kcv-explorer.sql) is also available to an authorized App Builder developer, but its import alone does not perform the full deployment checks.
 
+## APEXlang and runtime services
 
-## APEXlang and the supplied installer
+Maintainers author native APEXlang (`.apx`) pages on dev, together with UI assets and SQL/PLSQL APIs. The release supplies the verified engine export and Worksheet wrappers, so no Python, SQLcl, APEXlang compiler or frontend server is required by learners. The [export receipt](export-validation.json) identifies the prepared artifact, not universal deployment acceptance.
 
-APEXlang (`.apx`) is the authoring representation of the application definition. The prepared app also uses HTML/CSS/JavaScript UI assets and a PL/SQL database API. Dev contains that source and the build/export workflow for adaptations.
+Question evidence is retrieved by the application before `KCV_GROUNDED_TEAM`; the separate explorer team handles proposals. The database owner already has its model profile/credential. No browser API key or separate APEX Generative AI service configuration is required. Local context search uses an independently installed database embedding model and explicit keyword fallback.
 
-The release supplies the APEX-engine-generated SQL export and its Worksheet installer. Those deploy the prepared application and assets; learners do not have to compile APEXlang or run authoring tools. See [deployment architecture](../docs/architecture.md#how-apexlang-relates-to-deployment) for the relationship between those artifacts and the running experience.
+Follow the [clean deployment lab](../labs/deploy-explorer/deploy-explorer.md) or [migration guide](../docs/migrate-to-v2.md). After import, verify app login, both personal/sample paths, historical evidence and saved-work reopening. Installation may expire a browser session; sign back in with the same app account.

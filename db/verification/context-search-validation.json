@@ -1,0 +1,107 @@
+{
+  "format_version": 1,
+  "date": "2026-11-25",
+  "product_version": "2.0.0",
+  "increment": "C3 R7",
+  "status": "native_and_scoped_browser_checks_passed",
+  "scope": "Private My Contexts hybrid text/semantic search over saved drafts, with saved-objective previews and request-scoped rendering.",
+  "schema": {
+    "checkpoint": "2.0.0-c3-r7-ready",
+    "complete_project_receipts": 96,
+    "liquibase_changesets_including_bootstrap": 97,
+    "invalid_project_objects": 0,
+    "native_upgrade": "passed",
+    "independent_repeat": {
+      "status": "passed",
+      "run": 0,
+      "previously_run": 97,
+      "verification": "passed"
+    },
+    "apex_installer_required_valid_package_spec_body_objects": 16,
+    "fresh_r7_installation": "not_executed",
+    "generated_worksheet_execution": "not_executed"
+  },
+  "retained_failure": {
+    "increment": "R6",
+    "native_test_error": "ORA-12733",
+    "trigger": "A valid 200-character multibyte query exceeded the regular-expression pattern byte limit when a user token formed part of the pattern.",
+    "resolution": "R7 appends a superseding package body and ready marker; it normalizes with fixed patterns and matches tokens literally. Earlier applied R6 payloads remain unchanged.",
+    "r7_regression": "passed"
+  },
+  "local_model_setup": {
+    "script": "sql/extensions/22_setup_context_search.sql",
+    "model_name": "KCV_CONTEXT_MINILM",
+    "dimensions": 384,
+    "existing_model_smoke": "passed",
+    "existing_model_original_bytes_certified": false,
+    "context_text_sent_to_external_model_service": false,
+    "backfill_ready_chunks": 4,
+    "existing_contexts_covered": 3
+  },
+  "native_search_regression": {
+    "script": "integration-test/verify_context_search.sql",
+    "status": "passed",
+    "checks": [
+      "Semantic-only match ranks first without an unrelated lunch context",
+      "SQL-like input remains literal; search is callable safely from a SQL SELECT",
+      "200-character Unicode input",
+      "Long saved fields and 240-character objective preview with ellipsis",
+      "Owner filtering and synthetic foreign-account rejection",
+      "Pagination and archive/unarchive reuse of unchanged embeddings",
+      "Changed saved content invalidates stale vectors and refreshes search coverage",
+      "Partial coverage falls back explicitly",
+      "Pending deletion is excluded and permanent deletion cascades derived chunks",
+      "Synthetic fixture cleanup"
+    ]
+  },
+  "existing_library_regression": {
+    "script": "integration-test/verify_my_contexts.sql",
+    "status": "passed"
+  },
+  "native_apex": {
+    "import": "passed",
+    "pages": 9,
+    "assets": 7,
+    "parsed_components": 33,
+    "single_search_call_per_request_guard": "passed",
+    "protected_request_only_clob": "verified",
+    "source_sha256": "494adbfc0db69f4dad787f970d562e6f168ea1a681155377bcfd37d9997bf829",
+    "engine_export_receipt": "apex/export-validation.json",
+    "current_engine_export_packaging": "passed",
+    "generated_new_and_upgrade_worksheet_wrappers": "prepared_not_executed"
+  },
+  "authenticated_browser": {
+    "status": "passed",
+    "checks": [
+      "An existing Active context was retrieved by a natural-language query with Similar meaning and its saved objective displayed",
+      "A literal title match ranked first",
+      "The Archived filter excluded that Active context",
+      "Clearing the query and selecting All restored the three original contexts and cleared the search notice"
+    ],
+    "contexts_created_or_edited": false,
+    "model_chat_requests": 0,
+    "two_account_browser_test": "not_executed"
+  },
+  "preservation": {
+    "status": "passed",
+    "preexisting_runtime_table_count_and_hash_assertions": 27,
+    "all_assertions_unchanged": true,
+    "exclusions": [
+      "Only the eight intended new R6/R7 project migration receipts were excluded from the existing registry comparison."
+    ],
+    "additional_data": "New derived search chunks are intentional additions, outside the preexisting-table preservation baseline.",
+    "scope_limit": "This is the recorded table baseline, not a whole-database audit."
+  },
+  "related_records": [
+    "db/verification/context-delete-validation.json",
+    "db/verification/context-lifecycle-validation.json",
+    "db/verification/fresh-dev-validation.json"
+  ],
+  "remaining_limits": [
+    "Fresh R7 installation and generated Worksheet execution have not been tested.",
+    "This browser run exercised search and filtering in one existing account; it did not repeat two-account browser isolation or edit/save flows.",
+    "R5 permanent-delete browser confirmation remains pending in its separate record."
+  ],
+  "release_promoted": false,
+  "committed_or_pushed": false
+}

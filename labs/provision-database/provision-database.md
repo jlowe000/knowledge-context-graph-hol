@@ -2,6 +2,8 @@
 
 ## Introduction
 
+Use this provisioning lab only when a new database is needed. A clean installation can instead use an approved existing Serverless database with an empty project schema; migration preserves its existing project. See [installation paths](../../docs/installation-paths.md).
+
 Create a dedicated lab database and learn to open SQL Worksheet. If an administrator provides the database, they perform Task 1 and give you its Console details and ADMIN access privately.
 
 Estimated Lab Time: 20 minutes plus provisioning time; planning estimate.
@@ -52,26 +54,24 @@ You have an OCI account authorized to create a lab database or an administrator 
 3. Paste this statement into the editor and choose **Run Statement** (Ctrl+Enter; Command+Enter on macOS):
 
    ```sql
-   <copy>
    SELECT USER AS signed_in_as FROM dual;
-   </copy>
    ```
 
 **Expected outcome:** Query Result shows ADMIN. Keep this private URL; another person's lab URL is not your database. If it cannot open, check your endpoint/network with the administrator rather than recreating the database.
 
 ## Task 3: Learn the two Run controls
 
-1. Use **Run Script (F5)** for the complete linked `.sql` scripts in this workshop. Read **Script Output** for created/compiled messages and errors. A success message followed by an Oracle error is not a passed task.
+1. Use **Run Script (F5)** for ordered schema parts and linked `.sql` files explicitly marked for script execution. Read **Script Output** for created/compiled messages and errors. A success message followed by an Oracle error is not a passed task.
 
-2. Use **Run Statement** for a selected single SQL statement, or a bind-variable block from BEGIN/DECLARE through END; **without the final slash**. A bind such as `:KCV_LAB_PASSWORD` opens an input dialog. The slash is a script delimiter, not part of the value.
+2. Use **Run Statement** for a selected single SQL statement, or a complete outer bind-variable block from BEGIN/DECLARE through the final END; **without the final slash**. This includes both APEX installers and their nonsecret target/application-ID binds, as well as private values such as `:KCV_LAB_PASSWORD`. The slash is a script delimiter, not part of the value.
 
-3. To run a long linked script reliably, open its local `.sql` file in a plain-text editor, copy the whole file, click the Worksheet editor, select all, paste, then use F5. Do not copy GitHub page HTML, Markdown fences or `<copy>` tags. Run one task's script at a time.
+3. For a complete linked `.sql` file, use Worksheet **Open File / upload SQL** to load it into the editor, verify it is complete, then use its documented Run Script or Run Statement mode. Run one task's file at a time. Short examples may be copied directly; omit GitHub page HTML, Markdown fences and LiveLabs copy wrappers. If upload truncates or rejects a file, stop and report it; do not split PL/SQL blocks yourself.
 
-**Expected outcome:** you know where to see results, where an error appears, and why secret bind values use Run Statement. Continue to [Configure database and model access](../configure-database/configure-database.md).
+**Expected outcome:** you know where to see results, where an error appears, and why bind prompts use Run Statement. Continue to [Configure database and model access](../configure-database/configure-database.md).
 
 ## Learn More
 
-- Setup reference (technical reference on the dev branch: `docs/setup.md`)
+- [Clean installation guide](../../docs/fresh-serverless-deployment.md)
 - [Screenshot capture checklist](../../docs/screenshots.md)
 
 ## Acknowledgements

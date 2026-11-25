@@ -2,116 +2,63 @@
 
 ## Introduction
 
-Install the supplied app without building an APEX application yourself. The primary route uses SQL Worksheet; App Builder is an alternative for readers who already have a workspace developer account.
+For complete SQL files, use Worksheet **Open File / upload SQL** to load the intended file into its editor, then run it in the mode stated below. Confirm the file is complete. Do not paste a filename as SQL or split a large block by hand; browser upload/execution remains part of the candidate rehearsal.
 
-Estimated Lab Time: 15–25 minutes; planning estimate.
+Install the prepared APEX application into the configured owner schema. This is the clean route; an existing app must use the [same-ID migration](../../docs/migrate-to-v2.md). APEXlang is used by maintainers; learners run supplied SQL.
+
+Estimated Lab Time: 15–25 minutes plus import time; planning estimate.
 
 ### Objectives
 
-In this lab, you will:
-
-- Create an APEX workspace mapped to KCV_LAB.
-- Create a separate app-user login.
-- Import the app and open its private URL.
+- Create and enable an APEX workspace mapped to the chosen owner.
+- Create an individual app-only login without exposing its password.
+- Install a new application and verify both sample and personal entry points.
 
 ### Prerequisites
 
-The native scenario check passed, you can sign in as ADMIN and KCV_LAB, and `sql/install/20_install_apex.sql` is available on your browser computer.
+Schema R7 verification, dataset load, grounded-team registration and model greeting have succeeded. Have ADMIN and owner Worksheet access plus the complete release installer. Local search requires its [separate setup](../../docs/context-search.md#worksheet-setup); absence of that model should show keyword fallback.
 
-## Task 1: Check APEX and create the workspace
+## Task 1: Prepare the workspace
 
-**Where:** SQL Worksheet. **Account:** ADMIN.
+**Account: ADMIN.** Use the same `KCV_SCHEMA` throughout. `KCV_WORKSPACE` identifies the APEX workspace; it is not another database user. Defaults are KCV_LAB and KCV_KNOWLEDGE.
 
-1. Sign into ADMIN Worksheet. Run [06_cloud_apex_preflight.sql](../../sql/admin/06_cloud_apex_preflight.sql) with F5. The app export was generated on APEX 26.1.5 and validated on Serverless 26.1.6; use a compatible APEX 26.1+ service. Do not edit the version number inside the export to force an older installation.
+Run the complete block in [06_cloud_apex_preflight.sql](../../sql/admin/06_cloud_apex_preflight.sql) with Run Statement, excluding the slash and supplying the target binds. Use a compatible APEX 26.1+ service; the app has been tested on 26.1.6. Do not edit an export version to force compatibility.
 
-2. Check whether KCV_KNOWLEDGE already appears in the workspace query. On a fresh installation it should not. If it exists from an earlier attempt, check that it maps to KCV_LAB rather than creating a second workspace blindly.
+Run [07_create_apex_workspace.sql](../../sql/admin/07_create_apex_workspace.sql) with Run Statement, excluding its slash. Supply `KCV_SCHEMA` and `KCV_WORKSPACE`. It creates the workspace if absent, verifies the mapping, explicitly enables it and commits. A mismatched mapping must stop; do not repoint an unrelated workspace.
 
-3. If absent, create it with F5:
+**Expected outcome:** the enabled workspace maps to the intended owner. A workspace API call alone is not proof that it is active or persisted.
 
-<!-- include-sql: sql/admin/07_create_apex_workspace.sql -->
+## Task 2: Create an app account
 
-```sql
-<copy>
-BEGIN
-  APEX_INSTANCE_ADMIN.ADD_WORKSPACE(
-    p_workspace=>'KCV_KNOWLEDGE',p_primary_schema=>'KCV_LAB');
-END;
-/
-</copy>
+As ADMIN, run [08_create_apex_app_user.sql](../../sql/admin/08_create_apex_app_user.sql) with Run Statement, excluding its slash. Supply `KCV_SCHEMA`, `KCV_WORKSPACE`, `KCV_APP_USER` and a private `KCV_APEX_PASSWORD`. The default app username is KCV_USER; use distinct accounts for separate learners. Keep passwords in the browser bind prompt.
+
+**Expected outcome:** an app-only account exists in this workspace. It cannot use App Builder or SQL Workshop. This password is distinct from the owner database password. Existing accounts are not reset. A shared app login shares its My Contexts library.
+
+## Task 3: Install a new app
+
+Sign into the owner's Worksheet and confirm `SELECT USER FROM dual;`. Open [20_install_apex.sql](../../sql/install/20_install_apex.sql), select the complete outer `DECLARE` through the final `END;`, excluding the final slash, and choose **Run Statement (Ctrl+Enter)**. Enter `KCV_SCHEMA`, `KCV_WORKSPACE` and `KCV_APP_ALIAS` consistently; defaults are KCV_LAB, KCV_KNOWLEDGE and KCV-EXPLORER. F5 does not open these bind prompts. A "variable not declared" error requires the complete-block Run Statement selection, not a change to the SQL or a new workspace.
+
+Wait for completion rather than submitting twice. The installer checks schema readiness and allocates a new application ID. Record the reported ID and launch information privately. A duplicate alias or wrong-schema error needs diagnosis, not a forced overwrite.
+
+**Expected outcome:** a new app is installed against this verified schema, with nine pages and seven packaged assets. No separate frontend build or JavaScript upload is required. If the file is absent, obtain the complete release package; do not install development tools to manufacture it.
+
+## Task 4: Sign in and choose an experience
+
+Use the installer launch information or the standard pattern below, replacing every placeholder with your own values. Do not publish an environment URL in a screenshot.
+
+```text
+https://YOUR-DATABASE-HOST/ords/r/YOUR-WORKSPACE/YOUR-APP-ALIAS/home
 ```
 
-[Script: 07_create_apex_workspace.sql](../../sql/admin/07_create_apex_workspace.sql)
+Sign into the application with the app account from Task 2, not ADMIN or the database owner. Open **Sample Contexts** to explore Alex/Sam/Casey, or **My Contexts** to create owned work. Verify menu navigation, then ask a sample question and inspect its evidence. Create a synthetic draft, review/apply it and reopen it after signing in again.
 
-<!-- /include-sql -->
-
-**Expected outcome:** the procedure completes. KCV_KNOWLEDGE is an APEX workspace using the existing KCV_LAB schema. It is not another database and does not create a login password.
-
-## Task 2: Create the application user
-
-**Where:** SQL Worksheet. **Account:** ADMIN.
-
-1. Use the block below with **Run Statement**, excluding the slash. Enter a new private password in the KCV_APEX_PASSWORD bind dialog and submit it. Do not put the password in the SQL text.
-
-<!-- include-sql: sql/admin/08_create_apex_app_user.sql -->
-
-```sql
-<copy>
-BEGIN
-  APEX_UTIL.SET_SECURITY_GROUP_ID(APEX_UTIL.FIND_SECURITY_GROUP_ID('KCV_KNOWLEDGE'));
-  APEX_UTIL.CREATE_USER(p_user_name=>'KCV_USER',p_web_password=>:KCV_APEX_PASSWORD,
-    p_developer_privs=>NULL,p_allow_app_building_yn=>'N',p_allow_sql_workshop_yn=>'N',
-    p_allow_team_development_yn=>'N',p_change_password_on_first_use=>'N');
-  COMMIT;
-END;
-</copy>
-```
-
-[Script: 08_create_apex_app_user.sql](../../sql/admin/08_create_apex_app_user.sql)
-
-<!-- /include-sql -->
-
-2. Keep this password associated with **KCV_USER**, not KCV_LAB. This is an APEX end user: it can use the application but cannot open App Builder or SQL Workshop. Account creation is an ADMIN task on the validated Serverless route.
-
-**Expected outcome:** the procedure completes and the new APEX login exists. Existing accounts are not reset. If policy rejects the password or the account exists, resolve that specific message with the administrator; do not rerun database provisioning.
-
-## Task 3: Install the application
-
-**Where:** SQL Worksheet. **Account:** KCV_LAB.
-
-1. Sign back into KCV_LAB Worksheet and check `SELECT USER FROM dual;`.
-
-2. Open the generated `sql/install/20_install_apex.sql`, replace the editor contents with the whole script and run **F5**. This can take time; do not submit it repeatedly while it is running. The script sets the workspace/schema and allocates a new app ID.
-
-3. Look for compatibility/import success and `KCV_APPLICATION_ID=` followed by a number. Record the number privately. Your number need not be 100; screenshots from the working demonstration are examples.
-
-**Expected outcome:** a new app named Knowledge Context Explorer is installed in KCV_KNOWLEDGE with parsing schema KCV_LAB and alias KCV-EXPLORER. If a duplicate alias is reported, inspect the existing app from your earlier attempt. Do not change the script to overwrite an unrelated application.
-
-Both SQL installation files are included in this branch. No Python, SQLcl or local APEX installation is required. If a file is missing, obtain the complete release download.
-
-## Task 4: Open and sign in to the app
-
-**Where:** browser. **Account:** KCV_USER.
-
-1. Take the host from your own Database Actions URL, retaining `https://` and everything before `/ords/`. Add this application path:
-
-   ```text
-   /ords/r/kcv_knowledge/kcv-explorer/home
-   ```
-
-2. Open the resulting URL in a new tab. The pattern is `https://YOUR-DATABASE-HOST/ords/r/kcv_knowledge/kcv-explorer/home`; replace the placeholder with your own host. Do not use the author's temporary database URL.
-
-3. Sign in as KCV_USER with the password from Task 2. If the login fails, check that you are on the application login rather than Database Actions, and that the account was created in KCV_KNOWLEDGE.
-
-**Expected outcome:** the app displays the Learner scenario selector and Conversation, Evidence, Context and Observations views. Iris styling is part of the supplied Universal Theme app. A successful app import does not yet establish that model calls work from the application session.
-
-The current export includes non-PDF source links, locator labels and versioned JavaScript assets. No additional application-file upload is required. If you intentionally retained an older export instead of importing this version, use the [older-installation fallback](../../docs/content-ingestion-upgrade.md#manual-fallback-for-an-older-installed-export) before testing non-PDF evidence.
-
-Continue to [Explore the evidence](../explore-evidence/explore-evidence.md).
+**Expected outcome:** the app authenticates, both entry points work, and a real answer has recorded evidence. An import alone does not validate inference or ownership. Use [validation status](../../docs/scenario-validation.md) to record actual results and remaining checks.
 
 ## Learn More
 
-- [APEX installation reference](../../apex/README.md)
-- Existing-installation upgrade route (technical reference on the dev branch: `docs/epics-upgrade.md`)
+- [My Contexts lab](../my-contexts/my-contexts.md)
+- [Sample evidence lab](../explore-evidence/explore-evidence.md)
+- [APEX deployment reference](../../apex/README.md)
 
 ## Acknowledgements
 

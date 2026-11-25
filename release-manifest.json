@@ -1,6 +1,10 @@
 {
   "format_version": 1,
   "distribution": "release",
+  "product_version": "2.0.0",
+  "candidate_label": "2.0.0-dev",
+  "source_commit": "03e915484219b8aa52fe82977300e67f17ac5bae",
+  "source_dirty": true,
   "python_required_for_learner": false,
   "dataset_kind": "attributed_editorial_summary",
   "summary_count": 762,
@@ -14,19 +18,23 @@
     },
     {
       "path": ".gitignore",
-      "sha256": "244f88f49bfed103ab68917671c7a4ca855f5929cb68098a8e18088c614b5f5f"
+      "sha256": "80bee23d8134f06f24825c47f3da4d848e4081a290533133e012e564b89e7b4e"
     },
     {
       "path": "apex/explorer.js",
-      "sha256": "35d2597bca5e2af63fda8c66cbf978c243f109bc7589e7b0c393c464dba98621"
+      "sha256": "f62bd94f1c904fe8584b82bff3b81253679d8125b6bc0acd248f21c6e08b76b9"
+    },
+    {
+      "path": "apex/export-validation.json",
+      "sha256": "61b05894b511aeddc54fe0873840cf1d95b140d872272f6e1c9b068a9fc4db14"
     },
     {
       "path": "apex/kcv-explorer.sql",
-      "sha256": "103f6e94feb474f796f5f733c7d007dc376cfc6daeb9179375ff5235d190fb3b"
+      "sha256": "ccbf315b6dc2630045f87d2db80d3a17318b62f9099ee49e596eb709f8b45acd"
     },
     {
       "path": "apex/README.md",
-      "sha256": "66abb42d0d5338a871f6eed5a8b60924fe6a9d5140b7ab679eda97e6b37d3f97"
+      "sha256": "0827bf30502ac33143c6c469d522fe366cb0628a46830156d4f9c84989f75a04"
     },
     {
       "path": "data/contexts.json",
@@ -81,36 +89,88 @@
       "sha256": "a4af42734c4690fbd84861bacfb7490a92cc65e581643fa5ea055ad582dc16c3"
     },
     {
+      "path": "db/manifest.json",
+      "sha256": "ac794a3e50d5898cd17ebb3e7c6cf65d13bf3bcf61e513f4ee7ab621d9bb6068"
+    },
+    {
+      "path": "db/README.md",
+      "sha256": "8c006b71138f0884c78c54cb74ea1232440bf17c7ba5f427650bc02ffe7e01c8"
+    },
+    {
+      "path": "db/verification/c3-r4-validation.json",
+      "sha256": "5a8809c36beeaf0896f7fb567f7d89f102a532e3fb368c025f0c8b7b60fb15c1"
+    },
+    {
+      "path": "db/verification/context-delete-validation.json",
+      "sha256": "a07ae86159b35e52fb5525768b8d52d280ca542cdf25ab0aa2a009bed36ccc50"
+    },
+    {
+      "path": "db/verification/context-lifecycle-validation.json",
+      "sha256": "29d5c9b333c52939517d0ee0eb725413c5481adc4d393f66585c7ffc2e363c13"
+    },
+    {
+      "path": "db/verification/context-search-validation.json",
+      "sha256": "5c58f8a914a1d72b7beb110a97a9f9b4920ad4f7414d421c4ea455f750618c09"
+    },
+    {
+      "path": "db/verification/fresh-dev-validation.json",
+      "sha256": "1ea73355502aa175c8473907bc8b35c61c24379f54eb9954a7ea74c5486ad192"
+    },
+    {
+      "path": "db/verification/native-validation.json",
+      "sha256": "6ebc4f8864719002eb40d7fb312d9380497665f59ae20d521ea90f95c544f585"
+    },
+    {
+      "path": "db/verification/release-v2-paths-validation.json",
+      "sha256": "6072beb44243689bcd911a87aa38986fadb8c78024f36c6b0e36168e60b6ca6c"
+    },
+    {
+      "path": "db/verification/sample-navigation-validation.json",
+      "sha256": "1b44f5eb8ac715a9458ea158f932ce696a52541f4a2e92e8e547e096a93cb97e"
+    },
+    {
       "path": "docs/architecture.md",
-      "sha256": "85e714dd74a87ef78c29103eab4ccb27bd84008a87abee00475575ca149a0fe4"
+      "sha256": "3abdc74fd7252e7725618abb8d3b3d62ddd0a671d76f962800e5eb4b9d3c45e7"
     },
     {
       "path": "docs/authentication.md",
-      "sha256": "1f8b45a97d499f2007330e3cf51949ef46cde5e0da88c2f7c9de8015e04518b2"
+      "sha256": "47416ad28f205e261f98aa39a777877ee57d4cfe2a8658f67b88a74ed31cb97c"
     },
     {
       "path": "docs/cleanup.md",
-      "sha256": "7d12f83306f1737c14b349b6547a1f2b396f405b3d25fe9d3cd6a8a92257f543"
+      "sha256": "4d61d74638620a3af7c4f6cab261955b464962492154ef97769f339a3d941fcc"
     },
     {
       "path": "docs/content-ingestion-upgrade.md",
-      "sha256": "b7ce522fc4615df16068f4341ace9299af074f64b6cac3ce9fcde6d443530c40"
+      "sha256": "47e800a25eb9b6630e908d0ed33cfaa3fcf7dfcbc08b116403d3ad0df9ecd328"
+    },
+    {
+      "path": "docs/context-search.md",
+      "sha256": "ba379a13a6b6969f02643245956af71d422ea09269991f7aa602c899b48f78ea"
     },
     {
       "path": "docs/fresh-serverless-deployment.md",
-      "sha256": "74e049598983d3ce22274131383b07194f83482e4f45a3227576e73eb8d7eff7"
+      "sha256": "59776fdefecab555945b7f06d136b016b178840fca1e85089044ec7cbf17c377"
     },
     {
       "path": "docs/github-dataset-load.md",
-      "sha256": "4db52c5c918945775c98070224f4ed25e08d5a6fce6a21fcad03b48db929512f"
+      "sha256": "209f41f24a125edab7bf9363dc21b0efec1d41cecfd982a3ad64aea114742b60"
+    },
+    {
+      "path": "docs/installation-paths.md",
+      "sha256": "d917521100d8b4b28985ffd4789e3dd6bcbce900c131f5be6f1822cf4b0c86ad"
     },
     {
       "path": "docs/learning-paths.md",
-      "sha256": "8a63c600da22f3b5a6cee967944cfa31570baefdce61f56d0e9db6891f9d784c"
+      "sha256": "4a8b9e5553bf18b10032a22fe60062b92fc7193a872fa06de9093477fdc40a7a"
     },
     {
       "path": "docs/livelabs-authoring-alignment.md",
-      "sha256": "24e57bdada734fe668961addd2726b47613c9f9da1cc7df6cb2c4aab90c7dff7"
+      "sha256": "31388d0e680af54465ad1bd2a7cd45e8dc3efe9f77d638a49e2980c845c85282"
+    },
+    {
+      "path": "docs/migrate-to-v2.md",
+      "sha256": "5bbb7dab87d66a5cb412a51ec0703c5d96e1b741fec2b0043fd644fb934e95dd"
     },
     {
       "path": "docs/public-research-catalog.md",
@@ -118,27 +178,27 @@
     },
     {
       "path": "docs/release-dataset.md",
-      "sha256": "bf051ace826babf70d8b1730743ed663f9e1bd9f1b4e2762230a35db38138eb1"
+      "sha256": "9aea394b6bba5580b695a414a4e4b1ad5d12b5dec7435ed1d21c6084ea9030de"
     },
     {
       "path": "docs/scenario-validation.md",
-      "sha256": "9bb2d2f95dffd090011a4243e9f28ff401c7f60f6dfe10c35ecb0a96cf2e6ef8"
+      "sha256": "27cb0baf7c0ba2b1893f4b1ec9d6e5436e07ac991af17c2eb56a24b857d935a0"
     },
     {
       "path": "docs/screenshots.md",
-      "sha256": "9b76f8f0ba9c169d9d46f738f02dbd2a960f5c7a9e8d8d7f1c56a05324d10138"
+      "sha256": "b8711f6b8caf9c2bbf607cbbc5b1078a7c82b77990e7a8e4e9dec92cb4a300b2"
     },
     {
       "path": "docs/sql-catalogue.md",
-      "sha256": "43ae7addeafd6f2dd269073f902e57e5b329f08417828d5d0d4e1bc5db105da0"
+      "sha256": "cc5ecc1136a570f203dee8b71c86c8259f2bd39fc66f8f37bcc16ab3d227609d"
     },
     {
       "path": "docs/ui-walkthrough.md",
-      "sha256": "d898d298c5101ec69d1f4ecfafb9da45832aecc289332c89a9636323473ecb31"
+      "sha256": "f5950997d4bbbef2a65d919ba8204ebec00ccc34c2cd65ad21ae6ec0005f2bac"
     },
     {
       "path": "docs/upstream-comparison.md",
-      "sha256": "31a16ea75bde8a2e721f99e7e73825c940be2cbf58f096544c54843e3c153de7"
+      "sha256": "8075527e40776ad399a3a7b6f6ee9d1301b4cf9a7a494e9cad06990000448fb5"
     },
     {
       "path": "generated/assessments.json",
@@ -170,11 +230,11 @@
     },
     {
       "path": "integration-test/verify_scenario_native.sql",
-      "sha256": "02a5da2c30c3105a61dc6e3813980e722cdb57f98430a0a915daf069adc3bf7d"
+      "sha256": "4fb4d3e41fdd887e44a93509efaaff2f1be5fd3727be650e07205da71cc81645"
     },
     {
       "path": "integration-test/verify_source_packet_scope.sql",
-      "sha256": "455582e7a59d9097e533ff9a892eb200b02b1c34cec2b355ab83a8feaa21e57d"
+      "sha256": "c28ed54ea022c439e03ecab450856f3f0a90437d53f3fe838a1cdeb1defb3330"
     },
     {
       "path": "integration-test/verify_worksheet.sql",
@@ -182,15 +242,15 @@
     },
     {
       "path": "labs/configure-database/configure-database.md",
-      "sha256": "096bbfd591e0e76d155259bfd0f41d139542187604abfd40a66f517a7949b400"
+      "sha256": "b50df12800c74b059642c0dbb53d5841c351bea3b6f24a9bf1353ac011ad9c0f"
     },
     {
       "path": "labs/deploy-explorer/deploy-explorer.md",
-      "sha256": "3770beba92f8f9dad605e3f81ab1d73f55cc2520bf58bac712ae0ec347a76af5"
+      "sha256": "edf0352992e7427e7a5628f629be0566820d46a26b906a198854ade9525d8914"
     },
     {
       "path": "labs/explore-evidence/explore-evidence.md",
-      "sha256": "f5abaf112f4ab40385147d472257baf8913b531280fc4436af45dac3aaeffdc1"
+      "sha256": "fc316847d91973398a9834b63511f00d1f5f9b0f37a7ce3274efdd28bfec2362"
     },
     {
       "path": "labs/explore-evidence/images/answer-lineage.jpg",
@@ -202,27 +262,31 @@
     },
     {
       "path": "labs/introduction/introduction.md",
-      "sha256": "8cf30fb26c57f788d8946195b052ee5e08ab5280321e497c4212fc8a9b0da097"
+      "sha256": "1c4da35ebfcc228b3483c423b8a623f73e4298d670dba3fd5cd2af4f38f7f541"
     },
     {
       "path": "labs/load-knowledge/load-knowledge.md",
-      "sha256": "3844f6268b9a61c5a7f79cfe1a1016e3aa2e48acb2c875b4936f49e5979b215d"
+      "sha256": "a997d9aac47faa6c50059fe6164e4821a158291d7a9d520efb9fa0ce985d7f00"
+    },
+    {
+      "path": "labs/my-contexts/my-contexts.md",
+      "sha256": "faf79e221a9fc4517cd578614a434e0c8cc9618b53f9b9b157fd533ce9d23848"
     },
     {
       "path": "labs/need-help/need-help.md",
-      "sha256": "31268f2cab181e3c18503b9e85676f267bd5cec91f97426d69ef338e4acfab21"
+      "sha256": "38c1151c5c920fbe3e41eeead6cdec62362b322832217362124da74416016866"
     },
     {
       "path": "labs/prepare-environment/prepare-environment.md",
-      "sha256": "29479b9ae5e095f83e3acee431f35db624d308092f257166ef7c80fff522d072"
+      "sha256": "44286d17be7746252ada0e524b93c35d493a784f83cdeb509179a70978f2cdf6"
     },
     {
       "path": "labs/provision-database/provision-database.md",
-      "sha256": "cc70867a5128fbeaf20a813610f5133e360f0376fe56dc1b7b0e46baa7aec4f8"
+      "sha256": "46258e6d525253d8220b62219ac8885fe774b8ad94d6782dd4ff0f5acd2098b1"
     },
     {
       "path": "labs/understand-collection/understand-collection.md",
-      "sha256": "b80ea707e226f86e1fc7af524ae64c035982e59b28ae2dfe22786c662e3c93ec"
+      "sha256": "a9a3b467e8becdfab7e5b449a2d6ba5ee33d1c326ba21fb7699341cdec96d2e1"
     },
     {
       "path": "LICENSE.txt",
@@ -230,7 +294,7 @@
     },
     {
       "path": "NOTICE.md",
-      "sha256": "a785e1f8124d2f207c6e0b12f3edc1eee28dc00edbab65e6769bd7d5b232253b"
+      "sha256": "e8ccb4cb73b4659f25d269a7b5fc7ae251168460b3c7ddcd12eaca780bfa7714"
     },
     {
       "path": "ontology/kcv.ttl",
@@ -242,7 +306,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "1afb6c2a81309b5ec5b5bec72d36c96a6c2d14c23b67f48cf305527dc0d3b9a9"
+      "sha256": "293164c61e85a6933b08f81a486171db0be5864182b05e5dfe836af94013f631"
     },
     {
       "path": "references/content-ingestion-checks.json",
@@ -265,6 +329,14 @@
       "sha256": "941deda2a84224453289f792c9f1c550ad49ea84b47b9223fdd96fc34713fe99"
     },
     {
+      "path": "references/my-contexts-c2-validation.json",
+      "sha256": "14e97bdfa22c0aadd342ca5d1b55592f7904088bdb1f20fc899149ccfa04e825"
+    },
+    {
+      "path": "references/my-contexts-c3-validation.json",
+      "sha256": "2664d5a474ce0d2f2cbf23f01e614b475e821331cb1dc65a9e43719c74d8fea9"
+    },
+    {
       "path": "references/public-access-checks.json",
       "sha256": "02bcb8fdc64092e5a55b390105222dc6783e71eaab290980dc504c1dc10b78cc"
     },
@@ -275,6 +347,10 @@
     {
       "path": "references/upstream.json",
       "sha256": "18cfad222d76bb05be02edf7b7309e03b1d9ad5f7f056c2fc4109d0e7a59a10f"
+    },
+    {
+      "path": "release-provenance.json",
+      "sha256": "8a18ec71e3dd36a87c9651607f4eda6077bcfe68e3948b92393f533039ae0f70"
     },
     {
       "path": "review-examples/examples.json",
@@ -290,7 +366,7 @@
     },
     {
       "path": "sql/admin/01_create_user_worksheet.sql",
-      "sha256": "7066029553ae9d1b0784e9ae12101f58c620c3778a1974d254d9997b98dfcfe7"
+      "sha256": "753b8d2d859480209bee04010f7dd526cfc44934bf910c93b74ab7abe09e468b"
     },
     {
       "path": "sql/admin/01_enable_java.sql",
@@ -298,67 +374,79 @@
     },
     {
       "path": "sql/admin/02_grants.sql",
-      "sha256": "67ca427b3258b2b565149605e43242b59c8468f2e151ab9aa9460360597f0fd5"
+      "sha256": "e1164a84fbcfcfed2eca6d3ec2591f459a4dd0a885e9e86f263fec6a3f3301b3"
     },
     {
       "path": "sql/admin/03_resource_principal.sql",
-      "sha256": "03fecee6dd50095ec38f57df9bf3d6548d8cfb473bbfd1436e540887bda1c250"
+      "sha256": "258389959007b5ad2ae950f076e5e9872bf3f59b13d2e48e68842646e60a854d"
     },
     {
       "path": "sql/admin/04_enable_database_actions.sql",
-      "sha256": "5446515a8070e7e8921645afbc3c9cf70f8bd09c0465336f63affb9d3cda0c16"
+      "sha256": "9c96968dba76c040289468c293da263e953de854e534f353cff6b9b6c752ad60"
     },
     {
       "path": "sql/admin/06_cloud_apex_preflight.sql",
-      "sha256": "cb58861fbe1c4f762e05a54d7027363548a2ac7d433013caa3ced194dfe17cd4"
+      "sha256": "fde6ee2aba3e878d12ec6961032ac5fe21aa3c91def6c3ebdf118942659afd10"
     },
     {
       "path": "sql/admin/07_create_apex_workspace.sql",
-      "sha256": "c59a0f80618fc2b5135b958cb6cbce636e7b9e8db0da9e56240365636004b3a0"
+      "sha256": "c941f59958663a7fecdf667d4b159d601ac48cd58624b334b8550f827e252e9f"
     },
     {
       "path": "sql/admin/08_create_apex_app_user.sql",
-      "sha256": "173c0fcae1afd2319e4fb5d6d6a2f3f7785062dd051e1d6cc192f24cff4a29e8"
+      "sha256": "83a4b18e9fca80df5a83dcc077da84dec697febbe9e81dc54b267a877be86f34"
+    },
+    {
+      "path": "sql/admin/11_context_search_grants.sql",
+      "sha256": "8314e04b29b5264aea06971571ce6a8a7b64809fc37edf496f58fc78cf2ce4d9"
     },
     {
       "path": "sql/extensions/00_readiness.sql",
       "sha256": "4bd1abe130e705c9a9bb4bfd3e0a0d237f74c89bc79278edebf231863e182115"
     },
     {
-      "path": "sql/extensions/01_scenario_objects.sql",
-      "sha256": "e384034bfdae8d1f3defe15aa1cb482c7b07c6d251f93a1ba3798a779c2cb8f3"
-    },
-    {
       "path": "sql/extensions/02_scenario_api.sql",
-      "sha256": "5a5839dc4e5330b10dd856b91a0b3ed37238853215ccc312c41bd86ba3914c06"
+      "sha256": "3017ec2fcdbdf5cfca3099346501d9dda4cc7745a763437f1fe8331cdd966b02"
     },
     {
       "path": "sql/extensions/03_scenario_agents.sql",
-      "sha256": "874478fd220f3241a99b4be320ffee81ff5b765374f7f3a06f31e7c373218625"
+      "sha256": "990b8180715e44e4f8c12b88ee0cf2be7aecbd2c25fba0b6485c1413e0d9d729"
     },
     {
       "path": "sql/extensions/04_domain_extraction.sql",
       "sha256": "a40e938c79f8cebf2b9dbde1c69e009c24e9b97104758480694d0963b29bb4a1"
     },
     {
-      "path": "sql/extensions/05_apex_api.sql",
-      "sha256": "9a070712772529fa0ef0e8381b9c1ea50fd7471244e0c8be5d71ebd796878627"
-    },
-    {
       "path": "sql/extensions/06_response_provenance.sql",
-      "sha256": "c02a4deb34cef2de925bf12d8eaed8b203b3bf171c4d9c0c49722c582b9b2cd8"
+      "sha256": "4a4750bf443711e72e0d3e363fbec347fa18ee806e0d479f6a5ef805c9439288"
     },
     {
-      "path": "sql/extensions/07_trace_tool_wrappers.sql",
-      "sha256": "47253c577c1d469e5af59685b7ed9623e78db8cc85191db3b3fc8dd59df6a0da"
+      "path": "sql/extensions/16_refresh_grounded_answers.sql",
+      "sha256": "39c60b36f971b4ae090f20bebbf0b480c41ce78e089021ce656f73c8dd907d48"
     },
     {
-      "path": "sql/extensions/08_content_locators.sql",
-      "sha256": "c00a4d9910883320884d8947cd77aacac92331575f6e5309ce26f56e0bde2d86"
+      "path": "sql/extensions/22_setup_context_search.sql",
+      "sha256": "781defcf2c95dce9269690b9529702b90e155e40624bb92ca7bc112acfdeafd3"
     },
     {
-      "path": "sql/extensions/09_refresh_context_guidance.sql",
-      "sha256": "fa56b2fcf0c40b7bb3efdfa236dc7b55c71d2be7bdb1b5b9c5cb4df97852c835"
+      "path": "sql/install/00_adopt_schema_baseline.sql",
+      "sha256": "65870e558b6680e4b91b5ee926138c0a4d243d356bf2917b6f6b5098e7598537"
+    },
+    {
+      "path": "sql/install/00_complete_v1_optional.sql",
+      "sha256": "8f82dd559bc28bc76fe761b228a3c3931f24655f3f1339d529a22b57041f7979"
+    },
+    {
+      "path": "sql/install/00_install_schema.sql",
+      "sha256": "0b1b159e4d58d12e9166f4c0ee683b53fab655fa111a7ad4afc83afd709c04b6"
+    },
+    {
+      "path": "sql/install/01_upgrade_schema.sql",
+      "sha256": "2a288847115e7cde4b7909e9f3001bde06b768825c91ce56f1882e1ead712e59"
+    },
+    {
+      "path": "sql/install/02_verify_schema.sql",
+      "sha256": "74e9b113da3d1479436fbe41b328b30763a587acdfd080bfab77ff37c45d4519"
     },
     {
       "path": "sql/install/10_load_dataset.sql",
@@ -370,7 +458,11 @@
     },
     {
       "path": "sql/install/20_install_apex.sql",
-      "sha256": "526a0c2e3b16c540c3ac7b282cbbef99133e0765ade50fe68c187db372a2b245"
+      "sha256": "0d5c364a206387b90c8d11d2741313d04220f79412775e240f6c9fe970207a05"
+    },
+    {
+      "path": "sql/install/20_upgrade_apex.sql",
+      "sha256": "a182a7a34926de2089ad1fec781606d702264e7cbdb314d4db850fd8350272ba"
     },
     {
       "path": "sql/install/dataset-parts/001.sql",
@@ -405,6 +497,162 @@
       "sha256": "2504eae5604175e6efdb82b597adb4f84324f8e682eecd0a9b9f375c171673ca"
     },
     {
+      "path": "sql/install/schema-parts/fresh/001.sql",
+      "sha256": "9fef82b20abbc2b07a6b16c2fd344ed939a3b5064d41d5e3c677ce2bb260dabb"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/002.sql",
+      "sha256": "9ef9b683487301d7602759943a2637b95cab6af3fb1e24fb2733b77f3091f75d"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/003.sql",
+      "sha256": "9d22f2b375f1d5b778cc785a73a751d386a61085c9c9b21df5e223b0549d4698"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/004.sql",
+      "sha256": "6025ed58f38d04e8c21252363325d844d2bacb3b6608fab2cfc8ae17c9a020d4"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/005.sql",
+      "sha256": "0f21c741aa0224b10d08d8d531b8649924a01e76c0cdc7ccd6f42f2257c16b00"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/006.sql",
+      "sha256": "04dab56d048d78c601b7733091131bf921a85be71c0d35ade1de5b5a076975f9"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/007.sql",
+      "sha256": "b6001ef27b72dd56beb6789a124b91e52c3a8efd01670ca03d7e0cb80e050aa9"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/008.sql",
+      "sha256": "36af56e5bae554de780043a3203b6800f865e7c47a147e8c2b788594d9a4fbb6"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/009.sql",
+      "sha256": "cc520b462680afc5e4fe441be0acc8b28ff37bc0e757aa7d793eb54017d8397b"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/010.sql",
+      "sha256": "443d7cacf7558adf76b4630a9b4bb61c8b6c17435e4e1b4abacf489c1171a3b5"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/011.sql",
+      "sha256": "bbbb7960d487574e733a3a9294e284ee00be276cb137f79522a6402ef6b45d3d"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/012.sql",
+      "sha256": "924b0cb4ae4b78ef1faef91be3f5e7e38efb13a2c2ac1fd7b5e2c0868a5ed5cd"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/013.sql",
+      "sha256": "7a69650672513a36409d1cf42fd0fca0009ce78e93d38522cf8e23ebbcd70b40"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/014.sql",
+      "sha256": "bf7ea0eb85779bc2463ecaa52c55314c5b779d5af1e170059be118716d4c3b3a"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/015.sql",
+      "sha256": "8f2157c628e1624203c228ddfd536ae927313bf622ab4202e758a9d49f23dda9"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/016.sql",
+      "sha256": "cd7c642a8e4e8a7e2c7062060bc38c09528691a4d412f0ddc2b52978dc791aac"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/017.sql",
+      "sha256": "787b3c3f905847622c48d2e6e02f3f4a18b6bfe9261cda52efc0c876605c0189"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/018.sql",
+      "sha256": "c0858c7ebfe760006c8f55433b31d6628b6af3d1c0e0f6a98bc5648f5091b316"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/019.sql",
+      "sha256": "0affd97285cedda98af9f507f268503a12be9d9f971c4d2dae1b29d248520720"
+    },
+    {
+      "path": "sql/install/schema-parts/manifest.json",
+      "sha256": "d00afdf9b819eaa9f0ef4237182884c450d436519f176e30fb80ecbbc1ed8353"
+    },
+    {
+      "path": "sql/install/schema-parts/README.md",
+      "sha256": "933a6c91b2ed8f54617c1c158407a66897b31919b2eb1ee15c56d01c9b954c08"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/001.sql",
+      "sha256": "72a731986c97047492ea4cc23f47970b283539e2f0ff9eb9a7d85d01893d65ec"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/002.sql",
+      "sha256": "487c2ef7382c521c42825d140c10607122070d3ea9bb90119e043f988558ace5"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/003.sql",
+      "sha256": "04bb1db9a3c28f12c5fffe737644ef5ae9429a779509cc609a026a6a5ac02521"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/004.sql",
+      "sha256": "3703ded1488c539c0ec59b2ed4afb8ca3642c150f9e301d61c4a87936ed50450"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/005.sql",
+      "sha256": "992dc8d3ac2542c0f040933f70307c6b63737d6db65f841b6a1c38d68fd180e0"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/006.sql",
+      "sha256": "e86a3fb7242d8b554b8aac875750838221c4c2a0f7c8a8a7cf081602f645a049"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/007.sql",
+      "sha256": "a3824cda11a40400ef84e1cbbfeff7d000facce35d488471a0cbd75040b1297c"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/008.sql",
+      "sha256": "e83193bffdfc3f9c2094b52431062b68f36db7056557849e175a63e2cd6d633f"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/009.sql",
+      "sha256": "fea6e41f1ebf5bbaef823b194927ddf02b23649296617160a0e734ddba463da5"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/010.sql",
+      "sha256": "e8abb39133985a696fec11d95368718e7fe660b2b2d7932c7f80d977d06e0d54"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/011.sql",
+      "sha256": "e304d20f97df23916d1f5fca27c326a3584e1a3a73a9a29d6f71db9b3e2bbd8c"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/012.sql",
+      "sha256": "6b292016ef7d3b066214c0225b87a5d7f6f52b71ca67ef2f15900275eeccc6fe"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/013.sql",
+      "sha256": "b9e08ec0129cb9ebb14f4d3feb510b75b850e255c84d0aaa4df8ccb02d34ce5c"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/014.sql",
+      "sha256": "3ae1d16c61f6e347fd5b608fa1ec87dda12b44bbdc744a1690bc0554bdc39c09"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/015.sql",
+      "sha256": "210b639b5bf8a2a9218e6a80df306d10c825910679eea199409314c484f73db6"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/016.sql",
+      "sha256": "4a893e01c74b67982ad7122fa17ec77bb1151969ae748753733bc48e61ca6c5b"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/017.sql",
+      "sha256": "f186ec88e2ed06ef3e6accac2df502e54771343694c0bf285244842d7472380b"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/018.sql",
+      "sha256": "9c769ff661fb65a3aaa7003715007ef13ea94624b5f71c4d05a6a4a4aec36f4a"
+    },
+    {
       "path": "sql/queries/00_create_conversation.sql",
       "sha256": "2d0e4cb7c0687fac70fd4fecf32272e9a0d589e310d55a854e693465975dde7f"
     },
@@ -425,26 +673,6 @@
       "sha256": "5c736fc56a57a0ea7d0ad7fecd81bde39ea6768e046fe7d6d21475f49efaebb3"
     },
     {
-      "path": "sql/queries/02_feedback.sql",
-      "sha256": "ff9761a7610fa578007c117127c56cbdffb2baa1828568fd4672f0587cb04118"
-    },
-    {
-      "path": "sql/queries/03_extract_candidates.sql",
-      "sha256": "57e5d9d155f95114d27b1ae3d2cdf9daf3f1ea49228a8b10a1c5775b35ba6496"
-    },
-    {
-      "path": "sql/queries/04_run_agents.sql",
-      "sha256": "936da0df1dd1f278b26ce1d9f400ea98fb13a1d757ff0dbcf65270833aae59f7"
-    },
-    {
-      "path": "sql/queries/05_record_feedback.sql",
-      "sha256": "41c065d7ebb6111a435553e9b32d329035ce3f2ce8c553c6983a63b39ca17dd7"
-    },
-    {
-      "path": "sql/queries/06_inference.sql",
-      "sha256": "828bd7d72dcb5bc0d280da1cee76212caa87938fc7f5dd300cd5fc57bd75db49"
-    },
-    {
       "path": "sql/queries/07_agent_progress.sql",
       "sha256": "85fce577de5d901134019f996a42bcfabf8123e561e02666c5c38b5c446c6a27"
     },
@@ -455,6 +683,398 @@
     {
       "path": "sql/queries/09_agent_tool_history.sql",
       "sha256": "5294c1d098880456ef3a07dbe12cbfeb98eb02a851ca95e864c3fce836db5898"
+    },
+    {
+      "path": "sql/recovery/1.0.0-001-kcv_settings.sql",
+      "sha256": "c022eaa3b78fd020235f89c4d73e86169199bf9e23bf78f6b02546516fe8518d"
+    },
+    {
+      "path": "sql/recovery/1.0.0-002-kcv_sources.sql",
+      "sha256": "94cb629bc30eb0f136ad8a0c086c81d5d66247b3e0abca0e897b7df7432db047"
+    },
+    {
+      "path": "sql/recovery/1.0.0-003-kcv_passages.sql",
+      "sha256": "85cee6ecc966d1f5107792df22e313a4033691a4e00d11668b67624422857ff4"
+    },
+    {
+      "path": "sql/recovery/1.0.0-004-kcv_contexts.sql",
+      "sha256": "e912ea4cf9b195ab63081fa8b2bb9ef04ab9e1caadbd64fa68f1f56828fe6f9b"
+    },
+    {
+      "path": "sql/recovery/1.0.0-005-kcv_graph_runs.sql",
+      "sha256": "16774ef1dc10aadd8444a583696b1e286d8be2e5bd53d5a299e2e9c33a94306b"
+    },
+    {
+      "path": "sql/recovery/1.0.0-006-kcv_rdf_stage.sql",
+      "sha256": "0f939f9ca088784d4726ebc9e64171c551d2dbcdbecd60c1db887b21d20ecf68"
+    },
+    {
+      "path": "sql/recovery/1.0.0-007-kcv_graph_sources.sql",
+      "sha256": "089a2ce28d29f76fa25dc0c271f9e86e9b0ea794ee22c604e67456ce919b1298"
+    },
+    {
+      "path": "sql/recovery/1.0.0-008-kcv_graph_contexts.sql",
+      "sha256": "edf98817c8aa865fb8112ab467911120c3c5146d2ebdb7119de45450e617f573"
+    },
+    {
+      "path": "sql/recovery/1.0.0-009-kcv_feedback.sql",
+      "sha256": "487a3b8a137689b5894f21197d38f91faf31631ad7696f6ea2005fa0eb787a32"
+    },
+    {
+      "path": "sql/recovery/1.0.0-010-kcv_dataset_runs.sql",
+      "sha256": "60afb38081e285cfc13d6bfafebdc9fde95fee945a61133b774ed55e56cd32ed"
+    },
+    {
+      "path": "sql/recovery/1.0.0-011-kcv_dataset_stage.sql",
+      "sha256": "cb575b1ecaa5372fb5e02ae47ea25186159873db9ad186a240be874f0ce1cd42"
+    },
+    {
+      "path": "sql/recovery/1.0.0-012-kcv_scenario_revisions.sql",
+      "sha256": "d7c43ddb21b07b1f8854e554ce899ccad0534460f72fb3386ed26693789b7d97"
+    },
+    {
+      "path": "sql/recovery/1.0.0-013-kcv_chat_sessions.sql",
+      "sha256": "64f47be2aad1548fc7330c2931eea8dde28a5dee7676ac4c1ba028acae2d7379"
+    },
+    {
+      "path": "sql/recovery/1.0.0-014-kcv_scenario_changes.sql",
+      "sha256": "c06c09bdb9e73835a75195e96b36eab3e89325a1a8d31d9ba010704378e8acf8"
+    },
+    {
+      "path": "sql/recovery/1.0.0-015-kcv_scenario_audit.sql",
+      "sha256": "b544ea74cdc697ab7701b1eb0fb0ae6a7e835b75d66a7fb94f02d4ba955a3152"
+    },
+    {
+      "path": "sql/recovery/1.0.0-016-kcv_chat_turns.sql",
+      "sha256": "3b148562fb0de494d5023c252715c250ebb4056fe8b9da6a09f243d45c605861"
+    },
+    {
+      "path": "sql/recovery/1.0.0-017-kcv_scenario_observations.sql",
+      "sha256": "5c879dd8aeac57240da294a46c26017d3f6cc0050903e4ab6e627a50f9ab1665"
+    },
+    {
+      "path": "sql/recovery/1.0.0-018-kcv_response_runs.sql",
+      "sha256": "406a12a596f3690c9898bb480ab5919f5d49d9d4e232607e4c52ae0b9caf64f9"
+    },
+    {
+      "path": "sql/recovery/1.0.0-019-kcv_response_tool_calls.sql",
+      "sha256": "5968632f5f96f1642bb4511d1eb136fab88b5bd6bf2b523a73dbe7c46d85fc61"
+    },
+    {
+      "path": "sql/recovery/1.0.0-020-kcv_domain_runs.sql",
+      "sha256": "6769d9b4d716ca7ac69ec1d0f47417687498a85b8744accb29413c555d356aa5"
+    },
+    {
+      "path": "sql/recovery/1.0.0-021-schema-setting.sql",
+      "sha256": "5434dd3db353e536882bf98d4b6ad39258cef6c7e91245e4f13b70498f2fef33"
+    },
+    {
+      "path": "sql/recovery/1.0.0-022-kcv_tool_run_ix.sql",
+      "sha256": "3b9230bc8c603069f5f0c57488a3a13645e186c5ca10ba209676f0cfd9d93f11"
+    },
+    {
+      "path": "sql/recovery/1.0.0-023-kcv_dataset-package.sql",
+      "sha256": "f46e4c1b2b5ffcd383057212646179aea0e618f1e0c0f251980b311e327fd81c"
+    },
+    {
+      "path": "sql/recovery/1.0.0-024-kcv_trace-package.sql",
+      "sha256": "49719b60d0120d0722b0fd5f2459ba8ccf55eb0958ba39a2f67e568f422e9e0b"
+    },
+    {
+      "path": "sql/recovery/1.0.0-025-kcv_scenario-package.sql",
+      "sha256": "13614ca0ebe03e4399f7957f354921bf04de08d29ad9f41c59df3d0de2e89710"
+    },
+    {
+      "path": "sql/recovery/1.0.0-026-kcv_apex-package.sql",
+      "sha256": "6221ef7c5c6e0c8f4b2803711cb2e7cc41d8f2152e3fb8f3688f2967d869cefc"
+    },
+    {
+      "path": "sql/recovery/1.0.0-027-kcv_context_packet-function.sql",
+      "sha256": "3010d313d0bd040775f724c37a2ec2d5806eb7d445eed5f048127b9c20bd5685"
+    },
+    {
+      "path": "sql/recovery/1.0.0-028-kcv_source_packet-function.sql",
+      "sha256": "11d813e0bc92e44ed8dd02cc08145822779616628abd9ad15bee19691b5bad47"
+    },
+    {
+      "path": "sql/recovery/1.0.0-029-kcv_evidence_packet-function.sql",
+      "sha256": "f396d78787d28cdd79de3d9b89f52af9515b7555ee7ae538bebec2d1a6681042"
+    },
+    {
+      "path": "sql/recovery/1.0.0-030-kcv_dataset-package-body.sql",
+      "sha256": "c30dd6947b1eca89da28962e32d1d57878890dced3c7bb6e6f5a6c55fb189ea6"
+    },
+    {
+      "path": "sql/recovery/1.0.0-031-kcv_trace-package-body.sql",
+      "sha256": "6b64dfdfe361d2a2650e7591ad01615aae907e71fe62884ada554ed7f861f734"
+    },
+    {
+      "path": "sql/recovery/1.0.0-032-kcv_scenario-package-body.sql",
+      "sha256": "08c9298e9a3e395282ad6a650d810df0d4685505b42dbbfe03a4ae56353a05b9"
+    },
+    {
+      "path": "sql/recovery/1.0.0-033-kcv_extract_domain-function.sql",
+      "sha256": "caa8c0dbe178dd0145997ce5836423d97ea43db5ff5bc20d3219c9e17a93e711"
+    },
+    {
+      "path": "sql/recovery/1.0.0-034-kcv_scenario_evidence-function.sql",
+      "sha256": "69fa90dab92de9e808df271a1aab257f751c4d1cd999c7fddfe7a0cb8922591d"
+    },
+    {
+      "path": "sql/recovery/1.0.0-035-kcv_scenario_propose-function.sql",
+      "sha256": "24fdbc1425981e88fb717a8998a60c5077484eec3f2766a595267df20d6af38a"
+    },
+    {
+      "path": "sql/recovery/1.0.0-036-kcv_apex-package-body.sql",
+      "sha256": "16e32fce956069dfe50ea952ca614f18dc584c57545ff59bdec98ff0aa830177"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-001-kcv_personal_contexts.sql",
+      "sha256": "1af73204e02d5593399cdc8f45bd4193a3329eb4767408e8401c8d351f8bccd6"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-002-kcv_personal_owner_ix.sql",
+      "sha256": "9782f4c7827751a5cb3a9992d5d226ec8f469fa284b30eabcfdf9e7d38258e06"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-003-kcv_context_requests.sql",
+      "sha256": "f4da874424559659db45f4f45064ed3f1cad3053b166545481bb219154cbef11"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-004-kcv_access-package.sql",
+      "sha256": "b1a3ab428005b534c82f499687239b2b8dbc674e39fc99819768761caa592b1d"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-005-kcv_access-package-body.sql",
+      "sha256": "863d7ae08cd7df82591cf090424c027397c92f00628944a05a73d6f8ee2fa31b"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-006-kcv_personal_context_api-package.sql",
+      "sha256": "1e9494ffce9b163bb7737bf96999a86ee9d3debb97156f1643572de784a77abf"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-007-kcv_personal_context_api-package-body.sql",
+      "sha256": "d9a0fdc41dac8e1d12ee46965603e0d45edaf44a8db390c2640979b697e8a776"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-008-kcv_access-session-binding-package.sql",
+      "sha256": "5b4ed04019a958dd009907f9fb291a69c3ebba64f181e6570e2bfabc3df56666"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-009-kcv_access-session-binding-package-body.sql",
+      "sha256": "4cb66ffbb3a3ef9198ba872fe3a0ea57730a085f2de8cd281f5e27e605427756"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-010-recompile-context-api.sql",
+      "sha256": "6510f16393415aa2cf331845b57c15bfbee96d616d331fca3f59b747e9514be2"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-identity-ready.sql",
+      "sha256": "775a053f012f9402c43b94eed22f59fb0cbc068a8dd2a454999438a7505424df"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c2-ready.sql",
+      "sha256": "aa1c0eac160414c43828b137fe98ded995e4df6ea83e33cfdebe3077e8c0456d"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-001-kcv_chat_sessions-journey-columns.sql",
+      "sha256": "dd132d1aa1e6b5f212572da549f9f9b1bdfd0a7d3ec8422926b3da7dc09509a1"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-002-kcv_chat_personal_ix.sql",
+      "sha256": "32faf8db2d625881c9a17c2cd764694986945779b586727e0d00c50719cc6681"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-003-kcv_response_runs-journey-columns.sql",
+      "sha256": "afee2fac04fd95d4bff1ef8bb20ece9f582dc86f44e2abc6e7680bdb237b3445"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-004-kcv_response_request_ix.sql",
+      "sha256": "5d65f769353069997a0be789247b76ca0dcb8f215a113d8a7dd59008d565c07f"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-005-kcv_context_attachments.sql",
+      "sha256": "2d481598b1782edb61eb602946f578941b00379d7f8edecdd70aefbe7555997a"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-006-kcv_personal_operations.sql",
+      "sha256": "d152371dcadf055583eb94e74532d76d19b170e51ea3ea9a1e883fd2ba900025"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-007-kcv_model_boundaries.sql",
+      "sha256": "d7d070680e5a9eb4e326f7515e66fab4b52e1f4ebaf454c508b244d9366538f8"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-008-kcv_access-package.sql",
+      "sha256": "91870bdce469b496d7555713082da4c39637fa9a53b61e1c3f7d4da11241ceaf"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-009-kcv_personal_context_api-package.sql",
+      "sha256": "6d8ac1a8f848860b9cd9811ac944954984b3d3aa43ac51bcbd36777d2ca3399f"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-010-kcv_personal_journey-package.sql",
+      "sha256": "2be02e0b3aa3cdf3ee106907ebb65b2ebc0304186ba4d5faf8819bb9678bb419"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-011-kcv_scenario-package.sql",
+      "sha256": "7d216a4988172b0d3f03f48730268421d01331a99bd40da47273ecd05342b487"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-012-kcv_access-package-body.sql",
+      "sha256": "b59e08749620c5a6fa3a8ace0e02037e44c60b9f082d5b78bba36e2c130d53b2"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-013-kcv_personal_context_api-package-body.sql",
+      "sha256": "55d16ffcae7bb3298aab8fb87196d4db75ec663a1da308cf865b6c0996075d98"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-014-kcv_personal_journey-package-body.sql",
+      "sha256": "47902238b0449dfb962f1a4f050a00f65ea12fbcf94105c27dd8e84f309915f8"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r1-001-kcv_scenario-package-body.sql",
+      "sha256": "656e1944ea2d1853e1b1d1cc7a18fee967c3946cee83a351b603d81e10a39c3a"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r1-002-kcv_trace-package-body.sql",
+      "sha256": "ec2b67d8cd5b47d03ff8b147e854a4a6595cbc3c348758e0e82976272453c6d5"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r1-003-kcv_apex-package-body.sql",
+      "sha256": "e6d63132487f591c4ee302b58c33e924de601a171f47f486bc514490323a54e5"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r1-004-kcv_personal_journey-package-body.sql",
+      "sha256": "caaa2e5dbb5987e5c86e229ff44261212c8e5e83f978107afc24fc05a9aca880"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r1-ready.sql",
+      "sha256": "e79a5575a2d3b82817dcf6281474aff54792ee28d70d7117f4d4f5a2950c936d"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r2-001-kcv_scenario-package-body.sql",
+      "sha256": "e0523a2ef637abfea8c0fb50aa49e9b078c63234c8c285ba9c3d50f122dbab9d"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r2-ready.sql",
+      "sha256": "f48156fda23c682c24eca98e2684ed450466e39a155ba7a1c32bf0968a857830"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r3-001-kcv_scenario-package-body.sql",
+      "sha256": "6dbed398ee1f1b886516ba6d526edf3203e7c87178905eca4a1272269a8a5159"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r3-002-kcv_personal_journey-package-body.sql",
+      "sha256": "ad16b732c73156ce4e9ee2d5da306a9de0948d1c1204d1254a53f0ff5c34be05"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r3-003-kcv_apex-package-body.sql",
+      "sha256": "1761e9829d1f4d8f297826edeeae763e578acf5dafbef6bbd87551eccb05cf27"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r3-ready.sql",
+      "sha256": "b72122ad9d2e6fc9c7f795aa7ed05c6d90d47bc2f133bfb0a07df4708519539e"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r4-001-kcv_response_tool_calls-origin.sql",
+      "sha256": "f5c98625ff98f5dc3819be278a927e69d4c07b17ac514d884ca6d67a11971b69"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r4-002-kcv_response_runs-model-start.sql",
+      "sha256": "51d3b67e605733124572083ac4a22f1783ec6fe1905b3bc03e9ccd9668e705fe"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r4-003-kcv_trace-package.sql",
+      "sha256": "dd43e64982c40a0f93dd5a13542c6cd2f307fef5fd954fc2852cff4976b1afb0"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r4-004-kcv_scenario-package.sql",
+      "sha256": "b2be5230148f8d9e91c72ad845ce22efcbd262d261d2602b6354ac26f6b88888"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r4-005-kcv_trace-package-body.sql",
+      "sha256": "e3a61cfd6fb8837b581a884cbb15927418870165c29d295810bc8bd6a6e091f1"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r4-006-kcv_scenario-package-body.sql",
+      "sha256": "5d7f27c68d105c7727753406ff3424669b440abeee2d513bc7720eea92f7b785"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r4-ready.sql",
+      "sha256": "1fbfccaaf0155713f8fbdf301a941d410949c20ddef3145d7873ea45d7f9ae5d"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r5-001-kcv_context_deletions.sql",
+      "sha256": "a9319d1af5073ed97a4f5e2eef4fafd7ead58890fb37e182ab773c9456e69edd"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r5-002-kcv_context_delete_resources.sql",
+      "sha256": "3c9d0ab59c573fc62a1b75c9faf90761570e0b55ee53c20e433fc9c2f8288958"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r5-003-kcv_context_delete-package.sql",
+      "sha256": "ef8779f20b664f940264fb792e11a20a1d3d3fd40f1bd8b7c8d650e52f7d0485"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r5-004-kcv_access-package-body.sql",
+      "sha256": "9a0be7b4cb3f36197717aefa7855e4221bb3246cf6b64751eb51de41f2c37c1f"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r5-005-kcv_personal_context_api-package-body.sql",
+      "sha256": "378eeb7e0c8fe1fed6a2b573cdeff9367064655fc5f93f00836cdb1e8c67545b"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r5-006-kcv_personal_journey-package-body.sql",
+      "sha256": "6a672c88de8265a79ee667a9073e7420ae2f9fb6526f0dd0493a6135dcc4a572"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r5-007-kcv_context_delete-package-body.sql",
+      "sha256": "47615ea87d399eb6fe87d413e3a60b7dbdad1a259bcec2b4a9bc2a537f002c23"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r5-ready.sql",
+      "sha256": "5ac531171454cbb36e137106c566d689ac0ac182a714df9e5427b0b32ff1ddac"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r6-001-kcv_context_search_chunks.sql",
+      "sha256": "a11decae22ff4bf789b01e07c4860fdf5bbdf21d3154011e4e4e3708d01e7e62"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r6-002-kcv_context_search-package.sql",
+      "sha256": "e6164dbb0f89c0b23d6022fbc1c42e29fdae1e910adb7b0309c694dfb25d6e0e"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r6-003-kcv_context_search-package-body.sql",
+      "sha256": "3a291c34d7857e4a664e42a1d9400db3618ae29d2427653b4b5c7dc78c2d3fdb"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r6-004-kcv_personal_context_api-package-body.sql",
+      "sha256": "4ba95e438e14a58cce82eaa07d589e900e6939b81377c818efabba2de94eafb1"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r6-005-kcv_personal_journey-package-body.sql",
+      "sha256": "d4070610025e0985941c75701b6a72fe33bdb90430f9abe9d8e0c20c1750562b"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r6-ready.sql",
+      "sha256": "ff525829f4a9817832bab97d35b23dad003335b6c4e243d83516a4f15d2af496"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r7-001-kcv_context_search-package-body.sql",
+      "sha256": "f7ce0561ef795f3d383b57884cbc8cf13655664ad879d1aca00a33a7c9c045e9"
+    },
+    {
+      "path": "sql/recovery/2.0.0-c3-r7-ready.sql",
+      "sha256": "135ca748ca3e886312b7f46baea221e0bb2d6ac5410c934558f4759a9cc208ed"
+    },
+    {
+      "path": "sql/recovery/manifest.json",
+      "sha256": "f188f48a6873b6d593b4a54eb7bb088acc33221a8f99f72723c859b552c4c8ca"
+    },
+    {
+      "path": "sql/recovery/README.md",
+      "sha256": "43e476a7d2e7343172c887cc32796f09d1fd800fafe1329f986735d19e2b8212"
     },
     {
       "path": "sql/scenarios/01_start.sql",
@@ -501,32 +1121,16 @@
       "sha256": "cc9a0e3d0ace6e8c3200768a6845aa33ca7b8304f523219b57dc7069ec53c8b4"
     },
     {
-      "path": "sql/schema/01_objects.sql",
-      "sha256": "fadbb283afc0ad6b6c051f9c2b235d1a0f82da406b7111400fd9fd21c5157bd2"
-    },
-    {
       "path": "sql/schema/02_network.sql",
       "sha256": "02113185a5d3b2ca3e8573170787f9983bed2a534d3ca523b05ba52fc75db00b"
     },
     {
-      "path": "sql/schema/03_tools.sql",
-      "sha256": "5d555da35074dc9854ecbff4506cb792d0ca01bca8b6ca3f6d3510374906e2c1"
-    },
-    {
-      "path": "sql/schema/04_agents.sql",
-      "sha256": "278368de11c827be8d1fbf8ba6b9b9ef5831e1cccd5f6b37cd2869ab68002b6f"
-    },
-    {
       "path": "sql/schema/05_profile_worksheet.sql",
-      "sha256": "38b810fa9828e8f204c214834fe6f0c702d5217e18f5ada8ad39ed02b9363f19"
-    },
-    {
-      "path": "sql/schema/06_dataset_import.sql",
-      "sha256": "fd6d1a72214de5e49255f0eb5c13af2cefb40e95d9b7fc0fb5071521706701bb"
+      "sha256": "9be5cb0ae13dfa89203be7080e1aeb3e666c05fbe67dd1e85de6d6460d1ee183"
     },
     {
       "path": "sql/schema/06_register_profile.sql",
-      "sha256": "826bdf62fb31222800aff4b627d7ace308f5641082db4d6c2dcde654810dba4e"
+      "sha256": "25aa78a21d67229ec5c4f0004ee1c82067b7e52b39a459628d877d9986c7dc0d"
     },
     {
       "path": "third-party/connormcd-misc-scripts/LICENSE.txt",
@@ -535,6 +1139,10 @@
     {
       "path": "third-party/connormcd-misc-scripts/README.md",
       "sha256": "6701c2fb2727453a777b846c2193d24269ee8b3ed1c5365f3c69a199c43d745a"
+    },
+    {
+      "path": "third-party/context-search-model/README.md",
+      "sha256": "91067fcde8e9df4a50303b8a43120f5f8c61be011607ae4c6c9a79323c809a3e"
     },
     {
       "path": "third-party/font-apex/LICENSE.txt",
@@ -551,6 +1159,10 @@
     {
       "path": "third-party/oracle-livelabs/README.md",
       "sha256": "0b852b45f455d080220c41f85f35645270edc638c9f6db39b08c160361ff14cd"
+    },
+    {
+      "path": "VERSION",
+      "sha256": "c28fcca53637bc88e124af1725df13cb98c69dedefd62fb3cdbe1cdb6b760624"
     }
   ]
 }

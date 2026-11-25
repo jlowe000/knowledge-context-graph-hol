@@ -1,0 +1,165 @@
+{
+  "recorded_date": "2026-11-25",
+  "product_version": "2.0.0",
+  "candidate_increment": "C3 R7 native emphasis for context overview actions",
+  "application_source_sha256": "e37625ee1b710b444dfd385ff80d3a61f8e71ada4004a19dd2161260eec7718c",
+  "export_sql_sha256": "ccbf315b6dc2630045f87d2db80d3a17318b62f9099ee49e596eb709f8b45acd",
+  "engine_import_export_verified": true,
+  "verification_scope": "The final directly authored APEXlang button-emphasis change was imported into the same isolated application with sessions retained. Native checks passed for nine pages, seven assets, 33 installed component parses and the existing search dataflow. Supported engine export confirms hot=true for Edit Draft, Review and Apply and Delete Context, with existing layout, conditions and actions retained. Browser reload verified all three visible buttons use the same native hot styling. No action was clicked or context data changed. Earlier layout/search validation and its limitations are retained separately; this is not a fresh full-suite or Worksheet deployment claim.",
+  "schema_ready_marker": "2.0.0-c3-r7-ready",
+  "engine": {
+    "apex": "26.1.6",
+    "sqlcl": "26.3.1.301.1413",
+    "format": "APPLICATION_SOURCE",
+    "supporting_objects_exported": false
+  },
+  "native_import": {
+    "installed_component_parse": "passed",
+    "components_checked": 33,
+    "runtime_data_preserved": null,
+    "runtime_table_count_hash_assertions": 0,
+    "same_application_id": true,
+    "keep_sessions": true,
+    "button_policy": "EXPLORE redirects to page 1 and has Do Not Check; the page-wide unsaved-changes guard remains enabled.",
+    "sample_selector_default": "P14_SAMPLE: CTX01, explicitly declared in APEXlang and verified in installed metadata",
+    "preservation_scope": "No context-changing actions were performed during the layout browser checks. Runtime table hashes were not rerun for this layout-only import. The earlier search run passed 27 original table assertions and is separately recorded in db/verification/context-search-validation.json.",
+    "search_request_cache": {
+      "item_type": "CLOB",
+      "storage": "request only",
+      "value_protected": true,
+      "list_calls_per_page_request": 1,
+      "report_reads": "APEX_SESSION_STATE.GET_CLOB",
+      "objective_preview_max_characters": 240,
+      "notice_html_escaped": true
+    },
+    "installed_layout": {
+      "result": "PASS",
+      "provenance": "Installed metadata from supported engine export",
+      "p10": {
+        "guidance": "region header before body/items",
+        "search": "bottom left",
+        "api_limit": 10,
+        "report_page_size": 10
+      },
+      "p13": {
+        "left": [
+          "EDIT",
+          "ARCHIVE",
+          "RESTORE",
+          "DUPLICATE"
+        ],
+        "right": [
+          "REVIEW",
+          "LIBRARY"
+        ],
+        "conversation_actions": "saved conversations region; start aligned left",
+        "delete": "separate Buttons Container region sequence100, PREVIOUS slot",
+        "existing_button_conditions_actions_and_targets": "unchanged"
+      },
+      "browser_limit_note": "A more-than-ten-item browser traversal was not performed."
+    },
+    "hot_buttons": [
+      "EDIT",
+      "REVIEW",
+      "DELETE_CONTEXT"
+    ]
+  },
+  "browser_scope": {
+    "result": "passed for the three-button native emphasis; earlier layout/search/lifecycle coverage retained and permanent deletion confirmation pending",
+    "archive_unarchive": {
+      "starting_state": "DRAFT",
+      "archive": "passed; Archived state and read-only controls displayed",
+      "archived_filter": "passed; selected context could be found",
+      "unarchive": "passed; returned to DRAFT with Edit draft, Review and apply, and Archive controls",
+      "active_filter": "passed; excluded other lifecycle states",
+      "fresh_active_roundtrip": "not performed",
+      "two_account_browser_check": "not performed"
+    },
+    "delete_confirmation": {
+      "review": "passed; identified the disposable draft and its saved-work counts",
+      "cancel": "passed; preserved the context",
+      "permanent_delete": "pending; no final browser delete click was performed"
+    },
+    "model_requests_for_lifecycle_and_deletion_checks": 0,
+    "scope_note": "The current follow-up verified visible native emphasis only. Layout, search, archive/unarchive and deletion review/Cancel are earlier scoped checks, retained without implying a new run.",
+    "context_search": {
+      "meaning_based_query": "passed; an existing Active context matched by similar meaning with its actual saved objective displayed",
+      "literal_title_query": "passed; exact wording ranked first",
+      "status_filter": "passed; Archived excluded the matching Active context and displayed no results",
+      "clear_search": "passed; All restored the original three contexts and cleared the search notice",
+      "mutations_during_search_check": 0,
+      "external_genai_requests": 0,
+      "local_onnx_inference": "used for nonblank semantic search queries; not claimed to be zero model activity",
+      "keyword_fallback_browser": "not performed; fallback is covered by the native search integration suite",
+      "scope_note": "Local embedding inference supports nonblank searches. No generative conversation request was made by these browser checks."
+    },
+    "layout": {
+      "final_active_overview": "passed; Edit Draft/Archive/Duplicate left and Review and Apply/My Contexts right",
+      "draft_and_archived_overview": "passed earlier in this layout increment; Unarchive on the left and lifecycle conditions preserved",
+      "saved_conversations": "passed; Start a new conversation left in its own saved-conversations region",
+      "delete_context": "passed for bottom-left placement only; no permanent-delete click",
+      "library": "passed; guidance ahead of fields, Search left below fields, empty search returned the three original contexts with objectives unchanged",
+      "pagination": "ten configured and native-export verified; only three available contexts, so a greater-than-ten browser traversal was not performed",
+      "context_mutations": 0,
+      "generative_requests": 0,
+      "local_embedding_queries": 0
+    },
+    "button_emphasis": {
+      "result": "passed",
+      "buttons": [
+        "Edit Draft",
+        "Review and Apply",
+        "Delete Context"
+      ],
+      "native_class": "t-Button--hot",
+      "same_computed_background": true,
+      "actions_clicked": 0,
+      "context_mutations": 0
+    }
+  },
+  "public_artifact_review": {
+    "sensitive_pattern_findings": 0,
+    "runtime_table_inserts": 0,
+    "private_app_user_references": 0,
+    "all_embedded_assets_match_authored_source": true,
+    "embedded_assets": 7,
+    "pages": [
+      0,
+      1,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      9999
+    ],
+    "engine_metadata": "Generic isolated workspace/schema/application identifiers remain installation metadata. Worksheet wrappers remap them. No private endpoints, credentials, workspace users or personal runtime records were exported.",
+    "attribution": "Retain the root MIT licence/NOTICE and third-party Oracle LiveLabs, Font APEX and catalogue file-list attribution. The optional context-search embedding model has separate notices and licence files under third-party/context-search-model; model binaries are not embedded in the APEX export."
+  },
+  "related_acceptance_records": [
+    "db/verification/context-search-validation.json",
+    "db/verification/context-lifecycle-validation.json",
+    "db/verification/context-delete-validation.json",
+    "db/verification/sample-navigation-validation.json",
+    "db/verification/fresh-dev-validation.json",
+    "db/verification/c3-r4-validation.json",
+    "references/my-contexts-c3-validation.json"
+  ],
+  "known_limitations": [
+    "The layout follow-up verified ten-item API/report configuration, but only three contexts were available in the browser; a greater-than-ten browser pagination traversal was not performed. The prior 27-table preservation audit belongs to the earlier search run and was not repeated for this layout-only import.",
+    "The final permanent-delete browser confirmation remains pending. Backend deletion and browser review/Cancel tests do not establish that final UI acceptance.",
+    "The earlier lifecycle browser run covered Draft to Archived to Draft and lifecycle filtering. It did not repeat an Active to Archived to Active roundtrip or a two-account browser isolation check.",
+    "Generated new-install and same-ID upgrade Worksheet wrappers have not been deployed for this source. Native APEXlang import and wrapper generation do not establish Worksheet deployment acceptance. A fresh R7 database installation has not been executed.",
+    "The browser checked live meaning-based and literal searches, status filtering and clearing. Keyword fallback, owner isolation and other edge cases rely on the separately recorded native search tests; this is not a production-scale performance assessment.",
+    "The first applied R6 native integration run failed with ORA-12733 on a Unicode query. R7 appends a corrected search body and ready marker; all applied R6 artifacts remain unchanged. The native R7 rerun and repeat migration passed.",
+    "Native APEXlang validation retains one deprecation warning for the regionBody slot on page 1; compilation and installed component parsing passed.",
+    "Deletion covers application-owned context data and tracked native graph/conversation resources. Provider service logs, database backups and separate administrator/agent audit history are outside this application operation. Minimal content-free request receipts remain to prevent stale token replay.",
+    "A prior R4 native model run returned malformed JSON despite successful evidence retrieval. Strict citation parsing remains fail-closed, with raw response and independent evidence available. Historical acceptance and this limitation remain documented in db/verification/c3-r4-validation.json."
+  ],
+  "prior_runtime_preservation": {
+    "record": "db/verification/context-search-validation.json",
+    "table_count_hash_assertions": 27,
+    "scope": "Earlier R7 search acceptance; not a new layout-import hash run."
+  }
+}

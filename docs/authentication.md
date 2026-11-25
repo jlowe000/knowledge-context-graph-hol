@@ -1,6 +1,11 @@
-# OCI Generative AI authentication
+# Model authentication for the release
 
-Choose one path. Both use the same `KCV_GENAI` profile and the same lab code. A database grant permits package use; OCI IAM separately authorizes inference. The user-key path is the default in the example profile and optional automation configuration.
+Use the actual project owner selected during setup; KCV_LAB below is the default example. ADMIN scripts take `KCV_SCHEMA` for custom targets. Keep chat model authentication separate from public GitHub loading and local ONNX search. Follow the [configuration lab](../labs/configure-database/configure-database.md) for ordering: the verified schema/settings table must exist before profile registration.
+
+
+Choose one path. Both use the same `KCV_GENAI` profile and the same lab code. A database grant permits package use; OCI IAM separately authorizes inference. The user-key path is the default in the example profile.
+
+Create the credential privately in the actual owner. A tested fresh setup rejected a schema-qualified credential name during profile creation; this guide uses an owner-local credential rather than promising cross-schema reuse.
 
 | Choice | OCI identity making model calls | Database credential | Dynamic group |
 | --- | --- | --- | --- |
@@ -22,7 +27,7 @@ Allow group <domain>/<group-name> to use generative-ai-chat in compartment <infe
 
 This lab calls chat models. Model discovery in the Console may separately require `inspect generative-ai-model`; dedicated endpoints or other operations may need additional permissions. See [Generative AI model permissions](https://docs.oracle.com/en-us/iaas/Content/generative-ai/models-api-permissions.htm). Permission for a different region/compartment/model does not establish that this profile's selection will work.
 
-3. As ADMIN, run the current [grants script](../sql/admin/02_grants.sql), which includes direct `DBMS_CLOUD` execution access. If you ran an earlier version, rerun this additive grants script.
+3. As ADMIN, run the current [grants script](../sql/admin/02_grants.sql), with KCV_SCHEMA set to the actual owner; it includes direct `DBMS_CLOUD` execution access. If you ran an earlier version, rerun this additive grants script.
 4. As **KCV_LAB**, create the credential below. Select `BEGIN` through `END;`, excluding `/`, and use **Run Statement** so Worksheet prompts for bind values. Supply the private key body without the PEM BEGIN/END lines; passphrase-protected keys are unsupported. Keep the key out of saved scripts, Git, screenshots and chat. Use an approved private credential-entry interface if your environment does not permit secret values in Worksheet bind dialogs.
 
 <!-- include-sql: sql/schema/00_user_credential_worksheet.sql -->
@@ -66,14 +71,14 @@ Allow dynamic-group <domain>/KCV_ADB_GENAI to use generative-ai-chat in compartm
 
 Allow IAM changes to propagate before testing. These examples authorize inference rather than management of models or clusters; additional operations require corresponding permissions.
 
-3. As ADMIN, run [03_resource_principal.sql](../sql/admin/03_resource_principal.sql). Its copyable block is in the setup guide (technical reference on the dev branch: `docs/setup.md`).
+3. As ADMIN, run [03_resource_principal.sql](../sql/admin/03_resource_principal.sql). Run its guarded block with Run Statement, excluding the slash, and supply this owner as KCV_SCHEMA.
 4. In the profile script, change `l_credential` to `'OCI$RESOURCE_PRINCIPAL'`. Do not create `OCI_USER_CRED` for this path. See [Select AI provider authentication](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/use-select-ai-ai-providers.html).
 
 ## Common profile and connection check
 
 Edit [05_profile_worksheet.sql](../sql/schema/05_profile_worksheet.sql) locally: set `l_region`, `l_compartment` to the inference compartment OCID, `l_model` to the exact model name/identifier supported by Select AI for the chosen region and access mode, and `l_credential` to the chosen name. Run as KCV_LAB using **Run Script (F5)**. The script creates `KCV_GENAI` independently of lab tables; it does not silently replace an existing profile. It builds attributes with `JSON_OBJECT_T` and serializes to CLOB before the package call. No secret values belong in the profile script.
 
-After `01_objects.sql` has created the lab tables and the profile has been created, register its name for extraction and agents. Run as KCV_LAB using **F5**:
+After the profile exists and the ordered schema has been verified, register its name for the agents. Run the following in the actual lab-owner Worksheet with **F5**:
 
 <!-- include-sql: sql/schema/06_register_profile.sql -->
 

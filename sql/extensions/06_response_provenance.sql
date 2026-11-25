@@ -25,18 +25,12 @@ END;
 /
 CREATE OR REPLACE PACKAGE kcv_trace AUTHID DEFINER AS
  PROCEDURE assert_run(p_request CLOB);
- PROCEDURE record_tool(p_request CLOB,p_tool VARCHAR2,p_output CLOB,p_started TIMESTAMP WITH TIME ZONE,p_error NUMBER DEFAULT NULL);
+ PROCEDURE record_tool(p_request CLOB,p_tool VARCHAR2,p_output CLOB,p_started TIMESTAMP WITH TIME ZONE,p_error NUMBER DEFAULT NULL,p_origin VARCHAR2 DEFAULT 'AGENT');
  FUNCTION response_trace(p_session VARCHAR2,p_turn NUMBER) RETURN CLOB;
 END;
 /
 CREATE OR REPLACE PACKAGE BODY kcv_trace AS
- PROCEDURE own_session(p_session VARCHAR2) IS n NUMBER; BEGIN
-  SELECT COUNT(*) INTO n FROM kcv_chat_sessions WHERE session_id=p_session
-   AND owner_name=COALESCE(SYS_CONTEXT('APEX$SESSION','APP_USER'),SYS_CONTEXT('USERENV','SESSION_USER'))
-   AND NVL(apex_app_id,'-')=NVL(SYS_CONTEXT('APEX$SESSION','APP_ID'),'-')
-   AND NVL(apex_session_id,'-')=NVL(SYS_CONTEXT('APEX$SESSION','APP_SESSION'),'-');
-  IF n<>1 THEN RAISE_APPLICATION_ERROR(-20100,'Unknown scenario session for this signed-in user/session');END IF;
- END;
+ PROCEDURE own_session(p_session VARCHAR2) IS BEGIN kcv_access.assert_session(p_session);END;
  PROCEDURE assert_run(p_request CLOB) IS sid VARCHAR2(40);eid VARCHAR2(40);n NUMBER;BEGIN
   sid:=JSON_VALUE(p_request,'$.scenario_session');eid:=JSON_VALUE(p_request,'$.execution_id');own_session(sid);
   SELECT COUNT(*) INTO n FROM kcv_response_runs r JOIN kcv_chat_sessions s ON s.session_id=r.session_id
@@ -46,17 +40,18 @@ CREATE OR REPLACE PACKAGE BODY kcv_trace AS
    AND DBMS_LOB.COMPARE(r.question,TO_CLOB(JSON_VALUE(p_request,'$.question' RETURNING VARCHAR2(8000))))=0;
   IF n<>1 THEN RAISE_APPLICATION_ERROR(-20170,'Invalid or inactive response execution');END IF;
  END;
- PROCEDURE record_tool(p_request CLOB,p_tool VARCHAR2,p_output CLOB,p_started TIMESTAMP WITH TIME ZONE,p_error NUMBER DEFAULT NULL) IS
+ PROCEDURE record_tool(p_request CLOB,p_tool VARCHAR2,p_output CLOB,p_started TIMESTAMP WITH TIME ZONE,p_error NUMBER DEFAULT NULL,p_origin VARCHAR2 DEFAULT 'AGENT') IS
   PRAGMA AUTONOMOUS_TRANSACTION;eid VARCHAR2(40);j JSON_ELEMENT_T;
  BEGIN
   assert_run(p_request);eid:=JSON_VALUE(p_request,'$.execution_id');
   IF p_tool NOT IN ('EVIDENCE','PROPOSAL') THEN RAISE_APPLICATION_ERROR(-20171,'Unknown trace tool');END IF;
+  IF p_origin IS NULL OR p_origin NOT IN ('APPLICATION','AGENT') THEN RAISE_APPLICATION_ERROR(-20171,'Unknown retrieval origin');END IF;
   IF p_output IS NOT NULL THEN
    IF DBMS_LOB.GETLENGTH(p_output)>1000000 THEN RAISE_APPLICATION_ERROR(-20172,'Evidence trace exceeds capture limit');END IF;
    j:=JSON_ELEMENT_T.parse(p_output);
   END IF;
-  INSERT INTO kcv_response_tool_calls(execution_id,tool_name,input_json,output_json,status,error_code,started_at)
-   VALUES(eid,p_tool,p_request,p_output,CASE WHEN p_error IS NULL THEN 'SUCCEEDED' ELSE 'FAILED' END,p_error,p_started);
+  INSERT INTO kcv_response_tool_calls(execution_id,tool_name,input_json,output_json,status,error_code,started_at,call_origin)
+   VALUES(eid,p_tool,p_request,p_output,CASE WHEN p_error IS NULL THEN 'SUCCEEDED' ELSE 'FAILED' END,p_error,p_started,p_origin);
   COMMIT;
  EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;
  END;
@@ -119,11 +114,19 @@ CREATE OR REPLACE PACKAGE BODY kcv_trace AS
   result.put('question',r.question);result.put('mode',r.request_mode);result.put('status',r.status);result.put('conversation_id',r.conversation_id);
   result.put('context',JSON_OBJECT_T.parse(r.context_json));result.put('sources',JSON_ARRAY_T.parse(r.sources_json));
   result.put('history_turn_ids',JSON_ARRAY_T.parse(r.history_json));result.put('profile_name',r.profile_name);
+  IF r.continuation_json IS NOT NULL THEN result.put('supplied_continuation',JSON_OBJECT_T.parse(r.continuation_json));END IF;
+  DECLARE selection JSON_OBJECT_T:=JSON_OBJECT_T();framing JSON_OBJECT_T:=JSON_OBJECT_T.parse(r.context_json);g VARCHAR2(128);BEGIN
+   SELECT base_graph INTO g FROM kcv_scenario_revisions WHERE revision_id=r.revision_id;
+   selection.put('collection',g);selection.put('topics',framing.get_object('topic_preferences'));selection.put('match','any selected topic');selection.put('weights_used_for_ranking',FALSE);
+   framing.remove('topic_preferences');result.put('selection_context',selection);result.put('interpretation_context',framing);
+  END;
   result.put('started_at',TO_CHAR(r.started_at,'YYYY-MM-DD"T"HH24:MI:SS.FF3TZH:TZM'));
+  IF r.model_started_at IS NOT NULL THEN result.put('model_started_at',TO_CHAR(r.model_started_at,'YYYY-MM-DD"T"HH24:MI:SS.FF3TZH:TZM'));END IF;
   IF r.finished_at IS NOT NULL THEN result.put('finished_at',TO_CHAR(r.finished_at,'YYYY-MM-DD"T"HH24:MI:SS.FF3TZH:TZM'));END IF;
   result.put('trace_version',r.trace_version);result.put('retrieval_policy',r.retrieval_policy);
   FOR t IN (SELECT * FROM kcv_response_tool_calls WHERE execution_id=r.execution_id ORDER BY call_id) LOOP
    obj:=JSON_OBJECT_T();obj.put('call_id',t.call_id);obj.put('tool',t.tool_name);obj.put('status',t.status);
+   IF t.call_origin<>'LEGACY' THEN obj.put('origin',t.call_origin);END IF;
    obj.put('started_at',TO_CHAR(t.started_at,'YYYY-MM-DD"T"HH24:MI:SS.FF3TZH:TZM'));
    obj.put('finished_at',TO_CHAR(t.finished_at,'YYYY-MM-DD"T"HH24:MI:SS.FF3TZH:TZM'));
    IF t.output_json IS NOT NULL THEN

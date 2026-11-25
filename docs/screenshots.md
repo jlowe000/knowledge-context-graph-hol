@@ -34,3 +34,7 @@ The included screenshots show the earlier extracted-passage dataset. This releas
 6. Record capture date, APEX/Console context and what was verified in the validation record. Label conceptual wireframes separately; they are not installation screenshots.
 
 The included images were captured on 19 November 2026 from APEX 26.1.6. Turn IDs and graph revision names are example values, not inputs for another installation. A fresh-instance screenshot set and first-time-learner rehearsal remain outstanding.
+
+## v2 captures to review
+
+Capture only safe screens: an empty My Contexts library; a synthetic draft; before/after review with no personal details; saved objective/search reason; an original and adopted-revision explanation; Archived/Unarchive; and a disposable Delete review. Omit browser URLs, account/environment identifiers, bind dialogs, login screens and credentials. Existing v1 screenshots show older agent-tool ordering, not current application retrieval. Do not present them as v2 acceptance.

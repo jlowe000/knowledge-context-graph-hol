@@ -1,0 +1,63 @@
+{
+  "recorded_date": "2026-11-25",
+  "product_version": "2.0.0",
+  "status": "native_import_and_authenticated_navigation_regressions_passed",
+  "scope": "Sample Contexts menu navigation and unsaved-change protection in the isolated fresh application",
+  "issue": "A pristine Sample Contexts page triggered a beforeunload warning when leaving through the menu. The browser selected the first LOV option, but no option had defaultSelected set, so the sample item appeared changed without a user edit.",
+  "change": {
+    "source": "apex/application/pages/p00014-sample-contexts.apx",
+    "item": "P14_SAMPLE",
+    "native_apexlang_default": {
+      "type": "static",
+      "value": "CTX01"
+    },
+    "page_unsaved_changes_warning": "remains_enabled",
+    "existing_explore_button_doNotCheck": "retained_only_for_deliberate_Explore_navigation",
+    "page_or_global_guard_disabled": false,
+    "database_runtime_or_dataset_changed": false
+  },
+  "native_checks": {
+    "apexlang_validation": "passed",
+    "apex_authoring_tests_passed": 10,
+    "native_import": "passed",
+    "pages": 8,
+    "static_assets": 7,
+    "installed_components_parsed": 29,
+    "fresh_runtime_hashes_unchanged_through_import": 25,
+    "runtime_baseline_date": "2026-11-25"
+  },
+  "authenticated_browser": {
+    "session": "same_authenticated_tab_preserved",
+    "my_contexts_to_sample_contexts": "passed",
+    "sample_initial_value": "CTX01",
+    "sample_defaultSelected_values": ["CTX01"],
+    "pristine_sample_contexts_to_my_contexts": "passed_no_beforeunload_warning",
+    "repeated_menu_reentry": "passed",
+    "edited_copy_name_then_menu": "beforeunload_warning_emitted_and_page_unchanged",
+    "reverted_copy_name_then_menu": "passed_no_beforeunload_warning",
+    "edited_copy_form_explore_button": "passed_immediate_sample_workspace_navigation_without_warning",
+    "final_view": "My Contexts_with_existing_contexts_visible",
+    "model_requests": 0,
+    "new_project_runtime_rows_saved": 0
+  },
+  "engine_export_receipt_refresh": "passed_matching_native_engine_export_and_receipt",
+  "artifact_provenance": {
+    "application_source_sha256": "87ab38260a77c3cfe938f7150f3daf7d452bb8b3b0abb5118f473d526d0d867f",
+    "export_sql_sha256": "344c4adce678057b5bf9106fb1637b802d548059693808f04425c4d6bff5029e",
+    "export_bytes": 325984,
+    "export_blocks": 44,
+    "static_assets_matched": 7,
+    "receipt": "apex/export-validation.json",
+    "worksheet_wrappers": "regenerated_not_executed"
+  },
+  "previous_fresh_record": "db/verification/fresh-dev-validation.json",
+  "previous_record_rewritten": false,
+  "release_promoted": false,
+  "changes_committed_or_pushed": false,
+  "limits": [
+    "This is a targeted navigation regression, not another fresh installation or model-quality run.",
+    "The 25 preserved runtime hashes use a new baseline captured for this import; the earlier fresh-deployment assertions remain in their dated record.",
+    "Generated Worksheet installer execution and the earlier fresh-deployment route limitations are not retested here.",
+    "No endpoints, private paths, credentials, OCIDs, account secrets, user-entered text or raw runtime rows are included."
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "format_version": 1,
+  "product_version": "2.0.0",
+  "status": "passed_with_documented_execution_mode_correction",
+  "validation_date": "2026-11-25",
+  "candidate_source_commit": "03e9154",
+  "candidate_includes_uncommitted_packaging_changes": true,
+  "scope": "SQL-first release package, isolated clean installation and published-v1 migration on temporary ADB Serverless",
+  "clean_installation": {
+    "status": "passed_with_documented_execution_mode_correction",
+    "schema_installation": "passed: 19 ordered fresh parts; full source/schema verification; 96 total and COMPLETE receipts; r7-ready; zero invalid project objects",
+    "worksheet_transport": "passed: all 19 files opened and executed through the owner Worksheet, including files exceeding 2 MB; first file opened manually, subsequent files through the native file picker",
+    "runtime_configuration": "passed: owner-private RDF network and credential/profile; real greeting; pinned GitHub load; native evidence, source isolation and refinement checks; conversation teams; checksum-verified local 384-dimensional embedding model",
+    "dataset_counts": {
+      "sources": 834,
+      "passages": 762,
+      "sample_contexts": 3
+    },
+    "apex_installation": "passed with corrected Run Statement mode: new application ID in an isolated enabled workspace; nine required pages and sixteen required package objects valid",
+    "apex_execution_mode_correction": "Candidate instructions incorrectly said Run Script for the bind-bearing installer; Worksheet rejected an undeclared target bind before import. Selecting the complete outer block without its slash and using Run Statement prompted for targets and imported successfully. Dev documentation/generator comments are corrected; the same complete-block Run Statement mode also passed for the existing-ID upgrade.",
+    "browser_journey": "passed within the initial authenticated session: sample/personal menu navigation, name-only draft and detailed edit, cancel/review/apply, grounded question, source graph/lineage, observation, topic-only refinement, explicit latest-revision adoption, grounded follow-up, historical explanation, title/objective/paraphrase search, archive/filter/unarchive, and a real sample answer; fresh sign-out/sign-in reopened the owned context, both answers, historical source explanation and original observation successfully",
+    "answer_evidence": "passed: two personal answers COMPLETED; six real passages and six recorded paths each; three matched explicit citations each and no unmatched citations; APPLICATION retrieval preceded each model request; observation retained original revision",
+    "search_coverage": "passed: current context hash and current local model match both indexed chunks; both READY, no keyword-only fallback; UI displayed hybrid mode and matching reasons",
+    "historical_evidence_scope": "Original answer text, source selection and original revision observed before and after adoption in the UI. Database hashes were first captured after adoption and are only a baseline for subsequent read-only checks; no pre-adoption byte comparison claimed.",
+    "sign_in_persistence": "passed: new APEX session reopened saved personal work; both response runs still COMPLETED; post-adoption answer/run/revision/evidence hashes unchanged; no additional model response runs"
+  },
+  "migration": {
+    "status": "passed_with_documented_execution_mode_correction",
+    "starting_release_commit": "83e3ecb64f417f6ef388df43ab9b102dddab2b71",
+    "starting_installation": "created and native verified: actual isolated owner; exact published-v1 compiled source fingerprints (13 programs); 19 tables; no invalid objects; optional extraction and migration registry absent; owner-local credential/profile with real greeting; pinned GitHub dataset 834 sources/762 passages/3 samples; original three-page application. The original v1 browser produced a real answer and saved an observation before the preservation baseline.",
+    "baseline_adoption": "passed: strict optional completion created the two supported missing objects; an independent repeat created zero; strict source/structure baseline adoption succeeded",
+    "schema_upgrade": "passed: all 18 ordered Worksheet upgrade parts; independent full verifier; read-only ADMIN confirmation of 96 COMPLETE project receipts, expected R7 ready-receipt hash, sixteen valid required package specification/body objects and zero invalid project objects",
+    "same_application_id_upgrade": "passed: complete outer installer block executed using Run Statement in 3.106 seconds; existing application ID, owner, workspace, alias and app accounts retained; nine pages after import compared with three in v1",
+    "saved_work_preservation": "passed after schema upgrade and again after runtime setup and app import: all twenty explicit v1-table comparisons matched except the permitted absent-to-empty optional-domain table; all six native graph counts and full hashes matched. Normalized private markers were checked against observed Worksheet output and compared with the unchanged before baselines.",
+    "browser_journey": "passed within the initial authenticated session: My Contexts/Sample Contexts navigation; name-only draft and detailed four-topic edit; preview/Cancel without publication; publish/start; real answer and evidence graphs; original-revision observation; Ontology-only learning-focus removal with explicit constraints unchanged; second publication and explicit latest-revision adoption; grounded follow-up and unchanged historical answer/source view; title, saved-objective and paraphrase search; archive/status filtering/unarchive. No extra question or revision was introduced.",
+    "v1_native_checks": "passed: published native evidence check and same native scenario/refinement test with only the owner guard parameterized for the isolated target",
+    "v1_app_installation": "passed: original published three-page app installed under a newly allocated isolated application ID; the subsequent v2 import retained that same ID",
+    "runtime_registration": "passed: 16_refresh_grounded_answers.sql refreshed the existing-owner grounded-answer registration; 22_setup_context_search.sql reported model READY with 384 dimensions and backfill COMPLETE",
+    "sign_in_persistence": "passed after the user signed in to a new APEX session: the Active personal context and saved conversation reopened on the latest adopted revision; both complete answer texts and the first historical sources explanation exactly matched the pre-sign-out UI text; the original-revision observation remained visible",
+    "v1_browser_evidence": "passed: real original-revision answer with one successful EVIDENCE tool call and five explicitly matched citations; observation records traceability rather than a demonstrated business outcome",
+    "v1_fixture_note": "Private synthetic fixture initially failed compilation on the reserved identifier PRIOR before mutation. After the identifier was corrected, it passed with six evidence passages, eight graph paths, one observation and zero inference requests; failed source copies were retained privately.",
+    "preservation_baseline": {
+      "explicit_v1_table_contracts": 20,
+      "chat_turns": 2,
+      "response_runs": 1,
+      "observations": 2,
+      "native_graphs": 6,
+      "base_graph_triples": 30144,
+      "overlay_graph_triple_counts": [
+        5,
+        7,
+        7,
+        7,
+        7
+      ]
+    },
+    "pending_checks": [],
+    "answer_evidence": {
+      "status": "passed",
+      "completed_personal_answers": 2,
+      "passages_per_answer": [
+        6,
+        6
+      ],
+      "graph_paths_per_answer": [
+        8,
+        8
+      ],
+      "matched_explicit_citations_per_answer": [
+        5,
+        4
+      ],
+      "unmatched_citations_per_answer": [
+        0,
+        0
+      ],
+      "application_retrieval_precedes_model": true,
+      "original_revision_observations": 1,
+      "latest_head_pinned_revision_and_explicit_adoption_journal": "passed"
+    },
+    "learning_focus_refinement": "passed: follow-up treats topic selection as learning interests rather than technical constraints; removed S03 selection and introduced S08 after Ontology was removed; explicit constraints stayed unchanged",
+    "search_coverage": "passed: all three expected chunks present and contiguous; each chunk text exactly matches its canonical saved-document slice; all are READY with current content hash/current local model, error-free 384-dimensional embeddings and no keyword-only fallback. UI title search showed Title match, objective search showed Saved information match, and paraphrase search showed saved-information/similar-meaning matches.",
+    "historical_evidence_scope": "Original complete answer text matched exactly before adoption, after adoption and after the follow-up; the historical sources view also remained unchanged. Personal-answer database hashes were first captured after adoption/follow-up and establish only the baseline for subsequent reopening checks, not pre-change byte preservation.",
+    "legacy_model_rowset_preservation": "passed after new personal browser writes and again after fresh-sign-in reopening: original v1 two-turn, one-response-run and one-tool-call rowset hashes, restricted to original v1 columns, match their pre-migration baselines. This post-browser check covers these three original model rowsets, not all twenty table rowsets or six graph hashes; the broader preservation passed earlier after schema/runtime/app import.",
+    "post_reopen_native_audit": {
+      "status": "passed",
+      "matching_before_after_markers": 20,
+      "completed_personal_answers": 2,
+      "additional_model_responses": 0,
+      "scope": "All captured audit markers matched exactly before and after reopening, including the first answer/run/revision/events hashes, original v1 model-rowset baseline hashes, current search coverage and completed response counts. Personal hashes remain a post-adoption/follow-up baseline; broader twenty-table/six-graph preservation was established at the earlier schema/runtime/app-import checkpoints."
+    }
+  },
+  "existing_installations": {
+    "baseline_recorded": true,
+    "schemas": 3,
+    "applications": 3,
+    "runtime_tables": 71,
+    "comparison": "passed: final read-only checks matched all 74 original-installation assertions and all 29 separate clean-rehearsal assertions. The upgraded-app persistence audit separately confirmed its recorded pre-sign-out markers after reopening.",
+    "scope": "Table row counts and digests, app identities and page counts. Raw VECTOR values excluded; search chunk metadata and content included. Private baseline retained outside version control."
+  },
+  "javavm": "VALID at initial readiness and all final recorded schema/application preservation checks; no changes made",
+  "release_branch": "unchanged",
+  "limitations": [
+    "Acceptance is scoped to candidate02 executable content and the recorded isolated-schema rehearsals. Corrected package instructions do not represent another deployment, and v2 remains unpromoted.",
+    "Both routes ran on an existing temporary ADB Serverless database. Provisioning a new database or enabling/restarting JAVAVM was not tested by these rehearsals.",
+    "Each route used one app account for its browser rehearsal; this does not establish two-account browser isolation or permanent-delete confirmation.",
+    "Legacy sample conversations remain browser-session-bound and are not automatically converted into personal My Contexts work. Preserved v1 rows/evidence/RDF do not promise legacy chat reopening after logout.",
+    "New personal-answer database hashes were first recorded after adoption/follow-up. UI text and historical sources were compared before/after refinement; no pre-adoption database-hash comparison is claimed.",
+    "Final post-browser legacy model preservation covers three original model rowsets. Full twenty-table and six-graph comparisons were made earlier, before the new personal browser writes.",
+    "Historical dev validation records retain their own recorded scope. Generation/local tests alone do not establish native or browser acceptance."
+  ],
+  "pending_checks": [],
+  "tested_package": "candidate02",
+  "packaging_checkpoint": "Candidate02 supplied the tested runtime. Corrected package execution instructions, SQL comments, the adoption success message and acceptance documentation do not represent another deployment. The distribution remains an unpromoted candidate; no commit or push is implied."
+}

@@ -1,0 +1,485 @@
+{
+  "format_version": 1,
+  "steps": [
+    {
+      "migration_id": "1.0.0-001-kcv_settings",
+      "path": "1.0.0-001-kcv_settings.sql",
+      "sha256": "c022eaa3b78fd020235f89c4d73e86169199bf9e23bf78f6b02546516fe8518d"
+    },
+    {
+      "migration_id": "1.0.0-002-kcv_sources",
+      "path": "1.0.0-002-kcv_sources.sql",
+      "sha256": "94cb629bc30eb0f136ad8a0c086c81d5d66247b3e0abca0e897b7df7432db047"
+    },
+    {
+      "migration_id": "1.0.0-003-kcv_passages",
+      "path": "1.0.0-003-kcv_passages.sql",
+      "sha256": "85cee6ecc966d1f5107792df22e313a4033691a4e00d11668b67624422857ff4"
+    },
+    {
+      "migration_id": "1.0.0-004-kcv_contexts",
+      "path": "1.0.0-004-kcv_contexts.sql",
+      "sha256": "e912ea4cf9b195ab63081fa8b2bb9ef04ab9e1caadbd64fa68f1f56828fe6f9b"
+    },
+    {
+      "migration_id": "1.0.0-005-kcv_graph_runs",
+      "path": "1.0.0-005-kcv_graph_runs.sql",
+      "sha256": "16774ef1dc10aadd8444a583696b1e286d8be2e5bd53d5a299e2e9c33a94306b"
+    },
+    {
+      "migration_id": "1.0.0-006-kcv_rdf_stage",
+      "path": "1.0.0-006-kcv_rdf_stage.sql",
+      "sha256": "0f939f9ca088784d4726ebc9e64171c551d2dbcdbecd60c1db887b21d20ecf68"
+    },
+    {
+      "migration_id": "1.0.0-007-kcv_graph_sources",
+      "path": "1.0.0-007-kcv_graph_sources.sql",
+      "sha256": "089a2ce28d29f76fa25dc0c271f9e86e9b0ea794ee22c604e67456ce919b1298"
+    },
+    {
+      "migration_id": "1.0.0-008-kcv_graph_contexts",
+      "path": "1.0.0-008-kcv_graph_contexts.sql",
+      "sha256": "edf98817c8aa865fb8112ab467911120c3c5146d2ebdb7119de45450e617f573"
+    },
+    {
+      "migration_id": "1.0.0-009-kcv_feedback",
+      "path": "1.0.0-009-kcv_feedback.sql",
+      "sha256": "487a3b8a137689b5894f21197d38f91faf31631ad7696f6ea2005fa0eb787a32"
+    },
+    {
+      "migration_id": "1.0.0-010-kcv_dataset_runs",
+      "path": "1.0.0-010-kcv_dataset_runs.sql",
+      "sha256": "60afb38081e285cfc13d6bfafebdc9fde95fee945a61133b774ed55e56cd32ed"
+    },
+    {
+      "migration_id": "1.0.0-011-kcv_dataset_stage",
+      "path": "1.0.0-011-kcv_dataset_stage.sql",
+      "sha256": "cb575b1ecaa5372fb5e02ae47ea25186159873db9ad186a240be874f0ce1cd42"
+    },
+    {
+      "migration_id": "1.0.0-012-kcv_scenario_revisions",
+      "path": "1.0.0-012-kcv_scenario_revisions.sql",
+      "sha256": "d7c43ddb21b07b1f8854e554ce899ccad0534460f72fb3386ed26693789b7d97"
+    },
+    {
+      "migration_id": "1.0.0-013-kcv_chat_sessions",
+      "path": "1.0.0-013-kcv_chat_sessions.sql",
+      "sha256": "64f47be2aad1548fc7330c2931eea8dde28a5dee7676ac4c1ba028acae2d7379"
+    },
+    {
+      "migration_id": "1.0.0-014-kcv_scenario_changes",
+      "path": "1.0.0-014-kcv_scenario_changes.sql",
+      "sha256": "c06c09bdb9e73835a75195e96b36eab3e89325a1a8d31d9ba010704378e8acf8"
+    },
+    {
+      "migration_id": "1.0.0-015-kcv_scenario_audit",
+      "path": "1.0.0-015-kcv_scenario_audit.sql",
+      "sha256": "b544ea74cdc697ab7701b1eb0fb0ae6a7e835b75d66a7fb94f02d4ba955a3152"
+    },
+    {
+      "migration_id": "1.0.0-016-kcv_chat_turns",
+      "path": "1.0.0-016-kcv_chat_turns.sql",
+      "sha256": "3b148562fb0de494d5023c252715c250ebb4056fe8b9da6a09f243d45c605861"
+    },
+    {
+      "migration_id": "1.0.0-017-kcv_scenario_observations",
+      "path": "1.0.0-017-kcv_scenario_observations.sql",
+      "sha256": "5c879dd8aeac57240da294a46c26017d3f6cc0050903e4ab6e627a50f9ab1665"
+    },
+    {
+      "migration_id": "1.0.0-018-kcv_response_runs",
+      "path": "1.0.0-018-kcv_response_runs.sql",
+      "sha256": "406a12a596f3690c9898bb480ab5919f5d49d9d4e232607e4c52ae0b9caf64f9"
+    },
+    {
+      "migration_id": "1.0.0-019-kcv_response_tool_calls",
+      "path": "1.0.0-019-kcv_response_tool_calls.sql",
+      "sha256": "5968632f5f96f1642bb4511d1eb136fab88b5bd6bf2b523a73dbe7c46d85fc61"
+    },
+    {
+      "migration_id": "1.0.0-020-kcv_domain_runs",
+      "path": "1.0.0-020-kcv_domain_runs.sql",
+      "sha256": "6769d9b4d716ca7ac69ec1d0f47417687498a85b8744accb29413c555d356aa5"
+    },
+    {
+      "migration_id": "1.0.0-021-schema-setting",
+      "path": "1.0.0-021-schema-setting.sql",
+      "sha256": "5434dd3db353e536882bf98d4b6ad39258cef6c7e91245e4f13b70498f2fef33"
+    },
+    {
+      "migration_id": "1.0.0-022-kcv_tool_run_ix",
+      "path": "1.0.0-022-kcv_tool_run_ix.sql",
+      "sha256": "3b9230bc8c603069f5f0c57488a3a13645e186c5ca10ba209676f0cfd9d93f11"
+    },
+    {
+      "migration_id": "1.0.0-023-kcv_dataset-package",
+      "path": "1.0.0-023-kcv_dataset-package.sql",
+      "sha256": "f46e4c1b2b5ffcd383057212646179aea0e618f1e0c0f251980b311e327fd81c"
+    },
+    {
+      "migration_id": "1.0.0-024-kcv_trace-package",
+      "path": "1.0.0-024-kcv_trace-package.sql",
+      "sha256": "49719b60d0120d0722b0fd5f2459ba8ccf55eb0958ba39a2f67e568f422e9e0b"
+    },
+    {
+      "migration_id": "1.0.0-025-kcv_scenario-package",
+      "path": "1.0.0-025-kcv_scenario-package.sql",
+      "sha256": "13614ca0ebe03e4399f7957f354921bf04de08d29ad9f41c59df3d0de2e89710"
+    },
+    {
+      "migration_id": "1.0.0-026-kcv_apex-package",
+      "path": "1.0.0-026-kcv_apex-package.sql",
+      "sha256": "6221ef7c5c6e0c8f4b2803711cb2e7cc41d8f2152e3fb8f3688f2967d869cefc"
+    },
+    {
+      "migration_id": "1.0.0-027-kcv_context_packet-function",
+      "path": "1.0.0-027-kcv_context_packet-function.sql",
+      "sha256": "3010d313d0bd040775f724c37a2ec2d5806eb7d445eed5f048127b9c20bd5685"
+    },
+    {
+      "migration_id": "1.0.0-028-kcv_source_packet-function",
+      "path": "1.0.0-028-kcv_source_packet-function.sql",
+      "sha256": "11d813e0bc92e44ed8dd02cc08145822779616628abd9ad15bee19691b5bad47"
+    },
+    {
+      "migration_id": "1.0.0-029-kcv_evidence_packet-function",
+      "path": "1.0.0-029-kcv_evidence_packet-function.sql",
+      "sha256": "f396d78787d28cdd79de3d9b89f52af9515b7555ee7ae538bebec2d1a6681042"
+    },
+    {
+      "migration_id": "1.0.0-030-kcv_dataset-package-body",
+      "path": "1.0.0-030-kcv_dataset-package-body.sql",
+      "sha256": "c30dd6947b1eca89da28962e32d1d57878890dced3c7bb6e6f5a6c55fb189ea6"
+    },
+    {
+      "migration_id": "1.0.0-031-kcv_trace-package-body",
+      "path": "1.0.0-031-kcv_trace-package-body.sql",
+      "sha256": "6b64dfdfe361d2a2650e7591ad01615aae907e71fe62884ada554ed7f861f734"
+    },
+    {
+      "migration_id": "1.0.0-032-kcv_scenario-package-body",
+      "path": "1.0.0-032-kcv_scenario-package-body.sql",
+      "sha256": "08c9298e9a3e395282ad6a650d810df0d4685505b42dbbfe03a4ae56353a05b9"
+    },
+    {
+      "migration_id": "1.0.0-033-kcv_extract_domain-function",
+      "path": "1.0.0-033-kcv_extract_domain-function.sql",
+      "sha256": "caa8c0dbe178dd0145997ce5836423d97ea43db5ff5bc20d3219c9e17a93e711"
+    },
+    {
+      "migration_id": "1.0.0-034-kcv_scenario_evidence-function",
+      "path": "1.0.0-034-kcv_scenario_evidence-function.sql",
+      "sha256": "69fa90dab92de9e808df271a1aab257f751c4d1cd999c7fddfe7a0cb8922591d"
+    },
+    {
+      "migration_id": "1.0.0-035-kcv_scenario_propose-function",
+      "path": "1.0.0-035-kcv_scenario_propose-function.sql",
+      "sha256": "24fdbc1425981e88fb717a8998a60c5077484eec3f2766a595267df20d6af38a"
+    },
+    {
+      "migration_id": "1.0.0-036-kcv_apex-package-body",
+      "path": "1.0.0-036-kcv_apex-package-body.sql",
+      "sha256": "16e32fce956069dfe50ea952ca614f18dc584c57545ff59bdec98ff0aa830177"
+    },
+    {
+      "migration_id": "2.0.0-c2-001-kcv_personal_contexts",
+      "path": "2.0.0-c2-001-kcv_personal_contexts.sql",
+      "sha256": "1af73204e02d5593399cdc8f45bd4193a3329eb4767408e8401c8d351f8bccd6"
+    },
+    {
+      "migration_id": "2.0.0-c2-002-kcv_personal_owner_ix",
+      "path": "2.0.0-c2-002-kcv_personal_owner_ix.sql",
+      "sha256": "9782f4c7827751a5cb3a9992d5d226ec8f469fa284b30eabcfdf9e7d38258e06"
+    },
+    {
+      "migration_id": "2.0.0-c2-003-kcv_context_requests",
+      "path": "2.0.0-c2-003-kcv_context_requests.sql",
+      "sha256": "f4da874424559659db45f4f45064ed3f1cad3053b166545481bb219154cbef11"
+    },
+    {
+      "migration_id": "2.0.0-c2-004-kcv_access-package",
+      "path": "2.0.0-c2-004-kcv_access-package.sql",
+      "sha256": "b1a3ab428005b534c82f499687239b2b8dbc674e39fc99819768761caa592b1d"
+    },
+    {
+      "migration_id": "2.0.0-c2-005-kcv_access-package-body",
+      "path": "2.0.0-c2-005-kcv_access-package-body.sql",
+      "sha256": "863d7ae08cd7df82591cf090424c027397c92f00628944a05a73d6f8ee2fa31b"
+    },
+    {
+      "migration_id": "2.0.0-c2-006-kcv_personal_context_api-package",
+      "path": "2.0.0-c2-006-kcv_personal_context_api-package.sql",
+      "sha256": "1e9494ffce9b163bb7737bf96999a86ee9d3debb97156f1643572de784a77abf"
+    },
+    {
+      "migration_id": "2.0.0-c2-007-kcv_personal_context_api-package-body",
+      "path": "2.0.0-c2-007-kcv_personal_context_api-package-body.sql",
+      "sha256": "d9a0fdc41dac8e1d12ee46965603e0d45edaf44a8db390c2640979b697e8a776"
+    },
+    {
+      "migration_id": "2.0.0-c2-ready",
+      "path": "2.0.0-c2-ready.sql",
+      "sha256": "aa1c0eac160414c43828b137fe98ded995e4df6ea83e33cfdebe3077e8c0456d"
+    },
+    {
+      "migration_id": "2.0.0-c2-008-kcv_access-session-binding-package",
+      "path": "2.0.0-c2-008-kcv_access-session-binding-package.sql",
+      "sha256": "5b4ed04019a958dd009907f9fb291a69c3ebba64f181e6570e2bfabc3df56666"
+    },
+    {
+      "migration_id": "2.0.0-c2-009-kcv_access-session-binding-package-body",
+      "path": "2.0.0-c2-009-kcv_access-session-binding-package-body.sql",
+      "sha256": "4cb66ffbb3a3ef9198ba872fe3a0ea57730a085f2de8cd281f5e27e605427756"
+    },
+    {
+      "migration_id": "2.0.0-c2-010-recompile-context-api",
+      "path": "2.0.0-c2-010-recompile-context-api.sql",
+      "sha256": "6510f16393415aa2cf331845b57c15bfbee96d616d331fca3f59b747e9514be2"
+    },
+    {
+      "migration_id": "2.0.0-c2-identity-ready",
+      "path": "2.0.0-c2-identity-ready.sql",
+      "sha256": "775a053f012f9402c43b94eed22f59fb0cbc068a8dd2a454999438a7505424df"
+    },
+    {
+      "migration_id": "2.0.0-c3-001-kcv_chat_sessions-journey-columns",
+      "path": "2.0.0-c3-001-kcv_chat_sessions-journey-columns.sql",
+      "sha256": "dd132d1aa1e6b5f212572da549f9f9b1bdfd0a7d3ec8422926b3da7dc09509a1"
+    },
+    {
+      "migration_id": "2.0.0-c3-002-kcv_chat_personal_ix",
+      "path": "2.0.0-c3-002-kcv_chat_personal_ix.sql",
+      "sha256": "32faf8db2d625881c9a17c2cd764694986945779b586727e0d00c50719cc6681"
+    },
+    {
+      "migration_id": "2.0.0-c3-003-kcv_response_runs-journey-columns",
+      "path": "2.0.0-c3-003-kcv_response_runs-journey-columns.sql",
+      "sha256": "afee2fac04fd95d4bff1ef8bb20ece9f582dc86f44e2abc6e7680bdb237b3445"
+    },
+    {
+      "migration_id": "2.0.0-c3-004-kcv_response_request_ix",
+      "path": "2.0.0-c3-004-kcv_response_request_ix.sql",
+      "sha256": "5d65f769353069997a0be789247b76ca0dcb8f215a113d8a7dd59008d565c07f"
+    },
+    {
+      "migration_id": "2.0.0-c3-005-kcv_context_attachments",
+      "path": "2.0.0-c3-005-kcv_context_attachments.sql",
+      "sha256": "2d481598b1782edb61eb602946f578941b00379d7f8edecdd70aefbe7555997a"
+    },
+    {
+      "migration_id": "2.0.0-c3-006-kcv_personal_operations",
+      "path": "2.0.0-c3-006-kcv_personal_operations.sql",
+      "sha256": "d152371dcadf055583eb94e74532d76d19b170e51ea3ea9a1e883fd2ba900025"
+    },
+    {
+      "migration_id": "2.0.0-c3-007-kcv_model_boundaries",
+      "path": "2.0.0-c3-007-kcv_model_boundaries.sql",
+      "sha256": "d7d070680e5a9eb4e326f7515e66fab4b52e1f4ebaf454c508b244d9366538f8"
+    },
+    {
+      "migration_id": "2.0.0-c3-008-kcv_access-package",
+      "path": "2.0.0-c3-008-kcv_access-package.sql",
+      "sha256": "91870bdce469b496d7555713082da4c39637fa9a53b61e1c3f7d4da11241ceaf"
+    },
+    {
+      "migration_id": "2.0.0-c3-009-kcv_personal_context_api-package",
+      "path": "2.0.0-c3-009-kcv_personal_context_api-package.sql",
+      "sha256": "6d8ac1a8f848860b9cd9811ac944954984b3d3aa43ac51bcbd36777d2ca3399f"
+    },
+    {
+      "migration_id": "2.0.0-c3-010-kcv_personal_journey-package",
+      "path": "2.0.0-c3-010-kcv_personal_journey-package.sql",
+      "sha256": "2be02e0b3aa3cdf3ee106907ebb65b2ebc0304186ba4d5faf8819bb9678bb419"
+    },
+    {
+      "migration_id": "2.0.0-c3-011-kcv_scenario-package",
+      "path": "2.0.0-c3-011-kcv_scenario-package.sql",
+      "sha256": "7d216a4988172b0d3f03f48730268421d01331a99bd40da47273ecd05342b487"
+    },
+    {
+      "migration_id": "2.0.0-c3-012-kcv_access-package-body",
+      "path": "2.0.0-c3-012-kcv_access-package-body.sql",
+      "sha256": "b59e08749620c5a6fa3a8ace0e02037e44c60b9f082d5b78bba36e2c130d53b2"
+    },
+    {
+      "migration_id": "2.0.0-c3-013-kcv_personal_context_api-package-body",
+      "path": "2.0.0-c3-013-kcv_personal_context_api-package-body.sql",
+      "sha256": "55d16ffcae7bb3298aab8fb87196d4db75ec663a1da308cf865b6c0996075d98"
+    },
+    {
+      "migration_id": "2.0.0-c3-014-kcv_personal_journey-package-body",
+      "path": "2.0.0-c3-014-kcv_personal_journey-package-body.sql",
+      "sha256": "47902238b0449dfb962f1a4f050a00f65ea12fbcf94105c27dd8e84f309915f8"
+    },
+    {
+      "migration_id": "2.0.0-c3-r1-001-kcv_scenario-package-body",
+      "path": "2.0.0-c3-r1-001-kcv_scenario-package-body.sql",
+      "sha256": "656e1944ea2d1853e1b1d1cc7a18fee967c3946cee83a351b603d81e10a39c3a"
+    },
+    {
+      "migration_id": "2.0.0-c3-r1-002-kcv_trace-package-body",
+      "path": "2.0.0-c3-r1-002-kcv_trace-package-body.sql",
+      "sha256": "ec2b67d8cd5b47d03ff8b147e854a4a6595cbc3c348758e0e82976272453c6d5"
+    },
+    {
+      "migration_id": "2.0.0-c3-r1-003-kcv_apex-package-body",
+      "path": "2.0.0-c3-r1-003-kcv_apex-package-body.sql",
+      "sha256": "e6d63132487f591c4ee302b58c33e924de601a171f47f486bc514490323a54e5"
+    },
+    {
+      "migration_id": "2.0.0-c3-r1-004-kcv_personal_journey-package-body",
+      "path": "2.0.0-c3-r1-004-kcv_personal_journey-package-body.sql",
+      "sha256": "caaa2e5dbb5987e5c86e229ff44261212c8e5e83f978107afc24fc05a9aca880"
+    },
+    {
+      "migration_id": "2.0.0-c3-r1-ready",
+      "path": "2.0.0-c3-r1-ready.sql",
+      "sha256": "e79a5575a2d3b82817dcf6281474aff54792ee28d70d7117f4d4f5a2950c936d"
+    },
+    {
+      "migration_id": "2.0.0-c3-r2-001-kcv_scenario-package-body",
+      "path": "2.0.0-c3-r2-001-kcv_scenario-package-body.sql",
+      "sha256": "e0523a2ef637abfea8c0fb50aa49e9b078c63234c8c285ba9c3d50f122dbab9d"
+    },
+    {
+      "migration_id": "2.0.0-c3-r2-ready",
+      "path": "2.0.0-c3-r2-ready.sql",
+      "sha256": "f48156fda23c682c24eca98e2684ed450466e39a155ba7a1c32bf0968a857830"
+    },
+    {
+      "migration_id": "2.0.0-c3-r3-001-kcv_scenario-package-body",
+      "path": "2.0.0-c3-r3-001-kcv_scenario-package-body.sql",
+      "sha256": "6dbed398ee1f1b886516ba6d526edf3203e7c87178905eca4a1272269a8a5159"
+    },
+    {
+      "migration_id": "2.0.0-c3-r3-002-kcv_personal_journey-package-body",
+      "path": "2.0.0-c3-r3-002-kcv_personal_journey-package-body.sql",
+      "sha256": "ad16b732c73156ce4e9ee2d5da306a9de0948d1c1204d1254a53f0ff5c34be05"
+    },
+    {
+      "migration_id": "2.0.0-c3-r3-003-kcv_apex-package-body",
+      "path": "2.0.0-c3-r3-003-kcv_apex-package-body.sql",
+      "sha256": "1761e9829d1f4d8f297826edeeae763e578acf5dafbef6bbd87551eccb05cf27"
+    },
+    {
+      "migration_id": "2.0.0-c3-r3-ready",
+      "path": "2.0.0-c3-r3-ready.sql",
+      "sha256": "b72122ad9d2e6fc9c7f795aa7ed05c6d90d47bc2f133bfb0a07df4708519539e"
+    },
+    {
+      "migration_id": "2.0.0-c3-r4-001-kcv_response_tool_calls-origin",
+      "path": "2.0.0-c3-r4-001-kcv_response_tool_calls-origin.sql",
+      "sha256": "f5c98625ff98f5dc3819be278a927e69d4c07b17ac514d884ca6d67a11971b69"
+    },
+    {
+      "migration_id": "2.0.0-c3-r4-002-kcv_response_runs-model-start",
+      "path": "2.0.0-c3-r4-002-kcv_response_runs-model-start.sql",
+      "sha256": "51d3b67e605733124572083ac4a22f1783ec6fe1905b3bc03e9ccd9668e705fe"
+    },
+    {
+      "migration_id": "2.0.0-c3-r4-003-kcv_trace-package",
+      "path": "2.0.0-c3-r4-003-kcv_trace-package.sql",
+      "sha256": "dd43e64982c40a0f93dd5a13542c6cd2f307fef5fd954fc2852cff4976b1afb0"
+    },
+    {
+      "migration_id": "2.0.0-c3-r4-004-kcv_scenario-package",
+      "path": "2.0.0-c3-r4-004-kcv_scenario-package.sql",
+      "sha256": "b2be5230148f8d9e91c72ad845ce22efcbd262d261d2602b6354ac26f6b88888"
+    },
+    {
+      "migration_id": "2.0.0-c3-r4-005-kcv_trace-package-body",
+      "path": "2.0.0-c3-r4-005-kcv_trace-package-body.sql",
+      "sha256": "e3a61cfd6fb8837b581a884cbb15927418870165c29d295810bc8bd6a6e091f1"
+    },
+    {
+      "migration_id": "2.0.0-c3-r4-006-kcv_scenario-package-body",
+      "path": "2.0.0-c3-r4-006-kcv_scenario-package-body.sql",
+      "sha256": "5d7f27c68d105c7727753406ff3424669b440abeee2d513bc7720eea92f7b785"
+    },
+    {
+      "migration_id": "2.0.0-c3-r4-ready",
+      "path": "2.0.0-c3-r4-ready.sql",
+      "sha256": "1fbfccaaf0155713f8fbdf301a941d410949c20ddef3145d7873ea45d7f9ae5d"
+    },
+    {
+      "migration_id": "2.0.0-c3-r5-001-kcv_context_deletions",
+      "path": "2.0.0-c3-r5-001-kcv_context_deletions.sql",
+      "sha256": "a9319d1af5073ed97a4f5e2eef4fafd7ead58890fb37e182ab773c9456e69edd"
+    },
+    {
+      "migration_id": "2.0.0-c3-r5-002-kcv_context_delete_resources",
+      "path": "2.0.0-c3-r5-002-kcv_context_delete_resources.sql",
+      "sha256": "3c9d0ab59c573fc62a1b75c9faf90761570e0b55ee53c20e433fc9c2f8288958"
+    },
+    {
+      "migration_id": "2.0.0-c3-r5-003-kcv_context_delete-package",
+      "path": "2.0.0-c3-r5-003-kcv_context_delete-package.sql",
+      "sha256": "ef8779f20b664f940264fb792e11a20a1d3d3fd40f1bd8b7c8d650e52f7d0485"
+    },
+    {
+      "migration_id": "2.0.0-c3-r5-004-kcv_access-package-body",
+      "path": "2.0.0-c3-r5-004-kcv_access-package-body.sql",
+      "sha256": "9a0be7b4cb3f36197717aefa7855e4221bb3246cf6b64751eb51de41f2c37c1f"
+    },
+    {
+      "migration_id": "2.0.0-c3-r5-005-kcv_personal_context_api-package-body",
+      "path": "2.0.0-c3-r5-005-kcv_personal_context_api-package-body.sql",
+      "sha256": "378eeb7e0c8fe1fed6a2b573cdeff9367064655fc5f93f00836cdb1e8c67545b"
+    },
+    {
+      "migration_id": "2.0.0-c3-r5-006-kcv_personal_journey-package-body",
+      "path": "2.0.0-c3-r5-006-kcv_personal_journey-package-body.sql",
+      "sha256": "6a672c88de8265a79ee667a9073e7420ae2f9fb6526f0dd0493a6135dcc4a572"
+    },
+    {
+      "migration_id": "2.0.0-c3-r5-007-kcv_context_delete-package-body",
+      "path": "2.0.0-c3-r5-007-kcv_context_delete-package-body.sql",
+      "sha256": "47615ea87d399eb6fe87d413e3a60b7dbdad1a259bcec2b4a9bc2a537f002c23"
+    },
+    {
+      "migration_id": "2.0.0-c3-r5-ready",
+      "path": "2.0.0-c3-r5-ready.sql",
+      "sha256": "5ac531171454cbb36e137106c566d689ac0ac182a714df9e5427b0b32ff1ddac"
+    },
+    {
+      "migration_id": "2.0.0-c3-r6-001-kcv_context_search_chunks",
+      "path": "2.0.0-c3-r6-001-kcv_context_search_chunks.sql",
+      "sha256": "a11decae22ff4bf789b01e07c4860fdf5bbdf21d3154011e4e4e3708d01e7e62"
+    },
+    {
+      "migration_id": "2.0.0-c3-r6-002-kcv_context_search-package",
+      "path": "2.0.0-c3-r6-002-kcv_context_search-package.sql",
+      "sha256": "e6164dbb0f89c0b23d6022fbc1c42e29fdae1e910adb7b0309c694dfb25d6e0e"
+    },
+    {
+      "migration_id": "2.0.0-c3-r6-003-kcv_context_search-package-body",
+      "path": "2.0.0-c3-r6-003-kcv_context_search-package-body.sql",
+      "sha256": "3a291c34d7857e4a664e42a1d9400db3618ae29d2427653b4b5c7dc78c2d3fdb"
+    },
+    {
+      "migration_id": "2.0.0-c3-r6-004-kcv_personal_context_api-package-body",
+      "path": "2.0.0-c3-r6-004-kcv_personal_context_api-package-body.sql",
+      "sha256": "4ba95e438e14a58cce82eaa07d589e900e6939b81377c818efabba2de94eafb1"
+    },
+    {
+      "migration_id": "2.0.0-c3-r6-005-kcv_personal_journey-package-body",
+      "path": "2.0.0-c3-r6-005-kcv_personal_journey-package-body.sql",
+      "sha256": "d4070610025e0985941c75701b6a72fe33bdb90430f9abe9d8e0c20c1750562b"
+    },
+    {
+      "migration_id": "2.0.0-c3-r6-ready",
+      "path": "2.0.0-c3-r6-ready.sql",
+      "sha256": "ff525829f4a9817832bab97d35b23dad003335b6c4e243d83516a4f15d2af496"
+    },
+    {
+      "migration_id": "2.0.0-c3-r7-001-kcv_context_search-package-body",
+      "path": "2.0.0-c3-r7-001-kcv_context_search-package-body.sql",
+      "sha256": "f7ce0561ef795f3d383b57884cbc8cf13655664ad879d1aca00a33a7c9c045e9"
+    },
+    {
+      "migration_id": "2.0.0-c3-r7-ready",
+      "path": "2.0.0-c3-r7-ready.sql",
+      "sha256": "135ca748ca3e886312b7f46baea221e0bb2d6ac5410c934558f4759a9cc208ed"
+    }
+  ]
+}

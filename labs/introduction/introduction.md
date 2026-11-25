@@ -30,7 +30,8 @@ No Python or local build is required on release. No OCI Console or SQL knowledge
 
    | Your question | Continue to |
    | --- | --- |
-   | How can this collection help me decide what to explore next? | [Use the app](../explore-evidence/explore-evidence.md) |
+   | How can this collection help with my own question? | [My Contexts](../my-contexts/my-contexts.md) |
+   | How can I try a supplied fictional example first? | [Explore a sample](../explore-evidence/explore-evidence.md) |
    | How do context, sources, the graph, agents and the UI work together? | [Understand the collection as a developer](../understand-collection/understand-collection.md) |
    | How do I install the supplied sample? | [Prepare release files](../prepare-environment/prepare-environment.md), then follow the deployment route |
    | How do I build my own collection or change this implementation? | Select dev and read `docs/build-your-own.md` |
@@ -50,7 +51,7 @@ No Python or local build is required on release. No OCI Console or SQL knowledge
    | ADMIN | Database/workspace setup when deploying the sample |
    | Your OCI user | Cloud provisioning and model permissions when your role requires them |
 
-2. Keep the credentials distinct and private. An app user does not need an ADMIN password. A developer inspecting a graph does not need to change cloud IAM when the sample is already configured.
+2. Use an individual app account for private My Contexts work: a shared login shares that library. Keep the credentials distinct and private. An app user does not need an ADMIN password. A developer inspecting a graph does not need to change cloud IAM when the sample is already configured.
 
 **Expected outcome:** you know which login is relevant and who supplies it.
 

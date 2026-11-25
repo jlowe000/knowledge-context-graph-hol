@@ -1,0 +1,548 @@
+{
+  "format_version": 1,
+  "product_version": "2.0.0",
+  "ready_checkpoint": "2.0.0-c3-r7-ready",
+  "project_migrations": 96,
+  "grouping_target_bytes": 1048576,
+  "size_limit_is_strict": false,
+  "execution_acceptance": "not established by generation",
+  "routes": {
+    "fresh": [
+      {
+        "ordinal": 1,
+        "path": "fresh/001.sql",
+        "sha256": "9fef82b20abbc2b07a6b16c2fd344ed939a3b5064d41d5e3c677ce2bb260dabb",
+        "bytes": 2789,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "bootstrap"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:001/019"
+      },
+      {
+        "ordinal": 2,
+        "path": "fresh/002.sql",
+        "sha256": "9ef9b683487301d7602759943a2637b95cab6af3fb1e24fb2733b77f3091f75d",
+        "bytes": 2024257,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "retired-candidate-preflight"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:002/019"
+      },
+      {
+        "ordinal": 3,
+        "path": "fresh/003.sql",
+        "sha256": "9d22f2b375f1d5b778cc785a73a751d386a61085c9c9b21df5e223b0549d4698",
+        "bytes": 997361,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "1.0.0-001-kcv_settings",
+          "1.0.0-002-kcv_sources",
+          "1.0.0-003-kcv_passages",
+          "1.0.0-004-kcv_contexts",
+          "1.0.0-005-kcv_graph_runs",
+          "1.0.0-006-kcv_rdf_stage",
+          "1.0.0-007-kcv_graph_sources",
+          "1.0.0-008-kcv_graph_contexts",
+          "1.0.0-009-kcv_feedback",
+          "1.0.0-010-kcv_dataset_runs",
+          "1.0.0-011-kcv_dataset_stage",
+          "1.0.0-012-kcv_scenario_revisions",
+          "1.0.0-013-kcv_chat_sessions",
+          "1.0.0-014-kcv_scenario_changes",
+          "1.0.0-015-kcv_scenario_audit",
+          "1.0.0-016-kcv_chat_turns",
+          "1.0.0-017-kcv_scenario_observations",
+          "1.0.0-018-kcv_response_runs",
+          "1.0.0-019-kcv_response_tool_calls",
+          "1.0.0-020-kcv_domain_runs",
+          "1.0.0-021-schema-setting",
+          "1.0.0-022-kcv_tool_run_ix",
+          "1.0.0-023-kcv_dataset-package",
+          "1.0.0-024-kcv_trace-package",
+          "1.0.0-025-kcv_scenario-package",
+          "1.0.0-026-kcv_apex-package",
+          "1.0.0-027-kcv_context_packet-function",
+          "1.0.0-028-kcv_source_packet-function",
+          "1.0.0-029-kcv_evidence_packet-function",
+          "1.0.0-030-kcv_dataset-package-body",
+          "1.0.0-031-kcv_trace-package-body",
+          "1.0.0-032-kcv_scenario-package-body",
+          "1.0.0-033-kcv_extract_domain-function",
+          "1.0.0-034-kcv_scenario_evidence-function",
+          "1.0.0-035-kcv_scenario_propose-function",
+          "1.0.0-036-kcv_apex-package-body",
+          "2.0.0-c2-001-kcv_personal_contexts",
+          "2.0.0-c2-002-kcv_personal_owner_ix",
+          "2.0.0-c2-003-kcv_context_requests",
+          "2.0.0-c2-004-kcv_access-package",
+          "2.0.0-c2-005-kcv_access-package-body",
+          "2.0.0-c2-006-kcv_personal_context_api-package"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:003/019"
+      },
+      {
+        "ordinal": 4,
+        "path": "fresh/004.sql",
+        "sha256": "6025ed58f38d04e8c21252363325d844d2bacb3b6608fab2cfc8ae17c9a020d4",
+        "bytes": 168592,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c2-007-kcv_personal_context_api-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:004/019"
+      },
+      {
+        "ordinal": 5,
+        "path": "fresh/005.sql",
+        "sha256": "0f21c741aa0224b10d08d8d531b8649924a01e76c0cdc7ccd6f42f2257c16b00",
+        "bytes": 1056513,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "2.0.0-c2-ready"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:005/019"
+      },
+      {
+        "ordinal": 6,
+        "path": "fresh/006.sql",
+        "sha256": "04dab56d048d78c601b7733091131bf921a85be71c0d35ade1de5b5a076975f9",
+        "bytes": 206023,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c2-008-kcv_access-session-binding-package",
+          "2.0.0-c2-009-kcv_access-session-binding-package-body",
+          "2.0.0-c2-010-recompile-context-api"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:006/019"
+      },
+      {
+        "ordinal": 7,
+        "path": "fresh/007.sql",
+        "sha256": "b6001ef27b72dd56beb6789a124b91e52c3a8efd01670ca03d7e0cb80e050aa9",
+        "bytes": 1089500,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "2.0.0-c2-identity-ready"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:007/019"
+      },
+      {
+        "ordinal": 8,
+        "path": "fresh/008.sql",
+        "sha256": "36af56e5bae554de780043a3203b6800f865e7c47a147e8c2b788594d9a4fbb6",
+        "bytes": 990330,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-001-kcv_chat_sessions-journey-columns",
+          "2.0.0-c3-002-kcv_chat_personal_ix",
+          "2.0.0-c3-003-kcv_response_runs-journey-columns",
+          "2.0.0-c3-004-kcv_response_request_ix",
+          "2.0.0-c3-005-kcv_context_attachments",
+          "2.0.0-c3-006-kcv_personal_operations",
+          "2.0.0-c3-007-kcv_model_boundaries",
+          "2.0.0-c3-008-kcv_access-package",
+          "2.0.0-c3-009-kcv_personal_context_api-package",
+          "2.0.0-c3-010-kcv_personal_journey-package",
+          "2.0.0-c3-011-kcv_scenario-package",
+          "2.0.0-c3-012-kcv_access-package-body",
+          "2.0.0-c3-013-kcv_personal_context_api-package-body",
+          "2.0.0-c3-014-kcv_personal_journey-package-body",
+          "2.0.0-c3-r1-001-kcv_scenario-package-body",
+          "2.0.0-c3-r1-002-kcv_trace-package-body",
+          "2.0.0-c3-r1-003-kcv_apex-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:008/019"
+      },
+      {
+        "ordinal": 9,
+        "path": "fresh/009.sql",
+        "sha256": "cc520b462680afc5e4fe441be0acc8b28ff37bc0e757aa7d793eb54017d8397b",
+        "bytes": 244740,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r1-004-kcv_personal_journey-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:009/019"
+      },
+      {
+        "ordinal": 10,
+        "path": "fresh/010.sql",
+        "sha256": "443d7cacf7558adf76b4630a9b4bb61c8b6c17435e4e1b4abacf489c1171a3b5",
+        "bytes": 1180307,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "2.0.0-c3-r1-ready"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:010/019"
+      },
+      {
+        "ordinal": 11,
+        "path": "fresh/011.sql",
+        "sha256": "bbbb7960d487574e733a3a9294e284ee00be276cb137f79522a6402ef6b45d3d",
+        "bytes": 214728,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r2-001-kcv_scenario-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:011/019"
+      },
+      {
+        "ordinal": 12,
+        "path": "fresh/012.sql",
+        "sha256": "924b0cb4ae4b78ef1faef91be3f5e7e38efb13a2c2ac1fd7b5e2c0868a5ed5cd",
+        "bytes": 1056408,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "2.0.0-c3-r2-ready"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:012/019"
+      },
+      {
+        "ordinal": 13,
+        "path": "fresh/013.sql",
+        "sha256": "7a69650672513a36409d1cf42fd0fca0009ce78e93d38522cf8e23ebbcd70b40",
+        "bytes": 421621,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r3-001-kcv_scenario-package-body",
+          "2.0.0-c3-r3-002-kcv_personal_journey-package-body",
+          "2.0.0-c3-r3-003-kcv_apex-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:013/019"
+      },
+      {
+        "ordinal": 14,
+        "path": "fresh/014.sql",
+        "sha256": "bf7ea0eb85779bc2463ecaa52c55314c5b779d5af1e170059be118716d4c3b3a",
+        "bytes": 1023716,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r3-ready",
+          "2.0.0-c3-r4-001-kcv_response_tool_calls-origin",
+          "2.0.0-c3-r4-002-kcv_response_runs-model-start",
+          "2.0.0-c3-r4-003-kcv_trace-package",
+          "2.0.0-c3-r4-004-kcv_scenario-package",
+          "2.0.0-c3-r4-005-kcv_trace-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:014/019"
+      },
+      {
+        "ordinal": 15,
+        "path": "fresh/015.sql",
+        "sha256": "8f2157c628e1624203c228ddfd536ae927313bf622ab4202e758a9d49f23dda9",
+        "bytes": 1012739,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r4-006-kcv_scenario-package-body",
+          "2.0.0-c3-r4-ready",
+          "2.0.0-c3-r5-001-kcv_context_deletions",
+          "2.0.0-c3-r5-002-kcv_context_delete_resources",
+          "2.0.0-c3-r5-003-kcv_context_delete-package",
+          "2.0.0-c3-r5-004-kcv_access-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:015/019"
+      },
+      {
+        "ordinal": 16,
+        "path": "fresh/016.sql",
+        "sha256": "cd7c642a8e4e8a7e2c7062060bc38c09528691a4d412f0ddc2b52978dc791aac",
+        "bytes": 379922,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r5-005-kcv_personal_context_api-package-body",
+          "2.0.0-c3-r5-006-kcv_personal_journey-package-body",
+          "2.0.0-c3-r5-007-kcv_context_delete-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:016/019"
+      },
+      {
+        "ordinal": 17,
+        "path": "fresh/017.sql",
+        "sha256": "787b3c3f905847622c48d2e6e02f3f4a18b6bfe9261cda52efc0c876605c0189",
+        "bytes": 1041245,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r5-ready",
+          "2.0.0-c3-r6-001-kcv_context_search_chunks",
+          "2.0.0-c3-r6-002-kcv_context_search-package",
+          "2.0.0-c3-r6-003-kcv_context_search-package-body",
+          "2.0.0-c3-r6-004-kcv_personal_context_api-package-body",
+          "2.0.0-c3-r6-005-kcv_personal_journey-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:017/019"
+      },
+      {
+        "ordinal": 18,
+        "path": "fresh/018.sql",
+        "sha256": "c0858c7ebfe760006c8f55433b31d6628b6af3d1c0e0f6a98bc5648f5091b316",
+        "bytes": 996601,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r6-ready",
+          "2.0.0-c3-r7-001-kcv_context_search-package-body",
+          "2.0.0-c3-r7-ready"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:018/019"
+      },
+      {
+        "ordinal": 19,
+        "path": "fresh/019.sql",
+        "sha256": "0affd97285cedda98af9f507f268503a12be9d9f971c4d2dae1b29d248520720",
+        "bytes": 2373721,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "final-schema-verification"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=fresh:019/019"
+      }
+    ],
+    "upgrade": [
+      {
+        "ordinal": 1,
+        "path": "upgrade/001.sql",
+        "sha256": "72a731986c97047492ea4cc23f47970b283539e2f0ff9eb9a7d85d01893d65ec",
+        "bytes": 2793,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "bootstrap"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:001/018"
+      },
+      {
+        "ordinal": 2,
+        "path": "upgrade/002.sql",
+        "sha256": "487c2ef7382c521c42825d140c10607122070d3ea9bb90119e043f988558ace5",
+        "bytes": 2024261,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "retired-candidate-preflight"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:002/018"
+      },
+      {
+        "ordinal": 3,
+        "path": "upgrade/003.sql",
+        "sha256": "04bb1db9a3c28f12c5fffe737644ef5ae9429a779509cc609a026a6a5ac02521",
+        "bytes": 608852,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "verified-baseline-gate",
+          "2.0.0-c2-001-kcv_personal_contexts",
+          "2.0.0-c2-002-kcv_personal_owner_ix",
+          "2.0.0-c2-003-kcv_context_requests",
+          "2.0.0-c2-004-kcv_access-package",
+          "2.0.0-c2-005-kcv_access-package-body",
+          "2.0.0-c2-006-kcv_personal_context_api-package",
+          "2.0.0-c2-007-kcv_personal_context_api-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:003/018"
+      },
+      {
+        "ordinal": 4,
+        "path": "upgrade/004.sql",
+        "sha256": "3703ded1488c539c0ec59b2ed4afb8ca3642c150f9e301d61c4a87936ed50450",
+        "bytes": 1056517,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "2.0.0-c2-ready"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:004/018"
+      },
+      {
+        "ordinal": 5,
+        "path": "upgrade/005.sql",
+        "sha256": "992dc8d3ac2542c0f040933f70307c6b63737d6db65f841b6a1c38d68fd180e0",
+        "bytes": 206027,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c2-008-kcv_access-session-binding-package",
+          "2.0.0-c2-009-kcv_access-session-binding-package-body",
+          "2.0.0-c2-010-recompile-context-api"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:005/018"
+      },
+      {
+        "ordinal": 6,
+        "path": "upgrade/006.sql",
+        "sha256": "e86a3fb7242d8b554b8aac875750838221c4c2a0f7c8a8a7cf081602f645a049",
+        "bytes": 1089504,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "2.0.0-c2-identity-ready"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:006/018"
+      },
+      {
+        "ordinal": 7,
+        "path": "upgrade/007.sql",
+        "sha256": "a3824cda11a40400ef84e1cbbfeff7d000facce35d488471a0cbd75040b1297c",
+        "bytes": 990334,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-001-kcv_chat_sessions-journey-columns",
+          "2.0.0-c3-002-kcv_chat_personal_ix",
+          "2.0.0-c3-003-kcv_response_runs-journey-columns",
+          "2.0.0-c3-004-kcv_response_request_ix",
+          "2.0.0-c3-005-kcv_context_attachments",
+          "2.0.0-c3-006-kcv_personal_operations",
+          "2.0.0-c3-007-kcv_model_boundaries",
+          "2.0.0-c3-008-kcv_access-package",
+          "2.0.0-c3-009-kcv_personal_context_api-package",
+          "2.0.0-c3-010-kcv_personal_journey-package",
+          "2.0.0-c3-011-kcv_scenario-package",
+          "2.0.0-c3-012-kcv_access-package-body",
+          "2.0.0-c3-013-kcv_personal_context_api-package-body",
+          "2.0.0-c3-014-kcv_personal_journey-package-body",
+          "2.0.0-c3-r1-001-kcv_scenario-package-body",
+          "2.0.0-c3-r1-002-kcv_trace-package-body",
+          "2.0.0-c3-r1-003-kcv_apex-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:007/018"
+      },
+      {
+        "ordinal": 8,
+        "path": "upgrade/008.sql",
+        "sha256": "e83193bffdfc3f9c2094b52431062b68f36db7056557849e175a63e2cd6d633f",
+        "bytes": 244744,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r1-004-kcv_personal_journey-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:008/018"
+      },
+      {
+        "ordinal": 9,
+        "path": "upgrade/009.sql",
+        "sha256": "fea6e41f1ebf5bbaef823b194927ddf02b23649296617160a0e734ddba463da5",
+        "bytes": 1180311,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "2.0.0-c3-r1-ready"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:009/018"
+      },
+      {
+        "ordinal": 10,
+        "path": "upgrade/010.sql",
+        "sha256": "e8abb39133985a696fec11d95368718e7fe660b2b2d7932c7f80d977d06e0d54",
+        "bytes": 214732,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r2-001-kcv_scenario-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:010/018"
+      },
+      {
+        "ordinal": 11,
+        "path": "upgrade/011.sql",
+        "sha256": "e304d20f97df23916d1f5fca27c326a3584e1a3a73a9a29d6f71db9b3e2bbd8c",
+        "bytes": 1056412,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "2.0.0-c3-r2-ready"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:011/018"
+      },
+      {
+        "ordinal": 12,
+        "path": "upgrade/012.sql",
+        "sha256": "6b292016ef7d3b066214c0225b87a5d7f6f52b71ca67ef2f15900275eeccc6fe",
+        "bytes": 421625,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r3-001-kcv_scenario-package-body",
+          "2.0.0-c3-r3-002-kcv_personal_journey-package-body",
+          "2.0.0-c3-r3-003-kcv_apex-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:012/018"
+      },
+      {
+        "ordinal": 13,
+        "path": "upgrade/013.sql",
+        "sha256": "b9e08ec0129cb9ebb14f4d3feb510b75b850e255c84d0aaa4df8ccb02d34ce5c",
+        "bytes": 1023720,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r3-ready",
+          "2.0.0-c3-r4-001-kcv_response_tool_calls-origin",
+          "2.0.0-c3-r4-002-kcv_response_runs-model-start",
+          "2.0.0-c3-r4-003-kcv_trace-package",
+          "2.0.0-c3-r4-004-kcv_scenario-package",
+          "2.0.0-c3-r4-005-kcv_trace-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:013/018"
+      },
+      {
+        "ordinal": 14,
+        "path": "upgrade/014.sql",
+        "sha256": "3ae1d16c61f6e347fd5b608fa1ec87dda12b44bbdc744a1690bc0554bdc39c09",
+        "bytes": 1012743,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r4-006-kcv_scenario-package-body",
+          "2.0.0-c3-r4-ready",
+          "2.0.0-c3-r5-001-kcv_context_deletions",
+          "2.0.0-c3-r5-002-kcv_context_delete_resources",
+          "2.0.0-c3-r5-003-kcv_context_delete-package",
+          "2.0.0-c3-r5-004-kcv_access-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:014/018"
+      },
+      {
+        "ordinal": 15,
+        "path": "upgrade/015.sql",
+        "sha256": "210b639b5bf8a2a9218e6a80df306d10c825910679eea199409314c484f73db6",
+        "bytes": 379926,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r5-005-kcv_personal_context_api-package-body",
+          "2.0.0-c3-r5-006-kcv_personal_journey-package-body",
+          "2.0.0-c3-r5-007-kcv_context_delete-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:015/018"
+      },
+      {
+        "ordinal": 16,
+        "path": "upgrade/016.sql",
+        "sha256": "4a893e01c74b67982ad7122fa17ec77bb1151969ae748753733bc48e61ca6c5b",
+        "bytes": 1041249,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r5-ready",
+          "2.0.0-c3-r6-001-kcv_context_search_chunks",
+          "2.0.0-c3-r6-002-kcv_context_search-package",
+          "2.0.0-c3-r6-003-kcv_context_search-package-body",
+          "2.0.0-c3-r6-004-kcv_personal_context_api-package-body",
+          "2.0.0-c3-r6-005-kcv_personal_journey-package-body"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:016/018"
+      },
+      {
+        "ordinal": 17,
+        "path": "upgrade/017.sql",
+        "sha256": "f186ec88e2ed06ef3e6accac2df502e54771343694c0bf285244842d7472380b",
+        "bytes": 996605,
+        "exceeds_grouping_target": false,
+        "steps": [
+          "2.0.0-c3-r6-ready",
+          "2.0.0-c3-r7-001-kcv_context_search-package-body",
+          "2.0.0-c3-r7-ready"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:017/018"
+      },
+      {
+        "ordinal": 18,
+        "path": "upgrade/018.sql",
+        "sha256": "9c769ff661fb65a3aaa7003715007ef13ea94624b5f71c4d05a6a4a4aec36f4a",
+        "bytes": 2373725,
+        "exceeds_grouping_target": true,
+        "steps": [
+          "final-schema-verification"
+        ],
+        "success_marker": "KCV_SCHEMA_PART_COMPLETE=upgrade:018/018"
+      }
+    ]
+  }
+}

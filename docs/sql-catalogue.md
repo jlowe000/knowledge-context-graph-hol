@@ -1,36 +1,38 @@
 # SQL catalogue and execution order
 
-For a guided developer experience of the knowledge collection, use [Understand the collection](../labs/understand-collection/understand-collection.md). This catalogue supports both deployment and the API exercises; an app-only user does not need to run SQL.
+An app-only user runs no SQL. Developer learners use [Understand the collection](../labs/understand-collection/understand-collection.md). Administrators first select [clean installation or migration](installation-paths.md); do not run every SQL file alphabetically.
 
-Use Database Actions SQL Worksheet. Do not run every SQL file alphabetically. Run complete slash-delimited files with F5; follow each lab's Run Statement instructions for private bind-input blocks.
+Use **Run Statement** for the documented private-bind PL/SQL blocks, excluding their trailing slash. Use **Run Script (F5)** for complete generated parts and other slash-delimited files. Check each result before the next step.
 
-## Required fresh installation
+## Clean installation
 
-| Phase | Account | Files, in order |
+| Phase | Account | Files/order |
 | --- | --- | --- |
-| Java readiness | ADMIN | `sql/admin/00_readiness.sql`; `00_java_status.sql`. Only if absent and intended: `01_enable_java.sql`, then OCI restart and wait for VALID |
-| User/access | ADMIN | `sql/admin/01_create_user_worksheet.sql`, `02_grants.sql`, `04_enable_database_actions.sql` |
-| Base graph schema | KCV_LAB | `sql/schema/01_objects.sql`, `02_network.sql`, `03_tools.sql`, `06_dataset_import.sql` |
-| Authentication | KCV_LAB | `sql/schema/00_user_credential_worksheet.sql`; resource-principal alternative instead requires documented IAM and ADMIN `sql/admin/03_resource_principal.sql` |
-| Model | KCV_LAB | `sql/schema/05_profile_worksheet.sql`, `06_register_profile.sql`, then `sql/queries/00_test_genai.sql` (inference charge possible) |
-| Dataset | KCV_LAB | [sql/install/10_load_github.sql](../sql/install/10_load_github.sql), `sql/queries/01_inspect.sql`, [verify_worksheet.sql](../integration-test/verify_worksheet.sql) |
-| Explorer backend | KCV_LAB | `sql/extensions/01_scenario_objects.sql`, **`06_response_provenance.sql`**, `02_scenario_api.sql`, `03_scenario_agents.sql`, `05_apex_api.sql` |
-| Native graph check | KCV_LAB | [verify_scenario_native.sql](../integration-test/verify_scenario_native.sql) |
-| APEX accounts | ADMIN | `sql/admin/06_cloud_apex_preflight.sql`, `07_create_apex_workspace.sql`, `08_create_apex_app_user.sql` |
-| Application | KCV_LAB | [sql/install/20_install_apex.sql](../sql/install/20_install_apex.sql) |
+| Platform | ADMIN | `sql/admin/00_readiness.sql`, `00_java_status.sql`; only if needed and authorized, `01_enable_java.sql` then OCI restart |
+| New owner | ADMIN | `01_create_user_worksheet.sql`, `02_grants.sql`, `04_enable_database_actions.sql`; consistent `KCV_SCHEMA`, private password |
+| Static schema | Owner | [Fresh schema parts](../sql/install/schema-parts/README.md), then [02_verify_schema.sql](../sql/install/02_verify_schema.sql) |
+| RDF network | Owner | [02_network.sql](../sql/schema/02_network.sql), once |
+| Model authentication | Owner; ADMIN for resource-principal alternative | [Authentication guide](authentication.md); do not configure both paths accidentally |
+| Model profile | Owner | `05_profile_worksheet.sql`, `06_register_profile.sql`, `sql/queries/00_test_genai.sql` (real inference) |
+| Public dataset | Owner | [10_load_github.sql](../sql/install/10_load_github.sql), inspection and source-scope checks |
+| Fresh registrations | Owner | [03_scenario_agents.sql](../sql/extensions/03_scenario_agents.sql), then native scenario verification |
+| Local library search | ADMIN, then owner | [Worksheet search setup](context-search.md#worksheet-setup): grants11, model22 and coverage |
+| Workspace/account | ADMIN | `06_cloud_apex_preflight.sql`, `07_create_apex_workspace.sql`, `08_create_apex_app_user.sql` |
+| New application | Owner | [20_install_apex.sql](../sql/install/20_install_apex.sql): select the complete outer block excluding the final slash, use **Run Statement**, then app-user tests |
 
-Read the [beginner labs](fresh-serverless-deployment.md) for all expected results, account changes and troubleshooting. The table is an index, not a substitute for the steps.
+Paths without a directory in the table belong to the directory identified by that phase: ADMIN files in `sql/admin/`, profile files in `sql/schema/`. The [configuration](../labs/configure-database/configure-database.md) and [deployment](../labs/deploy-explorer/deploy-explorer.md) labs provide full links, binds and expected outcomes.
 
-The [GitHub load guide](github-dataset-load.md) explains the full commit SHA, matching manifest hash and KCV_DATASET_RUNS progress query. The call downloads JSON data from public GitHub, with no GitHub credential. Its first use requires the importer package shown in the schema row.
+## Existing installation
 
-## Optional and reference SQL
+Follow [migration](migrate-to-v2.md). A compatible v1 installation first runs [00_complete_v1_optional.sql](../sql/install/00_complete_v1_optional.sql) to verify required objects and complete only missing optional baseline objects, then [00_adopt_schema_baseline.sql](../sql/install/00_adopt_schema_baseline.sql). Supported migration-managed checkpoints skip adoption. Both use the **upgrade** schema parts, the full verifier, [16_refresh_grounded_answers.sql](../sql/extensions/16_refresh_grounded_answers.sql), needed search setup and [20_upgrade_apex.sql](../sql/install/20_upgrade_apex.sql) with the existing app ID. For that APEX installer, select its complete outer block excluding the final slash and use **Run Statement** for the bind prompts. The public dataset and credentials stay unchanged unless separately reviewed.
 
-- `sql/install/dataset-parts/README.md` and numbered SQL parts: fallback if the database cannot fetch public GitHub. `sql/install/10_load_dataset.sql` combines them for a suitable client. Choose one form; do not also run the GitHub loader.
-- `sql/scenarios/01_start.sql` through `06_observe.sql`, `08_audit.sql` and `09_propose_change.sql`: perform the scenario through Worksheet rather than the UI. Bind session IDs from your own run.
-- `sql/extensions/00_readiness.sql`: inspect an existing base installation before adding the scenario.
-- `sql/extensions/07_trace_tool_wrappers.sql`: upgrade existing registrations; not required after a fresh `03_scenario_agents.sql` installation.
-- `sql/extensions/04_domain_extraction.sql`, `sql/scenarios/07_extract_domain.sql`, `10_owl_inference.sql`: advanced curation/inference, separate from the learner path. Extraction quotes the supplied summary, not the original slide; do not mistake that for source verification.
-- `sql/schema/04_agents.sql`, `sql/queries/00_create_conversation.sql`, `03_extract_candidates.sql`, `04_run_agents.sql`: older optional base-agent/curation flow, not KCV_EXPLORER_TEAM installation.
-- Remaining `sql/queries/`: inspection, Java/runtime/profile diagnosis, feedback and optional inference/history queries. Availability of agent history views can vary by service version.
+The combined `00_install_schema.sql` and `01_upgrade_schema.sql` retain the same ordered payloads as their generated parts. Choose one form for a route. Do not reinstall individual raw table/package files alongside it. Recovery is a reviewed response to a recorded failed step, not an instruction to clear receipts or rerun all SQL.
 
-Some creation scripts are intentionally not rerunnable. Inspect the specific failure and earlier result instead of dropping users, resetting accounts or rerunning the whole installation.
+## Developer learning and optional exercises
+
+- `sql/scenarios/01_start.sql` through `06_observe.sql`, `08_audit.sql` and `09_propose_change.sql`: inspect and exercise your own Worksheet sample session. Its ID is not an APEX conversation you can take over.
+- [02_scenario_api.sql](../sql/extensions/02_scenario_api.sql) and [06_response_provenance.sql](../sql/extensions/06_response_provenance.sql): implementation reading for SPARQL, packet bounds and observable trace capture; do not run these as ad hoc upgrades.
+- `sql/extensions/04_domain_extraction.sql` and scenarios07/10: separate domain/OWL exercises where their prerequisites are provided. They are not required for My Contexts; class entailment and extracted proposals are not business-value proof.
+- `sql/queries/`: targeted inspection/diagnosis. Check the file's account/prerequisites before execution; view availability can vary by service version.
+
+The release contains prepared SQL. Source extraction, migration authoring, APEXlang changes, mocks and automated build/test tools belong to dev.

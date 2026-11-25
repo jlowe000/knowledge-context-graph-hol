@@ -1,4 +1,4 @@
--- KCV_LAB, after a dataset load and the current sql/schema/03_tools.sql.
+-- Project owner, after ordered schema verification and a dataset load.
 -- Native regression: add a temporary passage outside the active graph under an
 -- existing source edition. The source tool must not return it. Roll back only
 -- this fixture, preserving loaded snapshots and pre-existing user work.

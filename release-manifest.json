@@ -2,9 +2,41 @@
   "format_version": 1,
   "distribution": "release",
   "product_version": "2.0.0",
-  "candidate_label": "2.0.0-dev",
-  "source_commit": "03e915484219b8aa52fe82977300e67f17ac5bae",
-  "source_dirty": true,
+  "release_label": "2.0.0",
+  "distribution_status": "prepared_for_publication",
+  "publication": {
+    "remote_state": "not_checked",
+    "push_performed": false,
+    "tag_created": false,
+    "acceptance_record_sha256": "d56ae8eda0e284ae05d8229b38e6acaf642a3953cda56e4e11e48f11a30feb6d",
+    "note": "Local packaging only. Historical acceptance retains its recorded scope; compare runtime artifacts with the accepted package before publishing.",
+    "accepted_runtime_comparison": {
+      "accepted_release_commit": "0edb699a2f615c03292474ec13e9bce882c37164",
+      "accepted_manifest_sha256": "01e682ad789d0cca65841020b00a4817705f42977f87a17b4f082b2af5ab4c84",
+      "comparison": "passed",
+      "unchanged_non_document_files": 245,
+      "documentation_changes": [
+        "README.md",
+        "apex/README.md",
+        "docs/fresh-serverless-deployment.md",
+        "docs/installation-paths.md",
+        "docs/learning-paths.md",
+        "docs/migrate-to-v2.md",
+        "docs/scenario-validation.md"
+      ],
+      "exact_header_only_changes": [
+        "sql/install/10_load_github.sql"
+      ],
+      "regenerated_metadata": [
+        "generated/build-report.json",
+        "release-manifest.json",
+        "release-provenance.json"
+      ],
+      "scope": "All other payload files match accepted SHA-256 values. Historical acceptance records remain unchanged; no new database execution."
+    }
+  },
+  "source_commit": "792ca8bf67e9781dc3ce1b6f185777ee18914f1d",
+  "source_dirty": false,
   "python_required_for_learner": false,
   "dataset_kind": "attributed_editorial_summary",
   "summary_count": 762,
@@ -34,7 +66,7 @@
     },
     {
       "path": "apex/README.md",
-      "sha256": "0827bf30502ac33143c6c469d522fe366cb0628a46830156d4f9c84989f75a04"
+      "sha256": "6512f4c63f98163f743bb3e14fd4ac9306b2d25fef7655c07d4e684250784b76"
     },
     {
       "path": "data/contexts.json",
@@ -150,7 +182,7 @@
     },
     {
       "path": "docs/fresh-serverless-deployment.md",
-      "sha256": "59776fdefecab555945b7f06d136b016b178840fca1e85089044ec7cbf17c377"
+      "sha256": "33055047a23ec0a160ced7f2b0ee12fc4d527bfa222a04df29434634319b5847"
     },
     {
       "path": "docs/github-dataset-load.md",
@@ -158,11 +190,11 @@
     },
     {
       "path": "docs/installation-paths.md",
-      "sha256": "d917521100d8b4b28985ffd4789e3dd6bcbce900c131f5be6f1822cf4b0c86ad"
+      "sha256": "b625389ac41281ed059b10d27d4eee272c39349819d8fadd5084f08d1a828f87"
     },
     {
       "path": "docs/learning-paths.md",
-      "sha256": "4a8b9e5553bf18b10032a22fe60062b92fc7193a872fa06de9093477fdc40a7a"
+      "sha256": "f37174843a8260e5bcb20bac37425607b890809f0fc79b55954c895723073f99"
     },
     {
       "path": "docs/livelabs-authoring-alignment.md",
@@ -170,7 +202,7 @@
     },
     {
       "path": "docs/migrate-to-v2.md",
-      "sha256": "5bbb7dab87d66a5cb412a51ec0703c5d96e1b741fec2b0043fd644fb934e95dd"
+      "sha256": "1caef1acd94f7c7de7b1b28b2e64f9c0b7f6538fd72236bb543b840dfffcab83"
     },
     {
       "path": "docs/public-research-catalog.md",
@@ -182,7 +214,7 @@
     },
     {
       "path": "docs/scenario-validation.md",
-      "sha256": "27cb0baf7c0ba2b1893f4b1ec9d6e5436e07ac991af17c2eb56a24b857d935a0"
+      "sha256": "50ac4604c07e52ed0fc1ffc86dfe9a433964f56d7293523f851318ecfa5d6cf1"
     },
     {
       "path": "docs/screenshots.md",
@@ -206,7 +238,7 @@
     },
     {
       "path": "generated/build-report.json",
-      "sha256": "224f5d4cf016124ef9215223c6bcaa06efadae0e32ad1f04981f81f52d559159"
+      "sha256": "be2175ae6d6f42f9684b9f8494d602bee27a7e3f9bcbc0e5067b073b7dafba9f"
     },
     {
       "path": "generated/dataset-preview.md",
@@ -306,7 +338,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "293164c61e85a6933b08f81a486171db0be5864182b05e5dfe836af94013f631"
+      "sha256": "17f12ad32d56e042f2dd2ee0496dac1d8d06269d804ece5f01f79bbdc69e10a8"
     },
     {
       "path": "references/content-ingestion-checks.json",
@@ -350,7 +382,7 @@
     },
     {
       "path": "release-provenance.json",
-      "sha256": "8a18ec71e3dd36a87c9651607f4eda6077bcfe68e3948b92393f533039ae0f70"
+      "sha256": "36da50708838c6baa56d77e54a7758e9065648f385d0b8a39f5906d527f9f981"
     },
     {
       "path": "review-examples/examples.json",
@@ -454,7 +486,7 @@
     },
     {
       "path": "sql/install/10_load_github.sql",
-      "sha256": "2113f69426492fc0b8b544d8a7644f6b27b971b6149d35277d4238ab6db0cac5"
+      "sha256": "b05dbd702c792cc74df2794074775bd42598ac0da3b67331711ebcb31c10530c"
     },
     {
       "path": "sql/install/20_install_apex.sql",

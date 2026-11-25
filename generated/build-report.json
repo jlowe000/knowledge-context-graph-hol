@@ -16,10 +16,12 @@
   "context_count": 3,
   "triple_count": 30144,
   "graph_sha256": "397da9d9f22e3188e89a7c6671d34e1edfef7528a6c106025a63e9a3a4f8b041",
-  "native_serverless_validation": "release_summary_dataset_not_yet_run",
+  "native_serverless_validation": "see_recorded_release_path_acceptance",
   "model_extraction": "not_applicable",
   "full_source_text_location": "Not bundled; summaries in data/release-summaries.json",
   "independent_of_original_collection": true,
   "content_kind": "attributed_editorial_summary",
+  "validation_record": "db/verification/release-v2-paths-validation.json",
+  "package_generation_is_deployment_acceptance": false,
   "distribution": "release"
 }

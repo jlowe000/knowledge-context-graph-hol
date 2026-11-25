@@ -1,4 +1,6 @@
--- KCV_LAB: install sql/schema/06_dataset_import.sql first. Run Script (F5).
+-- Project owner: complete the ordered v2 schema installation or migration first.
+-- Run sql/install/02_verify_schema.sql and configure the owner RDF network before loading.
+-- Run this caller with Run Script (F5).
 -- Replace the commit placeholder with the full 40-character published commit SHA.
 -- This exact commit must contain the matching data/load/manifest.json.
 -- Public data only; no GitHub token or Python is required.

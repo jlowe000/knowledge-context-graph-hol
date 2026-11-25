@@ -169,7 +169,8 @@ def distribution_metadata(root, snapshot, version, prepare_publication=False):
     if snapshot.get('branch') != 'dev' or not re.fullmatch(r'[a-f0-9]{40}', snapshot.get('commit', '')):
         raise ValueError('Publication packaging requires a committed dev source')
     record_path = root/'db/verification/release-v2-paths-validation.json'
-    record = json.loads(checked_validation_record(record_path))
+    record_text = checked_validation_record(record_path)
+    record = json.loads(record_text)
     passed = {'passed', 'passed_with_documented_execution_mode_correction'}
     if (record.get('product_version') != version or record.get('status') not in passed
             or record.get('pending_checks') != []
@@ -180,7 +181,7 @@ def distribution_metadata(root, snapshot, version, prepare_publication=False):
     return {'release_label': version, 'distribution_status': 'prepared_for_publication',
             'publication': {'remote_state': 'not_checked', 'push_performed': False,
                             'tag_created': False,
-                            'acceptance_record_sha256': hashlib.sha256(record_path.read_bytes()).hexdigest(),
+                            'acceptance_record_sha256': hashlib.sha256(record_text.encode('utf-8')).hexdigest(),
                             'note': 'Local packaging only. Historical acceptance retains its recorded scope; '
                                     'compare runtime artifacts with the accepted package before publishing.'}}
 

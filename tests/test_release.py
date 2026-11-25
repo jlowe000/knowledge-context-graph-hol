@@ -287,7 +287,9 @@ class ReleasePackagingGuardTests(unittest.TestCase):
             accepted={'product_version':'2.0.0','status':'passed','pending_checks':[],
                       'clean_installation':{'status':'passed'},'migration':{'status':'passed'}}
             snapshot={'dirty':False,'branch':'dev','commit':'a'*40}
-            path.write_text(json.dumps(accepted),encoding='utf-8')
+            # Publication payloads use LF, including when dev checks out CRLF.
+            record_text=json.dumps(accepted,indent=2)+'\n'
+            path.write_bytes(record_text.replace('\n','\r\n').encode())
             with self.assertRaisesRegex(ValueError,'clean committed source'):
                 distribution_metadata(root,{'dirty':True},'2.0.0',True)
             for change in ({'branch':'release'},{'commit':'short'}):
@@ -300,7 +302,9 @@ class ReleasePackagingGuardTests(unittest.TestCase):
             self.assertFalse(result['publication']['push_performed'])
             self.assertFalse(result['publication']['tag_created'])
             self.assertEqual(result['publication']['acceptance_record_sha256'],
-                             hashlib.sha256(path.read_bytes()).hexdigest())
+                             hashlib.sha256(record_text.encode()).hexdigest())
+            self.assertNotEqual(result['publication']['acceptance_record_sha256'],
+                                hashlib.sha256(path.read_bytes()).hexdigest())
             for change in ({'product_version':'2.1.0'}, {'pending_checks':['browser']},
                            {'migration':{'status':'pending'}},
                            {'clean_installation':{'status':'passed','pending_checks':['reopening']}}):

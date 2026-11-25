@@ -42,11 +42,11 @@ Use the current dev migrations to install the search table/package before this r
 
 ### 1. Grant the named owner permission as ADMIN
 
-In a direct ADMIN session, replace `KCV_MY_DEV` with the existing project schema name and run [11_context_search_grants.sql](../sql/admin/11_context_search_grants.sql):
+In a direct ADMIN session, supply the existing build owner, such as `KCV_V2_001`, and run [11_context_search_grants.sql](../sql/admin/11_context_search_grants.sql). Use the new owner's name for a replacement build; see [build naming](dev-build-lifecycle.md#naming-and-identity).
 
 ```sql
 VARIABLE KCV_SCHEMA VARCHAR2(30)
-EXEC :KCV_SCHEMA := 'KCV_MY_DEV';
+EXEC :KCV_SCHEMA := 'KCV_V2_001';
 @sql/admin/11_context_search_grants.sql
 ```
 

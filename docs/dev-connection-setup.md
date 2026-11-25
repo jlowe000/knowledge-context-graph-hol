@@ -1,4 +1,4 @@
-# Private SQLcl connection for v2 development tests
+# Private SQLcl connections for dev builds
 
 This is a dev-only setup step. SQL Worksheet authentication is separate from SQLcl. Never put a database password, wallet, private connection string or saved connection export into Git or chat.
 
@@ -58,15 +58,30 @@ On the same date, the user completed local setup and saved a private connection 
 
 Java 25 emitted a JLine native-access warning before the Windows prompt during this test; SQLcl and `lb version` still completed successfully. This warning is separate from database authentication.
 
+## Choose build-specific connection names
+
+Use `KCV_V<major>_<three-digit-build>` for both the dev schema and its APEX workspace. For product major version 2, the first build is `KCV_V2_001`; a replacement is `KCV_V2_002`. The build number identifies a deployment, not a change to the product's `major.minor.patch` version. See the [dev build lifecycle](dev-build-lifecycle.md) for creation, replacement and retirement.
+
+| Purpose | First build | Replacement build |
+| --- | --- | --- |
+| Schema and APEX workspace | `KCV_V2_001` | `KCV_V2_002` |
+| Saved SQLcl owner connection | `KCV_V2_001_OWNER` | `KCV_V2_002_OWNER` |
+| APEX application alias | `KCV-V2-001` | `KCV-V2-002` |
+| APEX end-user account | `KCV_USER` in the first workspace | `KCV_USER` in the replacement workspace |
+
+Keep `KCV_V2_ADMIN` as the shared administrative connection to this temporary database. It is separate from each build's owner connection. The APEX application ID is another identifier: choose an unused ID for a new build rather than deriving it from the build number or reusing an existing app ID.
+
+`KCV_USER` is an APEX app-only account, not a database login or SQLcl connection. The same username in two workspaces represents two separate accounts; it does not transfer saved contexts or grant access to the other build. Configure each app account privately through the deployment steps.
+
 ## Configure the temporary database privately
 
-For an isolated test schema to be created on the temporary Serverless instance, save an ADMIN connection with the alias `KCV_V2_ADMIN`. Supply your actual connection identifier privately in the command below; omit the password so SQLcl prompts for it:
+Save the shared ADMIN connection as `KCV_V2_ADMIN`. For a wallet connection, replace the wallet path and TNS service alias privately; omit the password so SQLcl prompts for it:
 
 ```sql
-connect -save KCV_V2_ADMIN -savepwd ADMIN@<private_connection_identifier>
+connect -cloudconfig "/private/path/Wallet.zip" -save KCV_V2_ADMIN -savepwd ADMIN@your_tns_service_name
 ```
 
-Use the database connection information supplied by OCI, not the Database Actions HTTPS URL. If your connection requires an ADB wallet, save it privately on this computer outside the project and add `-cloudconfig /private/path/wallet.zip` to the connection command. On Windows, use a native path such as `C:/private/wallet.zip` at the SQL prompt. Replace example paths with your actual private location. SQLcl prompts for required secrets; do not add them to the command line or a script.
+Use the database connection information supplied by OCI, not the Database Actions HTTPS URL. Store the wallet outside the project. For WSL, use its Linux path; on Windows, use a native path such as `C:/private/Wallet.zip` at the SQL prompt. If the selected connection method does not require a wallet, omit `-cloudconfig` and supply its private connection identifier instead. SQLcl prompts for required secrets; do not add them to the command line or a script.
 
 `-savepwd` explicitly authorizes SQLcl to retain the connection credential in its private connection store for subsequent test commands. If you prefer not to save it, omit that flag and use an interactive authenticated session for each test run; the agent cannot assume unattended access in that case. Do not export or display the connection definition.
 
@@ -78,24 +93,35 @@ select user as connected_user from dual;
 
 Expected result: `ADMIN` on the intended temporary test database. Tell the collaborator only that `KCV_V2_ADMIN` is ready and whether password saving was selected. If you already have an isolated developer schema and prefer to use it, provide its saved connection alias and schema name only; it needs the documented migration prerequisites.
 
-Test setup must create/use a separately identified test schema and app, verify its scope before mutation, and preserve the existing `KCV_LAB` installation and JAVAVM. A saved ADMIN connection is for test bootstrap; application and migration checks run as the isolated schema owner. Native tests are not marked passed merely because SQLcl can connect.
+Each build must use its separately identified schema, workspace and app. Verify the target before mutation and preserve the existing build until the replacement and its recovery plan are validated. Keep JAVAVM enabled. A saved ADMIN connection is for administration; database migrations and owner-side checks run as the selected build's actual schema owner. Native tests are not marked passed merely because SQLcl can connect.
 
 ## Save an isolated owner connection with an ADB wallet
 
-For a test schema already approved to connect through ADMIN, use the explicit SQLcl proxy syntax below. An administrator must first grant `ALTER USER KCV_V2_TEST GRANT CONNECT THROUGH ADMIN` on the intended temporary database. This grant does not change the schema password or transfer any cloud credential.
+First follow [fresh dev deployment](fresh-dev-deployment.md) to create `KCV_V2_001`. Its [dev schema bootstrap](../sql/admin/09_create_dev_schema.sql) creates a schema with `NO AUTHENTICATION` and explicitly grants `CONNECT THROUGH ADMIN`. This owner has no database password of its own. Proxy access does not transfer any OCI credential into the new schema.
 
 Inside SQLcl in the same Oracle Linux environment as the launcher, replace the wallet path and TNS service alias with your private values:
 
 ```sql
-connect -cloudconfig "/mnt/c/path/to/Wallet.zip" -save KCV_V2_OWNER -savepwd ADMIN[KCV_V2_TEST]@your_tns_service_name
+connect -cloudconfig "/private/path/Wallet.zip" -save KCV_V2_001_OWNER -savepwd ADMIN[KCV_V2_001]@your_tns_service_name
 ```
 
-Enter the **ADMIN password** at SQLcl's private prompt. Use the service alias from that wallet's `tnsnames.ora`, rather than a Database Actions URL. For Oracle Linux outside WSL, use that host's Linux wallet path. The brackets around `KCV_V2_TEST` are literal proxy syntax. Add `-replace` only when deliberately replacing an existing `KCV_V2_OWNER` saved connection.
+Enter the **ADMIN password** at SQLcl's private prompt. Use the service alias from that wallet's `tnsnames.ora`, rather than a Database Actions URL. The brackets around `KCV_V2_001` are literal proxy syntax. Add `-replace` only to repair that same build's saved connection after confirming its target; do not use it to repoint an old build alias at a replacement.
 
 Verify both identities:
 
 ```sql
-select user, sys_context('USERENV','PROXY_USER') as proxy_user from dual;
+select user, sys_context('USERENV','CURRENT_SCHEMA') as current_schema,
+       sys_context('USERENV','PROXY_USER') as proxy_user from dual;
 ```
 
-Expected: `KCV_V2_TEST` and `ADMIN`. A later `connect -name KCV_V2_OWNER` must return the same identities before migrations run. `ALTER SESSION SET CURRENT_SCHEMA` alone does not establish an owner connection. Preserve the separate `KCV_V2_ADMIN` alias for administration. See Oracle's [SQLcl proxy connection syntax](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/22.4/sqcug/accessing-databases.html).
+Expected: `KCV_V2_001`, `KCV_V2_001` and `ADMIN`. A later `connect -name KCV_V2_001_OWNER` must return the same identities before migrations run. `ALTER SESSION SET CURRENT_SCHEMA` alone does not establish an owner connection. Preserve the separate `KCV_V2_ADMIN` alias for administration. See Oracle's [SQLcl proxy connection syntax](https://docs.oracle.com/en/database/oracle/sql-developer-command-line/22.4/sqcug/accessing-databases.html).
+
+## Connect to a replacement without changing the current build
+
+After the administrator creates and grants proxy access to `KCV_V2_002`, save a separate owner connection:
+
+```sql
+connect -cloudconfig "/private/path/Wallet.zip" -save KCV_V2_002_OWNER -savepwd ADMIN[KCV_V2_002]@your_tns_service_name
+```
+
+Repeat the identity query: both owner values must be `KCV_V2_002`, with proxy `ADMIN`. Keep `KCV_V2_001_OWNER` available while its build is retained for verification or recovery. Only after the old build's schema/workspace/app retirement is verified may you optionally remove its obsolete saved owner alias from the local SQLcl connection store. Removing a local alias does not retire database resources. Keep `KCV_V2_ADMIN` while the shared database remains in use.

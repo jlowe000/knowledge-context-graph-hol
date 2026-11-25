@@ -1,6 +1,8 @@
 # Database migrations on dev
 
-Status: v2.0.0 C3 R7 dev candidate, not an accepted release. The [context-search record](../db/verification/context-search-validation.json) records the native upgrade to 96 COMPLETE project receipts / 97 Liquibase changesets, zero invalid objects and successful search regression tests. Scoped browser search/filter checks passed; the matching engine export is identified by its [receipt](../apex/export-validation.json). Fresh R7 installation remains unverified. The [deletion record](../db/verification/context-delete-validation.json) retains its R5 native results and pending permanent-delete browser confirmation; the [fresh deployment record](../db/verification/fresh-dev-validation.json) describes the preceding R4 installation. Generated Worksheet installer execution remains unverified; historical records and release remain unchanged.
+Current schema: v2.0.0 C3 R7, with 96 COMPLETE project receipts and 97 Liquibase changesets. [Numbered-build fresh installation](dev-build-lifecycle.md#validation-scope) and the separate [SQL-first clean/migration rehearsals](../db/verification/release-v2-paths-validation.json) passed within their recorded scope. The [context-search record](../db/verification/context-search-validation.json) covers search regressions; the matching engine export has its own [receipt](../apex/export-validation.json). The [deletion record](../db/verification/context-delete-validation.json) retains pending permanent-delete browser confirmation. Records below describe earlier checkpoints and their limitations at the time; they do not replace the current deployment guide.
+
+Use [build lifecycle](dev-build-lifecycle.md) to decide between an in-place migration and a new `KCV_V<major>_<build>` replacement. An in-place migration retains the owner/workspace/app identity. A replacement gets new identities and an empty personal library; retirement is a separate administrator operation, not a Liquibase rollback.
 
 The [24 November native migration record](../db/verification/native-validation.json) records successful SQLcl/Liquibase execution on isolated Serverless schemas: all 48 project migrations, fresh and verified-v1 upgrade routes, repeat updates, exact schema/program checks, concurrent-runner exclusion and failure/recovery probes. Generated Worksheet SQL also passed fresh/adoption/upgrade/repeat and subsequent Liquibase-entry tests through SQLcl. The Database Actions browser upload/copy transport has not been tested for these v2 bundles. The initial timestamp-index verification correction and later append-only identity correction are recorded explicitly; this is not full-v2 or release acceptance.
 
@@ -44,7 +46,7 @@ Use the repository's Python environment if dependencies are not on your path. Th
 
 ## Fresh isolated schema
 
-Use the [complete fresh dev deployment route](fresh-dev-deployment.md) for parameterized ADMIN bootstrap, a separate owner connection, runtime configuration, dataset loading and a new APEX app. It identifies local bootstrap/documentation/APEX fixes added after the published R4 commit and records scoped fresh acceptance with the remaining route limitations. Connect SQLcl to the dedicated schema and work from the repository root. The commands below were exercised with the SQLcl/Liquibase versions recorded above; validate them again when changing runner versions.
+Use the [complete fresh dev deployment route](fresh-dev-deployment.md) for parameterized ADMIN bootstrap, a build-specific owner connection, runtime configuration, dataset loading and a new APEX app. Give the schema and workspace the same numbered-build name. Connect SQLcl as that actual owner and work from the repository root. Validate runner compatibility when changing SQLcl/Liquibase versions.
 
 Before the Liquibase commands, use SQLcl `cd /path/to/knowledge-context-graph-hol` with your actual repository path. A previously executed script under `work/` can change relative-path resolution; do not assume a shell working directory or script header left Liquibase at the repository root.
 
@@ -63,10 +65,10 @@ No credentials or environment-specific source rows are part of the baseline. Its
 
 Preserve the existing schema, application ID, public collection and personal runtime rows. Connect as the project schema owner using the private SQLcl setup. `ALTER SESSION SET CURRENT_SCHEMA` does not establish an owner session and is rejected by the migration runner.
 
-1. Put the target application into a maintenance window and wait for active requests to finish. Setting a database flag alone cannot stop an already running application request. Keep the original separate HOL application available.
+1. Put the target application into a maintenance window and wait for active requests to finish. Setting a database flag alone cannot stop an already running application request. Preserve any other installations outside the migration scope.
 2. Record counts of existing contexts, conversations, turns and observations without exporting their contents. Record the current migration checkpoint and application identity.
 3. Run the same `lb validate`, `lb status`, `lb update` and verification commands shown above. Do not recreate users, repeat raw table initialization, re-adopt an already recorded baseline or reset migration checksums.
-4. Confirm 96 active COMPLETE project receipts, the `2.0.0-c3-r7-ready` marker, no invalid project objects and unchanged existing runtime row counts. Run `integration-test/verify_migration_legacy_requests.sql` in the isolated test schema; it uses and removes its own reserved probe table.
+4. Confirm 96 active COMPLETE project receipts, the `2.0.0-c3-r7-ready` marker, no invalid project objects and unchanged existing runtime row counts. The `integration-test/verify_migration_legacy_requests.sql` fixture uses and removes its own reserved probe table, but its historical owner allowlist rejects numbered builds. Review a private adapter with the exact isolated owner guard and cleanup scope before running it on a numbered build; retain the diff/results. Do not remove the guard or admit every `KCV_` schema.
 5. Run `sql/extensions/16_refresh_grounded_answers.sql` for the existing configured app. Confirm its ready message; a deferred message means initial model/agent setup is still needed.
 6. Import the compatible native APEXlang application using the same application ID, complete the personal-journey and existing sample checks, then reopen the application. Verify a follow-up question records evidence for that answer and any incomplete response is visibly labelled. Keep any unresolved native/model/browser checks explicit in the candidate record.
 
@@ -97,7 +99,7 @@ If the actual v1 deployment differs, stop and inspect the specific object named 
 
 ## Independent Worksheet acceptance
 
-The release learner route remains Database Actions SQL Worksheet. These are candidate generated scripts for testing on dev; this work has not promoted them to release.
+The release learner route uses Database Actions SQL Worksheet. The [SQL-first validation record](../db/verification/release-v2-paths-validation.json) records the isolated clean and migration rehearsals. The build-named dev route uses local SQLcl/Liquibase and a schema-only proxy owner; do not assume that owner can sign in to Worksheet.
 
 | Entry path | Ordered scripts |
 | --- | --- |

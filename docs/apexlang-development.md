@@ -6,7 +6,7 @@ The v2 application is authored directly under `apex/application/`. SQL/PLSQL sti
 
 R7 adds local context search and saved-objective previews on page 10. Its [validation record](../db/verification/context-search-validation.json) reports native upgrade/repeat, search regressions, APEX import with nine pages/seven assets/33 parsed components, and scoped browser search/filter checks. The [R5 deletion record](../db/verification/context-delete-validation.json) retains successful native tests and browser review/Cancel; permanent-delete browser confirmation remains pending.
 
-The preceding [fresh R4 deployment](../db/verification/fresh-dev-validation.json) passed schema/data, native/model and personal/sample browser checks. The historical [R4 record](../db/verification/c3-r4-validation.json) and [journey record](../references/my-contexts-c3-validation.json) retain the earlier browser expiry pass and separate malformed-JSON native failure. These results describe their own source versions. Fresh R7 and generated Worksheet installer execution remain unverified; no release promotion is implied.
+The preceding [fresh R4 deployment](../db/verification/fresh-dev-validation.json) passed schema/data, native/model and personal/sample browser checks. The historical [R4 record](../db/verification/c3-r4-validation.json) and [journey record](../references/my-contexts-c3-validation.json) retain the earlier browser expiry pass and separate malformed-JSON native failure. The later [SQL-first installation-path rehearsal](../db/verification/release-v2-paths-validation.json) covers a clean R7 installation and a published-v1 migration, including new-app and same-ID Worksheet imports with the documented Run Statement correction. These records describe their tested source versions and routes; they do not certify an untested replacement build or imply release promotion.
 
 | Page | Implementation |
 | --- | --- |
@@ -22,6 +22,14 @@ Saving drafts may refresh embeddings with the local database model; it makes no 
 
 Use the [starting walkthrough](my-contexts-draft-walkthrough.md), [complete manual candidate review](my-contexts-manual-test.md) and [API contract](my-contexts-api.md). Learning-loop planning/assessment and evaluation of the Explorer are separate future epics. The existing observation capture and explicit refinement do not implement those future workflows.
 
+## Target one dev build explicitly
+
+Use `KCV_V<major>_<build>` for the schema and workspace, padding the build number to at least three digits: for example, `KCV_V2_001`. Use the matching owner connection `KCV_V2_001_OWNER` and application alias `KCV-V2-001`. Keep the shared `KCV_V2_ADMIN` connection for administrative operations. The [private connection guide](dev-connection-setup.md) describes the wallet/proxy setup; [fresh dev deployment](fresh-dev-deployment.md) creates and enables the workspace before import.
+
+A replacement uses `KCV_V2_002`, `KCV_V2_002_OWNER` and `KCV-V2-002`, with a separate unused application ID. The build number does not select an APEX app ID or change the product version. Existing-ID upgrade mode updates an app in its existing build; it is not a way to move an app into a replacement workspace.
+
+Create `KCV_USER` as an app-only account in the target workspace through the deployment instructions. It is not the schema owner or a database login. The same username in another workspace is a separate identity; a new build does not automatically inherit that account's private contexts. Follow the [dev build lifecycle](dev-build-lifecycle.md) to validate the replacement and recovery material before retiring the old schema/workspace/app. Obsolete owner aliases can be removed locally only after retirement is verified; keep the shared ADMIN connection.
+
 ## Author and validate
 
 1. Edit `.apx` page/shared-component files directly, including the conversation region in `pages/p00001-home.apx`. Maintain `apex/explorer.js` and `apex/explorer.css` for the existing specialized workspace. There is no separate HTML page generator.
@@ -35,7 +43,7 @@ apex validate -input apex/application
 exit
 ```
 
-The connected C3 metadata check used SQLcl `26.3.1.0`, build `26.3.1.301.1413`, against APEX `26.1.6`. It reported validation success with the existing page 1 `regionBody` deprecation warning. Offline SQLcl may use newer metadata and report differences that do not describe the target engine. Repeat validation using `apex validate -input apex/application -workspace YOUR_TEST_WORKSPACE` after privately connecting to the target. Inspect the output for compile errors: a zero SQLcl process exit code alone is insufficient. Neither offline nor connected metadata validation proves PL/SQL compilation, identity isolation or browser behavior.
+The connected C3 metadata check used SQLcl `26.3.1.0`, build `26.3.1.301.1413`, against APEX `26.1.6`. It reported validation success with the existing page 1 `regionBody` deprecation warning. Offline SQLcl may use newer metadata and report differences that do not describe the target engine. Repeat validation using `apex validate -input apex/application -workspace KCV_V2_001` after privately connecting to the selected build. Substitute the replacement workspace when applicable. Inspect the output for compile errors: a zero SQLcl process exit code alone is insufficient. Neither offline nor connected metadata validation proves PL/SQL compilation, identity isolation or browser behavior.
 
 Keep `.apx` files UTF-8 with LF line endings, as specified in `.gitattributes`; this compiler reports syntax errors for CRLF input. The native reports allow up to four UTF-8 bytes per permitted character for short fields and use SQL `VARCHAR2(32767)` for longer values. Target acceptance must verify that size is supported and that multibyte text survives save, list, overview and editor round trips. The API also limits the combined draft to 16,000 UTF-8 bytes, so several individually valid fields can still exceed the total limit and require shortening.
 
@@ -55,24 +63,25 @@ Library and overview paging is processed on submit, before APEX redirects back t
 
 Export the reviewed, deployed candidate through APEX/SQLcl to `apex/kcv-explorer.sql` and record its tested scope and unresolved limitations separately. Never hand-edit this generated SQL to imitate new pages. Retain the app's page numbers/aliases and use a supported engine export.
 
-The current nine-page engine export and [export-validation.json](../apex/export-validation.json) identify the tested R7 source and seven application assets. New/upgrade Worksheet wrappers are generated from that artifact but require separate execution acceptance. The receipt validates artifact provenance; it does not certify every deployment route, model response or release readiness.
+The current nine-page engine export and [export-validation.json](../apex/export-validation.json) identify the tested R7 source and seven application assets. New/upgrade Worksheet wrappers are generated from that artifact; the [installation-path rehearsal](../db/verification/release-v2-paths-validation.json) records their bounded execution acceptance. Revalidate a changed source/export or deployment route. The receipt validates artifact provenance; it does not certify every deployment route, model response or release readiness.
 
-The wrapper supports two distinct modes:
-
-```text
-python scripts/build_apex_worksheet.py --mode new
-python scripts/build_apex_worksheet.py --mode upgrade
-```
-
-Those commands use the legacy KCV_KNOWLEDGE/KCV_LAB defaults. For a separate fresh development target, specify every target explicitly; verify the workspace mapping before executing the result:
+The wrapper supports distinct `new` and `upgrade` modes. Its defaults are the legacy KCV_KNOWLEDGE/KCV_LAB target, so dev builds must specify every target explicitly. Verify the workspace mapping before executing the generated result. For a new first build:
 
 ```bash
-python scripts/build_apex_worksheet.py --mode new --workspace KCV_V2_FRESH --schema KCV_V2_FRESH --alias KCV-FRESH-EXPLORER --output work/fresh/20_install_apex.sql
+python scripts/build_apex_worksheet.py --mode new --workspace KCV_V2_001 --schema KCV_V2_001 --alias KCV-V2-001 --output work/builds/v2_001/20_install_apex.sql
 ```
 
-Follow [fresh dev deployment](fresh-dev-deployment.md) for the complete setup. Execute either generated Worksheet wrapper with **Run Statement (Ctrl+Enter)** as the intended owner: select the complete outer `DECLARE` through the final `END;`, excluding the final slash. Supply any target binds and the existing app ID for an upgrade. F5 does not open these bind prompts. Choose the wrapper or native APEXlang import for that installation; running both creates separate apps and does not establish a single tested deployment path.
+To upgrade the existing app inside that same build:
 
-`new` allocates a new application ID. `upgrade` generates `work/worksheet/20_upgrade_apex.sql`, requires the existing app ID in a Worksheet bind prompt, and checks workspace, parsing schema, alias, the completed `2.0.0-c3-r7-ready` migration and all sixteen required package specification/body objects, including personal-journey, conversation, deletion and context search before import. It preserves the application ID. APEX generates an offset to avoid internal metadata collisions; page numbers and aliases are retained, but internal numeric component IDs are not an ownership key.
+```bash
+python scripts/build_apex_worksheet.py --mode upgrade --workspace KCV_V2_001 --schema KCV_V2_001 --alias KCV-V2-001 --output work/builds/v2_001/20_upgrade_apex.sql
+```
+
+For a replacement, use `new` with the `KCV_V2_002` schema/workspace, `KCV-V2-002` alias and a separate `work/builds/v2_002/` output location. Keep the old build and its generated artifacts intact until its retirement is approved and verified.
+
+Follow [fresh dev deployment](fresh-dev-deployment.md) for the normal native APEXlang route. The dev owner is `NO AUTHENTICATION` and uses SQLcl proxy access; it has no direct Worksheet password. The generated Worksheet route is for a deployment with an authenticated owner Worksheet, as used in the SQL-first release rehearsal. Execute either wrapper there with **Run Statement (Ctrl+Enter)**: select the complete outer `DECLARE` through the final `END;`, excluding the final slash. Supply any target binds and the existing app ID for an upgrade. F5 does not open these bind prompts. Choose one import route for that installation; running both new-install routes creates separate apps and does not establish a single tested deployment path.
+
+`new` allocates a new application ID. Native APEXlang import instead takes an explicit `-id`; use an unused ID and the chosen build's explicit workspace, schema and alias as described in the fresh-deployment guide. Do not assume a historical app ID is available. `upgrade` requires the existing app ID in a Worksheet bind prompt, and checks workspace, parsing schema, alias, the completed `2.0.0-c3-r7-ready` migration and all sixteen required package specification/body objects, including personal-journey, conversation, deletion and context search before import. It preserves the application ID. APEX generates an offset to avoid internal metadata collisions; page numbers and aliases are retained, but internal numeric component IDs are not an ownership key.
 
 For product version 2 or later, **both new and upgrade modes** require `apex/export-validation.json`, recorded only after the actual engine import/export acceptance, containing:
 

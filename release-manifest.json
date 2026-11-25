@@ -8,7 +8,7 @@
     "remote_state": "not_checked",
     "push_performed": false,
     "tag_created": false,
-    "acceptance_record_sha256": "d56ae8eda0e284ae05d8229b38e6acaf642a3953cda56e4e11e48f11a30feb6d",
+    "acceptance_record_sha256": "6072beb44243689bcd911a87aa38986fadb8c78024f36c6b0e36168e60b6ca6c",
     "note": "Local packaging only. Historical acceptance retains its recorded scope; compare runtime artifacts with the accepted package before publishing.",
     "accepted_runtime_comparison": {
       "accepted_release_commit": "0edb699a2f615c03292474ec13e9bce882c37164",
@@ -35,7 +35,7 @@
       "scope": "All other payload files match accepted SHA-256 values. Historical acceptance records remain unchanged; no new database execution."
     }
   },
-  "source_commit": "792ca8bf67e9781dc3ce1b6f185777ee18914f1d",
+  "source_commit": "84d93fdad0b42d8e21affa9aa2b96312f15a0dfc",
   "source_dirty": false,
   "python_required_for_learner": false,
   "dataset_kind": "attributed_editorial_summary",
@@ -382,7 +382,7 @@
     },
     {
       "path": "release-provenance.json",
-      "sha256": "36da50708838c6baa56d77e54a7758e9065648f385d0b8a39f5906d527f9f981"
+      "sha256": "7028c3c69a545a72113019c21609d032cf10d8b367145376dfe0da5a27e74792"
     },
     {
       "path": "review-examples/examples.json",

@@ -7,7 +7,7 @@
     "remote_state": "not_checked",
     "push_performed": false,
     "tag_created": false,
-    "acceptance_record_sha256": "d56ae8eda0e284ae05d8229b38e6acaf642a3953cda56e4e11e48f11a30feb6d",
+    "acceptance_record_sha256": "6072beb44243689bcd911a87aa38986fadb8c78024f36c6b0e36168e60b6ca6c",
     "note": "Local packaging only. Historical acceptance retains its recorded scope; compare runtime artifacts with the accepted package before publishing.",
     "accepted_runtime_comparison": {
       "accepted_release_commit": "0edb699a2f615c03292474ec13e9bce882c37164",
@@ -35,11 +35,11 @@
     }
   },
   "source": {
-    "commit": "792ca8bf67e9781dc3ce1b6f185777ee18914f1d",
+    "commit": "84d93fdad0b42d8e21affa9aa2b96312f15a0dfc",
     "branch": "dev",
     "dirty": false,
     "changed_paths": [],
-    "eligible_source_tree_sha256": "fe5401743dcc39c5c7fc41eae4c5f82b2abf18c692541f71f8e9f6efa20e6d8f",
+    "eligible_source_tree_sha256": "4073c79f13628a385b970b01a0dd1832663f7b57c35daf6d2358472b1c7b6cbb",
     "ignored_private_work_included": false
   },
   "application_source_sha256": "e37625ee1b710b444dfd385ff80d3a61f8e71ada4004a19dd2161260eec7718c",

@@ -1,4 +1,4 @@
-"""Wrap the unchanged APEX export blocks for one Database Actions script execution.
+"""Wrap the unchanged APEX export blocks for one Database Actions statement execution.
 
 Uses supported installation-context APIs. Generated output stays local in work/.
 SQL literal ampersands become equivalent CHR(38) expressions to avoid Worksheet
@@ -48,7 +48,7 @@ def export_blocks(path):
     if any(x.strip() for x in pending):raise ValueError('Unterminated export block')
 
 
-def build(workspace='KCV_KNOWLEDGE',schema='KCV_LAB',alias='KCV-EXPLORER',output=None,mode='new'):
+def build(workspace='KCV_KNOWLEDGE',schema='KCV_LAB',alias='KCV-EXPLORER',output=None,mode='new',runtime_targets=False):
     for name,value in [('workspace',workspace),('schema',schema)]:
         if not re.fullmatch(r'[A-Z][A-Z0-9_]{0,29}',value):raise ValueError('Invalid '+name)
     if not re.fullmatch(r'[A-Z][A-Z0-9-]{0,50}',alias):raise ValueError('Invalid application alias')
@@ -76,6 +76,20 @@ def build(workspace='KCV_KNOWLEDGE',schema='KCV_LAB',alias='KCV-EXPLORER',output
     AND object_type IN ('PACKAGE','PACKAGE BODY') AND status='VALID';
  IF l_count<>16 THEN RAISE_APPLICATION_ERROR(-20164,'Required personal journey, conversation, deletion and search APIs must compile before app installation');END IF;
 """
+    declarations=''
+    target_checks=''
+    workspace_sql,schema_sql,alias_sql=(f"'{workspace}'",f"'{schema}'",f"'{alias}'")
+    if runtime_targets:
+        workspace_sql,schema_sql,alias_sql='l_workspace','l_schema','l_alias'
+        declarations=f""" l_schema VARCHAR2(128):=NVL(UPPER(TRIM(:KCV_SCHEMA)),'{schema}');
+ l_workspace VARCHAR2(128):=NVL(UPPER(TRIM(:KCV_WORKSPACE)),'{workspace}');
+ l_alias VARCHAR2(128):=NVL(UPPER(TRIM(:KCV_APP_ALIAS)),'{alias}');
+"""
+        target_checks=""" IF NOT REGEXP_LIKE(l_schema,'^KCV_[A-Z0-9_]{1,26}$','c')
+  OR NOT REGEXP_LIKE(l_workspace,'^[A-Z][A-Z0-9_]{0,29}$','c')
+  OR NOT REGEXP_LIKE(l_alias,'^[A-Z][A-Z0-9-]{0,50}$','c') THEN
+  RAISE_APPLICATION_ERROR(-20165,'Use valid project schema, workspace and application alias names');END IF;
+"""
     install_context=""" APEX_APPLICATION_INSTALL.GENERATE_APPLICATION_ID;
  APEX_APPLICATION_INSTALL.GENERATE_OFFSET;
  l_app_id:=APEX_APPLICATION_INSTALL.GET_APPLICATION_ID;
@@ -87,24 +101,38 @@ def build(workspace='KCV_KNOWLEDGE',schema='KCV_LAB',alias='KCV-EXPLORER',output
  IF l_app_id IS NULL OR l_app_id<=0 OR l_app_id<>TRUNC(l_app_id) THEN
    RAISE_APPLICATION_ERROR(-20161,'Supply an existing application ID');END IF;
  SELECT COUNT(*) INTO l_count FROM apex_applications
-  WHERE application_id=l_app_id AND workspace='{workspace}'
-    AND owner='{schema}' AND UPPER(alias)='{alias}';
+  WHERE application_id=l_app_id AND workspace={workspace_sql}
+    AND owner={schema_sql} AND UPPER(alias)={alias_sql};
  IF l_count<>1 THEN RAISE_APPLICATION_ERROR(-20162,'Application, workspace, alias and parsing schema must match');END IF;
  APEX_APPLICATION_INSTALL.SET_APPLICATION_ID(l_app_id);
  APEX_APPLICATION_INSTALL.GENERATE_OFFSET;
 """
-    sql=f"""-- KCV_LAB: Run Script once. {notice}
+    elif runtime_targets:
+        install_context=f""" SELECT COUNT(*) INTO l_count FROM apex_applications
+  WHERE workspace={workspace_sql} AND UPPER(alias)={alias_sql};
+ IF l_count<>0 THEN RAISE_APPLICATION_ERROR(-20166,'Application alias already exists; use the reviewed upgrade path or a different alias');END IF;
+"""+install_context
+    target_notice='-- Target binds may be left blank for KCV_LAB / KCV_KNOWLEDGE / KCV-EXPLORER.\n' if runtime_targets else ''
+    sql=f"""-- Project schema owner: Run Statement once. {notice}
+-- Select the complete DECLARE through final END; block, excluding the final slash (/).
+-- Run Statement opens the required target/application-ID bind prompts.
+{target_notice}\
 DECLARE
  l_app_id NUMBER;
  l_count NUMBER;
+{declarations}\
 BEGIN
- IF SYS_CONTEXT('USERENV','CURRENT_SCHEMA')<>'{schema}' THEN
-   RAISE_APPLICATION_ERROR(-20160,'Use the intended parsing schema');END IF;
+{target_checks}\
+ IF SYS_CONTEXT('USERENV','CURRENT_SCHEMA')<>{schema_sql}
+  OR SYS_CONTEXT('USERENV','SESSION_USER')<>{schema_sql}
+  OR USER<>SYS_CONTEXT('USERENV','SESSION_USER')
+  OR USER IN ('ADMIN','SYS','SYSTEM') THEN
+   RAISE_APPLICATION_ERROR(-20160,'Connect as the intended parsing schema owner');END IF;
 {schema_gate}\
- APEX_APPLICATION_INSTALL.SET_WORKSPACE('{workspace}');
- APEX_APPLICATION_INSTALL.SET_SCHEMA('{schema}');
+ APEX_APPLICATION_INSTALL.SET_WORKSPACE({workspace_sql});
+ APEX_APPLICATION_INSTALL.SET_SCHEMA({schema_sql});
 {install_context}\
- APEX_APPLICATION_INSTALL.SET_APPLICATION_ALIAS('{alias}');
+ APEX_APPLICATION_INSTALL.SET_APPLICATION_ALIAS({alias_sql});
 """+'\n'.join(blocks)+"\n DBMS_OUTPUT.PUT_LINE('KCV_APPLICATION_ID='||l_app_id);\nEND;\n/\n"
     if '&' in sql:raise ValueError('Unexpected ampersand outside a quoted export literal')
     target=Path(output) if output else ROOT/('work/worksheet/20_upgrade_apex.sql' if mode=='upgrade' else 'work/worksheet/20_install_apex.sql')
@@ -115,4 +143,5 @@ BEGIN
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--workspace',default='KCV_KNOWLEDGE');p.add_argument('--schema',default='KCV_LAB');p.add_argument('--alias',default='KCV-EXPLORER');p.add_argument('--output',type=Path)
     p.add_argument('--mode',choices=['new','upgrade'],default='new')
-    a=p.parse_args();print(build(a.workspace,a.schema,a.alias,a.output,a.mode))
+    p.add_argument('--runtime-targets',action='store_true',help='Prompt for target names in SQL Worksheet; blanks use the supplied defaults')
+    a=p.parse_args();print(build(a.workspace,a.schema,a.alias,a.output,a.mode,a.runtime_targets))

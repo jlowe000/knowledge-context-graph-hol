@@ -23,7 +23,7 @@ Your facilitator has supplied a working Knowledge Context Explorer URL and an ap
 
 **Where:** Knowledge Context Explorer. **Account:** KCV_USER.
 
-1. Select **Alex · engineering information discovery** and click **Start a new conversation**. Read Current understanding. Use **Evidence** to inspect the initial connections, then return to **Conversation**.
+1. Open **Sample Contexts**, choose Alex and select **Explore the samples**. In the sample workspace, select **Alex · engineering information discovery** and click **Start a new conversation**. Read Current understanding. Use **Evidence** to inspect the initial connections, then return to **Conversation**.
 
 2. Keep Conversation intent set to **Explore and ask about content**. Paste the question below into Your question or new thought and click **Explore this question**:
 
@@ -47,11 +47,11 @@ Your facilitator has supplied a working Knowledge Context Explorer URL and an ap
 
    ![Sources popup showing Alex connected through topics to sources and their PDF pages](images/sources-graph.jpg)
 
-**Expected outcome:** you can explain why a source was selected and locate its detail. This real screenshot is from the validated demonstration; your turn/revision IDs, selection and wording can differ. A graph connection alone does not establish suitability or observed value.
+**Expected outcome:** you can explain why a source was selected and locate its detail. This is a historical v1 screenshot using extracted passages. Current v2 uses editorial summaries and application retrieval before model dispatch; identifiers, labels and wording differ. A graph connection alone does not establish suitability or observed value.
 
 ## Task 3: Inspect answer lineage
 
-1. Select **Answer lineage**. Click the EVIDENCE tool node or Pinned graphs node to see what was captured for this response.
+1. Select **Answer lineage**. Click the **Application evidence retrieval** node or Pinned graphs node to see what was captured for this response.
 
 2. Open **Overview** for the recorded question, context and event timestamps. Open **Limits** for retrieval/capture boundaries. The graph depicts observable data flow and reference links, not private model reasoning.
 
@@ -59,7 +59,9 @@ Your facilitator has supplied a working Knowledge Context Explorer URL and an ap
 
    ![Answer lineage showing the question, context, pinned graphs, captured evidence tool, stored answer and six matched citation references](images/answer-lineage.jpg)
 
-**Expected outcome:** the response is linked to an execution, actual tool output and citation metadata. If structured citations cannot be read, matching is labelled unavailable rather than silently treated as zero. Answers created before trace capture show an earlier-response notice.
+The image above is historical v1, with the older agent-tool ordering.
+
+**Expected outcome:** the current response is linked to application retrieval before model dispatch, the captured evidence and citation metadata. If structured citations cannot be read, matching is labelled unavailable rather than silently treated as zero. Answers created before trace capture show an earlier-response notice.
 
 ## Task 4: Refine the focus and compare
 
@@ -87,7 +89,7 @@ Your facilitator has supplied a working Knowledge Context Explorer URL and an ap
 
 3. Decide whether to continue exploring, narrow the question further or finish with a concrete reading/conversation action. An experiment is one possible next step, not a required outcome.
 
-**Expected outcome:** the status confirms the observation was saved against the current revision. This records feedback; it does not retrain the model, certify source claims or automatically apply a refinement. You have completed the main beginner path.
+**Expected outcome:** the status confirms the observation was saved against the current revision. This records feedback; it does not retrain the model, certify source claims or automatically apply a refinement. You have completed the fictional sample path. Continue with [My Contexts](../my-contexts/my-contexts.md) to create your own owned learning context.
 
 To understand how the collection works as a developer, continue to [Understand the collection](../understand-collection/understand-collection.md). To build a different implementation, use the dev branch.
 
@@ -96,7 +98,7 @@ For a longer app journey, use the [detailed UI walkthrough](../../docs/ui-walkth
 ## Learn More
 
 - [Taxonomy, ontology and data contracts](../../docs/architecture.md)
-- [Additional scenarios and optional exercises](../07_original_workshop_scenarios.md)
+- [SQL learning catalogue](../../docs/sql-catalogue.md)
 
 ## Acknowledgements
 

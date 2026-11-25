@@ -45,7 +45,7 @@ def sql_statements(path):
         raise ValueError(f'{path}: every SQL unit must end with a slash on its own line')
 
 
-def apply(path, admin=False):
+def apply(path, admin=False, bindings=None):
     results=[]
     with connect(admin) as conn:
         with conn.cursor() as cur:
@@ -53,7 +53,12 @@ def apply(path, admin=False):
                 # Slash-delimited SQL removes its final semicolon; PL/SQL retains it.
                 if not re.match(r'^\s*(BEGIN\b|DECLARE\b|CREATE\s+OR\s+REPLACE\b)', statement, re.I):
                     statement = statement.rstrip().removesuffix(';')
-                cur.execute(statement)
+                if bindings is None:
+                    cur.execute(statement)
+                else:
+                    # Explicit inputs for a parameterized single-block script.
+                    # Values remain driver binds, never interpolated into SQL.
+                    cur.execute(statement, bindings)
                 if cur.description:
                     columns=[d[0] for d in cur.description]
                     results.append([dict(zip(columns,[v.read() if hasattr(v,'read') else v for v in row])) for row in cur])

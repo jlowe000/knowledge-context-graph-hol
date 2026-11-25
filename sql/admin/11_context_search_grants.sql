@@ -1,7 +1,8 @@
 -- ADMIN: permit only the named project schema to load its own embedding model.
+-- Run Statement. KCV_SCHEMA is the intended existing owner; blank means KCV_LAB.
 -- No model, directory, external credential or network ACL is created here.
 DECLARE
- l_schema VARCHAR2(128):=:KCV_DEV_SCHEMA;
+ l_schema VARCHAR2(128):=NVL(UPPER(TRIM(:KCV_SCHEMA)),'KCV_LAB');
  l_target VARCHAR2(132);n PLS_INTEGER;
 BEGIN
  IF SYS_CONTEXT('USERENV','SESSION_USER')<>'ADMIN' THEN
@@ -14,5 +15,6 @@ BEGIN
  EXECUTE IMMEDIATE 'GRANT CREATE MINING MODEL TO '||l_target;
  EXECUTE IMMEDIATE 'GRANT EXECUTE ON SYS.DBMS_VECTOR TO '||l_target;
  DBMS_OUTPUT.PUT_LINE('Context search model privileges ready.');
+ DBMS_OUTPUT.PUT_LINE('KCV_CONTEXT_SEARCH_GRANTS_READY='||l_schema);
 END;
 /

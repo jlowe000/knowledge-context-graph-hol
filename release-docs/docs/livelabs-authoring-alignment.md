@@ -11,7 +11,7 @@ The beginner route is now the canonical set of labs linked from [Start here](fre
 | Objectives and Prerequisites before tasks | Present in every beginner lab; no ADB knowledge assumed |
 | Numbered Task headings and ordered steps | Tasks identify actions in sequence; account/location repeated at role changes |
 | Short lowercase lab/folder names | For example `labs/configure-database/configure-database.md` |
-| Copyable commands in fenced blocks | LiveLabs `<copy>` markers; GitHub readers are told to copy only the content between them |
+| Copyable commands in fenced blocks | LiveLabs authoring markers are stripped from packaged GitHub Markdown; users copy the SQL directly |
 | Retained SQL plus short inline examples | Generated from actual scripts; new lab bind-statement copies omit the script slash intentionally |
 | Task-specific screenshots with alt text | Two real app images included; remaining platform captures explicitly tracked, not fabricated |
 | Outcomes and recovery | Each task says what success looks like; Need Help covers likely failures |

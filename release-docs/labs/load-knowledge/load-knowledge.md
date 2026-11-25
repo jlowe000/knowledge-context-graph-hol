@@ -1,98 +1,51 @@
-# Load Knowledge and Install the Scenario
+# Load Knowledge and Register Conversations
 
 ## Introduction
 
-Load the public-source collection and the code used by the application. The main path uses the curated graph; claim extraction and manual claim approval are separate optional exercises.
+Load the attributed public summaries and register the prepared conversation services. The complete v2 static schema was installed in the previous lab; this lab does not create those tables/packages again.
 
-Estimated Lab Time: 20–30 minutes; planning estimate.
+Estimated Lab Time: 10–20 minutes plus download/graph preparation time; planning estimate.
 
 ### Objectives
 
-In this lab, you will:
-
-- Fetch a pinned public dataset from GitHub and load its evidence and native RDF relationships.
-- Install scenario sessions, response snapshots and the agent team in dependency order.
-- Check native graph behaviour before opening the application.
+- Load a pinned public dataset from GitHub and inspect its graph.
+- Register the configured scenario agents once on a clean installation.
+- Verify native evidence selection before using the app.
 
 ### Prerequisites
 
-KCV_LAB owns the base tables/functions/network and the KCV_DATASET importer from the preceding lab, Java is VALID, and the KCV_GENAI greeting works. The public commit you will load must contain `data/load/manifest.json` and its JSON parts; see the [GitHub dataset guide](../../docs/github-dataset-load.md).
+[Database configuration](../configure-database/configure-database.md) completed: R7 schema verified, owner-private RDF network, working KCV_GENAI profile and registered AI_PROFILE setting. Use the actual owner Worksheet, normally KCV_LAB.
 
 ## Task 1: Load the public dataset
 
-**Where:** SQL Worksheet. **Account:** KCV_LAB.
+1. Follow [Choose a published version](../../docs/github-dataset-load.md#choose-a-published-version). Use a full commit SHA containing the dataset and the matching manifest hash. A local release build is not a published GitHub object. The package preparer may identify an earlier immutable published dataset commit when its bytes are unchanged; do not select a different dataset yourself to bypass a failed hash.
+2. Open [10_load_github.sql](../../sql/install/10_load_github.sql), replace only the commit placeholder using that documented version and run the whole call with F5. The download is anonymous; no GitHub token is needed.
+3. Wait for success. Use the progress query in the load guide if necessary; a slow browser is not permission to start another load.
+4. Run [01_inspect.sql](../../sql/queries/01_inspect.sql), [verify_worksheet.sql](../../integration-test/verify_worksheet.sql) and [verify_source_packet_scope.sql](../../integration-test/verify_source_packet_scope.sql), each separately with F5. The last test rolls back its own synthetic out-of-graph passage.
 
-1. Run `SELECT USER FROM dual;` and confirm KCV_LAB.
+**Expected outcome:** SUCCEEDED, a ready ACTIVE_GRAPH and the supplied summary corpus: 834 source references, 762 passages, three fictional contexts and 30,144 triples for this dataset edition. Verify the package's manifest rather than treating these as universal counts. The loader imports no personal contexts, app accounts or conversations. A matched summary has its own text hash and links to the original public material.
 
-2. On GitHub, select **release** and confirm that the intended published commit contains `data/load/manifest.json`. Copy its **full 40-character commit SHA**. This pins the sample to one published version; do not enter a branch name, a shortened SHA or a commit from before the dataset was added. Use the caller and manifest from that same release commit.
+If GitHub is unavailable, use the [SQL fallback](../../docs/github-dataset-load.md#sql-fallback). Choose one loading method; never run them concurrently. A migration can retain its existing public dataset and skip loading entirely.
 
-3. Open `sql/install/10_load_github.sql` from that same commit. It contains a short call and the expected manifest SHA-256. Replace its commit placeholder with the full commit SHA from step 2, then run the complete call with **Run Script (F5)**. The form is shown below; use the manifest hash supplied by the matching file, not a hash copied from another candidate or release.
+## Task 2: Register conversation services
 
-   ```sql
-   BEGIN
-     KCV_DATASET.LOAD_GITHUB(
-       p_owner=>'jlowe000', p_repo=>'knowledge-context-graph-hol',
-       p_ref=>'PASTE_FULL_40_CHARACTER_COMMIT_SHA',
-       p_expected_manifest_sha256=>'PASTE_64_CHARACTER_HASH_FROM_MATCHING_CALLER');
-   END;
-   /
-   ```
+On a **clean** configured schema, run [03_scenario_agents.sql](../../sql/extensions/03_scenario_agents.sql) with F5 once. The script registers the prepared teams/tasks/tools using the existing profile. Do not rerun raw scenario-object, provenance or application-package creation scripts; the ordered schema installer already installed them.
 
-   ADB downloads the manifest and JSON parts directly from public GitHub, verifies their hashes and counts, and loads the sources, evidence, contexts and RDF. It does not download or execute SQL from GitHub. No GitHub credential or Object Storage bucket is needed. This call does not request model inference.
+**Expected outcome:** registration completes. The application retrieves evidence before `KCV_GROUNDED_TEAM` generates an answer. Proposal handling retains the separate explorer team. An existing team is a reason to inspect an earlier run, not drop it. Existing installations use [migration](../../docs/migrate-to-v2.md) and the scoped registration refresh instead.
 
-4. Wait for the call to finish and inspect Script Output. Enable DBMS Output if needed. Use the [progress and error checks](../../docs/github-dataset-load.md#check-progress-and-handle-errors) from a second KCV_LAB Worksheet if the first is still busy; do not start another load. A local package is not available through GitHub until its files have been committed and pushed. If the published commit does not yet contain the manifest, stop at that checkpoint.
+## Task 3: Verify the scenario
 
-5. After successful completion, run [01_inspect.sql](../../sql/queries/01_inspect.sql) and [verify_worksheet.sql](../../integration-test/verify_worksheet.sql), each using F5. If necessary, enable/display DBMS Output in Worksheet to see the PASS message.
+Run the complete block in [verify_scenario_native.sql](../../integration-test/verify_scenario_native.sql) with Run Statement, excluding its slash, and supply the actual owner as KCV_SCHEMA. Review the explicit PASS output and any Oracle errors. This checks the supplied sample's graph/refinement behavior; it does not establish a successful chat answer. No inference is needed for these native read/refinement checks.
 
-The GitHub package contains attributed editorial summaries of public material. Original source pages are linked for inspection; this load does not re-download or reverify those originals. The supplied summary SQL parts are a fallback when GitHub loading is unavailable. Choose one dataset/load method for the fresh lab; do not run both. See the [dataset guide](../../docs/github-dataset-load.md) for the available paths. Building a different collection is a separate dev-branch learning experience.
+Optionally run [verify_github_dataset.sql](../../integration-test/verify_github_dataset.sql) for maintainer acceptance. It performs public downloads and intentionally records wrong-hash/retry cases; do not confuse that expected failed run with an unexplained failure.
 
-The RDF network (KCV_NET) is a database graph-storage structure, separate from an OCI virtual cloud network (VCN). Snapshot graph names are generated by the lab; do not copy another learner's graph name as an input.
-
-**Expected outcome:** the sources, passages and contexts are loaded; ACTIVE_GRAPH identifies a ready snapshot; the native probe prints `PASS: active context and native RDF evidence include overview and disclaimer`. A PASS here makes no model call. Do not proceed if graph creation or evidence lookup failed.
-
-## Task 2: Install the application backend
-
-**Where:** SQL Worksheet. **Account:** KCV_LAB.
-
-1. Run these complete files with F5, one at a time, in the table order. **The dependency order is different from alphabetical filename order.**
-
-   | Order | File | What it creates |
-   | --- | --- | --- |
-   | 1 | [01_scenario_objects.sql](../../sql/extensions/01_scenario_objects.sql) | Scenario sessions, revisions, chat and observations |
-   | 2 | [06_response_provenance.sql](../../sql/extensions/06_response_provenance.sql) | Recorded response runs, actual tool payloads and trace API |
-   | 3 | [02_scenario_api.sql](../../sql/extensions/02_scenario_api.sql) | Context refinement, evidence retrieval and model-call API |
-   | 4 | [03_scenario_agents.sql](../../sql/extensions/03_scenario_agents.sql) | KCV_EXPLORER_TEAM and its registered tools/agents |
-   | 5 | [05_apex_api.sql](../../sql/extensions/05_apex_api.sql) | Authenticated application callback |
-
-2. After each file, inspect errors. After the last file, run:
-
-   ```sql
-   <copy>
-   SELECT name,type,line,text FROM user_errors ORDER BY name,sequence;
-   </copy>
-   ```
-
-3. If a script reports an existing table, network, profile or team, investigate the earlier run instead of rerunning every file. Initial creation scripts are not all rerunnable. [07_trace_tool_wrappers.sql](../../sql/extensions/07_trace_tool_wrappers.sql) is an upgrade helper; the initial agent script already installs those wrappers.
-
-**Expected outcome:** no compile errors, and registration completes successfully. The UI uses **KCV_EXPLORER_TEAM**. You do not need to create the older KCV_TEAM in `sql/schema/04_agents.sql` for this beginner application path. Never install the local mocks under `integration-test/mocks/` into KCV_LAB.
-
-## Task 3: Check native scenario behaviour
-
-1. Still as KCV_LAB, run [verify_scenario_native.sql](../../integration-test/verify_scenario_native.sql) with F5. It creates test scenario conversations/overlays and checks actual graph paths and a topic removal; it does not request model inference.
-
-2. Read the final output.
-
-**Expected outcome:** `PASS: native graph paths, healthcare qualifications and changed topic retrieval; base graph preserved`. This confirms the database can retrieve evidence and refine context while preserving the base graph.
-
-If the script fails, retain the Oracle error and the preceding task name. Do not grant broad privileges or rebuild all data. Use [Need help?](../need-help/need-help.md).
-
-Continue to [Deploy the application](../deploy-explorer/deploy-explorer.md).
+**Expected outcome:** native evidence and source-scope checks pass with historical graph data preserved. Complete [local search setup](../../docs/context-search.md#worksheet-setup) if semantic library search is wanted, then continue to [deploy the app](../deploy-explorer/deploy-explorer.md).
 
 ## Learn More
 
-- [Scenario implementation and boundaries](../../docs/scenario-setup.md)
-- [GitHub dataset loading and troubleshooting](../../docs/github-dataset-load.md)
-- [Optional relationship extraction and OWL exercises](../07_original_workshop_scenarios.md)
+- [Dataset semantics](../../docs/release-dataset.md)
+- [SQL catalogue](../../docs/sql-catalogue.md)
+- [Validation status](../../docs/scenario-validation.md)
 
 ## Acknowledgements
 

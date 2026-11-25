@@ -1,37 +1,33 @@
 # Release architecture
 
-A fictional person/organisation's context meets a curated graph of topics, public sources and attributed editorial summaries. The intersection helps select evidence for a question. Refinements create new context revisions; saved responses retain their historical evidence.
+The app connects an owned learning context to a curated public collection. It selects bounded evidence, asks a model to interpret that evidence and retains the answer's context, evidence and citation links.
 
 ```mermaid
 flowchart LR
-  A[Supplied summary dataset SQL] --> B[Native RDF graph and source tables]
-  C[Person and organisation context] --> D[Context topic overlay]
-  B --> E[Bounded topic-based retrieval]
-  D --> E
-  F[APEX user question] --> G[Select AI explorer team]
-  G --> E
-  E --> H[Recorded tool evidence]
-  H --> I[Answer and citations]
-  I --> J[Sources and Answer lineage]
-  F --> K[Preview and apply refinement]
-  K --> D
-  I --> L[Observation and next step]
+  P[Public summaries and native RDF graph] --> E[Application evidence retrieval]
+  D[Owned saved draft] --> R[Reviewed immutable revision]
+  R --> C[Conversation with selected revision]
+  Q[User question] --> E
+  C --> E
+  E --> T[Captured evidence packet and graph paths]
+  T --> M[Grounded answer team]
+  M --> A[Answer and citation matches]
+  T --> X[Sources and Answer lineage]
+  A --> X
+  D --> S[Private local context-search chunks]
 ```
 
-The [ontology](../ontology/kcv.ttl) defines the shared model; [scenario-extension.ttl](../ontology/scenario-extension.ttl) documents scenario concepts. The native graph binds a context's explicit topics to content topics, versions and evidence. Retrieval is deterministic and bounded, not vector similarity or a learned relevance ranking. Context weights do not drive ordering.
+## Public knowledge and personal runtime data
 
-Release evidence is editorial summary text with its own ID/hash, original source edition hash and public page link. See [dataset semantics](release-dataset.md). It is not full source text or an automatically accepted claim. Model answers distinguish proposed relevance from observed value. Roadmap and regional limitations remain visible.
+The [ontology](../ontology/kcv.ttl) and [scenario extension](../ontology/scenario-extension.ttl) describe content, versions, evidence, topics and context relationships. The dataset contains public references, attributed editorial summaries and three fictional contexts. A source edition hash identifies original material; a summary ID/hash identifies the text actually supplied to the model. Follow original links to verify claims.
 
-APEX invokes the database API and KCV_EXPLORER_TEAM. The team has a question worker, a change planner and coordinator; no external Python service is involved. The planner proposes changes only. The user previews/applies structured refinements. The response explanation shows recorded execution/tool payloads and citation links, not private model reasoning. Saving an observation does not retrain the model or automatically alter the curated graph.
+My Contexts adds owned drafts, immutable ready revisions, private RDF overlays, conversations, observations and response traces. These are database runtime records, not additions to the public dataset or GitHub repository. Sharing an app login shares its library. Separate accounts have separate ownership; a URL checksum is not the ownership decision.
 
-ADB Serverless supplies SQL/PLSQL, Java/RDF, Select AI and APEX; OCI Generative AI supplies model inference with configured IAM access. No Object Storage, external graph database, queue or application server is required for this path. Developer preparation/extraction/testing tools are available on dev with separate setup instructions.
-
+Saving does not publish a ready revision. Review/apply creates one. Existing conversations keep their selected revision until explicit adoption of the latest ready revision. Historical answers keep their original context/evidence. A new public collection is adopted deliberately; it does not rewrite earlier answers.
 
 ## How SPARQL supports a question
 
-The collection stores RDF relationships in Oracle's native graph engine. The current context revision supplies topic links; the pinned source graph supplies content, versions and evidence links. The supplied evidence tool runs SPARQL through Oracle SQL's `SEM_MATCH` table function over both graphs.
-
-Using `kcv:` for the collection namespace, its pattern is:
+The application retrieves evidence **before** calling `KCV_GROUNDED_TEAM`. SQL/PLSQL executes SPARQL through Oracle's `SEM_MATCH` table function over the selected context overlay and pinned public graph. This is a schematic relationship, not a complete Worksheet statement:
 
 ```sparql
 SELECT ?item ?ver ?topic ?passage WHERE {
@@ -41,16 +37,26 @@ SELECT ?item ?ver ?topic ?passage WHERE {
 }
 ```
 
-This is a schematic pattern, not a complete Worksheet statement. The [implementation](../sql/extensions/02_scenario_api.sql) fixes the current context IRI, quotes the SPARQL into SQL and adds ordering/limits. The result variables become SQL columns. PL/SQL retrieves each matched summary's text and metadata and returns JSON with actual graph paths, capped at six distinct pages and two per source.
+The [scenario API](../sql/extensions/02_scenario_api.sql) supplies actual identifiers, ordering and bounds. Any selected topic can match. Curriculum sources precede catalogue IDs; the packet contains at most six passages and two locators per source version. This public-evidence selection is a deterministic topic join, not vector search. Topic weights do not rank it.
 
-The model calls this predefined evidence tool. Its natural-language answer interprets the returned material; it does not invent the graph connections displayed by APEX. The saved response explanation retains the actual tool output and context revision. The [developer learning lab](../labs/understand-collection/understand-collection.md) lets you inspect the same boundary through SQL and the app.
+Objective, role, background and constraints inform interpretation; they are not additional source filters. Removing a topic changes learning focus rather than technical capability. Objective-only edits can legitimately leave selected evidence unchanged.
 
-Optional OWL2RL SQL demonstrates class entailment. Normal question retrieval does not automatically run that inference exercise or consume its inferred graph.
+The grounded answer task receives the captured packet. Proposal handling retains the separate explorer team. New trace events distinguish application retrieval from agent tools; older events retain their historical representation. Sources and Answer lineage show recorded inputs, paths and citation matches, not hidden reasoning or a correctness score. Unsupported/incomplete answers remain visibly incomplete.
+
+## Private context search is separate
+
+My Contexts searches saved titles/details using literal text and optional local embeddings from `KCV_CONTEXT_MINILM`. Account/status restrictions apply before ranking; results show the saved objective and match reason. Private derived chunks exclude transcripts, evidence and observations. They are removed with a permanently deleted context and are not redistributed.
+
+Local embeddings run inside Oracle Database: library search sends no context to an external embedding/chat service. A chat question does send context/evidence to the configured model service. Keyword fallback is visible when embeddings are unavailable. See [context search](context-search.md).
 
 ## How APEXlang relates to deployment
 
-The app is authored as APEXlang (`.apx`) application definitions, together with HTML/CSS/JavaScript UI assets and a SQL/PLSQL backend. The authoring source and rebuild tools are available on dev for people adapting their own implementation.
+Dev maintains native APEXlang (`.apx`) definitions, UI assets and database APIs. Release supplies the APEX-engine SQL export and prepared new/upgrade Worksheet installers. Learners do not compile APEXlang, install SQLcl or run Python. Installation uses the ordered schema bundles and a matching export; replacing isolated package files is not the v2 migration route.
 
-For this release, the prepared app was imported into APEX and exported by the APEX engine as [kcv-explorer.sql](../apex/kcv-explorer.sql). The [Worksheet installer](../sql/install/20_install_apex.sql) wraps that export with workspace/parsing-schema installation settings and allocates a new application ID. It already includes the runtime UI assets.
+ADB Serverless supplies SQL/PLSQL, Java/RDF, local vector inference, Select AI and APEX. The configured OCI model service supplies chat inference. No external graph database, queue or application server is required. Embedding model weights are obtained separately with their own attribution; they are not bundled.
 
-A learner can install the supplied SQL without writing APEXlang, running Python or installing SQLcl. A developer learning the collection can study how the definitions, export, API and running UI relate. Someone changing the app's definition or behaviour follows the separate dev build/validate/import/export journey. See [APEX deployment notes](../apex/README.md).
+## What this example does not establish
+
+Observations record what the user checked and what to consider next. They do not automatically refine context, retrain a model, modify curated facts or prove business outcomes. Optional OWL exercises demonstrate class entailment separately. The broader learning loop and evaluation of the Explorer are future work, outside this release journey.
+
+Continue with [app use](../labs/my-contexts/my-contexts.md), [developer learning](../labs/understand-collection/understand-collection.md) or [installation paths](installation-paths.md).

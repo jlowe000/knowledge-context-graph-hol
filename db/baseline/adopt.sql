@@ -3073,7 +3073,7 @@ END;
   require(l_n=1,''Existing baseline receipt differs; use deliberate recovery'');
  END IF;
  COMMIT;l_result:=DBMS_LOCK.RELEASE(l_lock);
- DBMS_OUTPUT.PUT_LINE(''Verified v1 baseline receipts recorded. Run the normal Liquibase update; no changelog-sync is needed.'');
+ DBMS_OUTPUT.PUT_LINE(''Verified v1 baseline receipts recorded. Continue with the documented ordered upgrade for your deployment route.'');
 EXCEPTION WHEN OTHERS THEN ROLLBACK;IF l_lock IS NOT NULL AND l_result=0 THEN l_result:=DBMS_LOCK.RELEASE(l_lock);END IF;RAISE;
 END;');
  EXECUTE IMMEDIATE l_step;

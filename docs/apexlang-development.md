@@ -70,7 +70,7 @@ Those commands use the legacy KCV_KNOWLEDGE/KCV_LAB defaults. For a separate fre
 python scripts/build_apex_worksheet.py --mode new --workspace KCV_V2_FRESH --schema KCV_V2_FRESH --alias KCV-FRESH-EXPLORER --output work/fresh/20_install_apex.sql
 ```
 
-Follow [fresh dev deployment](fresh-dev-deployment.md) for the complete setup. Choose the wrapper or native APEXlang import for that installation; running both creates separate apps and does not establish a single tested deployment path.
+Follow [fresh dev deployment](fresh-dev-deployment.md) for the complete setup. Execute either generated Worksheet wrapper with **Run Statement (Ctrl+Enter)** as the intended owner: select the complete outer `DECLARE` through the final `END;`, excluding the final slash. Supply any target binds and the existing app ID for an upgrade. F5 does not open these bind prompts. Choose the wrapper or native APEXlang import for that installation; running both creates separate apps and does not establish a single tested deployment path.
 
 `new` allocates a new application ID. `upgrade` generates `work/worksheet/20_upgrade_apex.sql`, requires the existing app ID in a Worksheet bind prompt, and checks workspace, parsing schema, alias, the completed `2.0.0-c3-r7-ready` migration and all sixteen required package specification/body objects, including personal-journey, conversation, deletion and context search before import. It preserves the application ID. APEX generates an offset to avoid internal metadata collisions; page numbers and aliases are retained, but internal numeric component IDs are not an ownership key.
 

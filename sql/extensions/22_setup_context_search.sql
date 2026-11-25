@@ -1,4 +1,5 @@
--- Owner runtime setup after the R6 schema migration and ADMIN search grants.
+-- Owner runtime setup after current schema installation and ADMIN search grants.
+-- Select DECLARE through END; use Run Statement, without the final slash.
 -- Bind KCV_MODEL_URI to the direct, augmented all_MiniLM_L12_v2.onnx download
 -- from Oracle's public model catalogue. Do not save a populated URI in Git.
 -- The model bytes are fetched into the database; context text is never uploaded.
@@ -27,20 +28,15 @@ BEGIN
   INTO l_dimensions USING 'Find saved learning ideas by meaning';
  IF l_dimensions<>384 THEN RAISE_APPLICATION_ERROR(-20360,'Expected a 384-dimensional embedding model');END IF;
  DBMS_OUTPUT.PUT_LINE('CONTEXT_SEARCH_MODEL_READY=384');
-END;
-/
-DECLARE
- l_dimensions PLS_INTEGER;
-BEGIN
- -- A Worksheet may continue after an earlier block fails: recheck locally.
- EXECUTE IMMEDIATE 'SELECT VECTOR_DIMENSION_COUNT(VECTOR_EMBEDDING(KCV_CONTEXT_MINILM USING :t AS DATA)) FROM dual'
-  INTO l_dimensions USING 'Validate the search model before refreshing saved contexts';
- IF l_dimensions<>384 THEN RAISE_APPLICATION_ERROR(-20360,'Expected a 384-dimensional embedding model');END IF;
+ -- Keep loading, validation and backfill in one block: an error cannot fall
+ -- through to a later Worksheet block and refresh with an unintended model.
  kcv_context_search.reindex_all;
  COMMIT;
  DBMS_OUTPUT.PUT_LINE('CONTEXT_SEARCH_BACKFILL=COMPLETE; inspect coverage below');
+EXCEPTION WHEN OTHERS THEN ROLLBACK;RAISE;
 END;
 /
+-- Run this read-only query separately only after both success markers above.
 SELECT embedding_status, COUNT(*) AS chunks
 FROM kcv_context_search_chunks
 GROUP BY embedding_status

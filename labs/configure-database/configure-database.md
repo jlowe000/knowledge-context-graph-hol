@@ -77,27 +77,13 @@ SELECT dbms_java.get_jdk_version AS java_version FROM dual
 
 **Where:** SQL Worksheet. **Account:** ADMIN.
 
-1. Open [01_create_user_worksheet.sql](../../sql/admin/01_create_user_worksheet.sql). Copy DECLARE through END; into Worksheet, excluding the final slash, and choose **Run Statement**. Enter a private KCV_LAB_PASSWORD value in the bind dialog. The script accepts 12–64 characters from its documented set and refuses to reset an existing user.
+1. Open [01_create_user_worksheet.sql](../../sql/admin/01_create_user_worksheet.sql). Copy DECLARE through END; into Worksheet, excluding the final slash, and choose **Run Statement**. Enter the chosen KCV_SCHEMA and a private KCV_LAB_PASSWORD value in the bind dialog. The script accepts 12–64 characters from its documented set and refuses to reset an existing user.
 
-2. Open [02_grants.sql](../../sql/admin/02_grants.sql), replace the editor contents with the complete script, and choose **Run Script (F5)**. This gives KCV_LAB own-object creation privileges, package execution and the quota set during user creation; it does not make the user a DBA.
+2. Open [02_grants.sql](../../sql/admin/02_grants.sql), copy its complete block without the final slash, and choose **Run Statement** with the same KCV_SCHEMA. This gives KCV_LAB own-object creation privileges, package execution and the quota set during user creation; it does not make the user a DBA.
 
 3. Enable Database Actions for the new schema with F5:
 
-<!-- include-sql: sql/admin/04_enable_database_actions.sql -->
-
-```sql
-<copy>
-BEGIN
-  ORDS_ADMIN.ENABLE_SCHEMA(p_enabled=>TRUE,p_schema=>'KCV_LAB',
-    p_url_mapping_type=>'BASE_PATH',p_url_mapping_pattern=>'kcv_lab',p_auto_rest_auth=>TRUE);
-END;
-/
-</copy>
-```
-
-[Script: 04_enable_database_actions.sql](../../sql/admin/04_enable_database_actions.sql)
-
-<!-- /include-sql -->
+Open [04_enable_database_actions.sql](../../sql/admin/04_enable_database_actions.sql) and run its complete guarded block with **Run Statement**, excluding the final slash. Supply `KCV_SCHEMA`; use the actual target names consistently. Blank nonsecret values select the documented defaults. Keep passwords in the private bind prompt.
 
 4. Check that the user exists:
 

@@ -61,13 +61,13 @@ You have an OCI account authorized to create a lab database or an administrator 
 
 ## Task 3: Learn the two Run controls
 
-1. Use **Run Script (F5)** for the complete linked `.sql` scripts in this workshop. Read **Script Output** for created/compiled messages and errors. A success message followed by an Oracle error is not a passed task.
+1. Use **Run Script (F5)** for ordered schema parts and linked `.sql` files explicitly marked for script execution. Read **Script Output** for created/compiled messages and errors. A success message followed by an Oracle error is not a passed task.
 
-2. Use **Run Statement** for a selected single SQL statement, or a bind-variable block from BEGIN/DECLARE through END; **without the final slash**. A bind such as `:KCV_LAB_PASSWORD` opens an input dialog. The slash is a script delimiter, not part of the value.
+2. Use **Run Statement** for a selected single SQL statement, or a complete outer bind-variable block from BEGIN/DECLARE through the final END; **without the final slash**. This includes the generated APEX installers and their target/application-ID prompts, as well as private values such as `:KCV_LAB_PASSWORD`. The slash is a script delimiter, not part of the value.
 
-3. To run a long linked script reliably, open its local `.sql` file in a plain-text editor, copy the whole file, click the Worksheet editor, select all, paste, then use F5. Do not copy GitHub page HTML, Markdown fences or `<copy>` tags. Run one task's script at a time.
+3. Load the complete local `.sql` file through Worksheet Open File or copy it from a plain-text editor. Verify its contents, then use its documented Run Script or Run Statement mode. Do not copy GitHub page HTML, Markdown fences or `<copy>` tags. Run one task's script at a time.
 
-**Expected outcome:** you know where to see results, where an error appears, and why secret bind values use Run Statement. Continue to [Configure database and model access](../configure-database/configure-database.md).
+**Expected outcome:** you know where to see results, where an error appears, and why bind prompts use Run Statement. Continue to [Configure database and model access](../configure-database/configure-database.md).
 
 ## Learn More
 

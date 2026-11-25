@@ -22,27 +22,13 @@ The native scenario check passed, you can sign in as ADMIN and KCV_LAB, and `wor
 
 **Where:** SQL Worksheet. **Account:** ADMIN.
 
-1. Sign into ADMIN Worksheet. Run [06_cloud_apex_preflight.sql](../../sql/admin/06_cloud_apex_preflight.sql) with F5. The app export was generated on APEX 26.1.5 and validated on Serverless 26.1.6; use a compatible APEX 26.1+ service. Do not edit the version number inside the export to force an older installation.
+1. Sign into ADMIN Worksheet. Run the block in [06_cloud_apex_preflight.sql](../../sql/admin/06_cloud_apex_preflight.sql) with Run Statement, excluding the slash, and supply KCV_SCHEMA/KCV_WORKSPACE. The app export was generated on APEX 26.1.5 and validated on Serverless 26.1.6; use a compatible APEX 26.1+ service. Do not edit the version number inside the export to force an older installation.
 
 2. Check whether KCV_KNOWLEDGE already appears in the workspace query. On a fresh installation it should not. If it exists from an earlier attempt, check that it maps to KCV_LAB rather than creating a second workspace blindly.
 
-3. If absent, create it with F5:
+3. Create or verify its mapping with the guarded block below:
 
-<!-- include-sql: sql/admin/07_create_apex_workspace.sql -->
-
-```sql
-<copy>
-BEGIN
-  APEX_INSTANCE_ADMIN.ADD_WORKSPACE(
-    p_workspace=>'KCV_KNOWLEDGE',p_primary_schema=>'KCV_LAB');
-END;
-/
-</copy>
-```
-
-[Script: 07_create_apex_workspace.sql](../../sql/admin/07_create_apex_workspace.sql)
-
-<!-- /include-sql -->
+Open [07_create_apex_workspace.sql](../../sql/admin/07_create_apex_workspace.sql) and run its complete guarded block with **Run Statement**, excluding the final slash. Supply `KCV_SCHEMA` and `KCV_WORKSPACE`; use the actual target names consistently. Blank nonsecret values select the documented defaults. Keep passwords in the private bind prompt.
 
 **Expected outcome:** the procedure completes. KCV_KNOWLEDGE is an APEX workspace using the existing KCV_LAB schema. It is not another database and does not create a login password.
 
@@ -52,23 +38,7 @@ END;
 
 1. Use the block below with **Run Statement**, excluding the slash. Enter a new private password in the KCV_APEX_PASSWORD bind dialog and submit it. Do not put the password in the SQL text.
 
-<!-- include-sql: sql/admin/08_create_apex_app_user.sql -->
-
-```sql
-<copy>
-BEGIN
-  APEX_UTIL.SET_SECURITY_GROUP_ID(APEX_UTIL.FIND_SECURITY_GROUP_ID('KCV_KNOWLEDGE'));
-  APEX_UTIL.CREATE_USER(p_user_name=>'KCV_USER',p_web_password=>:KCV_APEX_PASSWORD,
-    p_developer_privs=>NULL,p_allow_app_building_yn=>'N',p_allow_sql_workshop_yn=>'N',
-    p_allow_team_development_yn=>'N',p_change_password_on_first_use=>'N');
-  COMMIT;
-END;
-</copy>
-```
-
-[Script: 08_create_apex_app_user.sql](../../sql/admin/08_create_apex_app_user.sql)
-
-<!-- /include-sql -->
+Open [08_create_apex_app_user.sql](../../sql/admin/08_create_apex_app_user.sql) and run its complete guarded block with **Run Statement**, excluding the final slash. Supply `KCV_SCHEMA`, `KCV_WORKSPACE`, `KCV_APP_USER` and private `KCV_APEX_PASSWORD`; use the actual target names consistently. Blank nonsecret values select the documented defaults. Keep passwords in the private bind prompt.
 
 2. Keep this password associated with **KCV_USER**, not KCV_LAB. This is an APEX end user: it can use the application but cannot open App Builder or SQL Workshop. Account creation is an ADMIN task on the validated Serverless route.
 
@@ -80,7 +50,7 @@ END;
 
 1. Sign back into KCV_LAB Worksheet and check `SELECT USER FROM dual;`.
 
-2. Open the generated `work/worksheet/20_install_apex.sql`, replace the editor contents with the whole script and run **F5**. This can take time; do not submit it repeatedly while it is running. The script sets the workspace/schema and allocates a new app ID.
+2. Open the generated `work/worksheet/20_install_apex.sql`, select its complete outer `DECLARE` through the final `END;`, excluding the final slash, and use **Run Statement (Ctrl+Enter)**. Supply any target binds requested by the generated file. This can take time; do not submit it repeatedly while it is running. The script sets the workspace/schema and allocates a new app ID.
 
 3. Look for compatibility/import success and `KCV_APPLICATION_ID=` followed by a number. Record the number privately. Your number need not be 100; screenshots from the working demonstration are examples.
 

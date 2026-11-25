@@ -19,15 +19,15 @@ This creates RDF/previews and **work/worksheet/10_load_dataset.sql**. The SQL lo
 
 The generated loader needs no substitution values. If Worksheet prompts for substitutions, cancel it and open the latest regenerated loader. The exporter represents source-text ampersands with `CHR(38)` so they are preserved without triggering client substitution. Do not enter replacement values for source text.
 
-Open SQL files using Worksheet's file controls or paste the content. Use **Run Script (F5)** for slash-delimited scripts. For a bind-variable PL/SQL block, select through END; without the final slash and use **Run Statement**. Inspect results after each step.
+Open SQL files using Worksheet's file controls or paste the content. Use **Run Script (F5)** for ordered schema parts and other files explicitly marked for script execution. For a bind-variable PL/SQL block and both generated APEX installers, select the complete outer DECLARE/BEGIN through the final END; without the final slash and use **Run Statement (Ctrl+Enter)**. This opens the required bind prompts. Inspect results after each step.
 
 ## ADMIN worksheet
 
 1. Run `sql/admin/00_readiness.sql`. Java must become VALID before the native RDF steps.
 2. If Java is absent and the database-wide change is intended, run `sql/admin/01_enable_java.sql`; restart the Serverless instance in OCI and wait for installation to finish. Oracle documents that Java cannot be disabled afterwards. This is not automatic setup.
-3. Open [01_create_user_worksheet.sql](../sql/admin/01_create_user_worksheet.sql), copy the block from `DECLARE` through `END;` into the ADMIN Worksheet, and use **Run Statement** (exclude the final `/`). Supply the private KCV_LAB_PASSWORD bind value when prompted. Do not save it into a script or send it in chat. Existing users cause a stop rather than a reset.
-4. Open [02_grants.sql](../sql/admin/02_grants.sql), paste the whole script into the ADMIN Worksheet, and use **Run Script (F5)** for own-object creation and direct package grants. It grants neither DBA nor ANY privileges nor DBMS_CLOUD_ADMIN to the learner. Exact native RDF privileges still require the functional probe.
-5. Run [04_enable_database_actions.sql](../sql/admin/04_enable_database_actions.sql) as ADMIN with **Run Script (F5)** to enable the lab user's authenticated Database Actions route. A copyable version is below.
+3. Open [01_create_user_worksheet.sql](../sql/admin/01_create_user_worksheet.sql), copy the block from `DECLARE` through `END;` into the ADMIN Worksheet, and use **Run Statement** (exclude the final `/`). Supply the chosen KCV_SCHEMA and private KCV_LAB_PASSWORD bind values when prompted. Do not save it into a script or send it in chat. Existing users cause a stop rather than a reset.
+4. Open [02_grants.sql](../sql/admin/02_grants.sql), paste its complete block into the ADMIN Worksheet, excluding the final slash, and use **Run Statement** with the same KCV_SCHEMA for own-object creation and direct package grants. It grants neither DBA nor ANY privileges nor DBMS_CLOUD_ADMIN to the learner. Exact native RDF privileges still require the functional probe.
+5. As ADMIN, select the complete block in [04_enable_database_actions.sql](../sql/admin/04_enable_database_actions.sql), excluding the final slash, and use **Run Statement** with the same `KCV_SCHEMA` to enable that owner's authenticated Database Actions route.
 
 Java reference: [Oracle setup](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/autonomous-oracle-java.html). User/RDF reference: [RDF quick start](https://docs.oracle.com/en/database/oracle/oracle-database/26/rdfrm/quick-start-using-rdf-data-oracle-autonomous-ai-database.html).
 
@@ -76,19 +76,7 @@ SELECT dbms_java.get_jdk_version AS java_version FROM dual
 
 **Enable the authenticated lab-user Database Actions route after creating the user:**
 
-<!-- include-sql: sql/admin/04_enable_database_actions.sql -->
-
-```sql
-BEGIN
-  ORDS_ADMIN.ENABLE_SCHEMA(p_enabled=>TRUE,p_schema=>'KCV_LAB',
-    p_url_mapping_type=>'BASE_PATH',p_url_mapping_pattern=>'kcv_lab',p_auto_rest_auth=>TRUE);
-END;
-/
-```
-
-[Script: 04_enable_database_actions.sql](../sql/admin/04_enable_database_actions.sql)
-
-<!-- /include-sql -->
+Open [04_enable_database_actions.sql](../sql/admin/04_enable_database_actions.sql) and run its complete guarded block with **Run Statement**, excluding the final slash. Supply `KCV_SCHEMA`; use the actual target names consistently. Blank nonsecret values select the documented defaults. Keep passwords in the private bind prompt.
 
 ## OCI model authentication
 
@@ -105,18 +93,7 @@ No model key, user password or private target URL is bundled. Confirm networking
 
 **Resource-principal path only: enable use for the lab user after OCI IAM is configured (ADMIN). Skip this for user credentials:**
 
-<!-- include-sql: sql/admin/03_resource_principal.sql -->
-
-```sql
-BEGIN
-  DBMS_CLOUD_ADMIN.ENABLE_RESOURCE_PRINCIPAL(username=>'KCV_LAB');
-END;
-/
-```
-
-[Script: 03_resource_principal.sql](../sql/admin/03_resource_principal.sql)
-
-<!-- /include-sql -->
+Open [03_resource_principal.sql](../sql/admin/03_resource_principal.sql) and run its complete guarded block with **Run Statement**, excluding the final slash. Supply `KCV_SCHEMA`; use the actual target names consistently. Blank nonsecret values select the documented defaults. Keep passwords in the private bind prompt.
 
 ## KCV_LAB worksheet
 

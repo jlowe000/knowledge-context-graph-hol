@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 from urllib.parse import urlsplit
@@ -20,6 +21,10 @@ from kcv.worksheet import export
 from kcv.github_dataset import generate as generate_github_dataset
 from kcv.github_dataset import loader_script
 from scripts.build_apex_worksheet import build as build_apex_installer, verify_upgrade_export
+from scripts.build_apex_worksheet import application_source_hash
+from scripts import build_database_installers as migrations
+from scripts import build_release_sql
+from scripts.build_v1_baseline_completion import build as verify_optional_baseline
 
 LABS = ['introduction', 'prepare-environment', 'provision-database',
         'configure-database', 'load-knowledge', 'deploy-explorer',
@@ -27,6 +32,80 @@ LABS = ['introduction', 'prepare-environment', 'provision-database',
 DOCS = ['fresh-serverless-deployment.md', 'authentication.md', 'cleanup.md',
         'ui-walkthrough.md', 'screenshots.md', 'livelabs-authoring-alignment.md',
         'upstream-comparison.md']
+
+# Public runtime/setup and educational reference SQL only. Initial raw DDL and
+# developer schema/proxy bootstraps are deliberately not a release install path.
+SQL_FILES = [
+    'admin/00_java_status.sql', 'admin/00_readiness.sql', 'admin/01_enable_java.sql',
+    'admin/01_create_user_worksheet.sql', 'admin/02_grants.sql',
+    'admin/03_resource_principal.sql', 'admin/04_enable_database_actions.sql',
+    'admin/06_cloud_apex_preflight.sql', 'admin/07_create_apex_workspace.sql',
+    'admin/08_create_apex_app_user.sql', 'admin/11_context_search_grants.sql',
+    'schema/00_user_credential_worksheet.sql', 'schema/02_network.sql',
+    'schema/05_profile_worksheet.sql', 'schema/06_register_profile.sql',
+    'extensions/00_readiness.sql', 'extensions/02_scenario_api.sql',
+    'extensions/03_scenario_agents.sql', 'extensions/04_domain_extraction.sql',
+    'extensions/06_response_provenance.sql', 'extensions/16_refresh_grounded_answers.sql',
+    'extensions/22_setup_context_search.sql',
+    'install/00_complete_v1_optional.sql', 'install/00_adopt_schema_baseline.sql', 'install/00_install_schema.sql',
+    'install/01_upgrade_schema.sql', 'install/02_verify_schema.sql',
+    'queries/00_create_conversation.sql', 'queries/00_inspect_ai_profile.sql',
+    'queries/00_java_runtime.sql', 'queries/00_test_genai.sql', 'queries/01_inspect.sql',
+    'queries/07_agent_progress.sql', 'queries/08_agent_task_history.sql',
+    'queries/09_agent_tool_history.sql',
+    'scenarios/01_start.sql', 'scenarios/02_inspect.sql', 'scenarios/03_ask.sql',
+    'scenarios/04_preview_change.sql', 'scenarios/05_apply_change.sql',
+    'scenarios/06_observe.sql', 'scenarios/07_extract_domain.sql',
+    'scenarios/08_audit.sql', 'scenarios/09_propose_change.sql',
+    'scenarios/10_owl_inference.sql',
+]
+VALIDATION_RECORDS = [
+    'native-validation.json', 'c3-r4-validation.json', 'fresh-dev-validation.json',
+    'sample-navigation-validation.json', 'context-delete-validation.json',
+    'context-lifecycle-validation.json', 'context-search-validation.json',
+    'release-v2-paths-validation.json',
+]
+
+
+def source_snapshot(root):
+    """Identify the actual local inputs without exposing repository credentials."""
+    def git(*args):
+        return subprocess.run(['git', '-C', str(root), *args], check=True,
+                              capture_output=True).stdout
+    commit = git('rev-parse', 'HEAD').decode().strip()
+    branch = git('branch', '--show-current').decode().strip()
+    tracked = git('ls-files', '-z').decode().split('\0')
+    untracked = git('ls-files', '--others', '--exclude-standard', '-z').decode().split('\0')
+    changed = set(git('diff', '--name-only', 'HEAD', '-z').decode().split('\0')) | set(untracked)
+    changed.discard('')
+    digest = hashlib.sha256()
+    for relative in sorted(set(tracked + untracked) - {''}):
+        path = root / relative
+        if not path.is_file():
+            digest.update(relative.encode()+b'\0DELETED\0')
+            continue
+        raw = path.read_bytes()
+        if b'\0' not in raw:
+            raw = raw.replace(b'\r\n', b'\n')
+        digest.update(relative.encode()+b'\0'+hashlib.sha256(raw).digest())
+    return {'commit': commit, 'branch': branch, 'dirty': bool(changed),
+            'changed_paths': sorted(changed), 'eligible_source_tree_sha256': digest.hexdigest(),
+            'ignored_private_work_included': False}
+
+
+def checked_validation_record(path):
+    """Keep public records exact; reject unsafe records rather than silently redact them."""
+    text = path.read_text(encoding='utf-8')
+    json.loads(text)
+    patterns = [r'-----BEGIN (?:RSA |EC |OPENSSH |ENCRYPTED )?PRIVATE KEY-----',
+                r'https?://[^\s"<>]*\.adb\.[^\s"<>]*oraclecloudapps\.com',
+                r'(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})',
+                r'ocid1\.[a-z0-9_]+\.[a-z0-9_.-]{20,}',
+                r'https?://[^\s"<>]*(?:sharepoint\.com|onedrive\.live\.com|seismic\.com)',
+                r'(?:C:\\\\Users\\\\|/mnt/c/Users/|/home/[^/\s]+/)']
+    if any(re.search(pattern, text, re.I) for pattern in patterns):
+        raise ValueError('Private data pattern in validation record: '+path.name)
+    return text
 
 
 def write(path, text):
@@ -65,21 +144,30 @@ def validate(folder):
     errors = []
     for p in folder.rglob('*'):
         if not p.is_file(): continue
-        if p.suffix in {'.py', '.sh', '.pem', '.key', '.wallet'}:
+        if p.suffix.lower() in {'.py', '.sh', '.ps1', '.pem', '.key', '.wallet', '.p12', '.sso', '.jks'}:
             errors.append('Unexpected developer/credential file: ' + str(p.relative_to(folder)))
         if p.suffix != '.md': continue
         text = p.read_text(encoding='utf-8')
         for target in re.findall(r'!?\[[^\]]*\]\(([^)]+)\)', text):
             if '://' in target or target.startswith('#'): continue
             link = target.split('#')[0]
-            if link and not (p.parent / link).exists():
-                errors.append(str(p.relative_to(folder)) + ': missing ' + target)
+            if link:
+                resolved=(p.parent/link).resolve()
+                if not resolved.is_relative_to(folder.resolve()):
+                    errors.append(str(p.relative_to(folder)) + ': link leaves release tree: ' + target)
+                elif not resolved.exists():
+                    errors.append(str(p.relative_to(folder)) + ': missing ' + target)
     if errors: raise ValueError('\n'.join(errors))
 
 
 def build(output):
     output = Path(output).resolve()
     if output.exists(): raise ValueError('Use a new output folder; existing output is never deleted')
+    # Cover validation and copying with the same source snapshot. A changed
+    # public input must never become the baseline after its access check.
+    snapshot = source_snapshot(ROOT)
+    version = '1.0.0'
+    receipt = None
     version_file = ROOT / 'VERSION'
     if version_file.exists():
         version = version_file.read_text(encoding='utf-8').strip()
@@ -88,7 +176,7 @@ def build(output):
         if int(version.split('.')[0]) >= 2:
             # A new source tree plus an old engine export is not a v2 distribution.
             # This checks import/export provenance, not all release acceptance gates.
-            verify_upgrade_export(ROOT)
+            receipt = verify_upgrade_export(ROOT)
     if (ROOT / 'data/public-content-summaries.json').exists():
         from kcv.editorial import validate_summary_basis
         validate_summary_basis(ROOT)
@@ -128,6 +216,11 @@ def build(output):
                     or checked.get('hash_basis') != 'catalogue_metadata' or not checked.get('reason')
                     or metadata_hash != source['version']['sha256']):
                 raise ValueError('Unverified manual source must remain explicit catalogue metadata: ' + source['id'])
+    # Reject an altered/unverified public input before requiring unrelated build
+    # metadata. The same intake boundary can therefore be tested independently.
+    schema_manifest = migrations.validate_manifest(ROOT)
+    migrations.build(ROOT, check=True)
+    verify_optional_baseline(ROOT, check=True)
     with tempfile.TemporaryDirectory(prefix='kcv-release-') as temporary:
         stage = Path(temporary)
         def copy(relative):
@@ -136,9 +229,22 @@ def build(output):
             target.parent.mkdir(parents=True, exist_ok=True)
             if source.is_dir(): shutil.copytree(source, target)
             else: shutil.copy2(source, target)
-        for relative in ['.gitattributes', '.gitignore', 'LICENSE.txt', 'NOTICE.md',
-                         'data', 'ontology', 'references', 'review-examples', 'sql', 'third-party']:
+        for relative in ['.gitattributes', '.gitignore', 'LICENSE.txt', 'NOTICE.md', 'VERSION',
+                         'data', 'ontology', 'references', 'review-examples', 'third-party']:
             copy(relative)
+        for relative in SQL_FILES:
+            copy('sql/' + relative)
+        for name in VALIDATION_RECORDS:
+            relative = 'db/verification/' + name
+            checked_validation_record(ROOT / relative)
+            copy(relative)
+        checked_validation_record(ROOT/'apex/export-validation.json')
+        copy('apex/export-validation.json')
+        copy('db/manifest.json')
+        # This is an informational manifest, not a bundled Liquibase authoring tree.
+        write(stage/'db/README.md', '# Schema provenance\n\nThe manifest records the immutable migration chain used to generate the supplied SQL. '
+              'Payload/source paths describe dev authoring inputs; no Liquibase client is required. '
+              'Deploy using the release installation guide and SQL scripts. Public validation records retain their own historical scopes.\n')
         # This is an explicit publication allowlist, never a copy of work/.
         for name in LABS: copy('labs/' + name)
         for name in DOCS: copy('docs/' + name)
@@ -169,7 +275,10 @@ def build(output):
             '-- Contains attributed editorial summaries, not extracted PDF text or source quotations.')
         write(installer / '10_load_dataset.sql', loader)
         shutil.copytree(stage / 'work/worksheet/dataset-parts', installer / 'dataset-parts')
-        build_apex_installer(output=installer / '20_install_apex.sql')
+        build_release_sql.build(ROOT, installer/'schema-parts')
+        build_release_sql.package_recovery(ROOT, stage/'sql/recovery', schema_manifest)
+        build_apex_installer(output=installer / '20_install_apex.sql', runtime_targets=True)
+        build_apex_installer(output=installer / '20_upgrade_apex.sql', mode='upgrade', runtime_targets=True)
         pipeline.write(stage / 'data/release-summaries.json', {
             'content_kind': 'attributed_editorial_summary',
             'not_verbatim_source_text': True, 'passages': passages})
@@ -196,10 +305,6 @@ def build(output):
             text = text.replace('your generated file from the preparation lab', 'the supplied release file checked in with this branch')
             text = text.replace('verified public passages', 'attributed editorial summaries')
             text = text.replace('Public evidence, native graph', 'Attributed summaries, native graph')
-            if p.parent.name == 'deploy-explorer':
-                start = text.index('If the generated file is missing,')
-                end = text.index('## Task 4:', start)
-                text = text[:start] + 'Both SQL installation files are included in this branch. No Python, SQLcl or local APEX installation is required. If a file is missing, obtain the complete release download.\n\n' + text[end:]
             if p.parent.name == 'load-knowledge':
                 text = text.replace('regenerate the loader with the current project code', 'obtain an unchanged copy of the release loader')
                 text = text.replace('regenerated loader', 'release loader')
@@ -210,33 +315,52 @@ def build(output):
                 text = text.replace('complete saved passages', 'complete saved editorial summaries')
                 text = text.replace('With the supplied baseline,', 'The release uses summaries rather than the extracted text shown in the screenshots. With the supplied baseline,')
             write(p, text)
-        # Turn links to contributor-only references into explicit dev references.
-        # This prevents a release README from sending learners to missing tools/docs.
+        # Missing operational documentation is a packaging failure. Contributor
+        # references must be deliberately expressed in release-docs, never hidden
+        # by automatically rewriting broken links to a vague dev reference.
         for p in stage.rglob('*.md'):
-            def fix(match):
-                label, target = match.group(1), match.group(2)
-                if '://' in target or target.startswith('#'): return match.group()
-                path = (p.parent / target.split('#')[0]).resolve()
-                if path.exists(): return match.group()
-                try: relative = path.relative_to(stage).as_posix()
-                except ValueError: raise ValueError('Link leaves release tree: ' + target)
-                return label + ' (technical reference on the dev branch: `' + relative + '`)'
-            write(p, re.sub(r'(?<!!)\[([^\]]*)\]\(([^)]+)\)', fix, p.read_text(encoding='utf-8')))
+            # LiveLabs uses these wrappers for its renderer. GitHub code blocks
+            # must contain only copyable SQL, not the renderer's literal tags.
+            text=p.read_text(encoding='utf-8')
+            text=re.sub(r'(?m)^[ \t]*</?copy>[ \t]*\r?\n?', '', text)
+            if re.search(r'</?copy>',text,re.I):
+                raise ValueError('Unexpected inline LiveLabs copy wrapper: '+str(p.relative_to(stage)))
+            write(p,text)
         # No private runtime or PDF extraction files are copied into the result.
         shutil.rmtree(stage / 'work')
         # Stable byte hashes across Windows/Linux clones; .gitattributes enforces LF.
         for p in stage.rglob('*'):
             if p.is_file() and p.suffix.lower() not in {'.png', '.jpg'}:
                 write(p, p.read_text(encoding='utf-8'))
+        write(stage/'release-provenance.json', json.dumps({
+            'format_version': 1, 'product_version': version,
+            'candidate_label': version+'-dev', 'distribution_status': 'unpromoted_candidate',
+            'source': snapshot,
+            'application_source_sha256': application_source_hash(ROOT),
+            'application_export_sha256': hashlib.sha256((stage/'apex/kcv-explorer.sql').read_bytes()).hexdigest(),
+            'schema_manifest_sha256': hashlib.sha256((stage/'db/manifest.json').read_bytes()).hexdigest(),
+            'schema_ready_checkpoint': schema_manifest['migrations'][-1]['id'],
+            'dataset_manifest_sha256': manifest_hash,
+            'acceptance': {'export_receipt': 'apex/export-validation.json',
+                           'release_paths_record': 'db/verification/release-v2-paths-validation.json',
+                           'source_has_uncommitted_changes': snapshot['dirty'],
+                           'package_generation_is_deployment_acceptance': False,
+                           'worksheet_execution': 'not established by package generation',
+                           'note': 'Historical receipts apply only to their recorded source and scope; the exact candidate requires its own fresh and upgrade acceptance.'}
+        }, indent=2)+'\n')
         file_rows = [{'path': p.relative_to(stage).as_posix(),
                       'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}
                      for p in sorted(stage.rglob('*')) if p.is_file()]
         pipeline.write(stage / 'release-manifest.json', {'format_version': 1,
-            'distribution': 'release', 'python_required_for_learner': False,
+            'distribution': 'release', 'product_version': version,
+            'candidate_label': version+'-dev', 'source_commit': snapshot['commit'],
+            'source_dirty': snapshot['dirty'], 'python_required_for_learner': False,
             'dataset_kind': 'attributed_editorial_summary', 'summary_count': len(passages),
             'source_count': report['source_count'], 'catalogue_count': report['catalog_count'],
             'total_content_count': report['total_content_count'], 'files': file_rows})
         validate(stage)
+        if source_snapshot(ROOT) != snapshot:
+            raise ValueError('Source changed during packaging; rebuild from a stable reviewed tree')
         shutil.copytree(stage, output)
     return output
 

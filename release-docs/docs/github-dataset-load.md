@@ -6,11 +6,9 @@ The package contains attributed editorial summaries and public reference metadat
 
 ## Before the first load
 
-Follow the [database configuration lab](../labs/configure-database/configure-database.md). ADMIN applies the current `sql/admin/02_grants.sql`; KCV_LAB creates the base tables, KCV_NET and read-only tools, then runs [06_dataset_import.sql](../sql/schema/06_dataset_import.sql) once to install KCV_DATASET and its run log. Do not rerun all initial schema scripts on an existing installation.
+Follow the [database configuration lab](../labs/configure-database/configure-database.md): apply the owner grants, install the ordered v2 schema parts and verify them, then create the owner-private RDF network. The complete schema already includes KCV_DATASET and its run log. Do not replay raw table/tool/importer DDL. Existing installations first use [migration](migrate-to-v2.md); loading another public collection is optional and independent of an app upgrade.
 
-For an existing lab owner, apply the current grants as ADMIN, replace [03_tools.sql](../sql/schema/03_tools.sql) as KCV_LAB with F5, then install the importer. The current source packet limits evidence to passages in the active graph; older code could mix historical extracted passages with summaries sharing the same source edition. Its signature is unchanged and historical data is retained. Complete this replacement before native verification. Use a fresh lab schema for a separate summary exercise when existing conversations must remain in their current environment. Follow the [content locator upgrade](content-ingestion-upgrade.md) where applicable; installing an importer does not update the application.
-
-The manifest and every referenced JSON part must already be committed and pushed to the **public release branch**. Local generated files are not available to ADB through GitHub. Generating this package does not publish it; an older remote commit without `data/load/` cannot load the new content.
+The manifest and every referenced JSON part must already exist at the selected immutable public commit. Normally use the published release commit; a maintainer may specify an earlier published commit when its dataset bytes and manifest hash are unchanged. Local generated files are not available to ADB through GitHub. Generating this package does not publish it; an older remote commit without `data/load/` cannot load the new content.
 
 ## Choose a published version
 
@@ -23,9 +21,9 @@ This binds the dataset to both a specific repository commit and an expected mani
 
 ## Run the short call
 
-**Where:** Database Actions → SQL Worksheet. **Account:** KCV_LAB.
+**Where:** Database Actions → SQL Worksheet. **Account:** the project owner (KCV_LAB by default).
 
-Run `SELECT USER FROM dual;` first and confirm KCV_LAB. Replace the editor with the prepared caller and choose **Run Script (F5)**. The seven-line form is:
+Run `SELECT USER FROM dual;` first and confirm the chosen project owner. Replace the editor with the prepared caller and choose **Run Script (F5)**. The seven-line form is:
 
 ```sql
 BEGIN
@@ -58,7 +56,7 @@ FETCH FIRST 5 ROWS ONLY;
 | `SUCCEEDED` | The manifest completed and the ready graph was activated. Run the native verification below. |
 | `FAILED` | Retain the run ID, phase, error code and Worksheet error. Correct the cause, then rerun the same complete call. The previous ACTIVE_GRAPH is preserved. |
 | No rows | No recorded load reached this log, or you are in the wrong schema. Check `SELECT USER FROM dual;`, package installation and the immediate Worksheet error. |
-| Table or package missing | Return to the configuration lab and install `06_dataset_import.sql` as KCV_LAB after the base objects/grants. Do not recreate the whole schema. |
+| Table or package missing | Return to schema verification in the configuration/migration route. Do not install isolated raw packages or recreate the schema. |
 
 A retry is supported. A previously successful matching manifest can reactivate its ready snapshot; a failed load can create a new snapshot on retry. Progress timestamps record completed checkpoints rather than a percentage or an estimated finish time. A browser timeout alone does not prove the database stopped; inspect the run before retrying. A killed or disconnected database session can leave a stale RUNNING record. If its status is uncertain, ask the administrator to check that specific run/session before retrying; do not delete the run log or clear a lock to force progress.
 
@@ -68,7 +66,7 @@ For a 404/not-found response, check the owner, repository, full commit and publi
 
 ## Verify the loaded graph
 
-After `SUCCEEDED`, run [01_inspect.sql](../sql/queries/01_inspect.sql) and [verify_worksheet.sql](../integration-test/verify_worksheet.sql) as KCV_LAB with F5. Confirm a ready ACTIVE_GRAPH and the expected PASS message. Run [verify_source_packet_scope.sql](../integration-test/verify_source_packet_scope.sql) alone with F5 to confirm the source packet returns only evidence from the active graph. It creates and rolls back a temporary out-of-graph test passage without deleting historical evidence. Then continue with the [scenario backend and native checks](../labs/load-knowledge/load-knowledge.md#task-2-install-the-application-backend). These checks make no model inference calls.
+After `SUCCEEDED`, run [01_inspect.sql](../sql/queries/01_inspect.sql) and [verify_worksheet.sql](../integration-test/verify_worksheet.sql) as KCV_LAB with F5. Confirm a ready ACTIVE_GRAPH and the expected PASS message. Run [verify_source_packet_scope.sql](../integration-test/verify_source_packet_scope.sql) alone with F5 to confirm the source packet returns only evidence from the active graph. It creates and rolls back a temporary out-of-graph test passage without deleting historical evidence. Then continue with the [conversation registration and native checks](../labs/load-knowledge/load-knowledge.md#task-2-register-conversation-services). These checks make no model inference calls.
 
 The [native validation record](../references/github-dataset-validation.json) documents a successful ADB Serverless run on 23 November 2026 at dev commit `6eb868ee732f0ca3a0d8a6f9e68f838590d77b47`, with manifest SHA-256 `dae8efdcd9e99874c8dfc3d9a3ccaf4a861f76b3b5442f71f075a6d9b64ef8ad`. The importer, source tools, scenario and APEX backend packages compiled without errors. The observed load took 9.528 seconds and installed 834 sources, 762 passages, three contexts and 30,144 RDF triples, activating the new graph while preserving its predecessor. This timing describes one run, not a performance guarantee.
 

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 from . import pipeline as p
@@ -21,8 +22,11 @@ def main():
     parser.add_argument('--observation')
     parser.add_argument('--file',type=Path)
     parser.add_argument('--admin',action='store_true')
+    parser.add_argument('--schema',help='Explicit existing owner for ADMIN apply-sql of sql/admin/02_grants.sql')
     parser.add_argument('--task',choices=['analyse_source','clarify_context','assess_context'],default='assess_context')
     args=parser.parse_args()
+    if args.schema is not None and args.command!='apply-sql':
+        parser.error('--schema applies only to the parameterized ADMIN grants script')
     if args.command=='fetch': result=p.fetch()
     elif args.command=='prepare': result={'passages':len(p.prepare())}
     elif args.command=='build': result=p.build();p.render_svg()
@@ -51,7 +55,15 @@ def main():
         if args.command=='check-db': result=db.preflight()
         elif args.command=='apply-sql':
             if args.file is None:parser.error('--file required')
-            result={'applied':str(args.file),'query_results':db.apply(args.file,args.admin)}
+            grant_script=(p.ROOT/'sql/admin/02_grants.sql').resolve()
+            bindings=None
+            if args.file.resolve()==grant_script:
+                if not args.admin or not args.schema or not re.fullmatch(r'KCV_[A-Z0-9_]{1,26}',args.schema):
+                    parser.error('02_grants.sql requires --admin and --schema with the intended upper-case KCV_ owner')
+                bindings={'KCV_SCHEMA':args.schema}
+            elif args.schema is not None:
+                parser.error('--schema is supported only for sql/admin/02_grants.sql; use Worksheet binds for other setup scripts')
+            result={'applied':str(args.file),'query_results':db.apply(args.file,args.admin,bindings)}
         elif args.command=='load-db':result=db.load()
         elif args.command=='extract':result=db.extract(args.source)
         elif args.command=='provision':result=db.provision()

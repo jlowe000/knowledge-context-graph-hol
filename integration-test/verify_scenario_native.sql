@@ -1,11 +1,19 @@
--- KCV_LAB on Serverless ONLY. Creates scenario overlays/conversations; no inference calls.
+-- Project owner on Serverless ONLY. KCV_SCHEMA bind: chosen owner, blank means KCV_LAB.
+-- Run Statement without the final slash. Creates scenario overlays/conversations;
+-- no inference calls. Existing scenario data is not deleted by this exercise.
 -- Do not describe a mock-service run of this script as native validation.
 DECLARE
+ target_schema VARCHAR2(128):=NVL(UPPER(TRIM(:KCV_SCHEMA)),'KCV_LAB');mock_count PLS_INTEGER;
  sid VARCHAR2(40);req JSON_OBJECT_T:=JSON_OBJECT_T();packet JSON_OBJECT_T;ev JSON_ARRAY_T;row_json JSON_OBJECT_T;
  p3 BOOLEAN:=FALSE;p10 BOOLEAN:=FALSE;change_json JSON_OBJECT_T;reply CLOB;token VARCHAR2(40);oldbase VARCHAR2(128);newbase VARCHAR2(128);
  original_context JSON_OBJECT_T;refined_context JSON_OBJECT_T;original_preferences JSON_OBJECT_T;
 BEGIN
- IF SYS_CONTEXT('USERENV','SESSION_USER')<>'KCV_LAB' THEN RAISE_APPLICATION_ERROR(-20150,'Run native acceptance as KCV_LAB on the target, not the isolated mock schema');END IF;
+ IF NOT REGEXP_LIKE(target_schema,'^KCV_[A-Z0-9_]{1,26}$','c')
+   OR SYS_CONTEXT('USERENV','SESSION_USER')<>target_schema
+   OR SYS_CONTEXT('USERENV','CURRENT_SCHEMA')<>target_schema THEN
+   RAISE_APPLICATION_ERROR(-20150,'Sign in as the chosen project owner on Serverless; do not change CURRENT_SCHEMA to bypass this check');END IF;
+ SELECT COUNT(*) INTO mock_count FROM user_objects WHERE object_name IN('SEM_APIS','DBMS_CLOUD_AI','DBMS_CLOUD_AI_AGENT');
+ IF mock_count<>0 THEN RAISE_APPLICATION_ERROR(-20150,'Local service replacements cannot establish native Serverless acceptance');END IF;
  sid:=kcv_scenario.open_session('CTX03');req.put('scenario_session',sid);packet:=JSON_OBJECT_T.parse(kcv_scenario.evidence_packet(req.to_clob()));
  ev:=packet.get_array('evidence');IF packet.get_array('graph_paths').get_size=0 THEN RAISE_APPLICATION_ERROR(-20151,'No native graph paths returned');END IF;
  FOR i IN 0..ev.get_size-1 LOOP row_json:=TREAT(ev.get(i) AS JSON_OBJECT_T);

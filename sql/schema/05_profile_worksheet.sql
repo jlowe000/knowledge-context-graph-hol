@@ -1,7 +1,7 @@
--- KCV_LAB: set non-secret environment choices below before Run Script.
+-- Project owner: set non-secret environment choices below before Run Script.
 -- The credential must already be accessible to this lab user.
 -- User signing key: OCI_USER_CRED. Resource principal: OCI$RESOURCE_PRINCIPAL.
--- Independent of lab tables. Run 06_register_profile.sql after 01_objects.sql.
+-- Independent of lab tables. Run 06_register_profile.sql after ordered schema verification.
 DECLARE
   l_region VARCHAR2(128):=NULL;
   l_compartment VARCHAR2(256):=NULL;

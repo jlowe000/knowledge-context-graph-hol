@@ -41,7 +41,7 @@ EXEC :KCV_DEV_SCHEMA := 'KCV_V2_FRESH';
 @sql/admin/09_create_dev_schema.sql
 ```
 
-Expected: `KCV_DEV_SCHEMA_CREATED=KCV_V2_FRESH`, with scoped grants and ADMIN proxy access. The bootstrap requires an uppercase `KCV_` name of 5–30 characters, an absent owner, VALID Java, an online DATA tablespace and valid package prerequisites. An existing schema causes a stop, not password replacement or teardown. Do not run the older `01_create_user_worksheet.sql` or `02_grants.sql` unchanged: those target KCV_LAB.
+Expected: `KCV_DEV_SCHEMA_CREATED=KCV_V2_FRESH`, with scoped grants and ADMIN proxy access. The bootstrap requires an uppercase `KCV_` name of 5–30 characters, an absent owner, VALID Java, an online DATA tablespace and valid package prerequisites. An existing schema causes a stop, not password replacement or teardown. The shared release scripts `01_create_user_worksheet.sql` and `02_grants.sql` now take KCV_SCHEMA. This dev route deliberately uses the NO AUTHENTICATION/proxy bootstrap instead; do not mix its account model with a password-enabled Worksheet installation.
 
 ## 3. Save a new owner connection privately
 
@@ -118,7 +118,7 @@ Expected: KCV_NET belongs to the new schema. The same network name in another ow
 
 The new schema needs its own working model configuration. A saved ADMIN connection, an existing profile in another schema or a successful model call in the older app does not establish access for this owner.
 
-Choose the [user signing-key or resource-principal path](authentication.md) deliberately. The original authentication guide's KCV_LAB examples refer to the v1 owner; substitute the fresh owner only in reviewed administration actions. Do not execute the old hard-coded resource-principal grant against KCV_LAB. For the signing-key route tested here, create OCI_USER_CRED in the new owner; do not export another schema's private key to copy it.
+Choose the [user signing-key or resource-principal path](authentication.md) deliberately. KCV_LAB is the default example name; shared ADMIN scripts now accept KCV_SCHEMA. Supply the actual fresh owner for reviewed administration actions, including optional resource-principal enablement. For the signing-key route tested here, create OCI_USER_CRED in the new owner; do not export another schema's private key to copy it.
 
 For a new signing-key credential, open SQLcl using `bash scripts/open_dev_sqlcl.sh`. The launcher starts SQLcl with `-nohistory`. Connect privately as the new owner, run `SPOOL OFF`, and use a terminal without session recording or screen sharing. Enter the following block directly in that private interactive session, replacing the placeholders yourself. Do not save the populated block to a file, a chat or an agent tool invocation. The matching unencrypted key body excludes its PEM BEGIN/END lines:
 
@@ -210,7 +210,7 @@ END;
 /
 ```
 
-Expected: a new end-user account only in the fresh workspace. An existing username is not reset. The [original app-user script](../sql/admin/08_create_apex_app_user.sql) is a v1 reference hard-coded to KCV_KNOWLEDGE: do not run it unchanged. Use a separate app account for each person. Keep passwords in the private input interface; database proxy access is not an application password.
+Expected: a new end-user account only in the fresh workspace. An existing username is not reset. The shared [app-user script](../sql/admin/08_create_apex_app_user.sql) now takes KCV_SCHEMA, KCV_WORKSPACE and KCV_APP_USER plus the private password bind. Use those actual target names when choosing that Worksheet path; its default workspace is not this isolated dev workspace. Use a separate app account for each person. Keep passwords in the private input interface; database proxy access is not an application password.
 
 ## 10. Validate and import a new APEX application
 
@@ -233,7 +233,7 @@ The alternate Worksheet installer is a separate acceptance route. Generate it wi
 python scripts/build_apex_worksheet.py --mode new --workspace KCV_V2_FRESH --schema KCV_V2_FRESH --alias KCV-FRESH-EXPLORER --output work/fresh/20_install_apex.sql
 ```
 
-That installer allocates a new application ID. Choose either native APEXlang import or the new-app installer for a deployment; do not run both and accidentally create two apps. Generated-wrapper execution is not proven by a native APEXlang import.
+Open that installer in the intended owner's Worksheet, select the complete outer `DECLARE` through the final `END;`, excluding the final slash, and use **Run Statement (Ctrl+Enter)**. Supply any prompted target binds. The installer allocates a new application ID. Choose either native APEXlang import or the new-app installer for a deployment; do not run both and accidentally create two apps. Generated-wrapper execution is not proven by a native APEXlang import.
 
 ## 11. Test the fresh experience and record its limits
 

@@ -1,5 +1,15 @@
 # Release validation status
 
+## Current v2 release candidate
+
+The [release-path acceptance record](../db/verification/release-v2-paths-validation.json) tracks clean installation and migration independently. Current packaging and rehearsal work does not promote release. Native dev R7 tests and its engine export are supporting evidence; they do not certify the generated Worksheet parts, transport or a published-v1 upgrade. The complete app includes My Contexts, local search and same-ID migration. Permanent-delete confirmation needs its own disposable-data browser result.
+
+Acceptance must cover schema receipts/source verification, unchanged existing work, owner profile/agent setup, new/upgrade APEX import, personal and sample journeys, search/fallback and separate-account isolation. Record actual coverage and unresolved checks rather than calling a generated package fully validated.
+
+## Historical v1 and expanded-dataset evidence
+
+The dated results below retain their original scope; their package-by-package assumptions are not current v2 installation instructions.
+
 ## Existing application evidence
 
 The dev original-passage version was fully torn down (retaining JAVAVM), rebuilt on the temporary ADB Serverless instance and browser-tested through 23 November with APEX 26.1.6. Real model answers, native graph paths, context refinement, saved observations, per-response Sources/Answer lineage, historical persistence after reload and narrow-screen interaction were exercised. The native OWL before/after exercise also passed. These are supporting implementation results; they do not replace acceptance of the release summary dataset. Detailed records remain on dev.

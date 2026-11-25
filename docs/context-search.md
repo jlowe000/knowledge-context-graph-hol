@@ -45,12 +45,12 @@ Use the current dev migrations to install the search table/package before this r
 In a direct ADMIN session, replace `KCV_MY_DEV` with the existing project schema name and run [11_context_search_grants.sql](../sql/admin/11_context_search_grants.sql):
 
 ```sql
-VARIABLE KCV_DEV_SCHEMA VARCHAR2(30)
-EXEC :KCV_DEV_SCHEMA := 'KCV_MY_DEV';
+VARIABLE KCV_SCHEMA VARCHAR2(30)
+EXEC :KCV_SCHEMA := 'KCV_MY_DEV';
 @sql/admin/11_context_search_grants.sql
 ```
 
-Expected: `Context search model privileges ready.` The script grants `CREATE MINING MODEL` and execution of `SYS.DBMS_VECTOR` to that schema. It does not create a model, directory, external credential or network ACL. Existing owner prerequisites still include its permitted `DBMS_CLOUD` use.
+Expected: `KCV_CONTEXT_SEARCH_GRANTS_READY` The script grants `CREATE MINING MODEL` and execution of `SYS.DBMS_VECTOR` to that schema. It does not create a model, directory, external credential or network ACL. Existing owner prerequisites still include its permitted `DBMS_CLOUD` use.
 
 ### 2. Obtain the augmented model location privately
 

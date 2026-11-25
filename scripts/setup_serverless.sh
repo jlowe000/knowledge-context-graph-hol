@@ -8,8 +8,12 @@ mode="${1:-check}"
 case "$mode" in
   check) "$PYTHON" -m kcv.cli check-db ;;
   provision)
+    if [[ "${KCV_DB_USER:-KCV_LAB}" != KCV_LAB ]]; then
+      printf '%s\n' 'Legacy provision creates KCV_LAB only. Use the parameterized Worksheet setup for a different owner.' >&2
+      exit 2
+    fi
     "$PYTHON" -m kcv.cli provision
-    "$PYTHON" -m kcv.cli apply-sql --admin --file sql/admin/02_grants.sql
+    "$PYTHON" -m kcv.cli apply-sql --admin --schema KCV_LAB --file sql/admin/02_grants.sql
     ;;
   schema)
     if [[ -f VERSION && "$(cut -d. -f1 VERSION)" -ge 2 ]]; then

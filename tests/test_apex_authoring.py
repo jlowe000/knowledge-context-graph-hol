@@ -142,6 +142,34 @@ class ApexAuthoringTests(unittest.TestCase):
             self.assertLess(sql.index('2.0.0-c3-r7-ready'),sql.index('null; -- fixture only'))
             self.assertNotIn('&',sql)
 
+    def test_release_targets_are_bound_and_checked_before_import(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);self.fixture(root);self.receipt(root)
+            with patch.object(worksheet,'ROOT',root):
+                fresh=worksheet.build(runtime_targets=True).read_text()
+                upgrade=worksheet.build(mode='upgrade',runtime_targets=True).read_text()
+            for sql in (fresh,upgrade):
+                header=sql.split('\nDECLARE',1)[0]
+                self.assertIn('Run Statement once',header)
+                self.assertIn('excluding the final slash',header)
+                self.assertNotIn('Run Script',header)
+                for bind in (':KCV_SCHEMA',':KCV_WORKSPACE',':KCV_APP_ALIAS'):
+                    self.assertIn(bind,sql)
+                self.assertIn("SYS_CONTEXT('USERENV','SESSION_USER')<>l_schema",sql)
+                self.assertIn("USER<>SYS_CONTEXT('USERENV','SESSION_USER')",sql)
+                self.assertIn("USER IN ('ADMIN','SYS','SYSTEM')",sql)
+                self.assertIn('SET_WORKSPACE(l_workspace)',sql)
+                self.assertIn('SET_SCHEMA(l_schema)',sql)
+                self.assertIn('SET_APPLICATION_ALIAS(l_alias)',sql)
+                self.assertLess(sql.index('Use valid project schema'),sql.index('null; -- fixture only'))
+                self.assertNotIn('&',sql)
+            self.assertIn('Application alias already exists',fresh)
+            self.assertLess(fresh.index('Application alias already exists'),fresh.index('GENERATE_APPLICATION_ID'))
+            self.assertIn('l_app_id:=:KCV_APPLICATION_ID;',upgrade)
+            self.assertIn('workspace=l_workspace',upgrade)
+            self.assertIn('owner=l_schema AND UPPER(alias)=l_alias',upgrade)
+            self.assertNotIn('GENERATE_APPLICATION_ID',upgrade)
+
     def test_fresh_installer_still_allocates_new_id(self):
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp);self.fixture(root)

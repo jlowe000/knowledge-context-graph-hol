@@ -139,8 +139,13 @@ class PublicCatalogTests(unittest.TestCase):
             changed=p.read(root/'data/public-catalog.json')
             changed['items'][0]['url']='https://docs.oracle.com/not-the-verified-resource.html'
             p.write(root/'data/public-catalog.json',changed)
-            with patch('scripts.build_release.ROOT',root), self.assertRaisesRegex(ValueError,'Missing or mismatched anonymous verification'):
+            # This non-Git fixture stops at the public-input rejection; it does
+            # not produce a package or simulate successful provenance.
+            with patch('scripts.build_release.ROOT',root), \
+                 patch('scripts.build_release.source_snapshot',return_value={'fixture_only':True}), \
+                 self.assertRaisesRegex(ValueError,'Missing or mismatched anonymous verification'):
                 build(root/'release')
+            self.assertFalse((root/'release').exists())
 
     def test_release_includes_catalogue_graph_metadata_and_prepared_sql(self):
         with tempfile.TemporaryDirectory() as tmp:

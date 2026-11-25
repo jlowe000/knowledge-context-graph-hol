@@ -4,14 +4,15 @@ The branch choice follows your intended outcome. A developer learning to use the
 
 | Experience | What you do | What you learn | Completion outcome |
 | --- | --- | --- | --- |
-| Use the collection | Ask, inspect evidence, refine context and save an observation | How knowledge connects to a person's situation and next question | Explain a useful next step and its supporting evidence/limits |
-| Understand the collection as a developer | Inspect metadata/ontology, query a scenario, follow the agent tool and trace a response | How the supplied data, SPARQL, SQL/PLSQL, agents and APEX fit together | Explain the path from stored context to returned evidence and answer |
-| Deploy the supplied sample | Follow the ordered SQL/ADB/APEX setup | How to install and verify this existing example | A working sample for either learning experience |
+| Use the collection | Create or copy a context, ask, inspect evidence, refine deliberately and reopen saved work | How knowledge connects to a person's situation and next question | Explain a useful next step and its supporting evidence/limits |
+| Understand the collection as a developer | Inspect metadata/ontology, query a scenario, follow application retrieval and trace a response | How the supplied data, SPARQL, SQL/PLSQL, agents and APEX fit together | Explain the path from stored context to returned evidence and answer |
+| Install the supplied sample | Follow the clean-installation SQL/ADB/APEX route | How to install into an empty project schema | A new working sample for either learning experience |
+| Migrate an existing installation | Verify its starting version, apply ordered SQL upgrades and update the existing app | How to upgrade while retaining existing work | A verified v2 installation with its existing application identity and history |
 | Build your own version — dev | Change the source collection, taxonomy/ontology, retrieval, tools, UI and packaging | How to adapt and validate a new implementation | A separately tested adaptation with its own learner documentation |
 
 ## Use an existing application
 
-Start at [Explore evidence](../labs/explore-evidence/explore-evidence.md). Ask your facilitator for the app URL and app login. You do not need a database account, OCI tenancy or the developer environment. Read the actual evidence labels: these release files install editorial summaries, while an earlier hosted demonstration may contain extracted passages and different citation IDs.
+Start at [My Contexts](../labs/my-contexts/my-contexts.md) for your own question, or [Explore evidence](../labs/explore-evidence/explore-evidence.md) for the fictional sample. Ask your facilitator for the app URL and your individual app login. Sharing a login shares its personal library. You do not need a database account, OCI tenancy or the developer environment. Read the actual evidence labels: these release files install editorial summaries, while an earlier hosted demonstration may contain extracted passages and different citation IDs.
 
 ## Learn the developer experience
 
@@ -21,7 +22,9 @@ The [architecture](architecture.md) explains the SPARQL query and the role of AP
 
 ## Set up an environment only if needed
 
-Follow [Deploy the sample](fresh-serverless-deployment.md) when no suitable environment is supplied. Provisioning is setup work for the experience, not a prerequisite for every end user. Database and model access remain separate permissions.
+Choose an [installation path](installation-paths.md): [clean installation](fresh-serverless-deployment.md) for an empty project schema, or [migration](migrate-to-v2.md) for an existing supported installation. Both use Database Actions SQL Worksheet. The v2 candidate routes require separate fresh-installation and migration acceptance before publication.
+
+Provisioning is setup work for the experience, not a prerequisite for every end user. Database and model access remain separate permissions. A new schema on an approved existing database can be a clean installation; an existing project schema is a migration even if the database itself is temporary.
 
 ## Adapt the implementation
 

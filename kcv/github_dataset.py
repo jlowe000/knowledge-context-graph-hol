@@ -250,7 +250,9 @@ def loader_script(manifest_sha256):
     if not isinstance(manifest_sha256, str) or not _HASH.fullmatch(manifest_sha256):
         raise ValueError('The caller requires a SHA-256 manifest digest')
     return (
-        '-- KCV_LAB: install sql/schema/06_dataset_import.sql first. Run Script (F5).\n'
+        '-- Project owner: complete the ordered v2 schema installation or migration first.\n'
+        '-- Run sql/install/02_verify_schema.sql and configure the owner RDF network before loading.\n'
+        '-- Run this caller with Run Script (F5).\n'
         '-- Replace the commit placeholder with the full 40-character published commit SHA.\n'
         '-- This exact commit must contain the matching data/load/manifest.json.\n'
         '-- Public data only; no GitHub token or Python is required.\n'

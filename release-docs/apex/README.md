@@ -4,7 +4,7 @@ App users start with [My Contexts](../labs/my-contexts/my-contexts.md) or [Sampl
 
 ## Choose the installation mode
 
-Use [installation paths](../docs/installation-paths.md) before running SQL. A clean schema uses the new-app installer; an existing supported installation uses the ordered schema migration and **same-ID** app upgrade. Both routes have passed scoped candidate02 [acceptance](../db/verification/release-v2-paths-validation.json), including fresh-sign-in reopening. The tested import body is unchanged; its corrected execution instruction is Run Statement. The v2 distribution remains an unpromoted candidate.
+Use [installation paths](../docs/installation-paths.md) before running SQL. In this v2.0.0 distribution, a clean schema uses the new-app installer; an existing supported installation uses the ordered schema migration and **same-ID** app upgrade. Both routes have passed scoped candidate02 [acceptance](../db/verification/release-v2-paths-validation.json), including fresh-sign-in reopening. The tested import body is unchanged; the supplied execution instruction incorporates the **Run Statement** correction.
 
 | Mode | Prepared artifact | Identity behavior |
 | --- | --- | --- |

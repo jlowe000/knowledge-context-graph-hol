@@ -2,7 +2,7 @@
 
 Use this path for an **empty project schema**, on a new or approved existing ADB Serverless database. For an existing project installation, use [Migration to v2](migrate-to-v2.md). The [installation selector](installation-paths.md) explains the difference.
 
-**Candidate status:** the SQL-first clean route passed its scoped rehearsal in an isolated empty schema on an existing temporary Serverless database. See the [release-path record](../db/verification/release-v2-paths-validation.json). Candidate02 supplied the tested runtime; its APEX installer instruction was corrected to Run Statement without changing the import body. V2 remains unpromoted, and these tests do not establish provisioning of a new database. The linked labs use the ordered v2 installation; do not combine them with raw-object instructions from an older checkout.
+**v2.0.0 clean-installation acceptance:** the SQL-first clean route passed its scoped rehearsal in an isolated empty schema on an existing temporary Serverless database. See the [release-path record](../db/verification/release-v2-paths-validation.json). Candidate02 supplied the tested runtime; its APEX installer instruction was corrected to Run Statement without changing the import body. These tests do not establish provisioning of a new database. The linked labs use the ordered v2 installation; do not combine them with raw-object instructions from an older checkout.
 
 If a facilitator has already supplied an app, start with [app use](../labs/explore-evidence/explore-evidence.md) or [developer learning](../labs/understand-collection/understand-collection.md). No installation is needed for those hosted experiences.
 
@@ -25,7 +25,7 @@ Use **Run Script (F5)** for the ordered schema parts and other files explicitly 
 | --- | --- | --- | --- |
 | 1. Check the platform | ADMIN | Confirm the supported database/APEX versions and VALID JAVAVM. If Java is already enabled, leave it enabled. For a new database, complete the documented Java enablement/restart before proceeding. | Required database services are ready. Local laptop Java is not a substitute for database Java. |
 | 2. Prepare the lab owner | ADMIN | Use the supplied user, grants and Database Actions scripts. Create a new project owner, or verify a separately provisioned owner is empty and complete only missing setup. Do not reset an existing project's user to make it appear empty. | A password-enabled owner can open its own Worksheet with the required quota and grants. |
-| 3. Install the schema | Lab owner | Run the **fresh** files in the [schema-parts guide](../sql/install/schema-parts/README.md), then [02_verify_schema.sql](../sql/install/02_verify_schema.sql). Do not also run the old raw table/package creation sequence. | The ordered schema installation and full verification succeed. The R7 candidate has 96 COMPLETE project receipts and valid required packages. |
+| 3. Install the schema | Lab owner | Run the **fresh** files in the [schema-parts guide](../sql/install/schema-parts/README.md), then [02_verify_schema.sql](../sql/install/02_verify_schema.sql). Do not also run the old raw table/package creation sequence. | The ordered schema installation and full verification succeed. Version 2.0.0 uses the R7 checkpoint, with 96 COMPLETE project receipts and valid required packages. |
 | 4. Configure runtime services | Lab owner | Create the owner-private RDF network using `sql/schema/02_network.sql`. Follow [model authentication](authentication.md), create the profile and register it after the settings table exists. Test a greeting. | The RDF network and this owner's model profile work. A different owner's successful model call is not sufficient. |
 | 5. Load public knowledge | Lab owner | Follow [GitHub dataset loading](github-dataset-load.md) using the package's full published commit SHA and manifest hash. | The public summary dataset and graph are ready; load status reports success. No personal contexts are imported. |
 | 6. Register conversation services | Lab owner | Run `sql/extensions/03_scenario_agents.sql` after the profile and schema are ready. | The required teams are registered, including `KCV_GROUNDED_TEAM` for answers using application-retrieved evidence. Do not recreate schema tables here. |
@@ -42,7 +42,7 @@ SELECT USER FROM dual;
 
 Expected: the chosen project schema, normally `KCV_LAB`, not ADMIN.
 
-After the full schema verifier succeeds, this short query confirms the candidate checkpoint:
+After the full schema verifier succeeds, this short query confirms the version 2.0.0 schema checkpoint:
 
 ```sql
 SELECT migration_id,product_version,phase
@@ -52,7 +52,7 @@ WHERE migration_id='2.0.0-c3-r7-ready';
 
 Expected: one row with product version `2.0.0` and phase `COMPLETE`. This checkpoint does not replace model, account-isolation or browser tests. A Worksheet installation does not need a Liquibase changelog count.
 
-## Package acceptance before publication
+## Recorded package acceptance
 
 The candidate02 clean rehearsal passed all 19 ordered schema parts through Worksheet upload/execution, including parts exceeding 2 MB, runtime setup, new-app import and scoped browser/persistence checks. Use a complete matching package with the corrected execution instructions, documented order and completion checks; do not split PL/SQL blocks yourself. The linked validation record retains the one-account browser scope and untested permanent-delete confirmation.
 

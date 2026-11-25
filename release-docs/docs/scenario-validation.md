@@ -1,10 +1,10 @@
 # Release validation status
 
-## Current v2 release candidate
+## Version 2.0.0 distribution acceptance
 
-The [release-path acceptance record](../db/verification/release-v2-paths-validation.json) tracks clean installation and migration independently. Current packaging and rehearsal work does not promote release. Native dev R7 tests and its engine export are supporting evidence; they do not certify the generated Worksheet parts, transport or a published-v1 upgrade. The complete app includes My Contexts, local search and same-ID migration. Permanent-delete confirmation needs its own disposable-data browser result.
+The [release-path acceptance record](../db/verification/release-v2-paths-validation.json) records passed clean-installation and published-v1 migration rehearsals independently, including Worksheet transport, new/same-ID APEX import, preserved work and fresh-sign-in reopening. Candidate02 supplied the tested executable SQL; the supplied instructions incorporate its **Run Statement** correction without changing the import body. Native dev R7 tests and the engine export are supporting evidence, separate from those deployment rehearsals. The complete app includes My Contexts, local search and same-ID migration.
 
-Acceptance must cover schema receipts/source verification, unchanged existing work, owner profile/agent setup, new/upgrade APEX import, personal and sample journeys, search/fallback and separate-account isolation. Record actual coverage and unresolved checks rather than calling a generated package fully validated.
+The rehearsals used isolated schemas on an existing database and one app account per route. New-database provisioning, two-account browser isolation and final permanent-delete confirmation are outside that acceptance. A changed package or deployment environment needs its own checks; package generation alone is not a native/model/browser pass. The dated records retain their original source versions, failures, corrections and scope.
 
 ## Historical v1 and expanded-dataset evidence
 
@@ -18,7 +18,7 @@ The dev original-passage version was fully torn down (retaining JAVAVM), rebuilt
 
 This distribution uses attributed editorial summaries with distinct IDs/hashes, including selected passages from the expanded research. It includes a prebuilt dataset loader and Worksheet APEX installer. Build checks verify the publication allowlist, relative documentation links, generated SQL, graph/source/context integrity, native-query selection against RDFLib and manifest hashes. These are local checks, not a native Oracle database or inference pass.
 
-## Required native acceptance before a validated release tag
+## Historical v1 native acceptance checklist
 
 1. Follow the beginner route on a fresh approved ADB Serverless database using only release files.
 2. As KCV_LAB run [verify_worksheet.sql](../integration-test/verify_worksheet.sql) and [verify_scenario_native.sql](../integration-test/verify_scenario_native.sql). Inspect PASS and USER_ERRORS. These native checks make no model inference request.

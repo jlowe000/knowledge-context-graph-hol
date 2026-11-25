@@ -1,6 +1,6 @@
 # Knowledge Context Explorer — use it and understand it
 
-This is the **SQL-first learner distribution**, currently prepared on dev as an unpromoted v2 candidate. Choose the experience that fits what you want to learn:
+This is the **v2.0.0 SQL-first learner distribution**. Choose the experience that fits what you want to learn:
 
 | Your goal | Start here | What you need |
 | --- | --- | --- |
@@ -12,7 +12,7 @@ This is the **SQL-first learner distribution**, currently prepared on dev as an 
 
 Read [Choose your learning path](docs/learning-paths.md) if you are unsure. **Release is for both end users and developers learning this knowledge-collection example.** Dev is for people who want to change the example into their own implementation.
 
-For deployment, first choose between [clean installation and migration](docs/installation-paths.md). Both use supplied SQL through Database Actions; neither requires Liquibase, SQLcl or Python. Both routes passed their scoped candidate02 Worksheet/browser rehearsals, including fresh-sign-in reopening, as recorded in [release-path acceptance](db/verification/release-v2-paths-validation.json). The APEX execution instructions are corrected to Run Statement; v2 remains unpromoted and the published v1 release is unchanged.
+For deployment, first choose between [clean installation and migration](docs/installation-paths.md). Both use supplied SQL through Database Actions; neither requires Liquibase, SQLcl or Python. Both routes passed their scoped candidate02 Worksheet/browser rehearsals, including fresh-sign-in reopening, as recorded in [release-path acceptance](db/verification/release-v2-paths-validation.json). The supplied APEX installer instructions incorporate the tested **Run Statement** correction. The acceptance record retains the exact tested package and its limitations.
 
 ## What you can experience
 

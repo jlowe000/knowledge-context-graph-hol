@@ -1,6 +1,6 @@
 # Choose an installation path
 
-**v2 candidate documentation; not yet promoted to release.** Both SQL Worksheet routes passed their scoped rehearsals in isolated project schemas on an existing temporary ADB Serverless database: a clean R7 installation and an upgrade from the published v1 release. The [release-path validation record](../db/verification/release-v2-paths-validation.json) records the tested candidate, preserved-work checks and browser scope. Candidate02 required the documented APEX **Run Statement** instruction correction; its executable import body was unchanged. This does not announce a published v2 release or establish provisioning of a new database. Each route used one app account; two-account browser isolation and final permanent-delete confirmation are outside this acceptance.
+**Version 2.0.0 installation paths.** Both SQL Worksheet routes passed their scoped rehearsals in isolated project schemas on an existing temporary ADB Serverless database: a clean R7 installation and an upgrade from the published v1 release. The [release-path validation record](../db/verification/release-v2-paths-validation.json) records the tested candidate, preserved-work checks and browser scope. Candidate02 required the documented APEX **Run Statement** instruction correction; its executable import body was unchanged. These tests did not exercise provisioning of a new database. Each route used one app account; two-account browser isolation and final permanent-delete confirmation are outside this acceptance.
 
 If you already have a working app URL and your own app login, use [the learning paths](learning-paths.md). Installing or migrating is an administrator task; it is not required for every learner.
 
@@ -52,7 +52,7 @@ The ordered schema parts use **Run Script (F5)**. Both `20_install_apex.sql` and
 
 Both routes use **Database Actions → SQL Worksheet**. No Python, SQLcl, Liquibase client or APEXlang authoring environment is required for a learner installing the prepared release. ADMIN performs account/grant/workspace tasks; the actual project owner performs schema and runtime tasks. Changing `CURRENT_SCHEMA` while signed in as ADMIN is not an owner login.
 
-For the current candidate, successful schema verification requires **96 COMPLETE project receipts**, `2.0.0-c3-r7-ready`, no invalid project objects and all **16 required package specification/body objects**. The 97-entry Liquibase ledger used in dev is not a requirement for a Worksheet installation. These checks establish the schema contract, not successful model answers or complete learner acceptance.
+For version 2.0.0, successful schema verification requires **96 COMPLETE project receipts**, `2.0.0-c3-r7-ready`, no invalid project objects and all **16 required package specification/body objects**. The 97-entry Liquibase ledger used in dev is not a requirement for a Worksheet installation. These checks establish the schema contract, not successful model answers or complete learner acceptance.
 
 ## Preserve work and plan recovery
 

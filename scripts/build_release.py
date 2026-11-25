@@ -160,7 +160,103 @@ def validate(folder):
     if errors: raise ValueError('\n'.join(errors))
 
 
-def build(output):
+def distribution_metadata(root, snapshot, version, prepare_publication=False):
+    """Separate a local publication package from candidate and remote state."""
+    if not prepare_publication:
+        return {'candidate_label': version+'-dev', 'distribution_status': 'unpromoted_candidate'}
+    if snapshot.get('dirty') is not False:
+        raise ValueError('Publication packaging requires a clean committed source tree')
+    if snapshot.get('branch') != 'dev' or not re.fullmatch(r'[a-f0-9]{40}', snapshot.get('commit', '')):
+        raise ValueError('Publication packaging requires a committed dev source')
+    record_path = root/'db/verification/release-v2-paths-validation.json'
+    record = json.loads(checked_validation_record(record_path))
+    passed = {'passed', 'passed_with_documented_execution_mode_correction'}
+    if (record.get('product_version') != version or record.get('status') not in passed
+            or record.get('pending_checks') != []
+            or any(record.get(route, {}).get('status') not in passed
+                   or record[route].get('pending_checks', []) != []
+                   for route in ('clean_installation', 'migration'))):
+        raise ValueError('Publication packaging requires recorded clean and migration acceptance for this version')
+    return {'release_label': version, 'distribution_status': 'prepared_for_publication',
+            'publication': {'remote_state': 'not_checked', 'push_performed': False,
+                            'tag_created': False,
+                            'acceptance_record_sha256': hashlib.sha256(record_path.read_bytes()).hexdigest(),
+                            'note': 'Local packaging only. Historical acceptance retains its recorded scope; '
+                                    'compare runtime artifacts with the accepted package before publishing.'}}
+
+
+def compare_accepted_package(root, stage, commit):
+    """Bind publication-only changes to the previously accepted Git payload."""
+    if not isinstance(commit, str) or not re.fullmatch(r'[a-f0-9]{40}', commit):
+        raise ValueError('Supply the full accepted release commit for publication comparison')
+    def committed_file(path):
+        return subprocess.run(['git', '-C', str(root), 'show', commit+':'+path],
+                              check=True, capture_output=True).stdout
+    manifest_bytes = committed_file('release-manifest.json')
+    accepted = json.loads(manifest_bytes)
+    if accepted['product_version'] != (stage/'VERSION').read_text().strip():
+        raise ValueError('Accepted release comparison must use the same product version')
+    expected = {item['path']: item['sha256'] for item in accepted['files']}
+    if len(expected) != len(accepted['files']):
+        raise ValueError('Duplicate paths in accepted release manifest')
+    actual = {p.relative_to(stage).as_posix(): p for p in stage.rglob('*') if p.is_file()}
+    tree_bytes = subprocess.run(['git', '-C', str(root), 'ls-tree', '-r', '-z', commit],
+                                check=True, capture_output=True).stdout
+    tree = {}
+    for entry in tree_bytes.split(b'\0'):
+        if not entry:
+            continue
+        info, name = entry.split(b'\t', 1)
+        mode, kind, oid = info.decode().split()
+        if kind != 'blob' or mode not in {'100644', '100755'}:
+            raise ValueError('Unexpected link or submodule in accepted release')
+        tree[name.decode('utf-8')] = oid
+    if set(tree) != set(expected) | {'release-manifest.json'}:
+        raise ValueError('Accepted manifest inventory differs from its Git tree')
+    def blob_id(raw, oid):
+        digest = hashlib.sha1() if len(oid) == 40 else hashlib.sha256()
+        digest.update(f'blob {len(raw)}\0'.encode())
+        digest.update(raw)
+        return digest.hexdigest()
+    for name, digest in expected.items():
+        # Reuse an identical staged blob; read only differing committed files.
+        raw = actual[name].read_bytes() if name in actual else None
+        if raw is None or blob_id(raw, tree[name]) != tree[name]:
+            raw = committed_file(name)
+        if hashlib.sha256(raw).hexdigest() != digest:
+            raise ValueError('Accepted manifest hash differs from its Git payload: '+name)
+    metadata = {'release-provenance.json', 'release-manifest.json', 'generated/build-report.json'}
+    changed_docs, comment_changes, matched = [], [], []
+    for name in sorted((set(expected) | set(actual)) - metadata):
+        if name.endswith('.md'):
+            if name not in actual or name not in expected or hashlib.sha256(actual[name].read_bytes()).hexdigest() != expected[name]:
+                changed_docs.append(name)
+            continue
+        if name not in actual or name not in expected:
+            raise ValueError('Runtime file added or removed since accepted release: '+name)
+        raw = actual[name].read_bytes()
+        if hashlib.sha256(raw).hexdigest() == expected[name]:
+            matched.append(name)
+            continue
+        if name == 'sql/install/10_load_github.sql':
+            old = committed_file(name)
+            old_header = b'-- KCV_LAB: install sql/schema/06_dataset_import.sql first. Run Script (F5).\n'
+            new_header = (b'-- Project owner: complete the ordered v2 schema installation or migration first.\n'
+                          b'-- Run sql/install/02_verify_schema.sql and configure the owner RDF network before loading.\n'
+                          b'-- Run this caller with Run Script (F5).\n')
+            if old.startswith(old_header) and raw == new_header + old[len(old_header):]:
+                comment_changes.append(name)
+                continue
+        raise ValueError('Runtime differs from accepted release; new acceptance is required: '+name)
+    return {'accepted_release_commit': commit,
+            'accepted_manifest_sha256': hashlib.sha256(manifest_bytes).hexdigest(),
+            'comparison': 'passed', 'unchanged_non_document_files': len(matched),
+            'documentation_changes': changed_docs, 'exact_header_only_changes': comment_changes,
+            'regenerated_metadata': sorted(metadata),
+            'scope': 'All other payload files match accepted SHA-256 values. Historical acceptance records remain unchanged; no new database execution.'}
+
+
+def build(output, *, prepare_publication=False, accepted_release_commit=None):
     output = Path(output).resolve()
     if output.exists(): raise ValueError('Use a new output folder; existing output is never deleted')
     # Cover validation and copying with the same source snapshot. A changed
@@ -177,6 +273,9 @@ def build(output):
             # A new source tree plus an old engine export is not a v2 distribution.
             # This checks import/export provenance, not all release acceptance gates.
             receipt = verify_upgrade_export(ROOT)
+    distribution = distribution_metadata(ROOT, snapshot, version, prepare_publication)
+    if prepare_publication and not accepted_release_commit:
+        raise ValueError('Supply the full accepted release commit for publication comparison')
     if (ROOT / 'data/public-content-summaries.json').exists():
         from kcv.editorial import validate_summary_basis
         validate_summary_basis(ROOT)
@@ -284,7 +383,9 @@ def build(output):
             'not_verbatim_source_text': True, 'passages': passages})
         report.update({'content_kind': 'attributed_editorial_summary',
             'full_source_text_location': 'Not bundled; summaries in data/release-summaries.json',
-            'native_serverless_validation': 'release_summary_dataset_not_yet_run',
+            'native_serverless_validation': 'see_recorded_release_path_acceptance',
+            'validation_record': 'db/verification/release-v2-paths-validation.json',
+            'package_generation_is_deployment_acceptance': False,
             'model_extraction': 'not_applicable', 'distribution': 'release'})
         pipeline.write(stage / 'generated/build-report.json', report)
         preview = (stage / 'generated/dataset-preview.md').read_text(encoding='utf-8')
@@ -332,9 +433,12 @@ def build(output):
         for p in stage.rglob('*'):
             if p.is_file() and p.suffix.lower() not in {'.png', '.jpg'}:
                 write(p, p.read_text(encoding='utf-8'))
+        if prepare_publication:
+            distribution['publication']['accepted_runtime_comparison'] = compare_accepted_package(
+                ROOT, stage, accepted_release_commit)
         write(stage/'release-provenance.json', json.dumps({
             'format_version': 1, 'product_version': version,
-            'candidate_label': version+'-dev', 'distribution_status': 'unpromoted_candidate',
+            **distribution,
             'source': snapshot,
             'application_source_sha256': application_source_hash(ROOT),
             'application_export_sha256': hashlib.sha256((stage/'apex/kcv-explorer.sql').read_bytes()).hexdigest(),
@@ -346,14 +450,15 @@ def build(output):
                            'source_has_uncommitted_changes': snapshot['dirty'],
                            'package_generation_is_deployment_acceptance': False,
                            'worksheet_execution': 'not established by package generation',
-                           'note': 'Historical receipts apply only to their recorded source and scope; the exact candidate requires its own fresh and upgrade acceptance.'}
+                           'note': 'Historical receipts apply only to their recorded source and scope. '
+                                   'Compare the generated runtime with the accepted package; changed runtime requires relevant fresh and upgrade acceptance.'}
         }, indent=2)+'\n')
         file_rows = [{'path': p.relative_to(stage).as_posix(),
                       'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}
                      for p in sorted(stage.rglob('*')) if p.is_file()]
         pipeline.write(stage / 'release-manifest.json', {'format_version': 1,
             'distribution': 'release', 'product_version': version,
-            'candidate_label': version+'-dev', 'source_commit': snapshot['commit'],
+            **distribution, 'source_commit': snapshot['commit'],
             'source_dirty': snapshot['dirty'], 'python_required_for_learner': False,
             'dataset_kind': 'attributed_editorial_summary', 'summary_count': len(passages),
             'source_count': report['source_count'], 'catalogue_count': report['catalog_count'],
@@ -368,5 +473,10 @@ def build(output):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', type=Path, default=ROOT / 'work/release-package')
+    parser.add_argument('--prepare-publication', action='store_true',
+                        help='Require clean committed inputs and recorded installation-path acceptance; does not push or tag')
+    parser.add_argument('--accepted-release-commit',
+                        help='Full commit of the accepted same-version package; publication changes must preserve its runtime')
     args = parser.parse_args()
-    print(build(args.output))
+    print(build(args.output, prepare_publication=args.prepare_publication,
+                accepted_release_commit=args.accepted_release_commit))

@@ -22,7 +22,7 @@ The [architecture](architecture.md) explains the SPARQL query and the role of AP
 
 ## Set up an environment only if needed
 
-Choose an [installation path](installation-paths.md): [clean installation](fresh-serverless-deployment.md) for an empty project schema, or [migration](migrate-to-v2.md) for an existing supported installation. Both use Database Actions SQL Worksheet. The v2 candidate routes require separate fresh-installation and migration acceptance before publication.
+Choose an [installation path](installation-paths.md): [clean installation](fresh-serverless-deployment.md) for an empty project schema, or [migration](migrate-to-v2.md) for an existing supported installation. Both use Database Actions SQL Worksheet. The version 2.0.0 routes passed separate clean-installation and migration rehearsals; the [acceptance record](../db/verification/release-v2-paths-validation.json) states the tested scope and remaining limitations.
 
 Provisioning is setup work for the experience, not a prerequisite for every end user. Database and model access remain separate permissions. A new schema on an approved existing database can be a clean installation; an existing project schema is a migration even if the database itself is temporary.
 

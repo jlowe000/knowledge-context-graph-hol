@@ -1,4 +1,4 @@
-# Configure the Database and Model
+# Configure the Database Schema
 
 ## Introduction
 
@@ -11,8 +11,8 @@ Estimated Lab Time: 30–60 minutes plus Java enablement/restart and model waiti
 ### Objectives
 
 - Check Java readiness, create a password-enabled owner and apply its grants.
-- Install and verify the ordered schema, then create its private RDF network.
-- Configure this owner's credential/profile; complete the required model test after app binding.
+- Install and verify the ordered static schema.
+- Prepare the handoff to app import and binding; configure credentials and the model in Deployment setup afterward.
 
 ### Prerequisites
 
@@ -56,25 +56,15 @@ Then run [02_verify_schema.sql](../../sql/install/02_verify_schema.sql) with F5.
 
 **Expected outcome:** tables, APIs, migration receipts and static search/deletion objects are installed. No user credential, model, dataset or RDF network was created by these bundles.
 
-## Task 4: Create the RDF network and model credential
+## Task 4: Continue to the app installation
 
-**Account: lab owner.** Run [02_network.sql](../../sql/schema/02_network.sql) with F5 once for this new schema. Existing network errors require inspection, not dropping the network. Follow [authentication](../../docs/authentication.md) for OCI user or resource-principal permission.
+The verified static schema is enough to import the application. Its RDF network, credential, model profile, conversation components and public dataset can be absent at this point.
 
-For your OCI user, run the block in [00_user_credential_worksheet.sql](../../sql/schema/00_user_credential_worksheet.sql) with Run Statement, excluding its slash. Privately supply `OCI_USER_OCID`, `OCI_TENANCY_OCID`, `OCI_FINGERPRINT` and the matching unencrypted `OCI_PRIVATE_KEY` body without PEM BEGIN/END lines. OCI Console passwords are not signing keys. Do not reuse a qualified credential from another schema as a substitute for supported owner setup.
+Continue to [deploy the app](../deploy-explorer/deploy-explorer.md): create the workspace and separate installer/learner accounts, import the app, then run the generated owner binding. Sign into the runtime app as the workspace-administrator installer and complete **Deployment setup** there.
 
-For resource principal instead, the OCI administrator configures the dynamic group and inference policy; ADMIN runs [03_resource_principal.sql](../../sql/admin/03_resource_principal.sql) for this `KCV_SCHEMA`. Use `OCI$RESOURCE_PRINCIPAL` in the profile. Choose one authentication path. Model IAM is separate from anonymous GitHub dataset access.
+Do not run the old manual credential/profile/greeting sequence before that flow. The app creates or selects the owner-local credential, configures/registers KCV_GENAI and records the required model test. [Authentication](../../docs/authentication.md) explains the OCI identity/IAM prerequisites and separately labelled headless alternatives. Resource-principal IAM preparation remains an administrator task; it is not performed by the credential form.
 
-**Expected outcome:** KCV_NET exists for this owner, and its chosen model authentication is configured. Inference has not yet been tested.
-
-## Task 5: Create and register the profile
-
-As the owner, open [05_profile_worksheet.sql](../../sql/schema/05_profile_worksheet.sql). Privately fill its region, compartment, supported model identifier and credential name as explained in [authentication](../../docs/authentication.md). Use the service's supported model name/identifier, not an arbitrary model OCID. Keep environment values out of shared files.
-
-Run the configured profile file as instructed, then [06_register_profile.sql](../../sql/schema/06_register_profile.sql) with F5. The settings table now exists because Task 3 completed. An optional [diagnostic greeting](../../sql/queries/00_test_genai.sql) makes a real, potentially billable call. To avoid duplicating tests, normally wait for the required [deployment TEST_MODEL step](../../docs/deployment-setup.md#sql-first-final-readiness) after app import/binding. A manual greeting does not record that readiness result.
-
-**Expected outcome:** this owner's KCV_GENAI profile exists and its name is registered. Model access remains unverified until a real call succeeds; a different owner's successful request is insufficient. On an authorization error, check the owner's key/fingerprint, IAM, region and model; do not recreate tables.
-
-Continue to [load knowledge](../load-knowledge/load-knowledge.md). The independent [local search setup](../../docs/context-search.md#worksheet-setup) can be completed before opening the app.
+**Expected outcome:** the owner has the complete static schema and is ready for app import. Successful schema installation alone does not establish model access or learner readiness.
 
 ## Learn More
 

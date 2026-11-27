@@ -6,6 +6,8 @@ The authored application now declares 2.1.0. Its native application-only import 
 
 ## Inputs and artifact boundaries
 
+The [source build process](apex-build-process.md) explains how to generate these inputs without historical `work/` staging folders. Native application import/export is part of that build, followed by separate installation acceptance. Supporting Objects are generated from the tracked migration contract; output directories are configurable. A single end-to-end Bash orchestrator remains future work.
+
 | Input | Requirement |
 | --- | --- |
 | VERSION and maintained apex/application source | Matching reviewed product version and source hash |

@@ -63,6 +63,8 @@ Library and overview paging is processed on submit, before APEX redirects back t
 
 ## Engine export and Worksheet packaging
 
+Use the [source build process](apex-build-process.md) for Supporting Objects generation, isolated native import/export, ZIP validation and release assembly. Import/export belongs to the build; the four installation routes then test its output. The generated directories can live outside `work/` and are not the maintained source.
+
 Export the reviewed, deployed candidate through APEX/SQLcl to `apex/kcv-explorer.sql` and record its tested scope and unresolved limitations separately. Never hand-edit this generated SQL to imitate new pages. Retain the app's page numbers/aliases and use a supported engine export.
 
 The current [SQL export receipt](../apex/export-validation.json) identifies the versioned v2.1.0 definition-only export: 11 pages and 16 maintained assets. The companion [APEXlang receipt](../apex/apexlang-export-validation.json) identifies the native ZIP and canonical Supporting Objects. Native import/export ran without executing those Supporting Objects; its success does not establish backend or learner readiness. The older nine-page/seven-asset R7 receipt and [v2.0.0 route rehearsal](../db/verification/release-v2-paths-validation.json) retain their historical scope. Current packaging uses the explicit inputs and four independent route checks in [the packaging plan](apex-led-release-packaging-plan.md).

@@ -8,6 +8,9 @@ Use this route to install the maintained dev application into a **new schema and
 
 The [v2.1.0 four-route record](../db/verification/release-v2.1-paths-validation.json) covers the separate curated APEX-led and SQL-first prepared-environment rehearsals. The [v2.0.0 SQL-first record](../db/verification/release-v2-paths-validation.json), [R4 fresh acceptance](../db/verification/fresh-dev-validation.json), [navigation](../db/verification/sample-navigation-validation.json), [search](../db/verification/context-search-validation.json) and [deletion](../db/verification/context-delete-validation.json) records retain their historical scope. Record the results for the actual dev transport you execute.
 
+
+**Setup order:** install and verify the static schema, create the workspace and installer/learner accounts, import the app, bind it to the owner, then configure the credential, model and runtime services through **Deployment setup**. SQLcl/Liquibase remains the DEV-led schema workflow. This revised ordering is documentation guidance over the existing setup APIs; it does not relabel the earlier direct DEV-led rehearsal as a new end-to-end pass.
+
 ## 1. Choose a separate target and check prerequisites
 
 Use Oracle Linux/Bash and the [local SQLcl launcher](dev-connection-setup.md). Java and SQLcl run locally; a container is not required. Keep the wallet, saved connections, credentials and execution logs outside published files.
@@ -90,99 +93,13 @@ lb update -changelog-file db/changelog.xml
 @sql/install/02_verify_schema.sql
 ```
 
-Expected for current R7: 96 COMPLETE project migrations, 97 Liquibase changesets including bootstrap, the `2.0.0-c3-r7-ready` checkpoint and zero invalid project objects. Repeat `lb update` and the verifier: no pending migration should execute. Inspect SQLcl output for errors as well as its process exit code. Follow [migration failure/recovery](database-migrations.md#failure-and-recovery) if a step fails; do not clear checksums or fabricate receipts.
+Expected current contract: 121 COMPLETE project migration receipts, the `2.1.0-apl-r4-ready` checkpoint and zero invalid project objects. Use the full verifier; Liquibase's bookkeeping count is separate. Repeat `lb update` and the verifier: no pending migration should execute. Inspect SQLcl output for errors as well as its process exit code. Follow [migration failure/recovery](database-migrations.md#failure-and-recovery) if a step fails; do not clear checksums or fabricate receipts.
 
 Migrations already install the tables, packages, dataset importer and tool functions. Do not run `01_objects.sql`, `03_tools.sql`, `06_dataset_import.sql` or individual scenario package files over them. The remaining steps configure runtime services and data, which migrations deliberately do not create.
 
-For a candidate that includes hybrid My Contexts search, follow the separate [context-search runtime setup](context-search.md) after its schema migration. It uses [ADMIN grants](../sql/admin/11_context_search_grants.sql) and an [owner-run model setup/backfill](../sql/extensions/22_setup_context_search.sql). The embedding model is downloaded separately and runs inside the database; it does not use or replace the conversational GenAI profile configured below. Keep the populated model URI private and record search acceptance separately from the earlier fresh-deployment results.
+For a candidate that includes hybrid My Contexts search, follow the separate [context-search runtime setup](context-search.md) after its schema migration. It uses [ADMIN grants](../sql/admin/11_context_search_grants.sql) and an [owner-run model setup/backfill](../sql/extensions/22_setup_context_search.sql). The embedding model is downloaded separately and runs inside the database; it does not use or replace the conversational GenAI profile configured in Deployment setup. Keep the populated model URI private and record search acceptance separately from the earlier fresh-deployment results.
 
-## 5. Create the owner-private RDF network
-
-Run the one-time [02_network.sql](../sql/schema/02_network.sql) as the new owner:
-
-<!-- include-sql: sql/schema/02_network.sql -->
-
-```sql
-BEGIN
-  SEM_APIS.CREATE_RDF_NETWORK('DATA',network_owner=>USER,network_name=>'KCV_NET');
-END;
-/
-```
-
-[Script: 02_network.sql](../sql/schema/02_network.sql)
-
-<!-- /include-sql -->
-
-Expected: KCV_NET belongs to the new schema. The same network name in another owner is a separate network. If this step reports that the network already exists, inspect the current owner and previous execution; do not drop any network to force a clean result.
-
-## 6. Configure and test model access
-
-The new schema needs its own working model configuration. A saved ADMIN connection, an existing profile in another schema or a successful model call in the older app does not establish access for this owner.
-
-Choose the [user signing-key or resource-principal path](authentication.md) deliberately. KCV_LAB is the default example name; shared ADMIN scripts now accept KCV_SCHEMA. Supply the actual fresh owner for reviewed administration actions, including optional resource-principal enablement. For the signing-key route tested here, create OCI_USER_CRED in the new owner; do not export another schema's private key to copy it.
-
-For a new signing-key credential, open SQLcl using `bash scripts/open_dev_sqlcl.sh`. The launcher starts SQLcl with `-nohistory`. Connect privately as the new owner, run `SPOOL OFF`, and use a terminal without session recording or screen sharing. Enter the following block directly in that private interactive session, replacing the placeholders yourself. Do not save the populated block to a file, a chat or an agent tool invocation. The matching unencrypted key body excludes its PEM BEGIN/END lines:
-
-```sql
-BEGIN
-  DBMS_CLOUD.CREATE_CREDENTIAL(
-    credential_name=>'OCI_USER_CRED',
-    user_ocid=>'<YOUR_USER_OCID>', tenancy_ocid=>'<YOUR_TENANCY_OCID>',
-    private_key=>q'~<YOUR_MATCHING_UNENCRYPTED_KEY_BODY>~',
-    fingerprint=>'<YOUR_REGISTERED_KEY_FINGERPRINT>');
-END;
-/
-```
-
-The `q'~...~'` form is an Oracle string literal: retain both delimiters around the full key body, including any line breaks. A syntax error can quote part of the input, so share only its error code, not the populated statement or error excerpt. SQLcl does not automatically reproduce Worksheet's bind dialog, and this NO AUTHENTICATION schema cannot use a direct Worksheet login. [00_user_credential_worksheet.sql](../sql/schema/00_user_credential_worksheet.sql) remains the bind-based variant for a separately supported private entry interface. Local no-history mode does not change database audit policy. Close the private session after input; never print the credential or key to verify it.
-
-**Fresh-rehearsal finding:** an explicitly authorized attempt to use a stored credential from another schema failed at `DBMS_CLOUD_AI.CREATE_PROFILE`: its schema-qualified `credential_name` was rejected with `ORA-20010: Invalid credential name`. No profile was created and no greeting/model request was made. The temporary helper and scoped grant were removed, and the original credential was unchanged. This does not establish universal lack of cross-schema credential support, but that route is not supported by the observed Select AI profile behavior here. Use the new owner's OCI_USER_CRED for this deployment; an approved database grant alone does not prove that a profile accepts the qualified name.
-
-Use a private working copy of [05_profile_worksheet.sql](../sql/schema/05_profile_worksheet.sql) to set the approved model name, region, inference compartment and credential name, then execute it as the new owner. It creates KCV_GENAI without replacing an existing profile. Register it with [06_register_profile.sql](../sql/schema/06_register_profile.sql), now that migrations have created KCV_SETTINGS. Both files operate in the connected owner despite their historical KCV_LAB comments.
-
-Run [00_test_genai.sql](../sql/queries/00_test_genai.sql) to make one greeting request:
-
-<!-- include-sql: sql/queries/00_test_genai.sql -->
-
-```sql
-SELECT DBMS_CLOUD_AI.GENERATE(
-  prompt=>'Reply with a short greeting.',profile_name=>'KCV_GENAI',action=>'chat') AS response
-FROM dual
-/
-```
-
-[Script: 00_test_genai.sql](../sql/queries/00_test_genai.sql)
-
-<!-- /include-sql -->
-
-Expected: a real greeting, with `AI_PROFILE` set to KCV_GENAI in this owner. This makes a model request and may incur inference charges. On authorization or parsing failure, retain only the error code in shared records and investigate that specific profile/credential path before registering agents.
-
-## 7. Load the public dataset from the published dev commit
-
-The new owner already has KCV_DATASET from migrations. Use the [GitHub loader](github-dataset-load.md) directly; skip that guide's historical v1 raw initialization. This pinned call loads public JSON and verifies its hashes; it does not execute SQL from GitHub:
-
-```sql
-BEGIN
-  KCV_DATASET.LOAD_GITHUB(
-    p_ref=>'bcabe1ceb14a07c7338fcb58e96bdbf02429d886',
-    p_expected_manifest_sha256=>'dae8efdcd9e99874c8dfc3d9a3ccaf4a861f76b3b5442f71f075a6d9b64ef8ad');
-END;
-/
-```
-
-Expected: SUCCEEDED, a ready ACTIVE_GRAPH and **834 sources, 762 passages, 3 fictional contexts and 30,144 triples**. These counts describe that exact published summary dataset. Check [01_inspect.sql](../sql/queries/01_inspect.sql) and run [verify_worksheet.sql](../integration-test/verify_worksheet.sql); the latter makes no model call and checks the healthcare overview and qualification through native RDF retrieval.
-
-The download is anonymous and needs no GitHub token. Follow the loader guide's network/error checks if it fails. Do not change database-wide outbound routing or a preserved schema's grants merely to retry a new-owner download.
-
-## 8. Register the fresh scenario agents
-
-After the profile greeting and dataset checks pass, run [03_scenario_agents.sql](../sql/extensions/03_scenario_agents.sql) **once as the new owner**. It registers the read-only grounded answer task/team and the existing question/proposal routes. New questions retrieve evidence in application code before dispatching to KCV_GROUNDED_TEAM.
-
-Expected: KCV_GROUNDED_TEAM, KCV_EVIDENCE_TEAM and KCV_EXPLORER_TEAM in this owner's agent-team view. Run the full schema verifier again after runtime registration. An existing task/team is a reason to inspect prior setup, not drop and recreate all teams. Script16 is the repeatable R4 upgrade-registration path; it is unnecessary after successful fresh script03 registration. Script15 installs the older R3 route.
-
-[04_agents.sql](../sql/schema/04_agents.sql) is optional when exercising the original source/context/evidence worker labs. Its KCV_TEAM is not a prerequisite for My Contexts.
-
-## 9. Create a new APEX workspace and app account
+## 5. Create a new APEX workspace and app account
 
 Return to ADMIN. Create and enable the workspace mapped only to the new schema using [10_create_dev_workspace.sql](../sql/admin/10_create_dev_workspace.sql). The script runs ADD_WORKSPACE, ENABLE_WORKSPACE and COMMIT in that order:
 
@@ -198,7 +115,9 @@ Expected: both `KCV_DEV_WORKSPACE_CREATED=KCV_V2_001` and `KCV_DEV_WORKSPACE_ENA
 
 Explicit enablement matters: an earlier rehearsal left the workspace inactive after ADD_WORKSPACE. The combined creation/enablement bootstrap passed for the numbered build. If an existing workspace is inactive, inspect and enable that exact workspace; do not rerun ADD_WORKSPACE or change its owner authentication model.
 
-Create an app end user privately through APEX Administration Services, or use this block in the **ADMIN Database Actions Worksheet**. Confirm the fresh workspace name first, select BEGIN through END without the final slash, and choose **Run Statement**. Enter and submit the password yourself in the private `KCV_APEX_PASSWORD` bind dialog:
+Create a native APEX workspace-administrator account, such as `KCV_INSTALLER`, in this workspace through **APEX Administration Services → Manage Workspaces → Manage Developers and Users**. Give it the workspace-administrator rights required by Deployment setup. A developer-only or app-only account is insufficient. This is an APEX account, not the schema owner or the ADMIN database connection. The account's name alone grants no rights. Database SSO access to Builder is separate and is not needed merely to use the installed app's setup page.
+
+Create a separate app-only end user privately through APEX Administration Services, or use this block in the **ADMIN Database Actions Worksheet**. Confirm the fresh workspace name first, select BEGIN through END without the final slash, and choose **Run Statement**. Enter and submit the password yourself in the private `KCV_APEX_PASSWORD` bind dialog:
 
 ```sql
 BEGIN
@@ -213,7 +132,7 @@ END;
 
 Expected: a new end-user account only in the fresh workspace. An existing username is not reset. The shared [app-user script](../sql/admin/08_create_apex_app_user.sql) now takes KCV_SCHEMA, KCV_WORKSPACE and KCV_APP_USER plus the private password bind. Use those actual target names when choosing that Worksheet path; its default workspace is not this isolated dev workspace. Use a separate app account for each person. Keep passwords in the private input interface; database proxy access is not an application password.
 
-## 10. Validate and import a new APEX application
+## 6. Validate and import a new APEX application
 
 Use a **direct ADMIN connection**, as exercised in this rehearsal, or the intended owner after verifying its workspace activation. Specify every import target explicitly. Confirm the fresh workspace is enabled, its schema mapping is correct and the proposed application ID is unused. Do not change CURRENT_SCHEMA, grant broad APEX roles or change the new owner's authentication mode to work around an inactive workspace. The documented fresh example is:
 
@@ -228,6 +147,8 @@ The earlier owner-proxy import/activation failure is retained in the validation 
 
 Switch back to `KCV_V2_001_OWNER` for database-side checks and verify USER/CURRENT_SCHEMA again. The numbered-build acceptance parsed 33 application SQL components, with the native Close Window process intentionally skipped. Earlier APEX_SESSION harness results retain their own identity/isolation scope in the historical validation record. These server-side checks are distinct from the authenticated browser journey below, which tests the end user's actual login and UI.
 
+The verified static schema is sufficient for this app import. A missing credential/profile, RDF network or dataset is expected on a fresh owner and is handled after binding. Do not configure the model in a private SQL file merely to satisfy import.
+
 The alternate Worksheet installer is a separate acceptance route. Generate it with explicit target arguments rather than the KCV_LAB defaults:
 
 ```bash
@@ -236,9 +157,31 @@ python scripts/build_apex_worksheet.py --mode new --workspace KCV_V2_001 --schem
 
 This alternative needs a password-enabled owner Worksheet, as used in the separate [SQL-first clean/migration rehearsal](../db/verification/release-v2-paths-validation.json). Use a release checkout's own setup guide for that account model; the schema-only dev owner above cannot sign in directly to Worksheet. In a supported owner Worksheet, select the complete outer `DECLARE` through the final `END;`, excluding the final slash, and use **Run Statement (Ctrl+Enter)**. Supply any prompted target binds. The installer allocates a new application ID. Choose one import route for a deployment; running both creates separate apps. Native APEXlang acceptance does not by itself validate the generated wrapper.
 
-## 11. Test the fresh experience and record its limits
+## 7. Bind the app and complete Deployment setup
 
-For **2.1.0**, complete the [owner binding and setup readiness step](deployment-owner-binding.md) after importing the matching app and before attempting the gated learner pages. The curated SQL-first routes exercised this binding and readiness contract within their recorded scopes; they do not establish a separate direct DEV-led Liquibase/native-import rehearsal.
+As the actual new owner, follow [owner binding](deployment-owner-binding.md) with the imported app ID and its mapped workspace. This uses the generated verifier; ADMIN changing CURRENT_SCHEMA is not sufficient. Expect READY_FOR_SETUP on the first binding. The app stays closed to ordinary learners until readiness passes and learning is explicitly enabled.
+
+Open the installed runtime app and sign in using this workspace's **KCV_INSTALLER** APEX account. Follow the [shared Deployment setup guide](../release-docs/docs/deployment-setup.md#apex-guided-setup) in this order:
+
+1. **Prepare graph network** if it is missing. The owner-private network is separate from any older build's network.
+2. If using an OCI API signing key and the owner has no suitable credential, use **Create local OCI credential**. Enter the four matching values only in its dedicated masked fields, using the unencrypted key body without PEM markers or SQL quotation syntax. Submit privately. The form creates only owner-local OCI_USER_CRED and refuses replacement. For an upgrade, retain a suitable existing credential. Resource principal remains a separately prepared [IAM alternative](authentication.md).
+3. Under **Configure model access**, select the prepared credential and enter the approved region, inference compartment and supported model name. Save. The app creates/configures KCV_GENAI and registers it for the project; do not separately run 05_profile_worksheet.sql or 06_register_profile.sql.
+4. Use **Test model connection once** when its check is not READY. This is a real model request and records the result for the current profile; a standalone greeting does not satisfy readiness.
+5. **Prepare conversation components** after the profile is ready. This verifies or creates the required teams/tasks/tools without resetting conversations.
+6. **Load approved public collection** for the supplied demo. It uses the packaged immutable public commit/hash. Wait for completion; do not also run the standalone loader or agent-registration scripts.
+7. Refresh readiness. When all six checks are READY, choose **Enable learning** deliberately. On an upgrade, act only on missing checks; do not save/reload ready resources merely because a version changed.
+
+Keep private input out of chat, source files, screenshots and logs. OCI user/key registration and inference permissions remain prerequisites; the form does not create them. A failed model test does not require reinstalling the schema or app. See [setup recovery](../release-docs/docs/deployment-recovery.md).
+
+For a headless maintenance or diagnostic need, the [manual authentication alternatives](authentication.md) and owner setup API remain available. They are not additional steps after successful app setup. A separately chosen custom collection still needs its own DEV-led ingestion/configuration and acceptance; the guided public loader is not a generic importer for arbitrary research.
+
+## 8. Optional local semantic search
+
+The conversational OCI profile does not configure local embedding search. If wanted, follow [context-search setup](context-search.md): the administrator grants the scoped capabilities and the owner uses [22_setup_context_search.sql](../sql/extensions/22_setup_context_search.sql) to load/retain the local model and backfill derived search data. Keep any private model download URI out of source and logs. Without this model, expect the app's explicit keyword-only banner; this is not a failure of chat-model setup.
+
+Use read-only dataset/graph checks after setup. The supplied public demo has its own manifest counts; an adapted collection requires separately recorded expectations. Do not run raw schema packages or initial registration scripts over a configured installation.
+
+## 9. Test the fresh experience and record its limits
 
 Sign in to the new application using its new workspace account. Follow the [My Contexts manual review](my-contexts-manual-test.md): create or copy a draft, review/apply, start a conversation, ask a real question, inspect Sources and Answer lineage, record an observation, refine deliberately and reopen the saved conversation. Check that retrieval has APPLICATION origin before model dispatch, citations match supplied passages and earlier evidence remains unchanged. Exercise the sample route separately.
 
@@ -250,6 +193,6 @@ Compare the preserved installations' counts and application identities with the 
 
 A fresh schema/app test does not validate new-database provisioning, initial Java enablement, every model response, Worksheet transport or release promotion. Record each route separately and leave release unchanged until its own acceptance and explicit promotion.
 
-## 12. Replace or retire a build
+## 10. Replace or retire a build
 
 Follow the [dev build lifecycle](dev-build-lifecycle.md) for replacement, private recovery material, exact-target retirement, local work cleanup and obsolete SQLcl connections. Keep the previous installation until the replacement passes and the saved-work decision is recorded. Retirement preserves JAVAVM and shared infrastructure; it is not a Liquibase rollback.

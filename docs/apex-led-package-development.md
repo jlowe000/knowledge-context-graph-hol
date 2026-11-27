@@ -1,5 +1,7 @@
 # Developing the APEX-led package
 
+For the current source-to-artifact workflow, start with [Build the APEX application from source](apex-build-process.md). It separates maintained inputs, generated Supporting Objects, native import/export, ZIP packaging and deployment acceptance. The historical candidate notes below are evidence, not required staging directories.
+
 This is a maintainer guide for the v2.1.0 implementation. The curated package's four prepared-environment routes passed within the [current packaging plan](apex-led-release-packaging-plan.md) scope, and local dev/release commits are authorised. Remote push and tag creation are separate. Platform and provisioning limits remain explicit. Workspace installers follow [Install through APEX](apex-led-deployment.md); release has its own curated consumer guides.
 
 The [acceptance review](apex-led-acceptance-review.md) separates current passes, remaining checks on the populated test build, checks requiring another isolated environment and historical artifacts to retain.

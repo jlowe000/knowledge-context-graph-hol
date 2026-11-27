@@ -17,14 +17,20 @@ The script verifies the complete schema contract and the native application/work
 
 Expected output is `KCV_DEPLOYMENT_BINDING=READY_FOR_SETUP`. Both setup and application maintenance are enabled in one transaction. A repeat against the exact same binding returns `KCV_DEPLOYMENT_BINDING=ALREADY_VERIFIED` and preserves the current maintenance state. A different application or workspace is rejected; this script does not reassign an existing installation.
 
-Next, inspect readiness as the same owner:
+## Continue in the installed app
+
+After binding, open the runtime app and sign in using a **native APEX workspace-administrator** account such as KCV_INSTALLER. Use [account preparation](../release-docs/docs/apex-led-administrator-preparation.md#3-create-the-workspace-and-accounts) if it does not exist; do not grant setup rights to the app-only learner. The runtime APEX password is separate from the database/SQLcl connection.
+
+Follow [Deployment setup](../release-docs/docs/deployment-setup.md#apex-guided-setup) for the owner-private network, credential creation/selection, model configuration/test, conversation registration, public collection and explicit learner enablement. Import and binding require no pre-created model profile. The app configures/registers KCV_GENAI; do not run manual profile scripts as duplicate work.
+
+For an existing installation, retain correct resources and complete only missing readiness. All six checks READY still requires **Enable learning**. Reusing a completed enable token cannot clear maintenance subsequently enabled by another action. Review failures before retrying; never automatically repeat model calls.
+
+## Optional owner diagnostics or headless setup
+
+The shared owner API remains available for deliberately chosen non-UI work. Inspect status without making a model call:
 
 ```sql
 SELECT KCV_DEPLOY.STATUS_JSON FROM dual;
 ```
 
-Complete only the reported missing setup actions. The fixed owner API provides `ENSURE_NETWORK`, `CONFIGURE_PROFILE`, `REGISTER_RUNTIME`, `LOAD_DATASET`, `TEST_MODEL` and `ENABLE_LEARNING`; each mutation requires a new bounded request token for an explicit action. `CONFIGURE_PROFILE` selects an already prepared credential local to this owner; it never accepts a key or password. `LOAD_DATASET` loads the packaged public commit and manifest pin. `TEST_MODEL` makes a real model request and records whether the current profile succeeded. Existing resources are verified rather than reset.
-
-After all required checks pass, explicitly call `ENABLE_LEARNING`. Existing SQL-first runtime setup alone does not record the new model-test receipt or clear the setup gate. Reusing a completed enable token cannot clear maintenance subsequently enabled by another action. Review a failed request in `STATUS_JSON` before retrying with a new token; do not automatically repeat model calls.
-
-The [APEX-led setup guide](apex-led-deployment.md) describes the alternative workspace-administrator UI. An ordinary app-only learner cannot run setup. Learners can use the application after readiness has been verified and learning enabled; they need no database or OCI login.
+The bounded API provides ENSURE_NETWORK, CONFIGURE_PROFILE, REGISTER_RUNTIME, LOAD_DATASET, TEST_MODEL and ENABLE_LEARNING. Each mutation requires a new request token for an explicit action. See [owner readiness examples](../release-docs/docs/deployment-setup.md#sql-first-final-readiness). These are alternatives to completed app actions, not mandatory follow-up calls. Keep private key entry in its approved private interface and never put credential values into a saved script or tool call.

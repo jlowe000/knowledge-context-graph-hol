@@ -16,8 +16,10 @@ This is the **v2.1.0 distribution**, prepared from validated dev sources for rel
 ## Three deployment experiences
 
 - **APEX-led:** an administrator prepares ADB and the workspace; the installer imports the supplied application ZIP through App Builder, installs its Supporting Objects and completes guided setup. The ZIP contains backend installation and compilation steps, not credentials or saved learner data.
-- **OCI / DBA-led:** use supplied SQL through Database Actions for schema, runtime and app installation, then complete the same binding/readiness gates. No Python, SQLcl, Liquibase client or local wallet is needed.
+- **OCI / DBA-led:** use supplied SQL through Database Actions for static schema and app installation, then bind the owner and use the app's Deployment setup for credentials, model and runtime readiness. No Python, SQLcl, Liquibase client or local wallet is needed.
 - **DEV-led:** change sources, ontology, APIs, UI or migrations using dev's own tooling and validation. Those tools are not required to use or deploy this package.
+
+All three experiences use the runtime app's **Deployment setup** for normal credential/profile configuration after import and binding. They retain their distinct schema/application installation tools. A native APEX workspace-administrator installer account is separate from learner accounts; manual owner SQL remains an optional headless/diagnostic alternative.
 
 Choose [clean installation or upgrade within the intended experience](docs/installation-paths.md). Do not combine Supporting Objects installation with a second SQL-first schema installation.
 

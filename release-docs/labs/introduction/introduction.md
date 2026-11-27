@@ -21,7 +21,7 @@ In this introduction, you will:
 | App user | Browser, working app URL and app login supplied by your facilitator |
 | Developer learning | Release files and a deployed sample with private KCV_LAB Worksheet access |
 | Deploy through APEX | Prepared supported ADB/workspace, authorised installer, app ZIP and model inference permission |
-| Deploy through SQL Worksheet | Approved ADB resources, ADMIN/owner access and model inference permission |
+| Deploy through SQL Worksheet | Approved ADB, ADMIN/owner access, a separate installer APEX workspace-admin account and model inference permission |
 
 No Python or local build is required on release. No OCI Console or SQL knowledge is required for app use. Developer learning introduces the sample-specific SQL/graph concepts as you follow the implementation. ADB means Autonomous Database; APEX is the browser application platform included with it.
 
@@ -50,6 +50,7 @@ No Python or local build is required on release. No OCI Console or SQL knowledge
    | KCV_USER or facilitator-supplied app login | The app-user experience |
    | KCV_LAB | Developer SQL exercises and ownership of the sample data/code |
    | ADMIN | Database/workspace setup when deploying the sample |
+   | KCV_INSTALLER or facilitator-supplied workspace-administrator account | Deployment setup in the installed app; distinct from ordinary learners |
    | Your OCI user | Cloud provisioning and model permissions when your role requires them |
 
 2. Use an individual app account for private My Contexts work: a shared login shares that library. Keep the credentials distinct and private. An app user does not need an ADMIN password. A developer inspecting a graph does not need to change cloud IAM when the sample is already configured.

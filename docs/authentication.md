@@ -1,5 +1,9 @@
 # OCI Generative AI authentication
 
+**Normal setup for all three experiences:** after static-schema installation, workspace/account creation, app import and owner binding, use the installed app's [Deployment setup](../release-docs/docs/deployment-setup.md#apex-guided-setup). Enter signing-key inputs only in its dedicated credential form, select the credential under Configure model access, save the approved configuration and explicitly test the model. The app registers the profile; do not also run the manual creation/registration/greeting scripts.
+
+The OCI identity, key registration and IAM prerequisites below still apply. Manual SQL sections are separately labelled headless/diagnostic alternatives, not the normal SQL-first or DEV-led credential-entry route. Optional local embedding-model setup is separate.
+
 Choose one path. Both use the same `KCV_GENAI` profile and the same lab code. A database grant permits package use; OCI IAM separately authorizes inference. The user-key path is the default in the example profile and optional automation configuration.
 
 **Current dev owner:** the account names and Worksheet prompts below describe the v1 KCV_LAB setup. For a new v2 schema, complete the [fresh dev bootstrap and private owner connection](fresh-dev-deployment.md) first. Its parameterized bootstrap supplies the package grants; do not run hard-coded KCV_LAB administration scripts against a different target. Migrations create KCV_SETTINGS. A NO AUTHENTICATION owner uses SQLcl proxy access, not a direct Worksheet password login; SQLcl does not automatically open Worksheet bind dialogs. Create the signing-key credential privately in the actual new owner. The fresh rehearsal rejected a schema-qualified credential name with ORA-20010 during profile creation, before any model call; the guide records that finding rather than treating cross-schema reuse as an established alternative.
@@ -11,7 +15,7 @@ Choose one path. Both use the same `KCV_GENAI` profile and the same lab code. A 
 
 ## A. Existing OCI user credentials
 
-In Worksheet's bind dialog, match each value to its **field name**, not its position. `OCI_FINGERPRINT` is the short fingerprint shown for the registered public key, not the private-key body or a file path. `OCI_PRIVATE_KEY` takes the matching unencrypted key body without PEM BEGIN/END lines. Use Run Statement on the complete BEGIN–END block without the slash. If a bind is reported undeclared, reopen that complete block through Run Statement. A fingerprint-length error is an input-field check; inspect the field privately rather than sharing the entered values.
+For the optional manual Worksheet alternative below, match each value to its **field name**, not its position. `OCI_FINGERPRINT` is the short fingerprint shown for the registered public key, not the private-key body or a file path. `OCI_PRIVATE_KEY` takes the matching unencrypted key body without PEM BEGIN/END lines. Use Run Statement on the complete BEGIN–END block without the slash. If a bind is reported undeclared, reopen that complete block through Run Statement. A fingerprint-length error is an input-field check; inspect the field privately rather than sharing the entered values.
 
 Use this path if your OCI user already has inference permission in the intended compartment. Console/SSO access alone does not supply a database credential: this path requires an **OCI API signing key**, rather than your Console password, an OCI auth token or a Generative AI bearer API key. Oracle documents the [signing-key credential parameters](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-subprograms.html).
 
@@ -25,7 +29,11 @@ Allow group <domain>/<group-name> to use generative-ai-chat in compartment <infe
 This lab calls chat models. Model discovery in the Console may separately require `inspect generative-ai-model`; dedicated endpoints or other operations may need additional permissions. See [Generative AI model permissions](https://docs.oracle.com/en-us/iaas/Content/generative-ai/models-api-permissions.htm). Permission for a different region/compartment/model does not establish that this profile's selection will work.
 
 3. As ADMIN, run the current [grants script](../sql/admin/02_grants.sql), which includes direct `DBMS_CLOUD` execution access. If you ran an earlier version, rerun this additive grants script.
-4. As **KCV_LAB**, create the credential below. Select `BEGIN` through `END;`, excluding `/`, and use **Run Statement** so Worksheet prompts for bind values. Supply the private key body without the PEM BEGIN/END lines; passphrase-protected keys are unsupported. Keep the key out of saved scripts, Git, screenshots and chat. Use an approved private credential-entry interface if your environment does not permit secret values in Worksheet bind dialogs.
+4. Continue in the installed app's [credential form](../release-docs/docs/deployment-setup.md#create-a-credential-privately-if-needed) after import and binding. Skip manual creation below when using that flow. If OCI_USER_CRED already exists, retain it and review its intended identity instead of recreating it.
+
+### Optional manual credential creation
+
+Use this only when deliberately choosing a headless/facilitator alternative. As the actual project owner (KCV_LAB is the default example), create the credential below. Select `BEGIN` through `END;`, excluding `/`, and use **Run Statement** so Worksheet prompts for bind values. Supply the private key body without the PEM BEGIN/END lines; passphrase-protected keys are unsupported. Keep the key out of saved scripts, Git, screenshots and chat. Use an approved private credential-entry interface if your environment does not permit secret values in Worksheet bind dialogs.
 
 <!-- include-sql: sql/schema/00_user_credential_worksheet.sql -->
 
@@ -46,7 +54,7 @@ END;
 
 The credential is stored in the database, so treat this as granting the lab schema use of that OCI identity. See Oracle's [credential storage documentation](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/autonomous-manage-credentials.html). An existing `OCI_USER_CRED` is not overwritten; inspect its ownership and intended use first. A credential in ADMIN's schema is not the lab user's credential.
 
-5. Skip the resource-principal script and dynamic group steps. Continue with the common profile step below.
+For a user signing key, skip resource-principal setup. Return to [Deployment setup](../release-docs/docs/deployment-setup.md#apex-guided-setup) for profile configuration/testing, or continue with the explicitly optional manual profile alternative below. Do not perform both.
 
 ## B. Resource principal alternative
 
@@ -69,9 +77,11 @@ Allow dynamic-group <domain>/KCV_ADB_GENAI to use generative-ai-chat in compartm
 Allow IAM changes to propagate before testing. These examples authorize inference rather than management of models or clusters; additional operations require corresponding permissions.
 
 3. As ADMIN, run [03_resource_principal.sql](../sql/admin/03_resource_principal.sql). Its copyable block is in the [setup guide](setup.md#oci-model-authentication).
-4. In the profile script, change `l_credential` to `'OCI$RESOURCE_PRINCIPAL'`. Do not create `OCI_USER_CRED` for this path. See [Select AI provider authentication](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/use-select-ai-ai-providers.html).
+4. In the app's **Configure model access**, select `OCI$RESOURCE_PRINCIPAL` after the administrator has enabled it for this owner. Do not create OCI_USER_CRED for this path. For the optional manual profile alternative only, set `l_credential` to `'OCI$RESOURCE_PRINCIPAL'`. See [Select AI provider authentication](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/use-select-ai-ai-providers.html).
 
-## Common profile and connection check
+## Optional manual profile and diagnostic connection check
+
+Use this section only for an explicitly chosen headless workflow or diagnosis. Normal APEX-led, SQL-first and DEV-led installation uses Deployment setup instead. Manual profile creation/registering does not write the setup model-test receipt; complete that test and enablement through the app or the owner setup API.
 
 Edit [05_profile_worksheet.sql](../sql/schema/05_profile_worksheet.sql) locally: set `l_region`, `l_compartment` to the inference compartment OCID, `l_model` to the exact model name/identifier supported by Select AI for the chosen region and access mode, and `l_credential` to the chosen name. Run as KCV_LAB using **Run Script (F5)**. The script creates `KCV_GENAI` independently of lab tables; it does not silently replace an existing profile. It builds attributes with `JSON_OBJECT_T` and serializes to CLOB before the package call. No secret values belong in the profile script.
 

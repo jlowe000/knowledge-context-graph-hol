@@ -39,7 +39,7 @@ The current target has **121 COMPLETE project migrations**, checkpoint `2.1.0-ap
 
 ## Common readiness and handoff
 
-Both experiences finish at [deployment readiness](deployment-setup.md). Its six checks are Database objects, Graph network, Model profile, Model connection test, Conversation components and Public collection. All six READY does not enable learners automatically: **Enable learning** is explicit. A manual greeting does not record the setup API's model-test result.
+All three experiences finish through the runtime app's [Deployment setup](deployment-setup.md#apex-guided-setup) for credentials, profile and runtime readiness. Complete static schema installation, create a native APEX workspace-administrator installer and separate learners, import the app and establish owner binding first. No pre-created model credential/profile is needed just to import the app. Manual/headless owner SQL remains an explicit alternative, not a duplicate prerequisite. Its six checks are Database objects, Graph network, Model profile, Model connection test, Conversation components and Public collection. All six READY does not enable learners automatically: **Enable learning** is explicit. A manual greeting does not record the setup API's model-test result.
 
 Use one method per installation/loading step. Supporting Objects performs its own owner binding. SQL-first import requires the separate generated **03 binding** step; skipping it leaves the app gated even when the model and collection work.
 

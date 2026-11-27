@@ -20,6 +20,8 @@ After installing the development app through the [v2 deployment sequence](../ape
 
 The [C3 validation record](../references/my-contexts-c3-validation.json) separates current native, model and browser evidence from outstanding checks. The earlier [C2 validation record](../references/my-contexts-c2-validation.json) remains the historical record for the draft library, including account recreation and draft reopening; it does not certify the later personal journey.
 
+After schema migrations and app import, use the [owner-binding and app setup flow](deployment-owner-binding.md) for normal credential/profile configuration. SQLcl remains the DEV-led schema tool; model access is entered through Deployment setup using a separate native workspace-administrator installer account. Manual owner SQL is retained for explicitly chosen headless/diagnostic work.
+
 ## Requirements
 
 - Oracle Linux/Bash and Python 3.11+ (default python3.12).
@@ -52,6 +54,8 @@ Python `.py` files remain build/data utilities called from this Bash environment
 The `kcv/` package implements preparation and optional direct-database automation. `scripts/` contains developer/build utilities. `tests/` and `integration-test/` contain checks; mocks may be installed only in the isolated test schema. Learner database operations remain SQL/PLSQL.
 
 ## Build the curated release candidate
+
+Follow [Build the APEX application from source](apex-build-process.md) for the complete sequence: generate Supporting Objects, assemble the maintained application, perform native import/export in an isolated workspace, validate/package the ZIP, then build and test the consumer distribution. Native import/export is a build stage. Generated output can be outside `work/`; old staging folders are not source dependencies. The guide identifies the remaining manual orchestration and local editorial-provenance input.
 
 The v2.1.0 package offers APEX-led and SQL-first clean/upgrade paths. Follow the [packaging plan](apex-led-release-packaging-plan.md) for the native export prerequisites and four-route acceptance boundary. Supply the reviewed ZIP, its public receipt and the matching local canonical Supporting Objects directory explicitly:
 

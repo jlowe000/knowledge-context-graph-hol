@@ -18,19 +18,19 @@ If upload is rejected before execution, use the parts instead. After any migrati
 
 ## Installation sequence
 
+SQL-first controls schema and application installation; **Deployment setup** is the common credential/model/runtime configuration interface. The sequence below moves those settings after app import and binding. Earlier route evidence retains its recorded manual/mixed-transport scope; this documentation change is not a new end-to-end test. Keep [manual/headless alternatives](authentication.md) for a separately chosen need, not as duplicate work before the app flow.
+
 | Step | Account | Action and expected result |
 | --- | --- | --- |
 | 1. Platform | ADMIN | Run readiness/Java checks; retain VALID JAVAVM. Complete separately approved first enablement/restart only if required. |
 | 2. Owner | ADMIN | Use 01_create_user_worksheet, 02_grants and 04_enable_database_actions with the same KCV_SCHEMA/private password. Confirm the empty owner can open its Worksheet. |
-| 3. Schema | Owner | Run the chosen complete [combined clean script](../sql/install/00_install_schema.sql) or ordered **fresh** [parts](../sql/install/schema-parts/README.md), then [02_verify_schema.sql](../sql/install/02_verify_schema.sql). Expect the matching 121-step contract and valid source. Do not run raw tables/packages as well. |
-| 4. Network/profile | Owner | Run [02_network.sql](../sql/schema/02_network.sql) once. Follow [authentication](authentication.md) to create/register the owner-local profile. Reserve the required model test for step 10; an optional diagnostic greeting is a separate call. |
-| 5. Public collection | Owner | Use the package's [pinned GitHub loader](github-dataset-load.md). Expect a READY collection with manifest-matching content. No private contexts are imported. |
-| 6. Conversation components | Owner | Run [03_scenario_agents.sql](../sql/extensions/03_scenario_agents.sql) once on this fresh configured schema. Inspect existing names instead of deleting/recreating them. |
-| 7. Optional search | ADMIN, owner | Follow [local search setup](context-search.md#worksheet-setup) only if wanted. Without it the app must label keyword-only search; chat uses its separate profile. |
-| 8. Workspace/account | ADMIN | Use 06_cloud_apex_preflight, 07_create_apex_workspace and 08_create_apex_app_user. Confirm enabled owner mapping and individual app-only accounts. |
-| 9. New app | Owner | Choose [20_install_apex.sql](../sql/install/20_install_apex.sql) with Run Statement and binds, or [20_install_apex_script.sql](../sql/install/20_install_apex_script.sql) with explicit configuration and F5, as described below. Record the new app ID/alias privately. Do not use either allocator to upgrade an existing app. |
-| 10. Bind and enable | Owner | Run generated [03 binding](../sql/install/03_bind_deployment_owner.sql), then the [readiness/test/enable steps](deployment-setup.md#sql-first-final-readiness). The app remains gated until all required checks and explicit enablement succeed. |
-| 11. Learner verification | App user, then owner | Test Sample Contexts/My Contexts, a real answer and its evidence, then sign out/in and reopen it. Run the supplied scenario checks after readiness, not while setup is paused. |
+| 3. Schema | Owner | Run the chosen complete [clean script](../sql/install/00_install_schema.sql) or ordered **fresh** [parts](../sql/install/schema-parts/README.md), then [02_verify_schema.sql](../sql/install/02_verify_schema.sql). Expect the matching 121-step contract and valid source. Do not also run raw tables/packages. |
+| 4. Workspace and accounts | ADMIN | Create/enable the mapped workspace; create a native APEX workspace-administrator installer account such as KCV_INSTALLER and separate app-only learner accounts. See [account preparation](apex-led-administrator-preparation.md#3-create-the-workspace-and-accounts). SQL import does not require a separate Builder database login or REST setup. |
+| 5. New app | Owner | Use [20_install_apex.sql](../sql/install/20_install_apex.sql) with Run Statement/binds, or [20_install_apex_script.sql](../sql/install/20_install_apex_script.sql) with explicit configuration/F5. Record the new app ID/alias privately. A credential, profile and dataset are not import prerequisites. |
+| 6. Bind owner | Owner | Run generated [03 binding](../sql/install/03_bind_deployment_owner.sql) with the new app ID and mapped workspace. Expect READY_FOR_SETUP. |
+| 7. Shared Deployment setup | Installer APEX account | Sign into the runtime app and [prepare network, create/select credential, configure/test model, register components and load the collection](deployment-setup.md#apex-guided-setup). Enable learning when all six checks are READY. No manual profile/registration SQL is needed for this normal path. |
+| 8. Optional search | ADMIN, owner | Follow [local search setup](context-search.md#worksheet-setup) only if wanted. Without it the app labels keyword-only search; chat uses its separate profile. |
+| 9. Learner verification | App user, then owner | Test Sample Contexts/My Contexts, a real answer and its evidence, then sign out/in and reopen it. Run scenario checks only after readiness is enabled. |
 
 ADMIN filenames above are under sql/admin. The [configuration lab](../labs/configure-database/configure-database.md) and [app deployment lab](../labs/deploy-explorer/deploy-explorer.md) provide full links and expected outcomes.
 

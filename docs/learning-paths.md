@@ -24,7 +24,7 @@ Use a deployed sample and an authorised project-owner Worksheet to follow the [d
 | Deployment experience | Main activity | Preparation |
 | --- | --- | --- |
 | **APEX-led** | Import the app ZIP in App Builder; run Supporting Objects and guided setup | A facilitator prepares ADB, grants, workspace and model permissions |
-| **OCI / DBA-led** | Install through Database Actions SQL, then bind and enable learning | A technical facilitator uses ADMIN and owner Worksheet sessions |
+| **OCI / DBA-led** | Install schema/app through Database Actions SQL, bind, then configure model/runtime through Deployment setup | A technical facilitator uses ADMIN/owner Worksheet and a separate installer APEX account |
 | **DEV-led** | Change content, schema, ontology, tools, UI or packaging | Maintainers use separate dev tooling and tests |
 
 Select [clean installation or upgrade](installation-paths.md) within the chosen experience. Both release routes require a supported ADB, but neither requires every learner to have OCI access. A new schema on an approved existing database can be a clean installation; an existing project schema is an upgrade even on a temporary database.

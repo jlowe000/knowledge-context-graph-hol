@@ -24,7 +24,7 @@
       "scope": "Exact non-document runtime hashes are machine-checked. SQL-first execution and derivation evidence are reviewed attestations; external evidence files are not revalidated by this builder. Generation does not create deployment acceptance."
     }
   },
-  "source_commit": "db10f5a163213a07be431c0f6a84a7fb7373e3b3",
+  "source_commit": "ab8439c617583bc80c7e256bc1dd100aa60b2627",
   "source_dirty": false,
   "python_required_for_learner": false,
   "dataset_kind": "attributed_editorial_summary",
@@ -167,7 +167,7 @@
     },
     {
       "path": "docs/apex-led-administrator-preparation.md",
-      "sha256": "79b489813f083b8dcfd9888e975f2b1b872644e8c03002ed3c439caa68ab41ec"
+      "sha256": "dea48396b822b690edce396689de431f68b083c73a7448ac948f10444ffc48f6"
     },
     {
       "path": "docs/apex-led-installation.md",
@@ -183,7 +183,7 @@
     },
     {
       "path": "docs/authentication.md",
-      "sha256": "5a3304b5b7d8a3987588fc0f30aaa0cca2ced384a0339f00b6aba0fbed3f2191"
+      "sha256": "a1d47156c20b0acafef01ff991166c11daf26c99831d4267e4b10b92c606e0af"
     },
     {
       "path": "docs/cleanup.md",
@@ -203,23 +203,23 @@
     },
     {
       "path": "docs/deployment-setup.md",
-      "sha256": "1f95c2c41f83727e1201bcddd84b9f1804bdd05c5efb938ecc12bc29628ff034"
+      "sha256": "89b91c7be87568a46286f8c6bd1cc8be96573b815435ceed4f5f25894f7a9d8a"
     },
     {
       "path": "docs/fresh-serverless-deployment.md",
-      "sha256": "b8f3c27fcad374c8d29d15de96781a583588fecaee6db607c9d1379f5ed5f79e"
+      "sha256": "c1e2859be9b905a10755012faf741a101f4a5603bfd046b761bd29aa6ba6d8ff"
     },
     {
       "path": "docs/github-dataset-load.md",
-      "sha256": "7ad80d854fbead0d83757af26484f06bf288e849635ce0d157a33616f16e447e"
+      "sha256": "eb2fc12be84f578b7d17e7f2a571c6b3f3d08a6cc57f315de23247cf7751e8ce"
     },
     {
       "path": "docs/installation-paths.md",
-      "sha256": "e8bd56359b5ecf9b96e5d00c93d00074ac3b35d0c34f004a7588be902e625003"
+      "sha256": "14ce94a48f199a0b3a942fc693656a85210f6369f9b878becf839e1b360c3c43"
     },
     {
       "path": "docs/learning-paths.md",
-      "sha256": "ef19f529ea5170d644671e15a7c448eeaacd12afc833e5d63364c797bbfa93c9"
+      "sha256": "43ce68da75cd2721f65447233f66a2a05bb0a64178f4e1c9172b4047b7512a9a"
     },
     {
       "path": "docs/livelabs-authoring-alignment.md",
@@ -227,7 +227,7 @@
     },
     {
       "path": "docs/migrate-to-v2.1.md",
-      "sha256": "c4daab1afa19dedc18f4ef4d42c6dc4c27659041ad20be2048f6470379f5fd5c"
+      "sha256": "cadd2e292ba55d340a2c5224e686bc3176fef5a382bacf257f4fe34afba2441e"
     },
     {
       "path": "docs/migrate-to-v2.md",
@@ -255,7 +255,7 @@
     },
     {
       "path": "docs/sql-catalogue.md",
-      "sha256": "b1207f2aeec23deee5b3a00861f04c5b4422e54db0db29a3a922fb1474f70723"
+      "sha256": "38e9298895ef6744f050b069b845e228c6212ce08b663e082514400e36b38c40"
     },
     {
       "path": "docs/ui-walkthrough.md",
@@ -307,11 +307,11 @@
     },
     {
       "path": "labs/configure-database/configure-database.md",
-      "sha256": "9f0df5c3d39b1732079ce3d00fd083e85af2b5d55c68e8d4450670d3a092ad98"
+      "sha256": "382c14e778f202846461626c007798e00e6a83e229e5e22390fdd221be21ab26"
     },
     {
       "path": "labs/deploy-explorer/deploy-explorer.md",
-      "sha256": "b1a455deef10947c42ddacaaae1c5980bedd599debf369cd4fd3d115992d1ecd"
+      "sha256": "8b5003bf1de58b8bda3940965d64bac0b2c86a3b28509f017572b22347dc2ae4"
     },
     {
       "path": "labs/explore-evidence/explore-evidence.md",
@@ -327,11 +327,11 @@
     },
     {
       "path": "labs/introduction/introduction.md",
-      "sha256": "d254b76ea2c651ae5a24a7a03d2f557533256c41556985dda201b880571c02b2"
+      "sha256": "794ac9b06d7a323c947a3b97aff37fe0d02f95dd017ac11447c1cc72bbbbf3a7"
     },
     {
       "path": "labs/load-knowledge/load-knowledge.md",
-      "sha256": "bbd6feb1fc8a0f79f31a5fc85059d8415401b5d28efc8066d8d4c152d683a83c"
+      "sha256": "c12d70c467b195795b4f055b004fac28aef79e28c6da7553f9284a54cf3df33d"
     },
     {
       "path": "labs/my-contexts/my-contexts.md",
@@ -371,7 +371,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "91bb1de517be43cd7084160862cbab4dc4478b03db8bb20c9bcfafae19ea88fc"
+      "sha256": "8286862585c0f53c56d141170c8fab80ae75fbf8c9674269b3961a8c42614e43"
     },
     {
       "path": "references/content-ingestion-checks.json",
@@ -415,7 +415,7 @@
     },
     {
       "path": "release-provenance.json",
-      "sha256": "abe3dd4c7cdb08fc26416ae071d44b6f04abb849e2e7d69e19766f302fc8039a"
+      "sha256": "a54e80a5cd51915a303260454616acf2b31db762f29e095c07bd8d60678f3d89"
     },
     {
       "path": "review-examples/examples.json",

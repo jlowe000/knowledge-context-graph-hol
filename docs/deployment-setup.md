@@ -1,6 +1,6 @@
 # Complete deployment readiness
 
-Both v2.1.0 experiences use the same backend/readiness contract. **This package's four APEX-led and SQL-first prepared-environment routes passed within their recorded scopes**; see [validation](scenario-validation.md). Installing objects, importing the app and enabling learners are separate steps.
+All three deployment experiences use the same backend/readiness contract and the runtime app's Deployment setup for normal credential/model configuration. **This package's four APEX-led and SQL-first prepared-environment routes passed within their recorded scopes**; see [validation](scenario-validation.md). Installing objects, importing the app and enabling learners are separate steps.
 
 ## Required checks
 
@@ -17,7 +17,11 @@ Six READY rows can still mean learning is paused. **Enable learning** is deliber
 
 ## APEX guided setup
 
-Sign into the running app as an authorised **APEX workspace administrator**. Learners and developer-only accounts cannot invoke setup. Each action checks the owner/app/workspace binding.
+This is the **common credential, model and runtime setup path for APEX-led, SQL-first and DEV-led installations**. The installation method still differs: Supporting Objects for APEX-led, Worksheet scripts for SQL-first, or SQLcl/Liquibase and native app import for dev. Import the app before entering model credentials. APEX-led installation binds the owner itself; SQL-first and DEV-led imports require the [generated owner-binding step](#sql-first-owner-binding) first.
+
+Create or verify the separate native APEX workspace-administrator installer account using [account preparation](apex-led-administrator-preparation.md#3-create-the-workspace-and-accounts). Sign into the **installed runtime application** using that workspace account, such as KCV_INSTALLER. This is not ADMIN's database login, a schema-owner login or the Builder sign-in page. The username alone grants no privileges. Learners and developer-only accounts cannot invoke setup. Each action checks the owner/app/workspace binding.
+
+For a new owner, use the actions below in order. The profile precedes model testing and registration; the RDF network precedes collection loading. Existing ready resources on upgrade are retained. Close a completed success/error banner if it covers the account menu before signing out.
 
 | Action | When to use it | Expected outcome |
 | --- | --- | --- |
@@ -51,7 +55,7 @@ Expected: `KCV_DEPLOYMENT_BINDING=READY_FOR_SETUP`. It verifies the contract/nat
 
 ## SQL-first final readiness
 
-Use **Run Statement** as the owner. These are alternatives to installer-UI calls, not extra requests after a successful UI test.
+**Optional headless/diagnostic alternative.** The normal SQL-first and DEV-led path finishes through the [APEX guided setup](#apex-guided-setup) above. Retain these owner API examples for a deliberately chosen non-UI operation; do not run them as extra requests after a successful app test. Use **Run Statement** as the actual owner in Worksheet, or the documented true-owner SQLcl session.
 
 ```sql
 SELECT KCV_DEPLOY.STATUS_JSON FROM dual;

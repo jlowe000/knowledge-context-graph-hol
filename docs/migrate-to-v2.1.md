@@ -51,25 +51,17 @@ If execution is uncertain, check the existing app, activity and status using [re
 
 This SQL app-definition route does not run a second Supporting Objects installation. Next run generated [03_bind_deployment_owner.sql](../sql/install/03_bind_deployment_owner.sql) as the owner with the actual app ID/workspace, using Run Statement for its complete block. Expect READY_FOR_SETUP or the exact-existing-binding ALREADY_VERIFIED result. See [binding and readiness](deployment-setup.md#sql-first-owner-binding).
 
-## 4. Complete only missing readiness
+## 4. Complete only missing readiness in the app
 
-Preserve the existing network, profile, credential, collection and registrations. Inspect:
+Preserve the existing network, credential/profile, collection and conversation registrations. Verify or create the separate native APEX workspace-administrator installer account using [account preparation](apex-led-administrator-preparation.md#3-create-the-workspace-and-accounts), without changing learner accounts.
 
-```sql
-SELECT KCV_DEPLOY.STATUS_JSON FROM dual;
-```
+After owner binding, sign into the **installed runtime app** as that installer and open [Deployment setup](deployment-setup.md#apex-guided-setup). Refresh readiness first. Retain a suitable existing credential; do not recreate it. Leave the existing model configuration and collection untouched when already correct. If the model connection test is not READY, explicitly use **Test model connection once**. A historical greeting from the older package is not this readiness receipt.
 
-Use the shared [final readiness steps](deployment-setup.md#sql-first-final-readiness). If the current model check is not READY, explicitly call TEST_MODEL once. All six READY then requires ENABLE_LEARNING. A manual greeting from the old package is not the new receipt. Do not rerun model tests, save profiles or reload data just because the version changed.
+Use **Prepare conversation components** only when the required registration check is missing; review conflicting existing names rather than deleting them. Once all six checks are READY, choose **Enable learning** deliberately. Upgrading alone is not a reason to save profiles, repeat model calls or reload the collection.
 
-If conversation components are missing, review them before using the bounded registration API as the owner:
+The [owner SQL API](deployment-setup.md#sql-first-final-readiness) remains an optional headless/diagnostic alternative. Do not combine it with duplicate app actions. Optional local embedding search remains separate; without it the app labels keyword matching. Do not install/delete that model merely to force a test outcome.
 
-```sql
-BEGIN
-  KCV_DEPLOY.REGISTER_RUNTIME(LOWER(RAWTOHEX(SYS_GUID())));
-END;
-```
-
-That is an explicit setup action and pauses learning. Refresh status and enable deliberately after all checks pass. Optional local search setup remains separate; without embeddings the app labels keyword matching. Do not install/delete the optional model merely to force a test outcome.
+The earlier SQL-first upgrade acceptance used its recorded owner-Worksheet readiness actions. The common-UI instructions reuse the existing setup contract but are not a newly observed end-to-end route result.
 
 ## 5. Verify preservation and reopen access
 

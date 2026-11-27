@@ -11,21 +11,20 @@ Use Run Statement for complete bind-bearing blocks, excluding the trailing slash
 | Platform | ADMIN | sql/admin/00_readiness.sql and 00_java_status.sql; only if needed/approved, 01_enable_java.sql and OCI restart |
 | Password owner | ADMIN | sql/admin/01_create_user_worksheet.sql, 02_grants.sql, 04_enable_database_actions.sql |
 | Static schema | Owner | [Fresh parts](../sql/install/schema-parts/README.md), then [02_verify_schema.sql](../sql/install/02_verify_schema.sql) |
-| RDF network | Owner | [02_network.sql](../sql/schema/02_network.sql), once |
-| Credential/profile | Owner; ADMIN/IAM for resource principal | [Authentication](authentication.md), sql/schema/05_profile_worksheet.sql, 06_register_profile.sql |
-| Public dataset | Owner | [10_load_github.sql](../sql/install/10_load_github.sql) and read-only inspection |
-| Registrations | Owner | [03_scenario_agents.sql](../sql/extensions/03_scenario_agents.sql) for a fresh configured schema |
-| Optional embeddings | ADMIN, owner | [Context-search setup](context-search.md#worksheet-setup) |
-| Workspace/account | ADMIN | sql/admin/06_cloud_apex_preflight.sql, 07_create_apex_workspace.sql, 08_create_apex_app_user.sql |
-| New app | Owner | [20_install_apex.sql](../sql/install/20_install_apex.sql), complete outer block with Run Statement |
-| Binding/readiness | Owner | [03_bind_deployment_owner.sql](../sql/install/03_bind_deployment_owner.sql), then [status, TEST_MODEL and ENABLE_LEARNING](deployment-setup.md#sql-first-final-readiness) |
+| Workspace/accounts | ADMIN | sql/admin/06_cloud_apex_preflight.sql and 07_create_apex_workspace.sql; native installer workspace-admin account through APEX Administration Services; separate learners through 08_create_apex_app_user.sql |
+| New app | Owner | [20_install_apex.sql](../sql/install/20_install_apex.sql), complete outer block with Run Statement, or the documented configured F5 wrapper |
+| Binding | Owner | [03_bind_deployment_owner.sql](../sql/install/03_bind_deployment_owner.sql) after import |
+| Credential/model/runtime setup | Installer APEX account | [Deployment setup](deployment-setup.md#apex-guided-setup): network, credential, profile/test, registrations, public collection, explicit enablement |
+| Optional embeddings | ADMIN, owner | [Context-search setup](context-search.md#worksheet-setup), separate from OCI chat profile |
 | Verification | App user, owner | Learner evidence/persistence and native scenario checks after readiness is enabled |
+
+Manual credential creation, 05_profile_worksheet.sql, 06_register_profile.sql, 02_network.sql, 10_load_github.sql and standalone agent registration remain available for separately chosen [headless/diagnostic alternatives](authentication.md). They are not additional steps in the normal app-guided setup sequence. Retain existing profile/data/registrations on upgrade.
 
 A manual sql/queries/00_test_genai.sql greeting is an optional diagnostic model call, not the v2.1 setup-test receipt. Avoid duplicating calls when the required setup test already passed.
 
 ## SQL-first upgrade
 
-Follow [v2.0.0 to v2.1.0](migrate-to-v2.1.md): verify the published baseline, apply the upgrade parts and full verifier, replace the **same app ID** with [20_upgrade_apex.sql](../sql/install/20_upgrade_apex.sql), run 03 binding and complete only missing readiness. Preserve credentials, collection and personal history. Use bounded REGISTER_RUNTIME only when required components are missing; do not rerun fresh registrations blindly.
+Follow [v2.0.0 to v2.1.0](migrate-to-v2.1.md): verify the published baseline, apply the upgrade parts and full verifier, replace the **same app ID** with [20_upgrade_apex.sql](../sql/install/20_upgrade_apex.sql), run 03 binding and complete only missing readiness in the runtime app as the workspace-administrator installer. Preserve credentials, collection and personal history. Use bounded REGISTER_RUNTIME only when required components are missing; do not rerun fresh registrations blindly.
 
 The v1 completion/adoption helpers are not part of this v2.1 package. Use the [published v2.0.0 bridge](migrate-to-v2.md), with that package's matching scripts, before upgrading again. Unknown or partial checkpoints need maintainer review.
 

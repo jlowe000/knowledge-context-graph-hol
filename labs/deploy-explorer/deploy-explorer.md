@@ -1,63 +1,63 @@
-# Deploy Knowledge Context Explorer
+# Deploy Knowledge Context Explorer through SQL Worksheet
 
 ## Introduction
 
-For complete SQL files, use Worksheet **Open File / upload SQL** to load the intended file into its editor, then run it in the mode stated below. Confirm the file is complete. Do not paste a filename as SQL or split a large block by hand; browser upload/execution remains part of the candidate rehearsal.
+This is the **SQL-first clean** app-installation lab for the v2.1.0 distribution. App Builder users follow [APEX-led installation](../../docs/apex-led-installation.md). Existing apps use [same-ID upgrade](../../docs/migrate-to-v2.1.md). Do not combine schema transports.
 
-Install the prepared APEX application into the configured owner schema. This is the clean route; an existing app must use the [same-ID migration](../../docs/migrate-to-v2.md). APEXlang is used by maintainers; learners run supplied SQL.
-
-Estimated Lab Time: 15–25 minutes plus import time; planning estimate.
+Estimated Lab Time: 15–25 minutes plus import/model waiting time; planning estimate.
 
 ### Objectives
 
-- Create and enable an APEX workspace mapped to the chosen owner.
-- Create an individual app-only login without exposing its password.
-- Install a new application and verify both sample and personal entry points.
+- Create/verify a mapped workspace and individual app-only accounts.
+- Import a new app, establish the owner binding and complete readiness.
+- Verify a real question, recorded evidence and saved-history reopening.
 
 ### Prerequisites
 
-Schema R7 verification, dataset load, grounded-team registration and model greeting have succeeded. Have ADMIN and owner Worksheet access plus the complete release installer. Local search requires its [separate setup](../../docs/context-search.md#worksheet-setup); absence of that model should show keyword fallback.
+Current schema verification, owner-private network, configured profile, public collection and conversation registration. Use the matching curated package and actual password-enabled owner Worksheet. This route's [package acceptance](../../db/verification/release-v2.1-paths-validation.json) passed within its recorded mixed Worksheet/SQLcl scope; the schema/app installation and binding ran in Worksheet.
 
-## Task 1: Prepare the workspace
+## Task 1: Create and enable the workspace
 
-**Account: ADMIN.** Use the same `KCV_SCHEMA` throughout. `KCV_WORKSPACE` identifies the APEX workspace; it is not another database user. Defaults are KCV_LAB and KCV_KNOWLEDGE.
+As ADMIN, run the complete bind blocks in [06_cloud_apex_preflight.sql](../../sql/admin/06_cloud_apex_preflight.sql) and [07_create_apex_workspace.sql](../../sql/admin/07_create_apex_workspace.sql), excluding the slash and using **Run Statement**. Supply the intended KCV_SCHEMA/KCV_WORKSPACE. Confirm correct mapping and explicit enablement; stop on a mismatch. Do not repoint another workspace.
 
-Run the complete block in [06_cloud_apex_preflight.sql](../../sql/admin/06_cloud_apex_preflight.sql) with Run Statement, excluding the slash and supplying the target binds. Use a compatible APEX 26.1+ service; the app has been tested on 26.1.6. Do not edit an export version to force compatibility.
+## Task 2: Create individual app-only accounts
 
-Run [07_create_apex_workspace.sql](../../sql/admin/07_create_apex_workspace.sql) with Run Statement, excluding its slash. Supply `KCV_SCHEMA` and `KCV_WORKSPACE`. It creates the workspace if absent, verifies the mapping, explicitly enables it and commits. A mismatched mapping must stop; do not repoint an unrelated workspace.
+As ADMIN, run [08_create_apex_app_user.sql](../../sql/admin/08_create_apex_app_user.sql) with Run Statement. Supply the same schema/workspace, a chosen KCV_APP_USER and private KCV_APEX_PASSWORD. Use distinct accounts for separate libraries. These APEX accounts do not need database logins.
 
-**Expected outcome:** the enabled workspace maps to the intended owner. A workspace API call alone is not proof that it is active or persisted.
+The owner can perform all final readiness via SQL. If an installer will instead use the setup UI, arrange its separate native APEX workspace-administrator account using [administrator preparation](../../docs/apex-led-administrator-preparation.md#3-create-the-workspace-and-accounts). Do not give those rights to ordinary learners.
 
-## Task 2: Create an app account
+## Task 3: Import a new application
 
-As ADMIN, run [08_create_apex_app_user.sql](../../sql/admin/08_create_apex_app_user.sql) with Run Statement, excluding its slash. Supply `KCV_SCHEMA`, `KCV_WORKSPACE`, `KCV_APP_USER` and a private `KCV_APEX_PASSWORD`. The default app username is KCV_USER; use distinct accounts for separate learners. Keep passwords in the browser bind prompt.
+Sign into the actual owner's Worksheet and confirm:
 
-**Expected outcome:** an app-only account exists in this workspace. It cannot use App Builder or SQL Workshop. This password is distinct from the owner database password. Existing accounts are not reset. A shared app login shares its My Contexts library.
-
-## Task 3: Install a new app
-
-Sign into the owner's Worksheet and confirm `SELECT USER FROM dual;`. Open [20_install_apex.sql](../../sql/install/20_install_apex.sql), select the complete outer `DECLARE` through the final `END;`, excluding the final slash, and choose **Run Statement (Ctrl+Enter)**. Enter `KCV_SCHEMA`, `KCV_WORKSPACE` and `KCV_APP_ALIAS` consistently; defaults are KCV_LAB, KCV_KNOWLEDGE and KCV-EXPLORER. F5 does not open these bind prompts. A "variable not declared" error requires the complete-block Run Statement selection, not a change to the SQL or a new workspace.
-
-Wait for completion rather than submitting twice. The installer checks schema readiness and allocates a new application ID. Record the reported ID and launch information privately. A duplicate alias or wrong-schema error needs diagnosis, not a forced overwrite.
-
-**Expected outcome:** a new app is installed against this verified schema, with nine pages and seven packaged assets. No separate frontend build or JavaScript upload is required. If the file is absent, obtain the complete release package; do not install development tools to manufacture it.
-
-## Task 4: Sign in and choose an experience
-
-Use the installer launch information or the standard pattern below, replacing every placeholder with your own values. Do not publish an environment URL in a screenshot.
-
-```text
-https://YOUR-DATABASE-HOST/ords/r/YOUR-WORKSPACE/YOUR-APP-ALIAS/home
+```sql
+SELECT USER FROM dual;
 ```
 
-Sign into the application with the app account from Task 2, not ADMIN or the database owner. Open **Sample Contexts** to explore Alex/Sam/Casey, or **My Contexts** to create owned work. Verify menu navigation, then ask a sample question and inspect its evidence. Create a synthetic draft, review/apply it and reopen it after signing in again.
+Open [20_install_apex.sql](../../sql/install/20_install_apex.sql). Select its complete outer DECLARE through final END, excluding the slash, and use **Run Statement**. Enter consistent KCV_SCHEMA, KCV_WORKSPACE and KCV_APP_ALIAS. Record the new app ID/launch link privately. F5 does not open these installer binds. Do not edit the SQL or create another workspace to bypass an undeclared-bind error.
 
-**Expected outcome:** the app authenticates, both entry points work, and a real answer has recorded evidence. An import alone does not validate inference or ownership. Use [validation status](../../docs/scenario-validation.md) to record actual results and remaining checks.
+Expected: a new app against the verified schema. The SQL export is definition-only, so no second Supporting Objects backend installation is needed.
+
+## Task 4: Bind and enable learning
+
+Run generated [03_bind_deployment_owner.sql](../../sql/install/03_bind_deployment_owner.sql) as the owner with the imported KCV_APPLICATION_ID and mapped KCV_WORKSPACE, using Run Statement on its complete block. Expect READY_FOR_SETUP, or ALREADY_VERIFIED for the exact existing binding.
+
+Follow [SQL-first final readiness](../../docs/deployment-setup.md#sql-first-final-readiness): read STATUS_JSON, complete only missing services, TEST_MODEL once when required, then ENABLE_LEARNING when all six checks are READY. A manual greeting does not satisfy the new test receipt; import alone does not open the learner pages.
+
+Expected: all required checks READY and learning explicitly enabled. Optional local embeddings can be absent with the keyword-only banner.
+
+## Task 5: Verify the learner experience
+
+Sign in as an app-only learner. Open Sample Contexts and My Contexts and check menu navigation. Copy a sample or save a synthetic personal draft, review/apply it, ask one learning question and inspect Sources and Answer lineage. Sign out/in and reopen the same answer without asking again.
+
+As the owner, run the [native scenario check](../../integration-test/verify_scenario_native.sql) only after readiness is enabled: complete block, Run Statement, actual KCV_SCHEMA. Its no-inference graph/refinement checks are separate from the real answer. Verify another app-only account cannot see private work or open setup; report unperformed checks.
+
+Record the exact package/result in [validation](../../docs/scenario-validation.md). If checks fail, keep learners out and use [recovery](../../docs/deployment-recovery.md). A successful import alone does not establish inference or ownership.
 
 ## Learn More
 
-- [My Contexts lab](../my-contexts/my-contexts.md)
-- [Sample evidence lab](../explore-evidence/explore-evidence.md)
+- [My Contexts](../my-contexts/my-contexts.md)
+- [Sample evidence](../explore-evidence/explore-evidence.md)
 - [APEX deployment reference](../../apex/README.md)
 
 ## Acknowledgements

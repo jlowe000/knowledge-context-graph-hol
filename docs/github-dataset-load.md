@@ -6,7 +6,7 @@ The package contains attributed editorial summaries and public reference metadat
 
 ## Before the first load
 
-Follow the [database configuration lab](../labs/configure-database/configure-database.md): apply the owner grants, install the ordered v2 schema parts and verify them, then create the owner-private RDF network. The complete schema already includes KCV_DATASET and its run log. Do not replay raw table/tool/importer DDL. Existing installations first use [migration](migrate-to-v2.md); loading another public collection is optional and independent of an app upgrade.
+Follow the [database configuration lab](../labs/configure-database/configure-database.md): apply the owner grants, install the ordered v2 schema parts and verify them, then create the owner-private RDF network. The complete schema already includes KCV_DATASET and its run log. Do not replay raw table/tool/importer DDL. Existing installations first select their [version-specific upgrade](installation-paths.md); loading another public collection is optional and independent of an app upgrade.
 
 The manifest and every referenced JSON part must already exist at the selected immutable public commit. Normally use the published release commit; a maintainer may specify an earlier published commit when its dataset bytes and manifest hash are unchanged. Local generated files are not available to ADB through GitHub. Generating this package does not publish it; an older remote commit without `data/load/` cannot load the new content.
 

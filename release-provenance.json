@@ -1,55 +1,70 @@
 {
   "format_version": 1,
-  "product_version": "2.0.0",
-  "release_label": "2.0.0",
+  "product_version": "2.1.0",
+  "release_label": "2.1.0",
   "distribution_status": "prepared_for_publication",
   "publication": {
     "remote_state": "not_checked",
     "push_performed": false,
     "tag_created": false,
-    "acceptance_record_sha256": "6072beb44243689bcd911a87aa38986fadb8c78024f36c6b0e36168e60b6ca6c",
-    "note": "Local packaging only. Historical acceptance retains its recorded scope; compare runtime artifacts with the accepted package before publishing.",
+    "acceptance_record_sha256": "0c0c72c0ddfca193e99510dd3a1502ae8b387177269ef9ca34cecf76349bc4d7",
+    "note": "Local packaging only; exact accepted runtime comparison is required before publication.",
     "accepted_runtime_comparison": {
-      "accepted_release_commit": "0edb699a2f615c03292474ec13e9bce882c37164",
-      "accepted_manifest_sha256": "01e682ad789d0cca65841020b00a4817705f42977f87a17b4f082b2af5ab4c84",
       "comparison": "passed",
-      "unchanged_non_document_files": 245,
-      "documentation_changes": [
-        "README.md",
-        "apex/README.md",
-        "docs/fresh-serverless-deployment.md",
-        "docs/installation-paths.md",
-        "docs/learning-paths.md",
-        "docs/migrate-to-v2.md",
-        "docs/scenario-validation.md"
+      "accepted_runtime_files": 293,
+      "routes": [
+        "apex_led_clean",
+        "apex_led_upgrade",
+        "sql_first_clean",
+        "sql_first_upgrade"
       ],
-      "exact_header_only_changes": [
-        "sql/install/10_load_github.sql"
-      ],
-      "regenerated_metadata": [
-        "generated/build-report.json",
-        "release-manifest.json",
-        "release-provenance.json"
-      ],
-      "scope": "All other payload files match accepted SHA-256 values. Historical acceptance records remain unchanged; no new database execution."
+      "acceptance_record": "db/verification/release-v2.1-paths-validation.json",
+      "sql_first_transport_evidence": "reviewed_attestation",
+      "scope": "Exact non-document runtime hashes are machine-checked. SQL-first execution and derivation evidence are reviewed attestations; external evidence files are not revalidated by this builder. Generation does not create deployment acceptance."
     }
   },
   "source": {
-    "commit": "84d93fdad0b42d8e21affa9aa2b96312f15a0dfc",
+    "commit": "db10f5a163213a07be431c0f6a84a7fb7373e3b3",
     "branch": "dev",
     "dirty": false,
     "changed_paths": [],
-    "eligible_source_tree_sha256": "4073c79f13628a385b970b01a0dd1832663f7b57c35daf6d2358472b1c7b6cbb",
+    "eligible_source_tree_sha256": "e8c1ee0a1962f71a3b3456e1ad22fb7963593b2dd5b41ec03594a3296aa76486",
     "ignored_private_work_included": false
   },
-  "application_source_sha256": "e37625ee1b710b444dfd385ff80d3a61f8e71ada4004a19dd2161260eec7718c",
-  "application_export_sha256": "ccbf315b6dc2630045f87d2db80d3a17318b62f9099ee49e596eb709f8b45acd",
-  "schema_manifest_sha256": "ac794a3e50d5898cd17ebb3e7c6cf65d13bf3bcf61e513f4ee7ab621d9bb6068",
-  "schema_ready_checkpoint": "2.0.0-c3-r7-ready",
+  "application_source_sha256": "e9aee1a07900b662d13cc5fc823801b32996db3d701590bc31bcd28fe9d50122",
+  "application_export_sha256": "819c8ac55a732b3c7236f4e30c2cfde9e849b2c1bb766aaae67a76e3991eb576",
+  "schema_manifest_sha256": "6577188e9ea090d8437982de153ddfca4d406259aaf05c36f3a1ee17ae7202bd",
+  "schema_ready_checkpoint": "2.1.0-apl-r4-ready",
   "dataset_manifest_sha256": "dae8efdcd9e99874c8dfc3d9a3ccaf4a861f76b3b5442f71f075a6d9b64ef8ad",
+  "apexlang_package": {
+    "product_version": "2.1.0",
+    "archive_sha256": "db2c90feb59ac5712441fa2336a35a0f1a350495dc92be1701306502b56371cc",
+    "application_source_sha256": "e9aee1a07900b662d13cc5fc823801b32996db3d701590bc31bcd28fe9d50122",
+    "schema_manifest_sha256": "6577188e9ea090d8437982de153ddfca4d406259aaf05c36f3a1ee17ae7202bd",
+    "canonical_supporting_manifest_sha256": "b3031ce0f1e9373cf950dc78c48ba7a64896954a9d7a84ee086c09a31bd14091",
+    "receipt_sha256": "ff189c55c944fb8f87ec8279d38d4cf5d40861f05cebd894abc45e861257143a",
+    "canonical_script_roundtrip_checked": true,
+    "maintained_assets_checked": true,
+    "asset_count": 16,
+    "entry_count": 46,
+    "mmd_version": "26.1.0+3102",
+    "application_declared_version": "2.1.0",
+    "native_default_zip_budget": {
+      "max_entry_uncompressed_bytes": 10485760,
+      "max_total_uncompressed_bytes": 31457280,
+      "max_entry_count": 1024,
+      "actual_largest_entry_bytes": 5538135,
+      "actual_total_uncompressed_bytes": 8188455,
+      "actual_entry_count": 46
+    },
+    "source_application_id": 146,
+    "source_id_is_target_binding": false,
+    "archive_bytes_preserved": true,
+    "package_generation_is_deployment_acceptance": false
+  },
   "acceptance": {
     "export_receipt": "apex/export-validation.json",
-    "release_paths_record": "db/verification/release-v2-paths-validation.json",
+    "release_paths_record": "db/verification/release-v2.1-paths-validation.json",
     "source_has_uncommitted_changes": false,
     "package_generation_is_deployment_acceptance": false,
     "worksheet_execution": "not established by package generation",

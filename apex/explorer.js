@@ -40,6 +40,21 @@ document.addEventListener('DOMContentLoaded', () => {
   if(!Array.isArray(p.basis_locators)||p.basis_locators.length<2)return [];
   const links=new Map();p.basis_locators.forEach(b=>{if(!b||typeof b!=='object')return;const url=publicUrl(b.locator_url);if(url){const label=locatorLabel(b);links.set(url+'\n'+label,{url,label});}});return [...links.values()];
  }
+ function revisionChangeSummary(previous,data){
+  if(!previous||!previous.state||!data||!data.state||previous.state.scenario_session!==data.state.scenario_session||previous.state.context_revision===data.state.context_revision)return '';
+  const topicKeys=snapshot=>{const topics=snapshot.state.context&&snapshot.state.context.topic_preferences;return topics&&typeof topics==='object'&&!Array.isArray(topics)?new Set(Object.keys(topics)):null;};
+  const sourceIds=snapshot=>{const paths=snapshot.packet&&snapshot.packet.graph_paths;if(!Array.isArray(paths))return null;const ids=paths.map(p=>p&&p.content_item);return ids.every(id=>typeof id==='string'&&id.length)?new Set(ids):null;};
+  const difference=(before,after)=>[...before].filter(x=>!after.has(x)).sort();
+  const changes=(before,after)=>{const removed=difference(before,after),added=difference(after,before);return [removed.length?`removed ${removed.join(', ')}`:null,added.length?`added ${added.join(', ')}`:null].filter(Boolean).join('; ');};
+  const beforeTopics=topicKeys(previous),afterTopics=topicKeys(data),focus=beforeTopics&&afterTopics?changes(beforeTopics,afterTopics):'';
+  const heading=focus?`Learning focus revised: ${focus}.`:'Objective/context revised.';
+  const before=sourceIds(previous),after=sourceIds(data);
+  if(!before||!after)return `${heading} A source comparison is unavailable; inspect Evidence for the current recorded connections.`;
+  const sources=changes(before,after);
+  if(sources)return `${heading} Returned sources changed: ${sources}. Inspect Evidence for their recorded connections.`;
+  if(!after.size)return `${heading} No sources were returned in either revision; inspect Evidence for the recorded retrieval.`;
+  return `${heading} The returned sources are unchanged; inspect Evidence for their recorded connections.`;
+ }
  function packetOf(trace){const evidence=new Map(),paths=new Map();(trace.tool_calls||[]).filter(c=>c.tool==='EVIDENCE'&&c.status==='SUCCEEDED').forEach(c=>{(c.output.evidence||[]).forEach(p=>evidence.set(p.id,p));(c.output.graph_paths||[]).forEach(p=>paths.set(JSON.stringify(p),p));});return {evidence:[...evidence.values()],graph_paths:[...paths.values()]};}
  function eventLabel(c){return c.origin==='APPLICATION'?(c.tool==='EVIDENCE'?'Application evidence retrieval':`Application ${c.tool} step`):`${c.tool} ${c.origin==='AGENT'?'agent tool':'recorded tool'}`;}
  function traceProcess(t,turn){
@@ -113,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('kcv-context').value=context.id;$('kcv-context-summary').replaceChildren(el('strong',[context.person,context.role].filter(Boolean).join(' · ')||'Your saved context'),el('p',context.objective||context.question),el('p',`Objective: ${context.objective_clarity||'unknown'} · ${context.learning_purpose||'Purpose not yet set'}`,'kcv-muted'));
   $('kcv-identifiers').textContent=JSON.stringify({context_revision:state.context_revision,conversation_id:state.conversation_id,base_graph:state.base_graph,overlay_graph:state.overlay_graph},null,2);
   vocabulary=data.topics||[];activeTopics=Object.keys(context.topic_preferences||{});refinementFields();
-  if(previous&&previous.state.scenario_session===session&&previous.state.context_revision!==state.context_revision){const before=new Set((previous.packet.graph_paths||[]).map(p=>p.content_item)),after=new Set((packet.graph_paths||[]).map(p=>p.content_item)),out=[...before].filter(x=>!after.has(x)),added=[...after].filter(x=>!before.has(x));$('kcv-change-summary').textContent=out.length||added.length?`Context revised. No longer selected: ${out.join(', ')||'none'}. Now selected: ${added.join(', ')||'none'}. Bounded selection; source knowledge is unchanged.`:'Objective/context revised. Topic-based source selection is unchanged.';}
+  if(previous&&previous.state.scenario_session===session&&previous.state.context_revision!==state.context_revision)$('kcv-change-summary').textContent=revisionChangeSummary(previous,data);
   else if(!previous||previous.state.scenario_session!==session)$('kcv-change-summary').textContent='';
   renderTurns();renderObservations();permissions();
   sourceCards($('kcv-sources'),packet,data.sources);sourceGraph($('kcv-graph'),packet,context,data.sources,$('kcv-current-detail'),$('kcv-sources'));

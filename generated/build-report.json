@@ -21,7 +21,7 @@
   "full_source_text_location": "Not bundled; summaries in data/release-summaries.json",
   "independent_of_original_collection": true,
   "content_kind": "attributed_editorial_summary",
-  "validation_record": "db/verification/release-v2-paths-validation.json",
+  "validation_record": "db/verification/release-v2.1-paths-validation.json",
   "package_generation_is_deployment_acceptance": false,
   "distribution": "release"
 }

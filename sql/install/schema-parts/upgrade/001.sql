@@ -1,4 +1,4 @@
--- UPGRADE part 001 of 018. Run Script as the project owner.
+-- UPGRADE part 001 of 024. Run Script as the project owner.
 -- Run in manifest order. Stop after any error; do not skip ahead.
 -- An oversized atomic step is retained intact to preserve its checks.
 DECLARE l_step CLOB;
@@ -37,7 +37,7 @@ BEGIN
 END;');
  EXECUTE IMMEDIATE l_step;
  l_step:=TO_CLOB('');
- l_step:=l_step||TO_CLOB('BEGIN DBMS_OUTPUT.PUT_LINE(''KCV_SCHEMA_PART_COMPLETE=upgrade:001/018'');END;');
+ l_step:=l_step||TO_CLOB('BEGIN DBMS_OUTPUT.PUT_LINE(''KCV_SCHEMA_PART_COMPLETE=upgrade:001/024'');END;');
  EXECUTE IMMEDIATE l_step;
 END;
 /

@@ -78,7 +78,13 @@ CREATE OR REPLACE PACKAGE BODY kcv_scenario AS
  FUNCTION open_session(p_context VARCHAR2) RETURN VARCHAR2 IS
    body CLOB; base VARCHAR2(128); rev VARCHAR2(40); conv VARCHAR2(128);
    sid VARCHAR2(40):='S'||RAWTOHEX(SYS_GUID());
+   admission PLS_INTEGER;admitted PLS_INTEGER;ignored PLS_INTEGER;
  BEGIN
+   -- A new sample has no durable conversation/operation lease yet. Retain
+   -- shared admission across native RDF/model commits until its row exists.
+   admission:=DBMS_UTILITY.GET_HASH_VALUE('KCV_WRITE_ADMISSION:'||$$PLSQL_UNIT_OWNER,1,1073741823);
+   admitted:=DBMS_LOCK.REQUEST(id=>admission,lockmode=>DBMS_LOCK.S_MODE,timeout=>0,release_on_commit=>FALSE);
+   IF admitted<>0 THEN RAISE_APPLICATION_ERROR(-20246,'OPERATION_IN_PROGRESS: Finish the earlier transaction or retry after setup');END IF;
    kcv_access.assert_writable;
    SELECT setting_value INTO base FROM kcv_settings WHERE setting_key='ACTIVE_GRAPH';
    SELECT c.context_json INTO body FROM kcv_contexts c JOIN kcv_graph_contexts gc ON gc.snapshot_id=c.snapshot_id
@@ -88,7 +94,10 @@ CREATE OR REPLACE PACKAGE BODY kcv_scenario AS
    INSERT INTO kcv_chat_sessions(session_id,owner_name,apex_app_id,apex_session_id,conversation_id,context_id,revision_id)
      VALUES(sid,actor,SYS_CONTEXT('APEX$SESSION','APP_ID'),SYS_CONTEXT('APEX$SESSION','APP_SESSION'),conv,p_context,rev);
    COMMIT;
+   ignored:=DBMS_LOCK.RELEASE(admission);admitted:=NULL;
    RETURN sid;
+ EXCEPTION WHEN OTHERS THEN
+   IF admitted=0 THEN ignored:=DBMS_LOCK.RELEASE(admission);END IF;RAISE;
  END;
  FUNCTION context_packet(p_request CLOB) RETURN CLOB IS sid VARCHAR2(40); body CLOB; BEGIN
    sid:=JSON_VALUE(p_request,'$.scenario_session' RETURNING VARCHAR2(40) ERROR ON ERROR);

@@ -12,9 +12,17 @@ Create the credential privately in the actual owner. A tested fresh setup reject
 | User API signing key | Your OCI user | `OCI_USER_CRED`, owned by KCV_LAB | Not required |
 | Resource principal | This Autonomous Database | `OCI$RESOURCE_PRINCIPAL` | Required for this documented path |
 
+## Credential entry through the installer app
+
+For the APEX-led route, complete Supporting Objects first, then use [Create a local OCI signing credential](deployment-setup.md#create-a-credential-privately-if-needed) as the authorised workspace administrator. This uses the same OCI signing-key identity described below, creates only owner-local OCI_USER_CRED and refuses replacement. It does not create an OCI identity or grant IAM permission. A facilitator-prepared credential remains an alternative; do not perform both creation routes for an existing name.
+
+The dedicated masked fields are the only runtime app fields intended for private-key entry. Profile configuration accepts only names/configuration. Review platform logging controls; bounded earlier canary tests do not prove universal audit/request-log protection.
+
 ## A. Existing OCI user credentials
 
 In Worksheet's bind dialog, match each value to its **field name**, not its position. `OCI_FINGERPRINT` is the short fingerprint shown for the registered public key, not the private-key body or a file path. `OCI_PRIVATE_KEY` takes the matching unencrypted key body without PEM BEGIN/END lines. Use Run Statement on the complete BEGIN–END block without the slash. If a bind is reported undeclared, reopen that complete block through Run Statement. A fingerprint-length error is an input-field check; inspect the field privately rather than sharing the entered values.
+
+`OCI_USER_OCID` must identify the OCI user under whose API Keys settings the matching public key is registered. Check that user identifier explicitly: the tenancy, fingerprint and model configuration can all be correct while a different user OCID still causes `ORA-20401`. Successful credential creation does not establish inference access; the explicit model test does. After correcting only the credential under the same name, retain the existing profile, dataset and app, and retry the model test once.
 
 Use this path if your OCI user already has inference permission in the intended compartment. Console/SSO access alone does not supply a database credential: this path requires an **OCI API signing key**, rather than your Console password, an OCI auth token or a Generative AI bearer API key. Oracle documents the [signing-key credential parameters](https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/dbms-cloud-subprograms.html).
 
@@ -74,7 +82,7 @@ Allow IAM changes to propagate before testing. These examples authorize inferenc
 3. As ADMIN, run [03_resource_principal.sql](../sql/admin/03_resource_principal.sql). Run its guarded block with Run Statement, excluding the slash, and supply this owner as KCV_SCHEMA.
 4. In the profile script, change `l_credential` to `'OCI$RESOURCE_PRINCIPAL'`. Do not create `OCI_USER_CRED` for this path. See [Select AI provider authentication](https://docs.oracle.com/en/database/oracle/oracle-database/26/selai/use-select-ai-ai-providers.html).
 
-## Common profile and connection check
+## SQL-first profile and diagnostic connection check
 
 Edit [05_profile_worksheet.sql](../sql/schema/05_profile_worksheet.sql) locally: set `l_region`, `l_compartment` to the inference compartment OCID, `l_model` to the exact model name/identifier supported by Select AI for the chosen region and access mode, and `l_credential` to the chosen name. Run as KCV_LAB using **Run Script (F5)**. The script creates `KCV_GENAI` independently of lab tables; it does not silently replace an existing profile. It builds attributes with `JSON_OBJECT_T` and serializes to CLOB before the package call. No secret values belong in the profile script.
 
@@ -113,6 +121,8 @@ FROM dual
 <!-- /include-sql -->
 
 If it fails, inspect the reported error: check schema credential ownership, matching signing key/fingerprint, effective user-group or dynamic-group policies, compartment, supported model/region and database outbound connectivity. Authentication and inference remain unvalidated until a real call succeeds.
+
+For v2.1.0, this manual diagnostic greeting does not record the deployment model-test receipt. After importing the app and running generated 03 owner binding, complete [STATUS_JSON, TEST_MODEL and ENABLE_LEARNING](deployment-setup.md#sql-first-final-readiness). Skip this optional greeting if the required setup test will provide the same access check; do not send duplicate calls merely to follow both guides. The APEX-led installer uses the guided configuration/test instead of these SQL profile steps.
 
 ### JSON syntax error when exercising the profile
 

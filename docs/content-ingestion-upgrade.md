@@ -1,6 +1,6 @@
 # Upgrade the application or public collection
 
-For an existing v1 or migration-managed installation, use [Migrate to v2](migrate-to-v2.md). The previous package-by-package update sequence is not the v2 route. Use ordered schema adoption/upgrade/verification and the same-ID APEX upgrade from one complete package. Historical instructions require their matching v1 checkout.
+For an existing installation, use the [version-aware installation selector](installation-paths.md). Published v2.0.0 uses the v2.1.0 upgrade; v1 first uses the pinned published v2.0.0 bridge. The old package-by-package sequence is historical, not a direct v1-to-v2.1 recipe. Keep schema/app upgrade separate from an optional public-collection update.
 
 ## Keep application and collection updates separate
 

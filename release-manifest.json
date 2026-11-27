@@ -1,41 +1,30 @@
 {
   "format_version": 1,
   "distribution": "release",
-  "product_version": "2.0.0",
-  "release_label": "2.0.0",
+  "product_version": "2.1.0",
+  "release_label": "2.1.0",
   "distribution_status": "prepared_for_publication",
   "publication": {
     "remote_state": "not_checked",
     "push_performed": false,
     "tag_created": false,
-    "acceptance_record_sha256": "6072beb44243689bcd911a87aa38986fadb8c78024f36c6b0e36168e60b6ca6c",
-    "note": "Local packaging only. Historical acceptance retains its recorded scope; compare runtime artifacts with the accepted package before publishing.",
+    "acceptance_record_sha256": "0c0c72c0ddfca193e99510dd3a1502ae8b387177269ef9ca34cecf76349bc4d7",
+    "note": "Local packaging only; exact accepted runtime comparison is required before publication.",
     "accepted_runtime_comparison": {
-      "accepted_release_commit": "0edb699a2f615c03292474ec13e9bce882c37164",
-      "accepted_manifest_sha256": "01e682ad789d0cca65841020b00a4817705f42977f87a17b4f082b2af5ab4c84",
       "comparison": "passed",
-      "unchanged_non_document_files": 245,
-      "documentation_changes": [
-        "README.md",
-        "apex/README.md",
-        "docs/fresh-serverless-deployment.md",
-        "docs/installation-paths.md",
-        "docs/learning-paths.md",
-        "docs/migrate-to-v2.md",
-        "docs/scenario-validation.md"
+      "accepted_runtime_files": 293,
+      "routes": [
+        "apex_led_clean",
+        "apex_led_upgrade",
+        "sql_first_clean",
+        "sql_first_upgrade"
       ],
-      "exact_header_only_changes": [
-        "sql/install/10_load_github.sql"
-      ],
-      "regenerated_metadata": [
-        "generated/build-report.json",
-        "release-manifest.json",
-        "release-provenance.json"
-      ],
-      "scope": "All other payload files match accepted SHA-256 values. Historical acceptance records remain unchanged; no new database execution."
+      "acceptance_record": "db/verification/release-v2.1-paths-validation.json",
+      "sql_first_transport_evidence": "reviewed_attestation",
+      "scope": "Exact non-document runtime hashes are machine-checked. SQL-first execution and derivation evidence are reviewed attestations; external evidence files are not revalidated by this builder. Generation does not create deployment acceptance."
     }
   },
-  "source_commit": "84d93fdad0b42d8e21affa9aa2b96312f15a0dfc",
+  "source_commit": "db10f5a163213a07be431c0f6a84a7fb7373e3b3",
   "source_dirty": false,
   "python_required_for_learner": false,
   "dataset_kind": "attributed_editorial_summary",
@@ -53,20 +42,28 @@
       "sha256": "80bee23d8134f06f24825c47f3da4d848e4081a290533133e012e564b89e7b4e"
     },
     {
+      "path": "apex/apexlang-validation.json",
+      "sha256": "ff189c55c944fb8f87ec8279d38d4cf5d40861f05cebd894abc45e861257143a"
+    },
+    {
       "path": "apex/explorer.js",
-      "sha256": "f62bd94f1c904fe8584b82bff3b81253679d8125b6bc0acd248f21c6e08b76b9"
+      "sha256": "2e9dcbd0b741241996f4f9d95f47ef8c5564dd9ee81a6fff6363ba3a32310f99"
     },
     {
       "path": "apex/export-validation.json",
-      "sha256": "61b05894b511aeddc54fe0873840cf1d95b140d872272f6e1c9b068a9fc4db14"
+      "sha256": "8a4a05c66f645ca124b9c051442784c7ff1e4f4a7f3d3489644a1f928973e745"
+    },
+    {
+      "path": "apex/kcv-explorer.apx.zip",
+      "sha256": "db2c90feb59ac5712441fa2336a35a0f1a350495dc92be1701306502b56371cc"
     },
     {
       "path": "apex/kcv-explorer.sql",
-      "sha256": "ccbf315b6dc2630045f87d2db80d3a17318b62f9099ee49e596eb709f8b45acd"
+      "sha256": "819c8ac55a732b3c7236f4e30c2cfde9e849b2c1bb766aaae67a76e3991eb576"
     },
     {
       "path": "apex/README.md",
-      "sha256": "6512f4c63f98163f743bb3e14fd4ac9306b2d25fef7655c07d4e684250784b76"
+      "sha256": "40b91d733bd42245a0412fc4ff1f344bf6bce71cbfd39eef7577d656ac62331f"
     },
     {
       "path": "data/contexts.json",
@@ -122,11 +119,15 @@
     },
     {
       "path": "db/manifest.json",
-      "sha256": "ac794a3e50d5898cd17ebb3e7c6cf65d13bf3bcf61e513f4ee7ab621d9bb6068"
+      "sha256": "6577188e9ea090d8437982de153ddfca4d406259aaf05c36f3a1ee17ae7202bd"
     },
     {
       "path": "db/README.md",
       "sha256": "8c006b71138f0884c78c54cb74ea1232440bf17c7ba5f427650bc02ffe7e01c8"
+    },
+    {
+      "path": "db/verification/apex-led-candidate-validation.json",
+      "sha256": "17242d09af8ba29317140378f4a4952e9a1f04160a357c944fc137813fdd81ae"
     },
     {
       "path": "db/verification/c3-r4-validation.json",
@@ -157,8 +158,24 @@
       "sha256": "6072beb44243689bcd911a87aa38986fadb8c78024f36c6b0e36168e60b6ca6c"
     },
     {
+      "path": "db/verification/release-v2.1-paths-validation.json",
+      "sha256": "0c0c72c0ddfca193e99510dd3a1502ae8b387177269ef9ca34cecf76349bc4d7"
+    },
+    {
       "path": "db/verification/sample-navigation-validation.json",
       "sha256": "1b44f5eb8ac715a9458ea158f932ce696a52541f4a2e92e8e547e096a93cb97e"
+    },
+    {
+      "path": "docs/apex-led-administrator-preparation.md",
+      "sha256": "79b489813f083b8dcfd9888e975f2b1b872644e8c03002ed3c439caa68ab41ec"
+    },
+    {
+      "path": "docs/apex-led-installation.md",
+      "sha256": "d1739b45922908d89c295ea4321a371a2fc830cc94ef02ef19b79e30826095cb"
+    },
+    {
+      "path": "docs/apex-led-upgrade.md",
+      "sha256": "03ec06a62886f93b6788fde3e72a39b2cd24f0e186658177e046ca25816ac0d1"
     },
     {
       "path": "docs/architecture.md",
@@ -166,7 +183,7 @@
     },
     {
       "path": "docs/authentication.md",
-      "sha256": "47416ad28f205e261f98aa39a777877ee57d4cfe2a8658f67b88a74ed31cb97c"
+      "sha256": "5a3304b5b7d8a3987588fc0f30aaa0cca2ced384a0339f00b6aba0fbed3f2191"
     },
     {
       "path": "docs/cleanup.md",
@@ -174,35 +191,51 @@
     },
     {
       "path": "docs/content-ingestion-upgrade.md",
-      "sha256": "47e800a25eb9b6630e908d0ed33cfaa3fcf7dfcbc08b116403d3ad0df9ecd328"
+      "sha256": "ed7267cba73651d0239c15875fb6b49906e8ba761f1f900a7b66de8c4ca9af8a"
     },
     {
       "path": "docs/context-search.md",
       "sha256": "ba379a13a6b6969f02643245956af71d422ea09269991f7aa602c899b48f78ea"
     },
     {
+      "path": "docs/deployment-recovery.md",
+      "sha256": "5733e0ca0200e5070149a1280109f39066b2b9288b90d546927fe5e0341389b9"
+    },
+    {
+      "path": "docs/deployment-setup.md",
+      "sha256": "1f95c2c41f83727e1201bcddd84b9f1804bdd05c5efb938ecc12bc29628ff034"
+    },
+    {
       "path": "docs/fresh-serverless-deployment.md",
-      "sha256": "33055047a23ec0a160ced7f2b0ee12fc4d527bfa222a04df29434634319b5847"
+      "sha256": "b8f3c27fcad374c8d29d15de96781a583588fecaee6db607c9d1379f5ed5f79e"
     },
     {
       "path": "docs/github-dataset-load.md",
-      "sha256": "209f41f24a125edab7bf9363dc21b0efec1d41cecfd982a3ad64aea114742b60"
+      "sha256": "7ad80d854fbead0d83757af26484f06bf288e849635ce0d157a33616f16e447e"
     },
     {
       "path": "docs/installation-paths.md",
-      "sha256": "b625389ac41281ed059b10d27d4eee272c39349819d8fadd5084f08d1a828f87"
+      "sha256": "e8bd56359b5ecf9b96e5d00c93d00074ac3b35d0c34f004a7588be902e625003"
     },
     {
       "path": "docs/learning-paths.md",
-      "sha256": "f37174843a8260e5bcb20bac37425607b890809f0fc79b55954c895723073f99"
+      "sha256": "ef19f529ea5170d644671e15a7c448eeaacd12afc833e5d63364c797bbfa93c9"
     },
     {
       "path": "docs/livelabs-authoring-alignment.md",
       "sha256": "31388d0e680af54465ad1bd2a7cd45e8dc3efe9f77d638a49e2980c845c85282"
     },
     {
+      "path": "docs/migrate-to-v2.1.md",
+      "sha256": "c4daab1afa19dedc18f4ef4d42c6dc4c27659041ad20be2048f6470379f5fd5c"
+    },
+    {
       "path": "docs/migrate-to-v2.md",
-      "sha256": "1caef1acd94f7c7de7b1b28b2e64f9c0b7f6538fd72236bb543b840dfffcab83"
+      "sha256": "3a9f3e058324685e69813db6e868838a0aceb9ba0dea65dddb84f6f69d779ee1"
+    },
+    {
+      "path": "docs/oracle-apex-skills.md",
+      "sha256": "2accba151b5595e2fa440edbe34e57824d4c0635a417781c4bcffede77d5a43a"
     },
     {
       "path": "docs/public-research-catalog.md",
@@ -210,11 +243,11 @@
     },
     {
       "path": "docs/release-dataset.md",
-      "sha256": "9aea394b6bba5580b695a414a4e4b1ad5d12b5dec7435ed1d21c6084ea9030de"
+      "sha256": "7507c2002d8984887a7937143b7d505cce1dcd68eb2d4849f7e0c1142bd214aa"
     },
     {
       "path": "docs/scenario-validation.md",
-      "sha256": "50ac4604c07e52ed0fc1ffc86dfe9a433964f56d7293523f851318ecfa5d6cf1"
+      "sha256": "439dde412e0c437239e2694e460aa1430f608fdee26a55024ef401b155fc272e"
     },
     {
       "path": "docs/screenshots.md",
@@ -222,7 +255,7 @@
     },
     {
       "path": "docs/sql-catalogue.md",
-      "sha256": "cc5ecc1136a570f203dee8b71c86c8259f2bd39fc66f8f37bcc16ab3d227609d"
+      "sha256": "b1207f2aeec23deee5b3a00861f04c5b4422e54db0db29a3a922fb1474f70723"
     },
     {
       "path": "docs/ui-walkthrough.md",
@@ -238,7 +271,7 @@
     },
     {
       "path": "generated/build-report.json",
-      "sha256": "be2175ae6d6f42f9684b9f8494d602bee27a7e3f9bcbc0e5067b073b7dafba9f"
+      "sha256": "8e9c32442d06741c63a400b4bfed681d7a936fb741780c66836b0e0a0cad5274"
     },
     {
       "path": "generated/dataset-preview.md",
@@ -274,11 +307,11 @@
     },
     {
       "path": "labs/configure-database/configure-database.md",
-      "sha256": "b50df12800c74b059642c0dbb53d5841c351bea3b6f24a9bf1353ac011ad9c0f"
+      "sha256": "9f0df5c3d39b1732079ce3d00fd083e85af2b5d55c68e8d4450670d3a092ad98"
     },
     {
       "path": "labs/deploy-explorer/deploy-explorer.md",
-      "sha256": "edf0352992e7427e7a5628f629be0566820d46a26b906a198854ade9525d8914"
+      "sha256": "b1a455deef10947c42ddacaaae1c5980bedd599debf369cd4fd3d115992d1ecd"
     },
     {
       "path": "labs/explore-evidence/explore-evidence.md",
@@ -294,11 +327,11 @@
     },
     {
       "path": "labs/introduction/introduction.md",
-      "sha256": "1c4da35ebfcc228b3483c423b8a623f73e4298d670dba3fd5cd2af4f38f7f541"
+      "sha256": "d254b76ea2c651ae5a24a7a03d2f557533256c41556985dda201b880571c02b2"
     },
     {
       "path": "labs/load-knowledge/load-knowledge.md",
-      "sha256": "a997d9aac47faa6c50059fe6164e4821a158291d7a9d520efb9fa0ce985d7f00"
+      "sha256": "bbd6feb1fc8a0f79f31a5fc85059d8415401b5d28efc8066d8d4c152d683a83c"
     },
     {
       "path": "labs/my-contexts/my-contexts.md",
@@ -306,11 +339,11 @@
     },
     {
       "path": "labs/need-help/need-help.md",
-      "sha256": "38c1151c5c920fbe3e41eeead6cdec62362b322832217362124da74416016866"
+      "sha256": "7a4ea9f74d034002b55350c73ca589c14466281b94d122badb9178a21b0005e8"
     },
     {
       "path": "labs/prepare-environment/prepare-environment.md",
-      "sha256": "44286d17be7746252ada0e524b93c35d493a784f83cdeb509179a70978f2cdf6"
+      "sha256": "76b9f7dbd3ffddc818e92e22b1c71afbd484fb5aa00298f5747121d77777d139"
     },
     {
       "path": "labs/provision-database/provision-database.md",
@@ -338,7 +371,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "17f12ad32d56e042f2dd2ee0496dac1d8d06269d804ece5f01f79bbdc69e10a8"
+      "sha256": "91bb1de517be43cd7084160862cbab4dc4478b03db8bb20c9bcfafae19ea88fc"
     },
     {
       "path": "references/content-ingestion-checks.json",
@@ -382,7 +415,7 @@
     },
     {
       "path": "release-provenance.json",
-      "sha256": "7028c3c69a545a72113019c21609d032cf10d8b367145376dfe0da5a27e74792"
+      "sha256": "abe3dd4c7cdb08fc26416ae071d44b6f04abb849e2e7d69e19766f302fc8039a"
     },
     {
       "path": "review-examples/examples.json",
@@ -433,12 +466,28 @@
       "sha256": "8314e04b29b5264aea06971571ce6a8a7b64809fc37edf496f58fc78cf2ce4d9"
     },
     {
+      "path": "sql/admin/12_prepare_apexlang_rest.sql",
+      "sha256": "7fa094cc912f67a6eb5d8f512b4c4f42dc04f86227de9287167f536122d99553"
+    },
+    {
+      "path": "sql/admin/13_create_builder_login.sql",
+      "sha256": "e09b4edbc1a501dffa589163812c88706a6d5e730aec37c1e3340d7d8f86bd10"
+    },
+    {
+      "path": "sql/admin/14_prepare_owner_credential.sql",
+      "sha256": "c2ff004c90999ee37343db72826fb5e1d41eaec85c173df814ea6f6d6aa893b3"
+    },
+    {
+      "path": "sql/admin/15_create_apex_owner.sql",
+      "sha256": "abe3935b3acc19eef980fa96354a735e843320ea83cc252704214c2f40d564e8"
+    },
+    {
       "path": "sql/extensions/00_readiness.sql",
       "sha256": "4bd1abe130e705c9a9bb4bfd3e0a0d237f74c89bc79278edebf231863e182115"
     },
     {
       "path": "sql/extensions/02_scenario_api.sql",
-      "sha256": "3017ec2fcdbdf5cfca3099346501d9dda4cc7745a763437f1fe8331cdd966b02"
+      "sha256": "6a954cf997ba20799f57517195cf3d5ae7c367fd6a5b1fca1ab545771b3759cc"
     },
     {
       "path": "sql/extensions/03_scenario_agents.sql",
@@ -461,24 +510,20 @@
       "sha256": "781defcf2c95dce9269690b9529702b90e155e40624bb92ca7bc112acfdeafd3"
     },
     {
-      "path": "sql/install/00_adopt_schema_baseline.sql",
-      "sha256": "65870e558b6680e4b91b5ee926138c0a4d243d356bf2917b6f6b5098e7598537"
-    },
-    {
-      "path": "sql/install/00_complete_v1_optional.sql",
-      "sha256": "8f82dd559bc28bc76fe761b228a3c3931f24655f3f1339d529a22b57041f7979"
-    },
-    {
       "path": "sql/install/00_install_schema.sql",
-      "sha256": "0b1b159e4d58d12e9166f4c0ee683b53fab655fa111a7ad4afc83afd709c04b6"
+      "sha256": "909046667910010acee9b942513d81dfb58e2868ab7d345722ca4122d6229733"
     },
     {
       "path": "sql/install/01_upgrade_schema.sql",
-      "sha256": "2a288847115e7cde4b7909e9f3001bde06b768825c91ce56f1882e1ead712e59"
+      "sha256": "35c70156134f25e1a964785877343e4836cd8344fc918e99937e4596c0e3b5e9"
     },
     {
       "path": "sql/install/02_verify_schema.sql",
-      "sha256": "74e9b113da3d1479436fbe41b328b30763a587acdfd080bfab77ff37c45d4519"
+      "sha256": "b3f427d8a10c65698d105a4ee7672f0cb33cc870dfb5dad56f3a0aec4be0aa48"
+    },
+    {
+      "path": "sql/install/03_bind_deployment_owner.sql",
+      "sha256": "05120d7ca9833aae2530907f4be885d803217999f3c20db316524c5750c9b3c7"
     },
     {
       "path": "sql/install/10_load_dataset.sql",
@@ -490,11 +535,19 @@
     },
     {
       "path": "sql/install/20_install_apex.sql",
-      "sha256": "0d5c364a206387b90c8d11d2741313d04220f79412775e240f6c9fe970207a05"
+      "sha256": "2fe0210090adc426261519ba84c1a40135a54d21262bd2c0fa554bfdfcf6aa13"
+    },
+    {
+      "path": "sql/install/20_install_apex_script.sql",
+      "sha256": "9c650620bb4c635be13dd60689c02853cf5c876287d1a726e7e42381622becb3"
     },
     {
       "path": "sql/install/20_upgrade_apex.sql",
-      "sha256": "a182a7a34926de2089ad1fec781606d702264e7cbdb314d4db850fd8350272ba"
+      "sha256": "08980ad557fe336aeeaecc1ea1cdf2a72b724727f73436a65377c07b3dcdc57e"
+    },
+    {
+      "path": "sql/install/20_upgrade_apex_script.sql",
+      "sha256": "2f32d74fc29e766e643de6c2fcf69d37be1aa2c67b7cba0dbf8edac9f25e5495"
     },
     {
       "path": "sql/install/dataset-parts/001.sql",
@@ -530,159 +583,207 @@
     },
     {
       "path": "sql/install/schema-parts/fresh/001.sql",
-      "sha256": "9fef82b20abbc2b07a6b16c2fd344ed939a3b5064d41d5e3c677ce2bb260dabb"
+      "sha256": "6d5ad5ee93c77b5c052b5ec8fed003ad2165e3940a72bd96dfe5bbb991289e45"
     },
     {
       "path": "sql/install/schema-parts/fresh/002.sql",
-      "sha256": "9ef9b683487301d7602759943a2637b95cab6af3fb1e24fb2733b77f3091f75d"
+      "sha256": "b25e4696e3e68bf852c54b34365257413285ccd5a30e0390298571029f22a7fb"
     },
     {
       "path": "sql/install/schema-parts/fresh/003.sql",
-      "sha256": "9d22f2b375f1d5b778cc785a73a751d386a61085c9c9b21df5e223b0549d4698"
+      "sha256": "1f8c02f428e39a9a57f9e069b5221c07737bb85aed1ad5e937141b20fa33d678"
     },
     {
       "path": "sql/install/schema-parts/fresh/004.sql",
-      "sha256": "6025ed58f38d04e8c21252363325d844d2bacb3b6608fab2cfc8ae17c9a020d4"
+      "sha256": "c8244631056a7b6fdfa348b372ac6decaa4bdfc439a62881c9c97a154150e07e"
     },
     {
       "path": "sql/install/schema-parts/fresh/005.sql",
-      "sha256": "0f21c741aa0224b10d08d8d531b8649924a01e76c0cdc7ccd6f42f2257c16b00"
+      "sha256": "9258241aa51b2cbd8c1fd7dee79e166a9a8567edbc886cf0b0913dc30a1f085c"
     },
     {
       "path": "sql/install/schema-parts/fresh/006.sql",
-      "sha256": "04dab56d048d78c601b7733091131bf921a85be71c0d35ade1de5b5a076975f9"
+      "sha256": "fead89523cceefdd712736893d4460f90ddadc5729aabcdb7ef181a76ae01a97"
     },
     {
       "path": "sql/install/schema-parts/fresh/007.sql",
-      "sha256": "b6001ef27b72dd56beb6789a124b91e52c3a8efd01670ca03d7e0cb80e050aa9"
+      "sha256": "d1354fb73eb4960cbb6d108625ee6093c04d9e77c8eadf7232dd5f6d4882d29a"
     },
     {
       "path": "sql/install/schema-parts/fresh/008.sql",
-      "sha256": "36af56e5bae554de780043a3203b6800f865e7c47a147e8c2b788594d9a4fbb6"
+      "sha256": "2a0c2aa919cb8b40d7370209da66baf1d7bd24e7d13be724fa06ff5f64f3faa1"
     },
     {
       "path": "sql/install/schema-parts/fresh/009.sql",
-      "sha256": "cc520b462680afc5e4fe441be0acc8b28ff37bc0e757aa7d793eb54017d8397b"
+      "sha256": "b52347296f06f39283666709c2c42ba1fa04229c1ebdde16cf2601c7d2d0b173"
     },
     {
       "path": "sql/install/schema-parts/fresh/010.sql",
-      "sha256": "443d7cacf7558adf76b4630a9b4bb61c8b6c17435e4e1b4abacf489c1171a3b5"
+      "sha256": "eb66a37262594d8d7799d97aca74dfbb089e5effcf8f6c14794c52c5b1f05421"
     },
     {
       "path": "sql/install/schema-parts/fresh/011.sql",
-      "sha256": "bbbb7960d487574e733a3a9294e284ee00be276cb137f79522a6402ef6b45d3d"
+      "sha256": "d3f51c6aa8854fa5d019091692c2c50a73ea1e2580500deab831f25070c7d244"
     },
     {
       "path": "sql/install/schema-parts/fresh/012.sql",
-      "sha256": "924b0cb4ae4b78ef1faef91be3f5e7e38efb13a2c2ac1fd7b5e2c0868a5ed5cd"
+      "sha256": "fb7c730d7b67e49acd6ec848534171e33d58410104419a3d7915cd260c412d3b"
     },
     {
       "path": "sql/install/schema-parts/fresh/013.sql",
-      "sha256": "7a69650672513a36409d1cf42fd0fca0009ce78e93d38522cf8e23ebbcd70b40"
+      "sha256": "f7c52ea6651ffc08bbc26908b8bc9e50338d82e16bbccd6f6782cf89bc7c4a40"
     },
     {
       "path": "sql/install/schema-parts/fresh/014.sql",
-      "sha256": "bf7ea0eb85779bc2463ecaa52c55314c5b779d5af1e170059be118716d4c3b3a"
+      "sha256": "596eb42b180675e59effb5b59698071cbcc97e816ce9980dba0bbe3532f814ca"
     },
     {
       "path": "sql/install/schema-parts/fresh/015.sql",
-      "sha256": "8f2157c628e1624203c228ddfd536ae927313bf622ab4202e758a9d49f23dda9"
+      "sha256": "989cc3aa91a3748a2b2c43a0ae92eb8973e7fc9b7310dd28b2d593560cadfb30"
     },
     {
       "path": "sql/install/schema-parts/fresh/016.sql",
-      "sha256": "cd7c642a8e4e8a7e2c7062060bc38c09528691a4d412f0ddc2b52978dc791aac"
+      "sha256": "9770aa9fae876b7e07b860aea006f2df0938daea6e22625b30b6d5c65d8700b6"
     },
     {
       "path": "sql/install/schema-parts/fresh/017.sql",
-      "sha256": "787b3c3f905847622c48d2e6e02f3f4a18b6bfe9261cda52efc0c876605c0189"
+      "sha256": "b647345de54629a181353b4f30e36d19d204dd2042736d9df0824e6278524f93"
     },
     {
       "path": "sql/install/schema-parts/fresh/018.sql",
-      "sha256": "c0858c7ebfe760006c8f55433b31d6628b6af3d1c0e0f6a98bc5648f5091b316"
+      "sha256": "311abdbe6b273011b224ebaab235b199492762fdcbb9c083307f046ce14ffacd"
     },
     {
       "path": "sql/install/schema-parts/fresh/019.sql",
-      "sha256": "0affd97285cedda98af9f507f268503a12be9d9f971c4d2dae1b29d248520720"
+      "sha256": "2306c4b99a99d7a99d55a7acc6a35f3bb8e6ffa48c55c1391c53036448746c61"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/020.sql",
+      "sha256": "4424fa40905d70b6e4ab0bc3aac4a6780e5055c92a16cc97cd3d0272cd0e2678"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/021.sql",
+      "sha256": "1c84aecc0ad439fa5a0fed0dd6774b052ff2195de71932f366083d64e50e83dd"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/022.sql",
+      "sha256": "cfc0635fd0df053d6201e64d40c23278766e2c31c37fd3ac9d04c80db055da03"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/023.sql",
+      "sha256": "22a46e2c10846c0f7a3ad04e8765c15ab9f13bc1491323061f6268b3e34ed935"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/024.sql",
+      "sha256": "25ee29cb18e92f8d17bfcc4339d7fc1277390c73312ffc5d6d3c740d72b77055"
+    },
+    {
+      "path": "sql/install/schema-parts/fresh/025.sql",
+      "sha256": "68d484dd7854481d2dcb3723a6146d164095b071bfa10e8c28934b841c709db8"
     },
     {
       "path": "sql/install/schema-parts/manifest.json",
-      "sha256": "d00afdf9b819eaa9f0ef4237182884c450d436519f176e30fb80ecbbc1ed8353"
+      "sha256": "9e53985436202970b6cebc5ebe863c4752df0243a0de03f463d3882b812d1e75"
     },
     {
       "path": "sql/install/schema-parts/README.md",
-      "sha256": "933a6c91b2ed8f54617c1c158407a66897b31919b2eb1ee15c56d01c9b954c08"
+      "sha256": "2186333694f77e657cd5496e297626da4fac98a71bbaa8bf86ff7b4693ae999e"
     },
     {
       "path": "sql/install/schema-parts/upgrade/001.sql",
-      "sha256": "72a731986c97047492ea4cc23f47970b283539e2f0ff9eb9a7d85d01893d65ec"
+      "sha256": "87fa09ad4fc6a9ca9ee52ad362a90e461d0592e7f432017c862b1953c4082f9f"
     },
     {
       "path": "sql/install/schema-parts/upgrade/002.sql",
-      "sha256": "487c2ef7382c521c42825d140c10607122070d3ea9bb90119e043f988558ace5"
+      "sha256": "ad7053fc1d9744a018ef26865d307ff987180247e6588a07151f09a9fc8ae8db"
     },
     {
       "path": "sql/install/schema-parts/upgrade/003.sql",
-      "sha256": "04bb1db9a3c28f12c5fffe737644ef5ae9429a779509cc609a026a6a5ac02521"
+      "sha256": "7a10233fa7593ed6e65aa11ec34127ebe76db5373136ff262d8ca48b392ef4ef"
     },
     {
       "path": "sql/install/schema-parts/upgrade/004.sql",
-      "sha256": "3703ded1488c539c0ec59b2ed4afb8ca3642c150f9e301d61c4a87936ed50450"
+      "sha256": "2a9873c51d408ba60a0023631c09585627c1833a05743f250c98f448e3d3d2ae"
     },
     {
       "path": "sql/install/schema-parts/upgrade/005.sql",
-      "sha256": "992dc8d3ac2542c0f040933f70307c6b63737d6db65f841b6a1c38d68fd180e0"
+      "sha256": "d102ae15decf75e32bb0ee72c3ad9bf09c569fd09844a0ab6469bdbd10dc0c46"
     },
     {
       "path": "sql/install/schema-parts/upgrade/006.sql",
-      "sha256": "e86a3fb7242d8b554b8aac875750838221c4c2a0f7c8a8a7cf081602f645a049"
+      "sha256": "0b1e77e6201656ec0d5b5c829541a03a0872a229c715befdd3eed0b28f086402"
     },
     {
       "path": "sql/install/schema-parts/upgrade/007.sql",
-      "sha256": "a3824cda11a40400ef84e1cbbfeff7d000facce35d488471a0cbd75040b1297c"
+      "sha256": "06dc26a5ea0c883a06918fc4f46621c1cf9eca5b6bb0fe458a31328337cf64b3"
     },
     {
       "path": "sql/install/schema-parts/upgrade/008.sql",
-      "sha256": "e83193bffdfc3f9c2094b52431062b68f36db7056557849e175a63e2cd6d633f"
+      "sha256": "bdff10f5add82c5a5f75c194d48c62898a57c22632f69a36df06b0b0f90b49fa"
     },
     {
       "path": "sql/install/schema-parts/upgrade/009.sql",
-      "sha256": "fea6e41f1ebf5bbaef823b194927ddf02b23649296617160a0e734ddba463da5"
+      "sha256": "be0a573502a974e04cda8d8b291191012e5961a7467e9ca3a2eca3d404ab166e"
     },
     {
       "path": "sql/install/schema-parts/upgrade/010.sql",
-      "sha256": "e8abb39133985a696fec11d95368718e7fe660b2b2d7932c7f80d977d06e0d54"
+      "sha256": "6e80b77bb4fc0cb1b2cd5fea2fdc30b447760e04a2c7e946bd498f633fb1b651"
     },
     {
       "path": "sql/install/schema-parts/upgrade/011.sql",
-      "sha256": "e304d20f97df23916d1f5fca27c326a3584e1a3a73a9a29d6f71db9b3e2bbd8c"
+      "sha256": "d089069a1c39098cfd4603bc0196c62e1c91cca207d41d8d5d0af8dca70dd04a"
     },
     {
       "path": "sql/install/schema-parts/upgrade/012.sql",
-      "sha256": "6b292016ef7d3b066214c0225b87a5d7f6f52b71ca67ef2f15900275eeccc6fe"
+      "sha256": "e894ad6943f1bf0e3275201a5038d7a47ba829c9e5dd3126d84faf3d1a28206b"
     },
     {
       "path": "sql/install/schema-parts/upgrade/013.sql",
-      "sha256": "b9e08ec0129cb9ebb14f4d3feb510b75b850e255c84d0aaa4df8ccb02d34ce5c"
+      "sha256": "6b89dff15dc268ed797aa6a31b1a81f0dcbce341ee71348615017e2af4502e84"
     },
     {
       "path": "sql/install/schema-parts/upgrade/014.sql",
-      "sha256": "3ae1d16c61f6e347fd5b608fa1ec87dda12b44bbdc744a1690bc0554bdc39c09"
+      "sha256": "2c1506c9f09a9046eb4dd9f6f48354556b7d6549f43b8781b86ea5be2ca23347"
     },
     {
       "path": "sql/install/schema-parts/upgrade/015.sql",
-      "sha256": "210b639b5bf8a2a9218e6a80df306d10c825910679eea199409314c484f73db6"
+      "sha256": "5257830233a2ebbac6b596ce503c4dfc5673f273a06cc466344a1159d4d10289"
     },
     {
       "path": "sql/install/schema-parts/upgrade/016.sql",
-      "sha256": "4a893e01c74b67982ad7122fa17ec77bb1151969ae748753733bc48e61ca6c5b"
+      "sha256": "5fae9ef456ee8a8c306eda203e87252485e791ee5a5a3c259ff50d21572ecd3b"
     },
     {
       "path": "sql/install/schema-parts/upgrade/017.sql",
-      "sha256": "f186ec88e2ed06ef3e6accac2df502e54771343694c0bf285244842d7472380b"
+      "sha256": "3ca8f9f757f6699cae973791ba0a38e98384a3934acdb89f74915e38512544c2"
     },
     {
       "path": "sql/install/schema-parts/upgrade/018.sql",
-      "sha256": "9c769ff661fb65a3aaa7003715007ef13ea94624b5f71c4d05a6a4a4aec36f4a"
+      "sha256": "275809fd41ebec3ce71b2200006eb16f7a43ef138a0a8e5010d803b0427b5814"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/019.sql",
+      "sha256": "1fe5e1aa0084bdbb458838c35573bfbb9cb5956829bc180f15eb923a0a91f8d3"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/020.sql",
+      "sha256": "7340cd7e10349303747bed45bb8ec468288a2d3992ac17bf4df812405e5dcb04"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/021.sql",
+      "sha256": "cb910cd3218f49b5622736771c18f5ed2d63ee495d8ef2320804b44846177edc"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/022.sql",
+      "sha256": "393ae1a74d28946d00a9958fc54b93a1ed8862cebd7f63235bc96f7e4964d5e0"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/023.sql",
+      "sha256": "5046f82521db9e77e955362f1f1091a865df9e7743f8ce43414c7dcfbbfdbe7e"
+    },
+    {
+      "path": "sql/install/schema-parts/upgrade/024.sql",
+      "sha256": "598be1d76947ecc57c0c1de1caf43a453e06e2931ad89049e3d957ff9b6c78c3"
     },
     {
       "path": "sql/queries/00_create_conversation.sql",
@@ -1101,8 +1202,108 @@
       "sha256": "135ca748ca3e886312b7f46baea221e0bb2d6ac5410c934558f4759a9cc208ed"
     },
     {
+      "path": "sql/recovery/2.1.0-apl-001-kcv_access-package-body.sql",
+      "sha256": "ec8abe8a85165f6145942541006aba53233e6c2faafc20448b10840aa5e18214"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-002-kcv_scenario-package-body.sql",
+      "sha256": "1793d3be733fecf340e92c9e6f44fe4f9b22cdca45a9f09fc35b2d427790eae0"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-003-kcv_deploy_state.sql",
+      "sha256": "3d88b4b2ed467606e4abca674664aeee4425a802a189b52abe6f67e26647eb2e"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-004-kcv_deploy_runs.sql",
+      "sha256": "6c4d9f2fdc9396efd6b95f109309e69f6c4fb170a443209359f388aa9f67b45a"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r1-001-kcv_deploy_runs_recent.sql",
+      "sha256": "020209e2048ed4dd083c50df07f2bca73482b2dc7798da467a556c399f802c93"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r1-002-kcv_deploy_contract-package.sql",
+      "sha256": "815d05c19a09a2be48eef62e46b193c220065110bb2db0e3a719e4a22d7ef241"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r1-003-kcv_deploy-package.sql",
+      "sha256": "3c03d57d93424f63bb4b2bc53211ebf7e9b6a1406b2fb13fd5ba9974930d16fe"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r1-004-kcv_deploy-package-body.sql",
+      "sha256": "94ea5a06894849e8d3cbf35bbe4d3b1526a42a87faec7ea55433a422188dc257"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r1-005-backend-ready.sql",
+      "sha256": "9e495b977e467d642923b2c8e7ef5125a65961df3be0d79e2c5573abcc3960d5"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r1-006-kcv_deploy_contract-package-body.sql",
+      "sha256": "197974c94e1202253ba5dc1ce0cdab87d6e64bf3ddf48c8e8e9ea97e3fbf5888"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r1-ready.sql",
+      "sha256": "f2ab7b51cb63c468d08c40717380711f30cb47064dfd683b3cc6ceae79b87066"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r2-001-kcv_deploy-package-body.sql",
+      "sha256": "bca1555f30bede3ff759fedba79a9c9a34a05ceafc023f65cf9e034f014a9116"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r2-002-backend-ready.sql",
+      "sha256": "15b94d8f433510cee11b1d890274f8a6dca5c609827d3c18fd037682ed3673b8"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r2-003-kcv_deploy_contract-package-body.sql",
+      "sha256": "8dd4b757b940fa7cb35e406a021b346f782d53473b8115779213646394dc4f12"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r2-ready.sql",
+      "sha256": "f38eb72e98e03fc7e0399e3cd363874d2a241140e3358b4d2c1ecac6e25ffd0b"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r3-001-kcv_deploy-package-body.sql",
+      "sha256": "1a0b5256c8215728f46fc0a56e1620fddac6968de5d330e8c7046af19a0212bb"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r3-002-backend-ready.sql",
+      "sha256": "4d63eb0283d1d6c51cdf96ad1f611c638aa43de298efd8d62e7e0fce40355c22"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r3-003-kcv_deploy_contract-package-body.sql",
+      "sha256": "1053f4f954aebb4607b6ad1aba99073ca45008593b1ab474959d1f68acfcf2cc"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r3-ready.sql",
+      "sha256": "fe923c2c06ce9759c63fd231ca41984e49bf6c8ab318c8083144e4677d1ac717"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r4-001-kcv_deploy_runs-operation.sql",
+      "sha256": "06e99a52ce94236400dd83878ca335d362bf86a6749553caa75e4ff26774f5b5"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r4-002-kcv_deploy-package.sql",
+      "sha256": "2a23718f96794c62178550f59fdfb00d0d570b85e5d74eb10bb62e3bac1c4f72"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r4-003-kcv_deploy-package-body.sql",
+      "sha256": "7a5536ea9bada9bd816f9f587c97f07b8732e244d3e1a5a79f492402af041e76"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r4-004-backend-ready.sql",
+      "sha256": "1ed98a443bfb6524d06f283bc04d2ce1e0c38fc0802683addac81f92c8a0ac16"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r4-005-kcv_deploy_contract-package-body.sql",
+      "sha256": "4767ecee25d288d50c48f80c5468829b52734dfc7ee18e01b8299dc432e05dba"
+    },
+    {
+      "path": "sql/recovery/2.1.0-apl-r4-ready.sql",
+      "sha256": "bcaec495a6faaa34e1047acb3cfc8cff9747597a983d35a2d326074f5f3d1a1d"
+    },
+    {
       "path": "sql/recovery/manifest.json",
-      "sha256": "f188f48a6873b6d593b4a54eb7bb088acc33221a8f99f72723c859b552c4c8ca"
+      "sha256": "3e80706c29171269e084577edded16056420f488b3eee61d404ca6fa04e62fea"
     },
     {
       "path": "sql/recovery/README.md",
@@ -1193,8 +1394,20 @@
       "sha256": "0b852b45f455d080220c41f85f35645270edc638c9f6db39b08c160361ff14cd"
     },
     {
+      "path": "third-party/oracle-skills/LICENSE.txt",
+      "sha256": "939579ce6e384d07f665d3f8078d3596a41c3517465a92d9ce680ebb23e33205"
+    },
+    {
+      "path": "third-party/oracle-skills/NOTICE.md",
+      "sha256": "bbc1830de47fd1c4c214d855cfa07c485632f2a6507ef58a8ce2a6d2b2387425"
+    },
+    {
+      "path": "third-party/oracle-skills/provenance.json",
+      "sha256": "6a8e28c99407a49c99a52a6a4aba6f3aaf226eb752364c42dcf4ef3a18978fd5"
+    },
+    {
       "path": "VERSION",
-      "sha256": "c28fcca53637bc88e124af1725df13cb98c69dedefd62fb3cdbe1cdb6b760624"
+      "sha256": "c89b87c262e9d5ffd20e73aac74a1772adcc9f5a21682cc33adcf5086e5fef5c"
     }
   ]
 }

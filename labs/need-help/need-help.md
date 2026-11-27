@@ -50,7 +50,7 @@ You have the name of the lab/task you were attempting and its exact displayed er
 | Symptom | Check before retrying |
 | --- | --- |
 | Schema part fails or receipt differs | Keep the failed step/error; stop dependent setup. Do not clear receipts or rerun raw DDL. Use the selected clean/migration route. |
-| App import rejects readiness or target | Verify R7 schema and actual schema/workspace/alias. An upgrade requires the original app ID. |
+| App import rejects readiness or target | Verify the matching v2.1 contract and actual schema/workspace/alias. SQL-first also requires generated 03 binding; an upgrade retains the original app ID. |
 | Workspace is unavailable after creation | Verify mapping and explicit enablement; an ADD_WORKSPACE call alone is insufficient. |
 | Search shows Keyword only or Partial | Inspect local model setup/coverage, separately from chat profile/IAM. |
 | A saved context is missing | Check the app account, application and status filter. Sharing an account is not separate-user isolation. |
@@ -71,7 +71,7 @@ You have the name of the lab/task you were attempting and its exact displayed er
 
 3. If adding a screenshot, show the relevant control/result and account role. Keep passwords, entered secret bind values, private keys, authentication tokens, personal account details and private connection URLs out of the image. Do not post live session URLs in a public issue.
 
-**Expected outcome:** a facilitator or administrator can reproduce the failing step without receiving your secrets. See [authentication troubleshooting](../../docs/authentication.md#json-syntax-error-when-exercising-the-profile) and [migration recovery](../../docs/migrate-to-v2.md) where relevant.
+**Expected outcome:** a facilitator or administrator can reproduce the failing step without receiving your secrets. See [authentication troubleshooting](../../docs/authentication.md#json-syntax-error-when-exercising-the-profile) and [deployment recovery](../../docs/deployment-recovery.md) where relevant.
 
 ## Task 3: Resume from the last successful checkpoint
 

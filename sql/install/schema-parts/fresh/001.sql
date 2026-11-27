@@ -1,4 +1,4 @@
--- FRESH part 001 of 019. Run Script as the project owner.
+-- FRESH part 001 of 025. Run Script as the project owner.
 -- Run in manifest order. Stop after any error; do not skip ahead.
 -- An oversized atomic step is retained intact to preserve its checks.
 DECLARE l_step CLOB;
@@ -37,7 +37,7 @@ BEGIN
 END;');
  EXECUTE IMMEDIATE l_step;
  l_step:=TO_CLOB('');
- l_step:=l_step||TO_CLOB('BEGIN DBMS_OUTPUT.PUT_LINE(''KCV_SCHEMA_PART_COMPLETE=fresh:001/019'');END;');
+ l_step:=l_step||TO_CLOB('BEGIN DBMS_OUTPUT.PUT_LINE(''KCV_SCHEMA_PART_COMPLETE=fresh:001/025'');END;');
  EXECUTE IMMEDIATE l_step;
 END;
 /

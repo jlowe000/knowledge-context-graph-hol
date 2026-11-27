@@ -1,6 +1,6 @@
 app KCV-EXPLORER (
     name: Knowledge Context Explorer
-    version: 2.1.0-dev
+    version: 2.1.0
     logo {
         type: text
         text: &APP_TITLE.

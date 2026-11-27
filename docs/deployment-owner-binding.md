@@ -1,6 +1,6 @@
 # Bind setup to an imported application
 
-This is the **2.1.0 dev candidate** path for an installer using SQLcl or an owner SQL Worksheet. Native acceptance is pending. The published 2.0.0 application does not require this step.
+This is the **2.1.0** path for an installer using SQLcl or an owner SQL Worksheet. The [four-route record](../db/verification/release-v2.1-paths-validation.json) records successful binding in both curated SQL-first routes. Clean schema/app installation and binding used Worksheet, while its successful model test and enablement used genuine-owner SQLcl; the SQL-first upgrade completed its retained-model test and enablement in Worksheet. This is not a separate direct DEV-led Liquibase/native-import acceptance claim. The published 2.0.0 application does not require this step.
 
 After the ordered schema installation and matching application import, run [03_bind_deployment_owner.sql](../sql/install/03_bind_deployment_owner.sql) as the authenticated project owner. An approved proxy connection whose database user is that owner is supported by the identity checks. ADMIN changing `CURRENT_SCHEMA` is rejected. Do not run the maintained template in `sql/schema`; it deliberately stops without the generated verifier.
 

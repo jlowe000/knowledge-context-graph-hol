@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Load the attributed public summaries and register the prepared conversation services. The complete v2 static schema was installed in the previous lab; this lab does not create those tables/packages again.
+Load the attributed public summaries and register the prepared conversation services. The complete v2.1.0 static schema was installed in the previous lab; this lab does not create those tables/packages again.
 
 Estimated Lab Time: 10–20 minutes plus download/graph preparation time; planning estimate.
 
@@ -10,11 +10,11 @@ Estimated Lab Time: 10–20 minutes plus download/graph preparation time; planni
 
 - Load a pinned public dataset from GitHub and inspect its graph.
 - Register the configured scenario agents once on a clean installation.
-- Verify native evidence selection before using the app.
+- Prepare native scenario verification for after deployment readiness is enabled.
 
 ### Prerequisites
 
-[Database configuration](../configure-database/configure-database.md) completed: R7 schema verified, owner-private RDF network, working KCV_GENAI profile and registered AI_PROFILE setting. Use the actual owner Worksheet, normally KCV_LAB.
+[Database configuration](../configure-database/configure-database.md) completed: 121-step schema verified, owner-private RDF network, configured KCV_GENAI profile and registered AI_PROFILE setting. Use the actual owner Worksheet, normally KCV_LAB.
 
 ## Task 1: Load the public dataset
 
@@ -31,15 +31,15 @@ If GitHub is unavailable, use the [SQL fallback](../../docs/github-dataset-load.
 
 On a **clean** configured schema, run [03_scenario_agents.sql](../../sql/extensions/03_scenario_agents.sql) with F5 once. The script registers the prepared teams/tasks/tools using the existing profile. Do not rerun raw scenario-object, provenance or application-package creation scripts; the ordered schema installer already installed them.
 
-**Expected outcome:** registration completes. The application retrieves evidence before `KCV_GROUNDED_TEAM` generates an answer. Proposal handling retains the separate explorer team. An existing team is a reason to inspect an earlier run, not drop it. Existing installations use [migration](../../docs/migrate-to-v2.md) and the scoped registration refresh instead.
+**Expected outcome:** registration completes. The application retrieves evidence before `KCV_GROUNDED_TEAM` generates an answer. Proposal handling retains the separate explorer team. An existing team is a reason to inspect an earlier run, not drop it. Existing installations use [migration](../../docs/migrate-to-v2.1.md) and the scoped registration refresh instead.
 
-## Task 3: Verify the scenario
+## Task 3: Complete deployment before scenario verification
 
-Run the complete block in [verify_scenario_native.sql](../../integration-test/verify_scenario_native.sql) with Run Statement, excluding its slash, and supply the actual owner as KCV_SCHEMA. Review the explicit PASS output and any Oracle errors. This checks the supplied sample's graph/refinement behavior; it does not establish a successful chat answer. No inference is needed for these native read/refinement checks.
+First complete [app import, binding and explicit learning enablement](../deploy-explorer/deploy-explorer.md). The new readiness gate also applies to scenario operations; do not try to bypass it with native tests. Afterward, run the complete block in [verify_scenario_native.sql](../../integration-test/verify_scenario_native.sql) with Run Statement, excluding its slash, and supply the actual owner as KCV_SCHEMA. Review the explicit PASS output and any Oracle errors. This checks the supplied sample's graph/refinement behavior; it does not establish a successful chat answer. No inference is needed for these native read/refinement checks.
 
 Optionally run [verify_github_dataset.sql](../../integration-test/verify_github_dataset.sql) for maintainer acceptance. It performs public downloads and intentionally records wrong-hash/retry cases; do not confuse that expected failed run with an unexplained failure.
 
-**Expected outcome:** native evidence and source-scope checks pass with historical graph data preserved. Complete [local search setup](../../docs/context-search.md#worksheet-setup) if semantic library search is wanted, then continue to [deploy the app](../deploy-explorer/deploy-explorer.md).
+**Expected outcome:** collection/registration checks pass; scenario checks run after readiness is enabled. Complete [local search setup](../../docs/context-search.md#worksheet-setup) if semantic library search is wanted, then continue to [deploy the app](../deploy-explorer/deploy-explorer.md).
 
 ## Learn More
 

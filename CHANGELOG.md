@@ -1,8 +1,19 @@
 # Changes
 
-## 2.0.0 — unreleased
+## 2.1.0 — local release preparation, 28 November 2026
 
-My Contexts is being implemented and validated on dev. The candidate adds a persistent, owner-scoped draft library, explicit graph preview/apply, saved personal conversations and bounded model continuation, with directly authored native APEXlang pages and migration artifacts. The full v2 experience is not accepted or published yet.
+The validated distribution adds APEX-led installation alongside SQL-first deployment. Local dev/release commits are authorised; remote push and a v2.1.0 tag are separate actions.
+
+- Add an App Builder ZIP with Supporting Objects, guarded installation/compilation, guided owner-local credential and model setup, collection loading and explicit learner readiness.
+- Supply separate APEX-led and SQL-first clean-installation and populated v2.0.0-upgrade guides, preserving saved work and historical evidence within the recorded comparisons.
+- Maintain one 121-migration schema contract ending at `2.1.0-apl-r4-ready`, with an 11-page application and 16 maintained assets.
+- Record four prepared-environment route passes, bounded preservation checks and exact accepted runtime hashes in the [v2.1 validation record](db/verification/release-v2.1-paths-validation.json). SQL-first clean used Worksheet plus genuine-owner SQLcl; combined schema-file transport, new-database provisioning and first Java enablement remain outside acceptance.
+
+The release package keeps the supplied learning experience separate from dev's authoring, migration and build tools. These route results do not establish a new direct DEV-led Liquibase rehearsal.
+
+## 2.0.0 — published 25 November 2026
+
+My Contexts introduced a persistent, owner-scoped draft library, explicit graph preview/apply, saved personal conversations and bounded model continuation, with directly authored native APEXlang pages and migration artifacts. Tag `v2.0.0` identifies release commit `9597607c8cdd07b47893a92959bec9cb8f166829`. Its [SQL-first clean-installation and migration record](db/verification/release-v2-paths-validation.json) retains the exact acceptance scope. The development milestones below describe the increments that led to that release.
 
 - Introduce major.minor.patch product versions and immutable release tags.
 - Begin migration-managed personal-context storage and native page authoring.
@@ -15,7 +26,7 @@ My Contexts is being implemented and validated on dev. The candidate adds a pers
 - Validate independent APEX expiry continuation with six passages and three matched citations. A separate native model response contained malformed JSON, which retains an explicit warning rather than inferred citation matches. See `references/my-contexts-c3-validation.json` for current coverage and remaining fresh-deployment/Worksheet checks.
 - Remove obsolete authoring snapshots and one-off local transformation tools, clarify historical v1 guidance, and expand private-file exclusions. Record the publication-file and local-history privacy audit in `docs/publication-security-review.md`.
 
-Compatibility and upgrade instructions will be finalized against the accepted build. The major version reflects the planned functional uplift; it does not authorize removal of existing data or imply an untested downgrade is supported.
+The major version reflects the delivered functional uplift. The [historical v1-to-v2.0.0 bridge](release-docs/docs/migrate-to-v2.md) preserves that release's upgrade path; it does not establish a direct v1-to-v2.1 upgrade or an unsupported downgrade.
 
 ## 1.0.0 — baseline tagged 24 November 2026
 

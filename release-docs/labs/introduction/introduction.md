@@ -20,7 +20,8 @@ In this introduction, you will:
 | --- | --- |
 | App user | Browser, working app URL and app login supplied by your facilitator |
 | Developer learning | Release files and a deployed sample with private KCV_LAB Worksheet access |
-| Deploy the sample | Approved OCI/ADB resources, administrator support and model inference permission; the setup labs explain each step |
+| Deploy through APEX | Prepared supported ADB/workspace, authorised installer, app ZIP and model inference permission |
+| Deploy through SQL Worksheet | Approved ADB resources, ADMIN/owner access and model inference permission |
 
 No Python or local build is required on release. No OCI Console or SQL knowledge is required for app use. Developer learning introduces the sample-specific SQL/graph concepts as you follow the implementation. ADB means Autonomous Database; APEX is the browser application platform included with it.
 
@@ -57,7 +58,7 @@ No Python or local build is required on release. No OCI Console or SQL knowledge
 
 ## Task 3: Understand the sample
 
-1. Review the sample: nine reviewed public presentation records, the expanded public research catalogue and attributed editorial summaries of selected content, three fictional learner contexts and a prepared APEX app. The supplied SQL loads the collection. It does not redistribute the original PDFs.
+1. Review the sample: nine reviewed public presentation records, the expanded public research catalogue and attributed editorial summaries of selected content, three fictional learner contexts and a prepared APEX app. Setup loads the collection through guided APEX actions or the supplied SQL. It does not redistribute the original PDFs.
 
 2. Notice the boundary: context changes affect which evidence is selected. They do not rewrite source facts, certify correctness or train the model. A matched citation points to supplied evidence; follow its original page link to check the source.
 
@@ -69,7 +70,7 @@ No Python or local build is required on release. No OCI Console or SQL knowledge
 
 - [Choose your learning path](../../docs/learning-paths.md)
 - [Source attribution](../../NOTICE.md)
-- [Deployment route](../../docs/fresh-serverless-deployment.md)
+- [Deployment route selector](../../docs/installation-paths.md)
 
 ## Acknowledgements
 

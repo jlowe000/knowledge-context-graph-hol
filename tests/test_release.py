@@ -13,6 +13,7 @@ from kcv import pipeline as p
 from scripts.build_release import build, validate, distribution_metadata, compare_accepted_package
 from scripts import build_release_sql
 from scripts import build_database_installers as migrations
+from tests.test_release_apex_led import package_fixture
 
 
 def decoded_clob(text, variable):
@@ -33,6 +34,7 @@ class ReleaseTests(unittest.TestCase):
         # Fixture for dataset/distribution regression only. Real engine-export
         # gating is exercised separately; this mock is never an acceptance receipt.
         with patch('scripts.build_release.verify_upgrade_export', return_value={'fixture_only': True}), \
+             patch('scripts.build_release.reviewed_apexlang_package', return_value=package_fixture()), \
              patch('scripts.build_apex_worksheet.verify_upgrade_export', return_value={'fixture_only': True}):
             cls.folder = build(Path(cls.temporary.name) / 'release')
 
@@ -44,7 +46,10 @@ class ReleaseTests(unittest.TestCase):
         names = {f.relative_to(self.folder).as_posix() for f in self.folder.rglob('*') if f.is_file()}
         for required in ['sql/install/10_load_dataset.sql', 'sql/install/20_install_apex.sql',
                          'sql/install/20_upgrade_apex.sql','VERSION','release-provenance.json',
-                         'sql/install/00_complete_v1_optional.sql',
+                         'apex/kcv-explorer.apx.zip', 'apex/apexlang-validation.json',
+                         'sql/install/03_bind_deployment_owner.sql',
+                         'sql/admin/12_prepare_apexlang_rest.sql', 'sql/admin/13_create_builder_login.sql',
+                         'sql/admin/14_prepare_owner_credential.sql', 'sql/admin/15_create_apex_owner.sql',
                          'apex/export-validation.json','db/manifest.json',
                          'sql/install/schema-parts/manifest.json','sql/recovery/manifest.json',
                          'docs/release-dataset.md', 'README.md', 'LICENSE.txt', 'NOTICE.md',
@@ -61,6 +66,11 @@ class ReleaseTests(unittest.TestCase):
                          'release-docs', 'config', '.venv'} for n in names))
         self.assertFalse(any(n.endswith(('.py', '.sh', '.env', '.pem', '.key')) for n in names))
         self.assertNotIn('docs/development.md', names)
+        self.assertNotIn('sql/admin/09_create_dev_schema.sql', names)
+        self.assertNotIn('sql/admin/10_create_dev_workspace.sql', names)
+        self.assertNotIn('sql/install/00_complete_v1_optional.sql', names)
+        self.assertNotIn('sql/install/00_adopt_schema_baseline.sql', names)
+        self.assertEqual((self.folder/'apex/kcv-explorer.apx.zip').read_bytes(), package_fixture()['archive_bytes'])
         self.assertFalse((self.folder / 'integration-test/mocks').exists())
         for path in self.folder.rglob('*.md'):
             self.assertNotIn('<copy>',path.read_text(encoding='utf-8'),str(path))
@@ -118,11 +128,10 @@ class ReleaseTests(unittest.TestCase):
         readme = (self.folder / 'README.md').read_text(encoding='utf-8')
         for route in ['labs/my-contexts/my-contexts.md',
                       'labs/understand-collection/understand-collection.md',
-                      'docs/fresh-serverless-deployment.md','docs/migrate-to-v2.md']:
+                      'docs/fresh-serverless-deployment.md', 'docs/apex-led-installation.md',
+                      'docs/installation-paths.md']:
             self.assertIn(route, readme)
             self.assertTrue((self.folder / route).is_file())
-        anchor = 'docs/ui-walkthrough.md#explore-the-expanded-research-with-casey'
-        self.assertIn(anchor, readme)
         walkthrough = (self.folder / 'docs/ui-walkthrough.md').read_text(encoding='utf-8')
         self.assertIn('## Explore the expanded research with Casey', walkthrough)
         self.assertIn('S10',walkthrough)

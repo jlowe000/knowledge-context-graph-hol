@@ -1,4 +1,6 @@
-# Install through APEX
+# Install through APEX — development rehearsal reference
+
+This page retains the r13 development procedure and its historical acceptance scope. For the current curated v2.1.0 package, follow [APEX-led installation](../release-docs/docs/apex-led-installation.md) or [upgrade](../release-docs/docs/apex-led-upgrade.md), supported by the subsequent [four-route record](../db/verification/release-v2.1-paths-validation.json). Publication statements below describe the earlier checkpoint, not current local promotion status.
 
 **Unpublished dev candidate: both prepared-environment core paths passed with coverage limits.** R13 passed clean ZIP installation, guided credential/profile setup, real learner evidence and new-sign-in persistence, plus a populated published-v2 same-application upgrade and historical evidence reopening. Reviewer isolation and the recorded credential/concurrency/recovery checks also passed. See the [current acceptance review](apex-led-acceptance-review.md) for exact scopes and retained historical evidence. New-database provisioning and first Java enablement/restart were not rehearsed; platform audit/request-log protection remains unproven.
 

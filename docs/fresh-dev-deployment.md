@@ -1,12 +1,12 @@
 # Deploy a fresh v2 development instance
 
-Use this route to install the My Contexts candidate into a **new schema and APEX workspace on an existing ADB Serverless database**. It preserves other schemas, applications and their data. It does not provision a new database or repeat Java enablement. The published SQL-first release has its own learning experience and remains unchanged.
+Use this route to install the maintained dev application into a **new schema and APEX workspace on an existing ADB Serverless database**. It preserves other schemas, applications and their data. It does not provision a new database or repeat Java enablement. The curated release has its own [APEX-led and SQL-first learning/deployment experience](../release-docs/docs/installation-paths.md).
 
-**Current dev route:** use a build-named owner and workspace, such as `KCV_V2_001`, for the R7 schema and nine-page application. The [build lifecycle guide](dev-build-lifecycle.md) defines the naming, replacement and retirement process. A replacement build gets a new identity; an in-place migration preserves the existing identity and saved work.
+**Current dev contract:** use an unused build-named owner and workspace, such as `KCV_V2_001`, for the v2.1.0 schema ending at `2.1.0-apl-r4-ready` and the 11-page application with 16 maintained assets. The [build lifecycle guide](dev-build-lifecycle.md) defines the naming, replacement and retirement process. A replacement build gets a new identity; an in-place migration preserves the existing identity and saved work. The historical direct DEV-led rehearsal below is not a new v2.1.0 Liquibase acceptance claim.
 
 **25 November 2026 validation:** a fresh build from dev commit `32e111f6340ab97beb0720dc867e7c2ab8ab46ae` passed the schema-only owner/workspace setup, Liquibase installation, owner-local model access, public data load, local search and native APEXlang import. It had 96 COMPLETE project receipts, 97 Liquibase changesets, zero invalid objects, nine pages and seven assets. Native grounded-answer checks passed initial, adopted-revision and provider-history-expiry requests. The signed-in browser passed sample/personal navigation, draft publication, evidence graphs, explicit adoption, a grounded follow-up, semantic search and reopening historical evidence. See the [validation scope](dev-build-lifecycle.md#validation-scope) for limits.
 
-The separate [SQL-first clean/migration record](../db/verification/release-v2-paths-validation.json) covers the Worksheet rehearsals. Historical [R4 fresh acceptance](../db/verification/fresh-dev-validation.json), [navigation](../db/verification/sample-navigation-validation.json), [search](../db/verification/context-search-validation.json) and [deletion](../db/verification/context-delete-validation.json) records retain their own scope. These documentation changes do not alter the release branch.
+The [v2.1.0 four-route record](../db/verification/release-v2.1-paths-validation.json) covers the separate curated APEX-led and SQL-first prepared-environment rehearsals. The [v2.0.0 SQL-first record](../db/verification/release-v2-paths-validation.json), [R4 fresh acceptance](../db/verification/fresh-dev-validation.json), [navigation](../db/verification/sample-navigation-validation.json), [search](../db/verification/context-search-validation.json) and [deletion](../db/verification/context-delete-validation.json) records retain their historical scope. Record the results for the actual dev transport you execute.
 
 ## 1. Choose a separate target and check prerequisites
 
@@ -222,7 +222,7 @@ apex validate -input apex/application -workspace KCV_V2_001
 apex import -input apex/application -workspace KCV_V2_001 -schema KCV_V2_001 -id 123 -alias KCV-V2-001 -name "Knowledge Context Explorer"
 ```
 
-Use `123` only after checking it is unused; choose another unused ID for each replacement build. Import can replace an existing selected application. The numbered-build rehearsal used direct ADMIN with explicit targets and produced nine pages and seven static assets, with the existing `regionBody` deprecation warning. Inspect the output and installed target rather than relying only on SQLcl's process exit code. See [APEXlang authoring](apexlang-development.md) for engine export and receipt requirements.
+Use `123` only after checking it is unused; choose another unused ID for each replacement build. Import can replace an existing selected application. The historical v2.0.0 numbered-build rehearsal used direct ADMIN with explicit targets and produced nine pages and seven static assets, with the existing `regionBody` deprecation warning. Current v2.1.0 metadata identifies 11 pages and 16 maintained assets. Inspect the output and installed target rather than relying only on SQLcl's process exit code. See [APEXlang authoring](apexlang-development.md) for engine export and receipt requirements.
 
 The earlier owner-proxy import/activation failure is retained in the validation record. The cause was workspace inactivity, confirmed through the public APEX error message. After ENABLE_WORKSPACE, `APEX_UTIL.SET_WORKSPACE` succeeded in the same true-owner proxy identity. NO AUTHENTICATION and proxy access required no change. The actual app import in this rehearsal used direct ADMIN with explicit targets; successful owner workspace activation does not itself constitute a separate owner-import test.
 
@@ -238,7 +238,7 @@ This alternative needs a password-enabled owner Worksheet, as used in the separa
 
 ## 11. Test the fresh experience and record its limits
 
-For the **2.1.0 dev candidate**, complete the [owner binding and setup readiness step](deployment-owner-binding.md) after importing the matching app and before attempting the gated learner pages. This additional path remains subject to its native acceptance; the earlier 2.0.0 rehearsal below does not establish it.
+For **2.1.0**, complete the [owner binding and setup readiness step](deployment-owner-binding.md) after importing the matching app and before attempting the gated learner pages. The curated SQL-first routes exercised this binding and readiness contract within their recorded scopes; they do not establish a separate direct DEV-led Liquibase/native-import rehearsal.
 
 Sign in to the new application using its new workspace account. Follow the [My Contexts manual review](my-contexts-manual-test.md): create or copy a draft, review/apply, start a conversation, ask a real question, inspect Sources and Answer lineage, record an observation, refine deliberately and reopen the saved conversation. Check that retrieval has APPLICATION origin before model dispatch, citations match supplied passages and earlier evidence remains unchanged. Exercise the sample route separately.
 

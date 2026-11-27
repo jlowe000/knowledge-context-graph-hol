@@ -1,6 +1,6 @@
 # Developing the APEX-led package
 
-This is a maintainer guide for the unpublished 2.1.0 dev candidate. Both prepared-environment core paths passed within the [current acceptance review](apex-led-acceptance-review.md) scope; platform and provisioning limits remain explicit. Workspace installers follow [Install through APEX](apex-led-deployment.md). The published SQL-first v2.0.0 package and release branch are unchanged.
+This is a maintainer guide for the v2.1.0 implementation. The curated package's four prepared-environment routes passed within the [current packaging plan](apex-led-release-packaging-plan.md) scope, and local dev/release commits are authorised. Remote push and tag creation are separate. Platform and provisioning limits remain explicit. Workspace installers follow [Install through APEX](apex-led-deployment.md); release has its own curated consumer guides.
 
 The [acceptance review](apex-led-acceptance-review.md) separates current passes, remaining checks on the populated test build, checks requiring another isolated environment and historical artifacts to retain.
 
@@ -112,6 +112,8 @@ Record these as separate checks:
 4. App Builder imports the actual supplied ZIP, then executes its full Supporting Objects clean installation and supported upgrade.
 5. Guided setup, learner authorisation, real answers/evidence, persistence, maintenance and interrupted-operation recovery pass against those installed targets.
 6. Preservation checks confirm the existing protected installation and saved data remain intact. Record observed concurrent runtime additions separately from destructive changes.
+
+**Browser account handoff:** in the installer's Deployment setup page, verify and record the operation's outcome first, then close its processing/error/success banner before opening the account menu or choosing **Sign Out**. The overlay can intercept those controls. If the outcome is still unknown, inspect readiness/receipts before dismissing the banner or changing accounts.
 
 The decoder probe passed in the isolated ADB owner, including six rejection cases; the corrupt gzip fixture returned ORA-29294. This does not establish the full install, upgrade or browser journey. Keep intermediate archives and private connection/log details in ignored work areas; publish only the accepted, scanned artifact and its safe validation record after explicit publication authorisation.
 

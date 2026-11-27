@@ -73,17 +73,33 @@ def build(root, output, target_bytes=PART_TARGET_BYTES):
                          'steps': [name for name, _ in group], 'success_marker': marker})
         result['routes'][route] = rows
     (output/'manifest.json').write_text(json.dumps(result, indent=2)+'\n', encoding='utf-8', newline='\n')
+    upgrade_start = (
+        'the verified published v2.0 baseline with valid migration receipts. A v1 installation must first '
+        'follow the pinned published v2.0 bridge; direct v1-to-v2.1 acceptance is not claimed. '
+        if manifest['target_product_version'].split('.')[:2] == ['2', '1'] else
+        'a v1 schema that has passed the documented optional-baseline completion and '
+        '`../00_adopt_schema_baseline.sql` checks, or an installation with valid migration receipts. ')
     (output/'README.md').write_text(
         '# Ordered schema installation parts\n\n'
-        'Choose **fresh** for an empty project schema. Choose **upgrade** only after the existing '
-        'v1 schema has passed the documented optional-baseline completion and `../00_adopt_schema_baseline.sql` checks, '
-        'or when it already has valid migration receipts. '
+        'Choose **fresh** for an empty project schema. Choose **upgrade** only when starting from '
+        + upgrade_start +
         'Do not run both routes.\n\n'
+        'Within the chosen route, select **one execution form**: upload the complete '
+        '[combined clean installer](../00_install_schema.sql) or '
+        '[combined upgrade installer](../01_upgrade_schema.sql), as appropriate, '
+        'or use the corresponding numbered parts below. Both forms contain the same ordered '
+        'canonical steps; the combined file keeps them in one outer failure-stop block. '
+        'Use Worksheet **Open File** to load the entire SQL file and **Run Script (F5)** as the '
+        'actual project owner. Combined files reduce file handling, but their size and actual '
+        'Worksheet execution must be checked for the specific release; generation is not transport acceptance.\n\n'
+        'If an upload is rejected **before execution**, the other form remains an option. '
+        'Once migrations have started, or execution is uncertain, inspect receipts and the recovery '
+        'guidance before changing forms or retrying. Do not run the other form as an extra installation.\n\n'
         'Open each numbered `.sql` file in the chosen directory in order. Run its complete contents with '
         'SQL Worksheet **Run Script (F5)** as the project schema owner. Stop on any error. Each file is one '
         'outer PL/SQL block so later steps in that file do not execute after a failure. DDL can already '
         'have committed: inspect the receipt and use the documented recovery process before retrying. '
-        'The last part performs full schema verification. Do not also run the combined installer.\n\n'
+        'The last part performs full schema verification.\n\n'
         '`manifest.json` records exact order, step IDs, file sizes, SHA-256 hashes and success markers. '
         'The grouping target is one MiB, not a hard ceiling. Complete verification/migration blocks '
         'larger than that remain intact. Generation alone does not establish browser upload limits or '

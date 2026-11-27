@@ -1,4 +1,6 @@
-# Prepare an environment for APEX-led installation
+# Prepare an environment for APEX-led installation — development reference
+
+This page retains the r13 development preparation procedure and its historical scope. For the current curated v2.1.0 package, use [administrator preparation](../release-docs/docs/apex-led-administrator-preparation.md) and the [installation selector](../release-docs/docs/installation-paths.md). The subsequent [four-route record](../db/verification/release-v2.1-paths-validation.json) covers prepared environments, not new-database provisioning or first Java activation. Publication statements below describe the earlier checkpoint.
 
 **Unpublished dev candidate guidance; both prepared-environment core paths passed with stated limits.** Follow the [candidate validation record](../db/verification/apex-led-candidate-validation.json) for measured scope. Preparation is performed by an administrator or facilitator before the workspace installer follows [Install through APEX](apex-led-deployment.md). The published v2.0.0 package remains SQL-first.
 

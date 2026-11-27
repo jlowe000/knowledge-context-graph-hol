@@ -1,47 +1,47 @@
 # Knowledge Context Explorer — use it and understand it
 
-This is the **v2.0.0 SQL-first learner distribution**. Choose the experience that fits what you want to learn:
+This is the **v2.1.0 distribution**, prepared from validated dev sources for release. APEX-led and SQL-first clean installation and populated v2.0.0 upgrade passed on prepared environments, within the scopes in the [v2.1 path record](db/verification/release-v2.1-paths-validation.json). The package retains the tested runtime files. Local release preparation does not publish a GitHub branch or tag.
 
 | Your goal | Start here | What you need |
 | --- | --- | --- |
-| Use your own learning context | [My Contexts](labs/my-contexts/my-contexts.md) | An existing app URL and app login from your facilitator |
-| Learn how the collection works as a developer | [Developer learning lab](labs/understand-collection/understand-collection.md) | A deployed sample and your lab-owner SQL Worksheet access |
-| Install into an empty project schema | [Clean installation](docs/fresh-serverless-deployment.md) | An approved ADB Serverless environment and administrator/model access |
-| Upgrade an existing installation | [Migration to v2](docs/migrate-to-v2.md) | A supported existing installation, its recorded identities and a recovery plan |
-| Build your own adaptation | Select **dev**, then read `docs/build-your-own.md` | The source/preparation/build environment documented on dev |
+| Try your own learning question | [My Contexts](labs/my-contexts/my-contexts.md) | A facilitator-provided app URL and individual app login |
+| Understand the supplied collection as a developer | [Developer learning lab](labs/understand-collection/understand-collection.md) | A deployed sample and authorised owner Worksheet access |
+| Install through App Builder | [APEX-led clean installation](docs/apex-led-installation.md) | A prepared supported ADB/workspace and application ZIP |
+| Install using Database Actions | [SQL-first clean installation](docs/fresh-serverless-deployment.md) | Administrator and project-owner Worksheet access |
+| Upgrade a supported v2.0.0 installation | [Choose the upgrade route](docs/installation-paths.md) | Existing identities, saved work, maintenance window and recovery preparation |
+| Build your own adaptation | [DEV-led guide on dev](https://github.com/jlowe000/knowledge-context-graph-hol/blob/dev/docs/build-your-own.md) | The separate source, migration and build environment |
 
-Read [Choose your learning path](docs/learning-paths.md) if you are unsure. **Release is for both end users and developers learning this knowledge-collection example.** Dev is for people who want to change the example into their own implementation.
+**Using an existing app needs no OCI account, database login, SQL or local tooling.** Choose [your learning path](docs/learning-paths.md). Release is for app users and developers learning this supplied collection; dev is for changing its implementation.
 
-For deployment, first choose between [clean installation and migration](docs/installation-paths.md). Both use supplied SQL through Database Actions; neither requires Liquibase, SQLcl or Python. Both routes passed their scoped candidate02 Worksheet/browser rehearsals, including fresh-sign-in reopening, as recorded in [release-path acceptance](db/verification/release-v2-paths-validation.json). The supplied APEX installer instructions incorporate the tested **Run Statement** correction. The acceptance record retains the exact tested package and its limitations.
+## Three deployment experiences
+
+- **APEX-led:** an administrator prepares ADB and the workspace; the installer imports the supplied application ZIP through App Builder, installs its Supporting Objects and completes guided setup. The ZIP contains backend installation and compilation steps, not credentials or saved learner data.
+- **OCI / DBA-led:** use supplied SQL through Database Actions for schema, runtime and app installation, then complete the same binding/readiness gates. No Python, SQLcl, Liquibase client or local wallet is needed.
+- **DEV-led:** change sources, ontology, APIs, UI or migrations using dev's own tooling and validation. Those tools are not required to use or deploy this package.
+
+Choose [clean installation or upgrade within the intended experience](docs/installation-paths.md). Do not combine Supporting Objects installation with a second SQL-first schema installation.
 
 ## What you can experience
 
-Create an owned context or explore a fictional sample, inspect connected sources and answer lineage, clarify an objective or topic, compare answers and record what you learned. Save multiple conversations, explicitly adopt revised context, search your library and return after signing in again. Developers can also inspect the source/version/evidence model, follow the native SPARQL query and exercise the supplied SQL APIs.
+Create an owned context or explore a fictional sample. Ask a question, inspect connected sources and answer lineage, refine your objective or learning focus, and record what you learned. Save multiple conversations, explicitly adopt revised context and reopen historical evidence after signing in again. Local semantic search is optional; the app labels keyword-only matching when its embedding model is unavailable.
 
-Using a hosted app requires no OCI Console, SQL or Python access. Deploying this sample uses SQL through Database Actions and a [short call that loads the dataset directly from GitHub](docs/github-dataset-load.md); no Python, client wallet or local build is needed. The [architecture](docs/architecture.md) explains SPARQL and the role of APEXlang in preparing the deployable app.
+Developers can inspect the source/version/evidence model, follow native SPARQL retrieval and exercise the SQL APIs. The [architecture](docs/architecture.md) explains how APEXlang, SQL/PLSQL, the graph and model calls fit together.
 
-## Included sample
+## Included material
 
-- The original nine reviewed sources, the expanded public research catalogue, attributed editorial summaries and three fictional learner contexts. Exact coverage is recorded in generated/build-report.json.
-- Ontology, graph/model/agent SQL, scenario APIs and native verification.
-- Ordered schema installation/upgrade parts, [GitHub dataset loader](sql/install/10_load_github.sql), new/same-ID APEX installers and [standard APEX export](apex/kcv-explorer.sql).
-- Personal contexts, local semantic/keyword search and historical answer evidence; private runtime records are never part of the public dataset.
-- Separate user, developer-learning and deployment guides.
+- Public research catalogue, attributed editorial summaries, ontology and three fictional contexts; coverage is recorded in `generated/build-report.json`.
+- APEX-led ZIP with Supporting Objects, SQL-first ordered schema parts, new/same-ID app installers and standard SQL app export. See the [artifact selector](docs/installation-paths.md#use-one-matching-package).
+- [Pinned GitHub dataset loader](docs/github-dataset-load.md) and SQL fallback.
+- Separate user, developer-learning, administrator and installation guides.
 
-The [dataset](docs/release-dataset.md) contains editorial summaries of public pages, not verbatim PDF extracts. Summary IDs/hashes identify that text; follow the original page links to check the source.
+The [dataset](docs/release-dataset.md) contains attributed editorial summaries, not verbatim PDF extraction or private runtime records. The collection is loaded during setup; personal graphs, conversations, credentials and app accounts are not distributed. Keep the approved public dataset commit and manifest hash together; a local build is not a new published GitHub dataset URL. Catalogue-only references remain discovery links; public access does not transfer copyright.
 
-The dataset load uses a published release commit and the supplied manifest hash. The commit must contain `data/load/manifest.json` and all its JSON parts; generating a local release does not publish them. The [load guide](docs/github-dataset-load.md) explains choosing the commit, monitoring progress and the retained SQL fallback.
+## Validation and limitations
 
-The [validation record](docs/scenario-validation.md) separates historical v1/dev checks from the current v2 release-package rehearsals. Fresh installation and migration need their own evidence; generated artifacts alone do not establish either pass. A facilitator should confirm the installed version, collection and available search mode before a workshop.
+The [validation guide](docs/scenario-validation.md) separates published v2.0.0 SQL-first evidence, earlier r13 tests and this distribution's four passed prepared-environment routes. Results include readiness, learner evidence, saved-answer reopening and bounded preservation checks. SQL-first clean installation used Worksheet for schema/app installation and genuine-owner SQLcl for its successful model test and enablement; it is not an all-Worksheet acceptance claim. Import success alone does not verify those outcomes. Confirm the exact package, active collection, readiness and search mode.
 
-The supplied engine-generated APEX export includes the non-PDF evidence display and versioned assets; no separate JavaScript upload is needed after a normal import. The [Casey walkthrough](docs/ui-walkthrough.md#explore-the-expanded-research-with-casey) shows how to add a healthcare focus and inspect added research alongside the original presentation.
-
-[MIT licence](LICENSE.txt) · [attribution](NOTICE.md) · [cleanup](docs/cleanup.md). No WMS/reservation metadata or other upstream workshops are included.
+Positive execution of the public administrator preparation templates, new-database provisioning and first Java enablement/restart remain outside the prepared-environment results. Finite privacy checks do not prove every platform log excludes private input. If a bare context-overview link fails after sign-in, open **My Contexts** and select the context again. See [recovery](docs/deployment-recovery.md) before retrying interrupted work.
 
 ## Licence
 
-An independent project for education, learning and experimentation. Copyright (c) 2026 Jason Lowe. Original project contributions are licensed under [MIT](LICENSE.txt). Third-party material retains its respective licences, including Oracle LiveLabs material under UPL 1.0, Font APEX assets under their upstream terms, and reused [public file-list metadata](third-party/connormcd-misc-scripts/README.md) under Apache 2.0. See [NOTICE.md](NOTICE.md) for attribution and scope.
-
-## Public research catalogue
-
-The graph also includes public research references admitted through recorded access checks or the [manually approved public-source rules](references/public-source-policy.json). Sources matching those rules are labelled **manually marked as public**; their actual access-test results remain separate. Download and open the [searchable catalogue](generated/public-catalog.html), or follow the [catalogue learning steps](docs/public-research-catalog.md) to browse the same source/topic/version relationships through SQL and SPARQL. The [access-check record](references/public-access-checks.json) distinguishes successful verification from failed or unsupported checks. Readable research now contributes actual passages on dev and selected attributed summaries on release. Catalogue-only references remain discovery links; see the content-ingestion record for coverage gaps. Public classification does not transfer source copyright or licences.
+Copyright (c) 2026 Jason Lowe. Original work is under [MIT](LICENSE.txt). Third-party material retains its terms, including Oracle LiveLabs UPL material, Font APEX assets and reused public file-list metadata under Apache 2.0. Keep [NOTICE.md](NOTICE.md) and applicable `third-party/` notices with redistributed packages. See [cleanup](docs/cleanup.md) before retiring an installation. No WMS metadata or other upstream workshops are included.

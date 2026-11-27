@@ -4,7 +4,9 @@ The v2 application is authored directly under `apex/application/`. SQL/PLSQL sti
 
 ## Current candidate
 
-R7 adds local context search and saved-objective previews on page 10. Its [validation record](../db/verification/context-search-validation.json) reports native upgrade/repeat, search regressions, APEX import with nine pages/seven assets/33 parsed components, and scoped browser search/filter checks. The [R5 deletion record](../db/verification/context-delete-validation.json) retains successful native tests and browser review/Cancel; permanent-delete browser confirmation remains pending.
+The v2.1.0 source has versioned native SQL/APEXlang exports with 11 pages and 16 maintained assets. Native application-only import/export, ZIP validation and all four curated-package deployment routes passed within the prepared-environment scopes in [the packaging plan](apex-led-release-packaging-plan.md). Local release promotion is approved; remote publication is a separate action.
+
+Historical v2.0.0 R7 adds local context search and saved-objective previews on page 10. Its [validation record](../db/verification/context-search-validation.json) reports native upgrade/repeat, search regressions, APEX import with nine pages/seven assets/33 parsed components, and scoped browser search/filter checks. The [R5 deletion record](../db/verification/context-delete-validation.json) retains successful native tests and browser review/Cancel; permanent-delete browser confirmation remains pending.
 
 The preceding [fresh R4 deployment](../db/verification/fresh-dev-validation.json) passed schema/data, native/model and personal/sample browser checks. The historical [R4 record](../db/verification/c3-r4-validation.json) and [journey record](../references/my-contexts-c3-validation.json) retain the earlier browser expiry pass and separate malformed-JSON native failure. The later [SQL-first installation-path rehearsal](../db/verification/release-v2-paths-validation.json) covers a clean R7 installation and a published-v1 migration, including new-app and same-ID Worksheet imports with the documented Run Statement correction. These records describe their tested source versions and routes; they do not certify an untested replacement build or imply release promotion.
 
@@ -63,7 +65,7 @@ Library and overview paging is processed on submit, before APEX redirects back t
 
 Export the reviewed, deployed candidate through APEX/SQLcl to `apex/kcv-explorer.sql` and record its tested scope and unresolved limitations separately. Never hand-edit this generated SQL to imitate new pages. Retain the app's page numbers/aliases and use a supported engine export.
 
-The current nine-page engine export and [export-validation.json](../apex/export-validation.json) identify the tested R7 source and seven application assets. New/upgrade Worksheet wrappers are generated from that artifact; the [installation-path rehearsal](../db/verification/release-v2-paths-validation.json) records their bounded execution acceptance. Revalidate a changed source/export or deployment route. The receipt validates artifact provenance; it does not certify every deployment route, model response or release readiness.
+The current [SQL export receipt](../apex/export-validation.json) identifies the versioned v2.1.0 definition-only export: 11 pages and 16 maintained assets. The companion [APEXlang receipt](../apex/apexlang-export-validation.json) identifies the native ZIP and canonical Supporting Objects. Native import/export ran without executing those Supporting Objects; its success does not establish backend or learner readiness. The older nine-page/seven-asset R7 receipt and [v2.0.0 route rehearsal](../db/verification/release-v2-paths-validation.json) retain their historical scope. Current packaging uses the explicit inputs and four independent route checks in [the packaging plan](apex-led-release-packaging-plan.md).
 
 The wrapper supports distinct `new` and `upgrade` modes. Its defaults are the legacy KCV_KNOWLEDGE/KCV_LAB target, so dev builds must specify every target explicitly. Verify the workspace mapping before executing the generated result. For a new first build:
 
@@ -81,13 +83,13 @@ For a replacement, use `new` with the `KCV_V2_002` schema/workspace, `KCV-V2-002
 
 Follow [fresh dev deployment](fresh-dev-deployment.md) for the normal native APEXlang route. The dev owner is `NO AUTHENTICATION` and uses SQLcl proxy access; it has no direct Worksheet password. The generated Worksheet route is for a deployment with an authenticated owner Worksheet, as used in the SQL-first release rehearsal. Execute either wrapper there with **Run Statement (Ctrl+Enter)**: select the complete outer `DECLARE` through the final `END;`, excluding the final slash. Supply any target binds and the existing app ID for an upgrade. F5 does not open these bind prompts. Choose one import route for that installation; running both new-install routes creates separate apps and does not establish a single tested deployment path.
 
-`new` allocates a new application ID. Native APEXlang import instead takes an explicit `-id`; use an unused ID and the chosen build's explicit workspace, schema and alias as described in the fresh-deployment guide. Do not assume a historical app ID is available. `upgrade` requires the existing app ID in a Worksheet bind prompt, and checks workspace, parsing schema, alias, the completed `2.0.0-c3-r7-ready` migration and all sixteen required package specification/body objects, including personal-journey, conversation, deletion and context search before import. It preserves the application ID. APEX generates an offset to avoid internal metadata collisions; page numbers and aliases are retained, but internal numeric component IDs are not an ownership key.
+`new` allocates a new application ID. Native APEXlang import instead takes an explicit `-id`; use an unused ID and the chosen build's explicit workspace, schema and alias as described in the fresh-deployment guide. Do not assume a historical app ID is available. `upgrade` requires the existing app ID in a Worksheet bind prompt, and checks workspace, parsing schema and alias, then verifies the matching canonical schema contract before import. The current contract has 121 completed migrations ending at `2.1.0-apl-r4-ready`; retain the full verifier rather than substituting a receipt count. It preserves the application ID. APEX generates an offset to avoid internal metadata collisions; page numbers and aliases are retained, but internal numeric component IDs are not an ownership key.
 
 For product version 2 or later, **both new and upgrade modes** require `apex/export-validation.json`, recorded only after the actual engine import/export acceptance, containing:
 
 ```json
 {
-  "product_version": "2.0.0",
+  "product_version": "2.1.0",
   "application_source_sha256": "hash of the complete authored application tree",
   "export_sql_sha256": "hash of the engine SQL export with LF text endings",
   "engine_import_export_verified": true
@@ -95,5 +97,7 @@ For product version 2 or later, **both new and upgrade modes** require `apex/exp
 ```
 
 `application_source_hash()` in `scripts/build_apex_worksheet.py` computes the portable source-tree hash. The receipt ties the checked-in source, SQL export and product version together; it is not a signature or an automatic test result. Do not create a positive receipt from an offline compiler run alone. A missing or stale receipt blocks v2 installer generation, preventing the old v1 export from being silently treated as v2. The legacy fresh-installer path remains supported for a version-1 source tree (including a legacy tree without `VERSION`).
+
+For SQL-first v2.1.0, run the generated owner binding after app import, then the required setup TEST_MODEL and explicit ENABLE_LEARNING gates; use [owner binding](deployment-owner-binding.md). App Builder uses the companion ZIP's guarded Supporting Objects path. Keep those distinct; the definition-only SQL export must not execute the backend installation a second time.
 
 Test fresh install and same-ID upgrade separately. A context saved before an app upgrade must remain visible afterward, and another application's session must not attach it. Browser tests also cover blank creation, failed-save retention, sample copying, more than 20 contexts, archive/restore, two-account tampering, keyboard operation and narrow layouts. Keep private environment/login details out of screenshots and public test records.

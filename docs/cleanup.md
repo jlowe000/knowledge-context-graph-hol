@@ -1,6 +1,10 @@
 # Cleanup and temporary resources
 
-Local files: `work/` contains public source downloads, full extracted text, raw model output and review logs. It is ignored by Git. Retain anything you need for reviewing results, then remove only this project's work directory using your normal file-management tools. Never remove another application's database volume.
+Local files: `work/` contains source downloads, extracted text, runtime evidence, recovery material, build inputs and generated packages. Git exclusion does not make those files disposable. Follow the [dev build lifecycle](dev-build-lifecycle.md) and inventory exact paths before cleanup. Remove only reviewed obsolete outputs after confirming they are neither dependencies nor unique evidence. Do not delete `work/` wholesale.
+
+Preserve the retained demo's artifacts and configuration requirements, current reviewed ZIP/native exports and canonical Supporting Objects inputs, verification receipts, verified backups, shared wallet, ADMIN/current-owner SQLcl connections, active local toolchain and research inputs. Do not copy private credentials or runtime material into Git. Remove obsolete saved owner aliases only after the corresponding database retirement is verified; a local alias deletion does not retire a schema.
+
+For numbered `KCV_V<major>_<build>` installations, use the [exact-target retirement process](dev-build-lifecycle.md#retire-an-exact-build). Confirm which build is retained, capture recovery/preservation checks, and review every other schema/workspace/app before removal. The legacy `KCV_LAB` notes below are not a generic numbered-build teardown. These instructions do not assert that any current cleanup has completed.
 
 The temporary ADB is a separately provisioned OCI resource. If it exists only for this exercise, review/export the evidence you need and terminate that exact instance through your normal OCI lifecycle process. Deletion/termination is not performed by any project script.
 

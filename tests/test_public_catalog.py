@@ -9,6 +9,7 @@ from rdflib import Graph
 from kcv import pipeline as p
 from kcv.public_access import validate_url, inspect_body, PublicRedirect, public_rule, retained_publisher
 from scripts.build_release import build
+from tests.test_release_apex_led import package_fixture
 
 
 class PublicAccessTests(unittest.TestCase):
@@ -151,6 +152,7 @@ class PublicCatalogTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             # Catalogue fixture only; native APEX import/export is a separate gate.
             with patch('scripts.build_release.verify_upgrade_export', return_value={'fixture_only': True}), \
+                 patch('scripts.build_release.reviewed_apexlang_package', return_value=package_fixture()), \
                  patch('scripts.build_apex_worksheet.verify_upgrade_export', return_value={'fixture_only': True}):
                 folder=build(Path(tmp)/'release')
             self.assertTrue((folder/'data/public-catalog.json').exists())
@@ -163,7 +165,7 @@ class PublicCatalogTests(unittest.TestCase):
             self.assertNotIn('&',loader)
             # Check every distributable text file, including generated SQL and HTML.
             for file in folder.rglob('*'):
-                if file.is_file() and file.suffix.lower() not in {'.png','.jpg'}:
+                if file.is_file() and file.suffix.lower() not in {'.png','.jpg','.zip'}:
                     text=file.read_text(encoding='utf-8')
                     import re
                     for url in re.findall(r'https?://[^\s<>"\']+',text):

@@ -46,10 +46,16 @@ It validates provenance and generates the public coverage record. It does not wr
 .venv/bin/python -m kcv.cli build
 .venv/bin/python -m kcv.cli worksheet
 .venv/bin/python -m unittest discover -s tests -v
-.venv/bin/python scripts/build_release.py --output work/release-content-build
+.venv/bin/python scripts/build_release.py \
+--output work/release-content-candidate \
+--apexlang-zip work/reviewed-apex/kcv-explorer.apx.zip \
+--apexlang-receipt apex/apexlang-export-validation.json \
+--apexlang-canonical work/reviewed-apex/supporting
 ```
 
-Run the original `fetch` step before `prepare` if the nine PDF editions are not already cached. Choose a new release output directory; the builder refuses to overwrite an existing one. Graph generation combines the original passages with the added research chunks and validates edition, locator and text hashes. The RDF contains provenance rather than full extracted bodies. Release substitutes the attributed summaries and packages a SQL-only installation path.
+Run the original `fetch` step before `prepare` if the nine PDF editions are not already cached. Choose a new release output directory; the builder refuses to overwrite an existing one. Graph generation combines the original passages with the added research chunks and validates edition, locator and text hashes. The RDF contains provenance rather than full extracted bodies. Release substitutes attributed summaries and packages both APEX-led and SQL-first installation paths. The three explicit APEXlang inputs must be the reviewed matching ZIP, public native receipt and local canonical Supporting Objects tree; the paths shown are examples. Native export and packaging checks do not establish deployment acceptance.
+
+The [packaging plan](apex-led-release-packaging-plan.md) separates dirty local candidates from clean committed publication preparation. Current v2.1.0 uses [four route-specific checks](../db/verification/release-v2.1-paths-validation.json); the earlier v2.0 publication-only --accepted-release-commit option does not apply. Preserve historical records and obtain publication approval separately.
 
 The release build also writes `data/load/manifest.json`, bounded JSON parts for sources/passages/contexts/triples and `sql/install/10_load_github.sql`. The short caller contains the generated manifest hash; learners supply the full published commit SHA. Only attributed summary data belongs in this public load package. The importer fetches data, validates it and uses installed database code; it never runs SQL downloaded from GitHub.
 

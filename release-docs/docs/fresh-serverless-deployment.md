@@ -1,61 +1,65 @@
-# Clean installation of the v2 sample
+# SQL-first clean installation of v2.1.0
 
-Use this path for an **empty project schema**, on a new or approved existing ADB Serverless database. For an existing project installation, use [Migration to v2](migrate-to-v2.md). The [installation selector](installation-paths.md) explains the difference.
+**v2.1.0: this prepared-environment SQL-first clean route passed within its recorded mixed-transport scope.** Schema/app installation and owner binding passed in Worksheet; the successful model test and explicit enablement used genuine-owner SQLcl. Learner evidence, persistence and bounded reviewer checks passed. See [validation](scenario-validation.md) for exact execution forms and limits. Use an empty project schema on an approved ADB Serverless database. Existing projects use [v2.0.0 to v2.1.0 upgrade](migrate-to-v2.1.md). The [installation selector](installation-paths.md) also offers App Builder installation.
 
-**v2.0.0 clean-installation acceptance:** the SQL-first clean route passed its scoped rehearsal in an isolated empty schema on an existing temporary Serverless database. See the [release-path record](../db/verification/release-v2-paths-validation.json). Candidate02 supplied the tested runtime; its APEX installer instruction was corrected to Run Statement without changing the import body. These tests do not establish provisioning of a new database. The linked labs use the ordered v2 installation; do not combine them with raw-object instructions from an older checkout.
+The [published v2.0.0 SQL-first record](../db/verification/release-v2-paths-validation.json) retains its earlier passing scope. It does not establish this 121-step package's transport, binding or readiness gates; see [v2.1 validation](../db/verification/release-v2.1-paths-validation.json). New database provisioning was not exercised by the earlier rehearsal.
 
-If a facilitator has already supplied an app, start with [app use](../labs/explore-evidence/explore-evidence.md) or [developer learning](../labs/understand-collection/understand-collection.md). No installation is needed for those hosted experiences.
+If a facilitator supplied an app, go directly to [My Contexts](../labs/my-contexts/my-contexts.md). Deployment needs ADMIN/owner access; learners do not.
 
 ## Before starting
 
-For complete SQL files, use Worksheet **Open File / upload SQL** to load the intended file into its editor, then run it in the mode stated below. Confirm the file is complete. Do not paste a filename as SQL or split a large block by hand; use the documented execution mode and stop if a file is rejected or truncated.
+Obtain one matching versioned package. Use a **password-enabled owner with its own Database Actions Worksheet**. The schema-only APEX-led route and dev's proxy/SQLcl workflow are not prerequisites for this SQL-first path. No local Python, Java, wallet, SQLcl, Liquibase or shell is needed.
 
-- Obtain a complete, versioned release package and its manifest. Use one version throughout; do not mix files from dev, v1 and v2.
-- Have ADMIN access for platform checks, user/grants and workspace setup, and an approved OCI Generative AI identity for chat inference.
-- Use a password-enabled lab owner with Database Actions access. The dev-only proxy/no-authentication connection workflow is not part of this route.
-- Keep credentials and model-download access links in private browser prompts, outside source files, screenshots and shared logs.
+For complete SQL files, use Worksheet **Open File/upload SQL**, confirm the file is complete and choose its documented execution mode. Use **Run Script (F5)** for the chosen schema execution form and the optional application-script wrapper described below. For bind-bearing setup and app-installer blocks, select the complete outer DECLARE/BEGIN through END without the trailing slash and use **Run Statement**. Do not split PL/SQL blocks or paste filenames as SQL. Stop on an error before dependent work.
 
-Database work uses **Database Actions SQL Worksheet**. No local Java, wallet, SQLcl, Liquibase, Bash or Python is required. OCI provisioning, IAM and any required database restart remain administrator tasks.
+For the schema, choose **one execution form**: the complete [00_install_schema.sql](../sql/install/00_install_schema.sql) file or the numbered **fresh** [schema parts](../sql/install/schema-parts/README.md). Both contain the same ordered canonical steps. Upload the chosen complete file(s) through Open File and use **Run Script (F5)**. The numbered parts were used in the accepted rehearsal. The combined file reduces file handling, but its large-file Worksheet transport remains unverified; it is not a preferred or accepted transport.
+
+If upload is rejected before execution, use the parts instead. After any migration starts—or a timeout leaves execution uncertain—inspect receipts and [recovery guidance](deployment-recovery.md) before switching forms or retrying. Do not run both as separate installations.
 
 ## Installation sequence
 
-Use **Run Script (F5)** for the ordered schema parts and other files explicitly marked for script execution. For bind-bearing setup blocks and the APEX installers, select the complete outer `DECLARE`/`BEGIN` through the final `END;`, excluding the final slash, and use **Run Statement (Ctrl+Enter)**. This opens the required bind prompts, including nonsecret application targets. Read the result after every step; stop on an error rather than continuing into dependent setup.
+| Step | Account | Action and expected result |
+| --- | --- | --- |
+| 1. Platform | ADMIN | Run readiness/Java checks; retain VALID JAVAVM. Complete separately approved first enablement/restart only if required. |
+| 2. Owner | ADMIN | Use 01_create_user_worksheet, 02_grants and 04_enable_database_actions with the same KCV_SCHEMA/private password. Confirm the empty owner can open its Worksheet. |
+| 3. Schema | Owner | Run the chosen complete [combined clean script](../sql/install/00_install_schema.sql) or ordered **fresh** [parts](../sql/install/schema-parts/README.md), then [02_verify_schema.sql](../sql/install/02_verify_schema.sql). Expect the matching 121-step contract and valid source. Do not run raw tables/packages as well. |
+| 4. Network/profile | Owner | Run [02_network.sql](../sql/schema/02_network.sql) once. Follow [authentication](authentication.md) to create/register the owner-local profile. Reserve the required model test for step 10; an optional diagnostic greeting is a separate call. |
+| 5. Public collection | Owner | Use the package's [pinned GitHub loader](github-dataset-load.md). Expect a READY collection with manifest-matching content. No private contexts are imported. |
+| 6. Conversation components | Owner | Run [03_scenario_agents.sql](../sql/extensions/03_scenario_agents.sql) once on this fresh configured schema. Inspect existing names instead of deleting/recreating them. |
+| 7. Optional search | ADMIN, owner | Follow [local search setup](context-search.md#worksheet-setup) only if wanted. Without it the app must label keyword-only search; chat uses its separate profile. |
+| 8. Workspace/account | ADMIN | Use 06_cloud_apex_preflight, 07_create_apex_workspace and 08_create_apex_app_user. Confirm enabled owner mapping and individual app-only accounts. |
+| 9. New app | Owner | Choose [20_install_apex.sql](../sql/install/20_install_apex.sql) with Run Statement and binds, or [20_install_apex_script.sql](../sql/install/20_install_apex_script.sql) with explicit configuration and F5, as described below. Record the new app ID/alias privately. Do not use either allocator to upgrade an existing app. |
+| 10. Bind and enable | Owner | Run generated [03 binding](../sql/install/03_bind_deployment_owner.sql), then the [readiness/test/enable steps](deployment-setup.md#sql-first-final-readiness). The app remains gated until all required checks and explicit enablement succeed. |
+| 11. Learner verification | App user, then owner | Test Sample Contexts/My Contexts, a real answer and its evidence, then sign out/in and reopen it. Run the supplied scenario checks after readiness, not while setup is paused. |
 
-| Step | Account | Action | Expected outcome |
-| --- | --- | --- | --- |
-| 1. Check the platform | ADMIN | Confirm the supported database/APEX versions and VALID JAVAVM. If Java is already enabled, leave it enabled. For a new database, complete the documented Java enablement/restart before proceeding. | Required database services are ready. Local laptop Java is not a substitute for database Java. |
-| 2. Prepare the lab owner | ADMIN | Use the supplied user, grants and Database Actions scripts. Create a new project owner, or verify a separately provisioned owner is empty and complete only missing setup. Do not reset an existing project's user to make it appear empty. | A password-enabled owner can open its own Worksheet with the required quota and grants. |
-| 3. Install the schema | Lab owner | Run the **fresh** files in the [schema-parts guide](../sql/install/schema-parts/README.md), then [02_verify_schema.sql](../sql/install/02_verify_schema.sql). Do not also run the old raw table/package creation sequence. | The ordered schema installation and full verification succeed. Version 2.0.0 uses the R7 checkpoint, with 96 COMPLETE project receipts and valid required packages. |
-| 4. Configure runtime services | Lab owner | Create the owner-private RDF network using `sql/schema/02_network.sql`. Follow [model authentication](authentication.md), create the profile and register it after the settings table exists. Test a greeting. | The RDF network and this owner's model profile work. A different owner's successful model call is not sufficient. |
-| 5. Load public knowledge | Lab owner | Follow [GitHub dataset loading](github-dataset-load.md) using the package's full published commit SHA and manifest hash. | The public summary dataset and graph are ready; load status reports success. No personal contexts are imported. |
-| 6. Register conversation services | Lab owner | Run `sql/extensions/03_scenario_agents.sql` after the profile and schema are ready. | The required teams are registered, including `KCV_GROUNDED_TEAM` for answers using application-retrieved evidence. Do not recreate schema tables here. |
-| 7. Enable semantic context search | ADMIN, then lab owner | Follow [Worksheet search setup](context-search.md#worksheet-setup): grant the required model privileges, load the separately obtained embedding model, verify it and backfill search data. | Search can use local embeddings. A new empty personal library may have no search rows; without the model, the app must explicitly report keyword-only matching. |
-| 8. Create the APEX workspace and account | ADMIN | Use the release workspace bootstrap, including explicit workspace enablement, and create a separate app login privately. | The enabled workspace maps to this owner and the app account can authenticate. |
-| 9. Install the app | Lab owner | Select the complete outer block in `sql/install/20_install_apex.sql`, excluding the final slash; use **Run Statement** and supply its target binds. Record the generated application ID and launch link. | A new application is installed against the verified schema. This installer allocates a new ID and is not the migration installer. |
-| 10. Verify the experience | App user; lab owner for SQL checks | Sign in, explore a Sample Context, create a My Contexts draft, review/apply it, ask a question and inspect its evidence. Sign out/in and reopen the saved work. Run the supplied final verification. | Both learning routes work and private saved work survives a new sign-in. |
+ADMIN filenames above are under sql/admin. The [configuration lab](../labs/configure-database/configure-database.md) and [app deployment lab](../labs/deploy-explorer/deploy-explorer.md) provide full links and expected outcomes.
 
-After signing in as the lab owner, confirm the account before running owner scripts:
+### Choose the application execution form
+
+The original **Run Statement** installer remains valid. It opens bind prompts for the target schema, workspace and alias. Alternatively, open [20_install_apex_script.sql](../sql/install/20_install_apex_script.sql) and edit only its labelled configuration block: replace the NULL values for `l_schema`, `l_workspace` and `l_alias` with your exact uppercase values in single quotes. These are non-secret target identifiers; do not add passwords, keys or model configuration. Unfilled NULL targets fail before import.
+
+Run the **complete script file, including its final slash, with Run Script (F5)**. This form needs no SQLcl and retains the authenticated-owner, alias and full-schema checks. It creates a new application; it must not replace an existing app. Then continue with the separate owner-binding step, whose original Run Statement/bind form is unchanged. The [validation record](../db/verification/release-v2.1-paths-validation.json) distinguishes the execution forms actually tested; generating a wrapper does not establish native acceptance.
+
+Choose one application execution form. If the browser stalls, a bind prompt is delayed or the result is unknown, inspect applications, activity and status using [recovery guidance](deployment-recovery.md#worksheet-application-import-or-bind-prompt-delay) before retrying or changing forms. Do not blindly repeat the new-app allocator. Changing how the application SQL is submitted does not require repeating schema installation, data loading or conversation-component registration.
+
+Confirm the owner before owner scripts:
 
 ```sql
 SELECT USER FROM dual;
 ```
 
-Expected: the chosen project schema, normally `KCV_LAB`, not ADMIN.
-
-After the full schema verifier succeeds, this short query confirms the version 2.0.0 schema checkpoint:
+After the full verifier, this additional checkpoint query should return one COMPLETE row for version 2.1.0:
 
 ```sql
 SELECT migration_id,product_version,phase
 FROM kcv_schema_migrations
-WHERE migration_id='2.0.0-c3-r7-ready';
+WHERE migration_id='2.1.0-apl-r4-ready';
 ```
 
-Expected: one row with product version `2.0.0` and phase `COMPLETE`. This checkpoint does not replace model, account-isolation or browser tests. A Worksheet installation does not need a Liquibase changelog count.
+Neither query substitutes for the physical/program verifier, model test or learner checks. Worksheet installation does not require a Liquibase ledger.
 
-## Recorded package acceptance
+## Completion and recovery
 
-The candidate02 clean rehearsal passed all 19 ordered schema parts through Worksheet upload/execution, including parts exceeding 2 MB, runtime setup, new-app import and scoped browser/persistence checks. Use a complete matching package with the corrected execution instructions, documented order and completion checks; do not split PL/SQL blocks yourself. The linked validation record retains the one-account browser scope and untested permanent-delete confirmation.
+Record the exact package and separate clean-route outcome in [v2.1 validation](../db/verification/release-v2.1-paths-validation.json). Verify saved personal evidence survives a new sign-in without another question, and record account-isolation checks actually performed.
 
-A failed installation can have committed DDL before the error. Retain the error and migration receipts, then use the supplied recovery instructions or facilitator support. Do not drop the user, graph or database to hide a failed step. Re-running verification is distinct from recreating credentials, networks or app accounts.
-
-The route follows [LiveLabs authoring conventions](livelabs-authoring-alignment.md). See [validation](scenario-validation.md) for recorded scope and [the screenshot checklist](screenshots.md) for safe beginner captures. The final release must record clean installation and migration as separate acceptance results.
+A failed step may leave committed DDL. Retain receipts and use [recovery](deployment-recovery.md); do not drop the owner/network or recreate credentials to hide a failed step. See [safe screenshot guidance](screenshots.md) for beginner documentation without private details.

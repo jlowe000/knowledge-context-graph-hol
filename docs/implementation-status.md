@@ -1,6 +1,16 @@
 # Implementation status
 
-## Current dev candidate — 25 November 2026
+## Current v2.1.0 package — 28 November 2026
+
+All four curated-package routes passed on prepared ADB environments: APEX-led clean installation and populated v2.0.0 upgrade, plus SQL-first clean installation and populated v2.0.0 upgrade. The [four-route record](../db/verification/release-v2.1-paths-validation.json) pins the tested artifacts and preserves the exact scopes. Results include learner answers/evidence, stored-history reopening, bounded reviewer checks and protected-build comparisons. SQL-first clean used Worksheet for schema/app installation and genuine-owner SQLcl for its successful model test and enablement. Combined schema-file transport, new-database provisioning and first Java enablement/restart remain outside these passes.
+
+The maintained contract contains 121 project migrations ending at `2.1.0-apl-r4-ready`; the application has 11 pages and 16 maintained assets. Local dev/release commits are authorised; remote publication is separate. The published v2.0.0 tag and earlier validation records retain their historical scope. Four release-route passes do not constitute a new direct DEV-led Liquibase rehearsal.
+
+Start with [development setup](development.md), [database migrations](database-migrations.md) and [APEXlang authoring](apexlang-development.md). Use the [packaging plan](apex-led-release-packaging-plan.md) for the accepted distribution and the [build lifecycle](dev-build-lifecycle.md) for exact-target preservation, replacement and retirement. The learning loop and Explorer evaluation remain separate future epics.
+
+## Historical v2 development checkpoint — 25 November 2026
+
+The following section records the pre-publication state at that checkpoint. Its release-state statements and then-pending checks are historical, not the current status above.
 
 The SQL-first v2 release candidate passed separate clean-installation and published-v1 migration rehearsals recorded in the [release-path record](../db/verification/release-v2-paths-validation.json). The tests used isolated schemas in an existing temporary Serverless database, parameterized ADMIN setup, ordered Worksheet schema parts and an APEX upgrade retaining the existing app ID. Both browser journeys and fresh-sign-in reopening passed. Candidate02 supplied the tested runtime; its bind-bearing APEX installer instruction was corrected to Run Statement without changing the import body. The corrected package instructions do not represent another deployment; v2 remains unpromoted. Private runtime is excluded; migration retained the public collection and stored credential/profile. The browser tests used one account per route and did not establish two-account browser isolation or permanent-delete confirmation. Learning-loop and Explorer-evaluation work stays separate.
 

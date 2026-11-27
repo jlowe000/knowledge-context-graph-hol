@@ -2,9 +2,11 @@
 
 Use dev when building your own adaptation of the collection or contributing implementation changes. Start with [Build your own version](build-your-own.md) for the learning journey, then use this page for its environment and build commands. Release has separate experiences for end users and developers learning the supplied collection; neither requires this authoring setup. This page is not shipped on release.
 
-## v2.0.0 work in progress
+## Current packaging and historical v2 development
 
-Current R7 adds local hybrid search over owned saved contexts and objective previews. Its [native upgrade/repeat, search regressions and scoped browser checks passed](../db/verification/context-search-validation.json). Use the R7 migration checkpoint before importing the nine-page app and follow the separate [model setup](context-search.md). The [R5 deletion record](../db/verification/context-delete-validation.json) retains successful native tests and browser review/Cancel, with permanent-delete browser confirmation still pending.
+The current v2.1.0 native exports and curated package preparation are described in [the packaging plan](apex-led-release-packaging-plan.md). All four prepared-environment runtime routes passed within their recorded scopes. SQL-first clean installation retains its mixed Worksheet/genuine-owner SQLcl scope, with learner persistence and bounded reviewer checks passed. The SQL-first upgrade preserved the existing application and work, and reopened the original answer and evidence without another question. The protected-build comparison and 78 local tests passed. See the [four-route record](../db/verification/release-v2.1-paths-validation.json) for exact evidence and limits. Local dev and release commits were authorised on 28 November 2026. Generate the distribution from committed dev with --prepare-publication; its provenance must confirm the accepted runtime inventory is unchanged. Remote push and tag creation require separate authorisation.
+
+Historical v2.0.0 R7 added local hybrid search over owned saved contexts and objective previews. Its [native upgrade/repeat, search regressions and scoped browser checks passed](../db/verification/context-search-validation.json) for the then-current nine-page application. Current v2.1.0 source requires the full [migration contract](database-migrations.md) and [owner-binding/readiness step](deployment-owner-binding.md); R7 alone is insufficient. Local search retains its separate [model setup](context-search.md). The [R5 deletion record](../db/verification/context-delete-validation.json) retains successful native tests and browser review/Cancel, with permanent-delete browser confirmation still pending.
 
 The `v1.0.0` tag retains the original baseline. Current numbered-build [fresh deployment and retirement](dev-build-lifecycle.md#validation-scope) passed with native model/browser checks and protected-data comparisons. The separate [SQL-first clean and migration rehearsals](../db/verification/release-v2-paths-validation.json) also passed within their recorded scope. Earlier [fresh](../db/verification/fresh-dev-validation.json) and [R4](../db/verification/c3-r4-validation.json) records remain historical evidence. The learning loop and Explorer evaluation remain separate future epics.
 
@@ -12,7 +14,7 @@ Use the [implementation plan](my-contexts-implementation-plan.md), [context API 
 
 For a separate fresh deployment, use [Fresh v2 dev deployment](fresh-dev-deployment.md). Name the owner and workspace `KCV_V<major>_<build>`, such as `KCV_V2_001`, and use a build-specific owner connection. The [build lifecycle](dev-build-lifecycle.md) covers in-place upgrades, independent replacement builds, private recovery material, exact-target retirement and local cleanup. `KCV_USER` is scoped to its APEX workspace; reusing the username does not transfer personal contexts to another build.
 
-The v2 release builder and app installer require a matching native engine import/export receipt and reject missing or stale source/export hashes. The current [receipt](../apex/export-validation.json) identifies the tested R7 source; offline compiler and local unit-test results alone cannot supply it. Deployment acceptance and release promotion are separate decisions. Updating dev deployment documentation leaves release unchanged.
+The release builder and app installer require a matching native engine import/export receipt and reject missing or stale source/export hashes. The current [receipt](../apex/export-validation.json) identifies the reviewed native export and its source/version; offline compiler and local unit-test results alone cannot supply it. Deployment acceptance and release promotion are separate decisions. Updating dev deployment documentation leaves release unchanged.
 
 After installing the development app through the [v2 deployment sequence](../apex/README.md#deploy-the-v2-dev-candidate), use the [personal journey walkthrough](my-contexts-draft-walkthrough.md) and [manual candidate review](my-contexts-manual-test.md) to exercise drafts, activation, saved conversations, refinement and evidence. Use migrations for the schema; the older raw-schema beginner and upgrade guides apply to a published v1 checkout.
 
@@ -37,7 +39,7 @@ All shell launchers use Bash: invoke them as `bash scripts/<name>.sh` from the r
 | `scripts/open_dev_sqlcl.sh` | Prepare missing local Java/SQLcl and open SQLcl without logging in; use it for the dev Liquibase/APEXlang workflow. |
 | `scripts/setup_serverless.sh` | Legacy direct-driver helper; v2 schema creation is blocked in favour of migrations. |
 
-Python `.py` files remain build/data utilities called from this Bash environment. Database objects and operations remain SQL/PLSQL. The release learner route remains SQL Worksheet and requires none of these shell launchers.
+Python `.py` files remain build/data utilities called from this Bash environment. Database objects and operations remain SQL/PLSQL. App learners use the deployed application and need neither SQL Worksheet nor deployment tools. The separate SQL-first deployment route uses the owner's Worksheet and requires none of these shell launchers.
 
 ## Set up and check the original-source pipeline
 
@@ -49,17 +51,27 @@ Python `.py` files remain build/data utilities called from this Bash environment
 
 The `kcv/` package implements preparation and optional direct-database automation. `scripts/` contains developer/build utilities. `tests/` and `integration-test/` contain checks; mocks may be installed only in the isolated test schema. Learner database operations remain SQL/PLSQL.
 
-## Build the SQL-first release
+## Build the curated release candidate
 
-Run `.venv/bin/python scripts/build_release.py --output work/release-package` from the project root. Use a new output directory each time; the tool refuses to delete or overwrite an existing directory.
+The v2.1.0 package offers APEX-led and SQL-first clean/upgrade paths. Follow the [packaging plan](apex-led-release-packaging-plan.md) for the native export prerequisites and four-route acceptance boundary. Supply the reviewed ZIP, its public receipt and the matching local canonical Supporting Objects directory explicitly:
 
-For publication-only corrections to an accepted package, commit the reviewed dev changes and use `--prepare-publication --accepted-release-commit FULL_ACCEPTED_RELEASE_COMMIT` with a new output directory. This records clean committed provenance, checks the same-version clean/migration acceptance record and rejects runtime changes against that accepted commit's manifest. It does not push, tag or rerun native tests. Follow [maintainer promotion](branch-workflow.md#maintainer-promotion) before updating release; historical records keep their original scope.
+```bash
+.venv/bin/python scripts/build_release.py \
+--output work/release-package-candidate \
+--apexlang-zip work/reviewed-apex/kcv-explorer.apx.zip \
+--apexlang-receipt apex/apexlang-export-validation.json \
+--apexlang-canonical work/reviewed-apex/supporting
+```
 
-The build uses attributed editorial summaries from the original presentations and the admitted expanded research, not private files or original PDF text. It generates a separate graph, summary IDs/hashes, a GitHub JSON load package and short caller, fallback SQL, an APEX Worksheet installer, learner documentation and a hashed file manifest. The package manifest records its exact counts. No PDF downloads or database connection are required for this release build. Release documentation overrides live under `release-docs/`; common labs are adapted in the packaging step.
+Replace the example local input paths with the reviewed artifacts; never invent a positive receipt. The builder also verifies the matching native SQL export/receipt already under apex/. Use a new output directory each time; existing output is not overwritten. Keep source inputs unchanged during generation.
 
-Run `.venv/bin/python -m unittest discover -s tests -v`, `python scripts/sync_doc_snippets.py --check` and `python scripts/build_apex.py --check` before promotion. Inspect `work/release-package/README.md` and `release-manifest.json`. The release dataset requires its own native graph/model/browser acceptance; original-passage validation cannot be claimed for changed summaries.
+The default build accepts a recorded dirty candidate snapshot and pending [four-route record](../db/verification/release-v2.1-paths-validation.json); this is not acceptance or publication. The package contains public editorial summaries, a separate graph/load package, fallback SQL, both application transports and learner guides. PDF bodies, runtime data, credentials and private work remain excluded. Release templates live under release-docs/.
 
-See [branch workflow](branch-workflow.md) for promotion. Optional direct-driver setup (`scripts/setup_serverless.sh`) is retained for legacy diagnostics/bootstrap and rejects raw schema creation on v2. Use the migration guide for v2 schema changes; do not mix old raw initialization scripts with migration-managed objects.
+For v2.1.0 publication preparation, --prepare-publication requires clean committed dev, all four routes passed with exact accepted artifact/runtime hashes, no pending checks, explicit publication approval and both native UI versions matching VERSION. It uses the same three explicit input flags. The older --accepted-release-commit gate applies only to historical v2.0 publication corrections and is rejected for v2.1.0. Neither mode pushes, tags or reruns native tests.
+
+Run the relevant source/package regressions, snippet and APEX synchronization checks, then inspect the output README, release-manifest.json and release-provenance.json. The new curated paths still require their own native/browser rehearsals; older r13 or original-passage evidence does not certify them. See [branch workflow](branch-workflow.md) before any authorised promotion.
+
+Optional direct-driver setup remains a legacy diagnostic path and rejects raw schema creation on migration-managed installations. Use [database migrations](database-migrations.md) for schema changes; do not combine raw initialization with ordered migrations.
 
 ## Publish and test the GitHub dataset on dev
 

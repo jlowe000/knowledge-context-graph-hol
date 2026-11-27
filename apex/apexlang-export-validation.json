@@ -1,0 +1,44 @@
+{
+  "format_version": 1,
+  "recorded_date": "2026-11-27",
+  "product_version": "2.1.0",
+  "declared_application_version": "2.1.0",
+  "archive_sha256": "db2c90feb59ac5712441fa2336a35a0f1a350495dc92be1701306502b56371cc",
+  "application_source_sha256": "e9aee1a07900b662d13cc5fc823801b32996db3d701590bc31bcd28fe9d50122",
+  "schema_manifest_sha256": "6577188e9ea090d8437982de153ddfca4d406259aaf05c36f3a1ee17ae7202bd",
+  "canonical_supporting_manifest_sha256": "b3031ce0f1e9373cf950dc78c48ba7a64896954a9d7a84ee086c09a31bd14091",
+  "native_export": {
+    "status": "passed",
+    "format": "APEXLANG",
+    "apex_version": "26.1.6",
+    "supporting_objects_exported": true,
+    "scope": "Native import/export with Supporting Objects execution explicitly disabled; final product version authored deliberately."
+  },
+  "native_zip_validation": {
+    "status": "passed",
+    "archive_sha256": "db2c90feb59ac5712441fa2336a35a0f1a350495dc92be1701306502b56371cc",
+    "apex_version": "26.1.6"
+  },
+  "security_review": {
+    "status": "passed",
+    "private_deployment_metadata": false,
+    "native_metadata": "Source application ID only; importer selects the actual target. No workspace, schema, salts or connection settings retained.",
+    "canonical_supporting_roundtrip": true,
+    "maintained_assets_matched": 16,
+    "finite_sensitive_pattern_findings": 0,
+    "synthetic_canary_findings": 0,
+    "runtime_rows_included": false,
+    "scope_limit": "Finite known-pattern and canonical-byte review, not a claim that unknown secret values were obtained or exhaustively searched."
+  },
+  "prior_candidate_comparison": {
+    "version_only_application_change": true,
+    "schema_migrations_changed": false,
+    "prior_receipt": "db/verification/apex-led-candidate-validation.json",
+    "scope": "All native components match the accepted prior candidate apart from the authored version and minimal native source ID."
+  },
+  "deployment_acceptance": "pending four-route release package checks",
+  "known_limitations": [
+    "Native validation retains the existing deprecated regionBody slot warning.",
+    "Native validation and canonical roundtrip do not establish App Builder installation, SQL-first deployment, model connectivity or learner acceptance."
+  ]
+}

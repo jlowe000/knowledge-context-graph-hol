@@ -1,14 +1,19 @@
 -- ADMIN Worksheet, Run Statement: bind the intended schema and workspace.
 -- Required for App Builder APEXlang ZIP import. Review this access change first.
 -- Requires metadata-catalog authentication; does not REST-enable any table.
+-- Blanks mean KCV_LAB / KCV_KNOWLEDGE; retain an existing installation's names.
 DECLARE
- s VARCHAR2(128):=UPPER(TRIM(:KCV_SCHEMA));
- w VARCHAR2(128):=UPPER(TRIM(:KCV_WORKSPACE));n NUMBER;
+ s VARCHAR2(128):=NVL(UPPER(TRIM(:KCV_SCHEMA)),'KCV_LAB');
+ w VARCHAR2(128):=NVL(UPPER(TRIM(:KCV_WORKSPACE)),'KCV_KNOWLEDGE');n NUMBER;
 BEGIN
- IF SYS_CONTEXT('USERENV','SESSION_USER')<>'ADMIN' THEN
-  RAISE_APPLICATION_ERROR(-20981,'Use a direct ADMIN session');END IF;
- IF s IS NULL OR w IS NULL OR NOT REGEXP_LIKE(s,'^KCV_V[0-9]+_[0-9]{3}$','c') OR w<>s THEN
-  RAISE_APPLICATION_ERROR(-20982,'Use matching KCV_V<major>_<build> schema and workspace names');END IF;
+ IF SYS_CONTEXT('USERENV','SESSION_USER')<>'ADMIN'
+  OR SYS_CONTEXT('USERENV','CURRENT_USER')<>'ADMIN'
+  OR SYS_CONTEXT('USERENV','CURRENT_SCHEMA')<>'ADMIN'
+  OR NVL(SYS_CONTEXT('USERENV','PROXY_USER'),'ADMIN') NOT IN('ADMIN','ORDS_PUBLIC_USER') THEN
+  RAISE_APPLICATION_ERROR(-20981,'Use the authenticated ADMIN session and ADMIN schema');END IF;
+ IF NOT REGEXP_LIKE(s,'^KCV_[A-Z0-9_]{1,26}$','c')
+  OR NOT REGEXP_LIKE(w,'^KCV_[A-Z0-9_]{1,26}$','c') THEN
+  RAISE_APPLICATION_ERROR(-20982,'Use the intended KCV_ schema and workspace names');END IF;
  SELECT COUNT(*) INTO n FROM apex_workspace_schemas WHERE workspace_name=w AND schema=s;
  IF n<>1 THEN RAISE_APPLICATION_ERROR(-20989,'Verify the exact workspace/schema mapping first');END IF;
  SELECT COUNT(*) INTO n FROM dba_ords_schemas WHERE parsing_schema=s;

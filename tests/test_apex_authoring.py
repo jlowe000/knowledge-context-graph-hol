@@ -119,6 +119,17 @@ class ApexAuthoringTests(unittest.TestCase):
         (root/'apex/region.html').write_text('<p>Obsolete HTML must not replace a page.</p>')
         (root/'apex/kcv-explorer.sql').write_text("begin\n null; -- fixture only\nend;\n/\n")
         (root/'VERSION').write_text('2.0.0\n')
+        (root/'db').mkdir()
+        payload='BEGIN NULL;END;\n'
+        verification=" require(1=1,'Fixture schema contract');\n"
+        (root/'db/payload.sql').write_text(payload)
+        (root/'db/verify.sql').write_text(verification)
+        (root/'db/manifest.json').write_text(json.dumps({
+            'format_version':1,'target_product_version':'2.0.0','migrations':[{
+                'id':'2.0.0-test-ready','version':'2.0.0','group':'feature','depends_on':[],
+                'payload':'db/payload.sql','payload_sha256':hashlib.sha256(payload.encode()).hexdigest(),
+                'verification':'db/verify.sql','verification_sha256':hashlib.sha256(verification.encode()).hexdigest()
+            }]}))
         return page
 
     def receipt(self, root, verified=True):
@@ -205,7 +216,7 @@ class ApexAuthoringTests(unittest.TestCase):
             self.assertIn('SET_APPLICATION_ID(l_app_id)',sql)
             self.assertIn("workspace='KCV_KNOWLEDGE'",sql)
             self.assertIn("owner='KCV_LAB' AND UPPER(alias)='KCV-EXPLORER'",sql)
-            self.assertLess(sql.index('2.0.0-c3-r7-ready'),sql.index('null; -- fixture only'))
+            self.assertLess(sql.index('2.0.0-test-ready'),sql.index('null; -- fixture only'))
             self.assertNotIn('&',sql)
 
     def test_release_targets_are_bound_and_checked_before_import(self):
@@ -252,9 +263,10 @@ class ApexAuthoringTests(unittest.TestCase):
                 sql=worksheet.build().read_text()
             self.assertIn('GENERATE_APPLICATION_ID',sql)
             self.assertNotIn(':KCV_APPLICATION_ID',sql)
-            self.assertLess(sql.index('2.0.0-c3-r7-ready'),sql.index('GENERATE_APPLICATION_ID'))
-            self.assertIn("object_name IN ('KCV_ACCESS','KCV_PERSONAL_CONTEXT_API','KCV_PERSONAL_JOURNEY','KCV_SCENARIO','KCV_TRACE','KCV_APEX','KCV_CONTEXT_DELETE','KCV_CONTEXT_SEARCH')",sql)
-            self.assertIn('IF l_count<>16',sql)
+            self.assertLess(sql.index('2.0.0-test-ready'),sql.index('GENERATE_APPLICATION_ID'))
+            self.assertIn("require(1=1,'Fixture schema contract')",sql)
+            self.assertIn("product_version='2.0.0'",sql)
+            self.assertNotIn('IF l_count<>16',sql)
 
 
 if __name__=='__main__':unittest.main()

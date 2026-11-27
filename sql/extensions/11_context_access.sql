@@ -71,9 +71,19 @@ CREATE OR REPLACE PACKAGE BODY kcv_access AS
     RAISE_APPLICATION_ERROR(-20241,'CONTEXT_UNAVAILABLE: Context is not available to this account');
    END IF;
  END;
- PROCEDURE assert_writable IS n NUMBER;BEGIN
+ PROCEDURE assert_writable IS n NUMBER;admission PLS_INTEGER;result PLS_INTEGER;ignored PLS_INTEGER;acquired BOOLEAN:=FALSE;BEGIN
+   -- Admit a write atomically with its first durable claim/transaction commit.
+   -- Setup takes X_MODE on this same owner-scoped lock before changing the
+   -- maintenance fence. Numeric IDs avoid ALLOCATE_UNIQUE's implicit commit.
+   admission:=DBMS_UTILITY.GET_HASH_VALUE('KCV_WRITE_ADMISSION:'||$$PLSQL_UNIT_OWNER,1,1073741823);
+   result:=DBMS_LOCK.REQUEST(id=>admission,lockmode=>DBMS_LOCK.S_MODE,timeout=>0,release_on_commit=>TRUE);
+   IF result NOT IN(0,4) THEN RAISE_APPLICATION_ERROR(-20246,'OPERATION_IN_PROGRESS: Setup is in progress; retry shortly.');END IF;
+   acquired:=result=0;
    SELECT COUNT(*) INTO n FROM kcv_settings WHERE setting_key='APP_MAINTENANCE' AND UPPER(setting_value)='ON';
    IF n>0 THEN RAISE_APPLICATION_ERROR(-20246,'OPERATION_IN_PROGRESS: Maintenance is in progress; try again shortly');END IF;
+ EXCEPTION WHEN OTHERS THEN
+   -- A nested check must not release its caller's native-operation lock.
+   IF acquired THEN ignored:=DBMS_LOCK.RELEASE(admission);END IF;RAISE;
  END;
  FUNCTION topic_options(p_graph VARCHAR2) RETURN CLOB IS a JSON_ARRAY_T:=JSON_ARRAY_T();BEGIN
    FOR t IN (SELECT DISTINCT jt.label FROM kcv_graph_sources gs,

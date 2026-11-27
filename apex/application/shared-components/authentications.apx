@@ -1,8 +1,27 @@
 authentication oracle-apex-accounts (
     name: Oracle APEX Accounts
     type: oracleApexAccounts
+    source {
+        plsqlCode:
+        ```plsql
+        PROCEDURE kcv_post_login IS
+          package_objects NUMBER;
+        BEGIN
+          -- A fresh import may not yet have Supporting Objects. In that case
+          -- only the neutral handoff page is reachable; authorisations fail closed.
+          SELECT COUNT(*) INTO package_objects FROM all_objects
+          WHERE owner=SYS_CONTEXT('USERENV','CURRENT_SCHEMA')
+            AND object_name='KCV_DEPLOY' AND object_type IN ('PACKAGE','PACKAGE BODY')
+            AND status='VALID';
+          IF package_objects<>2 THEN RETURN; END IF;
+          EXECUTE IMMEDIATE 'BEGIN kcv_deploy.capture_identity; END;';
+        EXCEPTION WHEN OTHERS THEN
+          RAISE_APPLICATION_ERROR(-20300,'Sign-in could not establish an application identity. Ask your facilitator to verify the installation.');
+        END;
+        ```
+    }
     loginProcessing {
-        postAuthenticationProcedureName: KCV_ACCESS.CAPTURE_IDENTITY
+        postAuthenticationProcedureName: kcv_post_login
         switchInSession: false
     }
 )

@@ -70,6 +70,9 @@ list navigation-menu (
         layout {
             sequence: 10
         }
+        security {
+            authorizationScheme: @learning-ready
+        }
         link {
             target: {
                 page: 10
@@ -82,9 +85,29 @@ entry samples (
   layout {
     sequence: 20
   }
+  security {
+    authorizationScheme: @learning-ready
+  }
   link {
     target: {
       page: 14
+    }
+  }
+)
+entry deployment-setup (
+  label: Deployment setup
+  icon {
+    imageIconCssClasses: fa-gear
+  }
+  layout {
+    sequence: 90
+  }
+  security {
+    authorizationScheme: @deployment-installer
+  }
+  link {
+    target: {
+      page: 900
     }
   }
 )

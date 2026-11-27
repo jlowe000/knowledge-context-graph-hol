@@ -12,6 +12,7 @@ page 12 (
     width: 1000
   }
   security {
+    authorizationScheme: @learning-ready
     authentication: required
     pageAccessProtection: argumentsMustHaveChecksum
     formAutoComplete: false
@@ -30,7 +31,7 @@ page 12 (
     source {
       htmlCode:
       ```html
-      <p role="status">&P12_VALIDATION_MESSAGE!HTML.</p><p>Your saved draft is unchanged. Cancel this review, then choose Edit draft to update it.</p>
+      <p role="status">&P12_VALIDATION_MESSAGE!HTML.</p><p>Your saved draft is unchanged. Choose a ready collection and its topics below, then refresh the preview. To change your question or other draft details, cancel this review and choose Edit Draft.</p>
       ```
     }
     serverSideCondition {
@@ -137,13 +138,9 @@ page 12 (
       ```sql
 SELECT CASE WHEN j.graph=JSON_VALUE(kcv_personal_context_api.get_context(:P12_CONTEXT_ID),'$.base_graph') THEN j.graph||' (currently pinned)' ELSE j.graph END d,j.graph r FROM JSON_TABLE(kcv_personal_journey.collections(:P12_CONTEXT_ID),'$.collections[*]' COLUMNS(graph VARCHAR2(128) PATH '$.graph')) j
       ```
-      displayNullValue: false
+      displayNullValue: true
+      nullDisplayValue: Choose a ready collection
       displayExtraValues: false
-    }
-    serverSideCondition {
-      type: expression
-      language: plsql
-      plsqlExpression: :P12_TOKEN IS NOT NULL
     }
   )
   pageItem P12_TOPICS (
@@ -173,7 +170,7 @@ SELECT CASE WHEN j.graph=JSON_VALUE(kcv_personal_context_api.get_context(:P12_CO
       type: sqlQuery
       sqlQuery:
       ```sql
-SELECT j.label d,j.label r FROM JSON_TABLE(kcv_personal_journey.collection_topics(:P12_CONTEXT_ID,:P12_COLLECTION),'$.topics[*]' COLUMNS(label VARCHAR2(800) PATH '$')) j ORDER BY j.label
+SELECT j.label d,j.label r FROM JSON_TABLE(CASE WHEN :P12_COLLECTION IS NULL THEN TO_CLOB('{"topics":[]}') ELSE kcv_personal_journey.collection_topics(:P12_CONTEXT_ID,:P12_COLLECTION) END,'$.topics[*]' COLUMNS(label VARCHAR2(800) PATH '$')) j ORDER BY j.label
       ```
     }
     cascadingLov {
@@ -183,11 +180,6 @@ SELECT j.label d,j.label r FROM JSON_TABLE(kcv_personal_journey.collection_topic
     }
     multipleValues {
       type: jsonArray
-    }
-    serverSideCondition {
-      type: expression
-      language: plsql
-      plsqlExpression: :P12_TOKEN IS NOT NULL
     }
   )
   button preview (
@@ -207,11 +199,6 @@ SELECT j.label d,j.label r FROM JSON_TABLE(kcv_personal_journey.collection_topic
       executeValidations: true
       showProcessing: true
       warnOnUnsavedChanges: doNotCheck
-    }
-    serverSideCondition {
-      type: expression
-      language: plsql
-      plsqlExpression: :P12_TOKEN IS NOT NULL
     }
   )
   button apply (
@@ -262,23 +249,34 @@ SELECT j.label d,j.label r FROM JSON_TABLE(kcv_personal_journey.collection_topic
     source {
       plsqlCode:
       ```plsql
-DECLARE j JSON_OBJECT_T; body JSON_OBJECT_T; prefs JSON_OBJECT_T; keys JSON_KEY_LIST; topics JSON_ARRAY_T:=JSON_ARRAY_T(); BEGIN
- :P12_VALIDATION_MESSAGE:=NULL;
- IF :P12_TOKEN IS NULL THEN
-  :P12_COLLECTION:=NULL; :P12_TOPICS:=NULL;
+DECLARE j JSON_OBJECT_T; saved JSON_OBJECT_T; body JSON_OBJECT_T; prefs JSON_OBJECT_T; keys JSON_KEY_LIST; topics JSON_ARRAY_T:=JSON_ARRAY_T(); ready_count NUMBER; BEGIN
+ saved:=JSON_OBJECT_T.parse(kcv_personal_context_api.get_context(:P12_CONTEXT_ID));
+ IF NVL(:P12_INITIALIZED,'N')<>'Y' THEN
+  :P12_INITIALIZED:='Y'; :P12_VALIDATION_MESSAGE:=NULL; :P12_TOKEN:=NULL;
+  :P12_COLLECTION:=saved.get_string('base_graph');
+  body:=saved.get_object('draft');prefs:=body.get_object('topic_preferences');keys:=prefs.get_keys;
+  FOR i IN 1..keys.count LOOP topics.append(keys(i));END LOOP;:P12_TOPICS:=topics.to_string();
+  SELECT COUNT(*) INTO ready_count FROM JSON_TABLE(kcv_personal_journey.collections(:P12_CONTEXT_ID),'$.collections[*]' COLUMNS(graph VARCHAR2(128) PATH '$.graph')) WHERE graph=:P12_COLLECTION;
+  IF ready_count<>1 THEN
+   :P12_COLLECTION:=NULL; :P12_TOPICS:='[]';
+   :P12_VALIDATION_MESSAGE:='Choose a ready collection and at least one topic, then refresh the preview.';
+   RETURN;
+  END IF;
   BEGIN
    j:=JSON_OBJECT_T.parse(kcv_personal_journey.preview(:P12_CONTEXT_ID,TO_NUMBER(:P12_VERSION)));
   EXCEPTION WHEN OTHERS THEN
-   IF SQLCODE=-20244 THEN
-    :P12_TOKEN:=NULL; :P12_COLLECTION:=NULL; :P12_TOPICS:=NULL;
-    :P12_VALIDATION_MESSAGE:=REGEXP_REPLACE(SQLERRM,'^ORA-20244: (VALIDATION_ERROR: )?','');
+   IF SQLCODE IN (-20244,-20247) THEN
+    :P12_TOKEN:=NULL;
+    :P12_VALIDATION_MESSAGE:=REGEXP_REPLACE(SQLERRM,'^ORA-202(44|47): ((VALIDATION_ERROR|INVALID_TOPIC): )?','');
     RETURN;
    ELSE RAISE; END IF;
   END;
   :P12_TOKEN:=j.get_string('token'); :P12_COLLECTION:=j.get_string('new_collection');
-  body:=j.get_object('after');prefs:=body.get_object('topic_preferences');keys:=prefs.get_keys;
+  body:=j.get_object('after');prefs:=body.get_object('topic_preferences');keys:=prefs.get_keys;topics:=JSON_ARRAY_T();
   FOR i IN 1..keys.count LOOP topics.append(keys(i));END LOOP;:P12_TOPICS:=topics.to_string();
- ELSE j:=JSON_OBJECT_T.parse(kcv_personal_journey.get_preview(:P12_CONTEXT_ID,:P12_TOKEN)); END IF;
+ ELSIF :P12_TOKEN IS NOT NULL THEN
+  j:=JSON_OBJECT_T.parse(kcv_personal_journey.get_preview(:P12_CONTEXT_ID,:P12_TOKEN));
+ END IF;
 END;
       ```
     }
@@ -294,14 +292,24 @@ END;
       plsqlCode:
       ```plsql
 DECLARE j JSON_OBJECT_T; body JSON_OBJECT_T; reviewed JSON_OBJECT_T; old_prefs JSON_OBJECT_T; prefs JSON_OBJECT_T:=JSON_OBJECT_T();topics JSON_ARRAY_T;label VARCHAR2(200);BEGIN
- j:=JSON_OBJECT_T.parse(kcv_personal_journey.get_preview(:P12_CONTEXT_ID,:P12_TOKEN));
- reviewed:=j.get_object('after');body:=JSON_OBJECT_T.parse(reviewed.to_clob());old_prefs:=body.get_object('topic_preferences');topics:=JSON_ARRAY_T.parse(NVL(:P12_TOPICS,'[]'));
+ IF :P12_COLLECTION IS NULL THEN RAISE_APPLICATION_ERROR(-20244,'Choose a ready collection before refreshing the preview.');END IF;
+ IF :P12_TOKEN IS NULL THEN
+  j:=JSON_OBJECT_T.parse(kcv_personal_context_api.get_context(:P12_CONTEXT_ID));reviewed:=j.get_object('draft');
+ ELSE
+  j:=JSON_OBJECT_T.parse(kcv_personal_journey.get_preview(:P12_CONTEXT_ID,:P12_TOKEN));reviewed:=j.get_object('after');
+ END IF;
+ body:=JSON_OBJECT_T.parse(reviewed.to_clob());old_prefs:=body.get_object('topic_preferences');topics:=JSON_ARRAY_T.parse(NVL(:P12_TOPICS,'[]'));
  FOR i IN 0..topics.get_size-1 LOOP
   label:=topics.get_string(i);
   IF old_prefs.has(label) THEN prefs.put(label,old_prefs.get_number(label));ELSE prefs.put(label,1);END IF;
  END LOOP;body.put('topic_preferences',prefs);
  j:=JSON_OBJECT_T.parse(kcv_personal_journey.preview(:P12_CONTEXT_ID,TO_NUMBER(:P12_VERSION),p_collection=>:P12_COLLECTION,p_body=>body.to_clob()));
- :P12_TOKEN:=j.get_string('token');
+ :P12_TOKEN:=j.get_string('token'); :P12_VALIDATION_MESSAGE:=NULL;
+EXCEPTION WHEN OTHERS THEN
+ IF SQLCODE IN (-20244,-20247) THEN
+  :P12_TOKEN:=NULL;
+  :P12_VALIDATION_MESSAGE:=REGEXP_REPLACE(SQLERRM,'^ORA-202(44|47): ((VALIDATION_ERROR|INVALID_TOPIC): )?','');
+ ELSE RAISE; END IF;
 END;
       ```
     }
@@ -500,6 +508,23 @@ END;
     type: hidden
     layout {
       sequence: 4
+      region: @review
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: session
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P12_INITIALIZED (
+    type: hidden
+    layout {
+      sequence: 5
       region: @review
       slot: regionBody
     }

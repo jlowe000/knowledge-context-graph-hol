@@ -1,0 +1,1178 @@
+page 900 (
+  name: Deployment setup
+  alias: DEPLOYMENT-SETUP
+  title: Prepare Knowledge Context Explorer
+  appearance {
+    pageTemplate: @/standard
+    templateOptions: #DEFAULT#
+  }
+  navigation {
+    warnOnUnsavedChanges: true
+  }
+  advanced {
+    reloadOnSubmit: always
+    enableDuplicatePageSubmissions: false
+  }
+  security {
+    authentication: required
+    authorizationScheme: @deployment-installer
+    pageAccessProtection: argumentsMustHaveChecksum
+    formAutoComplete: false
+  }
+  javaScript {
+    executeWhenPageLoads:
+    ```javascript
+    (function () {
+      'use strict';
+      const ids = ['P900_OCI_USER', 'P900_OCI_TENANCY', 'P900_OCI_FINGERPRINT', 'P900_OCI_PRIVATE_KEY'];
+      function clearCredentialInputs() {
+        ids.forEach(function (id) {
+          const input = document.getElementById(id);
+          if (input) {
+            input.value = '';
+            input.defaultValue = '';
+            input.removeAttribute('value');
+          }
+        });
+      }
+      clearCredentialInputs();
+      apex.jQuery(document).on('apexbeforepagesubmit.kcvCredential', function (_event, request) {
+        if (request !== 'CREATE_OCI_CREDENTIAL') clearCredentialInputs();
+      });
+      window.addEventListener('pagehide', clearCredentialInputs);
+      window.addEventListener('pageshow', clearCredentialInputs);
+    }());
+    ```
+  }
+  region introduction (
+    name: Installation readiness
+    type: staticContent
+    layout {
+      sequence: 10
+      slot: body
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p>Complete these steps as this workspace's administrator before inviting learners. Your facilitator prepares the database and grants. You can use an existing local credential or create one privately below.</p>
+      <p>Opening or refreshing this page only checks readiness. Model testing, registration and collection loading run only when you choose their buttons. A setup action keeps learning paused until you explicitly choose Enable learning.</p>
+      <p role="status"><strong>&P900_READINESS!HTML.</strong></p>
+      <p>&P900_SEARCH_NOTICE!HTML.</p>
+      <p>For an upgrade, retain the existing collection and model profile unless you intend to change them. Check their readiness first. Never delete saved work to retry installation.</p>
+      ```
+    }
+  )
+  pageItem P900_STATUS (
+    type: hidden
+    layout {
+      sequence: 10
+      region: @introduction
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      dataType: clob
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P900_CREDENTIALS (
+    type: hidden
+    layout {
+      sequence: 20
+      region: @introduction
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      dataType: clob
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P900_TOKEN (
+    type: hidden
+    layout {
+      sequence: 30
+      region: @introduction
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P900_READINESS (
+    type: hidden
+    layout {
+      sequence: 40
+      region: @introduction
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P900_SEARCH_NOTICE (
+    type: hidden
+    layout {
+      sequence: 50
+      region: @introduction
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P900_CHECKS (
+    type: hidden
+    layout {
+      sequence: 60
+      region: @introduction
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P900_DATASET_STATUS (
+    type: hidden
+    layout {
+      sequence: 70
+      region: @introduction
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P900_DATASET_PHASE (
+    type: hidden
+    layout {
+      sequence: 80
+      region: @introduction
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  pageItem P900_COLLECTION_COUNTS (
+    type: hidden
+    layout {
+      sequence: 90
+      region: @introduction
+      slot: regionBody
+    }
+    settings {
+      valueProtected: true
+    }
+    sessionState {
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+    }
+  )
+  region network (
+    name: 1. Prepare the graph network
+    type: staticContent
+    layout {
+      sequence: 30
+      slot: body
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p>Create or verify this installation's private RDF network. An existing matching network is retained. This action does not load the public collection.</p>
+      ```
+    }
+  )
+  region create-credential (
+    name: Create a local OCI signing credential
+    type: staticContent
+    layout {
+      sequence: 35
+      slot: body
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p>If your facilitator has already created a credential, select it under Configure model access. Otherwise, enter the four values from the same OCI API signing key here.</p>
+      <p>This creates <strong>OCI_USER_CRED</strong> only when that name is unused. It never replaces an existing credential. All four fields are masked and cleared after submitting or leaving this page. Creating the credential does not contact a model; test the model connection separately after configuring its profile.</p>
+      ```
+    }
+    security {
+      authorizationScheme: @deployment-installer
+    }
+  )
+  pageItem P900_OCI_USER (
+    type: password
+    label {
+      label: OCI user OCID
+      alignment: left
+    }
+    layout {
+      sequence: 10
+      region: @create-credential
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    settings {
+      submitWhenEnterPressed: false
+    }
+    validation {
+      valueRequired: false
+      maxLength: 256
+    }
+    advanced {
+      customAttributes: autocomplete="off" spellcheck="false" autocapitalize="none"
+      warnOnUnsavedChanges: ignore
+    }
+    source {
+      type: null
+      used: always
+    }
+    sessionState {
+      dataType: varchar2
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+      authorizationScheme: @deployment-installer
+      encryptSessionState: true
+    }
+    help {
+      inlineHelpText: User OCID for the account whose API signing key will be used.
+    }
+  )
+  pageItem P900_OCI_TENANCY (
+    type: password
+    label {
+      label: OCI tenancy OCID
+      alignment: left
+    }
+    layout {
+      sequence: 20
+      region: @create-credential
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    settings {
+      submitWhenEnterPressed: false
+    }
+    validation {
+      valueRequired: false
+      maxLength: 256
+    }
+    advanced {
+      customAttributes: autocomplete="off" spellcheck="false" autocapitalize="none"
+      warnOnUnsavedChanges: ignore
+    }
+    source {
+      type: null
+      used: always
+    }
+    sessionState {
+      dataType: varchar2
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+      authorizationScheme: @deployment-installer
+      encryptSessionState: true
+    }
+    help {
+      inlineHelpText: Tenancy OCID for the same OCI account.
+    }
+  )
+  pageItem P900_OCI_FINGERPRINT (
+    type: password
+    label {
+      label: API key fingerprint
+      alignment: left
+    }
+    layout {
+      sequence: 30
+      region: @create-credential
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    settings {
+      submitWhenEnterPressed: false
+    }
+    validation {
+      valueRequired: false
+      maxLength: 47
+    }
+    advanced {
+      customAttributes: autocomplete="off" spellcheck="false" autocapitalize="none"
+      warnOnUnsavedChanges: ignore
+    }
+    source {
+      type: null
+      used: always
+    }
+    sessionState {
+      dataType: varchar2
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+      authorizationScheme: @deployment-installer
+      encryptSessionState: true
+    }
+    help {
+      inlineHelpText: The matching public-key fingerprint: sixteen hexadecimal byte pairs separated by colons.
+    }
+  )
+  pageItem P900_OCI_PRIVATE_KEY (
+    type: password
+    label {
+      label: Private key body
+      alignment: left
+    }
+    layout {
+      sequence: 40
+      region: @create-credential
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    settings {
+      submitWhenEnterPressed: false
+    }
+    validation {
+      valueRequired: false
+      maxLength: 4000
+    }
+    advanced {
+      customAttributes: autocomplete="off" spellcheck="false" autocapitalize="none"
+      warnOnUnsavedChanges: ignore
+    }
+    source {
+      type: null
+      used: always
+    }
+    sessionState {
+      dataType: varchar2
+      storage: request
+    }
+    security {
+      sessionStateProtection: checksumRequiredSessionLevel
+      authorizationScheme: @deployment-installer
+      encryptSessionState: true
+    }
+    help {
+      inlineHelpText: Paste only the unencrypted base64 body between the PEM markers, without the markers or OCI_API_KEY label. Maximum 4000 characters.
+    }
+  )
+  button create-oci-credential (
+    buttonName: CREATE_OCI_CREDENTIAL
+    label: Create local OCI credential
+    layout {
+      sequence: 10
+      region: @create-credential
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: false
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    security {
+      authorizationScheme: @deployment-installer
+    }
+  )
+  region profile (
+    name: 2. Configure model access
+    type: staticContent
+    layout {
+      sequence: 40
+      slot: body
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p>Choose a credential already created privately in this database schema. Enter the OCI region, compartment OCID and supported model <strong>name</strong>. Do not enter a model endpoint, password or private key.</p><p>If the existing profile is ready, keep it and choose Test model connection. Changing the profile requires another explicit connection test. Form values are used for this request and are not supplied as export defaults.</p>
+      ```
+    }
+  )
+  pageItem P900_CREDENTIAL (
+    type: selectList
+    label {
+      label: Existing database credential
+      alignment: left
+    }
+    layout {
+      sequence: 10
+      region: @profile
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+    }
+    validation {
+      valueRequired: false
+    }
+    lov {
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+      SELECT credential display_value, credential return_value
+      FROM JSON_TABLE(apex_session_state.get_clob('P900_CREDENTIALS'),'$[*]' COLUMNS(credential VARCHAR2(128) PATH '$'))
+      ORDER BY credential
+      ```
+      displayNullValue: true
+      nullDisplayValue: Choose a prepared credential
+      displayExtraValues: false
+    }
+    sessionState {
+      storage: request
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P900_REGION (
+    type: textField
+    label {
+      label: OCI region
+      alignment: left
+    }
+    layout {
+      sequence: 20
+      region: @profile
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+      width: 60
+      valuePlaceholder: Your enabled region
+    }
+    validation {
+      valueRequired: false
+      maxLength: 128
+    }
+    sessionState {
+      storage: request
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P900_COMPARTMENT (
+    type: textField
+    label {
+      label: OCI compartment OCID
+      alignment: left
+    }
+    layout {
+      sequence: 30
+      region: @profile
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+      width: 60
+      valuePlaceholder: The compartment permitted for model use
+    }
+    validation {
+      valueRequired: false
+      maxLength: 256
+    }
+    sessionState {
+      storage: request
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  pageItem P900_MODEL (
+    type: textField
+    label {
+      label: Model name
+      alignment: left
+    }
+    layout {
+      sequence: 40
+      region: @profile
+      slot: regionBody
+    }
+    appearance {
+      template: @/optional-floating
+      width: 60
+      valuePlaceholder: The supported provider model name
+    }
+    validation {
+      valueRequired: false
+      maxLength: 256
+    }
+    sessionState {
+      storage: request
+    }
+    security {
+      sessionStateProtection: unrestricted
+    }
+  )
+  region runtime (
+    name: 3. Prepare conversation components
+    type: staticContent
+    layout {
+      sequence: 50
+      slot: body
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p>Register or verify the supplied conversation components after the model profile is ready. Existing matching components and conversations are retained; no learner question is sent.</p>
+      ```
+    }
+  )
+  region collection (
+    name: 4. Load the public collection
+    type: staticContent
+    layout {
+      sequence: 60
+      slot: body
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p>Fetch the package's approved dataset from a pinned public GitHub commit. The loader checks the manifest and content hashes, stages the data and builds the graph before activation. It does not fetch instructions from a moving branch.</p><p>A ready existing collection can be retained during an upgrade. A failed load must not replace it. If a request is interrupted, refresh readiness and review its recorded state before explicitly retrying.</p>
+      <p role="status">Last recorded load: <strong>&P900_DATASET_STATUS!HTML.</strong><br>Last recorded phase: <strong>&P900_DATASET_PHASE!HTML.</strong></p>
+      <p>Verified active collection: &P900_COLLECTION_COUNTS!HTML.</p>
+      <p>These are recorded results, not a live percentage. Refresh readiness to check again; refreshing does not restart the load.</p>
+      ```
+    }
+  )
+  region enable (
+    name: 5. Open learning
+    type: staticContent
+    layout {
+      sequence: 70
+      slot: body
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    source {
+      htmlCode:
+      ```html
+      <p>Enable learning only when every required check is ready. This removes the installation's maintenance gate so individual app accounts can use Sample Contexts and My Contexts.</p><p>The local embedding model is optional. Without it, context search uses keywords. Ask the facilitator to use the documented owner-only model setup if semantic search is needed; this page does not download model binaries.</p>
+      ```
+    }
+  )
+  button prepare-network (
+    buttonName: ENSURE_NETWORK
+    label: Prepare graph network
+    layout {
+      sequence: 10
+      region: @network
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+  )
+  button configure-profile (
+    buttonName: CONFIGURE_PROFILE
+    label: Save model configuration
+    layout {
+      sequence: 10
+      region: @profile
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+  )
+  button test-model (
+    buttonName: TEST_MODEL
+    label: Test model connection once
+    layout {
+      sequence: 20
+      region: @profile
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+  )
+  button register-runtime (
+    buttonName: REGISTER_RUNTIME
+    label: Prepare conversation components
+    layout {
+      sequence: 10
+      region: @runtime
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+  )
+  button load-dataset (
+    buttonName: LOAD_DATASET
+    label: Load approved public collection
+    layout {
+      sequence: 10
+      region: @collection
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+  )
+  button enable-learning (
+    buttonName: ENABLE_LEARNING
+    label: Enable learning
+    layout {
+      sequence: 10
+      region: @enable
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: true
+    }
+    behavior {
+      action: submitPage
+      executeValidations: true
+      showProcessing: true
+      warnOnUnsavedChanges: doNotCheck
+    }
+    serverSideCondition {
+      type: item=value
+      item: P900_CHECKS
+      value: Y
+    }
+  )
+  button refresh-readiness (
+    buttonName: REFRESH
+    label: Refresh readiness
+    layout {
+      sequence: 10
+      region: @introduction
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: false
+    }
+    behavior {
+      action: redirectThisApp
+      target: {
+        page: 900
+        clearCache: 900
+      }
+    }
+  )
+  button start-learning (
+    buttonName: START_LEARNING
+    label: Open My Contexts
+    layout {
+      sequence: 20
+      region: @enable
+      slot: bottom
+    }
+    appearance {
+      buttonTemplate: @/text
+      hot: true
+    }
+    behavior {
+      action: redirectThisApp
+      target: {
+        page: 10
+      }
+    }
+    security {
+      authorizationScheme: @learning-ready
+    }
+  )
+  region checks (
+    name: Required checks
+    type: classicReport
+    layout {
+      sequence: 20
+      slot: body
+    }
+    source {
+      location: localDatabase
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+      SELECT CASE step_id
+        WHEN 'schema' THEN 'Database objects'
+        WHEN 'network' THEN 'Graph network'
+        WHEN 'profile' THEN 'Model profile'
+        WHEN 'model_test' THEN 'Model connection test'
+        WHEN 'runtime' THEN 'Conversation components'
+        WHEN 'dataset' THEN 'Public collection' ELSE step_id END step_name,
+        status, next_action, error_code
+      FROM JSON_TABLE(apex_session_state.get_clob('P900_STATUS'),'$.steps[*]' COLUMNS(
+        ord FOR ORDINALITY, step_id VARCHAR2(32) PATH '$.id',
+        status VARCHAR2(32) PATH '$.status', next_action VARCHAR2(1000) PATH '$.next_action',
+        error_code VARCHAR2(64) PATH '$.error_code'))
+      ORDER BY ord
+      ```
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    reportLayout {
+      numberOfRowsType: staticValue
+      numberOfRows: 10
+    }
+    componentAppearance {
+      template: @/standard
+    }
+    column STEP_NAME (
+      reportColumnQueryId: 1
+      type: plainText
+      heading {
+        heading: Check
+        alignment: start
+      }
+      layout {
+        sequence: 10
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column STATUS (
+      reportColumnQueryId: 2
+      type: plainText
+      heading {
+        heading: Status
+        alignment: start
+      }
+      layout {
+        sequence: 20
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column NEXT_ACTION (
+      reportColumnQueryId: 3
+      type: plainText
+      heading {
+        heading: Next action
+        alignment: start
+      }
+      layout {
+        sequence: 30
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column ERROR_CODE (
+      reportColumnQueryId: 4
+      type: plainText
+      heading {
+        heading: Error code
+        alignment: start
+      }
+      layout {
+        sequence: 40
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+  )
+  region recent-operations (
+    name: Recent setup actions
+    type: classicReport
+    layout {
+      sequence: 80
+      slot: body
+    }
+    source {
+      location: localDatabase
+      type: sqlQuery
+      sqlQuery:
+      ```sql
+      SELECT REPLACE(operation,'_',' ') operation, status, phase, error_code, next_action
+      FROM JSON_TABLE(apex_session_state.get_clob('P900_STATUS'),'$.runs[*]' COLUMNS(
+        ord FOR ORDINALITY, operation VARCHAR2(64) PATH '$.operation',
+        status VARCHAR2(32) PATH '$.status', phase VARCHAR2(64) PATH '$.phase',
+        error_code VARCHAR2(64) PATH '$.error_code', next_action VARCHAR2(1000) PATH '$.next_action'))
+      ORDER BY ord
+      ```
+    }
+    appearance {
+      template: @/standard
+      templateOptions: #DEFAULT#
+    }
+    reportLayout {
+      numberOfRowsType: staticValue
+      numberOfRows: 20
+    }
+    componentAppearance {
+      template: @/standard
+    }
+    column OPERATION (
+      reportColumnQueryId: 1
+      type: plainText
+      heading {
+        heading: Action
+        alignment: start
+      }
+      layout {
+        sequence: 10
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column STATUS (
+      reportColumnQueryId: 2
+      type: plainText
+      heading {
+        heading: Status
+        alignment: start
+      }
+      layout {
+        sequence: 20
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column PHASE (
+      reportColumnQueryId: 3
+      type: plainText
+      heading {
+        heading: Last recorded phase
+        alignment: start
+      }
+      layout {
+        sequence: 30
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column ERROR_CODE (
+      reportColumnQueryId: 4
+      type: plainText
+      heading {
+        heading: Error code
+        alignment: start
+      }
+      layout {
+        sequence: 40
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+    column NEXT_ACTION (
+      reportColumnQueryId: 5
+      type: plainText
+      heading {
+        heading: Next action
+        alignment: start
+      }
+      layout {
+        sequence: 50
+        columnAlignment: start
+      }
+      sorting {
+        sortable: false
+      }
+      security {
+        escapeSpecialChars: true
+      }
+    )
+  )
+  process create-local-oci-credential (
+    name: Create the fixed local OCI credential once
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+      DECLARE
+        failure_code NUMBER;
+        PROCEDURE clear_inputs IS BEGIN
+          :P900_OCI_USER:=NULL; :P900_OCI_TENANCY:=NULL;
+          :P900_OCI_FINGERPRINT:=NULL; :P900_OCI_PRIVATE_KEY:=NULL;
+        END;
+      BEGIN
+        IF NVL(OWA_UTIL.GET_CGI_ENV('REQUEST_METHOD'),'UNSET')<>'POST' THEN
+          RAISE_APPLICATION_ERROR(-20301,'Use the credential creation button.');
+        END IF;
+        kcv_deploy.create_oci_credential(
+          p_user_ocid=>:P900_OCI_USER,p_tenancy_ocid=>:P900_OCI_TENANCY,
+          p_fingerprint=>:P900_OCI_FINGERPRINT,p_private_key=>:P900_OCI_PRIVATE_KEY,
+          p_request_token=>:P900_TOKEN);
+        clear_inputs;
+        apex_application.g_print_success_message:='Local OCI credential created. Select OCI_USER_CRED in the model configuration, then explicitly test its connection.';
+      EXCEPTION WHEN OTHERS THEN
+        failure_code:=SQLCODE;
+        clear_inputs;
+        apex_error.add_error(
+          p_message=>CASE failure_code
+            WHEN -20300 THEN 'Credential creation is not authorised for this account.'
+            WHEN -20301 THEN 'Check the OCI user and tenancy OCIDs, matching fingerprint and unencrypted private-key body. All credential inputs have been cleared.'
+            WHEN -20302 THEN 'Another setup action is running. Refresh readiness before entering the credential again.'
+            WHEN -20303 THEN 'OCI_USER_CRED already exists or this request was previously recorded. Existing credentials are retained. Refresh readiness and select the prepared credential.'
+            ELSE 'Credential creation did not complete (error code '||TO_CHAR(failure_code)||'). All credential inputs have been cleared. Refresh readiness and review the recorded status before entering them again.'
+          END,
+          p_display_location=>apex_error.c_inline_in_notification);
+      END;
+      ```
+    }
+    execution {
+      sequence: 5
+      point: processing
+    }
+    serverSideCondition {
+      type: request=Value
+      value: CREATE_OCI_CREDENTIAL
+    }
+    security {
+      authorizationScheme: @deployment-installer
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+  process run-requested-setup-action (
+    name: Run one requested setup action
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+      BEGIN
+        CASE :REQUEST
+          WHEN 'CONFIGURE_PROFILE' THEN
+            kcv_deploy.configure_profile(:P900_CREDENTIAL,:P900_REGION,:P900_COMPARTMENT,:P900_MODEL,:P900_TOKEN);
+          WHEN 'TEST_MODEL' THEN kcv_deploy.test_model(:P900_TOKEN);
+          WHEN 'ENSURE_NETWORK' THEN kcv_deploy.ensure_network(:P900_TOKEN);
+          WHEN 'REGISTER_RUNTIME' THEN kcv_deploy.register_runtime(:P900_TOKEN);
+          WHEN 'LOAD_DATASET' THEN kcv_deploy.load_dataset(:P900_TOKEN);
+          WHEN 'ENABLE_LEARNING' THEN kcv_deploy.enable_learning(:P900_TOKEN);
+          ELSE RAISE_APPLICATION_ERROR(-20301,'Choose a setup action.');
+        END CASE;
+        :P900_CREDENTIAL:=NULL; :P900_REGION:=NULL; :P900_COMPARTMENT:=NULL; :P900_MODEL:=NULL;
+        apex_application.g_print_success_message:='Setup action finished. Review the readiness checks before continuing.';
+      EXCEPTION WHEN OTHERS THEN
+        :P900_CREDENTIAL:=NULL; :P900_REGION:=NULL; :P900_COMPARTMENT:=NULL; :P900_MODEL:=NULL;
+        apex_error.add_error(
+          p_message=>CASE SQLCODE
+            WHEN -20300 THEN 'Setup is not authorised for this account. Sign out and ask your workspace administrator to verify access.'
+            WHEN -20301 THEN 'Check the selected credential, model name, region and compartment. No private key or endpoint is accepted.'
+            WHEN -20302 THEN 'Another setup action is still running. Wait, then refresh readiness before trying again.'
+            WHEN -20303 THEN 'This request no longer matches the recorded action. Refresh readiness before choosing the intended action again.'
+            WHEN -20305 THEN 'Required checks are not ready. Review the next actions below before continuing.'
+            ELSE 'The setup action did not complete (error code '||TO_CHAR(SQLCODE)||'). Choose Refresh readiness to see the latest recorded status before deciding whether to retry. Refreshing does not restart the action.'
+          END,
+          p_display_location=>apex_error.c_inline_in_notification);
+      END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: processing
+    }
+    serverSideCondition {
+      type: expression
+      language: plsql
+      plsqlExpression: :REQUEST IN ('CONFIGURE_PROFILE','TEST_MODEL','ENSURE_NETWORK','REGISTER_RUNTIME','LOAD_DATASET','ENABLE_LEARNING')
+    }
+    security {
+      authorizationScheme: @deployment-installer
+    }
+    error {
+      displayLocation: inlineInNotification
+    }
+  )
+  process read-setup-readiness (
+    name: Read setup readiness without performing setup
+    type: executeCode
+    source {
+      plsqlCode:
+      ```plsql
+      DECLARE doc CLOB; BEGIN
+        :P900_OCI_USER:=NULL; :P900_OCI_TENANCY:=NULL;
+        :P900_OCI_FINGERPRINT:=NULL; :P900_OCI_PRIVATE_KEY:=NULL;
+        doc:=kcv_deploy.status_json;
+        apex_session_state.set_value(p_item=>'P900_STATUS',p_value=>doc,p_commit=>FALSE);
+        apex_session_state.set_value(p_item=>'P900_CREDENTIALS',p_value=>kcv_deploy.credential_options,p_commit=>FALSE);
+        :P900_TOKEN:=RAWTOHEX(SYS_GUID());
+        :P900_CHECKS:=CASE JSON_VALUE(doc,'$.required_checks_ready') WHEN 'true' THEN 'Y' ELSE 'N' END;
+        :P900_READINESS:=CASE JSON_VALUE(doc,'$.ready_for_learners')
+          WHEN 'true' THEN 'Ready for learners.'
+          ELSE 'Learning is paused. Complete the required checks, then choose Enable learning.' END;
+        :P900_SEARCH_NOTICE:=JSON_VALUE(doc,'$.context_search.notice' RETURNING VARCHAR2(4000));
+        :P900_DATASET_STATUS:=NVL(JSON_VALUE(doc,'$.dataset_progress.status' RETURNING VARCHAR2(32)),'No recorded load');
+        :P900_DATASET_PHASE:=NVL(JSON_VALUE(doc,'$.dataset_progress.phase' RETURNING VARCHAR2(128)),'No recorded phase');
+        :P900_COLLECTION_COUNTS:=CASE WHEN JSON_VALUE(doc,'$.collection_counts.sources' RETURNING NUMBER) IS NOT NULL
+          THEN TO_CHAR(JSON_VALUE(doc,'$.collection_counts.sources' RETURNING NUMBER),'TM9')||' sources, '
+            ||TO_CHAR(JSON_VALUE(doc,'$.collection_counts.passages' RETURNING NUMBER),'TM9')||' passages, '
+            ||TO_CHAR(JSON_VALUE(doc,'$.collection_counts.contexts' RETURNING NUMBER),'TM9')||' sample contexts.'
+          ELSE 'Counts are available after the collection readiness check passes.' END;
+      END;
+      ```
+    }
+    execution {
+      sequence: 10
+      point: beforeHeader
+    }
+    security {
+      authorizationScheme: @deployment-installer
+    }
+  )
+)

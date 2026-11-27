@@ -21,6 +21,7 @@ page 13 (
     warnOnUnsavedChanges: false
   }
   security {
+    authorizationScheme: @learning-ready
     authentication: required
     pageAccessProtection: argumentsMustHaveChecksum
     formAutoComplete: false

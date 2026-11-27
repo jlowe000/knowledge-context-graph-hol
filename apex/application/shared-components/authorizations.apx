@@ -9,3 +9,45 @@ authorization administration-rights (
     }
 )
 
+authorization deployment-installer (
+    name: Deployment installer
+    type: plSqlFunctionBody
+    settings {
+        plsqlFunctionBody:
+        ```plsql
+        DECLARE allowed BOOLEAN; BEGIN
+          EXECUTE IMMEDIATE 'BEGIN :allowed := kcv_deploy.is_installer; END;' USING OUT allowed;
+          RETURN NVL(allowed,FALSE);
+        EXCEPTION WHEN OTHERS THEN RETURN FALSE;
+        END;
+        ```
+    }
+    error {
+        errorMessage: Setup is available only to this application's authorised workspace administrator after Supporting Objects installation. Ask your facilitator to finish the installation.
+    }
+    advanced {
+        evaluationType: always
+    }
+)
+
+authorization learning-ready (
+    name: Learning is ready
+    type: plSqlFunctionBody
+    settings {
+        plsqlFunctionBody:
+        ```plsql
+        DECLARE allowed BOOLEAN; BEGIN
+          EXECUTE IMMEDIATE 'BEGIN :allowed := kcv_deploy.learner_ready; END;' USING OUT allowed;
+          RETURN NVL(allowed,FALSE);
+        EXCEPTION WHEN OTHERS THEN RETURN FALSE;
+        END;
+        ```
+    }
+    error {
+        errorMessage: This application is not ready for learning or is undergoing maintenance. Return to the application home page and ask your facilitator to complete setup. Your saved work has not been removed.
+    }
+    advanced {
+        evaluationType: always
+    }
+)
+

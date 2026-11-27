@@ -11,6 +11,13 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ('explorer.js', 'explorer.css')
+ATTRIBUTIONS = (
+    'LICENSE.txt', 'NOTICE.md',
+    'third-party/oracle-livelabs/LICENSE.txt', 'third-party/oracle-livelabs/README.md',
+    'third-party/font-apex/LICENSE.txt', 'third-party/font-apex/README.md',
+    'third-party/connormcd-misc-scripts/LICENSE.txt', 'third-party/connormcd-misc-scripts/README.md',
+    'third-party/context-search-model/README.md',
+)
 
 
 def build(check=False, root=ROOT):
@@ -49,6 +56,24 @@ def build(check=False, root=ROOT):
                     errors.append(f'{page.relative_to(root)}: set {filename} cache version to {expected}')
         if not found:
             errors.append(f'No versioned {filename} reference in authored pages')
+    # Standalone application ZIPs carry the same notices as the repository.
+    # Fixture-only roots without the product licence do not package a product.
+    if (root / 'LICENSE.txt').exists():
+        definitions = (application / 'shared-components/static-files.apx').read_text(encoding='utf-8')
+        for name in ATTRIBUTIONS:
+            source = root / name
+            target = destination / 'attribution' / name
+            if not source.is_file():
+                errors.append('Missing application attribution source: ' + name)
+                continue
+            if f'file "attribution/{name}" (' not in definitions:
+                errors.append('Missing native application attribution declaration: ' + name)
+            if check:
+                if not target.is_file() or target.read_bytes() != source.read_bytes():
+                    errors.append('APEX attribution is stale: ' + name)
+            else:
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(source.read_bytes())
     if errors:
         raise ValueError('\n'.join(errors))
     return 'APEX assets synchronized; directly authored pages preserved'

@@ -18,6 +18,73 @@ class EvidenceUiTests(unittest.TestCase):
                              text=True, capture_output=True, check=True)
         return json.loads(run.stdout)
 
+    def revision_summary(self, before, after):
+        return self.evaluate('revisionChangeSummary(' + json.dumps(before) + ',' + json.dumps(after) + ')')
+
+    @staticmethod
+    def revision(revision, topics, sources):
+        return {'state': {'scenario_session': 'SESSION1', 'context_revision': revision,
+                          'context': {'topic_preferences': dict.fromkeys(topics, 1)}},
+                'packet': {'graph_paths': [{'content_item': source} for source in sources]}}
+
+    def test_removed_focus_is_visible_when_the_same_source_has_fewer_paths(self):
+        before = self.revision('R1', ['Healthcare journey', 'Connected operations'], ['S10'] * 4)
+        after = self.revision('R2', ['Healthcare journey'], ['S10'] * 2)
+        self.assertEqual('Learning focus revised: removed Connected operations. The returned sources are unchanged; '
+                         'inspect Evidence for their recorded connections.', self.revision_summary(before, after))
+
+    def test_objective_only_revision_and_changed_sources_are_distinct(self):
+        before = self.revision('R1', ['Healthcare journey'], ['S10'])
+        after = self.revision('R2', ['Healthcare journey'], ['S10'])
+        before['state']['context']['objective'] = 'Explore'
+        after['state']['context']['objective'] = 'Understand the patient journey'
+        self.assertEqual('Objective/context revised. The returned sources are unchanged; inspect Evidence for their '
+                         'recorded connections.', self.revision_summary(before, after))
+        after['packet']['graph_paths'] = [{'content_item': 'S02'}, {'content_item': 'S03'}]
+        self.assertEqual('Objective/context revised. Returned sources changed: removed S10; added S02, S03. '
+                         'Inspect Evidence for their recorded connections.', self.revision_summary(before, after))
+
+    def test_added_focus_and_source_changes_are_both_reported(self):
+        before = self.revision('R1', ['Healthcare journey'], ['S10'])
+        after = self.revision('R2', ['Semantic retrieval'], ['S02'])
+        self.assertEqual('Learning focus revised: removed Healthcare journey; added Semantic retrieval. '
+                         'Returned sources changed: removed S10; added S02. Inspect Evidence for their recorded '
+                         'connections.', self.revision_summary(before, after))
+
+    def test_missing_or_malformed_evidence_does_not_claim_unchanged_sources(self):
+        for packet in (None, {}, {'graph_paths': None}, {'graph_paths': [None]},
+                       {'graph_paths': [{'topic': 'Healthcare journey'}]}):
+            for side in ('before', 'after'):
+                with self.subTest(packet=packet, side=side):
+                    before = self.revision('R1', ['Healthcare journey'], ['S10'])
+                    after = self.revision('R2', ['Healthcare journey'], ['S10'])
+                    (before if side == 'before' else after)['packet'] = packet
+                    self.assertEqual('Objective/context revised. A source comparison is unavailable; inspect Evidence '
+                                     'for the current recorded connections.', self.revision_summary(before, after))
+        before = self.revision('R1', ['Healthcare journey'], [])
+        after = self.revision('R2', ['Healthcare journey'], [])
+        del before['packet']
+        del after['packet']
+        self.assertEqual('Objective/context revised. A source comparison is unavailable; inspect Evidence '
+                         'for the current recorded connections.', self.revision_summary(before, after))
+
+    def test_empty_evidence_and_absent_previous_revision_remain_conservative(self):
+        before = self.revision('R1', ['Healthcare journey'], [])
+        after = self.revision('R2', ['Healthcare journey'], [])
+        self.assertEqual('Objective/context revised. No sources were returned in either revision; inspect Evidence '
+                         'for the recorded retrieval.', self.revision_summary(before, after))
+        self.assertEqual('', self.revision_summary(None, after))
+        self.assertEqual('', self.revision_summary(after, after))
+        before['state']['scenario_session'] = 'OTHER_SESSION'
+        self.assertEqual('', self.revision_summary(before, after))
+
+    def test_missing_topics_do_not_invent_removed_interests(self):
+        before = self.revision('R1', ['Healthcare journey'], ['S10'])
+        after = self.revision('R2', ['Healthcare journey'], ['S10'])
+        del after['state']['context']['topic_preferences']
+        self.assertEqual('Objective/context revised. The returned sources are unchanged; inspect Evidence for their '
+                         'recorded connections.', self.revision_summary(before, after))
+
     def test_public_publishers_and_repository_owners(self):
         accepted = ['https://docs.oracle.com/en/database/guide.html',
                     'https://livelabs.oracle.com/ords/r/dbpm/livelabs/view-workshop?wid=4477',

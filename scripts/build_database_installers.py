@@ -65,7 +65,7 @@ def program_identity(unit: str):
     return (match[2].upper(), ' '.join(match[1].upper().split())) if match else None
 
 
-VERIFY_DECLARATIONS = r"""
+LEGACY_VERIFY_DECLARATIONS = r"""
  l_n NUMBER; l_source CLOB; l_expected CLOB; l_actual CLOB;
  PROCEDURE require(p_ok BOOLEAN,p_message VARCHAR2) IS BEGIN
   IF p_ok IS NULL OR NOT p_ok THEN RAISE_APPLICATION_ERROR(-20301,p_message); END IF;
@@ -163,6 +163,34 @@ VERIFY_DECLARATIONS = r"""
  END;
 """
 
+# USER identifies the gateway login during native APEX execution; USER_* views
+# and local foreign-key ownership belong to the effective executing schema.
+# Preserve the prior declarations only for immutable pre-2.1 owner wrappers.
+VERIFY_DECLARATIONS = LEGACY_VERIFY_DECLARATIONS.replace(
+    'r_owner=USER', "r_owner=SYS_CONTEXT('USERENV','CURRENT_USER')")
+
+
+def wrapper_declarations(item: dict, effective_owner: bool = False) -> str:
+    version = tuple(int(part) for part in item['version'].split('.'))
+    return LEGACY_VERIFY_DECLARATIONS if version < (2, 1, 0) and not effective_owner else VERIFY_DECLARATIONS
+
+
+def effective_owner_verification(root: Path, item: dict) -> str:
+    """Render one reviewed historical check for a schema execution context.
+
+    Frozen files and receipt hashes remain unchanged. Only the known custom
+    R6 foreign-key check is normalized; never rewrite program-source literals
+    or a payload. The ordinary owner transport does not use this adaptation.
+    """
+    text = read(root / item['verification'])
+    if 'r_owner=USER' not in text:
+        return text
+    if (item['id'] != '2.0.0-c3-r6-001-kcv_context_search_chunks'
+            or item['verification_sha256'] != 'eb6a5ce9e9a90ad23e3b962b05469aa194f489133217be38f3a617e39047c143'
+            or sha(text) != item['verification_sha256'] or text.count('r_owner=USER') != 1):
+        raise ValueError('Unreviewed effective-owner verification normalization: ' + item['id'])
+    return text.replace('r_owner=USER', "r_owner=SYS_CONTEXT('USERENV','CURRENT_USER')")
+
 
 def table_verification(contract: dict) -> str:
     return clob_assignment('l_expected', json.dumps(contract, separators=(',', ':'))) + '\n check_table(l_expected);'
@@ -173,6 +201,80 @@ def program_verification(unit: str) -> str:
     if not identity:
         raise ValueError('Not a program source')
     return clob_assignment('l_expected', canonical_program(unit)) + f'\n check_program({literal(identity[0])},{literal(identity[1])},l_expected);'
+
+
+def deployment_request_index_verification() -> str:
+    """Check the native UTC index generated for the journal's TSTZ column.
+
+    Oracle represents STARTED_AT with a generated hidden virtual timestamp and
+    SYS_EXTRACT_UTC. Its generated column name is not a portable identifier.
+    Keep the expression, key order, direction and physical index properties
+    exact instead of treating any function-based index as equivalent.
+    """
+    return """SELECT COUNT(*) INTO l_n FROM user_indexes WHERE index_name='KCV_DEPLOY_RUNS_RECENT'
+ AND table_owner=SYS_CONTEXT('USERENV','CURRENT_USER') AND table_name='KCV_DEPLOY_RUNS'
+ AND table_type='TABLE' AND uniqueness='NONUNIQUE' AND index_type='FUNCTION-BASED NORMAL'
+ AND status='VALID' AND funcidx_status='ENABLED' AND partitioned='NO' AND visibility='VISIBLE';
+ require(l_n=1,'Deployment request index differs');
+ SELECT COUNT(*) INTO l_n FROM user_ind_columns
+  WHERE index_name='KCV_DEPLOY_RUNS_RECENT' AND table_name='KCV_DEPLOY_RUNS';
+ require(l_n=2,'Deployment request index key count differs');
+ SELECT COUNT(*) INTO l_n FROM user_ind_columns
+  WHERE index_name='KCV_DEPLOY_RUNS_RECENT' AND table_name='KCV_DEPLOY_RUNS' AND descend='ASC';
+ require(l_n=2,'Deployment request index direction differs');
+ SELECT COUNT(*) INTO l_n FROM user_ind_columns
+  WHERE index_name='KCV_DEPLOY_RUNS_RECENT' AND table_name='KCV_DEPLOY_RUNS'
+   AND column_position=2 AND column_name='RUN_ID';
+ require(l_n=1,'Deployment request index second key differs');
+ SELECT COUNT(*) INTO l_n FROM user_ind_expressions
+  WHERE index_name='KCV_DEPLOY_RUNS_RECENT' AND table_name='KCV_DEPLOY_RUNS';
+ require(l_n=1,'Deployment request index expression count differs');
+ DECLARE expression_text LONG;first_column VARCHAR2(128);BEGIN
+  SELECT column_expression INTO expression_text FROM user_ind_expressions
+   WHERE index_name='KCV_DEPLOY_RUNS_RECENT' AND table_name='KCV_DEPLOY_RUNS' AND column_position=1;
+  require(REGEXP_REPLACE(expression_text,'[[:space:]]','')='SYS_EXTRACT_UTC("STARTED_AT")',
+   'Deployment request index UTC expression differs');
+  SELECT column_name INTO first_column FROM user_ind_columns
+   WHERE index_name='KCV_DEPLOY_RUNS_RECENT' AND table_name='KCV_DEPLOY_RUNS' AND column_position=1;
+  SELECT COUNT(*) INTO l_n FROM user_tab_cols
+   WHERE table_name='KCV_DEPLOY_RUNS' AND column_name=first_column
+    AND hidden_column='YES' AND virtual_column='YES' AND data_type='TIMESTAMP(6)';
+  require(l_n=1,'Deployment request index generated UTC column differs');
+ END;
+"""
+
+
+def deployment_request_index_payload(retired_id: str, retired_receipt_sha256: str) -> str:
+    """Reconcile only the known failed index check; never rewrite its receipt.
+
+    The enclosing migration also checks the full retirement record. If that
+    failed candidate exists, its index must already exist and pass verification.
+    A fresh target may create the intended index when it is absent.
+    """
+    if not re.fullmatch(r'[a-z0-9][a-z0-9._-]{0,100}', retired_id):
+        raise ValueError('Invalid retired migration identity')
+    if not re.fullmatch(r'[0-9a-f]{64}', retired_receipt_sha256):
+        raise ValueError('Invalid retired migration digest')
+    return f"""DECLARE
+ l_n NUMBER;l_retired NUMBER;l_failed NUMBER;
+ PROCEDURE require(p_ok BOOLEAN,p_message VARCHAR2) IS BEGIN
+  IF p_ok IS NULL OR NOT p_ok THEN RAISE_APPLICATION_ERROR(-20301,p_message);END IF;
+ END;
+BEGIN
+ SELECT COUNT(*) INTO l_retired FROM kcv_schema_migrations WHERE migration_id={literal(retired_id)};
+ SELECT COUNT(*) INTO l_failed FROM kcv_schema_migrations WHERE migration_id={literal(retired_id)}
+  AND payload_sha256={literal(retired_receipt_sha256)} AND product_version='2.1.0'
+  AND phase='FAILED' AND error_code=-20301 AND completed_at IS NULL;
+ require(l_retired=l_failed AND l_failed IN(0,1),'Retired deployment index audit differs');
+ SELECT COUNT(*) INTO l_n FROM user_indexes WHERE index_name='KCV_DEPLOY_RUNS_RECENT';
+ IF l_failed=1 THEN
+  require(l_n=1,'Retired deployment index is missing; owner recovery review is required');
+ ELSIF l_n=0 THEN
+  EXECUTE IMMEDIATE 'CREATE INDEX kcv_deploy_runs_recent ON kcv_deploy_runs (started_at,run_id)';
+ END IF;
+{deployment_request_index_verification().rstrip()}
+END;
+"""
 
 
 def validate_manifest(root: Path = ROOT) -> dict:
@@ -325,9 +427,10 @@ BEGIN
 END;"""
 
 
-def wrapper(root: Path, item: dict) -> str:
+def wrapper(root: Path, item: dict, effective_owner: bool = False) -> str:
     payload = read(root / item['payload']).strip()
-    verify = read(root / item['verification']).strip()
+    verify = (effective_owner_verification(root, item) if effective_owner
+              else read(root / item['verification'])).strip()
     digest = sha(item['payload_sha256'] + ':' + item['verification_sha256'])
     predecessor = ''
     audit_guard = retirement_guard(root, item.get('retirement_guards', []))
@@ -340,7 +443,7 @@ def wrapper(root: Path, item: dict) -> str:
 DECLARE
  l_sql CLOB; l_hash VARCHAR2(64); l_phase VARCHAR2(16); l_started BOOLEAN:=FALSE;
  l_lock VARCHAR2(128); l_lock_result PLS_INTEGER; l_error NUMBER;
-{VERIFY_DECLARATIONS}
+{wrapper_declarations(item, effective_owner)}
 BEGIN
  require(SYS_CONTEXT('USERENV','CURRENT_SCHEMA')=SYS_CONTEXT('USERENV','SESSION_USER')
   AND SYS_CONTEXT('USERENV','SESSION_USER') NOT IN ('ADMIN','SYS','SYSTEM'),'Connect as the intended project schema owner');
@@ -410,10 +513,10 @@ def successor_chain(item: dict, items: list[dict]) -> list[dict]:
     return result
 
 
-def worksheet_step(root: Path, item: dict, items: list[dict]) -> str:
+def worksheet_step(root: Path, item: dict, items: list[dict], effective_owner: bool = False) -> str:
     successors = successor_chain(item, items)
     if not successors:
-        return wrapper(root, item)
+        return wrapper(root, item, effective_owner=effective_owner)
     lines = ['DECLARE', ' l_sql CLOB;l_replaced BOOLEAN:=FALSE;', VERIFY_DECLARATIONS, 'BEGIN']
     # Prefer the newest fully recorded successor. A failed/incomplete successor
     # cannot hide either history or physical drift: the prior live contract must
@@ -422,9 +525,10 @@ def worksheet_step(root: Path, item: dict, items: list[dict]) -> str:
         digest = sha(successor['payload_sha256'] + ':' + successor['verification_sha256'])
         lines.extend([" IF NOT l_replaced THEN",
             f" SELECT COUNT(*) INTO l_n FROM kcv_schema_migrations WHERE migration_id={literal(successor['id'])} AND payload_sha256={literal(digest)} AND phase='COMPLETE';",
-            ' IF l_n=1 THEN', read(root / successor['verification']).strip(), receipt_check(item),
+            ' IF l_n=1 THEN', (effective_owner_verification(root, successor) if effective_owner
+                              else read(root / successor['verification'])).strip(), receipt_check(item),
             ' l_replaced:=TRUE;END IF;END IF;'])
-    lines.extend([' IF NOT l_replaced THEN', clob_assignment('l_sql', wrapper(root, item).strip()),
+    lines.extend([' IF NOT l_replaced THEN', clob_assignment('l_sql', wrapper(root, item, effective_owner=effective_owner).strip()),
                   ' EXECUTE IMMEDIATE l_sql;END IF;', 'END;\n'])
     return '\n'.join(lines)
 
@@ -448,20 +552,28 @@ def liquibase_needs_historical_step(root: Path, item: dict, items: list[dict]) -
     return '\n'.join(lines)
 
 
-def verification_block(root: Path, items: list[dict], receipts: bool = True) -> str:
+def verification_block(root: Path, items: list[dict], receipts: bool = True,
+                       effective_owner: bool = False) -> str:
     statements = [retirement_guard(root)] if receipts else []
+    checked_targets = set()
     for item in items:
         successors = successor_chain(item, items)
         target = successors[-1] if successors else item
         if successors and receipts:
             statements.append(receipt_check(target))
-        statements.append(read(root / target['verification']).strip())
+        # A single read-only block needs each final physical shape once. Keep
+        # every historical/successor receipt check in its original position;
+        # a failed physical check still aborts before later statements execute.
+        if target['id'] not in checked_targets:
+            statements.append((effective_owner_verification(root, target) if effective_owner
+                               else read(root / target['verification'])).strip())
+            checked_targets.add(target['id'])
         if receipts:
             statements.append(receipt_check(item))
     return 'DECLARE\n' + VERIFY_DECLARATIONS + '\nBEGIN\n' + '\n'.join(statements) + "\n DBMS_OUTPUT.PUT_LINE('KCV schema verification passed');\nEND;\n"
 
 
-def retired_candidate_preflight(root: Path, items: list[dict]) -> str | None:
+def retired_candidate_preflight(root: Path, items: list[dict], effective_owner: bool = False) -> str | None:
     """Repair only the reviewed failed candidate before a Worksheet replay.
 
     The normal baseline gate cannot validate a package left invalid by the
@@ -483,14 +595,15 @@ def retired_candidate_preflight(root: Path, items: list[dict]) -> str | None:
         lines.extend([f" SELECT COUNT(*) INTO l_n FROM kcv_schema_migrations WHERE migration_id IN ({ids}) AND phase='FAILED';",
                       ' IF l_n>0 THEN'])
         for mid in record['replacement_migrations']:
-            lines.extend([clob_assignment('l_sql', worksheet_step(root, active[mid], items).strip()),
+            lines.extend([clob_assignment('l_sql', worksheet_step(root, active[mid], items, effective_owner=effective_owner).strip()),
                           ' EXECUTE IMMEDIATE l_sql;'])
         lines.append(' END IF;')
     lines.append('END;\n')
     return '\n'.join(lines)
 
 
-def installed_contract_gate(root: Path, required: list[dict], all_items: list[dict]) -> str:
+def installed_contract_gate(root: Path, required: list[dict], all_items: list[dict],
+                            effective_owner: bool = False) -> str:
     """Verify required history against the newest *completed* live contract.
 
     Upgrade starts on either the original adopted v1, C2, or a completed later
@@ -502,10 +615,23 @@ def installed_contract_gate(root: Path, required: list[dict], all_items: list[di
     infers a receipt from object presence.
     """
     statements = []
+    physical_checks = {}
+    def check(item):
+        # The selected successor is determined at runtime, so a generator-time
+        # set alone would incorrectly omit a check on a partially upgraded DB.
+        # Emit one shared local procedure per possible target and memoize only
+        # successful calls for this anonymous block. Never memoize receipts or
+        # selection queries, and never retain state across requests.
+        if item['id'] not in physical_checks:
+            name = f'kcv_check_physical_{len(physical_checks) + 1}'
+            verification = (effective_owner_verification(root, item) if effective_owner
+                            else read(root / item['verification'])).strip()
+            physical_checks[item['id']] = (name, verification)
+        return ' ' + physical_checks[item['id']][0] + ';'
     for item in required:
         successors = successor_chain(item, all_items)
         if not successors:
-            statements.extend([read(root / item['verification']).strip(), receipt_check(item)])
+            statements.extend([check(item), receipt_check(item)])
             continue
         lines = [' DECLARE l_replaced BOOLEAN:=FALSE;BEGIN']
         for successor in reversed(successors):
@@ -513,12 +639,24 @@ def installed_contract_gate(root: Path, required: list[dict], all_items: list[di
             lines.extend([
                 ' IF NOT l_replaced THEN',
                 f" SELECT COUNT(*) INTO l_n FROM kcv_schema_migrations WHERE migration_id={literal(successor['id'])} AND payload_sha256={literal(digest)} AND phase='COMPLETE';",
-                ' IF l_n=1 THEN', read(root / successor['verification']).strip(),
+                ' IF l_n=1 THEN', check(successor),
                 ' l_replaced:=TRUE;END IF;END IF;'])
-        lines.extend([' IF NOT l_replaced THEN', read(root / item['verification']).strip(),
+        lines.extend([' IF NOT l_replaced THEN', check(item),
                       ' END IF;', receipt_check(item), ' END;'])
         statements.append('\n'.join(lines))
-    return ('DECLARE\n' + VERIFY_DECLARATIONS + '\nBEGIN\n' + '\n'.join(statements)
+    declarations = (" TYPE kcv_physical_checks_t IS TABLE OF BOOLEAN INDEX BY VARCHAR2(128);\n"
+                    " l_kcv_physical_checks kcv_physical_checks_t;\n")
+    procedures = []
+    for mid, (name, verification) in physical_checks.items():
+        procedures.append(f""" PROCEDURE {name} IS BEGIN
+  IF NOT l_kcv_physical_checks.EXISTS({literal(mid)}) THEN
+{verification}
+   l_kcv_physical_checks({literal(mid)}):=TRUE;
+  END IF;
+ END;
+""")
+    return ('DECLARE\n' + declarations + VERIFY_DECLARATIONS + '\n' + ''.join(procedures)
+            + '\nBEGIN\n' + '\n'.join(statements)
             + "\n DBMS_OUTPUT.PUT_LINE('KCV installed baseline contract verified');\nEND;\n")
 
 
@@ -546,7 +684,7 @@ def recovery(root: Path, item: dict) -> str:
 -- Acquires the same migration lock. Does not rerun DDL, clear a live lock or skip postconditions.
 DECLARE
  l_lock VARCHAR2(128);l_result PLS_INTEGER;
-{VERIFY_DECLARATIONS}
+{wrapper_declarations(item)}
 BEGIN
  require(SYS_CONTEXT('USERENV','CURRENT_SCHEMA')=SYS_CONTEXT('USERENV','SESSION_USER')
   AND SYS_CONTEXT('USERENV','SESSION_USER') NOT IN ('ADMIN','SYS','SYSTEM'),'Connect as the intended project schema owner');
@@ -563,6 +701,18 @@ BEGIN
 EXCEPTION WHEN OTHERS THEN ROLLBACK;IF l_lock IS NOT NULL AND l_result=0 THEN l_result:=DBMS_LOCK.RELEASE(l_lock);END IF;RAISE;
 END;
 /\n"""
+
+
+def owner_binding(root: Path, items: list[dict]) -> str:
+    """Embed full read-only verification in the explicit owner-only binder."""
+    template = read(root / 'sql/schema/07_bind_deployment_owner.sql')
+    marker = (" -- KCV_FULL_SCHEMA_VERIFICATION\n"
+              " RAISE_APPLICATION_ERROR(-20300,'Use generated sql/install/03_bind_deployment_owner.sql');")
+    if template.count(marker) != 1:
+        raise ValueError('Owner binding template verification marker differs')
+    result = template.replace(marker, verification_block(root, items).rstrip())
+    return ('-- GENERATED from the owner binding template and current full schema contract.\n'
+            + result.replace('-- Maintained template; use generated sql/install/03_bind_deployment_owner.sql.\n', '', 1))
 
 
 def build(root: Path = ROOT, check: bool = False):
@@ -603,6 +753,7 @@ def build(root: Path = ROOT, check: bool = False):
     write_checked(root / 'db/baseline/adopt.sql', adoption(root, groups['baseline']), check)
     write_checked(root / 'sql/install/00_adopt_schema_baseline.sql', adoption(root, groups['baseline']), check)
     write_checked(root / 'sql/install/02_verify_schema.sql', verification_block(root, all_items) + '/\n', check)
+    write_checked(root / 'sql/install/03_bind_deployment_owner.sql', owner_binding(root, all_items), check)
     for name, items in [('00_install_schema.sql', all_items), ('01_upgrade_schema.sql', groups['feature'])]:
         header = '-- GENERATED: local reviewed migration payloads. Run Script as the project schema owner.\n-- Check the final verification result; do not continue after an error.\n'
         if name.startswith('01'):

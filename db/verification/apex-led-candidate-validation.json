@@ -1,0 +1,2371 @@
+{
+  "candidate_version": "2.1.0",
+  "status": "in_progress_not_accepted",
+  "recorded_date": "2026-11-27",
+  "scope": "Isolated APEX-led deployment rehearsal on dev; existing deployment preserved; release unchanged",
+  "environment": {
+    "database": "Oracle AI Database 26ai, 23.26.4.1",
+    "apex": "26.1.6",
+    "ords": "26.3.1.r3031615",
+    "sqlcl": "26.3.1.0",
+    "javavm": "VALID; existing enablement retained",
+    "live_identifiers_omitted": true
+  },
+  "passed": [
+    "Required platform capabilities and isolated schema/workspace mapping checked",
+    "Builder database login has CREATE SESSION only, no roles or direct object grants",
+    "REST prerequisite enabled only for the two approved test schemas, with metadata authentication and no table APIs",
+    "Small Supporting Objects install and guarded upgrade executed through App Builder",
+    "Observed Builder effective parsing owner and authenticated native workspace administrator checks passed",
+    "Full compact application source directory validated, imported and exported natively; backend still empty",
+    "Candidate-r3 native ZIP validation passed with the default safety limits unchanged",
+    "Untouched ZIP exported by App Builder passed the actual browser import preview; no application installation was submitted",
+    "Candidate-r4 restores only minimal native deployment metadata; all 45 previous file contents are unchanged and native ZIP validation passed with default limits",
+    "Archive root layout compared against a ZIP exported directly through App Builder; retained component bytes match apart from the intentional staging alias",
+    "Owner-local OCI_USER_CRED exists in the isolated clean owner and its temporary creation helper is absent; credential values were not read",
+    "Standalone export contains all 16 maintained static assets, including nine unchanged licence/attribution files",
+    "Three administrator helper blocks parsed successfully without credential values",
+    "Nonfunctional credential ownership probe verified target-owner creation and removed its helper and dummy credential",
+    "Native transport probe restored a 139266-byte UTF-8 SQL block under the isolated parsing owner's definer privileges",
+    "Six transport negative fixtures rejected before execution; corrupt gzip returned ORA-29294",
+    "Transport probe helper removed after execution",
+    "42 local APEX authoring and packaging tests passed after compressed transport integration",
+    "34 migration generator tests passed, retaining the original 96 frozen migration records/payloads",
+    "Candidate-r4 passed actual App Builder preview and imported as a newly allocated application; no existing application was overwritten",
+    "Read-only post-interruption audit found 100 completed migration receipts, one failed receipt, none running, and no invalid project objects or compiler errors",
+    "Native dictionary confirmed the deployment request index is valid: FUNCTION-BASED NORMAL with SYS_EXTRACT_UTC(\"STARTED_AT\") followed by RUN_ID, both ascending",
+    "Corrected strict index verifier passed in the isolated workspace SQL Commands in 0.21 seconds, without database writes",
+    "Post-resumption preservation comparison matched all 28 tracked table digests and the protected application identity against the latest pre-import baseline",
+    "38 migration tests, 19 Supporting Objects tests and 27 APEX authoring/ZIP tests passed after the guarded retirement correction",
+    "Corrected read-only retirement guard verified the 100-step physical prefix natively and selected the exact known recovery; temporary helper removed and 101 receipts unchanged",
+    "Both corrected Supporting Objects drivers passed native DBMS_SQL parse-only checks",
+    "Candidate-r5 APEXlang directory validated and imported into the separate staging application; protected application/backend fingerprint was unchanged",
+    "Candidate-r5 native export retained all 16 assets and notices; both drivers round-tripped against canonical generated SQL",
+    "Exact candidate-r5 ZIP passed native APEX validation with default safety limits unchanged; targeted private-content scan found no matches",
+    "Candidate-r5 passed actual App Builder preview and replacement of the same isolated application; Supporting Objects Upgrade was submitted once",
+    "After the candidate-r5 gateway timeout, read-only native checks found 104 completed receipts, one interrupted RUNNING receipt, the retained original FAILED receipt, and no invalid project objects or compiler errors",
+    "Read-only physical audit passed the exact interrupted backend-ready contract: all 27 expected program hashes and validity checks, deployment tables and native index semantics",
+    "After the r5 timeout, a further preservation check matched all 28 tracked table digests and the protected application identity against the latest pre-import baseline",
+    "Signed-in installer sees the neutral installation/maintenance handoff while the backend is incomplete",
+    "Scoped saved proxy-owner connection verified; canonical per-step recovery reconciled only the physically complete interrupted receipt and completed both remaining migrations",
+    "Independent native audit passed all107 active completion receipts,28 exact valid programs, full physical contract and trusted application binding with both maintenance flags ON",
+    "Original failed receipt and native index identity/DDL timestamps remained unchanged after owner recovery",
+    "Post-recovery preservation audit matched all28 tracked table digests and protected application identity",
+    "Actual installer browser session reached guided Deployment setup; database objects READY and five runtime checks PENDING",
+    "Real-owner read-only readiness smoke passed: contract verification0.66seconds and status_json0.91seconds; no model requests made",
+    "Native setup-authorization harness passed installer identity pin, malformed profile rejection, two learner denials and anonymous denial;14 protected table fingerprints unchanged, fixture sessions removed, zero external model requests",
+    "Browser graph action recorded a FAILED request with error-20305; read-only diagnosis confirmed the native RDF catalogue VIEW was created and VALID, with no foreign model owners",
+    "Browser Refresh readiness exposed the recorded failed action without retrying it",
+    "Four canonical additive r2 migrations completed natively:111 active COMPLETE receipts,112 historical rows and no RUNNING migrations",
+    "R2 upgrade preserved all29 permanent runtime-table fingerprints, original108 receipt rows and127 native network object identities and DDL timestamps; trusted application binding and maintenance flags retained",
+    "Native network idempotence passed:existing valid catalogue VIEW and all127 native objects unchanged; one new successful setup receipt; no model action",
+    "Native fault injection passed:original error-20980 preserved despite secondary journal error-20981; caller received sanitized-20304; prior setup/settings/journal rows unchanged",
+    "Independent contender acquired both persistent locks while the failed holder session remained alive; exact synthetic trigger and receipt subsequently removed and absence verified",
+    "Candidate-r6 authored source passed native APEX validation and staging-only import; Supporting Objects auto-install disabled; protected application/backend snapshot unchanged",
+    "Candidate-r6 native export completed with11 pages and16 assets; original engine export retained unchanged",
+    "Exact candidate-r6 ZIP passed native validation with default safety limits unchanged; canonical Supporting Objects and16 assets matched; targeted scan of46 native files and197 decoded payloads found no matches",
+    "Actual installer browser saved its owner-local model profile without a model call; graph and profile readiness READY",
+    "Actual installer browser loaded the pinned public dataset successfully:834 sources,762 passages,3 sample contexts; dataset/setup journals SUCCEEDED and no active work",
+    "After private credential recreation, one explicit browser model retest succeeded and Model connection test became READY",
+    "Canonical r3 owner upgrade passed115 active COMPLETE migrations/116 historical rows; full before/after hashes preserved29 runtime tables,143 native network objects,8 runtime dictionaries and30,144 graph triples",
+    "Actual browser registration retry succeeded after canonical r3; independent inventories confirmed all9 existing component/attribute hashes unchanged and exactly2 new teams",
+    "Actual browser all6 required checks READY and Enable learning completed with Ready for learners",
+    "Candidate-r7 native validation/staging-only import passed; protected application/backend snapshot unchanged",
+    "Candidate-r7 native export and exact ZIP validation passed; canonical SQL and16 assets matched; targeted scans across46 native files and205 decoded payloads found no matches",
+    "After guided setup, protected original application identity and all28 tracked table digests matched the prior recovery baseline",
+    "Candidate-r7 passed actual App Builder preview and replacement of the same recovered application; Supporting Objects Upgrade was submitted once and completed with one successful script, zero errors and one total script",
+    "Candidate-r7 exact 115-step schema verifier passed after the browser upgrade; all116 historical receipt rows remained unchanged",
+    "Candidate-r7 before/after preservation comparison passed with a reported installer timestamp change:51 of53 assertions unchanged; only KCV_DEPLOY_STATE.UPDATED_AT and its containing singleton whole-row hash differed",
+    "After candidate-r7 browser upgrade, the protected original application identity and all28 tracked table digests matched their post-guided-setup baseline",
+    "After candidate-r7 browser upgrade, the installer signed in again, all6 readiness checks were READY and Enable learning returned Ready for learners; no repeated model test or dataset load",
+    "Genuine learner browser sign-in reached an empty My Contexts library with deployment navigation hidden; Sample Contexts opened the Casey sample conversation",
+    "Casey sample real answer passed with two S10 editorial-summary citations; Sources showed two passages and four topic paths, and Answer lineage showed successful application retrieval with two matched cited passages",
+    "Learner copied the Casey sample into a personal draft with fictional identity cleared, saved an objective and unknowns, reviewed and applied a private revision, and received a real personal answer with evidence",
+    "Learner refined the objective and removed Connected operations; review classified the topic removal as a learning-focus change while constraints remained an empty array; a second private revision became ready",
+    "Reopening the existing personal conversation retained its earlier revision pin; explicit Use latest confirmation then adopted the ready second revision",
+    "Separate prepared clean target passed read-only prerequisites for grants, REST, Java, quota and three native account roles; zero project objects and zero applications, with local credential and model profile absent",
+    "A real learner follow-up used the adopted second revision and showed two paths for Healthcare journey only; the earlier explanation retained four paths across two topics, with S10 still the source for both answers",
+    "After sign-out and a new sign-in, the learner reopened the saved personal context, both answers and the earlier explanation",
+    "Scoped learner before/after persistence records matched except attachment count one to two; two COMPLETED responses, two recorded model submissions and two application evidence calls stayed unchanged, with zero failed, running or uncertain responses, 30144 public triples and two private overlays",
+    "A second genuine app-only sign-in showed an empty personal library and no connected-healthcare search results using keyword fallback; direct Deployment setup navigation was denied with APEX.AUTHORIZATION.ACCESS_DENIED",
+    "Candidate-r8 native source validation, staging-only import with preservation checks and native export passed; no existing runtime application was replaced",
+    "Exact candidate-r8 ZIP built and native validation passed:46 entries,11 pages,16 assets and115 canonical migrations; targeted scans found zero matches across native files and205 decoded SQL payloads",
+    "Before the candidate-r8 clean attempt, native checks and App Builder confirmed the intended target had no project backend or applications",
+    "The actual candidate-r8 ZIP imported through App Builder into a newly allocated application; Supporting Objects Install was then submitted once, with its timeout recorded separately",
+    "After the candidate-r8 clean timeout, protected-installation preservation matched72 of72 assertions exactly with no exceptions:58 persistent non-network project tables including vectors/evidence plus checked programs/object identities, application identities and native network catalogues; excluded native triples, provider/dictionary runtime state and full APEX component source",
+    "Candidate-r9 local fresh-driver simplification passed70 focused tests:49 ZIP/migration tests and21 Supporting Objects tests; expanded SQL reduced19103836 to7597991 bytes with115 canonical contracts, final verifier and upgrade-driver bytes unchanged. Those local tests did not exercise browser runtime; later native validation and clean structural execution are recorded separately.",
+    "Candidate-r9 native source validation, staging-only import with existing backend preservation and native export passed",
+    "Exact candidate-r9 ZIP built and native validation passed:5506155 bytes,46 entries,11 pages,16 assets and115 canonical migrations; targeted scan found zero matches across files and204 decoded payloads (118 install/86 upgrade)",
+    "Read-only name-absence preflight passed before provisioning the next isolated clean target; subsequent creation/configuration verification is recorded separately",
+    "Explicitly approved next isolated target preparation verified: schema-only owner and enabled workspace created, authenticated REST metadata enabled with no table APIs, and project backend still empty; private account creation and r9 browser import remain pending",
+    "The user submitted new-target account prompts privately; native inventory verified one installer administrator/developer, two app-only learners, required grants and REST prerequisites. Eight empty-target checks passed with zero project objects/applications; local credential/profile absent.",
+    "Before the r9 browser import, a vector-aware107-assertion preservation baseline was captured across three protected builds, including the partial installation pinned at99 receipts; this baseline capture preceded the separately recorded successful107-assertion after-comparison.",
+    "Actual candidate-r9 pristine App Builder import and Supporting Objects Install passed:install-001-trusted-installation Success1/Errors0/Total1",
+    "Candidate-r9 read-only postinstall passed115 exact completed receipts with no extra/incomplete rows,28 valid program hashes,zero invalid/compiler errors,30 tables,correct application binding,both maintenance flags ON andzero setup requests",
+    "After candidate-r9 structural installation, strict protected-preservation comparison matched107 of107 assertions with no allowed changes across three builds, including the earlier partial installation pinned at99 receipts; declared exclusions remain",
+    "After the r9 clean structural checkpoint, actual installer sign-in and owner-local credential creation succeeded and Prepare graph network became READY; subsequent model-test and registration/data outcomes are recorded separately.",
+    "On the r9 clean target, existing successful profile configuration and READY status were observed without resaving; safe read-only checks confirmed matching configuration, local credential existence and removal of its temporary helper, without exposing values",
+    "Actual r9 browser conversation registration succeeded after one button submission; public collection loading succeeded and active counts verified834 sources/762 passages/3 sample contexts. Five checks were READY at that checkpoint; subsequent model tests and their failures are recorded separately",
+    "Corrected private credential repair passed after a non-credential gateway-context probe; user-entered replacement succeeded and temporary helper was removed. Earlier ORA-20981 rejection preserved credential/helper state.",
+    "Two separate fixed diagnostic greetings passed outside the APEX setup journal, one in the working owner and one in the new-owner definer context, without application data/history writes",
+    "The third explicit r9 APEX model test passed after two retained ORA-20401 failures; all six readiness checks are READY. The later Enable learning result and native ready-state verification are recorded separately.",
+    "Actual r9 Enable learning displayed Ready for learners after all six checks were READY; installer then signed out for a separate learner-account handoff",
+    "Native r9 post-enable readiness passed115 receipts/28 program hashes, current network/profile/model test,11 enabled conversation components,pinned834/762/3 collection andtwo maintenance flags OFF. Pre-learner baseline:zero answers,recorded model starts,evidence events andpersonal contexts; optional embedding absent and keyword fallback configured.",
+    "After r9 guided readiness, a second strict protected-build comparison passed107 of107 assertions with no exceptions before new-target learner activity",
+    "Actual r9 app-only sign-in, empty My Contexts, Use a sample/Explore Samples and return navigation passed; Deployment setup absent from learner menu",
+    "R9 Casey sample answer used S10 pages3/10 attributed summaries, left Australian availability unknown, showed four topic paths and one successful APPLICATION retrieval with two cited/matched passages",
+    "R9 personal copy cleared fictional identity, saved/published and answered against the first revision. Topic removal retained Healthcare journey with explicit constraints[] unchanged; review/apply, old-pin reopening and explicit Use latest passed",
+    "R9 corrected learning-focus notice matched the observed topic removal with unchanged sources. Follow-up used the new revision and two Healthcare journey paths; reopened earlier evidence retained the old revision,four paths,two topics",
+    "R9 pre-logout native checkpoint captured31 table/catalogue hashes:one personal context,two conversations,six turns,three COMPLETED answers,zero failed/uncertain/running,three model markers,three APPLICATION/zero AGENT evidence events,one attachment,three revisions/overlays and30144 public triples. Learner signed out after this baseline; later browser/native persistence results are recorded separately",
+    "R9 learner signed in again and reopened the same personal context/conversation; both answer texts and revision labels remained, with old four-path/two-topic and new two-path/Healthcare-journey explanations preserved; no new question/model submission",
+    "R9 native persistence comparison passed with one explicitly observed attachment addition(1to2),all prior attachment digests retained,30 other table/catalogue hashes and15 safe counts unchanged; recorded model requests and starts remained3. Zero-delta mode rejected that exact addition before bounded-one mode passed",
+    "Actual r9 second app-only account signed in with unfiltered My Contexts empty while first learner had one context; menu exposed only My Contexts/Sample Contexts. Direct same-application Deployment setup denied by Page security; dismissing returned to empty library. No search query,tampered-ID or direct-API test performed.",
+    "After r9 learner and second-account checks, final protected-build comparison passed107 of107 assertions unchanged with allowed_changes[] against the existing baseline; declared scope/exclusions retained",
+    "R9 prepared-environment clean path and its required scoped learner checks passed; optional embedding unconfigured with explicit keyword fallback. Genuine published-v2 same-application upgrade and overall acceptance remain pending.",
+    "Candidate-r10 actual same-application Supporting Objects upgrade completed121 migrations; original96 receipt rows and28 old-table hashes retained.",
+    "Candidate-r11 actual same-application replacement restored the intended portable alias without rerunning unchanged Supporting Objects.",
+    "Candidate-r12 native item controls, actual reload/Back, sanitized negative requests, two scoped LEVEL9 canary scans and45-assertion preservation passed.",
+    "Candidate-r12 user-private credential creation succeeded once;28 original table hashes and the draft were unchanged, with no inference and learning paused.",
+    "Candidate-r12 explicit model connection, runtime registration, pinned public collection load and learning enablement passed; native checks retained121 completed receipts, zero invalid project objects and three original draft-related rowset hashes before learner activity.",
+    "Candidate-r12 post-setup native export retained setup-page/item bytes and had zero matches for29 known synthetic patterns across46 files and216 decoded payloads; no real-key or unknown-key coverage claim.",
+    "Candidate-r13 native source validation, guarded UI-only staging import/preservation, native export and ZIP validation passed. Actual runtime replacement and learner retest are pending.",
+    "Candidate-r13 actual same-application browser replacement passed with Supporting Objects intentionally omitted; all19 scoped rowsets/eight counts retained exactly, including four original-baseline hashes. No learner retest result is inferred.",
+    "R13 explicit pre-collection selection and guarded preview/apply, two-answer refinement/adoption/historical evidence, and new-sign-in persistence passed. Original four baseline rowsets and 144 protected-build assertions remained exact; persistence permitted only one observed new session attachment."
+  ],
+  "resolved_diagnostics": [
+    {
+      "issue": "Markdown code fences inside SQL broke APEXlang multiline literals",
+      "resolution": "Native external SQL content files; full directory validation/import passed"
+    },
+    {
+      "issue": "Initial ZIP exceeded bundled native unpacked entry and total size limits",
+      "resolution": "Candidate lossless per-step gzip/Base64 transport, with compressed/plain byte counts and SHA-256 plus UTF-8 roundtrip verification",
+      "full_zip_validation": "native_validation_and_both_prepared_environment_core_paths_passed_including_guided_setup_real_learner_evidence_and_stored_history_preservation_with_stated_coverage_limits",
+      "safety_limits_changed": false
+    },
+    {
+      "issue": "Network readiness incorrectly treated the native SEM_MODEL$ catalogue view as a table",
+      "evidence": "Native owner dictionary: one VALID VIEW, zero same-named tables, zero foreign model owners",
+      "resolution": "New immutable r2 API migration requires a valid VIEW, preserves an existing marker and rejects partial networks before creation",
+      "native_validation": "passed_canonical_r2_upgrade_and_existing_network_idempotence"
+    },
+    {
+      "issue": "Runtime registration used TEAM_NAME for the team attribute view",
+      "evidence": "Native dictionary and parse-only projections confirm AGENT_TEAM_NAME; existing projection fails ORA-00904. Nine objects were created before verification stopped.",
+      "resolution": "New canonical r3 migration uses the natively verified team attribute key; existing runtime definitions and collection preserved",
+      "native_validation": "canonical_upgrade_and_preservation_tested_browser_retry_passed"
+    }
+  ],
+  "pending": [
+    "Extend published-v2 same-identity upgrade coverage to an already populated graph/conversation baseline and the remaining failure/concurrency cases. The tested schema/receipt/original saved-draft baseline and subsequent scoped r13 learner flow passed.",
+    "Broader direct-object/API isolation beyond the r9 unfiltered browser library and direct setup-page denial; no tampered-context-ID or direct API test was performed in this browser check. Earlier native setup-authorization evidence remains separate.",
+    "Broader concurrent setup/write admission and interruption/recovery acceptance beyond the recorded scoped cleanup fault tests",
+    "Broader readiness authorization performance acceptance beyond the recorded real-owner smoke measurements",
+    "Credential creation: successful replay, concurrent creation, native partial-success recovery and prior-success model-test invalidation",
+    "Bounded database-audit/request-log coverage remains unproven; the post-setup export passed only its scoped known-canary/source checks.",
+    "Polish the missing-context route after session loss: My Contexts provides a verified workaround; a NULL-context-only redirect remains unimplemented."
+  ],
+  "not_exercised": [
+    "New ADB provisioning",
+    "First-time JAVAVM enablement and restart",
+    "oracleapex.com compatibility"
+  ],
+  "unpackaged_development_fixes": {
+    "verification_deduplication": {
+      "local_tests_passed": 7,
+      "upgrade_gate_bytes_before": 8057397,
+      "upgrade_gate_bytes_after": 1775840,
+      "receipt_and_selection_checks_preserved": true,
+      "native_validation": "passed_candidate_r7_exact_schema_verifier_and_recovered_target_browser_upgrade",
+      "timeout_resolution": "current_recovered_target_upgrade_completed_without_timeout; exact_r5_slow_operation_and_other_install_paths_not_established"
+    },
+    "setup_exception_cleanup": {
+      "local_tests_passed": 6,
+      "change": "Independently attempt both persistent lock releases despite secondary cleanup errors; avoid cleanup commits if rollback fails",
+      "frozen_migrations_changed": false,
+      "native_fault_test": "passed_two_session_primary_and_secondary_failure_with_exact_fixture_cleanup",
+      "deployment": "canonical_r2_owner_upgrade_passed"
+    },
+    "replacement_readiness_contract": {
+      "local_tests_passed": 5,
+      "change": "Explicitly replace an earlier contract body while retaining historical receipts, checking each current physical target once and preventing self-referential body verification",
+      "native_validation": "passed_canonical_r2_upgrade_and_final_contract",
+      "new_migrations_frozen": true
+    },
+    "generated_artifacts": "Four additive r3 migrations frozen;115 active migration records; all111 prior records and494 existing frozen files unchanged. Canonical owner upgrade and full verification passed, followed by candidate-r7 recovered-target browser Upgrade. Separate clean and published-v2 upgrade acceptance remain pending.",
+    "status": "historical_development_fixes_now_in_candidate_r7; retained_key_for_record_continuity"
+  },
+  "candidate_artifact": {
+    "filename": "kcv-explorer-2.1.0-candidate-r13.zip",
+    "sha256": "a46e9c8980a5769eb10f15b1edb225359e52ce43e812eb28e1a24df875829e2d",
+    "archive_bytes": 5736759,
+    "native_files": 46,
+    "layout": "native-browser-flat-root",
+    "canonical_migrations": 121,
+    "native_validation": "Passed source/staging/export/ZIP checks with preexisting regionBody warning only.",
+    "browser_import": "Passed actual same-application replacement, Supporting Objects No and exact19-rowset/eight-count preservation; learner correction retest pending."
+  },
+  "browser_diagnostics": {
+    "candidate_r2": "Upload persisted byte-exact, but the import page returned HTTP 400; no new application was created",
+    "candidate_r3": "Flat archive layout passed native validation but browser preview still returned HTTP 400. Existing APEX debug records show ORA-06531 in the import parser before installation.",
+    "candidate_r4": "Minimal native deployment metadata restored; all 45 prior files byte-identical. Native ZIP validation, actual browser preview and application import passed. A reserved explicit application ID was rejected; automatic allocation created a separate application.",
+    "cause": "The single-variable candidate-r4 change resolved the observed preview failure. Full Supporting Objects subsequently exposed an independent index-verification defect.",
+    "native_export_control": "Downloaded directly from App Builder; contains only application-ID deployment metadata, no credential values or live endpoints; actual browser preview passed and offered a new target application ID. Installation was not submitted.",
+    "preservation_checkpoint": "Historical initial checkpoint:before import, the intended test backend was empty and the existing application identity and JAVAVM were valid. The first imported backend stopped partway through installation; later owner recovery and candidate-r7 acceptance are recorded separately.",
+    "error_status_settings": "Read-only GET_PARAMETER checks were unavailable on this instance with ORA-20987; no instance settings changed",
+    "supporting_objects": {
+      "status": "historical_initial_failure_preserved_after_owner_recovery",
+      "migration_id": "2.1.0-apl-005-kcv_deploy_runs_recent",
+      "error_code": "ORA-20301",
+      "error_summary": "Deployment request index differs",
+      "complete_receipts": 100,
+      "failed_receipts": 1,
+      "running_receipts": 0,
+      "invalid_project_objects": 0,
+      "compiler_errors": 0,
+      "cause": "Verifier assumed NORMAL and literal STARTED_AT; Oracle implements the TIMESTAMP WITH TIME ZONE index as a valid function-based UTC expression.",
+      "recovery": "Completed canonical owner recovery retained the original FAILED receipt and completed107 active steps. Subsequent canonical r2 upgrade completed111 active steps and112 historical rows, with no RUNNING migrations."
+    },
+    "candidate_r5": "Actual browser preview and same-application replacement passed. Supporting Objects Upgrade advanced four replacement steps, then returned HTTP504 with backend-ready RUNNING. Read-only checks found no active Builder request and physical postconditions passed. Canonical owner-assisted recovery and independent verification then passed. This does not convert the timed-out browser installation into a clean App Builder pass.",
+    "candidate_r5_interruption": {
+      "migration_id": "2.1.0-apl-r1-005-backend-ready",
+      "payload_sha256": "5b72f774729c27c730ec3c7ce4d45c0a659b82cb6524b329c64eb320686b2e58",
+      "complete_receipts": 104,
+      "running_receipts": 1,
+      "retained_failed_receipts": 1,
+      "invalid_project_objects": 0,
+      "compiler_errors": 0,
+      "physical_postconditions": "passed_read_only",
+      "receipt_reconciled": true,
+      "root_cause": "Foreground request timeout observed; the exact slow database operation is not yet isolated",
+      "recovery_result": "Owner-assisted canonical recovery completed;107 active COMPLETE receipts and108 historical rows; no RUNNING migrations",
+      "post_recovery_independent_audit": "passed"
+    },
+    "recovery_guard_diagnostic": "First read-only helper compile identified a local-variable declaration after local routines. Corrected declaration order passed the repeated native guard and both driver parse checks. Helper cleanup verified; project receipts unchanged.",
+    "candidate_r7": "Actual preview and replacement of the same recovered application passed. One Supporting Objects Upgrade submission completed with upgrade-001-trusted-installation Success, one successful script, zero errors and one total script; exact115-step verifier passed. This recovered-target operation completed without the earlier gateway failure; the historical r5 timeout is not relabelled as a pass.",
+    "candidate_r8": "Actual pristine-target import passed with automatic application-ID allocation. Supporting Objects Install submitted once ended with HTTP504; subsequent checkpoint has99 COMPLETE/99 total/zero FAILED/zero RUNNING, latest2.1.0-apl-003-kcv_deploy_state. No owner recovery or retry. A bounded query found no active APEX/target-session rows and count remained99; this is not exhaustive job proof. Cause remains unconfirmed.",
+    "candidate_r9": "Actual pristine App Builder import passed, followed by successful Supporting Objects Install:one success,zero errors,one script. Exact native structural verification and107-of107 protected preservation passed. Guided model/data/learner setup remains pending."
+  },
+  "preservation": {
+    "original_application_identity_and_page_count": "unchanged",
+    "protected_table_hashes": "All28 match the latest pre-import baseline after resumption, r5 timeout, owner recovery and completed guided setup; after candidate-r7 browser upgrade they also matched the post-guided-setup baseline. Earlier original-baseline difference remains documented below.",
+    "attachment_table": "One additional runtime row observed; the original row hash remains present. Cause not attributed to the rehearsal.",
+    "limitations": "Snapshot scope does not cover provider transient history, raw vectors, temporary staging, native RDF triples or the complete APEX component source",
+    "candidate_r7_browser_upgrade": {
+      "result": "PASS_WITH_REPORTED_INSTALLER_TIMESTAMP_CHANGE",
+      "assertions_captured": 53,
+      "assertions_unchanged": 51,
+      "reported_differences": [
+        "KCV_DEPLOY_STATE.UPDATED_AT",
+        "KCV_DEPLOY_STATE singleton whole-row hash containing UPDATED_AT"
+      ],
+      "explanation": "The installer intentionally stamps UPDATED_AT. No other state field or checked runtime/resource digest differed.",
+      "other_state_fields_unchanged": 11,
+      "other_runtime_tables_unchanged": 28,
+      "historical_receipt_rows_unchanged": 116,
+      "native_network_objects_unchanged": 143,
+      "runtime_dictionary_views_unchanged": 8,
+      "native_graphs_unchanged": 1,
+      "native_triples_unchanged": 30144,
+      "before_log_sha256": "8e2171b6b9b667d8daaa0068350691befe437c8f20d7e33443068e91467447ce",
+      "after_log_sha256": "07af873eff1bc6b298b8a5bdb29c6c08125ed2aca3922065f4ebe59bd232d55c",
+      "limitations": "Scoped stored-data/resource comparison; not a comparison of provider transient history, raw vector values, temporary staging or every APEX component source"
+    }
+  },
+  "publication": {
+    "committed": false,
+    "pushed": false,
+    "release_modified": false,
+    "artifact_accepted": false
+  },
+  "native_r2_acceptance": {
+    "status": "passed",
+    "complete_receipts": 111,
+    "historical_rows": 112,
+    "retained_failed_receipts": 1,
+    "running_receipts": 0,
+    "runtime_tables_fingerprinted": 29,
+    "native_network_objects_preserved": 127,
+    "network_idempotence": "passed",
+    "cleanup_fault_and_two_session_lock_test": "passed",
+    "synthetic_fixture_removed": true,
+    "external_model_requests": 0,
+    "browser_zip_acceptance": "r6_not_run_superseded_by_r7_recovered_target_upgrade"
+  },
+  "candidate_r6": {
+    "status": "native_zip_validated_runtime_registration_defect_found_before_browser_import",
+    "active_migrations": 111,
+    "pages": 11,
+    "assets": 16,
+    "staging_import_preservation": "passed",
+    "auto_supporting_objects_install": false,
+    "native_zip_validation": "passed",
+    "browser_acceptance": "not_run_superseded_by_r7",
+    "compiler_warning": "Existing page1 regionBody slot is deprecated; validation and import succeeded",
+    "filename": "kcv-explorer-2.1.0-candidate-r6.zip",
+    "sha256": "0ad6609cd232fa71f2790bdb11764e7b1c1e21d9c44eae86ae4e58a17bfa2c50",
+    "archive_bytes": 7312672,
+    "entries": 46,
+    "targeted_private_pattern_findings": 0,
+    "decoded_payloads_scanned": 197
+  },
+  "guided_browser_setup": {
+    "profile_configuration": "passed",
+    "network_readiness": "ready_after_native_idempotence",
+    "model_test": {
+      "attempts": 2,
+      "status": "passed_after_private_credential_recreation",
+      "error_code": "ORA-20401",
+      "private_credential_or_oci_access_check": "user_recreated_local_credential",
+      "model_retry_performed": true
+    },
+    "conversation_registration": {
+      "attempts": 2,
+      "status": "passed_after_canonical_r3_fix",
+      "error_code": "ORA-00904",
+      "diagnosis": "Native describe and parse-only checks confirmed AGENT_TEAM_NAME in both team views; the verifier incorrectly used TEAM_NAME in the attribute view. Tool/task/agent mappings passed. At the failed attempt nine objects existed and two final teams were absent; the explicit corrected retry then preserved those nine and created the two missing teams.",
+      "existing_object_and_attribute_hashes_preserved": 9,
+      "new_teams": 2
+    },
+    "public_collection": {
+      "status": "passed",
+      "sources": 834,
+      "passages": 762,
+      "sample_contexts": 3
+    },
+    "learning_enabled": true,
+    "scope": "Guided setup completed before candidate-r7 browser replacement; post-upgrade readiness and Enable learning are recorded under candidate_r7.post_upgrade_readiness"
+  },
+  "native_r3_acceptance": {
+    "status": "passed",
+    "complete_receipts": 115,
+    "historical_rows": 116,
+    "retained_failed_receipts": 1,
+    "running_receipts": 0,
+    "runtime_tables_fingerprinted": 29,
+    "network_objects_preserved": 143,
+    "runtime_dictionary_views_preserved": 8,
+    "native_graphs": 1,
+    "native_triples_preserved": 30144,
+    "maintenance_retained": true,
+    "existing_frozen_files_unchanged": 494,
+    "old_migration_records_unchanged": 111,
+    "browser_runtime_retry": "passed_preserved_nine_added_two"
+  },
+  "candidate_r7": {
+    "status": "recovered_target_browser_upgrade_passed",
+    "migrations": 115,
+    "pages": 11,
+    "assets": 16,
+    "staging_import_preservation": "passed",
+    "native_zip_validation": "passed",
+    "browser_acceptance": "passed_same_recovered_application_preview_replacement_and_supporting_objects_upgrade",
+    "filename": "kcv-explorer-2.1.0-candidate-r7.zip",
+    "sha256": "e4d69c3901f13b96c64f0c9ebb3b6a72a29464900f5aa4e697b4076079a6da7a",
+    "archive_bytes": 7540676,
+    "entries": 46,
+    "native_export": "passed",
+    "targeted_private_pattern_findings": 0,
+    "decoded_payloads_scanned": 205,
+    "supporting_objects": {
+      "action": "Upgrade",
+      "submitted_once": true,
+      "script": "upgrade-001-trusted-installation",
+      "successful_scripts": 1,
+      "errors": 0,
+      "total_scripts": 1,
+      "exact_schema_verifier": "passed_115_active_steps",
+      "historical_receipt_rows_unchanged": 116,
+      "scope": "Guarded idempotent upgrade on the already recovered canonical r3 installation; not a pristine clean install or a published-v2 baseline upgrade"
+    },
+    "preservation_result": "PASS_WITH_REPORTED_INSTALLER_TIMESTAMP_CHANGE",
+    "post_upgrade_readiness": {
+      "installer_signed_in_again": true,
+      "required_checks_ready": 6,
+      "enable_learning": "passed_ready_for_learners",
+      "duplicate_model_tests": 0,
+      "duplicate_dataset_loads": 0,
+      "learner_browser_journey": "scoped_adoption_followup_persistence_and_second_account_library_search_setup_gate_passed_wording_fix_pending"
+    },
+    "remaining_acceptance": [
+      "pristine_clean_browser_installation",
+      "published_v2_same_identity_browser_upgrade",
+      "corrected_response_notice_package_and_browser_acceptance"
+    ],
+    "remaining_acceptance_scope": "Historical r7 checkpoint; later r9 clean structural acceptance is separate and does not transfer the r7 learner pass to the new target."
+  },
+  "current_candidate": "r13",
+  "historical_candidate_r5_artifact": {
+    "filename": "kcv-explorer-2.1.0-candidate-r5.zip",
+    "sha256": "4502ee9ed514d1cd7901db34bf9b2d372ff5390e11a4d2745febbc4fbcb9ecc1",
+    "archive_bytes": 8494679,
+    "layout": "native-browser-flat-root",
+    "native_files": 46,
+    "largest_uncompressed_file_bytes": 6852018,
+    "total_uncompressed_bytes": 12001956,
+    "default_max_entry_bytes": 10485760,
+    "default_max_total_bytes": 31457280,
+    "plain_sql_roundtrip": "Native exported install/upgrade drivers match the corrected canonical candidate; application alias alone normalized in a separate portable copy",
+    "browser_import": "Passed actual browser preview and replacement of the same isolated application; guarded Supporting Objects Upgrade submitted once, then returned HTTP 504 during backend-ready. Installation is incomplete."
+  },
+  "learner_browser_acceptance": {
+    "status": "scoped_journey_and_library_isolation_passed_wording_fix_pending",
+    "scope": "Genuine learner session on the recovered installation after candidate-r7 browser upgrade",
+    "initial_sign_in": {
+      "status": "passed",
+      "my_contexts": "empty_library",
+      "deployment_navigation": "hidden"
+    },
+    "sample_answer": {
+      "status": "passed",
+      "sample": "Casey",
+      "real_model_answer": true,
+      "regional_availability": "qualified_in_answer",
+      "citations": {
+        "source": "S10",
+        "source_representation": "attributed_editorial_summary",
+        "explicit_citations": 2,
+        "matched_passages": 2
+      },
+      "sources_graph": {
+        "status": "passed",
+        "passages": 2,
+        "topic_paths": 4
+      },
+      "answer_lineage": {
+        "status": "passed",
+        "application_retrieval": "SUCCEEDED"
+      }
+    },
+    "personal_context": {
+      "sample_copy": "passed_fictional_identity_cleared",
+      "draft_save": "passed_objective_and_unknowns_saved",
+      "first_revision": "private_preview_reviewed_and_applied",
+      "real_personal_answer_and_evidence": "passed",
+      "refinement": {
+        "objective_changed": true,
+        "removed_topic": "Connected operations",
+        "review_classification": "learning_focus_change",
+        "constraints_before": [],
+        "constraints_after": []
+      },
+      "second_revision": "applied_and_ready",
+      "existing_conversation_reopened": "passed_still_pinned_to_earlier_revision",
+      "use_latest": "passed_explicit_confirmation_adopted_second_revision",
+      "followup": {
+        "status": "passed",
+        "real_model_answer": true,
+        "revision": "second_adopted_revision",
+        "topic_paths": 2,
+        "topics": [
+          "Healthcare journey"
+        ],
+        "source_ids": [
+          "S10"
+        ]
+      },
+      "historical_explanation": {
+        "status": "preserved_and_reopened",
+        "revision": "earlier_revision",
+        "topic_paths": 4,
+        "topic_count": 2,
+        "source_ids": [
+          "S10"
+        ]
+      }
+    },
+    "not_yet_accepted": [
+      "response_notice_correction_deployed_in_new_package",
+      "corrected_package_browser_acceptance",
+      "broader_direct_object_and_api_cross_account_isolation"
+    ],
+    "limitation": "The second account demonstrated library/search isolation and a server-side setup-page denial. Separate native setup-authorization checks passed earlier; these results do not prove every direct-object or API access path.",
+    "new_sign_in_persistence": {
+      "status": "passed",
+      "sign_out_and_new_sign_in": true,
+      "saved_context_and_both_answers_reopened": true,
+      "earlier_explanation_reopened": true,
+      "native_comparison": "all_reported_learner_records_unchanged_except_attachment_count_one_to_two",
+      "attachment_rows": {
+        "before": 1,
+        "after": 2
+      },
+      "completed_responses": {
+        "before": 2,
+        "after": 2
+      },
+      "recorded_model_submissions": {
+        "before": 2,
+        "after": 2
+      },
+      "application_evidence_calls": {
+        "before": 2,
+        "after": 2
+      },
+      "failed_responses": 0,
+      "running_responses": 0,
+      "uncertain_responses": 0,
+      "public_graph_triples": 30144,
+      "private_overlays": 2,
+      "scope": "Personal learner audit only; public graph count rechecked here, full triple fingerprint evidence belongs to the separate upgrade audit. Provider transient history was not inspected."
+    },
+    "second_account_browser": {
+      "status": "passed_scoped_ui_isolation_and_setup_gate",
+      "genuine_separate_app_only_sign_in": true,
+      "my_contexts": "empty_library",
+      "connected_healthcare_search": "no_results",
+      "search_mode": "keyword_fallback",
+      "direct_setup_navigation": "APEX.AUTHORIZATION.ACCESS_DENIED",
+      "scope": "Observed personal library/search isolation and direct setup-page authorization only; broader direct-object/API isolation is not implied."
+    }
+  },
+  "clean_target_preparation": {
+    "status": "pre_import_prerequisites_passed_followed_by_incomplete_r8_clean_attempt",
+    "grants": "passed",
+    "rest": "passed",
+    "java": "passed",
+    "quota": "passed",
+    "native_accounts": 3,
+    "native_account_roles": "verified",
+    "project_objects": 0,
+    "applications": 0,
+    "owner_local_credential": "absent",
+    "model_profile": "absent",
+    "limitations": "Prepared existing ADB only; clean installation remains incomplete. No runtime configuration, new database provisioning or first-time Java activation acceptance.",
+    "browser_state": "Application import passed; Supporting Objects Install ended with HTTP 504 after99 completed receipts; guided setup not run",
+    "snapshot_scope": "Historical pre-import preparation: zero project objects and applications recorded before candidate-r8 imported its new application and partial backend."
+  },
+  "open_findings": [
+    {
+      "issue": "Response notice mislabels topic removal as objective/context-only change when selected source IDs stay the same",
+      "observed_candidate": "r7",
+      "evidence": "Removing Connected operations reduced graph paths to Healthcare journey only while S10 remained the source for both answers. Retrieval and graph paths were correct; the notice compared source IDs and failed to describe the changed learning focus.",
+      "status": "resolved_by_actual_r9_learner_browser_check",
+      "remaining": "Resolved in the exercised r9 flow; retain historical r7 finding. Current fresh-path learner checks passed; the later published-v2 structural upgrade and scoped r13 learner flow are recorded separately.",
+      "observed_notice": "Objective/context revised. Topic-based source selection is unchanged.",
+      "candidate_r8_staging": "native_source_validation_staging_import_preservation_export_and_exact_zip_validation_passed",
+      "resolution": "Learning focus revised: removed Connected operations. The returned sources are unchanged; inspect Evidence for their recorded connections."
+    },
+    {
+      "issue": "Candidate-r8 pristine clean Supporting Objects request ended with HTTP 504",
+      "observed_candidate": "r8",
+      "status": "open_incomplete_installation",
+      "evidence": "One Install submission;99 completed receipt rows, zero FAILED/RUNNING, latest2.1.0-apl-003-kcv_deploy_state. No retry or owner recovery performed.",
+      "cause": "Not established",
+      "remaining": "Retain incomplete r8 history and unconfirmed root cause. The separate reduced r9 prepared-environment clean path and scoped learner checks passed; the later published-v2 structural upgrade and scoped r13 learner flow are recorded separately.",
+      "local_candidate_change": "Fresh-only simplification in r9 passed70 local tests, native packaging checks and a separate pristine browser structural installation;115 contracts/final verifier/upgrade bytes unchanged. No general performance or exact-cause claim."
+    },
+    {
+      "issue": "Two explicit r9 APEX model tests failed before the third succeeded; second-failure cause remains unconfirmed",
+      "observed_candidate": "r9",
+      "status": "no_longer_blocks_readiness_root_cause_unconfirmed",
+      "evidence": "Three APEX journal requests:two FAILED ORA-20401,one SUCCEEDED. Private credential repair passed after a guarded helper rejection. Two separate fixed diagnostic greetings also passed outside the journal without application data/history writes.",
+      "cause": "Exact cause of the second APEX failure is unconfirmed; matching metadata and successful diagnostics do not prove a cache explanation.",
+      "remaining": "Retain two failed APEX tests and separate diagnostic counts; readiness and required scoped fresh learner checks passed. Exact second-failure cause is unconfirmed; no further model retry needed for this checkpoint."
+    },
+    {
+      "issue": "Pre-collection draft cannot select a public collection in review",
+      "observed_candidate": "r12",
+      "status": "resolved_by_r13_browser_functional_retest",
+      "evidence": "The learner reopened and duplicated the original saved draft. Its base graph was null because the draft predated collection loading; a failed review preview hid the collection picker needed to proceed.",
+      "preservation": "Original draft was preserved by testing a duplicate. Native setup checks before learner activity retained all three original draft-related rowset hashes.",
+      "remaining": "Resolved within the exercised explicit collection/topic, preview/apply and scoped learner flow; retain the original r12 finding.",
+      "prepared_correction": "R13 native validation and actual browser replacement passed;19 rowsets/eight counts retained exactly.",
+      "resolution": "Blank or stale selections were rejected without publication; explicit refreshed selection published successfully. Original draft and all four baseline rowsets remained exact through learner refinement and persistence."
+    },
+    {
+      "issue": "Bare context-overview route after session loss lacks a context ID",
+      "observed_candidate": "r13",
+      "status": "open_navigation_limitation_with_verified_workaround",
+      "evidence": "The bare route reported ORA-20241 after sign-in; My Contexts displayed the original draft and working copy and opening the selected context worked.",
+      "workaround": "Open My Contexts and select the saved context.",
+      "scope_limit": "No ownership failure established; no authorization guard was changed. A NULL-context-only redirect is not implemented."
+    }
+  ],
+  "candidate_r8": {
+    "status": "clean_application_import_passed_supporting_objects_http504_incomplete",
+    "filename": "kcv-explorer-2.1.0-candidate-r8.zip",
+    "sha256": "b22c866d0bb1d31d956945bbc8e779c713493438dff5c36aba230b5634480abe",
+    "archive_bytes": 7541045,
+    "entries": 46,
+    "pages": 11,
+    "assets": 16,
+    "canonical_migrations": 115,
+    "native_source_validation": "passed",
+    "staging_only_import": "passed",
+    "staging_preservation": "passed",
+    "native_export": "passed",
+    "native_zip_validation": "passed",
+    "targeted_private_pattern_findings": 0,
+    "decoded_payloads_scanned": 205,
+    "scan_limitation": "Targeted scan returned zero findings; this does not guarantee every possible sensitive pattern was detected.",
+    "browser_acceptance": "application_import_passed_clean_supporting_objects_incomplete_not_accepted",
+    "clean_browser_state": "Pristine-target application import passed with automatic ID allocation; single Supporting Objects Install submission ended with HTTP 504. No retry, owner recovery, credential creation or guided setup.",
+    "remaining_acceptance": [
+      "fresh_supporting_objects_timeout_diagnosis_and_corrective_change",
+      "pristine_clean_browser_installation_and_guided_setup",
+      "corrected_notice_and_learner_browser_checks",
+      "published_v2_same_identity_browser_upgrade"
+    ],
+    "clean_install_attempt": {
+      "pristine_target_verified": {
+        "native": true,
+        "app_builder": true
+      },
+      "application_import": "passed_auto_assigned_new_application",
+      "supporting_objects_action": "Install",
+      "submitted_once": true,
+      "browser_outcome": "HTTP 504",
+      "status": "incomplete_not_passed",
+      "receipt_checkpoint": {
+        "complete": 99,
+        "total": 99,
+        "failed": 0,
+        "running": 0,
+        "latest_completed_migration": "2.1.0-apl-003-kcv_deploy_state"
+      },
+      "owner_recovery_used": false,
+      "retry_used": false,
+      "credential_creation_run": false,
+      "guided_setup_run": false,
+      "active_server_work": "Bounded activity query returned no active APEX or target-session rows; this is not exhaustive background-job proof. Receipt count remained99.",
+      "post_attempt_protected_preservation": "passed_72_of_72_exact_no_exceptions",
+      "cause": "Not established; cumulative foreground duration is an investigation hypothesis only, not a verified root cause.",
+      "receipt_timing": {
+        "rows": 99,
+        "recorded_timestamp_span_seconds": 117.737072,
+        "sum_recorded_execution_seconds": 7.396297,
+        "interpretation": "Consistent with time outside the recorded migration execution intervals; does not identify the exact phase or establish the timeout root cause.",
+        "scope": "Receipt timing observations, not a complete end-to-end browser request profile."
+      }
+    },
+    "post_attempt_preservation": {
+      "status": "passed",
+      "assertions": 72,
+      "matched": 72,
+      "exceptions": 0,
+      "protected_installations": 2,
+      "persistent_non_network_project_tables": 58,
+      "coverage": "Persistent table hashes including vectors and evidence; checked programs/object identities, application identities and native network catalogues.",
+      "exclusions": [
+        "native_triples",
+        "provider_and_dictionary_runtime_state",
+        "complete_apex_component_source"
+      ],
+      "before_log_sha256": "5dcb81a749850f0b007771439a7ca05c7bf52df1a487b341fdcef428549aae32",
+      "after_log_sha256": "6162dafc90279ce21b7da564d7db9d9cb9d9106d5564012644807df8501ec988",
+      "hash_note": "Log-file hashes identify evidence files; equality was assessed across their72 comparable records."
+    }
+  },
+  "latest_prepared_candidate": "r13",
+  "candidate_r9": {
+    "status": "prepared_environment_clean_path_and_scoped_learner_acceptance_passed_upgrade_pending",
+    "change_scope": "Fresh Supporting Objects driver only, after the strict empty-schema gate",
+    "generation": "115 direct canonical wrappers; omit retired-candidate preflight and future-successor branches in the pristine route",
+    "expanded_sql_bytes_before": 19103836,
+    "expanded_sql_bytes_after": 7597991,
+    "size_reduction_percent_rounded": 60.2,
+    "preserved_contracts": 115,
+    "canonical_contracts_unchanged": true,
+    "final_verifier_unchanged": true,
+    "upgrade_driver_bytes_unchanged": true,
+    "local_tests": {
+      "zip_and_migration_tests_passed": 49,
+      "supporting_objects_tests_passed": 21,
+      "total_passed": 70
+    },
+    "native_validation": "passed",
+    "browser_acceptance": "passed_pristine_application_import_and_supporting_objects_install_structural_only",
+    "runtime_improvement": "separate_pristine_clean_supporting_objects_completed_without_timeout",
+    "measurement_limitation": "SQL byte-size reduction is measured and r9 clean structural execution passed; the exact r8 timeout cause and a general runtime/performance guarantee are not established.",
+    "filename": "kcv-explorer-2.1.0-candidate-r9.zip",
+    "sha256": "bc53656479d04c9751e576ace9e5e3b923ba9225f8a65b8ec36a9a351a908465",
+    "archive_bytes": 5506155,
+    "entries": 46,
+    "pages": 11,
+    "assets": 16,
+    "canonical_migrations": 115,
+    "native_source_validation": "passed",
+    "staging_only_import": "passed",
+    "existing_backend_preservation_during_staging": "passed",
+    "native_export": "passed",
+    "native_zip_validation": "passed",
+    "targeted_private_pattern_findings": 0,
+    "decoded_payloads_scanned": 204,
+    "decoded_payloads_by_route": {
+      "install": 118,
+      "upgrade": 86
+    },
+    "scan_limitation": "Targeted scan returned zero findings; this does not guarantee every possible sensitive pattern was detected.",
+    "new_clean_target": {
+      "status": "prepared_environment_clean_install_setup_scoped_learner_checks_passed",
+      "read_only_name_absence_preflight": "passed",
+      "provisioning_scripts": "prepared",
+      "review_reason": "New target, grants, proxy access and workspace had not been explicitly approved.",
+      "schema_created": true,
+      "workspace_created": true,
+      "rest_configured": true,
+      "accounts_created": true,
+      "scope": "Separate target proved pristine before the r9 import; earlier partial r8 and populated r7 installations are preserved separately.",
+      "earlier_provisioning_command": "rejected_by_automatic_approval_review_before_dispatch",
+      "current_provisioning_command": "completed_schema_workspace_rest_verified",
+      "explicit_user_approval_received": true,
+      "approved_scope": [
+        "new_isolated_target_and_required_bootstrap",
+        "authenticated_rest_metadata_without_table_apis",
+        "private_account_prompts"
+      ],
+      "creation_verification": "schema_workspace_rest_and_accounts_passed",
+      "owner_authentication": "NO AUTHENTICATION",
+      "workspace_enabled": true,
+      "rest_metadata_authentication": true,
+      "rest_table_apis_enabled": false,
+      "project_backend": "installed_115_exact_receipts_30_tables",
+      "private_account_prompt": "submitted_privately_by_user_native_roles_verified",
+      "account_creation_confirmed": true,
+      "browser_import_started": true,
+      "native_account_roles": {
+        "installer_admin_and_developer": 1,
+        "app_only_learners": 2
+      },
+      "required_grants": "verified",
+      "empty_target_gate": {
+        "passed_assertions": 8,
+        "project_objects": 0,
+        "applications": 0,
+        "scope": "Passed before r9 import; these are historical zero counts, not current installed-object counts."
+      },
+      "owner_local_credential": "privately_replaced_successfully_helper_removed",
+      "model_profile": "READY_existing_successful_configuration_not_resaved",
+      "browser_handoff": "Current scoped clean-path checks complete; genuine published-v2 same-application upgrade remains pending.",
+      "remaining_approval_blocker": false
+    },
+    "pre_import_preservation_baseline": {
+      "status": "captured_and_compared_exactly_after_clean_install",
+      "assertions": 107,
+      "protected_builds": 3,
+      "vector_aware": true,
+      "partial_installation_receipts_pinned": 99,
+      "before_log_sha256": "68a51474b2eb603da5432909f8dd9771f21d69aca7b9f0909aacc97cd3552fa0",
+      "after_comparison": "passed_107_of_107_no_allowed_changes",
+      "scope": "Baseline captured before r9 import and compared after structural installation; comparison details below."
+    },
+    "clean_structural_acceptance": {
+      "status": "passed",
+      "pristine_precondition": "passed_native_and_browser_checks",
+      "application_import": "passed_new_auto_assigned_application",
+      "supporting_objects": {
+        "action": "Install",
+        "script": "install-001-trusted-installation",
+        "successful_scripts": 1,
+        "errors": 0,
+        "total_scripts": 1
+      },
+      "native_read_only_postinstall": {
+        "status": "passed",
+        "exact_complete_receipts": 115,
+        "extra_or_incomplete_receipts": 0,
+        "exact_valid_program_hashes": 28,
+        "invalid_objects_or_compiler_errors": 0,
+        "persistent_project_tables": 30,
+        "correct_application_binding": true,
+        "maintenance_flags_on": 2,
+        "setup_requests": 0,
+        "checkpoint": "Historical initial postinstall check before guided runtime actions; zero setup requests was true at that checkpoint."
+      },
+      "guided_model_setup": "not_run_at_structural_checkpoint",
+      "public_collection_load": "not_run_at_structural_checkpoint",
+      "learner_journey": "not_run_at_structural_checkpoint",
+      "scope": "Clean structural installation checkpoint only. Owner credential and profile were absent at that initial check; subsequent guided actions are recorded separately."
+    },
+    "post_install_preservation": {
+      "status": "passed",
+      "assertions": 107,
+      "matched": 107,
+      "allowed_changes": 0,
+      "protected_builds": 3,
+      "vector_aware": true,
+      "partial_installation_receipts_pinned": 99,
+      "before_log_sha256": "68a51474b2eb603da5432909f8dd9771f21d69aca7b9f0909aacc97cd3552fa0",
+      "after_log_sha256": "d6af377eb438ee08cb55036a973a0efd8da9572d778e412dac126e006510fbc8",
+      "scope": "Exact predeclared persistent-table/program/object/application/network-catalogue comparisons across the original, populated learner and incomplete prior-clean installations.",
+      "exclusions": [
+        "native_triples",
+        "provider_and_dictionary_runtime_state",
+        "complete_apex_component_source"
+      ],
+      "hash_note": "Log-file hashes identify evidence files; equality was assessed across107 comparable assertions."
+    },
+    "guided_browser_setup": {
+      "status": "ready_for_learners_scoped_clean_path_acceptance_passed",
+      "installer_sign_in": "passed",
+      "owner_local_credential_creation": "observed_success",
+      "graph_network": "READY",
+      "model_details": "provided_privately_existing_successful_profile_observed",
+      "model_profile_configuration": "READY_existing_CONFIGURE_PROFILE_success_not_resaved",
+      "model_connection_test": {
+        "attempts": 3,
+        "status": "SUCCEEDED",
+        "explicit_user_action": true,
+        "readiness_refreshed_without_inference": true,
+        "retry_performed": true,
+        "automatic_retry": false,
+        "failed_attempts": 2,
+        "successful_attempts": 1,
+        "requests": [
+          {
+            "ordinal": 1,
+            "status": "FAILED",
+            "error_code": "ORA-20401"
+          },
+          {
+            "ordinal": 2,
+            "status": "FAILED",
+            "error_code": "ORA-20401"
+          },
+          {
+            "ordinal": 3,
+            "status": "SUCCEEDED"
+          }
+        ],
+        "second_failure_cause": "Unconfirmed; a cache cause has not been established."
+      },
+      "conversation_registration": {
+        "status": "SUCCEEDED",
+        "button_submissions": 1
+      },
+      "public_collection": {
+        "status": "SUCCEEDED",
+        "active_sources": 834,
+        "active_passages": 762,
+        "sample_contexts": 3
+      },
+      "learning_enabled": true,
+      "learner_journey": "scoped_sample_personal_refinement_adoption_history_persistence_and_second_account_library_setup_gate_passed",
+      "scope": "Actual newly installed r9 target; separate from the completed guided setup and learner evidence on the recovered r7 target.",
+      "profile_resaved_during_this_check": false,
+      "safe_configuration_checks": {
+        "profile_configuration_matches_working_installation": true,
+        "local_credential_exists": true,
+        "temporary_creation_helper_absent": true,
+        "private_values_recorded": false,
+        "limitation": "These metadata checks do not establish valid signing-key or inference authorization.",
+        "credential_username_metadata_matches_working_installation": true
+      },
+      "required_checks_ready": 6,
+      "required_checks_total": 6,
+      "credential_repair": {
+        "status": "private_user_replacement_passed_helper_removed",
+        "repair_performed": true,
+        "model_retry_performed": true,
+        "first_attempt": {
+          "error_code": "ORA-20981",
+          "cause": "Private helper required null proxy identity and rejected the authorised ADMIN Worksheet gateway context.",
+          "credential_preserved": true,
+          "remaining_helpers": 0
+        },
+        "noncredential_guard_probe": "passed_with_minimal_gateway_proxy_allowlist",
+        "second_attempt": {
+          "executed_privately_by_user": true,
+          "credential_replaced": true,
+          "helper_removed": true
+        },
+        "private_credential_values_recorded": false
+      },
+      "enable_learning": {
+        "submitted": true,
+        "status": "SUCCEEDED",
+        "observed_message": "Ready for learners"
+      },
+      "separate_diagnostic_greetings": {
+        "calls": 2,
+        "successful_calls": 2,
+        "apex_setup_journal_requests": 0,
+        "contexts": [
+          "working_owner",
+          "new_owner_definer_context"
+        ],
+        "fixed_prompts": true,
+        "application_data_or_history_writes": false,
+        "scope": "Separate diagnostic model requests; not part of the three explicit APEX TEST_MODEL journal requests."
+      }
+    },
+    "native_post_enable_readiness": {
+      "status": "passed",
+      "exact_complete_receipts": 115,
+      "exact_valid_program_hashes": 28,
+      "network_ready": true,
+      "profile_ready": true,
+      "stored_successful_model_test_current": true,
+      "enabled_conversation_components": 11,
+      "pinned_public_collection": {
+        "verified": true,
+        "sources": 834,
+        "passages": 762,
+        "sample_contexts": 3
+      },
+      "maintenance_flags_off": 2,
+      "setup_model_tests": {
+        "total": 3,
+        "successful": 1,
+        "failed": 2
+      },
+      "pre_learner_baseline": {
+        "learner_answers": 0,
+        "recorded_model_starts": 0,
+        "application_evidence_events": 0,
+        "personal_contexts": 0
+      },
+      "optional_embedding_model": "absent",
+      "search_mode": "keyword_fallback",
+      "learner_search_exercised": false,
+      "scope": "Native ready-state and initial learner baseline after Enable learning; not learner browser acceptance."
+    },
+    "learner_browser_acceptance": {
+      "status": "passed_scoped_fresh_learner_checks",
+      "scope": "Actual r9 clean installation; browser observations below are separate from r7 acceptance.",
+      "sign_in": {
+        "passed": true,
+        "initial_my_contexts": "empty",
+        "use_a_sample": "passed",
+        "explore_samples": "passed",
+        "sample_to_my_contexts_navigation": "passed",
+        "deployment_navigation": "hidden"
+      },
+      "sample_answer": {
+        "status": "passed",
+        "sample": "Casey",
+        "question_scope": "clinical care, enterprise operations and Australia",
+        "real_model_answer": true,
+        "source": "S10",
+        "pages": [
+          3,
+          10
+        ],
+        "representation": "attributed_editorial_summaries",
+        "australian_availability": "unknown_not_asserted",
+        "business_outcome_claim": "none",
+        "source_graph_paths": 4,
+        "topics": [
+          "Connected operations",
+          "Healthcare journey"
+        ],
+        "lineage": {
+          "application_evidence_steps": 1,
+          "status": "SUCCEEDED",
+          "pinned_graphs_shown": true,
+          "explicit_citations": 2,
+          "matched_passages": 2
+        }
+      },
+      "personal_context": {
+        "sample_copy": "passed_fictional_identity_cleared",
+        "save_and_first_publication": "passed",
+        "first_answer": {
+          "status": "passed",
+          "revision": "first_personal_revision",
+          "source": "S10",
+          "pages": [
+            3,
+            10
+          ],
+          "source_graph_paths": 4,
+          "australian_availability": "unknown_not_asserted"
+        },
+        "refinement": {
+          "objective_and_question_edited": true,
+          "removed_topic": "Connected operations",
+          "retained_topics": [
+            "Healthcare journey"
+          ],
+          "constraints_before": [],
+          "constraints_after": [],
+          "constraints_review": "Unchanged",
+          "second_revision_reviewed_and_applied": true
+        },
+        "saved_conversation_reopened": "old_revision_pin_retained_before_explicit_adoption",
+        "use_latest": "passed_explicit_confirmation",
+        "observed_notice": "Learning focus revised: removed Connected operations. The returned sources are unchanged; inspect Evidence for their recorded connections.",
+        "notice_status": "passed",
+        "followup": {
+          "status": "passed",
+          "revision": "second_personal_revision",
+          "source_graph_paths": 2,
+          "topics": [
+            "Healthcare journey"
+          ],
+          "australian_availability": "unknown_not_asserted",
+          "removed_topic_interpretation": "learning_focus_not_technical_constraint"
+        },
+        "earlier_explanation_reopened_after_followup": {
+          "status": "passed_preserved",
+          "revision": "first_personal_revision",
+          "source_graph_paths": 4,
+          "topic_count": 2
+        },
+        "persistent_observation_added": false
+      },
+      "native_pre_logout_checkpoint": {
+        "status": "captured_and_compared_with_one_explicit_observed_attachment_addition",
+        "table_and_catalogue_hashes": 31,
+        "personal_contexts": 1,
+        "conversations": 2,
+        "saved_turns": 6,
+        "answer_requests": {
+          "total": 3,
+          "COMPLETED": 3,
+          "FAILED": 0,
+          "UNCERTAIN": 0,
+          "RUNNING": 0
+        },
+        "model_start_markers": 3,
+        "evidence_events": {
+          "APPLICATION": 3,
+          "AGENT": 0
+        },
+        "attachments": 1,
+        "revisions_across_checked_conversations": 3,
+        "native_overlays": 3,
+        "public_graph_triples": 30144,
+        "before_log_sha256": "ec438ccf36cbf1b63f850f49bce2486933ad59a4d66f3da1e460e61ca7c2050e",
+        "scope": "Pre-logout baseline covering the checked sample and personal conversations. Public graph triple count does not by itself prove full triple-content equality."
+      },
+      "persistence": {
+        "status": "passed_with_one_observed_attachment_addition",
+        "browser_sign_out": "passed_after_baseline",
+        "new_sign_in": "passed",
+        "same_context_and_conversation_reopened": true,
+        "both_answer_texts_and_revision_labels_preserved": true,
+        "earlier_explanation": {
+          "revision": "first_personal_revision",
+          "source_graph_paths": 4,
+          "topic_count": 2
+        },
+        "refined_explanation": {
+          "revision": "second_personal_revision",
+          "source_graph_paths": 2,
+          "topics": [
+            "Healthcare journey"
+          ]
+        },
+        "new_question_or_model_request_submitted": false,
+        "native_comparison": {
+          "status": "passed",
+          "unchanged_other_table_and_catalogue_hashes": 30,
+          "unchanged_safe_counts": 15,
+          "attachments_before": 1,
+          "attachments_after": 2,
+          "explicitly_allowed_observed_additions": 1,
+          "all_prior_attachment_digests_retained": true,
+          "zero_delta_comparator": "rejected_exactly_the_observed_attachment_addition",
+          "bounded_one_attachment_comparator": "passed",
+          "recorded_model_requests_before": 3,
+          "recorded_model_requests_after": 3,
+          "model_start_markers_before": 3,
+          "model_start_markers_after": 3,
+          "before_log_sha256": "ec438ccf36cbf1b63f850f49bce2486933ad59a4d66f3da1e460e61ca7c2050e",
+          "after_log_sha256": "1dd70d95e64ac86d838c9982265ab66303f6be3bddd1ebba79b1c80960201916",
+          "scope": "Existing checked learner records retained; one observed login/reopen attachment is an explicit bounded addition. No arbitrary hash differences are ignored."
+        }
+      },
+      "second_account_isolation": {
+        "status": "passed_browser_library_isolation_and_direct_setup_authorization",
+        "genuine_separate_app_only_sign_in": true,
+        "my_contexts": {
+          "count": 0,
+          "search_text": "empty",
+          "status_filter": "All",
+          "first_learner_personal_context_count": 1
+        },
+        "menu": [
+          "My Contexts",
+          "Sample Contexts"
+        ],
+        "deployment_setup_navigation": "absent",
+        "direct_same_application_setup_route": {
+          "status": "denied",
+          "observed_message": "Setup is available only to this application's authorised workspace administrator after Supporting Objects installation. Ask your facilitator to finish the installation. Access denied by Page security check.",
+          "dismissal_returned_to": "empty My Contexts library"
+        },
+        "search_query_test": "not_performed",
+        "tampered_context_id_test": "not_performed",
+        "direct_api_access_test": "not_performed",
+        "scope": "Unfiltered browser library isolation and direct page-security denial only; no broader object/API isolation claim."
+      },
+      "limitations": "The scoped required fresh learner checks passed. This browser isolation test did not submit a search query, tamper with a context ID or call a direct API. No observation workflow was exercised. Persistence allows only the observed one-attachment addition."
+    },
+    "post_ready_protected_preservation": {
+      "status": "passed",
+      "assertions": 107,
+      "matched": 107,
+      "allowed_changes": 0,
+      "protected_builds": 3,
+      "vector_aware": true,
+      "partial_installation_receipts_pinned": 99,
+      "before_log_sha256": "68a51474b2eb603da5432909f8dd9771f21d69aca7b9f0909aacc97cd3552fa0",
+      "after_log_sha256": "4d4963584040e9e24d7f63dcabe432beb03bc2d03981208d61f472a37c3fe05f",
+      "scope": "Exact predeclared persistent-table/program/object/application/network-catalogue comparisons across the original, populated learner and incomplete prior-clean installations.",
+      "exclusions": [
+        "native_triples",
+        "provider_and_dictionary_runtime_state",
+        "complete_apex_component_source"
+      ],
+      "hash_note": "Log-file hashes identify evidence files; equality was assessed across107 comparable assertions.",
+      "checkpoint": "After guided readiness and before the new learner journey; protects the three separate prior builds."
+    },
+    "post_learner_protected_preservation": {
+      "status": "passed",
+      "assertions": 107,
+      "matched": 107,
+      "allowed_changes": [],
+      "protected_builds": 3,
+      "vector_aware": true,
+      "partial_installation_receipts_pinned": 99,
+      "before_log_sha256": "68a51474b2eb603da5432909f8dd9771f21d69aca7b9f0909aacc97cd3552fa0",
+      "after_log_sha256": "0f642a63366ebfd06dafa7f76d7eb23fa573a6f45801ea32ef1b859fbf773c9e",
+      "scope": "Exact predeclared persistent-table/program/object/application/network-catalogue comparisons across the original, populated learner and incomplete prior-clean installations.",
+      "exclusions": [
+        "native_triples",
+        "provider_and_dictionary_runtime_state",
+        "complete_apex_component_source"
+      ],
+      "hash_note": "Log-file hashes identify evidence files; equality was assessed across107 comparable assertions.",
+      "checkpoint": "After the fresh-target learner and second-account checks; all107 protected assertions unchanged."
+    },
+    "fresh_path_acceptance": {
+      "status": "passed_scoped_prepared_environment_path",
+      "scope": "Actual r9 ZIP import and Supporting Objects from an empty owner on the existing prepared ADB, guided setup, scoped learner journey, persistence and second-account library/setup-page checks.",
+      "required_scoped_learner_checks": "passed",
+      "optional_embedding_model": "unconfigured",
+      "search_mode": "keyword_fallback",
+      "not_claimed": [
+        "new_adb_provisioning",
+        "first_time_javavm_activation",
+        "semantic_embedding_search",
+        "tampered_context_id_or_direct_api_isolation",
+        "published_v2_same_application_upgrade",
+        "overall_publication_acceptance"
+      ]
+    }
+  },
+  "current_candidate_scope": "R13 same-application replacement, explicit collection selection, scoped learner answers/refinement/adoption, historical evidence and new-sign-in persistence passed. The original saved draft and migration receipts remained exact; one observed new session attachment was permitted during reopening. Remaining failure/concurrency, audit and broader isolation coverage keep overall acceptance incomplete.",
+  "historical_candidate_r7_artifact": {
+    "filename": "kcv-explorer-2.1.0-candidate-r7.zip",
+    "sha256": "e4d69c3901f13b96c64f0c9ebb3b6a72a29464900f5aa4e697b4076079a6da7a",
+    "archive_bytes": 7540676,
+    "layout": "native-browser-flat-root",
+    "native_files": 46,
+    "largest_uncompressed_file_bytes": 5355525,
+    "total_uncompressed_bytes": 10675993,
+    "default_max_entry_bytes": 10485760,
+    "default_max_total_bytes": 31457280,
+    "plain_sql_roundtrip": "Native exported install/upgrade drivers match canonical r3 supporting definitions; application alias alone normalized in a separate portable copy",
+    "browser_import": "Passed actual preview and replacement of the same recovered application; guarded Supporting Objects Upgrade completed with one successful script and zero errors. Separate pristine-clean and published-v2 upgrade routes remain pending.",
+    "scan_scope": "Targeted private-pattern scan of46 native files and205 decoded payloads returned zero findings; this is not a guarantee that every possible secret pattern was detected"
+  },
+  "historical_candidate_r9_artifact": {
+    "filename": "kcv-explorer-2.1.0-candidate-r9.zip",
+    "sha256": "bc53656479d04c9751e576ace9e5e3b923ba9225f8a65b8ec36a9a351a908465",
+    "archive_bytes": 5506155,
+    "layout": "native-browser-flat-root",
+    "native_files": 46,
+    "largest_uncompressed_file_bytes": 5355525,
+    "total_uncompressed_bytes": 7845620,
+    "default_max_entry_bytes": 10485760,
+    "default_max_total_bytes": 31457280,
+    "browser_import": "Passed actual prepared-environment clean import/Supporting Objects, guided setup and scoped learner acceptance including corrected notice, bounded persistence and second-account library/direct-setup checks. Genuine published-v2 upgrade and overall acceptance remain pending.",
+    "scan_scope": "Targeted private-pattern scan across46 native files and204 decoded payloads returned zero findings; not a guarantee that every sensitive pattern was detected."
+  },
+  "candidate_r10": {
+    "artifact": {
+      "filename": "kcv-explorer-2.1.0-candidate-r10.zip",
+      "sha256": "ed96ed72d7e6b08f41918ff332ea517f93faf7606cd842e118006ae5f5fa5ae5",
+      "archive_bytes": 5736404,
+      "native_files": 46
+    },
+    "actual_browser_same_application_replacement": "passed",
+    "supporting_objects_upgrade": {
+      "status": "passed",
+      "observed_summary": "upgrade-001-trusted-installation",
+      "successful_statements": 1,
+      "errors": 0,
+      "complete_receipts": 121,
+      "final_r4_receipt_count": 1,
+      "invalid_project_objects": 0
+    },
+    "request_observation": "The initial installation tab became unresponsive. Early checks still showed96 completed receipts; later native checks showed121 and the browser summary confirmed success. No cause or exact request timing is inferred.",
+    "preservation": {
+      "status": "passed_scoped_comparison",
+      "original_table_hashes_unchanged": 28,
+      "original_receipt_rows_unchanged": 96,
+      "unchanged_assertions": 40,
+      "application_id_retained": true,
+      "expected_changes": {
+        "new_receipts": 25,
+        "new_deployment_tables": 2,
+        "APP_MAINTENANCE": "ABSENT to ON",
+        "application_pages": "9 to11"
+      }
+    },
+    "limitation": "The published-v2 baseline included a saved draft but no graph or answer history. Preservation of nonexistent runtime rows is not evidence for populated graph/conversation upgrade cases.",
+    "finding": "Staging application alias propagated into the imported application; corrected separately in r11."
+  },
+  "candidate_r11": {
+    "artifact": {
+      "filename": "kcv-explorer-2.1.0-candidate-r11.zip",
+      "sha256": "5c266995d1d314b0c7f86381d19768d6dec0d96d7ed38e8311e541f1e0ae7495",
+      "archive_bytes": 5736397,
+      "native_files": 46
+    },
+    "change_scope": "Leading application alias normalized to intended portable alias; backend bytes unchanged.",
+    "native_zip_validation": "passed",
+    "actual_same_application_replacement": "passed",
+    "intended_runtime_alias_observed": true,
+    "supporting_objects_selection": "No, intentionally; the byte-identical backend already had121 completed migrations.",
+    "negative_native_checks": {
+      "malformed_inputs": 7,
+      "new_token_duplicate_rejections": 2,
+      "protected_hash_unchanged": true,
+      "learner_and_missing_identity_pin_denied": true,
+      "test_fixture_removed": true,
+      "model_calls": 0,
+      "credential_value_reads": 0
+    },
+    "earlier_privacy_scope": {
+      "normal_cases": 2,
+      "normal_debug_rows_each": 0,
+      "normal_debug_redaction": "not_established_empty_logs",
+      "level9_messages_per_request": [
+        3369,
+        3420
+      ],
+      "level9_canary_matches": 0,
+      "native_export_scan": {
+        "zip_entries": 46,
+        "zip_entry_bytes": 8186403,
+        "decoded_payloads": 216,
+        "decoded_bytes": 29866428,
+        "synthetic_canary_matches": 0,
+        "archive_sha256": "197946db53faf35221ff4b8699c6e96390246bb8835fd451d2d9b4f26cf0b895"
+      },
+      "journal_rows_scanned": 0,
+      "scope_limit": "Rejected requests only; no positive-creation export/journal inference."
+    },
+    "reload_finding": {
+      "status": "historical_unconfirmed_completed_reload",
+      "observation": "Masked values were reported after an attempted reload, but no later server Rendering was observed. This did not prove completed navigation or server-side secret persistence. R12 added clearing/unsaved-change hardening and exercised actual reload and Back."
+    }
+  },
+  "candidate_r12": {
+    "artifact": {
+      "filename": "kcv-explorer-2.1.0-candidate-r12.zip",
+      "sha256": "ec4dcdb5fadbcad762894273993cde86b5823ba086506e3b577c7c62d8d1786b",
+      "archive_bytes": 5736426,
+      "layout": "native-browser-flat-root",
+      "native_files": 46,
+      "canonical_migrations": 121,
+      "browser_import": "Passed actual same-application replacement; Supporting Objects deliberately omitted because canonical backend was unchanged from the completed r10 upgrade.",
+      "native_validation": "Source validation, guarded staging import, backend preservation, export and final ZIP validation passed; one preexisting regionBody deprecation warning.",
+      "scan_scope": "Post-setup native export matched the setup-page/item bytes and had zero matches for29 known synthetic patterns across46 native files and216 decoded payloads. No real-key, unknown-key or universal no-logging claim."
+    },
+    "actual_same_application_replacement": "passed",
+    "canonical_backend_unchanged": true,
+    "post_import_preservation": {
+      "assertions_compared": 45,
+      "assertions_unchanged": 45,
+      "allowed_changes": [],
+      "before_log_sha256": "44786e493f8a97bacb2931cc4713b5f5ae01428d3a44cc125fad3c4d6867d5a2",
+      "after_log_sha256": "61414d0c8a08707da16bf5f238fffa1aa8436c0530dde57e59fb20f3bc43fee3"
+    },
+    "native_item_controls": {
+      "password_items": 4,
+      "request_only_items": 4,
+      "encrypted_items": 4,
+      "unsaved_change_ignored_items": 4,
+      "initialization_or_cleanup_hooks": 0
+    },
+    "synthetic_browser_checks": {
+      "actual_reload": "passed_fields_values_defaults_and_attributes_empty_no_dialog",
+      "distinct_same_tab_navigation_then_Back": "passed_fields_empty_no_dialog",
+      "malformed_and_duplicate_requests_normal_and_LEVEL9": "passed_sanitized_rejections_fields_empty_no_input_values_in_DOM_or_URL",
+      "unrelated_blank_profile_submit": "passed_fields_empty_sanitized_rejection",
+      "debug_off_restored": true,
+      "scope_limit": "Installation-status redirect and toolbar navigation to another tab were not counted as the distinct Back test."
+    },
+    "native_canary_scans": {
+      "normal_cases": 2,
+      "normal_debug_rows_each": 0,
+      "normal_debug_redaction": "not_established_empty_logs",
+      "level9_exact_processing_posts": 2,
+      "level9_message_counts": [
+        3372,
+        3417
+      ],
+      "level9_maximum_level": 9,
+      "level9_canary_matches": 0,
+      "post_series_session_items_checked": 4,
+      "post_series_session_items_nonnull": 0,
+      "scope_limit": "Native session-state checks establish post-series state; browser observations separately establish per-POST clearing. Only fixed synthetic canaries were searched."
+    },
+    "database_audit_scope": {
+      "bounded_owner_lookup_rows": 0,
+      "coverage": "unproven",
+      "client_identifier_inferred": false,
+      "audit_policy_changed": false,
+      "universal_no_logging_guarantee": false
+    },
+    "post_negative_preservation": {
+      "assertions_compared": 45,
+      "assertions_unchanged": 45,
+      "allowed_changes": [],
+      "after_log_sha256": "72525cb487ca7993b0ccc89b62db012ec89173727a95abc1d20e6e91ccbbd37a",
+      "setup_journal_rows": 0,
+      "model_calls": 0,
+      "credential_mutations": 0
+    },
+    "positive_creation_preparation": {
+      "existing_credential_initially_preserved": true,
+      "fixed_name_removal_separately_authorized": true,
+      "scope": "Only the isolated target owner-local OCI_USER_CRED",
+      "guarded_removal": "passed_with_deployment_mutex_and_both_maintenance_flags_ON",
+      "user_private_form_submission": true,
+      "agent_read_private_inputs": false,
+      "meaning": "Authorized test preparation outside the app; the application has no overwrite/rotation action."
+    },
+    "positive_creation": {
+      "actual_browser": "passed",
+      "operation": "CREATE_OCI_CREDENTIAL",
+      "status": "SUCCEEDED",
+      "phase": "COMPLETE",
+      "successful_creation_journal_rows": 1,
+      "fixed_owner_local_credential_count": 1,
+      "input_current_values_empty": 4,
+      "input_default_values_empty": 4,
+      "input_value_attributes_empty": 4,
+      "debug_off": true,
+      "native_old_table_hashes_unchanged": 28,
+      "saved_draft_hash_unchanged": true,
+      "both_maintenance_flags": "ON",
+      "model_test_poststate": "NOT_TESTED",
+      "answer_model_start_evidence_rows": 0,
+      "prior_success_invalidation": "not_exercised_no_prior_success_baseline"
+    },
+    "other_installations_preservation_after_slot_preparation": {
+      "assertions_compared": 144,
+      "assertions_unchanged": 144,
+      "allowed_changes": [],
+      "before_log_sha256": "bbf528e435f050564b28962a44ec5c55a8c1328b94b202fc7749551d5cb2edb9",
+      "after_log_sha256": "b7f99fa332d8d9ba01f6c5aea7fb58bf73374c9f93f335745e533eedcdf35f5d",
+      "scope_limit": "Checkpoint after approved credential-slot preparation; no later protected-state comparison is inferred."
+    },
+    "guided_setup": {
+      "profile_configuration": "passed_actual_browser",
+      "explicit_model_connection_test": "passed_actual_browser",
+      "runtime_registration": "passed_actual_browser",
+      "pinned_public_collection_load": "passed_actual_browser",
+      "active_sources": 834,
+      "active_passages": 762,
+      "sample_contexts": 3,
+      "required_checks_READY": 6,
+      "native_post_setup_observer": "passed",
+      "enable_learning": "passed_actual_browser_Ready_for_learners",
+      "updated_learner_E2E": "blocked_precollection_draft_collection_picker",
+      "complete_migration_receipts": 121,
+      "invalid_project_objects": 0,
+      "successful_model_test_requests": 1,
+      "original_draft_related_rowsets_unchanged_before_learner_activity": 3
+    },
+    "remaining": [
+      "Fix and browser-retest collection selection for drafts created before a collection existed",
+      "Successful request-token replay",
+      "Genuinely concurrent credential creation",
+      "Native partial-success recovery",
+      "Invalidation of a previously successful model test",
+      "Updated learner journey and persistence/isolation",
+      "Populated graph/conversation preservation across the published-v2 upgrade"
+    ],
+    "acceptance": "scoped_passes_overall_candidate_not_accepted",
+    "post_setup_native_export_check": {
+      "status": "passed_scoped_known_canary_and_source_equality_check",
+      "setup_page_byte_equal_to_r12_artifact": true,
+      "credential_item_blocks_unchanged": 4,
+      "native_files": 46,
+      "native_file_bytes": 8186670,
+      "decoded_payloads": 216,
+      "decoded_payload_bytes": 29866428,
+      "known_synthetic_patterns": 29,
+      "matches": 0,
+      "result_record_sha256": "227bc81c87da498c87e6cbc4f39a555a9d4e78d4a351524ce5b33e2e77103565",
+      "limits": "Known synthetic patterns only; no real-key or unknown-key scan claim. Omitted native-export defaults do not replace the separate native item-metadata checks."
+    },
+    "learner_checkpoint": {
+      "original_draft_reopened": "passed_actual_browser",
+      "working_duplicate_created": "passed_original_preserved",
+      "collection_selection": "blocked",
+      "scope": "Draft created before public collection loading has no base graph; failed review preview hides the collection selector needed to proceed.",
+      "full_updated_learner_acceptance": false
+    }
+  },
+  "candidate_r13": {
+    "artifact": {
+      "filename": "kcv-explorer-2.1.0-candidate-r13.zip",
+      "sha256": "a46e9c8980a5769eb10f15b1edb225359e52ce43e812eb28e1a24df875829e2d",
+      "archive_bytes": 5736759,
+      "native_files": 46
+    },
+    "change_scope": "Review-page UI correction lets an owned draft with no collection select a ready collection and eligible topics before its first preview. Existing ownership, explicit preview/apply, version and body guards remain.",
+    "native_source_validation": "passed",
+    "guarded_staging_import": "passed_UI_only_Supporting_Objects_disabled",
+    "staging_preservation": {
+      "permanent_application_table_hashes_unchanged": 30,
+      "checked_object_identities": "unchanged",
+      "native_catalogue_snapshot": "unchanged",
+      "protected_runtime_application_snapshot": "unchanged",
+      "scope_limit": "Preservation during staging import only; no actual runtime replacement or later browser-state comparison is inferred."
+    },
+    "native_export": "passed",
+    "native_zip_validation": "passed",
+    "warnings": [
+      {
+        "type": "regionBody deprecation",
+        "preexisting": true
+      }
+    ],
+    "actual_browser_replacement": "passed_Application_Imported",
+    "current_handoff": "Scoped learner persistence completed; learner conversation left open.",
+    "deployed_runtime_candidate": "r13",
+    "learner_blocker": "resolved_precollection_selection_issue",
+    "learner_answer_evidence": "passed_scoped_browser_and_native_checks",
+    "overall_acceptance": "not_accepted",
+    "pre_runtime_replacement_snapshot": {
+      "status": "captured_read_only_before_import",
+      "rowsets_captured": 19,
+      "original_baseline_rowsets_exact": 4,
+      "original_scope": [
+        "Original personal draft",
+        "Original search chunk",
+        "Original SAVE_DRAFT receipt",
+        "All121 migration receipt rows"
+      ],
+      "working_copy_answer_requests": 0,
+      "working_copy_model_starts": 0,
+      "scope_limit": "Before-import baseline only; no post-runtime-import preservation result is claimed."
+    },
+    "supporting_objects_selection": "No; canonical backend unchanged",
+    "post_runtime_replacement_preservation": {
+      "status": "passed_exact_comparison",
+      "rowsets_compared": 19,
+      "rowsets_unchanged": 19,
+      "original_baseline_rowsets_exact": 4,
+      "counts_compared": 8,
+      "counts_unchanged": 8,
+      "allowed_attachment_additions": 0,
+      "answers": 0,
+      "model_starts": 0,
+      "attachments": 0,
+      "before_log_sha256": "cfd68771219b2c1485ef1aa0ac114c48589b9b8d089b76863e311db31b11386d",
+      "after_log_sha256": "931231ac72e86c46f6d554f378e510d5ae131f0920bb96232d05e2e1cc2143b9"
+    },
+    "collection_selection_retest": {
+      "status": "passed",
+      "blank_collection_and_topics": "rejected_with_selection_retained",
+      "changed_collection_after_preview": "Apply rejected with ORA-20244; no revisions/answers/model starts",
+      "explicit_refreshed_preview_and_apply": "passed",
+      "pinned_review_unchanged_rows": 13,
+      "original_baseline_rowsets_exact": 4
+    },
+    "refinement_and_evidence": {
+      "status": "passed",
+      "changed_fields": [
+        "question",
+        "objective",
+        "situation",
+        "unknowns"
+      ],
+      "topic_removed": "Ontology",
+      "explicit_constraints": "unchanged",
+      "explicit_adoption": "Old conversation pin retained until Use latest; new revision adopted afterwards",
+      "first_answer": {
+        "explicit_citations": 5,
+        "matched_citations": 5,
+        "sources": 3,
+        "passages": 6,
+        "topics": 2
+      },
+      "follow_up": {
+        "explicit_citations": 4,
+        "matched_citations": 4,
+        "sources": 4,
+        "passages": 6,
+        "topics": 1,
+        "source_removed": "S03",
+        "sources_added": [
+          "R0208",
+          "R0243"
+        ]
+      },
+      "historical_answer": "Original revision, two topics, S03 and historical banner retained",
+      "native": {
+        "completed_answers": 2,
+        "application_evidence_events_before_model": 2,
+        "recorded_public_passage_entries": 12,
+        "recorded_paths": 12,
+        "explicit_citations": 9,
+        "matched_citations": 9,
+        "historical_revision_pins": 2,
+        "invalid_objects": 0
+      },
+      "scope_limit": "Passage/path totals are across both responses, not a claim of twelve distinct passages. No new public-URL fetch or provider reasoning inspection is inferred."
+    },
+    "persistence": {
+      "status": "passed_actual_sign_out_new_sign_in_and_reopen",
+      "answers_reopened": 2,
+      "historical_and_current_evidence_popups": "passed_with_respective_revision_topics_sources_and_citation_matches",
+      "new_question_or_model_submission": false,
+      "rowsets_compared": 19,
+      "rowsets_unchanged": 18,
+      "original_baseline_rowsets_exact": 4,
+      "observed_new_session_attachments": 1,
+      "prior_attachment_hashes": "retained",
+      "other_counts_unchanged": 7,
+      "answers_unchanged": 2,
+      "model_starts_unchanged": 2,
+      "before_log_sha256": "4eacc9173a36f5e7e5331bb55b3d2ecdf8489fe4c91d3b8b1f19f5f2363671db",
+      "after_log_sha256": "12ffa3b7fcfa172b18c6a605e75a42712aab9921911cdea3e83cc43e6d9f28e2",
+      "scope_limit": "Exactly one independently observed new session attachment was permitted; no arbitrary drift was ignored."
+    },
+    "other_builds_preservation": {
+      "status": "passed",
+      "assertions_unchanged": 144,
+      "allowed_changes": [],
+      "before_log_sha256": "b7f99fa332d8d9ba01f6c5aea7fb58bf73374c9f93f335745e533eedcdf35f5d",
+      "after_log_sha256": "d47389ceccf6fd407fa6c322fb0aedd62ad7411f003fc8cb73d7ef62bf782bae"
+    },
+    "authorization_scope": {
+      "current_learner_direct_setup_route": "denied_APEX_AUTHORIZATION_ACCESS_DENIED",
+      "second_account_browser_check_this_run": "not_performed",
+      "scope_limit": "Earlier second-account and native API authorization results remain separate."
+    }
+  },
+  "historical_candidate_r12_artifact": {
+    "filename": "kcv-explorer-2.1.0-candidate-r12.zip",
+    "sha256": "ec4dcdb5fadbcad762894273993cde86b5823ba086506e3b577c7c62d8d1786b",
+    "archive_bytes": 5736426,
+    "layout": "native-browser-flat-root",
+    "native_files": 46,
+    "canonical_migrations": 121,
+    "browser_import": "Passed actual same-application replacement; Supporting Objects deliberately omitted because canonical backend was unchanged from the completed r10 upgrade.",
+    "native_validation": "Source validation, guarded staging import, backend preservation, export and final ZIP validation passed; one preexisting regionBody deprecation warning.",
+    "scan_scope": "Post-setup native export matched the setup-page/item bytes and had zero matches for29 known synthetic patterns across46 native files and216 decoded payloads. No real-key, unknown-key or universal no-logging claim."
+  },
+  "remaining_acceptance_review": {
+    "recorded_date": "2026-11-27",
+    "status": "prepared_environment_core_paths_passed_with_remaining_coverage_limits",
+    "candidate": "candidate-r13",
+    "scope": "Measured prepared-environment installation, populated-upgrade, learner and recovery checks on isolated targets, plus preservation and cleanup marking. No release promotion, commit, push or environment retirement.",
+    "offline_regression": {
+      "status": "passed",
+      "tests": 125,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "native_execution": false,
+      "limit": "Source, behavioral and artifact regressions do not replace native or browser acceptance."
+    },
+    "reviewer_browser": {
+      "status": "passed_scoped",
+      "library_status_all": "empty",
+      "keyword_search": "empty",
+      "direct_setup_route": "APEX authorization denied",
+      "foreign_context_url_without_checksum": "APEX session-state checksum denied",
+      "limit": "The foreign URL was rejected before backend ownership evaluation. It is not backend denial proof or coverage of every route."
+    },
+    "native_completed_replay_and_duplicate": {
+      "status": "passed",
+      "completed_token_replays": 2,
+      "inputs": "synthetic; existing successful request token and authorized native fixture identity",
+      "replay_result": "unchanged state",
+      "new_token_duplicate_error": "ORA-20303",
+      "application_tables_preserved": 30,
+      "metadata_preserved": [
+        "credential names",
+        "compared object identity",
+        "native catalogue"
+      ],
+      "stored_credential_values_read": false,
+      "limit": "Replay does not establish creation races; the separate bounded absent-name overlap is recorded under credential recovery."
+    },
+    "native_reviewer_isolation": {
+      "status": "passed_scoped_native_fixture",
+      "foreign_reads": {
+        "count": 4,
+        "operations": [
+          "context",
+          "state",
+          "history",
+          "trace"
+        ],
+        "expected_error": "ORA-20241"
+      },
+      "foreign_callbacks": {
+        "count": 3,
+        "expected_error": "ORA-20241",
+        "error_envelope_exact": true,
+        "payload_disclosed": false
+      },
+      "credential_choices": {
+        "denied": true,
+        "expected_error": "ORA-20300"
+      },
+      "setup_actions": {
+        "denied": 7,
+        "expected_error": "ORA-20300"
+      },
+      "fixture_removed": true,
+      "application_tables_preserved": 30,
+      "compared_metadata_preserved": true,
+      "limit": "Native authenticated-session fixtures test the listed API and callback boundaries, not actual browser sign-in or every HTTP route."
+    },
+    "native_credential_setup_mutex": {
+      "status": "passed_two_session_held_mutex_case",
+      "holder": "separate native session holds setup mutex",
+      "contender_error": "ORA-20302",
+      "persistent_mutation": false,
+      "application_tables_preserved_per_session": 30,
+      "compared_metadata_preserved_per_session": true,
+      "limit": "This held-mutex case is separate from the later passed bounded absent-name overlap recorded under credential recovery."
+    },
+    "native_uncommitted_maintenance": {
+      "status": "passed_rollback_only_fixture",
+      "write_error": "ORA-20246",
+      "learner_ready": false,
+      "owned_read_available": true,
+      "rollback_and_fixture_cleanup": "exact prior state restored",
+      "application_tables_preserved": 30,
+      "compared_metadata_preserved": true,
+      "limit": "Does not prove committed cross-session maintenance visibility or post-mutation recovery."
+    },
+    "native_writer_admission": {
+      "status": "passed_two_session_actual_shared_lock",
+      "holder": "actual assert_writable shared admission lock",
+      "contender": "ensure_network in a separate owner session",
+      "recorded_receipt": {
+        "count": 1,
+        "status": "FAILED",
+        "cause": "ORA-20302",
+        "reported_wrapper": "ORA-20304",
+        "synthetic_test_only": true
+      },
+      "failed_token_replay": "no state change and no new request",
+      "fixture_cleanup": "Only the exact newly created synthetic failed receipt was removed after verification.",
+      "application_tables_preserved_per_session": 30,
+      "compared_metadata_preserved_per_session": true,
+      "limit": "Other uncertain-work, interruption and genuine post-mutation recovery cases remain separate."
+    },
+    "post_learner_export": {
+      "status": "passed_scoped_comparison_and_pattern_scan",
+      "native_entries": 46,
+      "component_files_identical_to_r13": 45,
+      "default_deployment_metadata_only_difference": "source application ID",
+      "decoded_payloads_checked": 216,
+      "decoded_bytes_checked": 29866428,
+      "native_bytes_checked": 8188459,
+      "reference_archive_sha256": "a46e9c8980a5769eb10f15b1edb225359e52ce43e812eb28e1a24df875829e2d",
+      "private_comparison_archive_sha256": "1573db510631951a8e6cb54f111c3991d9df944a15658cbf135a7835f0100751",
+      "synthetic_credential_canaries": {
+        "patterns": 29,
+        "entry_matches": 0,
+        "decoded_payload_matches": 0
+      },
+      "known_synthetic_contexts": {
+        "patterns": 28,
+        "entry_matches": 0,
+        "decoded_payload_matches": 0
+      },
+      "known_environment_patterns": {
+        "patterns": 12,
+        "entry_matches": 0,
+        "decoded_payload_matches": 0
+      },
+      "actual_credential_or_private_profile_values_retrieved": false,
+      "limits": [
+        "Native target-specific export stays private; this comparison does not publish it.",
+        "Finite known patterns only; no universal unknown-secret absence claim.",
+        "Export checks do not establish platform logging or audit coverage."
+      ]
+    },
+    "bounded_audit_coverage": {
+      "status": "unproven",
+      "policy_metadata_readable": true,
+      "potentially_relevant_enabled_policies": 7,
+      "relevant_enabled_object_rules": 0,
+      "uncorrelated_gateway_rows": 0,
+      "owner_audit_rows": 0,
+      "owner_audit_sql_text_rows": 0,
+      "owner_audit_sql_binds_rows": 0,
+      "known_canary_matches": 0,
+      "owner_text_bind_coverage_observed": false,
+      "redaction_proven": false,
+      "limit": "No matching rows means no demonstrated request/text/bind coverage. It is not proof that logging redacts inputs or that no other logging location exists."
+    },
+    "readiness_timing": {
+      "status": "measured",
+      "status_call_milliseconds": [
+        5260,
+        580,
+        520
+      ],
+      "ready_steps_per_call": 6,
+      "model_calls": 0,
+      "performance_threshold_defined": false,
+      "limit": "Three observations are not an SLA, a general benchmark or a cause analysis of prior gateway failures. Browser readiness/authorization timing remains separate."
+    },
+    "cleanup_review": {
+      "status": "marked_only_no_deletion",
+      "exact_paths_and_runtime_identities": "Retained in private ignored review/inventory; omitted from this public checkpoint.",
+      "protected": [
+        "published baseline installation",
+        "current candidate runtime and staging dependency",
+        "other existing apps and saved data",
+        "shared Builder identity",
+        "shared wallet and ADMIN connection",
+        "verified historical recovery material",
+        "JAVAVM",
+        "release branch"
+      ],
+      "frozen_input_hashes_matched": 510,
+      "historical_backup_or_manifest_hashes_matched": 6,
+      "limits": [
+        "Earlier generated stages can still be explicit inputs to the current preparation chain.",
+        "A content/app archive is not a rehearsed full restoration.",
+        "No schema/workspace, saved connection, artifact or backup deletion is authorized by this marking."
+      ],
+      "additional_protected_backup": "Private pre-upgrade APEXlang and SQL application definitions are retained; they are not a full database or learner-data backup.",
+      "current_completed_acceptance_targets": "Both clean and populated-upgrade targets remain protected with their users, credentials, saved answers, evidence and before/after baselines."
+    },
+    "additional_installation_targets": {
+      "status": "both_prepared_environment_core_paths_passed_with_remaining_coverage_limits",
+      "new_isolated_targets": 2,
+      "schemas_and_matching_workspaces": "created with explicit user approval",
+      "rest_setup": "complete on both",
+      "workspace_accounts": "created and verified on both",
+      "final_pristine_installation": {
+        "status": "prepared_environment_clean_path_passed",
+        "candidate": "candidate-r13",
+        "actual_app_builder_zip_import": "passed",
+        "supporting_objects_installation": {
+          "successful_scripts": 1,
+          "errors": 0,
+          "total_scripts": 1
+        },
+        "native_contract": {
+          "exact_complete_migration_receipts": 121,
+          "historical_or_incomplete_receipts": 0,
+          "exact_valid_program_hashes": 28,
+          "invalid_objects_or_compiler_errors": 0,
+          "persistent_project_tables": 30,
+          "trusted_application_owner_binding": "passed",
+          "maintenance_flags": "both ON",
+          "checkpoint_scope": "Supporting Objects installation checkpoint before real guided setup and learning enablement."
+        },
+        "guided_runtime_setup": "passed through the actual app, including private credential/profile setup, real learner answer/evidence and new-sign-in persistence",
+        "full_clean_path_accepted": true,
+        "final_readonly_pristine_inventory": {
+          "status": "passed",
+          "complete_migration_receipts": 121,
+          "application_tables": 30,
+          "empty_runtime_tables": 27,
+          "credentials": 0,
+          "profiles": 0,
+          "setup_journal_rows": 0,
+          "fixture_objects": 0,
+          "native_network_objects": 0,
+          "invalid_objects": 0,
+          "compiler_errors": 0,
+          "maintenance": "ON",
+          "model_test": "NOT_TESTED",
+          "checkpoint_scope": "Before real credential entry and guided runtime setup; these zero-runtime counts are historical, not the current populated state."
+        },
+        "guided_setup": {
+          "status": "passed",
+          "private_credential_and_profile": "entered/configured by user through the actual app",
+          "successful_explicit_model_tests": 1,
+          "additional_model_tests": 0,
+          "graph_network": "passed",
+          "conversation_registration": "passed",
+          "pinned_public_collection_load": "passed",
+          "required_checks_ready": 6,
+          "sources": 834,
+          "passages": 762,
+          "sample_contexts": 3,
+          "native_verification": {
+            "complete_migration_receipts": 121,
+            "exact_program_hashes": 28,
+            "model_test_matches_current_profile": true,
+            "learner_model_start_markers_before_handoff": 0
+          },
+          "post_setup_baseline": {
+            "rowsets": 45,
+            "native_graphs": 1,
+            "native_triples": 30144
+          },
+          "browser_enable_learning": "passed explicitly",
+          "real_clean_target_learner_flow": "passed, including new sign-in and stored-answer/evidence reopening with no additional Ask"
+        },
+        "actual_learner_browser": {
+          "status": "passed_including_new_sign_in_and_stored_evidence",
+          "sample_copy": "Casey copied; fictional identity fields observed empty",
+          "personal_edit": "objective, background and explicit constraint edited; saved, reviewed and applied as a ready revision",
+          "answer_content": "distinguished attributed editorial summary, proposed relevance and the learner availability constraint",
+          "explicit_citations": 2,
+          "matched_citations": 2,
+          "sources": 1,
+          "source_label": "S10",
+          "recorded_paths": 4,
+          "topics": 2,
+          "lineage_status": "SUCCEEDED",
+          "application_evidence_steps": 1,
+          "new_sign_in_and_native_preservation": "passed: same context, revision, conversation, answer, Sources and Answer lineage reopened; no Ask"
+        },
+        "acceptance_scope": "Clean application installation and learner handoff on an already prepared supported ADB; not new ADB provisioning or first Java activation.",
+        "persistence_comparison": {
+          "status": "passed",
+          "total_rowsets_compared": 46,
+          "exact_nonattachment_rowsets": 45,
+          "original_attachment_rows_preserved": 1,
+          "observed_attachment_additions": 1,
+          "answer_request_delta": 0,
+          "answer_model_start_marker_delta": 0,
+          "setup_model_test_request_delta": 0,
+          "model_boundary_delta": 0,
+          "public_graph_triples": 30144,
+          "full_public_graph_fingerprint_matches_prelearner_baseline": true,
+          "limit": "Exactly one observed new login/open attachment was allowed. Recorded application boundaries are not provider billing telemetry; comparison is not a restorable database backup."
+        }
+      },
+      "populated_published_v2_upgrade": {
+        "status": "prepared_environment_populated_published_v2_upgrade_path_passed",
+        "published_baseline": {
+          "exact_migration_receipts": 96,
+          "schema_and_application_installation": "passed",
+          "rdf_network": "passed",
+          "pinned_published_github_dataset": "passed",
+          "runtime_registration": "passed",
+          "private_model_profile_configuration": "completed by user"
+        },
+        "actual_learner_browser": {
+          "ready_personal_contexts": 1,
+          "ready_personal_revisions": 1,
+          "started_conversations": 1,
+          "real_answer_observed": true,
+          "explicit_citations": 5,
+          "explicit_citations_matched": 5,
+          "supplied_passages": 6,
+          "sources": 3,
+          "sources_and_lineage_popup": "observed",
+          "stored_answer_reopen": "passed"
+        },
+        "native_answer_and_preservation_observer": {
+          "status": "passed",
+          "completed_personal_answers_checked": 1,
+          "explicit_citations": 5,
+          "matched_citations": 5,
+          "supplied_public_passages": 6,
+          "recorded_paths": 8,
+          "premodel_application_evidence_events": 1
+        },
+        "candidate_upgrade": "passed actual same-application r13 replacement and one Supporting Objects Upgrade submission",
+        "full_populated_upgrade_path_accepted": true,
+        "pre_upgrade_checkpoint": {
+          "status": "passed",
+          "idle_before_pause": true,
+          "learning_pause": "APP_MAINTENANCE ON",
+          "fingerprint_baseline_entries": 44,
+          "published_migration_receipts": 96,
+          "native_graphs": 2,
+          "native_triples": 30151,
+          "application_definition_exports": [
+            "APEXlang",
+            "SQL"
+          ],
+          "application_definition_export_status": "passed; retained privately",
+          "limit": "Application definition exports and comparison fingerprints are not a full database, learner-data or native-graph recovery backup.",
+          "application_definition_backup_manifest_sha256": "3b7e1b75046c1fbbdbd59d7ad1ac11e57c7f120c5abf095be187443cfc26a308",
+          "application_definition_backup_native_files": 30
+        },
+        "upgrade_result": {
+          "status": "passed_structural_preservation_guided_readiness_and_historical_learner_reopen",
+          "application_identity": "retained",
+          "supporting_objects_summary": {
+            "successful_upgrade_scripts": 1,
+            "errors": 0
+          },
+          "native_contract": {
+            "complete_exact_migration_receipts": 121,
+            "exact_program_hashes": 28,
+            "persistent_project_tables": 30,
+            "application_pages": 11,
+            "trusted_application_owner_binding": "passed",
+            "invalid_objects_or_compiler_errors": 0
+          },
+          "preservation": {
+            "fingerprinted_rowsets_unchanged": 44,
+            "runtime_metrics_unchanged": 6,
+            "old_published_migration_receipts_exact": 96,
+            "native_graphs": 2,
+            "native_triples": 30151,
+            "comparison_exceptions": 0
+          },
+          "postupgrade_guided_readiness_and_enablement": {
+            "status": "passed through actual installer app",
+            "initial_pending_check": "Model connection test only",
+            "successful_explicit_model_tests": 1,
+            "required_checks_ready": 6,
+            "enable_learning": "SUCCEEDED; Ready for learners",
+            "retained_without_reconfiguration": [
+              "existing credential",
+              "model profile",
+              "graph network",
+              "conversation components",
+              "public collection"
+            ],
+            "profile_save_dataset_load_or_network_preparation_repeated": false
+          },
+          "postupgrade_learner_stored_answer_and_evidence_reopen": "passed in browser and native before/after comparison; original revision, answer, citations, Sources and Answer lineage retained"
+        },
+        "observer_diagnostic": {
+          "classification": "premature_observer_not_product_failure",
+          "observation": "Browser inspection timed out while the single submitted upgrade was in progress. The first native contract observer compiled before the new contract package existed, with the published 96-receipt prefix still visible.",
+          "resubmission": false,
+          "resolution": "A fresh responsive browser showed one successful upgrade script and zero errors; the subsequent native current-contract check and before/after comparator passed.",
+          "limit": "Neither browser-control timeouts nor the premature probe establish that the installation request failed."
+        },
+        "acceptance_scope": "Same-application upgrade from the populated published-v2 baseline on a prepared supported ADB, followed by guided readiness and historical learner evidence reopening.",
+        "post_guided_original_baseline_comparison": {
+          "status": "passed_with_expected_learning_enablement_change",
+          "prior_rowsets_directly_exact": 42,
+          "original_migration_receipt_rows_exact": 96,
+          "settings_comparison": "all original settings match after a read-only projection of the observed APP_MAINTENANCE OFF value to its prior ON value",
+          "only_expected_original_settings_change": "APP_MAINTENANCE ON to OFF",
+          "projection_updated_database_rows": false
+        },
+        "historical_reopen_comparison": {
+          "status": "passed",
+          "exact_nonattachment_rowsets": 45,
+          "original_attachment_rows_preserved": 1,
+          "observed_attachment_additions": 1,
+          "answer_request_delta": 0,
+          "answer_model_start_marker_delta": 0,
+          "setup_model_test_request_delta": 0,
+          "model_boundary_delta": 0,
+          "native_graphs": 2,
+          "native_triples": 30151,
+          "full_native_term_hashes_unchanged": true,
+          "completed_answers_checked": 1,
+          "supplied_public_passages": 6,
+          "recorded_paths": 8,
+          "explicit_citations": 5,
+          "matched_citations": 5,
+          "historical_revision_pins_checked": 1,
+          "limit": "Exactly one observed new login/open attachment was allowed. Recorded application boundaries are not provider billing telemetry; no claim of a full database backup."
+        }
+      },
+      "existing_installations": "preserved",
+      "limit": "Both isolated prepared-environment core paths passed through real learner evidence and stored-history reopening. New provisioning, broader failure coverage and platform logging limits remain separate; existing installations and release are preserved."
+    },
+    "harness_diagnostics": {
+      "initial_replay_inventory": "Initial application-table scope included native RDF support tables. The corrected fixture passed; the original failed harness log is retained.",
+      "product_change_for_this_correction": false
+    },
+    "remaining_acceptance": [
+      "No pending check remains for the two scoped prepared-environment core paths. Release publication/promotion is separate and has not been performed or implied."
+    ],
+    "evidence_receipts": [
+      {
+        "label": "native_completed_replay_and_duplicate",
+        "sha256": "32f3a6bc2486ac016a904b8dfbf3f445992323e7f090d3c3a4e2e12475338ac3",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "native_reviewer_api_and_callback_denials",
+        "sha256": "1228ec8df510c274c95bb3dfde845f7933c1b55c2c9ac551175ed0214bb491e2",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "native_setup_mutex_holder",
+        "sha256": "759de0b2194e4ed9494be4837d985e7a58e7f756616aac7e38e3e10bc108e42d",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "native_credential_mutex_contender",
+        "sha256": "08d6be7de4e6e940ca9d875911138e94bec16dbe268bb8de37f90326f6bb1159",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "native_uncommitted_maintenance",
+        "sha256": "dd20ccdca12ba9193300a5a2b921f3af89ece2374643f5e3afcd6bb06e366b60",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "native_writer_admission_holder",
+        "sha256": "e323b29c64c3b80ef4b56de2c330a8d95694143c79f293ef50dffbe3216e4280",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "native_setup_writer_admission_contender",
+        "sha256": "d5946207d97f00eefeffc7452ca056a384ad0c4a85e8bfd57e074996e52d356f",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "native_readiness_timing",
+        "sha256": "b86bd0afa649dc4df895448515a8154794ab4fe5a9d2bc3761e1c3914103d968",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "post_learner_export_scan",
+        "sha256": "7429b84758313364b0875c8b19515abb32a42aea001d0c5260f20c34d272fca9",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "bounded_audit_policy_coverage",
+        "sha256": "b28fc99e4e399c6078622a1b85e77b72aeb626f4a207aca06d41c3aa196d9f5a",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "offline_suites",
+        "sha256": "69f9f68a791da768c3e2b8557792b924df3578df9a1b8944fdeeeb7f9520ffc6",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "private_cleanup_review",
+        "sha256": "090d27909bb1983a9a10c1ba590cd1f722653ee84444ed0a37669f748fc18ce2",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "private_cleanup_inventory",
+        "sha256": "f93149eadb7c6d77e851b0c69918f32d557a4fb2df98e949c483d6827b2dff36",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "final_pristine_native_contract",
+        "sha256": "ba63f3c7020ab6155fbff5abdb1d78b4c98cd90a682dfc209adc85bdbafc1045",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "synthetic_credential_preflight",
+        "sha256": "5f7a1fdeb381e0d2d4da8737e1ebec13b941b83ff3646ccdc673731251fa2c78",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "credential_recovery_original_failed_final_comparison",
+        "sha256": "826e1804cecbb7f6434786c138f36e07a39f3122a30e97e21f9204b2461f6e93",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "credential_recovery_exact_cleanup",
+        "sha256": "27735bff532cfbf384d0e6a32c59faae4f5f8a6ccef925fbe5f33255df6f7457",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "other_build_preservation_after_checks",
+        "sha256": "b084afe066a44c60cb67d9b0da26ce2c3408a4cf1bdc0e2a4f18c2b871172b0c",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "current_learner_preservation_after_checks",
+        "sha256": "8e56bf826cea50ecf4e28d9edfb4233802b8fc45d72eca0604420d25fa5cc046",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "credential_recovery_corrected_parse",
+        "sha256": "5583dc619faa527c34a8ee1a284e70c58a00c6fac354ce40e94acf146f1c0216",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "credential_postcreation_corrected_pass",
+        "sha256": "4bdd370fbb10fcda104261a8eeced11655d579782e1d40566fd48529ffd24e8a",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "credential_interrupted_reconciliation_pass",
+        "sha256": "d8d0f661bcc40ff2d138353820fc56e1a290165ba5218ced3a1a282ca391ea29",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "credential_absent_name_primary_pass",
+        "sha256": "170d0e34218545555a1710859c2b0f99d76c80566df029561062b18ead026790",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "credential_absent_name_contender_pass",
+        "sha256": "f10c8a0e13dd17b86fe88457fbec06da0b1aaf86f14a885a656251b7517c8d89",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "final_pristine_readonly_inventory",
+        "sha256": "907f2dc73d262c57c34539ffe086eb91955819b61ec8794216a720c0b1c25b4e",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "published_populated_answer_native_observer",
+        "sha256": "cdc31316012ae6b42fb0e5a1329ee75e3cc1b4456d676dd72517e758b2a7047e",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "published_populated_idle_pause",
+        "sha256": "4c20f00e253792de9fc0d0ff06495b773a1e45fdd4a00864bd089770a8e4890a",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "published_populated_preupgrade_fingerprints",
+        "sha256": "1736f927ae8abe28fe54acad36e949772cc2caedaa6c696359c7dd880188ba32",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "published_app_definition_backups",
+        "sha256": "ebfb01026f4324a2a258bf6b7aa77f85f121ab964bcd01ffd0fe9e012d07c94a",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "published_app_definition_backup_manifest",
+        "sha256": "3b7e1b75046c1fbbdbd59d7ad1ac11e57c7f120c5abf095be187443cfc26a308",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "private_cleanup_review_with_backup_retention",
+        "sha256": "c953554083185904f97c799b3d04fe1770242fdca37a701592c66a27ad3365bd",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "private_cleanup_inventory_with_backup_retention",
+        "sha256": "97186e56d2db235cc477dd5cb7e5491314cfb9fd981162c096b20cb83bf82ff2",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "clean_actual_guided_ready",
+        "sha256": "da7916044bbb92c8b7903ca856d58bef90772518bf824a916e25dbcdff2880ba",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "clean_postguided_baseline",
+        "sha256": "c35b0ba04d08f7c3ba6459471dd1c30505fad054c9b61790c017b1bcb40b4643",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "native_dataset_wrong_hash_missing_ref_retry",
+        "sha256": "7bc61996145f20fb259953293373c5ca2b5e7aa17b513f3e583bc854ac47689e",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "populated_upgrade_premature_observer",
+        "sha256": "a4fe4207cb78b34f0e9c16d7bedd4b39e38a51026357b77d17cb9411383bddaa",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "populated_upgrade_progress_observation",
+        "sha256": "7a98ac2d5ff9de5650cd2c6a58b1cd9a6a1f7b5ea937a7c94de0cb4573a6c8b6",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "populated_upgrade_current_contract_pass",
+        "sha256": "c438f9a819faa6153a3f1d2a2efa1a2201ae35dfa0762499eb8f01c2fad71722",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "populated_upgrade_preservation_after",
+        "sha256": "e565857e1a746f452e30b9e81a9628207b5bc7fec21dd10354bcc6e67382e712",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "committed_uncertain_recovery_execution",
+        "sha256": "73f452e89010fbd4861425bd1179d1fbdf1dfa79b1e9724cff576a1590ff1ba1",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "committed_uncertain_recovery_native_log",
+        "sha256": "95ab01dd17bfa4974d8ca3d641b0b47cb5b2c96dcf7152ca45edde5081efe4cd",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "final_protected_installations_summary",
+        "sha256": "d1639398c2fba1ea5c6f7a8e8d4f6b25d3f079d498f74f659fe9d532f428e86a",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "clean_final_learner_persistence",
+        "sha256": "8fbc01a862b067d5337576d050626af0c857adba2468afbbf3348049c71d35ab",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "populated_upgrade_final_history_persistence",
+        "sha256": "e4504d23c2f3ce4b1b921894243cfe2da58263009dc7c7ff3e892afa07cf87b3",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "clean_final_history_before",
+        "sha256": "2dd0ef318809991248694112a2862820b4a6a822e02826a5f1e471989e6dc970",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "clean_final_history_after",
+        "sha256": "553ced6c2e8f7f2d39f6d85f64d37d102301c6e66bc0c4f6ead98f796dde6af3",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "final_private_cleanup_review",
+        "sha256": "ef7db2a8ab72550143105178d9df54009ff77f077c4d7e129e3962e2c5109d69",
+        "storage": "private ignored work area; exact local path omitted"
+      },
+      {
+        "label": "final_private_cleanup_inventory",
+        "sha256": "2015900b582efa44af5a8b9e1fe87cf715426901fef48f84384d5f590d54d5f1",
+        "storage": "private ignored work area; exact local path omitted"
+      }
+    ],
+    "publication": {
+      "release_unchanged": true,
+      "commit_or_push_performed": false,
+      "accepted_for_release": false
+    },
+    "credential_recovery_fixture_progress": {
+      "status": "passed_scoped_corrected_native_fixtures",
+      "synthetic_native_credential_create_and_drop_preflight": "passed",
+      "functional_assertions_observed": [
+        "fault handling",
+        "prior-success invalidation",
+        "replay",
+        "scoped cleanup"
+      ],
+      "original_final_preservation_comparison": "failed; original failure retained",
+      "diagnosed_harness_effect": "A temporary fault-injection trigger changed the LAST_DDL_TIME of KCV_DEPLOY_RUNS. The observed fingerprint difference was limited to that table timestamp.",
+      "cleanup_checkpoint": {
+        "status": "passed",
+        "deployment_state_fields_restored": 12,
+        "full_state_row_hash": "restored",
+        "other_application_table_hashes_unchanged": 27,
+        "remaining_synthetic_credentials": 0,
+        "remaining_profiles": 0,
+        "remaining_setup_journal_rows": 0,
+        "remaining_fault_triggers": 0,
+        "private_harness_baseline_tables_retained": 0,
+        "canonical_contract_preserved": true
+      },
+      "corrected_fixture": "All five blocks parsed natively; corrected journal-fault, interrupted-request and two-session absent-name contention executions passed.",
+      "product_change_for_observed_failure": false,
+      "limit": "The original failed harness comparison remains a failure. Corrected fixtures verify their exact synthetic fault/concurrency scope with an explicit journal-table DDL window; they do not prove all platform interruption modes or complete the guided clean path.",
+      "corrected_native_results": {
+        "native_parse_only_blocks": 5,
+        "postcreation_journal_fault": {
+          "status": "passed",
+          "prior_success_invalidated": true,
+          "automatic_credential_replacement": false,
+          "explicit_reconciliation_and_cleanup": "passed"
+        },
+        "interrupted_request": {
+          "status": "passed",
+          "transition": "RUNNING to INTERRUPTED",
+          "recovery": "explicit same-token reconciliation",
+          "automatic_credential_replacement": false,
+          "cleanup": "passed"
+        },
+        "absent_name_concurrent_attempts": {
+          "status": "passed_bounded_two_session_overlap",
+          "successful_creations": 1,
+          "second_attempt_error": "ORA-20302",
+          "second_attempt_persistent_mutation": false,
+          "primary_and_contender_preservation": "passed",
+          "cleanup": "passed"
+        },
+        "journal_table_ddl_effect": "Exact temporary-trigger DDL window verified; other protected baseline values compared without broad exclusions.",
+        "retained_baseline_cleanup": "Only the exact private metadata baseline fixture was removed; canonical contract and pristine state preserved."
+      }
+    },
+    "preservation_after_additional_checks": {
+      "status": "passed_scoped_comparisons",
+      "other_existing_build_assertions_unchanged": 144,
+      "protected_current_candidate": {
+        "learner_rowsets_compared": 19,
+        "learner_rowsets_unchanged": 19,
+        "original_baseline_rowsets_unchanged": 4,
+        "recorded_counts_compared_and_unchanged": 8,
+        "new_session_attachments": 0,
+        "new_recorded_model_starts": 0,
+        "previous_attachment_hashes_retained": 2
+      },
+      "limit": "These are the recorded snapshot/comparator scopes, not a whole-database backup or provider billing claim.",
+      "final_recheck": "passed unchanged after the additional clean/upgrade setup and learner checks; latest read-only snapshots retain the same comparison scopes"
+    },
+    "native_dataset_fetch_hash_retry": {
+      "status": "passed_scoped_native_fixture",
+      "wrong_hash": {
+        "status": "FAILED",
+        "error_code": -20070,
+        "phase": "FETCHING_MANIFEST"
+      },
+      "missing_public_reference": {
+        "status": "FAILED",
+        "error_code": -20404,
+        "phase": "FETCHING_MANIFEST",
+        "http_status": 404
+      },
+      "valid_retry": {
+        "status": "SUCCEEDED",
+        "phase": "REUSED_READY_GRAPH"
+      },
+      "prior_rowsets_unchanged": 43,
+      "native_triples_unchanged": 30144,
+      "new_receipts_retained": {
+        "failed": 2,
+        "succeeded_reusing_ready_graph": 1
+      },
+      "limit": "Checks the observed fetch/hash failures and safe reuse retry, not a mid-graph-construction interruption or every loader failure mode."
+    },
+    "native_committed_uncertain_work": {
+      "status": "passed_bounded_synthetic_native_scope",
+      "committed_uncertain_cases": [
+        "without a lease",
+        "with a lease"
+      ],
+      "setup_admission": "rejected before runtime mutation in both cases",
+      "failed_token_replays": "no further receipt or mutation",
+      "real_recover_response": "abandoned the synthetic response and cleared its lease while learning remained enabled",
+      "prior_rowsets_unchanged": 43,
+      "native_triples_unchanged": 30144,
+      "fixture_cleanup": "exact synthetic relational rows and two failed setup receipts removed",
+      "model_or_provider_conversation_calls": 0,
+      "native_graph_creations": 0,
+      "limits": [
+        "Synthetic committed state, not a real provider timeout.",
+        "Identity sequences and Oracle advisory-lock bookkeeping are outside the rowset comparison.",
+        "Owner-native execution does not establish browser error rendering or already-open browser maintenance behavior."
+      ]
+    },
+    "optional_model_fallback_browser": {
+      "status": "passed",
+      "query": "clinical",
+      "matched_information": "saved objective",
+      "result": "saved personal context displayed with its objective and Saved information match",
+      "banner": "Keyword matches only: the local semantic search model is unavailable.",
+      "limit": "Observed fallback with the existing optional-model state; no model was installed or removed for this check."
+    },
+    "prepared_environment_core_acceptance": {
+      "status": "passed_with_stated_scope",
+      "candidate": "candidate-r13",
+      "candidate_archive_sha256": "a46e9c8980a5769eb10f15b1edb225359e52ce43e812eb28e1a24df875829e2d",
+      "clean_path": "actual App Builder ZIP and Supporting Objects installation, app credential/profile setup, required readiness, real learner question/evidence and new-sign-in persistence passed",
+      "populated_upgrade_path": "actual published-v2 same-application upgrade, exact structural/data preservation, guided readiness/enablement and historical answer/evidence reopening passed",
+      "environment": "existing prepared ADB with required capabilities and workspace access",
+      "publication": "unpublished dev candidate; no release acceptance, promotion, commit or push follows from this scoped result",
+      "limit": "Not a new-database provisioning rehearsal, universal platform/privacy guarantee or full database recovery test."
+    },
+    "remaining_coverage_limits": [
+      "New-database provisioning and first-time Java activation/restart were not rehearsed.",
+      "Audit/request-log protection remains unproven: the bounded policy review returned no relevant owner/gateway rows; finite known-pattern scans are not a universal secret-absence guarantee.",
+      "Committed maintenance visibility to an already authenticated browser and broader DDL or mid-graph-build interruption/recovery were not observed. Bounded committed UNCERTAIN admission/recovery passed.",
+      "Readiness measurements are three observations without an SLA or agreed performance budget.",
+      "Additional direct HTTP routes/mutations and any unrecorded final-version SQL-first/dev route are outside the stated fixture coverage.",
+      "A bare context-overview route after session loss can lack its required context ID; reopen through My Contexts.",
+      "Application-definition backups and preservation fingerprints are not a rehearsed full database/graph/credential recovery backup."
+    ]
+  }
+}

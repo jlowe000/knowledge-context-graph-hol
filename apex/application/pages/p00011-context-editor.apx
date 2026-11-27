@@ -10,6 +10,7 @@ page 11 (
     warnOnUnsavedChanges: true
   }
   security {
+    authorizationScheme: @learning-ready
     authentication: required
     pageAccessProtection: argumentsMustHaveChecksum
     formAutoComplete: false

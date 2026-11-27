@@ -3,7 +3,7 @@ page 1 (
  alias: HOME
  title: Knowledge Context Explorer
  javaScript {
-  fileUrls: #APP_FILES#explorer.js?v=f62bd94f1c90
+  fileUrls: #APP_FILES#explorer.js?v=2e9dcbd0b741
  }
  css {
   fileUrls: #APP_FILES#explorer.css?v=9c15faffbaff
@@ -13,6 +13,7 @@ page 1 (
   templateOptions: #DEFAULT#
  }
  security {
+   authorizationScheme: @learning-ready
   authentication: required
   pageAccessProtection: argumentsMustHaveChecksum
   formAutoComplete: false

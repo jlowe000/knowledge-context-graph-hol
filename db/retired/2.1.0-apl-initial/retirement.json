@@ -1,0 +1,273 @@
+{
+  "id": "2.1.0-apl-unaccepted-index-verifier",
+  "recorded_date": "2026-11-27",
+  "reason": "The native APEX Supporting Objects clean installation completed100 migrations, then the deployment-request index postcondition failed with ORA-20301. Oracle correctly represents the TIMESTAMP WITH TIME ZONE first key as a function-based SYS_EXTRACT_UTC index; the original verifier incorrectly required NORMAL and the visible STARTED_AT key. The seven-step suffix was not accepted. The replacement verifies the exact native expression and key order without rebuilding an existing index.",
+  "original_manifest": "db/retired/2.1.0-apl-initial/manifest.json",
+  "original_manifest_sha256": "e071d65d17ac57b0f05a60cdeab98d133d7d226f740021a9783d92c7ab0e320b",
+  "applied_prefix_count": 100,
+  "applied_wrapper_hashes": {
+    "db/generated/bootstrap.sql": "e162cd5fbbaf93b6e6cb616c49db27febab3540b7e7877f1fb99c7dadda39209",
+    "db/generated/1.0.0-001-kcv_settings.sql": "55f0a39816ddcc6c6a6397783e526966178965f00972d624ae3897f01908b365",
+    "db/generated/1.0.0-002-kcv_sources.sql": "d229c178b5b5a5093802d1dac7d95d76faf1b89885e7580af075899635add9c4",
+    "db/generated/1.0.0-003-kcv_passages.sql": "9b6345a6675177cbc5762bb4190d863c7aa91961e928640f094d88aa42c13b95",
+    "db/generated/1.0.0-004-kcv_contexts.sql": "bdf61f395d409ee9379bb59beddb48a13a63f59a05a6973d73fa48a1e847cb6c",
+    "db/generated/1.0.0-005-kcv_graph_runs.sql": "ac9dea4fc8e84d1b1e0a25709381d7e531e6d4043074deb470634a823fd962a5",
+    "db/generated/1.0.0-006-kcv_rdf_stage.sql": "01caaa88f4d77601b5ebf7eefc360e22e666909caf3e14720faf1635cd714269",
+    "db/generated/1.0.0-007-kcv_graph_sources.sql": "d6d3cb50c1823004afd8b663a47e3aebf3a404be72f09b5e2986d14fc20aa812",
+    "db/generated/1.0.0-008-kcv_graph_contexts.sql": "45650a265e29e017e608e07f991669409686c1728b575f3f99b30d9ca106d66a",
+    "db/generated/1.0.0-009-kcv_feedback.sql": "7197df7191caf0c5b2efc6bf92f9268bef09cbd6258d5f5e3f15ddf95d76ccd1",
+    "db/generated/1.0.0-010-kcv_dataset_runs.sql": "5ce840626a09573bf133defb477397245bc5da034ae14c96e4733dec0217e021",
+    "db/generated/1.0.0-011-kcv_dataset_stage.sql": "24a8d2a2145bc2edf7e616fca2df1159c0458195950f8555f66c20a726782f24",
+    "db/generated/1.0.0-012-kcv_scenario_revisions.sql": "8a1019f22894a1656c8168395120bea53cfdabc155afffa05a7ab292af8115d0",
+    "db/generated/1.0.0-013-kcv_chat_sessions.sql": "a223754aa3cf11b71d7c4fecc9a4b38e49301ad0d844b3987526018c39826b0d",
+    "db/generated/1.0.0-014-kcv_scenario_changes.sql": "0b8d6b568197ce9f19b38578b225af5e4196f6ed03c3c47983c0a41ed6897095",
+    "db/generated/1.0.0-015-kcv_scenario_audit.sql": "8fa2c60caa3f6fa0ac0824320f3da150650bf7700ef553306f6bfc2f57aa442d",
+    "db/generated/1.0.0-016-kcv_chat_turns.sql": "f0a24d965cf23b8ea4a74d79a7181b756517be9c9c1fd3d99fcb10c7dd4be4e6",
+    "db/generated/1.0.0-017-kcv_scenario_observations.sql": "98d043113a4bac3787f370ef78f1ae431d9df9408e016620a3e3e61f41108bd8",
+    "db/generated/1.0.0-018-kcv_response_runs.sql": "ec380f821a886d4ebec4ea5c3e7f0542aa220b28e1ff9b6711a52ff8241ff0f9",
+    "db/generated/1.0.0-019-kcv_response_tool_calls.sql": "f68975b46e3046e0db5fd9c27be58c776ef20597477ec61c469ab4fafc22dbc4",
+    "db/generated/1.0.0-020-kcv_domain_runs.sql": "94f368a8707177defc38e0c2500b819d6d3b9bc3b281eaadf487277ec00290f4",
+    "db/generated/1.0.0-021-schema-setting.sql": "b2ff3188a7d2289f1d735ec01f258f2d38b3e6c3687b142f2df92cfd2e38eac3",
+    "db/generated/1.0.0-022-kcv_tool_run_ix.sql": "4ea958179c3c31700a5a5f27f3fd5d2f119de840102ebde12cb3272d3279621a",
+    "db/generated/1.0.0-023-kcv_dataset-package.sql": "6e45f76bc8328cd74d4b43c10d196403acbf6a37953598f9458107777c8fb2ff",
+    "db/generated/1.0.0-024-kcv_trace-package.sql": "ff1628b5c57e25c7cabf80140757e14e8563ac8102cc493c536d0b27fc2158e1",
+    "db/generated/1.0.0-025-kcv_scenario-package.sql": "364dd297b1cfaa2ed0dba6e74796a815471cb506040583490ab2047c7526c84f",
+    "db/generated/1.0.0-026-kcv_apex-package.sql": "5b883a660d1151f83095a1b26fa03fd069798ed1d0f41831528f13b0621b6f2b",
+    "db/generated/1.0.0-027-kcv_context_packet-function.sql": "bb85e847ab20cfb5bca5f110454bd14c5f266b3a2f5a0a41afd722fa11691013",
+    "db/generated/1.0.0-028-kcv_source_packet-function.sql": "9dc5605ef4458cb02ad6ca35cee17e1c3e4405ccf94e8b31011c72033ee33a95",
+    "db/generated/1.0.0-029-kcv_evidence_packet-function.sql": "59aa387eae3776f71ade498c76ac62e41ea9fd611322924ceb91b7e70f33f505",
+    "db/generated/1.0.0-030-kcv_dataset-package-body.sql": "2261b973f20ef51da98b4e84761b235d5817acc9a2ffca0fadc627fdf129bd92",
+    "db/generated/1.0.0-031-kcv_trace-package-body.sql": "1f01ff1c4c2b556944a1bd2db87b59943b6d1481e630366f1bf0e08bd324f66a",
+    "db/generated/1.0.0-032-kcv_scenario-package-body.sql": "357f22a53fce6cbcad15614a3d55c1fd3191d860cd39be496d34d4abb79deffd",
+    "db/generated/1.0.0-033-kcv_extract_domain-function.sql": "a4183cefe550b446ba06e126309b66471d8016b847377a446146ead667986832",
+    "db/generated/1.0.0-034-kcv_scenario_evidence-function.sql": "9d99166dc39aeeca04c8d79ff3ca4de8e8c8837725fe21c711ad28d7bfbffc85",
+    "db/generated/1.0.0-035-kcv_scenario_propose-function.sql": "257a735e272c2213fe665cc37b455e9dc9a948661620aa89b99e691d1c3d971d",
+    "db/generated/1.0.0-036-kcv_apex-package-body.sql": "800526b6800c3af9f27141c75daf16a725af33801765b336019ba23a4a93b754",
+    "db/generated/2.0.0-c2-001-kcv_personal_contexts.sql": "438f25e38a1d1327814e51c954c6ba29105bcd7ecf2fcae00422122ddd34aae0",
+    "db/generated/2.0.0-c2-002-kcv_personal_owner_ix.sql": "3aa1cc3d8e71148dae2b68b17d2e22e5a3829bbd684e91ca82bcb92966f2c163",
+    "db/generated/2.0.0-c2-003-kcv_context_requests.sql": "ac664723d0e9d03181b7b861e81c41a2860473b7e0318e7af1db96f2a77f317b",
+    "db/generated/2.0.0-c2-004-kcv_access-package.sql": "deb5d8dbe213a3b4e04588d7cc0104debbfdfb42609aef7b54506e558182758d",
+    "db/generated/2.0.0-c2-005-kcv_access-package-body.sql": "dde6b9df2a4a56687224a8af0d214b57092c55b0f79f6a139a28622a3188ee1a",
+    "db/generated/2.0.0-c2-006-kcv_personal_context_api-package.sql": "a92722e66defeb35ceb3d1e5c9c6d70028821e3dac3a9bcf8d63ca70c173ad7b",
+    "db/generated/2.0.0-c2-007-kcv_personal_context_api-package-body.sql": "1c82fea1c53c9f60aa042fd1f0c92ba809ddf551a877ef936424e3e5da9a1fb3",
+    "db/generated/2.0.0-c2-ready.sql": "7f7016c8f65a33829536854b47b9305f92bbb3d708fca72eb8b4f361b87790e6",
+    "db/generated/2.0.0-c2-008-kcv_access-session-binding-package.sql": "c782bfce9bac81d780086e2e638d6b5366957b907e7402d99f9df43b5ec27199",
+    "db/generated/2.0.0-c2-009-kcv_access-session-binding-package-body.sql": "01ac77fdca2d26ff16f51a2c2c957bf2c6e15325d2feb89c78e173be6bb6b758",
+    "db/generated/2.0.0-c2-010-recompile-context-api.sql": "cd03c16b501707b4843c25bf158fd34b3a4c739ba56ba96b12f7b5e55c2cf83b",
+    "db/generated/2.0.0-c2-identity-ready.sql": "878d7b941ff662c59b41839fd0ff2441de76d8aa4eb6f155b957e22aaf944253",
+    "db/generated/2.0.0-c3-001-kcv_chat_sessions-journey-columns.sql": "804d0e98881fbf0d208c04c9cdcd47b0871f21531c68772867bed6794878df25",
+    "db/generated/2.0.0-c3-002-kcv_chat_personal_ix.sql": "8ffab27165400d219d4b1dfbed2166e96edf2a8056b85130f72dc23ae520e99a",
+    "db/generated/2.0.0-c3-003-kcv_response_runs-journey-columns.sql": "cc3413126dd0269db6a0935fa49c7a22e6a8da69b5c0ca2726b1bd6d6b7ab910",
+    "db/generated/2.0.0-c3-004-kcv_response_request_ix.sql": "30d4fdc8a3fd5ca65432f9c7694c364c1a298ca1abe64dc5d31cb0556b9b2342",
+    "db/generated/2.0.0-c3-005-kcv_context_attachments.sql": "a4c6b25b64baa1b476a3e98ae21cff3dd3d86701d6c790ea860370de17631b02",
+    "db/generated/2.0.0-c3-006-kcv_personal_operations.sql": "df4952d1f00fa16ceaa92efc2737e5230f7916359b35c0ee4a65577f9be119f0",
+    "db/generated/2.0.0-c3-007-kcv_model_boundaries.sql": "7024ebff4bf2c74f88c768472b0ef463f4094f9f94aaa1e99950ba3925c38b53",
+    "db/generated/2.0.0-c3-008-kcv_access-package.sql": "a8b9ac2a6ae2a1fd02b15c0be171bb5c10492fb46cbb7c4e8e4b39a7fd5f008a",
+    "db/generated/2.0.0-c3-009-kcv_personal_context_api-package.sql": "b807acd08e60b9fa0994256b366d2cc6d40a2393b153d27acff7e348a93c4a12",
+    "db/generated/2.0.0-c3-010-kcv_personal_journey-package.sql": "cb1c4a450e4d0c6a11464d284a2d246a2159cfd324b289731d49dd0118b4d665",
+    "db/generated/2.0.0-c3-011-kcv_scenario-package.sql": "17a9dbb25a20815501fea35b6f678af7eaa5e722a0b4cb1fa0480e4cd364c790",
+    "db/generated/2.0.0-c3-012-kcv_access-package-body.sql": "2f5e1d12fd2a99b9e09cf692878cbfa8bdbce7380b595ce8f563c9d0c8e6b0fc",
+    "db/generated/2.0.0-c3-013-kcv_personal_context_api-package-body.sql": "5d6633ac6ef940738cc649c8b663150270e6dcc8afb2057183f9b4edcd4d44e5",
+    "db/generated/2.0.0-c3-014-kcv_personal_journey-package-body.sql": "5e75fe01e5c51222e67642710307e046fc3208802be53403b26651e1a5ede6e3",
+    "db/generated/2.0.0-c3-r1-001-kcv_scenario-package-body.sql": "0a73d932e0b8499af8978c290362abc5275d9a7feac3bd8d0b5bac8fc422e918",
+    "db/generated/2.0.0-c3-r1-002-kcv_trace-package-body.sql": "c22a0cb2b9520cda1f3949a4110a7aae26729081dcaf93c1962f5f308412e573",
+    "db/generated/2.0.0-c3-r1-003-kcv_apex-package-body.sql": "3d403cc9314efe6e4481a46a5fde738e491c449509baac3326ef62085486d07a",
+    "db/generated/2.0.0-c3-r1-004-kcv_personal_journey-package-body.sql": "8f629471fa020158ea48d2063738452b3e5e1555a8fc9d0ae246aeba608777dc",
+    "db/generated/2.0.0-c3-r1-ready.sql": "74e92adca2843e0b50d436479329a1c8671ccd5dd60926db4cd3b8f7929dcaae",
+    "db/generated/2.0.0-c3-r2-001-kcv_scenario-package-body.sql": "b8de14833d82d2d04dea0ffa2549f9ced2c0be7e0b4ba1aebdc81e53a361fc90",
+    "db/generated/2.0.0-c3-r2-ready.sql": "c631344f3bfbc0337142abe27ec302386ddc20301c65e5d6ba2f707feb905955",
+    "db/generated/2.0.0-c3-r3-001-kcv_scenario-package-body.sql": "24743f0a6826eb37aa3320d54a7ceb3b67b53de03cbd0851dc23148188241e17",
+    "db/generated/2.0.0-c3-r3-002-kcv_personal_journey-package-body.sql": "624968917e459283a7df63752839fe5b84c5fcad5488c2620c1d274e6e35c2c6",
+    "db/generated/2.0.0-c3-r3-003-kcv_apex-package-body.sql": "c55b7424367e3f76789f0362c22f39f259b8cf25827f458a23c1a442da9dedb1",
+    "db/generated/2.0.0-c3-r3-ready.sql": "a34c5c501757adc0a36397edbbc895f5cdd28d2cc93494e114c3f39001cf626a",
+    "db/generated/2.0.0-c3-r4-001-kcv_response_tool_calls-origin.sql": "f175ed5dfc78c04434ab7b75b1feb08cedcad888e48605fd3d28e38b45cfc538",
+    "db/generated/2.0.0-c3-r4-002-kcv_response_runs-model-start.sql": "5e43ffde4ec25d17f3118cdad201c2e73b9d1ffb017459629f09938b5f0dc503",
+    "db/generated/2.0.0-c3-r4-003-kcv_trace-package.sql": "48e4b40bd0653ada86905a757d60b253702ccd3a5aed97f496adde94c59ecc46",
+    "db/generated/2.0.0-c3-r4-004-kcv_scenario-package.sql": "4a798b6386a4254a4a162fb5c478a0095f2ba24ccc6d260cb0174a766095b957",
+    "db/generated/2.0.0-c3-r4-005-kcv_trace-package-body.sql": "150334cbd4ad2f0a5cfcc1b5b99e67803f24d5559d5095a3ac04695ff655864f",
+    "db/generated/2.0.0-c3-r4-006-kcv_scenario-package-body.sql": "bbcffad6a57dfb0a7c5f36e05167dec45274f9d197bfb090b9c7a5aa0c63adf0",
+    "db/generated/2.0.0-c3-r4-ready.sql": "2f1b93575d5e781078dcc3623019cd8cc8141b8e35b0d9d34986d58ce57df6c5",
+    "db/generated/2.0.0-c3-r5-001-kcv_context_deletions.sql": "2b17db4328e307ea758480097a425e4a045337d0d22d571fea082f1eac4a31bc",
+    "db/generated/2.0.0-c3-r5-002-kcv_context_delete_resources.sql": "da56bc5b8923495a62b2b0df1f8e3d00d080689244cefc00a3c73896a14669d7",
+    "db/generated/2.0.0-c3-r5-003-kcv_context_delete-package.sql": "9838223ad5be6a11d92e2c0dbfc4184a96d891b8c8feaacecf5bb8c6e53a0d98",
+    "db/generated/2.0.0-c3-r5-004-kcv_access-package-body.sql": "afb2e6d47766cfeb4325213ec286b3a81f07092bd1393d240681b3bdb224d908",
+    "db/generated/2.0.0-c3-r5-005-kcv_personal_context_api-package-body.sql": "ea589e220cc6d7c94de4c73453ae4aa617302da2663d87bd114ba3f991651e4b",
+    "db/generated/2.0.0-c3-r5-006-kcv_personal_journey-package-body.sql": "b9fff1745e9854d30d3a011885241eb5dfabb46867b358a8fb70f6fd7d73d9d2",
+    "db/generated/2.0.0-c3-r5-007-kcv_context_delete-package-body.sql": "993e7b5198f97f8cd8a9db285e4db8f2b34dfec12e0a35bd1587ae08427d9f8b",
+    "db/generated/2.0.0-c3-r5-ready.sql": "75e91b76afa04addddb9fcc32e5f2dab162a30c5fc740b4e856259c1bd448834",
+    "db/generated/2.0.0-c3-r6-001-kcv_context_search_chunks.sql": "ffc86e285eb254c57e931d8bb22e75d9d687c346ad079b8f1a6de8bd8dae0858",
+    "db/generated/2.0.0-c3-r6-002-kcv_context_search-package.sql": "7522d17c17cc39165564f2100f5ce85296c9b4b7160834a4048ef2584633281a",
+    "db/generated/2.0.0-c3-r6-003-kcv_context_search-package-body.sql": "72a55df8f30114b3a82a38f1f068f28f5f3458fc8dae7f4c5c2c8cf011987316",
+    "db/generated/2.0.0-c3-r6-004-kcv_personal_context_api-package-body.sql": "5f214b3c2f3d5cc7a5877527e5f33b75256d18a70bc440d0e8beec686ac0a88e",
+    "db/generated/2.0.0-c3-r6-005-kcv_personal_journey-package-body.sql": "9387d02fd0f44e54c729d502df3349577e117075ee266dbf83e58a714e6bccf3",
+    "db/generated/2.0.0-c3-r6-ready.sql": "b9c0c9bda896ae3cc2fcb783da7cb4a511b27ee1b528ddeabcfd62465bbb3062",
+    "db/generated/2.0.0-c3-r7-001-kcv_context_search-package-body.sql": "163f2a2ff9db029557b29712a5817326a6b8c98383cb6c983fd771ac28aef04c",
+    "db/generated/2.0.0-c3-r7-ready.sql": "905774235123bc7f2fe3bffbb4608c18b341dcda73a739d377b0551221ca548e",
+    "db/generated/2.1.0-apl-001-kcv_access-package-body.sql": "2d6d5a664dc00e434b9771b79579d94e928bf2289d2be3c3c0f11501fc786185",
+    "db/generated/2.1.0-apl-002-kcv_scenario-package-body.sql": "7f352254b5eff73e56a729ece6491af5126053c7e839251bb06970b637e23919",
+    "db/generated/2.1.0-apl-003-kcv_deploy_state.sql": "fa4da8b61a48d4358153c7a68eeeacdd4f1dd03d0796f682bd32c20ef61c8a80",
+    "db/generated/2.1.0-apl-004-kcv_deploy_runs.sql": "bdec69425225cc2922267a6137246a9ee7ee4669b8bc387c93dc0a104a7c5e54"
+  },
+  "entries": [
+    {
+      "migration": {
+        "id": "2.1.0-apl-005-kcv_deploy_runs_recent",
+        "group": "feature",
+        "version": "2.1.0",
+        "payload": "db/changes/2.1.0-apl/2.1.0-apl-005-kcv_deploy_runs_recent.sql",
+        "verification": "db/changes/2.1.0-apl/2.1.0-apl-005-kcv_deploy_runs_recent.verify.sql",
+        "depends_on": [
+          "2.1.0-apl-004-kcv_deploy_runs"
+        ],
+        "payload_sha256": "3d92dd3e6cd87af17e33f5c50c152d13fd114196fbf04795977c48b923997645",
+        "verification_sha256": "4cea314f31f86be2e35d536c26d7968a06d404d54ca35bc390dab71914e94735",
+        "source_path": "sql/extensions/23_deployment_objects.sql",
+        "source_unit": 2
+      },
+      "artifact_hashes": {
+        "db/generated/2.1.0-apl-005-kcv_deploy_runs_recent.sql": "5a08fbc6f6ff98b07bca5914d139ed3b2a40aaf8c6a3fcd94a25533ba1f79b94",
+        "db/recovery/2.1.0-apl-005-kcv_deploy_runs_recent.sql": "56a698bb47545c8c5857fa2dafa4377e8684d16ccdee7302581c7536385bd884"
+      },
+      "allowed_registry_state": "ABSENT_OR_FAILED",
+      "error_code": -20301
+    },
+    {
+      "migration": {
+        "id": "2.1.0-apl-006-kcv_deploy_contract-package",
+        "group": "feature",
+        "version": "2.1.0",
+        "payload": "db/changes/2.1.0-apl/2.1.0-apl-006-kcv_deploy_contract-package.sql",
+        "verification": "db/changes/2.1.0-apl/2.1.0-apl-006-kcv_deploy_contract-package.verify.sql",
+        "depends_on": [
+          "2.1.0-apl-005-kcv_deploy_runs_recent"
+        ],
+        "payload_sha256": "541a7edb9d8d9fedd09a51191f53d52030ebae03b9e0c75b84eaf8c8fa7d7c90",
+        "verification_sha256": "9aa00240f7ee18a9ea1e97e92a6edbe12c6aaeeb1ffad3f037523da28cdb1b9b",
+        "source_path": "sql/generated/kcv_deploy_contract.spec.sql",
+        "source_unit": 0
+      },
+      "artifact_hashes": {
+        "db/generated/2.1.0-apl-006-kcv_deploy_contract-package.sql": "4681951c22b544beb059e7aef2f29fe0474e951ce8ff235035f5ebb221539200",
+        "db/recovery/2.1.0-apl-006-kcv_deploy_contract-package.sql": "dde134ee81bb763b694e63b5ee646fcfffe8351bda20ebe10b4a311d55fab01b"
+      },
+      "allowed_registry_state": "ABSENT"
+    },
+    {
+      "migration": {
+        "id": "2.1.0-apl-007-kcv_deploy-package",
+        "group": "feature",
+        "version": "2.1.0",
+        "payload": "db/changes/2.1.0-apl/2.1.0-apl-007-kcv_deploy-package.sql",
+        "verification": "db/changes/2.1.0-apl/2.1.0-apl-007-kcv_deploy-package.verify.sql",
+        "depends_on": [
+          "2.1.0-apl-006-kcv_deploy_contract-package"
+        ],
+        "payload_sha256": "98bae1cc95fc43071aeba925b41007f5705c4fca37551a0a46e2bd1c48249aea",
+        "verification_sha256": "386529b0927c86fcd43c15ec8397c6b00e5ce0e156041b286e315db3634e94a3",
+        "source_path": "sql/extensions/24_deployment_api.sql",
+        "source_unit": 0
+      },
+      "artifact_hashes": {
+        "db/generated/2.1.0-apl-007-kcv_deploy-package.sql": "37f24d4d9c144232584f4da4fdad4e1709195f6493af0d991874439d8eafd543",
+        "db/recovery/2.1.0-apl-007-kcv_deploy-package.sql": "aa2b4f84aed648b42714ea3749d77d0952e6cd951301866dadd786d990b2f5c7"
+      },
+      "allowed_registry_state": "ABSENT"
+    },
+    {
+      "migration": {
+        "id": "2.1.0-apl-008-kcv_deploy-package-body",
+        "group": "feature",
+        "version": "2.1.0",
+        "payload": "db/changes/2.1.0-apl/2.1.0-apl-008-kcv_deploy-package-body.sql",
+        "verification": "db/changes/2.1.0-apl/2.1.0-apl-008-kcv_deploy-package-body.verify.sql",
+        "depends_on": [
+          "2.1.0-apl-007-kcv_deploy-package"
+        ],
+        "payload_sha256": "748a58452efe0eff8480ce2e060140300a9d709974d18a4057017bffe3b1b666",
+        "verification_sha256": "34b628cbccdaa2eccf1893cc275a65e41d36c3c4c6e5690165d3b74baaf33641",
+        "source_path": "sql/extensions/24_deployment_api.sql",
+        "source_unit": 1
+      },
+      "artifact_hashes": {
+        "db/generated/2.1.0-apl-008-kcv_deploy-package-body.sql": "5733f35e06eaa957d92c2fb0515dc1bbb78c0c733145c888e8b4580f857304f0",
+        "db/recovery/2.1.0-apl-008-kcv_deploy-package-body.sql": "d85c57cdbb094d50e98bc27498051db3192e9e597e5f67192cbe25539527f828"
+      },
+      "allowed_registry_state": "ABSENT"
+    },
+    {
+      "migration": {
+        "id": "2.1.0-apl-009-backend-ready",
+        "group": "feature",
+        "version": "2.1.0",
+        "payload": "db/changes/2.1.0-apl/2.1.0-apl-009-backend-ready.sql",
+        "verification": "db/changes/2.1.0-apl/2.1.0-apl-009-backend-ready.verify.sql",
+        "depends_on": [
+          "2.1.0-apl-008-kcv_deploy-package-body"
+        ],
+        "payload_sha256": "8d8e587518848bc7b511d994789609a76165b0a85495895a045b6115ed4eea9f",
+        "verification_sha256": "be517bedef2409d1eb6fc99b9905eb5f384a44f9c775f2f329e3d9d779380d01",
+        "supersedes": [
+          "2.0.0-c3-r7-ready"
+        ]
+      },
+      "artifact_hashes": {
+        "db/generated/2.1.0-apl-009-backend-ready.sql": "628b98a3547b3e34b404de7afe3a04e4ea4edbe8bc7c63fc7b671a1091596898",
+        "db/recovery/2.1.0-apl-009-backend-ready.sql": "2e759b292b439c2711dfc063f36293ef6c13ae1997d9be6a847f361b9c8f4973"
+      },
+      "allowed_registry_state": "ABSENT"
+    },
+    {
+      "migration": {
+        "id": "2.1.0-apl-010-kcv_deploy_contract-package-body",
+        "group": "feature",
+        "version": "2.1.0",
+        "payload": "db/changes/2.1.0-apl/2.1.0-apl-010-kcv_deploy_contract-package-body.sql",
+        "verification": "db/changes/2.1.0-apl/2.1.0-apl-010-kcv_deploy_contract-package-body.verify.sql",
+        "depends_on": [
+          "2.1.0-apl-009-backend-ready"
+        ],
+        "payload_sha256": "2fa7b88bd83231875028e190c9f8e698579e1cece6a5fe9b5bfa22c2a443cf72",
+        "verification_sha256": "3835aa544ce096c40d15953c6a7bc6ac1d3c034c22d77882e357f9a534e0d3b5",
+        "source_path": "sql/generated/kcv_deploy_contract.body.sql",
+        "source_unit": 0
+      },
+      "artifact_hashes": {
+        "db/generated/2.1.0-apl-010-kcv_deploy_contract-package-body.sql": "9f2936aa8132634562bca54f16fdd95cce47bb82c85af00d1b0b5bf458be29f2",
+        "db/recovery/2.1.0-apl-010-kcv_deploy_contract-package-body.sql": "44ff8e9f1c504875848bf68563f2653fb0e185f0d693b2560523d2b0be518fd0"
+      },
+      "allowed_registry_state": "ABSENT"
+    },
+    {
+      "migration": {
+        "id": "2.1.0-apl-ready",
+        "group": "feature",
+        "version": "2.1.0",
+        "payload": "db/changes/2.1.0-apl/2.1.0-apl-ready.sql",
+        "verification": "db/changes/2.1.0-apl/2.1.0-apl-ready.verify.sql",
+        "depends_on": [
+          "2.1.0-apl-010-kcv_deploy_contract-package-body"
+        ],
+        "payload_sha256": "31c5981175bebaa4de2f700662dcb2ff170b56248e77cf8850c879787cb58a8d",
+        "verification_sha256": "7e50c274cfd3daaf541f87d481cc30c12818308c4f0b0285dbd3de761190e9c3",
+        "supersedes": [
+          "2.1.0-apl-009-backend-ready"
+        ]
+      },
+      "artifact_hashes": {
+        "db/generated/2.1.0-apl-ready.sql": "29cb76d25805ef32fcef8f9b382c6fc5f7585b333bf6f80c4e67b128c4f75cd0",
+        "db/recovery/2.1.0-apl-ready.sql": "da485ec1ce9d7419344f56eb197dc5d7f1634cf3da0ce768d35df9f4ed6a5626"
+      },
+      "allowed_registry_state": "ABSENT"
+    }
+  ],
+  "replacement_migrations": [
+    "2.1.0-apl-r1-001-kcv_deploy_runs_recent",
+    "2.1.0-apl-r1-002-kcv_deploy_contract-package",
+    "2.1.0-apl-r1-003-kcv_deploy-package",
+    "2.1.0-apl-r1-004-kcv_deploy-package-body",
+    "2.1.0-apl-r1-005-backend-ready",
+    "2.1.0-apl-r1-006-kcv_deploy_contract-package-body",
+    "2.1.0-apl-r1-ready"
+  ],
+  "receipt_policy": "Keep the original failed receipt, timestamps, digest and error unchanged. It is never marked COMPLETE. Fresh installations have no retired receipts. None of the retired steps may have an executed Liquibase row. If the exact retired failure is present but its index is absent, stop for owner review instead of creating a replacement silently."
+}

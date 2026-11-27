@@ -12,6 +12,72 @@ from scripts import build_apex_worksheet as worksheet
 
 
 class ApexAuthoringTests(unittest.TestCase):
+    def test_deployment_guards_cover_all_learner_pages_and_do_not_cache(self):
+        root=Path(__file__).resolve().parents[1]/'apex/application'
+        names=('p00001-home.apx','p00010-my-contexts.apx','p00011-context-editor.apx',
+               'p00012-review-context.apx','p00013-context-overview.apx',
+               'p00014-sample-contexts.apx','p00015-delete-context.apx')
+        for name in names:
+            page=(root/'pages'/name).read_text(encoding='utf-8')
+            page_security=page.split('security {',1)[1].split('}',1)[0]
+            self.assertIn('authorizationScheme: @learning-ready',page_security,name)
+        schemes=(root/'shared-components/authorizations.apx').read_text(encoding='utf-8')
+        for scheme,method in (('deployment-installer','is_installer'),('learning-ready','learner_ready')):
+            body=schemes.split('authorization '+scheme+' (',1)[1].split('\n)',1)[0]
+            self.assertIn('evaluationType: always',body)
+            self.assertIn('kcv_deploy.'+method,body)
+            self.assertIn('EXCEPTION WHEN OTHERS THEN RETURN FALSE',body)
+        setup=(root/'pages/p00900-deployment-setup.apx').read_text(encoding='utf-8')
+        self.assertNotIn('@administration-rights',setup)
+        self.assertIn('authorizationScheme: @deployment-installer',setup.split('region ',1)[0])
+
+    def test_setup_render_is_read_only_and_sensitive_configuration_is_request_only(self):
+        root=Path(__file__).resolve().parents[1]/'apex/application'
+        setup=(root/'pages/p00900-deployment-setup.apx').read_text(encoding='utf-8')
+        read=setup.split('process read-setup-readiness (',1)[1]
+        self.assertIn('point: beforeHeader',read)
+        calls=re.findall(r'kcv_deploy\.([a-z_]+)',read,re.I)
+        self.assertEqual(calls,['status_json','credential_options'])
+        for name in ('CREDENTIAL','REGION','COMPARTMENT','MODEL','STATUS','CREDENTIALS'):
+            item=setup.split('pageItem P900_'+name+' (',1)[1].split('\n  )',1)[0]
+            self.assertIn('storage: request',item,name)
+            self.assertNotIn('default {',item,name)
+        token=setup.split('pageItem P900_TOKEN (',1)[1].split('\n  )',1)[0]
+        self.assertIn('valueProtected: true',token)
+        self.assertIn('sessionStateProtection: checksumRequiredSessionLevel',token)
+        self.assertIn(':P900_TOKEN:=RAWTOHEX(SYS_GUID())',read)
+        actions=setup.split('process run-requested-setup-action (',1)[1].split('process read-setup-readiness',1)[0]
+        self.assertIn('point: processing',actions)
+        self.assertIn('authorizationScheme: @deployment-installer',actions)
+        self.assertNotIn('SQLERRM',setup)
+        self.assertNotRegex(setup,r'pageItem\s+P900_(?:PRIVATE_KEY|PASSWORD|ENDPOINT)\b')
+        self.assertIn("JSON_TABLE(apex_session_state.get_clob('P900_STATUS')",setup)
+        for name in ('DATASET_STATUS','DATASET_PHASE','COLLECTION_COUNTS'):
+            self.assertIn('&P900_'+name+'!HTML.',setup)
+            item=setup.split('pageItem P900_'+name+' (',1)[1].split('\n  )',1)[0]
+            self.assertIn('storage: request',item)
+        self.assertIn("'$.dataset_progress.phase' RETURNING VARCHAR2(128)",read)
+        self.assertIn("'$.collection_counts.sources' RETURNING NUMBER",read)
+        for column in ('NEXT_ACTION','ERROR_CODE'):
+            blocks=setup.split('column '+column+' (')[1:]
+            self.assertTrue(blocks)
+            for block in blocks:self.assertIn('escapeSpecialChars: true',block.split('\n    )',1)[0])
+
+    def test_missing_backend_routes_to_neutral_handoff_without_granting_identity(self):
+        root=Path(__file__).resolve().parents[1]/'apex/application'
+        auth=(root/'shared-components/authentications.apx').read_text(encoding='utf-8')
+        self.assertIn('postAuthenticationProcedureName: kcv_post_login',auth)
+        self.assertIn('IF package_objects<>2 THEN RETURN',auth)
+        self.assertIn('kcv_deploy.capture_identity',auth)
+        self.assertNotIn('kcv_access.capture_identity',auth.lower())
+        self.assertNotIn('set_session_state',auth.lower())
+        app=(root/'application.apx').read_text(encoding='utf-8')
+        self.assertIn('page: 901',app.split('homeUrl:',1)[1].split('}',1)[0])
+        handoff=(root/'pages/p00901-installation-status.apx').read_text(encoding='utf-8')
+        self.assertIn('Supporting Objects',handoff)
+        self.assertIn('EXCEPTION WHEN OTHERS THEN ready:=FALSE; installer:=FALSE',handoff)
+        self.assertNotRegex(handoff,r'kcv_deploy\.(?:test_model|configure_profile|enable_learning|load_dataset)')
+
     def test_context_search_runs_once_and_report_uses_request_only_payload(self):
         # Repeated report evaluation must not repeat an embedding request or
         # reuse another request's private results from persistent session state.

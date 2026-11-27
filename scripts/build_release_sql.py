@@ -12,18 +12,18 @@ from scripts import build_database_installers as migrations
 PART_TARGET_BYTES = 1024 * 1024
 
 
-def installation_steps(root, manifest, route):
+def installation_steps(root, manifest, route, effective_owner=False):
     items = manifest['migrations']
     baseline = [item for item in items if item['group'] == 'baseline']
     selected = items if route == 'fresh' else [item for item in items if item['group'] == 'feature']
     steps = [('bootstrap', migrations.BOOTSTRAP)]
-    preflight = migrations.retired_candidate_preflight(root, items)
+    preflight = migrations.retired_candidate_preflight(root, items, effective_owner=effective_owner)
     if preflight:
         steps.append(('retired-candidate-preflight', preflight))
     if route == 'upgrade':
-        steps.append(('verified-baseline-gate', migrations.installed_contract_gate(root, baseline, items)))
-    steps.extend((item['id'], migrations.worksheet_step(root, item, items)) for item in selected)
-    steps.append(('final-schema-verification', migrations.verification_block(root, items)))
+        steps.append(('verified-baseline-gate', migrations.installed_contract_gate(root, baseline, items, effective_owner=effective_owner)))
+    steps.extend((item['id'], migrations.worksheet_step(root, item, items, effective_owner=effective_owner)) for item in selected)
+    steps.append(('final-schema-verification', migrations.verification_block(root, items, effective_owner=effective_owner)))
     return steps
 
 

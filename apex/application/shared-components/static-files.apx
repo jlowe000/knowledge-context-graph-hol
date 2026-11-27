@@ -33,3 +33,40 @@ file "explorer.css" (
  mimeType: text/css
  charSet: utf-8
 )
+
+file "attribution/LICENSE.txt" (
+ mimeType: text/plain
+ charSet: utf-8
+)
+file "attribution/NOTICE.md" (
+ mimeType: text/plain
+ charSet: utf-8
+)
+file "attribution/third-party/oracle-livelabs/LICENSE.txt" (
+ mimeType: text/plain
+ charSet: utf-8
+)
+file "attribution/third-party/oracle-livelabs/README.md" (
+ mimeType: text/plain
+ charSet: utf-8
+)
+file "attribution/third-party/font-apex/LICENSE.txt" (
+ mimeType: text/plain
+ charSet: utf-8
+)
+file "attribution/third-party/font-apex/README.md" (
+ mimeType: text/plain
+ charSet: utf-8
+)
+file "attribution/third-party/connormcd-misc-scripts/LICENSE.txt" (
+ mimeType: text/plain
+ charSet: utf-8
+)
+file "attribution/third-party/connormcd-misc-scripts/README.md" (
+ mimeType: text/plain
+ charSet: utf-8
+)
+file "attribution/third-party/context-search-model/README.md" (
+ mimeType: text/plain
+ charSet: utf-8
+)

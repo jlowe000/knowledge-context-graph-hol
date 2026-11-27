@@ -71,7 +71,7 @@ DECLARE
    c:=TREAT(cs.get(i) AS JSON_OBJECT_T);found:=FALSE;wanted_constraint:=c.get_string('type');
    FOR r IN (SELECT constraint_name,constraint_type,search_condition_vc,r_constraint_name
       FROM user_constraints WHERE table_name=name AND status='ENABLED' AND validated='VALIDATED'
-      AND deferrable='NOT DEFERRABLE' AND (constraint_type<>'R' OR (delete_rule='NO ACTION' AND r_owner=USER))
+      AND deferrable='NOT DEFERRABLE' AND (constraint_type<>'R' OR (delete_rule='NO ACTION' AND r_owner=SYS_CONTEXT('USERENV','CURRENT_USER')))
       AND constraint_type=wanted_constraint) LOOP
     SELECT LISTAGG(column_name,',') WITHIN GROUP(ORDER BY position) INTO colnames
      FROM user_cons_columns WHERE constraint_name=r.constraint_name;

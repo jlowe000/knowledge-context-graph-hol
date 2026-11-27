@@ -77,7 +77,7 @@ All three experiences target the same versioned application and database model. 
 | **Migration** | Verify a supported starting installation, apply ordered upgrades and update the existing application identity | Preserve existing data and evidence within the tested migration contract; check the recorded limits |
 | **Replacement build** | Create and validate another isolated deployment before deciding whether to retire the old one | Does not automatically transfer personal contexts, accounts or conversations |
 
-Product versions use `major.minor.patch`. A dev identity such as `KCV_V2_002` identifies a deployment build; it is not a new product version. Record the source commit, product version, migration checkpoint and dataset commit/hash together. Reusing an app username in a new workspace does not transfer ownership of saved work.
+Product versions use `major.minor.patch`. A dev identity following `KCV_V<KCV_MAJOR>_<KCV_BUILD>` identifies a deployment build; it is not a new product version. Use the [deployment parameters](deployment-parameters.md) for reusable examples. Record the source commit, product version, migration checkpoint and dataset commit/hash together. Reusing an app username in a new workspace does not transfer ownership of saved work.
 
 The supplied release data consists of attributed editorial summaries and public references loaded from a pinned GitHub commit with manifest/hash checks. Dev can additionally generate extracted authoring passages for local review. Those are distinct evidence editions and must not silently replace one another during packaging. Personal contexts, conversations, observations, credentials and private environment configuration are runtime data, not release seed data.
 

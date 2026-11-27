@@ -4,22 +4,23 @@ Use this guide with [fresh dev deployment](fresh-dev-deployment.md). It covers i
 
 ## Naming and identity
 
-Name the database schema and APEX workspace identically: **`KCV_V<major>_<build>`**.
+Name the database schema and APEX workspace identically: **`KCV_V<KCV_MAJOR>_<KCV_BUILD>`**. Use the [deployment parameter guide](deployment-parameters.md) to select the version, build and application identities. Every `<UPPER_CASE_TOKEN>` below is a documentation placeholder: replace it before running a command. SQLcl does not expand these tokens automatically.
 
-| Identity | First build example | Replacement example |
+| Identity | Selected build | Replacement build |
 | --- | --- | --- |
-| Schema and workspace | `KCV_V2_001` | `KCV_V2_002` |
-| SQLcl owner connection | `KCV_V2_001_OWNER` | `KCV_V2_002_OWNER` |
-| Application alias | `KCV-V2-001` | `KCV-V2-002` |
+| Database schema | `<KCV_SCHEMA>` | `<KCV_REPLACEMENT_SCHEMA>` |
+| APEX workspace (same as its schema) | `<KCV_WORKSPACE>` | `<KCV_REPLACEMENT_WORKSPACE>` |
+| SQLcl owner connection | `<KCV_OWNER_CONNECTION>` | `<KCV_REPLACEMENT_OWNER_CONNECTION>` |
+| Application alias | `<KCV_APP_ALIAS>` | `<KCV_REPLACEMENT_APP_ALIAS>` |
 | Application ID | An unused ID, recorded separately | A different unused ID |
-| APEX end user | `KCV_USER` in workspace `KCV_V2_001` | A separately created `KCV_USER` in workspace `KCV_V2_002` |
-| Administrative connection | Existing private ADMIN alias, for example `KCV_V2_ADMIN` | Retain the same ADMIN alias |
+| APEX end user | `KCV_USER` in workspace `<KCV_WORKSPACE>` | A separately created `KCV_USER` in workspace `<KCV_REPLACEMENT_WORKSPACE>` |
+| Administrative connection | `<KCV_ADMIN_CONNECTION>` | Retain the same ADMIN alias |
 
-The major comes from the product version: `2.0.0` uses `V2`. The build is an allocation sequence per major version on the target database, starting at `001`, padded to at least three digits. Allocate the next unused number and retain a record of retired numbers; do not reuse them. A new installation of the same product version or Git commit still receives a new build number. A future major version starts its own sequence, such as `KCV_V3_001`.
+The major comes from the product version in the checked-out `VERSION` file. The build is an allocation sequence per major version on the target database, starting at `001`, padded to at least three digits. Allocate the next unused number and retain a record of retired numbers; do not reuse them. A new installation of the same product version or Git commit still receives a new build number. A future major version starts its own build sequence.
 
 Keep product version, Git commit and deployment build separate. An in-place patch/minor upgrade retains the deployed schema/workspace and records the new code and migration checkpoint. The bootstrap accepts uppercase `KCV_` identifiers of 5–30 characters; it does not enforce this narrower convention or equality of the workspace and schema. Supply both names explicitly and identically.
 
-The dev owner has **NO AUTHENTICATION**. Its private owner connection uses `ADMIN[build_owner]` proxy syntax; `CURRENT_SCHEMA` alone does not establish that identity. `KCV_USER` is an APEX app-only account, not a database login or a workspace developer. Reusing that username across workspaces creates separate accounts with independently entered passwords.
+The dev owner has **NO AUTHENTICATION**. Its private owner connection uses `ADMIN[<KCV_SCHEMA>]` proxy syntax (replace the angle-bracket token and retain the square brackets); `CURRENT_SCHEMA` alone does not establish that identity. `KCV_USER` is an APEX app-only account, not a database login or a workspace developer. Reusing that username across workspaces creates separate accounts with independently entered passwords.
 
 ## Choose the lifecycle operation
 
@@ -45,7 +46,7 @@ Verify exported row/triple counts, file completeness and checksums. State the li
 ## Replace a build
 
 1. **Record the current build.** Privately record its exact owner, workspace, app ID/alias, source commit, product version, migration checkpoint, public dataset commit/hash and SQLcl owner alias. Record counts/digests for the existing data and app identity. Keep wallet paths, endpoints, service names and secrets out of public records.
-2. **Allocate the replacement.** For example, preserve `KCV_V2_001` and allocate `KCV_V2_002`. Check that its owner/workspace/alias are unused and select a different unused application ID. Do not overwrite the current owner connection or app to make a target available.
+2. **Allocate the replacement.** Preserve `<KCV_SCHEMA>` and allocate `<KCV_REPLACEMENT_SCHEMA>` using the next unused build number. Check that its owner/workspace/alias are unused and select a different unused application ID. Do not overwrite the current owner connection or app to make a target available.
 3. **Deploy independently.** Follow [all fresh-deployment steps](fresh-dev-deployment.md) with the new target names. Create the owner/grants, save the new proxy connection and apply Liquibase. Create/enable the workspace with a native installer-admin and separate app-only learners, import the APEXlang app, then establish owner binding. Configure its own network, credential/profile, model test, runtime registrations and public collection through Deployment setup. Optional local semantic search remains a separate owner/admin task. Keep account passwords private.
 4. **Validate the replacement.** Check the schema verifier, zero invalid project objects, a READY public graph, source/passage counts, owner-local model access and local embedding dimensions. Use exact-owner test adapters where required; historical integration-test guards are not generic build allowlists. Run the personal/sample browser flow, evidence views, explicit revision adoption, a follow-up and saved-work reopening. Record what passed and what remains untested.
 5. **Check the old build is preserved.** Compare its data/app baseline after installation and tests. Resolve any unexplained difference before continuing. A working replacement must not depend on the old schema's credential, profile, graph or packages.
@@ -125,14 +126,14 @@ Use SQLcl's connection manager from the **same OS account and Oracle Linux/WSL e
 connmgr list -flat
 ```
 
-After confirming `KCV_V2_001` has been retired and `KCV_V2_002` is the retained build, remove only the obsolete saved connection:
+After verifying which build was retired and which is retained, replace `<KCV_RETIRED_OWNER_CONNECTION>` with the retired build's exact alias. Remove only that obsolete saved connection:
 
-```sql
-connmgr delete -conn KCV_V2_001_OWNER
+```text
+connmgr delete -conn <KCV_RETIRED_OWNER_CONNECTION>
 connmgr list -flat
 ```
 
-These commands were checked against local SQLcl 26.3 connection-manager help. Confirm `help connmgr` for a different client version. Keep `KCV_V2_002_OWNER` and the shared ADMIN alias. Avoid folder deletion or `-force`: they can remove other saved connections. Removing a saved connection removes its local saved settings/credential entry; it does not drop the database user, change the ADMIN password, revoke an OCI key or remove a wallet still used by another alias. A connection saved under Windows is separate from the Linux user's connection store.
+These commands were checked against local SQLcl 26.3 connection-manager help. Confirm `help connmgr` for a different client version. Keep `<KCV_REPLACEMENT_OWNER_CONNECTION>` and the shared ADMIN alias. Avoid folder deletion or `-force`: they can remove other saved connections. Removing a saved connection removes its local saved settings/credential entry; it does not drop the database user, change the ADMIN password, revoke an OCI key or remove a wallet still used by another alias. A connection saved under Windows is separate from the Linux user's connection store.
 
 ## Validation scope
 

@@ -37,6 +37,8 @@ Stop if required files are absent. Do not substitute the new-app installer for a
 
 The current target has **121 COMPLETE project migrations**, checkpoint `2.1.0-apl-r4-ready`, valid matching program source and no invalid project objects. Use the full verifier; a receipt count alone is insufficient. Worksheet installation does not need a Liquibase ledger.
 
+Deployment names use the [target parameters](apex-led-administrator-preparation.md#2-choose-the-owner-route). Version numbers in checkpoint queries, supported upgrade baselines, compatibility requirements and published release links remain explicit: they identify the actual package contract or recorded evidence, rather than values to substitute for a new build.
+
 ## Common readiness and handoff
 
 All three experiences finish through the runtime app's [Deployment setup](deployment-setup.md#apex-guided-setup) for credentials, profile and runtime readiness. Complete static schema installation, create a native APEX workspace-administrator installer and separate learners, import the app and establish owner binding first. No pre-created model credential/profile is needed just to import the app. Manual/headless owner SQL remains an explicit alternative, not a duplicate prerequisite. Its six checks are Database objects, Graph network, Model profile, Model connection test, Conversation components and Public collection. All six READY does not enable learners automatically: **Enable learning** is explicit. A manual greeting does not record the setup API's model-test result.

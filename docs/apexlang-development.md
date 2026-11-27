@@ -26,9 +26,9 @@ Use the [starting walkthrough](my-contexts-draft-walkthrough.md), [complete manu
 
 ## Target one dev build explicitly
 
-Use `KCV_V<major>_<build>` for the schema and workspace, padding the build number to at least three digits: for example, `KCV_V2_001`. Use the matching owner connection `KCV_V2_001_OWNER` and application alias `KCV-V2-001`. Keep the shared `KCV_V2_ADMIN` connection for administrative operations. The [private connection guide](dev-connection-setup.md) describes the wallet/proxy setup; [fresh dev deployment](fresh-dev-deployment.md) creates and enables the workspace before import.
+Use the [deployment parameters](deployment-parameters.md) to select `<KCV_SCHEMA>`, `<KCV_WORKSPACE>`, `<KCV_OWNER_CONNECTION>` and `<KCV_APP_ALIAS>`. Derive the major from `VERSION` and allocate a new build number. Replace every `<TOKEN>` before executing the command templates below; SQLcl and Bash do not expand this notation. Keep `<KCV_ADMIN_CONNECTION>` for administrative operations. The [private connection guide](dev-connection-setup.md) describes the wallet/proxy setup; [fresh dev deployment](fresh-dev-deployment.md) creates and enables the workspace before import.
 
-A replacement uses `KCV_V2_002`, `KCV_V2_002_OWNER` and `KCV-V2-002`, with a separate unused application ID. The build number does not select an APEX app ID or change the product version. Existing-ID upgrade mode updates an app in its existing build; it is not a way to move an app into a replacement workspace.
+A replacement uses its own `<KCV_REPLACEMENT_SCHEMA>`, matching workspace, `<KCV_REPLACEMENT_OWNER_CONNECTION>` and `<KCV_REPLACEMENT_APP_ALIAS>`, with a separate unused application ID. The build number does not select an APEX app ID or change the product version. Existing-ID upgrade mode updates an app in its existing build; it is not a way to move an app into a replacement workspace.
 
 Create `KCV_USER` as an app-only account in the target workspace through the deployment instructions. It is not the schema owner or a database login. The same username in another workspace is a separate identity; a new build does not automatically inherit that account's private contexts. Follow the [dev build lifecycle](dev-build-lifecycle.md) to validate the replacement and recovery material before retiring the old schema/workspace/app. Obsolete owner aliases can be removed locally only after retirement is verified; keep the shared ADMIN connection.
 
@@ -45,7 +45,7 @@ apex validate -input apex/application
 exit
 ```
 
-The connected C3 metadata check used SQLcl `26.3.1.0`, build `26.3.1.301.1413`, against APEX `26.1.6`. It reported validation success with the existing page 1 `regionBody` deprecation warning. Offline SQLcl may use newer metadata and report differences that do not describe the target engine. Repeat validation using `apex validate -input apex/application -workspace KCV_V2_001` after privately connecting to the selected build. Substitute the replacement workspace when applicable. Inspect the output for compile errors: a zero SQLcl process exit code alone is insufficient. Neither offline nor connected metadata validation proves PL/SQL compilation, identity isolation or browser behavior.
+The connected C3 metadata check used SQLcl `26.3.1.0`, build `26.3.1.301.1413`, against APEX `26.1.6`. It reported validation success with the existing page 1 `regionBody` deprecation warning. Offline SQLcl may use newer metadata and report differences that do not describe the target engine. Repeat validation using `apex validate -input apex/application -workspace <KCV_WORKSPACE>` after privately connecting to the selected build. Substitute the replacement workspace when applicable. Inspect the output for compile errors: a zero SQLcl process exit code alone is insufficient. Neither offline nor connected metadata validation proves PL/SQL compilation, identity isolation or browser behavior.
 
 Keep `.apx` files UTF-8 with LF line endings, as specified in `.gitattributes`; this compiler reports syntax errors for CRLF input. The native reports allow up to four UTF-8 bytes per permitted character for short fields and use SQL `VARCHAR2(32767)` for longer values. Target acceptance must verify that size is supported and that multibyte text survives save, list, overview and editor round trips. The API also limits the combined draft to 16,000 UTF-8 bytes, so several individually valid fields can still exceed the total limit and require shortening.
 
@@ -71,27 +71,27 @@ The current [SQL export receipt](../apex/export-validation.json) identifies the 
 
 The wrapper supports distinct `new` and `upgrade` modes. Its defaults are the legacy KCV_KNOWLEDGE/KCV_LAB target, so dev builds must specify every target explicitly. Verify the workspace mapping before executing the generated result. For a new first build:
 
-```bash
-python scripts/build_apex_worksheet.py --mode new --workspace KCV_V2_001 --schema KCV_V2_001 --alias KCV-V2-001 --output work/builds/v2_001/20_install_apex.sql
+```text
+python scripts/build_apex_worksheet.py --mode new --workspace <KCV_WORKSPACE> --schema <KCV_SCHEMA> --alias <KCV_APP_ALIAS> --output "<KCV_BUILD_ROOT>/20_install_apex.sql"
 ```
 
 To upgrade the existing app inside that same build:
 
-```bash
-python scripts/build_apex_worksheet.py --mode upgrade --workspace KCV_V2_001 --schema KCV_V2_001 --alias KCV-V2-001 --output work/builds/v2_001/20_upgrade_apex.sql
+```text
+python scripts/build_apex_worksheet.py --mode upgrade --workspace <KCV_WORKSPACE> --schema <KCV_SCHEMA> --alias <KCV_APP_ALIAS> --output "<KCV_BUILD_ROOT>/20_upgrade_apex.sql"
 ```
 
-For a replacement, use `new` with the `KCV_V2_002` schema/workspace, `KCV-V2-002` alias and a separate `work/builds/v2_002/` output location. Keep the old build and its generated artifacts intact until its retirement is approved and verified.
+For a replacement, use `new` with `<KCV_REPLACEMENT_SCHEMA>`, `<KCV_REPLACEMENT_WORKSPACE>`, `<KCV_REPLACEMENT_APP_ALIAS>` and a separately selected `<KCV_BUILD_ROOT>` output location. Keep the old build and its generated artifacts intact until its retirement is approved and verified.
 
 Follow [fresh dev deployment](fresh-dev-deployment.md) for the normal native APEXlang route. The dev owner is `NO AUTHENTICATION` and uses SQLcl proxy access; it has no direct Worksheet password. The generated Worksheet route is for a deployment with an authenticated owner Worksheet, as used in the SQL-first release rehearsal. Execute either wrapper there with **Run Statement (Ctrl+Enter)**: select the complete outer `DECLARE` through the final `END;`, excluding the final slash. Supply any target binds and the existing app ID for an upgrade. F5 does not open these bind prompts. Choose one import route for that installation; running both new-install routes creates separate apps and does not establish a single tested deployment path.
 
 `new` allocates a new application ID. Native APEXlang import instead takes an explicit `-id`; use an unused ID and the chosen build's explicit workspace, schema and alias as described in the fresh-deployment guide. Do not assume a historical app ID is available. `upgrade` requires the existing app ID in a Worksheet bind prompt, and checks workspace, parsing schema and alias, then verifies the matching canonical schema contract before import. The current contract has 121 completed migrations ending at `2.1.0-apl-r4-ready`; retain the full verifier rather than substituting a receipt count. It preserves the application ID. APEX generates an offset to avoid internal metadata collisions; page numbers and aliases are retained, but internal numeric component IDs are not an ownership key.
 
-For product version 2 or later, **both new and upgrade modes** require `apex/export-validation.json`, recorded only after the actual engine import/export acceptance, containing:
+For product version 2 or later, **both new and upgrade modes** require `apex/export-validation.json`, recorded only after the actual engine import/export acceptance, containing the fields below. This is a structural example: replace `<KCV_VERSION>` with the value from `VERSION` and record the real hashes and verification result. JSON does not expand tokens.
 
 ```json
 {
-  "product_version": "2.1.0",
+  "product_version": "<KCV_VERSION>",
   "application_source_sha256": "hash of the complete authored application tree",
   "export_sql_sha256": "hash of the engine SQL export with LF text endings",
   "engine_import_export_verified": true

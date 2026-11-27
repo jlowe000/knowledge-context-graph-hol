@@ -18,6 +18,17 @@ Expected: JAVAVM is VALID and the required API/capability checks pass. Review [O
 
 The project owner stores tables, packages and graphs. The APEX workspace maps to that owner; an APEX learner account is a separate identity.
 
+Choose the target once and reuse these named values throughout installation. Angle-bracket names below are documentation placeholders: replace the whole token, including the brackets, with your intended value. In Worksheet's bind dialog, enter the value against the corresponding bind name; do not type the placeholder or add SQL quotes.
+
+| Documentation token | Meaning | Worksheet bind name |
+| --- | --- | --- |
+| `<KCV_SCHEMA>` | Project database owner | `KCV_SCHEMA` |
+| `<KCV_WORKSPACE>` | APEX workspace mapped to that owner | `KCV_WORKSPACE` |
+| `<KCV_APP_ALIAS>` | Application alias for this installation | `KCV_APP_ALIAS` |
+| `<KCV_APP_ID>` | Assigned application ID after a clean import; retained ID for an upgrade | `KCV_APPLICATION_ID` |
+
+The DEV-led naming pattern is `KCV_V<KCV_MAJOR>_<KCV_BUILD>` for both owner and workspace: the major comes from the package's `VERSION` file and the three-digit build counter identifies an installation. A new build number does not change the product version. You may use that pattern here or another approved name. An upgrade keeps the existing names and app ID. The release scripts already accept named binds, so no numbered example build needs to be copied into SQL.
+
 | Route | ADMIN steps | Result |
 | --- | --- | --- |
 | **APEX-led clean** | [15_create_apex_owner.sql](../sql/admin/15_create_apex_owner.sql), then [02_grants.sql](../sql/admin/02_grants.sql) | New schema-only owner, 1 GB DATA quota, required grants; no owner password or proxy account is created |

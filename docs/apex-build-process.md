@@ -14,7 +14,7 @@ The maintained source is in Git. Historical `work/` folders, deployed demo data 
 | [ZIP packager](../scripts/build_apexlang_zip.py) | Packages the native export and verifies scripts, assets and portable metadata |
 | [Release builder](../scripts/build_release.py), tracked public summaries and release documentation templates | Produces the consumer distribution after native artifacts are reviewed |
 
-Keep credentials, wallet files, private connection settings and runtime learner data out of these inputs and outputs. Use the [private SQLcl connection setup](dev-connection-setup.md). The application build uses a separately selected owner/workspace and application ID; do not import over the live demo to create a package.
+Keep credentials, wallet files, private connection settings and runtime learner data out of these inputs and outputs. Use the [private SQLcl connection setup](dev-connection-setup.md). Use the [deployment parameter guide](deployment-parameters.md) for named tokens, including the product version read from `VERSION` and the separately allocated build number. Replace angle-bracket tokens before executing SQLcl templates. The application build uses a separately selected owner/workspace and application ID; do not import over the live demo to create a package.
 
 ## 1. Select source, tooling and a new output directory
 
@@ -78,8 +78,8 @@ This step compiles the application definition and registers its Supporting Objec
 Use the same reviewed build application for both exports. The following are SQLcl command templates; replace the application ID and absolute output paths before running them:
 
 ```text
-apex export -applicationid <build-app-id> -exptype APEXLANG -expsupportingobjects Y -skipexportdate -dir <native-export-directory>
-apex export -applicationid <build-app-id> -expsupportingobjects N -skipexportdate -dir <sql-export-directory>
+apex export -applicationid <KCV_APP_ID> -exptype APEXLANG -expsupportingobjects Y -skipexportdate -dir "<KCV_NATIVE_EXPORT_DIR>"
+apex export -applicationid <KCV_APP_ID> -expsupportingobjects N -skipexportdate -dir "<KCV_SQL_EXPORT_DIR>"
 ```
 
 The APEXlang export includes Supporting Objects. The SQL export is definition-only for the SQL-first route, whose schema installer runs separately. Do not hand-edit the engine-generated SQL or pretend a ZIP of the authored source is the reviewed native export.

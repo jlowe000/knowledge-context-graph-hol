@@ -25,7 +25,7 @@ The complete sequence is **OCI database → database readiness and owner → APE
 
 1. Open the OCI Console and navigate to **Oracle AI Database → Autonomous AI Database**. Select the intended region and compartment.
 2. Choose **Create Autonomous AI Database**. Select the Serverless deployment and an Oracle AI Database **26ai** configuration that meets the package's required capabilities. Transaction Processing is the intended lab workload; confirm it in the eventual acceptance record.
-3. Enter a display name and an alphanumeric database name. The database name is separate from a schema/workspace name such as `KCV_V2_004`; do not put underscores into the database-name field.
+3. Enter a display name and an alphanumeric database name. The database name is separate from the selected `<KCV_SCHEMA>` / `<KCV_WORKSPACE>`; do not put underscores into the database-name field.
 4. Review the tenancy-approved compute, storage, autoscaling, licensing and network settings. Use a network path reachable by the installer and learners. This guide does not assume a particular Free, Developer or Paid configuration has passed acceptance.
 5. Set the **ADMIN** password privately, review the creation summary and create the database. Wait for its lifecycle state to become **Available**.
 
@@ -59,7 +59,7 @@ Check the database/APEX/ORDS versions, native VECTOR support and the required AP
 
 ## 3. Prepare the project owner and grants
 
-**Account: database ADMIN.** Select a new schema/workspace identity using `KCV_V<major>_<three-digit-build>`, for example `KCV_V2_004` when that name is unused. The schema owns the application's tables, packages and graphs; the workspace is the APEX development area mapped to it.
+**Account: database ADMIN.** Select a new schema/workspace identity using `KCV_V<KCV_MAJOR>_<KCV_BUILD>`. Resolve `<KCV_SCHEMA>` and `<KCV_WORKSPACE>` through the [deployment parameter guide](deployment-parameters.md), and confirm the names are unused. The schema owns the application's tables, packages and graphs; the workspace is the APEX development area mapped to it.
 
 For the current isolated dev rehearsal, open [09_create_dev_schema.sql](../sql/admin/09_create_dev_schema.sql) in ADMIN Worksheet. Select its complete `DECLARE`–`END;` block, excluding the final slash, use **Run Statement**, and supply the chosen schema as `KCV_DEV_SCHEMA`. The helper checks prerequisites and name availability before creating the owner, its quota, direct grants and approved ADMIN proxy access. It intentionally stops if that owner already exists.
 

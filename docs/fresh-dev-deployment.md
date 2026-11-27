@@ -2,7 +2,7 @@
 
 Use this route to install the maintained dev application into a **new schema and APEX workspace on an existing ADB Serverless database**. It preserves other schemas, applications and their data. It does not provision a new database or repeat Java enablement. The curated release has its own [APEX-led and SQL-first learning/deployment experience](../release-docs/docs/installation-paths.md).
 
-**Current dev contract:** use an unused build-named owner and workspace, such as `KCV_V2_001`, for the v2.1.0 schema ending at `2.1.0-apl-r4-ready` and the 11-page application with 16 maintained assets. The [build lifecycle guide](dev-build-lifecycle.md) defines the naming, replacement and retirement process. A replacement build gets a new identity; an in-place migration preserves the existing identity and saved work. The historical direct DEV-led rehearsal below is not a new v2.1.0 Liquibase acceptance claim.
+**Current dev contract:** use an unused build-named owner and workspace, identified by `<KCV_SCHEMA>`, for the v2.1.0 schema ending at `2.1.0-apl-r4-ready` and the 11-page application with 16 maintained assets. The [build lifecycle guide](dev-build-lifecycle.md) defines the naming, replacement and retirement process. A replacement build gets a new identity; an in-place migration preserves the existing identity and saved work. The historical direct DEV-led rehearsal below is not a new v2.1.0 Liquibase acceptance claim.
 
 **25 November 2026 validation:** a fresh build from dev commit `32e111f6340ab97beb0720dc867e7c2ab8ab46ae` passed the schema-only owner/workspace setup, Liquibase installation, owner-local model access, public data load, local search and native APEXlang import. It had 96 COMPLETE project receipts, 97 Liquibase changesets, zero invalid objects, nine pages and seven assets. Native grounded-answer checks passed initial, adopted-revision and provider-history-expiry requests. The signed-in browser passed sample/personal navigation, draft publication, evidence graphs, explicit adoption, a grounded follow-up, semantic search and reopening historical evidence. See the [validation scope](dev-build-lifecycle.md#validation-scope) for limits.
 
@@ -15,18 +15,20 @@ The [v2.1.0 four-route record](../db/verification/release-v2.1-paths-validation.
 
 Use Oracle Linux/Bash and the [local SQLcl launcher](dev-connection-setup.md). Java and SQLcl run locally; a container is not required. Keep the wallet, saved connections, credentials and execution logs outside published files.
 
-Use `KCV_V<major>_<build>` for both schema and workspace. The major comes from the product version; the build is a sequence starting at `001`. For example, a replacement of `KCV_V2_001` is `KCV_V2_002`, even when the product version is still 2.0.0. Never reuse a retired build number. These are deployment identities, not a replacement for semantic versioning or Git commit IDs.
+Use `KCV_V<KCV_MAJOR>_<KCV_BUILD>` for both schema and workspace. Read the major from [VERSION](../VERSION) and allocate the next unused build number, padded to at least three digits. A replacement gets a new build number even when the product version is unchanged. Never reuse a retired build number. These are deployment identities, separate from semantic versioning and Git commit IDs.
 
-| Item | First-build example | Replacement example |
+**Before running any example, replace every `<TOKEN>` using the [deployment parameter guide](deployment-parameters.md).** Tokens are documentation placeholders, not automatic SQLcl or Bash variables. Keep SQL string quotes and proxy square brackets as shown.
+
+| Item | Selected build token | Replacement |
 | --- | --- | --- |
-| Database schema | `KCV_V2_001` | `KCV_V2_002` |
-| APEX workspace | `KCV_V2_001` | `KCV_V2_002` |
-| Private SQLcl owner alias | `KCV_V2_001_OWNER` | `KCV_V2_002_OWNER` |
-| APEX application ID | `123`, **only if unused** | A different unused ID; not derived from the build |
-| Application alias | `KCV-V2-001` | `KCV-V2-002` |
+| Database schema | `<KCV_SCHEMA>` | `<KCV_REPLACEMENT_SCHEMA>` |
+| APEX workspace | `<KCV_WORKSPACE>` | `<KCV_REPLACEMENT_WORKSPACE>` |
+| Private SQLcl owner alias | `<KCV_OWNER_CONNECTION>` | `<KCV_REPLACEMENT_OWNER_CONNECTION>` |
+| APEX application ID | `<KCV_APP_ID>`, **only if unused** | A different unused ID; not derived from the build |
+| Application alias | `<KCV_APP_ALIAS>` | `<KCV_REPLACEMENT_APP_ALIAS>` |
 | Workspace-scoped app user | `KCV_USER` | A new `KCV_USER` account in the new workspace |
 
-The remaining examples show the first build. If it exists already, choose the next unused build and substitute its owner, workspace, owner connection and app alias consistently. Preserve the separate ADMIN connection and all other installations until the replacement passes. The bootstrap accepts broader uppercase `KCV_` names; the build convention and matching schema/workspace names are documented choices, not additional enforcement in those scripts.
+The remaining examples use your selected build. If its identity exists already, choose the next unused build and substitute its owner, workspace, owner connection and app alias consistently. Preserve the separate ADMIN connection and all other installations until the replacement passes. The bootstrap accepts broader uppercase `KCV_` names; the build convention and matching schema/workspace names are documented choices, not additional enforcement in those scripts.
 
 As ADMIN, run the read-only [Java/RDF readiness script](../sql/admin/00_readiness.sql) and check `SELECT version_no FROM apex_release;`. Expected: JAVAVM VALID, valid RDF/Select AI APIs and APEX 26.1 or later. Existing acceptance used APEX 26.1.6; a different version needs its own validation. Leave Java enabled. If readiness fails, resolve the prerequisite before creating the test schema.
 
@@ -41,18 +43,18 @@ In ADMIN SQLcl, set the non-secret target bind and run [09_create_dev_schema.sql
 ```sql
 SET SERVEROUTPUT ON
 VARIABLE KCV_DEV_SCHEMA VARCHAR2(30)
-EXEC :KCV_DEV_SCHEMA := 'KCV_V2_001';
+EXEC :KCV_DEV_SCHEMA := '<KCV_SCHEMA>';
 @sql/admin/09_create_dev_schema.sql
 ```
 
-Expected: `KCV_DEV_SCHEMA_CREATED=KCV_V2_001`, with scoped grants and ADMIN proxy access. The bootstrap requires an uppercase `KCV_` name of 5–30 characters, an absent owner, VALID Java, an online DATA tablespace and valid package prerequisites. An existing schema causes a stop, not password replacement or teardown. The shared release scripts `01_create_user_worksheet.sql` and `02_grants.sql` now take KCV_SCHEMA. This dev route deliberately uses the NO AUTHENTICATION/proxy bootstrap instead; do not mix its account model with a password-enabled Worksheet installation.
+Expected: `KCV_DEV_SCHEMA_CREATED=<KCV_SCHEMA>`, with scoped grants and ADMIN proxy access. The bootstrap requires an uppercase `KCV_` name of 5–30 characters, an absent owner, VALID Java, an online DATA tablespace and valid package prerequisites. An existing schema causes a stop, not password replacement or teardown. The shared release scripts `01_create_user_worksheet.sql` and `02_grants.sql` now take KCV_SCHEMA. This dev route deliberately uses the NO AUTHENTICATION/proxy bootstrap instead; do not mix its account model with a password-enabled Worksheet installation.
 
 ## 3. Save a new owner connection privately
 
 Open SQLcl from the same Oracle Linux environment that holds the wallet and saved ADMIN connection. Use the wallet's TNS service name, not the Database Actions HTTPS URL:
 
-```sql
-connect -cloudconfig "/private/path/Wallet.zip" -save KCV_V2_001_OWNER -savepwd ADMIN[KCV_V2_001]@your_tns_service_name
+```text
+connect -cloudconfig "<WALLET_ZIP>" -save <KCV_OWNER_CONNECTION> -savepwd ADMIN[<KCV_SCHEMA>]@<TNS_SERVICE>
 ```
 
 Enter the ADMIN password at SQLcl's private prompt. Replace the path and service name privately; do not store them in the repository or a public log. `-savepwd` saves the credential in SQLcl's private connection store; omit it if interactive entry is preferred. Save a different owner alias for each build and retain the previous alias until retirement is verified.
@@ -65,9 +67,9 @@ SELECT USER AS schema_owner,
 FROM dual;
 ```
 
-Expected: `KCV_V2_001`, `ADMIN`, `KCV_V2_001`. Use this owner connection for all following database steps except explicitly labelled ADMIN actions. This NO AUTHENTICATION schema cannot sign in directly to Database Actions with a database password. SQLcl proxy access is the development route; APEX has a separate application login.
+Expected: `<KCV_SCHEMA>`, `ADMIN`, `<KCV_SCHEMA>`. Use this owner connection for all following database steps except explicitly labelled ADMIN actions. This NO AUTHENTICATION schema cannot sign in directly to Database Actions with a database password. SQLcl proxy access is the development route; APEX has a separate application login.
 
-For later sessions, use `connect -name KCV_V2_001_OWNER` and repeat the identity query. If the alias is not found, confirm you opened SQLcl from the same operating-system account and WSL/Windows environment where it was saved. Do not replace the existing deployment's saved alias as a workaround.
+For later sessions, use `connect -name <KCV_OWNER_CONNECTION>` and repeat the identity query. If the alias is not found, confirm you opened SQLcl from the same operating-system account and WSL/Windows environment where it was saved. Do not replace the existing deployment's saved alias as a workaround.
 
 ## 4. Install and verify the schema through Liquibase
 
@@ -106,12 +108,12 @@ Return to ADMIN. Create and enable the workspace mapped only to the new schema u
 ```sql
 VARIABLE KCV_DEV_SCHEMA VARCHAR2(30)
 VARIABLE KCV_DEV_WORKSPACE VARCHAR2(30)
-EXEC :KCV_DEV_SCHEMA := 'KCV_V2_001';
-EXEC :KCV_DEV_WORKSPACE := 'KCV_V2_001';
+EXEC :KCV_DEV_SCHEMA := '<KCV_SCHEMA>';
+EXEC :KCV_DEV_WORKSPACE := '<KCV_WORKSPACE>';
 @sql/admin/10_create_dev_workspace.sql
 ```
 
-Expected: both `KCV_DEV_WORKSPACE_CREATED=KCV_V2_001` and `KCV_DEV_WORKSPACE_ENABLED=KCV_V2_001`. The schema must have NO AUTHENTICATION and the ADMIN proxy grant and must not already be mapped to a workspace. Existing workspaces cause a stop, not remapping. This step does not create an application login or change a database password.
+Expected: both `KCV_DEV_WORKSPACE_CREATED=<KCV_WORKSPACE>` and `KCV_DEV_WORKSPACE_ENABLED=<KCV_WORKSPACE>`. The schema must have NO AUTHENTICATION and the ADMIN proxy grant and must not already be mapped to a workspace. Existing workspaces cause a stop, not remapping. This step does not create an application login or change a database password.
 
 Explicit enablement matters: an earlier rehearsal left the workspace inactive after ADD_WORKSPACE. The combined creation/enablement bootstrap passed for the numbered build. If an existing workspace is inactive, inspect and enable that exact workspace; do not rerun ADD_WORKSPACE or change its owner authentication model.
 
@@ -121,7 +123,7 @@ Create a separate app-only end user privately through APEX Administration Servic
 
 ```sql
 BEGIN
-  APEX_UTIL.SET_SECURITY_GROUP_ID(APEX_UTIL.FIND_SECURITY_GROUP_ID('KCV_V2_001'));
+  APEX_UTIL.SET_SECURITY_GROUP_ID(APEX_UTIL.FIND_SECURITY_GROUP_ID('<KCV_WORKSPACE>'));
   APEX_UTIL.CREATE_USER(p_user_name=>'KCV_USER',p_web_password=>:KCV_APEX_PASSWORD,
     p_developer_privs=>NULL,p_allow_app_building_yn=>'N',p_allow_sql_workshop_yn=>'N',
     p_allow_team_development_yn=>'N',p_change_password_on_first_use=>'N');
@@ -137,22 +139,22 @@ Expected: a new end-user account only in the fresh workspace. An existing userna
 Use a **direct ADMIN connection**, as exercised in this rehearsal, or the intended owner after verifying its workspace activation. Specify every import target explicitly. Confirm the fresh workspace is enabled, its schema mapping is correct and the proposed application ID is unused. Do not change CURRENT_SCHEMA, grant broad APEX roles or change the new owner's authentication mode to work around an inactive workspace. The documented fresh example is:
 
 ```text
-apex validate -input apex/application -workspace KCV_V2_001
-apex import -input apex/application -workspace KCV_V2_001 -schema KCV_V2_001 -id 123 -alias KCV-V2-001 -name "Knowledge Context Explorer"
+apex validate -input apex/application -workspace <KCV_WORKSPACE>
+apex import -input apex/application -workspace <KCV_WORKSPACE> -schema <KCV_SCHEMA> -id <KCV_APP_ID> -alias <KCV_APP_ALIAS> -name "Knowledge Context Explorer"
 ```
 
-Use `123` only after checking it is unused; choose another unused ID for each replacement build. Import can replace an existing selected application. The historical v2.0.0 numbered-build rehearsal used direct ADMIN with explicit targets and produced nine pages and seven static assets, with the existing `regionBody` deprecation warning. Current v2.1.0 metadata identifies 11 pages and 16 maintained assets. Inspect the output and installed target rather than relying only on SQLcl's process exit code. See [APEXlang authoring](apexlang-development.md) for engine export and receipt requirements.
+Use `<KCV_APP_ID>` only after checking it is unused; choose another unused ID for each replacement build. Import can replace an existing selected application. The historical v2.0.0 numbered-build rehearsal used direct ADMIN with explicit targets and produced nine pages and seven static assets, with the existing `regionBody` deprecation warning. Current v2.1.0 metadata identifies 11 pages and 16 maintained assets. Inspect the output and installed target rather than relying only on SQLcl's process exit code. See [APEXlang authoring](apexlang-development.md) for engine export and receipt requirements.
 
 The earlier owner-proxy import/activation failure is retained in the validation record. The cause was workspace inactivity, confirmed through the public APEX error message. After ENABLE_WORKSPACE, `APEX_UTIL.SET_WORKSPACE` succeeded in the same true-owner proxy identity. NO AUTHENTICATION and proxy access required no change. The actual app import in this rehearsal used direct ADMIN with explicit targets; successful owner workspace activation does not itself constitute a separate owner-import test.
 
-Switch back to `KCV_V2_001_OWNER` for database-side checks and verify USER/CURRENT_SCHEMA again. The numbered-build acceptance parsed 33 application SQL components, with the native Close Window process intentionally skipped. Earlier APEX_SESSION harness results retain their own identity/isolation scope in the historical validation record. These server-side checks are distinct from the authenticated browser journey below, which tests the end user's actual login and UI.
+Switch back to `<KCV_OWNER_CONNECTION>` for database-side checks and verify USER/CURRENT_SCHEMA again. The numbered-build acceptance parsed 33 application SQL components, with the native Close Window process intentionally skipped. Earlier APEX_SESSION harness results retain their own identity/isolation scope in the historical validation record. These server-side checks are distinct from the authenticated browser journey below, which tests the end user's actual login and UI.
 
 The verified static schema is sufficient for this app import. A missing credential/profile, RDF network or dataset is expected on a fresh owner and is handled after binding. Do not configure the model in a private SQL file merely to satisfy import.
 
 The alternate Worksheet installer is a separate acceptance route. Generate it with explicit target arguments rather than the KCV_LAB defaults:
 
-```bash
-python scripts/build_apex_worksheet.py --mode new --workspace KCV_V2_001 --schema KCV_V2_001 --alias KCV-V2-001 --output work/builds/v2_001/20_install_apex.sql
+```text
+python scripts/build_apex_worksheet.py --mode new --workspace <KCV_WORKSPACE> --schema <KCV_SCHEMA> --alias <KCV_APP_ALIAS> --output "<KCV_BUILD_ROOT>/20_install_apex.sql"
 ```
 
 This alternative needs a password-enabled owner Worksheet, as used in the separate [SQL-first clean/migration rehearsal](../db/verification/release-v2-paths-validation.json). Use a release checkout's own setup guide for that account model; the schema-only dev owner above cannot sign in directly to Worksheet. In a supported owner Worksheet, select the complete outer `DECLARE` through the final `END;`, excluding the final slash, and use **Run Statement (Ctrl+Enter)**. Supply any prompted target binds. The installer allocates a new application ID. Choose one import route for a deployment; running both creates separate apps. Native APEXlang acceptance does not by itself validate the generated wrapper.

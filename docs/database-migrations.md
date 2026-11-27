@@ -2,7 +2,11 @@
 
 Current schema: v2.1.0, with 121 project migrations ending at `2.1.0-apl-r4-ready`. The [four-route record](../db/verification/release-v2.1-paths-validation.json) covers the curated APEX-led and SQL-first clean/upgrade rehearsals on prepared environments. It does not establish a new direct DEV-led Liquibase rehearsal. The earlier [numbered-build validation](dev-build-lifecycle.md#validation-scope), [v2.0.0 SQL-first record](../db/verification/release-v2-paths-validation.json), [context-search record](../db/verification/context-search-validation.json) and [deletion record](../db/verification/context-delete-validation.json) retain their original scopes. The [native export receipt](../apex/export-validation.json) identifies the current app artifact. Historical checkpoints below do not replace the current full-contract verifier or deployment guide.
 
-Use [build lifecycle](dev-build-lifecycle.md) to decide between an in-place migration and a new `KCV_V<major>_<build>` replacement. An in-place migration retains the owner/workspace/app identity. A replacement gets new identities and an empty personal library; retirement is a separate administrator operation, not a Liquibase rollback.
+Use [build lifecycle](dev-build-lifecycle.md) to decide between an in-place migration and a new `KCV_V<KCV_MAJOR>_<KCV_BUILD>` replacement, using the [deployment parameters](deployment-parameters.md). An in-place migration retains the owner/workspace/app identity. A replacement gets new identities and an empty personal library; retirement is a separate administrator operation, not a Liquibase rollback.
+
+**Version boundary:** v2.1.0 is the current target. The published v2.0.0 checkpoint, `2.0.0-c3-r7-ready`, is an **upgrade prerequisite**, not the final check. Other v2.0.0 migration IDs below describe immutable historical steps that remain in the current chain; do not rename them or treat an earlier checkpoint as current completion.
+
+**Historical v2.0.0 validation (C2–R4):** the following three paragraphs retain the results and limitations of those earlier candidates.
 
 The [24 November native migration record](../db/verification/native-validation.json) records successful SQLcl/Liquibase execution on isolated Serverless schemas: all 48 project migrations, fresh and verified-v1 upgrade routes, repeat updates, exact schema/program checks, concurrent-runner exclusion and failure/recovery probes. Generated Worksheet SQL also passed fresh/adoption/upgrade/repeat and subsequent Liquibase-entry tests through SQLcl. The Database Actions browser upload/copy transport has not been tested for these v2 bundles. The initial timestamp-index verification correction and later append-only identity correction are recorded explicitly; this is not full-v2 or release acceptance.
 
@@ -29,7 +33,7 @@ Use SQLcl's Liquibase integration for developer schema changes. The [local Bash 
 
 These scripts manage static project objects. They do not create users, enable Java, create credentials/profiles, copy content, register agents, create model conversations or create personal RDF overlays. Fresh setup still needs the documented prerequisites, RDF network, profile registration, dataset loading and deliberate agent setup. Existing setup retains these objects. Never run old raw `CREATE TABLE` scripts after the generated schema installer.
 
-After applying R4 to an existing configured app, run [16_refresh_grounded_answers.sql](../sql/extensions/16_refresh_grounded_answers.sql) as the lab owner. This repeatable runtime step creates or refreshes the grounded answer task with no tools and creates `KCV_GROUNDED_TEAM` if absent. The application supplies evidence retrieved before dispatch; proposed context changes retain their existing route. It preserves existing teams and conversations. On a fresh schema without the QA agent it explicitly defers registration: first configure a working model profile, then run the initial [03_scenario_agents.sql](../sql/extensions/03_scenario_agents.sql). Do not rerun initial agent creation on an already registered installation. Script 15 remains the historical R3 route and does not install the R4 grounded task.
+**Historical v2.0.0 R4 runtime setup / optional headless route:** after applying R4 to an existing configured app, run [16_refresh_grounded_answers.sql](../sql/extensions/16_refresh_grounded_answers.sql) as the lab owner. This repeatable runtime step creates or refreshes the grounded answer task with no tools and creates `KCV_GROUNDED_TEAM` if absent. The application supplies evidence retrieved before dispatch; proposed context changes retain their existing route. It preserves existing teams and conversations. On a fresh schema without the QA agent it explicitly defers registration: first configure a working model profile, then run the initial [03_scenario_agents.sql](../sql/extensions/03_scenario_agents.sql). Do not rerun initial agent creation on an already registered installation. Script 15 remains the historical R3 route and does not install the R4 grounded task.
 
 `KCV_SCHEMA_MIGRATIONS` records the expected payload/postcondition digest, product version, phase and completion for each step. It is separate from Liquibase's `DATABASECHANGELOG` and lock. Completed receipts are not trusted without postcondition checks. Oracle DDL commits independently; the wrappers make interrupted work visible rather than claiming a transactional rollback of the schema.
 
@@ -74,7 +78,7 @@ Preserve the existing schema, application ID, public collection and personal run
 
 On the development installation that encountered the initial compile error, one additional original FAILED receipt remains as audit evidence. The new checkpoint does not convert it to COMPLETE.
 
-R4 adds `CALL_ORIGIN` with a `LEGACY` default to retained retrieval events and nullable `MODEL_STARTED_AT` to response runs. New events use `APPLICATION` or `AGENT`; old trace JSON omits the new origin and missing timestamp. The final checkpoint recompiles dependent package bodies and functions and checks their exact source. These changes do not rerun historical answers.
+**Historical v2.0.0 schema additions (C3/R4–R7):** R4 adds `CALL_ORIGIN` with a `LEGACY` default to retained retrieval events and nullable `MODEL_STARTED_AT` to response runs. New events use `APPLICATION` or `AGENT`; old trace JSON omits the new origin and missing timestamp. The final checkpoint recompiles dependent package bodies and functions and checks their exact source. These changes do not rerun historical answers.
 
 R5 adds an empty deletion journal and resource manifest, the `KCV_CONTEXT_DELETE` package, and replacement access/context/journey bodies. Normal access is fenced once deletion starts; cleanup can resume after an interruption. The schema migration itself deletes no context, conversation or graph.
 
@@ -83,6 +87,8 @@ Historically, R6 added private derived search chunks, `KCV_CONTEXT_SEARCH`, and 
 The C3 table changes add nullable fields to existing chat and response records. The response request-token index uses a conditional expression so legacy responses with NULL tokens remain valid; only non-NULL per-conversation request tokens are unique. New attachments, operation journals and model-boundary tables start empty. Package specifications precede dependent bodies, and the final step recompiles the fixed project function inventory before verifying the complete source contract. These migrations do not backfill personal identities, publish contexts or create model conversations.
 
 ## Adopt an existing v1 Worksheet installation
+
+**Historical v1 → v2.0.0 adoption procedure.** The commands in this section describe the earlier rehearsal and must be reproduced in its matching historical checkout. For the current curated distribution, first follow the [published v2.0.0 bridge](../release-docs/docs/migrate-to-v2.md), then the [supported v2.0.0 → v2.1.0 upgrade](../release-docs/docs/migrate-to-v2.1.md). The historical adoption result does not establish a direct v1 → v2.1.0 deployment.
 
 Use an isolated copy/test installation for initial native acceptance. The baseline verifies expected columns, datatypes, nullability, defaults, identity columns, keys, foreign keys, check constraints, indexes and installed program text. Full-line comments and blank lines are ignored in program comparison; substantive source differences are rejected. The current baseline assumes BYTE semantics for unspecified VARCHAR2 lengths and preserves explicitly declared CHAR semantics in new fields.
 
@@ -99,25 +105,26 @@ If the actual v1 deployment differs, stop and inspect the specific object named 
 
 ## Independent Worksheet acceptance
 
-The release learner route uses Database Actions SQL Worksheet. The [SQL-first validation record](../db/verification/release-v2-paths-validation.json) records the isolated clean and migration rehearsals. The build-named dev route uses local SQLcl/Liquibase and a schema-only proxy owner; do not assume that owner can sign in to Worksheet.
+The release learner route uses Database Actions SQL Worksheet. The [current v2.1.0 four-route record](../db/verification/release-v2.1-paths-validation.json) covers the curated clean and upgrade rehearsals within their recorded scopes. The [historical v2.0.0 SQL-first record](../db/verification/release-v2-paths-validation.json) records the earlier clean and v1 adoption/migration rehearsals. The build-named dev route uses local SQLcl/Liquibase and a schema-only proxy owner; do not assume that owner can sign in to Worksheet.
 
 | Entry path | Ordered scripts |
 | --- | --- |
-| Empty project schema | `sql/install/00_install_schema.sql`, then `02_verify_schema.sql`. |
-| Existing verified v1 schema | `sql/install/00_adopt_schema_baseline.sql`, then `01_upgrade_schema.sql`, then `02_verify_schema.sql`. |
+| Empty project schema, target v2.1.0 | Follow the [current SQL-first clean guide](../release-docs/docs/fresh-serverless-deployment.md): ordered fresh schema parts or `sql/install/00_install_schema.sql`, then `02_verify_schema.sql`. |
+| Published v2.0.0 schema — upgrade prerequisite | Verify `2.0.0-c3-r7-ready` and the published physical/program contract, then follow the [v2.1.0 upgrade guide](../release-docs/docs/migrate-to-v2.1.md): ordered upgrade parts or `sql/install/01_upgrade_schema.sql`, then `02_verify_schema.sql`. |
+| Existing verified v1 schema — historical bridge required | Use the [pinned published v2.0.0 package and guide](../release-docs/docs/migrate-to-v2.md) first; only then follow the v2.0.0 → v2.1.0 upgrade. |
 | Existing migration-managed dev schema | `sql/install/01_upgrade_schema.sql`, then `02_verify_schema.sql`; preserve existing receipts. |
 
-Use Run Script and check the result after each file. The install/upgrade bundle has one outer PL/SQL block that stops on the first error, even if Worksheet normally continues later script blocks. It executes the same immutable SQL payloads and postconditions as Liquibase. Superseded steps are handled by the verified-history rules below. This does not undo DDL already committed; failed steps remain recorded. Literal ampersands are encoded to prevent substitution prompts without changing the executed SQL text.
+Use Run Script and check the result after each file. The current curated rehearsals used the ordered smaller schema parts; combined-file Worksheet transport remains unverified. Follow the linked route guide for the accepted transport and remaining setup steps. The install/upgrade bundle has one outer PL/SQL block that stops on the first error, even if Worksheet normally continues later script blocks. It executes the same immutable SQL payloads and postconditions as Liquibase. Superseded steps are handled by the verified-history rules below. This does not undo DDL already committed; failed steps remain recorded. Literal ampersands are encoded to prevent substitution prompts without changing the executed SQL text.
 
-The final check is short enough to run directly:
+After the full verifier passes, run this short **v2.1.0 final checkpoint check**:
 
 ```sql
 SELECT migration_id,product_version,phase
 FROM kcv_schema_migrations
-WHERE migration_id='2.0.0-c3-r7-ready';
+WHERE migration_id='2.1.0-apl-r4-ready';
 ```
 
-Expected: one `2.0.0` row with `COMPLETE`. This is a necessary schema checkpoint, not proof of browser, ownership, model or full-v2 acceptance. The complete verifier and native My Contexts/deletion/search tests remain required. The [search record](../db/verification/context-search-validation.json) describes R7's tested scope; the [fresh deployment](../db/verification/fresh-dev-validation.json), [R4](../db/verification/c3-r4-validation.json) and [R3](../db/verification/c3-r3-validation.json) records describe preceding checkpoints.
+Expected: one row with `migration_id = 2.1.0-apl-r4-ready`, `product_version = 2.1.0` and `phase = COMPLETE`. The full verifier must also confirm all 121 project migrations and the current physical/program contract with no invalid project objects. This single receipt does not establish application, ownership, model or browser readiness; complete the [owner binding and setup checks](deployment-owner-binding.md) and the relevant learner tests. The [R7 search record](../db/verification/context-search-validation.json), [fresh R4 deployment](../db/verification/fresh-dev-validation.json), [R4](../db/verification/c3-r4-validation.json) and [R3](../db/verification/c3-r3-validation.json) records are **historical v2.0.0 evidence**, not the current completion criteria.
 
 ## Adding a migration
 
@@ -127,7 +134,7 @@ Expected: one `2.0.0` row with `COMPLETE`. This is a necessary schema checkpoint
 4. Run `python scripts/build_database_installers.py` to regenerate wrappers, changelogs, recovery and Worksheet scripts; then run the check/tests above.
 5. Apply it through SQLcl to an isolated native target. Check compilation, fresh/upgrade paths, rerun behavior and failure recovery. Keep the result separate from local tests.
 
-New migrations that alter an earlier table/program must define which earlier postconditions they supersede at the new schema head. The C2 identity correction demonstrates this: it appends a new access specification, body, dependent-body compilation and `2.0.0-c2-identity-ready` checkpoint. The original access SQL, receipts and Liquibase checksums remain unchanged. The strict v1 verifier still describes the v1 baseline; it is not a generic verifier for arbitrary future schema states.
+New migrations that alter an earlier table/program must define which earlier postconditions they supersede at the new schema head. The historical v2.0.0 C2 identity correction demonstrates this: it appends a new access specification, body, dependent-body compilation and `2.0.0-c2-identity-ready` checkpoint. The original access SQL, receipts and Liquibase checksums remain unchanged. The strict v1 verifier still describes the v1 baseline; it is not a generic verifier for arbitrary future schema states.
 
 A manifest `supersedes` relationship replaces an earlier *current-state postcondition*, never its recorded history. The final verifier requires both the historical receipt and the exact successor digest/COMPLETE receipt, then checks the successor's actual program text and VALID status. Worksheet skips an old wrapper only after the same proof. If the successor is incomplete, the old physical contract must still pass; an interrupted specification/body replacement therefore fails closed and needs deliberate recovery before normal replay.
 
@@ -150,6 +157,8 @@ The shared `DBMS_LOCK` migration lock survives DDL commits and prevents another 
 An invalid package, a missing prerequisite or a partially installed object cannot receive a successful receipt. Investigate and fix the actual cause through a reviewed procedure. For physically complete work whose receipt was interrupted, the matching `db/recovery/<migration-id>.sql` requires the actual schema-owner session, acquires the same lock and verifies the exact postconditions and digest before reconciling it. It does not rerun DDL, clear a live lock or create a missing object. If postconditions are not met, recovery fails; do not mark the step complete manually.
 
 ### Retired initial C3 candidate
+
+**Historical v2.0.0 failure and recovery:** the exact IDs below identify preserved audit records and successor steps. They are not alternative final checkpoints for v2.1.0.
 
 The first native C3 attempt failed at `2.0.0-c3-015-kcv_scenario-package-body` with ORA-24344 because `PRIOR` was used as a PL/SQL identifier. The [retirement record](../db/retired/2.0.0-c3-initial/retirement.json) preserves the original manifest and hashes of the applied prefix and unaccepted suffix. The replacement changesets have new IDs; the original failed receipt, error and timestamps are never modified. The unexecuted old suffix is excluded from both active Liquibase and Worksheet routes.
 
